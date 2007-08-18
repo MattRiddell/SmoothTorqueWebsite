@@ -1,0 +1,131 @@
+<?
+$link = mysql_connect('localhost', 'root', '') OR die(mysql_error());
+mysql_select_db("SineDialer", $link);
+
+//$sql = 'SELECT * FROM number WHERE campaignid='.$_POST[campaignid]." LIMIT 50";
+$sql = 'SELECT * FROM queue WHERE campaignid='.$_POST[campaignid];
+$result=mysql_query($sql, $link) or die (mysql_error());;
+
+if (isset($_GET[campaignid])){
+$_POST[campaignid]=$_GET[campaignid];
+}
+<table align="center" border="0" cellpadding="2" cellspacing="0">
+<TR>
+<TD CLASS="thead">
+Name
+</TD>
+<TD CLASS="thead">
+Details
+</TD>
+<TD CLASS="thead">
+Start Time
+</TD>
+<TD CLASS="thead">
+End Time
+</TD>
+<TD CLASS="thead">
+Start Date
+</TD>
+<TD CLASS="thead">
+End Date
+</TD>
+</TD>
+<TD CLASS="thead">
+Status
+</TD>
+<TD  CLASS="thead">
+</TD>            
+</TR>
+
+<?                                                       
+while ($row = mysql_fetch_assoc($result)) {
+if ($toggle){
+$toggle=false;
+$class=" class=\"tborder2\"";
+} else {
+$toggle=true;
+$class=" class=\"tborderx\"";
+}
+?>
+<TR <?echo $class;?>>
+<TD>
+<A HREF="editschedule.php?id=<?echo $row[queueID]?>"><?echo $row[queuename];?></A>
+</TD>
+<TD>
+<?echo $row[details];?>
+</TD>
+<TD>
+<?echo $row[starttime];?>
+</TD>
+<TD>
+<?echo $row[endtime];?>
+</TD>
+<TD>
+<?echo $row[startdate];?>
+</TD>
+<TD>
+<?echo $row[enddate];?>
+</TD>
+<TD><div id="ajaxDiv"></div>
+<?
+switch($row[status]){
+case 1:
+    echo "Campaign Start - Not Yet Run";
+    break;
+case 2:
+    echo "Campaign Stop - Not Yet Run";
+    break;
+case 101:
+    echo "Campaign Start - Processed <A HREF=\"schedule.php?status=1&campaignid=".$_POST[campaignid]."&queueID=".$row[queueID]."\"><IMG SRC=\"/images/reset.gif\" BORDER=\"0\"></A>";
+    break;
+case 102:
+    echo "Campaign Stop - Processed";
+    break;    
+}
+?>
+</TD>
+<?/*?>
+<TD>
+<?echo $row[clid];?>
+</TD>
+<TD>
+<?echo $row[transferclid];?>
+</TD>
+<TD>
+<?echo $row[did];?>
+</TD>
+<TD>
+<?echo $row[context];?>
+</TD>
+<TD>
+<?echo $row[maxcalls];?>
+</TD>
+<TD>
+<?echo $row[maxchans];?>
+</TD>
+<TD>
+<?echo $row[maxretries];?>
+</TD>
+<TD>
+<?echo $row[retrytime];?>
+</TD>
+<TD>
+<?echo $row[waittime];?>
+</TD>
+<?*/?>
+<TD>
+<A HREF="deleteschedule.php?id=<?echo $row[queueID]?>"><IMG SRC="/images/cross.gif" BORDER="0"></A>
+</TD>
+</TR>
+
+<?
+}
+
+?>
+
+</TABLE>
+<?
+}
+require "footer.php";
+?>
+

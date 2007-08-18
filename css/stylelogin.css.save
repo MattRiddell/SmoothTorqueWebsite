@@ -1,0 +1,258 @@
+BODY {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: #ddddff; PADDING-BOTTOM: 0px; MARGIN: 0px; FONT: 10pt verdana, 
+geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; COLOR: #000000; PADDING-TOP: 0px
+}
+A:link {
+	COLOR: #22229c
+}
+A:visited {
+	COLOR: #22229c
+}
+A:hover {
+	COLOR: #ff4400
+}
+A:active {
+	COLOR: #ff4400
+}
+.page {
+	BACKGROUND: #ffffff; COLOR: #000000
+}
+TD {
+	FONT: 10pt verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif
+}
+TH {
+	FONT: 10pt verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif
+}
+P {
+	FONT: 10pt verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif
+}
+LI {
+	FONT: 10pt verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif
+}
+.tborder {
+	BORDER-RIGHT: #245e83 1px outset; BORDER-TOP: #245e83 1px outset; BACKGROUND: #e8edee; BORDER-LEFT: #245e83 1px outset; COLOR: #000000; BORDER-BOTTOM: #245e83 1px outset
+}
+.tborder2 {
+	BORDER-RIGHT: #245e83 1px outset; BORDER-TOP: #245e83 1px outset; BACKGROUND: #f8fdfe; BORDER-LEFT: #245e83 1px 
+outset; COLOR: #000000; BORDER-BOTTOM: #245e83 1px outset
+}
+.tcat {
+	BACKGROUND: #245e83 repeat-x left top; FONT: bold 9pt Geneva, Arial, Helvetica, sans-serif; COLOR: #ffffff; 
+LETTER-SPACING: 6px
+}
+.tcat A:link {
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+.tcat A:visited {
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+.tcat A:hover {
+	COLOR: #ffff66; TEXT-DECORATION: underline
+}
+.tcat A:active {
+	COLOR: #ffff66; TEXT-DECORATION: underline
+}
+.thead {
+	BACKGROUND: #245e83; FONT: bold 11px tahoma, verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; COLOR: #ffffff
+}
+.thead A:link {
+	COLOR: #ffffff
+}
+.thead A:visited {
+	COLOR: #ffffff
+}
+.thead A:hover {
+	COLOR: #ffff00
+}
+.thead A:active {
+	COLOR: #ffff00
+}
+.tfoot {
+	BACKGROUND: #245e83; COLOR: #e0e0f6
+}
+.tfoot A:link {
+	COLOR: #e0e0f6
+}
+.tfoot A:visited {
+	COLOR: #e0e0f6
+}
+.tfoot A:hover {
+	COLOR: #ffff66
+}
+.tfoot A:active {
+	COLOR: #ffff66
+}
+.alt1 {
+	BACKGROUND: #ffffff; COLOR: #000000
+}
+.alt1Active {
+	BACKGROUND: #ffffff; COLOR: #000000
+}
+.alt2 {
+	BACKGROUND: #ebf4fa; COLOR: #000000
+}
+.alt2Active {
+	BACKGROUND: #ebf4fa; COLOR: #000000
+}
+TD.inlinemod {
+	BACKGROUND: #ffffcc; COLOR: #000000
+}
+.wysiwyg {
+	BACKGROUND: #ffffff; FONT: 10pt verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; COLOR: #000000
+}
+TEXTAREA {
+	FONT: 10pt verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif
+}
+.bginput {
+	FONT: 10pt verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif
+}
+.button {
+	FONT: 11px verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif
+}
+SELECT {
+	FONT: 11px verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif
+}
+OPTION {
+	FONT-SIZE: 11px; FONT-FAMILY: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif
+}
+OPTGROUP {
+	FONT-SIZE: 11px; FONT-FAMILY: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif
+}
+.smallfont {
+	FONT: 11px verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif
+}
+.time {
+	COLOR: #666686
+}
+.navbar {
+	FONT: 11px verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif
+}
+.highlight {
+	FONT-WEIGHT: bold; COLOR: #ff0000
+}
+.fjsel {
+	BACKGROUND: #245e83; COLOR: #ffffff
+}
+.fjdpth0 {
+	BACKGROUND: #f7f7f7; COLOR: #000000
+}
+.panel {
+	BORDER-RIGHT: 2px inset; PADDING-RIGHT: 10px; BORDER-TOP: 2px inset; PADDING-LEFT: 10px; BACKGROUND: #e4e7f5 repeat-x left top; PADDING-BOTTOM: 10px; BORDER-LEFT: 2px inset; COLOR: #000000; PADDING-TOP: 10px; BORDER-BOTTOM: 2px inset
+}
+.panelsurround {
+	BACKGROUND: url(../../images/gradients/gradient_panelsurround.gif) #d5d8e5 repeat-x left top; COLOR: #000000
+}
+LEGEND {
+	FONT: 11px tahoma, verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; COLOR: #22229c
+}
+.vbmenu_control {
+	PADDING-RIGHT: 6px; PADDING-LEFT: 6px; BACKGROUND: url(../../images/gradients/newcat.gif) #245e83 repeat-x left top; PADDING-BOTTOM: 3px; FONT: bold 11px tahoma, verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; COLOR: #ffffff; PADDING-TOP: 3px; WHITE-SPACE: nowrap
+}
+.vbmenu_control A:link {
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+.vbmenu_control A:visited {
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+.vbmenu_control A:hover {
+	COLOR: #ffffff; TEXT-DECORATION: underline
+}
+.vbmenu_control A:active {
+	COLOR: #ffffff; TEXT-DECORATION: underline
+}
+.vbmenu_popup {
+	BORDER-RIGHT: #245e83 1px solid; BORDER-TOP: #245e83 1px solid; BACKGROUND: #ffffff; BORDER-LEFT: #245e83 1px solid; COLOR: #000000; BORDER-BOTTOM: #245e83 1px solid
+}
+.vbmenu_option {
+	BACKGROUND: #bbc7ce; FONT: 11px verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; CURSOR: pointer; COLOR: #000000; WHITE-SPACE: nowrap
+}
+.vbmenu_option A:link {
+	COLOR: #22229c; TEXT-DECORATION: none
+}
+.vbmenu_option A:visited {
+	COLOR: #22229c; TEXT-DECORATION: none
+}
+.vbmenu_option A:hover {
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+.vbmenu_option A:active {
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+.vbmenu_hilite {
+	BACKGROUND: #8a949e; FONT: 11px verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; CURSOR: pointer; COLOR: #ffffff; WHITE-SPACE: nowrap
+}
+.vbmenu_hilite A:link {
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+.vbmenu_hilite A:visited {
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+.vbmenu_hilite A:hover {
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+.vbmenu_hilite A:active {
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+.bigusername {
+	FONT-SIZE: 14pt
+}
+TD.thead {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; PADDING-BOTTOM: 4px; PADDING-TOP: 4px
+}
+DIV.thead {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; PADDING-BOTTOM: 4px; PADDING-TOP: 4px
+}
+.pagenav A {
+	BACKGROUND-COLOR: #ffffff; TEXT-DECORATION: none
+}
+.pagenav TD {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; PADDING-BOTTOM: 2px; PADDING-TOP: 2px
+}
+.fieldset {
+	MARGIN-BOTTOM: 6px
+}
+.fieldset {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.fieldset TD {
+	FONT-SIZE: 11px
+}
+.fieldset P {
+	FONT-SIZE: 11px
+}
+.fieldset LI {
+	FONT-SIZE: 11px
+}
+FORM {
+	DISPLAY: inline
+}
+LABEL {
+	CURSOR: default
+}
+.normal {
+	FONT-WEIGHT: normal
+}
+.inlineimg {
+	VERTICAL-ALIGN: middle
+}
+.sidemenu {
+	FONT: bold 11px tahoma, verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; COLOR: #ffffff
+}
+.sidemenu A:link {
+	FONT: bold 11px tahoma, verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; COLOR: #ffffff
+}
+.sidemenu A:visited {
+	FONT: bold 11px tahoma, verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; COLOR: #ffffff
+}
+.sidemenu A:active {
+	FONT: bold 11px tahoma, verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; COLOR: #ffffff
+}
+.sidemenu A:hover {
+	FONT: bold 11px tahoma, verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; COLOR: #ffff66
+}
+H1 {
+	FONT: bold 13px tahoma
+}
+body2 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: #ffffff; PADDING-BOTTOM: 0px; MARGIN: 0px; FONT: 10pt verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; COLOR: #000000; PADDING-TOP: 0px
+}
