@@ -1,5 +1,5 @@
 <?
-$pagenum=5;
+$pagenum=6;
 require "header.php";
 //$sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
 

@@ -14,7 +14,7 @@ if (isset($_POST[id])){
     $sql="UPDATE campaign SET name='$name', description='$description', messageid='$messageid',messageid2='$messageid2',messageid3='$messageid3' WHERE id=$id";
     $SMDB->executeUpdate($sql);
 
-    header("Location: editcampaign.php");
+    header("Location: campaigns.php");
     echo "redirected";
     exit;
 }

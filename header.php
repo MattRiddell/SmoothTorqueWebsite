@@ -56,9 +56,10 @@ if ($_COOKIE["loggedin"]==sha1("LoggedIn".$user)){
 <center><img src="logo.png">
 <ul>
 <li><a href="home.php">Home</a></li>
-<li><a href="campaignPage.php" rel="dropmenu1_e">Campaigns</a></li>
+<li><a href="campaigns.php" rel="dropmenu1_e">Campaigns</a></li>
+<li><a href="messages.php" rel="dropmenu1_e">Messages</a></li>
 <li><a href="numberPage.php" rel="dropmenu2_e">Numbers</a></li>
-<li><a href="schedulePage.php" rel="dropmenu3_e">Schedules</a></li>
+<li><a href="schedule.php" rel="dropmenu3_e">Schedules</a></li>
 <li><a href="settingsPage.php">Settings</a></li>
 <?if ($level==sha1("level100")) {?>
 <li><a href="customers.php" rel="dropmenu5_e">Customers</a></li>
@@ -76,7 +77,7 @@ if ($_COOKIE["loggedin"]==sha1("LoggedIn".$user)){
 <div id="dropmenu1_e" class="dropmenudiv_e">
         <a href="addCampaign.php">Add Campaign</a>
         <a href="chart.php">Monitor Campaign</a>
-        <a href="editcampaign.php">Edit Campaign</a>
+        <a href="campaigns.php">View Campaigns</a>
         <a href="menu_deleteCampaign.php">Delete Campaign</a>
 </div>
 

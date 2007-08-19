@@ -11,12 +11,12 @@ $telnet = new PHPTelnet();
 $result = $telnet->Connect();
 //echo "CONNECTION REQUEST: ".$result."<BR>";
 $telnet->DoCommand('deletec', $result);
-//echo "XX".$result."<BR>";       
+//echo "XX".$result."<BR>";
 $telnet->DoCommand($_POST[id], $result);
-echo "".$result."";          
+echo "".$result."";
 
 $telnet->Disconnect();
 sleep(1);
-} 
+}
 ?>
-<meta http-equiv="refresh" content="1;url=menu_deleteCampaign.php">
+<meta http-equiv="refresh" content="1;url=campaigns.php">

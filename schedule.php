@@ -8,12 +8,15 @@ echo sizeof($row);
 
 */
 
-$pagenum="3";
-$link = mysql_connect('localhost', 'root', '') OR die(mysql_error());
-mysql_select_db("SineDialer", $link);
+$pagenum="4";
+//$link = mysql_connect('localhost', 'root', '') OR die(mysql_error());
+//mysql_select_db("SineDialer", $link);
 if (isset($_GET[queueID])){
     $sql = 'update queue set status='.$_GET[status].' where queueID='.$_GET[queueID];
-    $result=mysql_query($sql, $link) or die (mysql_error());;
+    //$result=mysql_query($sql, $link) or die (mysql_error());;
+    require "sql.php";
+    $SMDB=new SmDB();
+    $SMDB->executeUpdate($sql);
     header("Location: schedule.php?campaignid=".$_GET[campaignid]);
 }
 

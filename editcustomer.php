@@ -1,5 +1,5 @@
 <?
-$pagenum=5;
+$pagenum=6;
 
 if (isset($_POST[name])){
 $description=$_POST[description];

@@ -1,4 +1,5 @@
 <?
+$pagenum="6";
 
 if (isset($_GET[sure])){
     $id=$_GET[id];

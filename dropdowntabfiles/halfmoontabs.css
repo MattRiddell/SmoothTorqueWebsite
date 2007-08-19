@@ -1,5 +1,7 @@
 .halfmoon{
 margin-bottom: 1em;
+background: #fff;
+
 }
 
 .halfmoon ul{
@@ -10,7 +12,7 @@ margin-bottom: 0;
 font: bold 12px Verdana;
 list-style-type: none;
 text-align: center; /*set to left, center, or right to align the menu as desired*/
-border-bottom: 1px solid #929492;
+border-bottom: 1px solid #000000;
 }
 
 .halfmoon li{
