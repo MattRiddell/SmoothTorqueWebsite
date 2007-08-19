@@ -2,6 +2,9 @@
 $pagenum="1";
 $campaigngroupid=$groupid;
 if (isset($_POST[id])){
+
+    require "sql.php";
+    $SMDB=new SmDB();
     $id=$_POST[id];
     $name=$_POST[name];
     $description=$_POST[description];
@@ -9,17 +12,10 @@ if (isset($_POST[id])){
     $messageid2=$_POST[messageid2];
     $messageid3=$_POST[messageid3];
     $sql="UPDATE campaign SET name='$name', description='$description', messageid='$messageid',messageid2='$messageid2',messageid3='$messageid3' WHERE id=$id";
-    require_once "PHPTelnet.php";
-    $telnet = new PHPTelnet();
-    $result = $telnet->Connect();
-    $telnet->DoCommand('sql', $result);
-    //flush();
-    $telnet->DoCommand($sql, $result);
-    //echo "".$result."<BR>";
-    //flush();
-    $telnet->Disconnect();
+    $SMDB->executeUpdate($sql);
+
     header("Location: editcampaign.php");
-    //echo "redirected";
+    echo "redirected";
     exit;
 }
 require "header.php";

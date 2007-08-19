@@ -13,6 +13,10 @@ $result = $telnet->Connect();
 //echo "CONNECTION REQUEST: ".$result."<BR>";
 $telnet->DoCommand('login', $result);
 //echo "XX".$result."<BR>";
+if (!substr(trim($result),0,5)=='<b>Ch'){
+    header("Location: index.php?error=Unable%20to%20connect%20to%20server.");
+    exit(0);
+}
 $telnet->DoCommand($_POST[user], $result);
 //echo "YY:".$result."<BR>";
 $telnet->DoCommand($passwordHash, $result);

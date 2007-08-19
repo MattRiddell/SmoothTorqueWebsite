@@ -1,11 +1,4 @@
 <?
-$link = mysql_connect('localhost', 'root', '') OR die(mysql_error());
-mysql_select_db("SineDialer", $link);
-
-$sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
-$result=mysql_query($sql, $link) or die (mysql_error());;
-$campaigngroupid=mysql_result($result,0,'campaigngroupid');
-
 if (isset($_POST[queuename])){
     //$queueid=$_POST[queueid];
     $campaignid=$_POST[campaignID];
@@ -40,7 +33,7 @@ if (isset($_POST[queuename])){
         }
     }
     $endtime=$endhour.":".$endmin;
-    
+
     $startdate=$_POST[startdate];
     $enddate=$_POST[enddate];
     $did=$_POST[did];
@@ -59,18 +52,33 @@ if (isset($_POST[queuename])){
     ,retrytime='$retrytime',waittime='$waittime' WHERE queueid=$queueid";
     // echo $sql;
 //    $sql="INSERT INTO campaign (groupid,name,description,messageid,messageid2,messageid3) VALUES ('$campaigngroupid','$name', '$description', '$messageid','$messageid2','$messageid3')";
-    $result=mysql_query($sql, $link) or die (mysql_error());;
-    include("schedule.php");
+    //$result=mysql_query($sql, $link) or die (mysql_error());;
+    require "sql.php";
+    $SMDB=new SmDB();
+    $SMDB->executeUpdate($sql);
+    header("Location: schedule.php");
     exit;
 }
 require "header.php";
-require "header_schedule.php";
-if (!isset($_GET[id])){
-} else {
+
+$sql = 'SELECT id FROM customer WHERE username=\''.$_COOKIE[user].'\'';
+$row1=$SMDB->executeQuery($sql);
+
+//$campaigngroupid=mysql_result($result,0,'campaigngroupid');
+$campaigngroupid=$row1[0]['id'];
+
+if (isset($_GET[id])){
 $sql = 'SELECT * FROM queue WHERE queueid='.$_GET[id];
-        $result=mysql_query($sql, $link) or die (mysql_error());;
+    //    $result=mysql_query($sql, $link) or die (mysql_error());;
         //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
-        $row = mysql_fetch_assoc($result);
+      //  $row = mysql_fetch_assoc($result);
+
+//$sql = 'SELECT id FROM customer WHERE username=\''.$_COOKIE[user].'\'';
+$row2=$SMDB->executeQuery($sql);
+$row=$row2[0];
+//$campaigngroupid=mysql_result($result,0,'campaigngroupid');
+//$campaigngroupid=$row1[0]['id'];
+
 ?>
 <FORM ACTION="editschedule.php" METHOD="POST">
 <table class="tborder" align="center" border="0" cellpadding="0" cellspacing="2">
@@ -96,7 +104,7 @@ $sql = 'SELECT * FROM queue WHERE queueid='.$_GET[id];
         $startampm="am";
     }
     $start="$starthour:$startmin $startampm";
-    
+
     $endtime=$row[endtime];
     $endhour=strtok($endtime,": ");
     $endmin=strtok(": ");
@@ -109,7 +117,7 @@ $sql = 'SELECT * FROM queue WHERE queueid='.$_GET[id];
     $end="$endhour:$endmin $endampm";
 
     //echo "[$start - $end]";
-    
+
 ?>
 <td><input id='starttime' name="starttime" type='text' value='<?echo $start;?>' size=8 maxlength=8 ONBLUR="validateDatePicker(this)">
 <IMG SRC="timePickerImages/timepicker.gif" BORDER="0" ALT="Pick a Time!" ONCLICK="selectTime(this,starttime)" STYLE="cursor:hand"></td>
@@ -119,12 +127,12 @@ $sql = 'SELECT * FROM queue WHERE queueid='.$_GET[id];
 <IMG SRC="timePickerImages/timepicker.gif" BORDER="0" ALT="Pick a Time!" ONCLICK="selectTime(this,endtime)" STYLE="cursor:hand"></td>
 </TD>
 </TR><TR><TD CLASS="thead">Start Date</TD><TD>
-<input name="startdate" value="<?echo $row[startdate];?>"> 
+<input name="startdate" value="<?echo $row[startdate];?>">
 
 <input type=button value="select" onclick="displayDatePicker('startdate', false, 'ymd', '-');">
 </TD>
 </TR><TR><TD CLASS="thead">End Date</TD><TD>
-<input name="enddate" value="<?echo $row[enddate];?>"> 
+<input name="enddate" value="<?echo $row[enddate];?>">
 
 <input type=button value="select" onclick="displayDatePicker('enddate', false, 'ymd', '-');">
 </TD>
@@ -186,4 +194,3 @@ $sql = 'SELECT * FROM queue WHERE queueid='.$_GET[id];
 <?      }
 require "footer.php";
 ?>
-

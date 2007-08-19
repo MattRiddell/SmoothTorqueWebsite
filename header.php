@@ -1,4 +1,6 @@
 <?
+ require "sql.php";
+$SMDB=new SmDB();
  function _get_browser()
 {
   $browser = array ( //reversed array

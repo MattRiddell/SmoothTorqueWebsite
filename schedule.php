@@ -1,4 +1,13 @@
 <?
+/*
+require "sql.php";
+$SMDB=new SmDB();
+$row=$SMDB->executeQuery("SELECT * FROM customer");
+print_r($row);
+echo sizeof($row);
+
+*/
+
 $pagenum="3";
 $link = mysql_connect('localhost', 'root', '') OR die(mysql_error());
 mysql_select_db("SineDialer", $link);
@@ -9,9 +18,7 @@ if (isset($_GET[queueID])){
 }
 
 require "header.php";
-$sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
-$result=mysql_query($sql, $link) or die (mysql_error());;
-$campaigngroupid=mysql_result($result,0,'campaigngroupid');
+$campaigngroupid=$groupid;
 
 if (isset($_GET[campaignid])){
 $_POST[campaignid]=$_GET[campaignid];

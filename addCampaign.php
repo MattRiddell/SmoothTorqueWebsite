@@ -55,13 +55,13 @@ $campaigngroupid=$groupid;
 </TR>
 <?
 
-//$sql="insert  into campaignmessage (filename,name,description) values".
+/*$sql="insert  into campaignmessage (filename,name,description) values".
 //     "('/var/lib/asterisk/sounds/beep.gsm', 'beep', 'a beep sound'),".
-//     "('/var/lib/asterisk/sounds/demo-echotest.gsm', 'echotest', 'the echo test sound'),".
+//     "('/var/lib/asterisk/sounds/demo-echotest.gsm', 'echotest', 'the echo test sound')";
 //     "('/var/lib/asterisk/sounds/intro2.ulaw', 'intro2', 'BigEars Live Introduction')";
-//     "('/var/lib/asterisk/sounds/answermachine.ulaw', 'answermachine', 'BigEars Answer Machine Message'),".
+//     "('/var/lib/asterisk/sounds/answermachine.ulaw', 'answermachine', 'BigEars Answer Machine Message')";
 //     "('/var/lib/asterisk/sounds/transfer.ulaw', 'transfer', 'BigEars Transfer Message')";
-/*
+
 require_once "PHPTelnet.php";
     $telnet = new PHPTelnet();
 $result = $telnet->Connect();
@@ -70,8 +70,8 @@ flush();
 $telnet->DoCommand($sql, $result);
 echo "".$result."<BR>";
 flush();
-$telnet->Disconnect();
-*/
+$telnet->Disconnect();*/
+
 require_once "PHPTelnet.php";
 
 $telnet = new PHPTelnet();
