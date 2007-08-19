@@ -1,17 +1,11 @@
 <?
-$pagenum=1;require "header.php";
+$pagenum=1;
+require_once "header.php";
 require_once "PHPTelnet.php";
-
-$telnet = new PHPTelnet();
-
-// if the first argument to Connect is blank,
-// PHPTelnet will connect to the local host via 127.0.0.1
 $telnet = new PHPTelnet();
 $result = $telnet->Connect();
-//echo "CONNECTION REQUEST: ".$result."<BR>";
 $telnet->DoCommand('selectcg', $result);//echo $result."<BR>";
 $telnet->DoCommand($_COOKIE[user], $result);
-//echo $result."<BR>";
 if (substr(trim($result),0,7)=="GroupID") {
     $groupid=substr(trim($result),8);
 }
@@ -24,23 +18,34 @@ $telnet->Disconnect();
     <TD>Select Campaign:</TD><TD>    <select name="id">
 
 <?
-$lines2=file("/tmp/Sm1.allCampaigns");
-$name="";
-foreach ($lines2 as $line_num => $line) {
-//              echo $line;
-        if (substr($line,0,4)=="id =") {
-                $id=trim(substr($line,5));
-        } else if (substr($line,0,4)=="grou") {
-                   if (trim(substr($line,10))==$groupid){
-                    echo "".$name;
-                } else {
-                    echo "[".trim(substr($line,10))."]";
-                }
-        } else if (substr($line,0,4)=="name") {
-                $name= "<option value=\"$id\">".trim(substr($line,6))."</option>
+
+$telnet = new PHPTelnet();
+$result = $telnet->Connect();
+while (substr(trim($result),0,3)!="END") {
+    $telnet->DoCommand('getallca', $result);
+    if (substr(trim($result),0,3)!="END"){
+        $pieces = explode("\n",$result);
+        $row[id]= $pieces[0];
+        $row[description]= $pieces[1];
+        $row[name]= $pieces[2];
+        $row[campaigngroupid]= $pieces[3];
+        $row[messageid]= $pieces[4];
+        $row[messageid2]= $pieces[5];
+        $row[messageid3]= $pieces[6];
+        echo $result."<BR>";
+        if ($groupid==trim($row[campaigngroupid])){
+            echo "<option value=\"$row[id]\">$row[description]</option>
 ";
+        } else {
+            echo $groupid."!=".$row[campaigngroupid];
         }
+
+    }
 }
+//exit(0);
+
+
+
 ?>
 </select>
 </td></tr><tr><td colspan=2>

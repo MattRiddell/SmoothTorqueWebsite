@@ -15,18 +15,22 @@ $website=$_POST[website];
 $security=$_POST[security];
 $company=$_POST[name];
 
-    $sql="INSERT INTO campaigngroup (name,description) VALUES ('$company','$description')";
-//    echo $sql;
-    $result=mysql_query($sql, $link) or die (mysql_error());;
-    $insertedID = mysql_insert_id();
-
     $sql="INSERT INTO customer (username,password,campaigngroupid,address1,address2,city,
     country,phone,fax,email,website,security,company)
-    VALUES ('$username','$password','$insertedID','$address1','$address2','$city',
+    VALUES ('$username','$password','0','$address1','$address2','$city',
     '$country','$phone','$fax','$email','$website','$security','$company')";
 
 //    echo $sql;
-    $result=mysql_query($sql, $link) or die (mysql_error());;
+//    $result=mysql_query($sql, $link) or die (mysql_error());;
+    require_once "PHPTelnet.php";
+    $telnet = new PHPTelnet();
+$result = $telnet->Connect();
+$telnet->DoCommand('sql', $result);
+flush();
+$telnet->DoCommand($sql, $result);
+echo "".$result."<BR>";
+flush();
+$telnet->Disconnect();
 
 
 

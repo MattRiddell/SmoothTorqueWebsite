@@ -72,9 +72,9 @@ if ($_COOKIE["loggedin"]==sha1("LoggedIn".$user)){
 <!--1st drop down menu -->
 
 <div id="dropmenu1_e" class="dropmenudiv_e">
-        <a href="menu_addCampaign.php">Add Campaign</a>
+        <a href="addCampaign.php">Add Campaign</a>
         <a href="chart.php">Monitor Campaign</a>
-        <a href="menu_editCampaign.php">Edit Campaign</a>
+        <a href="editcampaign.php">Edit Campaign</a>
         <a href="menu_deleteCampaign.php">Delete Campaign</a>
 </div>
 

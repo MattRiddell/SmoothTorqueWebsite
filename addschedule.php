@@ -1,12 +1,13 @@
 <?
+
 $pagenum="3";
-$link = mysql_connect('localhost', 'root', '') OR die(mysql_error());
-mysql_select_db("SineDialer", $link);
+//$link = mysql_connect('localhost', 'root', '') OR die(mysql_error());
+//mysql_select_db("SineDialer", $link);
 
-$sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
-$result=mysql_query($sql, $link) or die (mysql_error());;
-$campaigngroupid=mysql_result($result,0,'campaigngroupid');
-
+//$sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
+//$result=mysql_query($sql, $link) or die (mysql_error());;
+//$campaigngroupid=mysql_result($result,0,'campaigngroupid');
+$campaigngroupid=$groupid;
 if (isset($_POST[queuename])){
     //$queueid=$_POST[queueid];
     $campaignid=$_POST[campaignid];
@@ -60,7 +61,16 @@ if (isset($_POST[queuename])){
     ,'$retrytime','$waittime') ";
 
 //    $sql="INSERT INTO campaign (groupid,name,description,messageid,messageid2,messageid3) VALUES ('$campaigngroupid','$name', '$description', '$messageid','$messageid2','$messageid3')";
-    $result=mysql_query($sql, $link) or die (mysql_error());;
+    require_once "PHPTelnet.php";
+    $telnet = new PHPTelnet();
+$result = $telnet->Connect();
+$telnet->DoCommand('sql', $result);
+flush();
+$telnet->DoCommand($sql, $result);
+echo "".$result."<BR>";
+flush();
+$telnet->Disconnect();
+
     include("schedule.php");
     exit;
 }
@@ -70,17 +80,36 @@ if (!isset($_POST[campaignid])){
     <FORM ACTION="addschedule.php" METHOD="POST">
     <table class="tborder" align="center" border="0" cellpadding="0" cellspacing="2"><TR>
     <TD>Select Campaign:</TD><TD>
-        <SELECT NAME="campaignid">
-        <?
-        //
-        $sql = 'SELECT id,name FROM campaign WHERE groupid='.$campaigngroupid;
-        $result=mysql_query($sql, $link) or die (mysql_error());;
-        //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
-        while ($row = mysql_fetch_assoc($result)) {
-            echo "<OPTION VALUE=\"".$row[id]."\">".$row[name]."</OPTION>";
+        <select name="campaignid">
+
+<?
+require_once "PHPTelnet.php";
+
+$telnet = new PHPTelnet();
+$result = $telnet->Connect();
+while (substr(trim($result),0,3)!="END") {
+    $telnet->DoCommand('getallca', $result);
+    if (substr(trim($result),0,3)!="END"){
+        $pieces = explode("\n",$result);
+        $row[id]= $pieces[0];
+        $row[description]= $pieces[1];
+        $row[name]= $pieces[2];
+        $row[campaigngroupid]= $pieces[3];
+        $row[messageid]= $pieces[4];
+        $row[messageid2]= $pieces[5];
+        $row[messageid3]= $pieces[6];
+//        echo $result."<BR>";
+        if ($groupid==trim($row[campaigngroupid])){
+            echo "<option value=\"$row[id]\">$row[name]</option>
+";
+        } else {
+//            echo $groupid."!=".$row[campaigngroupid];
         }
-        ?>
-        </SELECT>
+
+    }
+}
+?>
+</select>
 
     </TD>
     </TR><TR>

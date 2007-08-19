@@ -87,7 +87,7 @@ while (substr(trim($result),0,3)!="END") {
     }
 //echo $result."<BR>";
 
-
+if (substr(trim($result),0,3)!="END") {
 
 
 
@@ -141,6 +141,7 @@ echo "<A HREF=\"editcustomer.php?id=".$row[id]."\">".trim(substr($row[company],0
 </TR>
 
 <?
+}
 }
 $telnet->Disconnect();
 sleep(1);

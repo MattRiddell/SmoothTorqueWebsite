@@ -5,10 +5,6 @@ require "header.php";?>
 require_once "PHPTelnet.php";
 
 $telnet = new PHPTelnet();
-
-// if the first argument to Connect is blank,
-// PHPTelnet will connect to the local host via 127.0.0.1
-$telnet = new PHPTelnet();
 $result = $telnet->Connect();
 //echo "CONNECTION REQUEST: ".$result."<BR>";
 $telnet->DoCommand('selectc', $result);

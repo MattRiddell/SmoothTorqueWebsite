@@ -16,9 +16,9 @@ $website=$_POST[website];
 $security=$_POST[security];
 $company=$_POST[name];
 
-    $sql="update campaigngroup set name='$company',description='$description' where id=".$_POST[campaigngroupid];
+//    $sql="update campaigngroup set name='$company',description='$description' where id=".$_POST[campaigngroupid];
 //    echo $sql;
-    $result=mysql_query($sql, $link) or die (mysql_error());;
+//    $result=mysql_query($sql, $link) or die (mysql_error());;
   //  $insertedID = mysql_insert_id();
 
     $sql="update customer set username='$username',address1='$address1',address2='$address2',
@@ -26,8 +26,17 @@ $company=$_POST[name];
     security='$security',company='$company' WHERE id=".$_POST[id];
 
     //echo $sql;
-    $result=mysql_query($sql, $link) or die (mysql_error());;
+    //$result=mysql_query($sql, $link) or die (mysql_error());;
+    require_once "PHPTelnet.php";
 
+$telnet = new PHPTelnet();
+$result = $telnet->Connect();
+$telnet->DoCommand('sql', $result);
+flush();
+$telnet->DoCommand($sql, $result);
+//echo "".$result."<BR>";
+flush();
+$telnet->Disconnect();
 
 
     include("customers.php");
