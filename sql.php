@@ -36,6 +36,8 @@ class SmDB {
         $telnet->DoCommand($sql, $result);
         $telnet->Disconnect();
     }
-
+    function isLoaded(){
+        return true;
+    }
 }
 ?>

@@ -31,7 +31,7 @@ $telnet->DoCommand($sql, $result);
 $telnet->Disconnect();
 
 
-    header("Location: editcampaign.php");
+    header("Location: campaigns.php");
     exit;
 }
 //require "header_campaign.php";
@@ -78,24 +78,8 @@ $telnet = new PHPTelnet();
 
 // if the first argument to Connect is blank,
 // PHPTelnet will connect to the local host via 127.0.0.1
-$telnet = new PHPTelnet();
-$result = $telnet->Connect();
-//echo "CONNECTION REQUEST: ".$result."<BR>";
-$x=10;
-$count=0;
-while (substr(trim($result),0,3)!="END") {
-    $telnet->DoCommand('getallm', $result);
-    //echo $result."<BR>";
-    if (substr(trim($result),0,3)!="END"){
-        $pieces = explode("\n",$result);
-        //echo $result."<BR>";
-        $row2[$count][id]= $pieces[0];
-        $row2[$count][filename]= $pieces[1];
-        $row2[$count][name]= $pieces[2];
-        $row2[$count][description]= $pieces[3];
-        $count++;
-    }
-}
+$row2=$SMDB->executeQuery("SELECT * FROM campaignmessage where customer_id=".$groupid);
+$count=sizeof($row2);
 
 //$count--;
 

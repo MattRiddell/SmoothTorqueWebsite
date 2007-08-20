@@ -65,10 +65,10 @@ if (isset($_POST[queuename])){
     $telnet = new PHPTelnet();
 $result = $telnet->Connect();
 $telnet->DoCommand('sql', $result);
-flush();
+//flush();
 $telnet->DoCommand($sql, $result);
-echo "".$result."<BR>";
-flush();
+//echo "".$result."<BR>";
+//flush();
 $telnet->Disconnect();
 
     include("schedule.php");

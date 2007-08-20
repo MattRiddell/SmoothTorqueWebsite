@@ -82,11 +82,13 @@ $row2=$SMDB->executeQuery($sql);
 $count=$row2[0]['count(*)'];
 
 
+//$sql = 'SELECT * from number where campaignid='.$row[id];
 $sql = 'SELECT count(*) from number where campaignid='.$row[id];
 //$result2=mysql_query($sql, $link) or die (mysql_error());;
 //$count2=mysql_result($result2,0,'count(*)');
 $row2=$SMDB->executeQuery($sql);
 $count2=$row2[0]['count(*)'];
+//print_r($row2);
 
 ?>
 <TD>
@@ -95,7 +97,7 @@ $count2=$row2[0]['count(*)'];
 
 
 <TD>
-<?echo "<A HREF=\"deletecampaign.php?id=".$row[id]."\"><IMG SRC=\"/images/cross.gif\" BORDER=\"0\"></A>";?>
+<?echo "<A HREF=\"deleteCampaign.php?id=".$row[id]."\"><IMG SRC=\"/images/cross.gif\" BORDER=\"0\"></A>";?>
 </TD>
 </TR>
 

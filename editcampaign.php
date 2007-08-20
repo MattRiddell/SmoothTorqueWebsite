@@ -41,7 +41,7 @@ $telnet = new PHPTelnet();
 $result = $telnet->Connect();
 //echo "CONNECTION REQUEST: ".$result."<BR>";
 $x=10;
-$count=0;
+$count=0;   /*
 while (substr(trim($result),0,3)!="END") {
     $telnet->DoCommand('getallm', $result);
     //echo $result."<BR>";
@@ -54,7 +54,10 @@ while (substr(trim($result),0,3)!="END") {
         $row2[$count][description]= $pieces[3];
         $count++;
     }
-}
+}     */
+$row2=$SMDB->executeQuery("SELECT * FROM campaignmessage where customer_id=".$groupid);
+$count=sizeof($row2);
+//echo $row2[0][filename];
 
 $telnet = new PHPTelnet();
 $result = $telnet->Connect();
@@ -148,7 +151,8 @@ while (substr(trim($result),0,3)!="END") {
 ?>
 <form action="editcampaign.php" method="get">
 <table class="tborder" align="center" border="0" cellpadding="0" cellspacing="2"><TR>
-    <TD>Select Campaign:</TD><TD>    <select name="id">
+    <TD>Select Campaign:</TD><TD>
+    <select name="id">
 
 <?
 $telnet = new PHPTelnet();

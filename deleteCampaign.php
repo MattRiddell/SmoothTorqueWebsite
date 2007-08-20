@@ -17,6 +17,13 @@ echo "".$result."";
 
 $telnet->Disconnect();
 sleep(1);
+} else {
+    if (isset($_GET[id])){
+        require_once "sql.php";
+        $SMDB2=new SmDB();
+        $sql="DELETE FROM campaign WHERE id=".$_GET[id];
+        $SMDB2->executeUpdate($sql);
+    }
 }
 ?>
-<meta http-equiv="refresh" content="1;url=campaigns.php">
+<meta http-equiv="refresh" content="0;url=campaigns.php">

@@ -1,39 +1,31 @@
 <?
 $pagenum=5;
 if (isset($_POST[name])){
-$description=$_POST[description];
-$username=$_POST[username];
-$password=sha1($_POST[password]);
-$address1=$_POST[address1];
-$address2=$_POST[address2];
-$city=$_POST[city];
-$country=$_POST[country];
-$phone=$_POST[phone];
-$fax=$_POST[fax];
-$email=$_POST[email];
-$website=$_POST[website];
-$security=$_POST[security];
-$company=$_POST[name];
+    $description=$_POST[description];
+    $username=$_POST[username];
+    $password=sha1($_POST[password]);
+    $address1=$_POST[address1];
+    $address2=$_POST[address2];
+    $city=$_POST[city];
+    $country=$_POST[country];
+    $phone=$_POST[phone];
+    $fax=$_POST[fax];
+    $email=$_POST[email];
+    $website=$_POST[website];
+    $security=$_POST[security];
+    $company=$_POST[name];
 
     $sql="INSERT INTO customer (username,password,campaigngroupid,address1,address2,city,
     country,phone,fax,email,website,security,company)
     VALUES ('$username','$password','0','$address1','$address2','$city',
     '$country','$phone','$fax','$email','$website','$security','$company')";
 
-//    echo $sql;
-//    $result=mysql_query($sql, $link) or die (mysql_error());;
     require_once "PHPTelnet.php";
     $telnet = new PHPTelnet();
-$result = $telnet->Connect();
-$telnet->DoCommand('sql', $result);
-flush();
-$telnet->DoCommand($sql, $result);
-echo "".$result."<BR>";
-flush();
-$telnet->Disconnect();
-
-
-
+    $result = $telnet->Connect();
+    $telnet->DoCommand('sql', $result);
+    $telnet->DoCommand($sql, $result);
+    $telnet->Disconnect();
     include("customers.php");
     exit;
 }

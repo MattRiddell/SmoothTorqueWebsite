@@ -1,11 +1,11 @@
 <?
- require "sql.php";
-$SMDB=new SmDB();
+require_once "sql.php";
+$SMDB2=new SmDB();
 
 function rgbhex($red,$green,$blue) {
  $red = dechex($red);
  if (strlen($red<2)){
-    //$red="0".$red;
+    $red="0".$red;
  }
  $green = dechex($green);
  if (strlen($green<2)){
@@ -17,26 +17,11 @@ function rgbhex($red,$green,$blue) {
  }
  return "#".strtoupper($red.$green.$blue);
 }
-
-//$link = mysql_connect('localhost', 'root', '') OR die(mysql_error());
-//mysql_select_db("SineDialer", $link);
-
 if (isset($_GET[campaigngroupid])){
-$campaigngroupid=$_GET[campaigngroupid];
+    $campaigngroupid=$_GET[campaigngroupid];
 }
-//$sql = 'SELECT * FROM number WHERE campaignid='.$_GET[id]." LIMIT 50";
-//if (isset($id)){
-//$_POST[campaignid]=$id;
-//$_GET[id]=$id;
-//}
 $sql = 'SELECT * FROM queue left join campaign ON queue.campaignid=campaign.id WHERE campaign.groupid='.$campaigngroupid;
-//$sql="select * from queue";
-$row1=$SMDB->executeQuery($sql);
-//print_r($row1);
-//echo sizeof($row1);
-//exit(0);
-//echo $sql;
-//$result=mysql_query($sql, $link) or die (mysql_error());;
+$row1=$SMDB2->executeQuery($sql);
 ?>
 <table align="center" border="0" cellpadding="2" cellspacing="0">
 <TR>
@@ -83,10 +68,8 @@ Status
 $xyz=0;
 while ($xyz<sizeof($row1)) {
 $sql2= 'SELECT name from campaign where id='.$row1[$xyz][campaignID];
-$row2=$SMDB->executeQuery($sql2);
-//$name=mysql_result($result2,0,'name');
+$row2=$SMDB2->executeQuery($sql2);
 $name=$row2[0]['name'];
-
 if ($toggle){
     $toggle=false;
     $class=" class=\"tborder2\"";
@@ -151,22 +134,6 @@ if (strlen($name)>9){
 <TD>
 <?echo $row1[$xyz][enddate]." ".$row1[$xyz][endtime];?>
 </TD>
-<?/*<TD>
-<?
-$time=$row[timespent];
-$hours=floor($time/60/60);
-if ($hours>0){
-    $time=$time-($hours*60*60);
-}
-$minutes=floor($time/60);
-if ($minutes>0){
-    $time=$time-($minutes*60);
-}
-$seconds=$time;
-echo "$hours:$minutes:$seconds";
-?>
-</TD>
-*/?>
 <TD><B>
 <?
 if ($row1[$xyz][status]==1|$row1[$xyz][status]==101){
@@ -184,8 +151,6 @@ echo $row1[$xyz][progress];
 
 <TD>
 <?
-//echo $row[flags]."/".$row[maxcalls];
-//echo $perc;
 if ($row1[$xyz][flags]>0){
 ?>
 <img src="images/percentImage.png" alt="<?echo $perc;?>%" class="percentImage" style="background-position: -<?echo 119-($perc*1.2); ?>px 0pt;" />

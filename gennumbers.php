@@ -1,5 +1,5 @@
 <?
-$pagenum="2";
+$pagenum="3";
 require "header.php";
 
 
@@ -13,27 +13,33 @@ if (!isset($_POST[campaignid])){
     <table class="tborder" align="center" border="0" cellpadding="0" cellspacing="2"><TR>
     <TD>Select Campaign:</TD><TD>
         <select name="campaignid">
+
 <?
-$lines2=file("/tmp/Sm1.allCampaigns");
-$name="";
-foreach ($lines2 as $line_num => $line) {
-//              echo $line;
-        if (substr($line,0,4)=="id =") {
-                $id=trim(substr($line,5));
-        } else if (substr($line,0,4)=="grou") {
-                   if (trim(substr($line,10))==$groupid){
-                    echo "".$name;
-                } else {
-                    echo "[".trim(substr($line,10))."]";
-                }
-        } else if (substr($line,0,4)=="name") {
-                $name= "<option value=\"$id\">".trim(substr($line,6))."</option>
+$telnet = new PHPTelnet();
+$result = $telnet->Connect();
+while (substr(trim($result),0,3)!="END") {
+    $telnet->DoCommand('getallca', $result);
+    if (substr(trim($result),0,3)!="END"){
+        $pieces = explode("\n",$result);
+        $row[id]= $pieces[0];
+        $row[description]= $pieces[1];
+        $row[name]= $pieces[2];
+        $row[campaigngroupid]= $pieces[3];
+        $row[messageid]= $pieces[4];
+        $row[messageid2]= $pieces[5];
+        $row[messageid3]= $pieces[6];
+        echo $result."<BR>";
+        if ($groupid==trim($row[campaigngroupid])){
+            echo "<option value=\"$row[id]\">$row[name]</option>
 ";
+        } else {
+//            echo $groupid."!=".$row[campaigngroupid];
         }
+
+    }
 }
 ?>
 </select>
-
     </TD>
     </TR><TR>
     <TD COLSPAN=2 ALIGN="CENTER">
@@ -48,26 +54,30 @@ foreach ($lines2 as $line_num => $line) {
  $count2=0;
  echo "Please Wait, saving data to the database.<BR><BR>This may take some time...<BR><BR>";
  for ($i=$_POST[start];$i<=$_POST[end];$i++){
-    echo $i;
+    //echo $i."<BR>";
     $myarray[$count]=$i;
-    $sql="INSERT IGNORE INTO number (campaignid,phonenumber,status,type) VALUES ($_POST[campaignid],$i,'new',0)";
+    $sql="INSERT INTO number (campaignid,phonenumber,status) VALUES ($_POST[campaignid],$i,'new')";
 //    $result=mysql_query($sql, $link) or die (mysql_error());;
+    $SMDB->executeUpdate($sql);
 
-/*    $count++;
+    $count++;
     $count2++;
     echo "<!-- . -->";
     if ($count2>($_POST[end]-$_POST[start])/100){
-        if ($count3>10){
+        if ($count3>9){
+            echo (round($count/($_POST[end]-$_POST[start])*100)-1)."% ";
             echo "<BR>";
             $count3=0;
-            }
-                    $count3++;
+        }
+        $count3++;
 
-            echo round($count/($_POST[end]-$_POST[start])*100)."% ";
+//        echo round($count/($_POST[end]-$_POST[start])*100)."% ";
+
+        echo "|";
         flush();
         $count2=0;
     }
-    */
+
  }
 
 // print_r($myarray);

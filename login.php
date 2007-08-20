@@ -22,7 +22,7 @@ $telnet->DoCommand($_POST[user], $result);
 $telnet->DoCommand($passwordHash, $result);
 //echo "YY2:".$result."<BR>";
 if (substr(trim($result),0,14)=="Security Level") {
-    $level=substr(trim($result),14);
+    $level=trim(substr(trim($result),14));
     //echo "FOUND SECURITY LEVEL $level";
 }
 //$pieces = explode("\n",$result);
@@ -39,10 +39,12 @@ if ($level>0) {
     setcookie("user",$_POST[user],time()+6000);
     if ($level==100){
         $levelout=sha1("level100");
+        //echo "Setting level to 100";
     } else {
         $levelout=sha1("level0");
     }
-    setcookie("level",$levelout,time()+6000);
+    setcookie("slevel",$levelout,time()+6000);
+    //echo $levelout;
     header("Location: home.php");
     exit;
 } else {

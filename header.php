@@ -32,12 +32,13 @@ $SMDB=new SmDB();
   return $info;
 }
 $user=$_COOKIE[user];
-$level=$_COOKIE[level];
+$level=$_COOKIE[slevel];
+//echo $_COOKIE[slevel];
 if ($_COOKIE["loggedin"]==sha1("LoggedIn".$user)){
     // Logged In
     setcookie("loggedin",sha1("LoggedIn".$user),time()+6000);
     setcookie("user",$user,time()+6000);
-    setcookie("level",$level,time()+6000);
+    setcookie("slevel",$level,time()+6000);
     ?>
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -57,7 +58,7 @@ if ($_COOKIE["loggedin"]==sha1("LoggedIn".$user)){
 <ul>
 <li><a href="home.php">Home</a></li>
 <li><a href="campaigns.php" rel="dropmenu1_e">Campaigns</a></li>
-<li><a href="messages.php" rel="dropmenu1_e">Messages</a></li>
+<li><a href="messages.php" rel="dropmenu4_e">Messages</a></li>
 <li><a href="numberPage.php" rel="dropmenu2_e">Numbers</a></li>
 <li><a href="schedule.php" rel="dropmenu3_e">Schedules</a></li>
 <li><a href="settingsPage.php">Settings</a></li>
@@ -78,7 +79,6 @@ if ($_COOKIE["loggedin"]==sha1("LoggedIn".$user)){
         <a href="addCampaign.php">Add Campaign</a>
         <a href="chart.php">Monitor Campaign</a>
         <a href="campaigns.php">View Campaigns</a>
-        <a href="menu_deleteCampaign.php">Delete Campaign</a>
 </div>
 
 <!--2nd drop down menu -->
@@ -87,6 +87,12 @@ if ($_COOKIE["loggedin"]==sha1("LoggedIn".$user)){
 <a href="menu_importNumbers.php">Import Numbers</a>
 <a href="menu_exportNumbers.php">Export Numbers</a>
 <a href="http://www.javascriptkit.com">Check Usage</a>
+</div>
+
+<!--Messages drop down menu -->
+<div id="dropmenu4_e" class="dropmenudiv_e" style="width: 150px;">
+<a href="addmessage.php">Add Message</a>
+<a href="messages.php">View Messages</a>
 </div>
 
 <!--2nd drop down menu -->
