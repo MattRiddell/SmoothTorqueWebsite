@@ -1,13 +1,9 @@
 <?
-$pagenum=6;
 require "header.php";
-//$sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
-
-
-
-
-//$result=mysql_query($sql, $link) or die (mysql_error());;
-$campaigngroupid=$groupid;
+require "header_customer.php";
+$sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
+$result=mysql_query($sql, $link) or die (mysql_error());;
+$campaigngroupid=mysql_result($result,0,'campaigngroupid');
 ?>
 
 <table class="" align="center" border="0" cellpadding="2" cellspacing="0">
@@ -43,56 +39,10 @@ Fax
 </TD>
 </TR>
 <?
-
-
-
-
-
-//$sql = 'SELECT * FROM customer';
-//$result=mysql_query($sql, $link) or die (mysql_error());;
+$sql = 'SELECT * FROM customer';
+$result=mysql_query($sql, $link) or die (mysql_error());;
 //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
-
-// $row is an array of one item's fields
-
-require_once "PHPTelnet.php";
-
-$telnet = new PHPTelnet();
-
-// if the first argument to Connect is blank,
-// PHPTelnet will connect to the local host via 127.0.0.1
-$telnet = new PHPTelnet();
-$result = $telnet->Connect();
-//echo "CONNECTION REQUEST: ".$result."<BR>";
-$x=10;
-while (substr(trim($result),0,3)!="END") {
-    $telnet->DoCommand('getallc', $result);
-    if (substr(trim($result),0,3)!="END"){
-        $pieces = explode("\n",$result);
-        $row[username]= $pieces[0];
-        $row[address1]= $pieces[2];
-        $row[address2]= $pieces[3];
-        $row[city]= $pieces[4];
-        $row[country]= $pieces[5];
-        $row[phone]= $pieces[6];
-        $row[email]= $pieces[7];
-        $row[fax]= $pieces[8];
-        $row[website]= $pieces[9];
-        $row[security]= $pieces[10];
-        $row[company]= $pieces[11];
-        $row[id]= $pieces[12];
-
-        /*for ($i=0;$i<sizeof($pieces);$i++){
-            echo "[$i]:$pieces[$i]<BR>";
-        }*/
-    }
-//echo $result."<BR>";
-
-if (substr(trim($result),0,3)!="END") {
-
-
-
-//while ($row = mysql_fetch_assoc($result)) {
-
+while ($row = mysql_fetch_assoc($result)) {
 if ($toggle){
 $toggle=false;
 $class=" class=\"tborder2\"";
@@ -136,17 +86,12 @@ echo "<A HREF=\"editcustomer.php?id=".$row[id]."\">".trim(substr($row[company],0
 <?echo $row[fax];?>
 </TD>
 <TD>
-<?echo "<A HREF=\"deletecustomer.php?id=".$row[id]."\"><IMG SRC=\"/images/cross.gif\" BORDER=\"0\"></A>";?>
+<a href="#" onclick="displaySmallMessage('includes/confirmDeleteCustomer.php?id=<?echo $row[id];?>');return false"><IMG SRC="/images/delete.png" BORDER="0"></a><br>
 </TD>
 </TR>
 
 <?
 }
-}
-$telnet->Disconnect();
-sleep(1);
-//exit(0);
-
 ?>
 
 </TABLE>

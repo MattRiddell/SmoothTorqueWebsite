@@ -1,14 +1,24 @@
 <?
 require "header.php";
 ?>
-<table class="tcat" align="center" border="0" cellpadding="0" cellspacing="2"><TR>
-<TD>
-Welcome to the SineDialer Enterprise Dialing Platform
 
-</TD>
-</TR>
-</TABLE>
+<br /><br /><br /><br />
+<center>
+<table background="/images/sdbox.png" width="300" height="200">
+<tr>
+<td>
+</td>
+<td width="260">
+<b>Welcome to SmoothTorque Enterprise.</b><br />
+<br />
+To get started, go into your list of campaigns by clicking on the
+Campaigns tab at the top of this page.
+<br />
+</td>
+<td>
+</td></tr>
+</table>
+</center>
 <?
 require "footer.php";
 ?>
-

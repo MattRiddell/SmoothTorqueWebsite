@@ -1,112 +1,81 @@
 <?
-$pagenum="1";
+include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(mysql_error());
+mysql_select_db("SineDialer", $link);
+if (isset($_GET[queueID])){
+    $sql = 'update queue set status='.$_GET[status].' where queueID='.$_GET[queueID];
+    $result=mysql_query($sql, $link) or die (mysql_error());;
+    header("Location: schedule.php?campaignid=".$_GET[campaignid]);
+}
+
 require "header.php";
-$sql = 'SELECT id FROM customer WHERE username=\''.$_COOKIE[user].'\'';
-$row1=$SMDB->executeQuery($sql);
-$campaigngroupid=$row1[0]['id'];
+$sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
+$result=mysql_query($sql, $link) or die (mysql_error());;
+$campaigngroupid=mysql_result($result,0,'campaigngroupid');
+require "header_campaign.php";
+
+if (isset($_GET[campaignid])){
+$_POST[campaignid]=$_GET[campaignid];
+}          /*
+if (!isset($_POST[campaignid])){
+    ?>
+    <FORM ACTION="schedule.php" METHOD="POST">
+    <table class="tborder" align="center" border="0" cellpadding="0" cellspacing="2"><TR>
+    <TD>Select Campaign:</TD><TD>
+        <SELECT NAME="campaignid">
+        <?
+        //
+        $sql = 'SELECT id,name FROM campaign WHERE groupid='.$campaigngroupid;
+        $result=mysql_query($sql, $link) or die (mysql_error());;
+        //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
+        while ($row = mysql_fetch_assoc($result)) {
+            echo "<OPTION VALUE=\"".$row[id]."\">".$row[name]."</OPTION>";
+        }
+        ?>
+        </SELECT>
+
+    </TD>
+    </TR><TR>
+    <TD COLSPAN=2 ALIGN="CENTER">
+    <INPUT TYPE="SUBMIT" VALUE="Display Schedule">
+    </TD>
+    </TR></table>
+    </FORM>
+    <?
+} else { */
+$out=_get_browser();
+//print_r($out)
+if ($out[browser]=="MSIE"){
 ?>
+<script type="text/javascript" src="/ajax/jquery.js"></script>
+        <script type="text/javascript">
+        $(function(){ // jquery onload
+                window.setInterval(function(){ // setInterval code
+                        $('#ajaxDiv').loadIfModified('disTime3.php?campaigngroupid=<?echo $campaigngroupid;?>&id=<?echo $_POST[campaignid];?>');  // jquery ajax load into div
+                },1000);
+        });
 
-<table class="" align="center" border="0" cellpadding="2" cellspacing="0">
-<TR>
-<TD CLASS="thead">
-Name
-</TD>
-<TD CLASS="thead">
-Description
-</TD>
-<TD CLASS="thead">
-Message 1
-</TD>
-<TD CLASS="thead">
-Message 2
-</TD>
-<TD CLASS="thead">
-Message 3
-</TD>
-<TD CLASS="thead">
-Used
-</TD>
-<TD CLASS="thead">
+        </script>
+ <?} else {?>
+<script type="text/javascript" src="/ajax/jquery.js"></script>
+        <script type="text/javascript">
 
-</TD>
-</TR>
+        $(function(){ // jquery onload
+                window.setInterval(function(){ // setInterval code
+                        //alert('hello');
+
+                        $('#ajaxDiv').load('disTime3.php?campaigngroupid=<?echo $campaigngroupid;?>&id=<?echo $_POST[campaignid];?>');  // jquery ajax load into div
+                },1000);
+        });
+                        </script>
+
+<?}?>
+<div id="ajaxDiv">
 <?
-$sql = 'SELECT * FROM campaign WHERE groupid='.$campaigngroupid;
-$row1=$SMDB->executeQuery($sql);
-//$campaigngroupid=mysql_result($result,0,'campaigngroupid');
-$countx=0;
-while ($countx<sizeof($row1)) {
-$row = $row1[$countx];
-if ($toggle){
-$toggle=false;
-$class=" class=\"tborder2\"";
-} else {
-$toggle=true;
-$class=" class=\"tborderx\"";
-}
-
+$id=$_POST[campaignid];
+include "disTime3.php";
 ?>
-<TR <?echo $class;?>>
-<TD>
+</div>
 <?
-if (strlen($row[name])<15){
-echo "<A HREF=\"editcampaign.php?id=".$row[id]."\">".$row[name]."</A>";
-} else {
-echo "<A HREF=\"editcampaign.php?id=".$row[id]."\">".trim(substr($row[name],0,15))."...</A>";
-}
-?>
-</TD>
-<TD>
-<?
-if (strlen($row[description])<25){
-echo $row[description];
-} else {
-echo trim(substr($row[description],0,25))."...";
-}
-?>
-</TD>
-<TD>
-<?echo $row[messageid];?>
-</TD>
-<TD>
-<?echo $row[messageid2];?>
-</TD>
-<TD>
-<?echo $row[messageid3];?>
-</TD>
-<?
-$sql = 'SELECT count(*) from number where campaignid='.$row[id].' and status="dialed"';
-//$result2=mysql_query($sql, $link) or die (mysql_error());;
-//$count=mysql_result($result2,0,'count(*)');
-$row2=$SMDB->executeQuery($sql);
-$count=$row2[0]['count(*)'];
 
-
-//$sql = 'SELECT * from number where campaignid='.$row[id];
-$sql = 'SELECT count(*) from number where campaignid='.$row[id];
-//$result2=mysql_query($sql, $link) or die (mysql_error());;
-//$count2=mysql_result($result2,0,'count(*)');
-$row2=$SMDB->executeQuery($sql);
-$count2=$row2[0]['count(*)'];
-//print_r($row2);
-
-?>
-<TD>
-<?echo $count."/".$count2;?>
-</TD>
-
-
-<TD>
-<?echo "<A HREF=\"deleteCampaign.php?id=".$row[id]."\"><IMG SRC=\"/images/cross.gif\" BORDER=\"0\"></A>";?>
-</TD>
-</TR>
-
-<?
-$countx++;
-}
-?>
-
-</TABLE>
-<?
 require "footer.php";
 ?>

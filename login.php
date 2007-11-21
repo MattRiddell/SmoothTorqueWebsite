@@ -1,51 +1,21 @@
 <?
 //require "header.php";
+include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(mysql_error());
+mysql_select_db("SineDialer", $link);
 $passwordHash = sha1($_POST['pass']);
-
-require_once "PHPTelnet.php";
-
-$telnet = new PHPTelnet();
-
-// if the first argument to Connect is blank,
-// PHPTelnet will connect to the local host via 127.0.0.1
-$telnet = new PHPTelnet();
-$result = $telnet->Connect();
-//echo "CONNECTION REQUEST: ".$result."<BR>";
-$telnet->DoCommand('login', $result);
-//echo "XX".$result."<BR>";
-if (!substr(trim($result),0,5)=='<b>Ch'){
-    header("Location: index.php?error=Unable%20to%20connect%20to%20server.");
-    exit(0);
-}
-$telnet->DoCommand($_POST[user], $result);
-//echo "YY:".$result."<BR>";
-$telnet->DoCommand($passwordHash, $result);
-//echo "YY2:".$result."<BR>";
-if (substr(trim($result),0,14)=="Security Level") {
-    $level=trim(substr(trim($result),14));
-    //echo "FOUND SECURITY LEVEL $level";
-}
-//$pieces = explode("\n",$result);
-//foreach ($pieces as $line_num => $line) {
-//}
-
-
-
-//$dbpass = sha1($_POST['pass']);
-//$result=mysql_query($sql, $link) or die (mysql_error());;
-//$dbpass=mysql_result($result,0,'password');
-if ($level>0) {
+$sql = 'SELECT password, security FROM customer WHERE username=\''.$_POST[user].'\'';
+$result=mysql_query($sql, $link) or die (mysql_error());;
+$dbpass=mysql_result($result,0,'password');
+if (trim($dbpass)==trim($passwordHash)){
     setcookie("loggedin",sha1("LoggedIn".$_POST[user]),time()+6000);
     setcookie("user",$_POST[user],time()+6000);
-    if ($level==100){
-        $levelout=sha1("level100");
-        //echo "Setting level to 100";
+    if (mysql_result($result,0,'security')==100){
+        $level=sha1("level100");
     } else {
-        $levelout=sha1("level0");
+        $level=sha1("level0");
     }
-    setcookie("slevel",$levelout,time()+6000);
-    //echo $levelout;
-    header("Location: home.php");
+    setcookie("level",$level,time()+6000);
+    header("Location: /main.php");
     exit;
 } else {
     setcookie("loggedin","--",time()+6000);
@@ -57,3 +27,5 @@ if ($level>0) {
 }
 require "footer.php";
 ?>
+
+

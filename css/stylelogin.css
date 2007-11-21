@@ -1,20 +1,28 @@
 BODY {
 	PADDING-RIGHT: 0px; PADDING-LEFT: 0px;
-	BACKGROUND: #f0f0ff;
+	BACKGROUND: #555;
 	PADDING-BOTTOM: 0px; MARGIN: 0px; FONT: 10pt verdana,
 geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; COLOR: #000000; PADDING-TOP: 0px
 }
 A:link {
-	COLOR: #22229c
-}
+    text-decoration: none;
+	COLOR: #2222fc;
+    }
 A:visited {
-	COLOR: #22229c
-}
+    text-decoration: none;
+	COLOR: #2222fc;
+    }
 A:hover {
 	COLOR: #ff4400
+    ;
+//    font-weight: bold;
+
 }
 A:active {
 	COLOR: #ff4400
+    ;
+    font-weight: bold;
+
 }
 .page {
 	BACKGROUND: #ffffff; COLOR: #000000
@@ -34,11 +42,11 @@ LI {
 	FONT: 9pt verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif
 }
 .tborder {
-	BORDER-RIGHT: #245e83 1px outset; BORDER-TOP: #245e83 1px outset; BACKGROUND: #d8ddde; BORDER-LEFT: #245e83 1px outset; COLOR: #000000; BORDER-BOTTOM: #245e83 1px outset;
-    BACKGROUND-IMAGE: url('../images/bg.gif');
+	BORDER-RIGHT: #245e83 1px outset; BORDER-TOP: #245e83 1px outset; BACKGROUND: #f6f6f6; BORDER-LEFT: #245e83 1px outset; COLOR: #000000; BORDER-BOTTOM: #245e83 1px outset;
+
 }
 .tborderx {
-	BORDER-RIGHT: #245e83 1px outset; BORDER-TOP: #245e83 1px outset; BACKGROUND: #d8ddde; BORDER-LEFT: #245e83 1px outset; COLOR: #000000; BORDER-BOTTOM: #245e83 1px outset;
+	BORDER-RIGHT: #245e83 1px outset; BORDER-TOP: #245e83 1px outset; BACKGROUND: #f2f2f2; BORDER-LEFT: #245e83 1px outset; COLOR: #000000; BORDER-BOTTOM: #245e83 1px outset;
 
 }
 .tborderxx {
@@ -46,7 +54,7 @@ LI {
 
 }
 .tborder2 {
-	BORDER-RIGHT: #245e83 1px outset; BORDER-TOP: #245e83 1px outset; BACKGROUND: #e8edee; BORDER-LEFT: #245e83 1px
+	BORDER-RIGHT: #245e83 1px outset; BORDER-TOP: #245e83 1px outset; BACKGROUND: #f8f8f8; BORDER-LEFT: #245e83 1px
 outset; COLOR: #000000; BORDER-BOTTOM: #245e83 1px outset
 }
 .tborder3{
@@ -70,35 +78,52 @@ outset; COLOR: #000000; BORDER-BOTTOM: #245e83 0px outset
 }
 
 .thead2 {
-background: url(../images/ch.gif);
+background: url(/images/ch.gif);
 COLOR: #FFFFFF;
+    FONT: 11pt verdana,geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
 }
 .theadl2 {
-background: url(../images/cl.gif);
+background: url(/images/cl.gif);
 COLOR: #000000;
 }
 .theadr2 {
-background: url(../images/cr.gif);
+background: url(/images/cr.gif);
 COLOR: #000000;
 }
 .thead {
-background: url(../images/chb.gif);
-COLOR: #FFFFFF;
+background: url(/images/chb.gif);
+COLOR: #ffffff;
+	text-decoration: none;
+    FONT: 11pt verdana,geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
 }
 .theadl {
-background: url(../images/clb.gif);
+background: url(/images/clb.gif);
 COLOR: #000000;
 }
 .theadr {
-background: url(../images/crb.gif);
+background: url(/images/crb.gif);
 COLOR: #000000;
 }
 .thead A:link {
-	COLOR: #FFFFFF;
+	COLOR: #000000;
+	text-decoration: none;
 }
 .thead A:visited {
-	COLOR: #FFFFFF;
+	COLOR: #000000;
+	text-decoration: none;
 }
+.thead2 A:link {
+	COLOR: #000000;
+	text-decoration: none;
+}
+.thead2 A:visited {
+	COLOR: #666666;
+	text-decoration: none;
+}
+.thead2 A:hover {
+	COLOR: #008;
+}
+
 
 /* the div that holds the date picker calendar */
 .dpDiv {
@@ -295,13 +320,13 @@ OPTGROUP {
 	BORDER-RIGHT: 2px inset; PADDING-RIGHT: 10px; BORDER-TOP: 2px inset; PADDING-LEFT: 10px; BACKGROUND: #e4e7f5 repeat-x left top; PADDING-BOTTOM: 10px; BORDER-LEFT: 2px inset; COLOR: #000000; PADDING-TOP: 10px; BORDER-BOTTOM: 2px inset
 }
 .panelsurround {
-	BACKGROUND: url(../images/gradients/gradient_panelsurround.gif) #d5d8e5 repeat-x left top; COLOR: #000000
+	BACKGROUND: url(../../images/gradients/gradient_panelsurround.gif) #d5d8e5 repeat-x left top; COLOR: #000000
 }
 LEGEND {
 	FONT: 11px tahoma, verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; COLOR: #22229c
 }
 .vbmenu_control {
-	PADDING-RIGHT: 6px; PADDING-LEFT: 6px; BACKGROUND: url(../images/gradients/newcat.gif) #245e83 repeat-x left top; PADDING-BOTTOM: 3px; FONT: bold 11px tahoma, verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; COLOR: #ffffff; PADDING-TOP: 3px; WHITE-SPACE: nowrap
+	PADDING-RIGHT: 6px; PADDING-LEFT: 6px; BACKGROUND: url(../../images/gradients/newcat.gif) #245e83 repeat-x left top; PADDING-BOTTOM: 3px; FONT: bold 11px tahoma, verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; COLOR: #ffffff; PADDING-TOP: 3px; WHITE-SPACE: nowrap
 }
 .vbmenu_control A:link {
 	COLOR: #ffffff; TEXT-DECORATION: none
@@ -412,7 +437,7 @@ body2 {
 	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: #ffffff; PADDING-BOTTOM: 0px; MARGIN: 0px; FONT: 10pt verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; COLOR: #000000; PADDING-TOP: 0px
 }
 img.percentImage {
- background: white url(../images/percentImage_back.png) top left no-repeat;
+ background: white url(/images/percentImage_back.png) top left no-repeat;
  padding: 0;
  margin: 5px 0 0 0;
  background-position: 1px 0;

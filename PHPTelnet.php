@@ -8,7 +8,7 @@ public domain
 
 class PHPTelnet {
 	var $use_usleep=1;	// change to 1 for faster execution
-		// don't change to 1 on Windows servers unless you have PHP 5
+	// don't change to 1 on Windows servers unless you have PHP 5
 	var $sleeptime=250;
 	var $loginsleeptime=1000000;
 
@@ -24,12 +24,9 @@ class PHPTelnet {
 	*/
 	function Connect() {
 		$rv=0;
-		
-				
 		$ip='127.0.0.1';
-		
-	if ($this->fp=fsockopen($ip,6901)) {				}
-					
+		if ($this->fp=fsockopen($ip,6901,$errno, $errstr, 3)) {				
+		}
 		return $rv;
 	}
 	
@@ -47,7 +44,7 @@ class PHPTelnet {
 			if ($this->use_usleep) usleep($this->sleeptime);
 			else sleep(1);
 			$this->GetResponse($r);
-			$r=preg_replace("/^.*?\n(.*)\n[^\n]*$/","$1",$r);
+//			$r=preg_replace("/^.*?\n(.*)\n[^\n]*$/","$1",$r);
 		}
 		return $this->fp?1:0;
 	}

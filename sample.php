@@ -1,10 +1,11 @@
 <?php
+$debug = true;
 $MAX_ENTRIES=241;
 include "charts.php";
 
 $chart [ 'chart_data' ][ 0 ][ 0 ] = "";
 $chart [ 'chart_data' ][ 1 ][ 0 ] = "Percentage On Phone";
-$chart [ 'chart_data' ][ 2 ][ 0 ] = "Speed";
+$chart [ 'chart_data' ][ 2 ][ 0 ] = "Current Running Speed";
 $chart [ 'chart_data' ][ 3 ][ 0 ] = "Max Running Speed";
 
 $id=$_GET[id];
@@ -26,10 +27,10 @@ foreach ($lines2 as $line_num => $line) {
 			$max = substr(trim($line),5);
                 }
                 if (substr(trim($line),0,4)=="Done") {
-			$dialed = substr(trim($line),5);
+			$dialed = substr(trim($line),6);
                 }
                 if (substr(trim($line),0,4)=="Mult") {
-			$multiplyer = substr(trim($line),5);
+			$multiplyer = substr(trim($line),6);
                 }
                 if (substr(trim($line),0,3)=="MRS") {
 			$mrs = substr(trim($line),5);
@@ -43,10 +44,23 @@ foreach ($lines2 as $line_num => $line) {
                 if (substr(trim($line),0,3)=="CAD") {
 			$cad = substr(trim($line),5);
                 }
+                if (substr(trim($line),0,2)=="MS") {
+                    $ms = substr(trim($line),4);
+                }
+                if (substr(trim($line),0,2)=="M2") {
+                    $m2 = substr(trim($line),4);
+                }
+                if (substr(trim($line),0,2)=="O1") {
+                    $o1 = substr(trim($line),4);
+                }
+                if (substr(trim($line),0,2)=="O2") {
+                    $o2 = substr(trim($line),4);
+                }
                 if (substr(trim($line),0,3)=="TSP") {
 			$timespent = substr(trim($line),5);
-			$timespentM = round($timespent/60);
+			$timespentM = floor($timespent/60);
 			$timespentS = $timespent%60;
+//			$timespentS = $timespent;
 
                 }
         }
@@ -150,12 +164,41 @@ $chart[ 'chart_value' ] = array ( 'prefix'=>"", 'suffix'=>"", 'decimals'=>0, 'se
 
 $text4="Running Speed: ".(($lastSpeed/100)*2000)." (" .round($lastSpeed,2) ."%)";
 
+if (!$debug){
+$chart[ 'draw' ] = array (
+array ( 'type'=>"text", 'color'=>"000000", 'alpha'=>2, 'font'=>"arial",
+        'rotation'=>0, 'bold'=>true, 'size'=>75, 'x'=>240, 'y'=>-200,
+        'width'=>620, 'height'=>300, 'text'=>"SmoothTorque", 'h_align'=>"left",
+        'v_align'=>"bottom" ),
+array ( 'type'=>"text", 'color'=>"444444", 'alpha'=>100, 'font'=>"arial", 'rotation'=>0,
+'bold'=>true, 'size'=>15, 'x'=>765, 'y'=>160, 'width'=>300, 'height'=>300, 'text'=>"Done: $dialed",
+'h_align'=>"left", 'v_align'=>"bottom" ),
+array ( 'type'=>"text", 'color'=>"000000", 'alpha'=>13, 'font'=>"arial",
+        'rotation'=>0, 'bold'=>true, 'size'=>25, 'x'=>390, 'y'=>170,
+        'width'=>620, 'height'=>300, 'text'=>"Time (seconds ago)", 'h_align'=>"left",
+        'v_align'=>"bottom" )
 
-$chart[ 'draw' ] = array ( array ( 'type'=>"text", 'color'=>"ffffff", 'alpha'=>15, 'font'=>"arial", 'rotation'=>-90,
+        );
+} else {
+$chart[ 'draw' ] = array (
+array ( 'type'=>"text", 'color'=>"000000", 'alpha'=>3, 'font'=>"arial",
+        'rotation'=>0, 'bold'=>true, 'size'=>75, 'x'=>240, 'y'=>120,
+        'width'=>620, 'height'=>300, 'text'=>"SmoothTorque", 'h_align'=>"left",
+        'v_align'=>"bottom" ),
+
+array ( 'type'=>"text", 'color'=>"ffffff", 'alpha'=>15, 'font'=>"arial", 'rotation'=>-90,
 'bold'=>true, 'size'=>50, 'x'=>-10, 'y'=>288, 'width'=>300, 'height'=>150, 'text'=>"Percent", 'h_align'=>"center",
 'v_align'=>"top" ),
 array ( 'type'=>"text", 'color'=>"000088", 'alpha'=>100, 'font'=>"arial", 'rotation'=>0,
 'bold'=>true, 'size'=>15, 'x'=>270, 'y'=>160, 'width'=>300, 'height'=>300, 'text'=>"Busy Agents: $busy/$max ($lastPerc%)",
+'h_align'=>"left",
+'v_align'=>"bottom" ),
+array ( 'type'=>"text", 'color'=>"444444", 'alpha'=>100, 'font'=>"arial", 'rotation'=>0,
+'bold'=>true, 'size'=>15, 'x'=>270, 'y'=>200, 'width'=>300, 'height'=>300, 'text'=>"Ms Sleep: $ms",
+'h_align'=>"left",
+'v_align'=>"bottom" ),
+array ( 'type'=>"text", 'color'=>"444444", 'alpha'=>100, 'font'=>"arial", 'rotation'=>0,
+'bold'=>true, 'size'=>15, 'x'=>505, 'y'=>200, 'width'=>300, 'height'=>300, 'text'=>"MaxDelayCalc: $m2",
 'h_align'=>"left",
 'v_align'=>"bottom" ),
 array ( 'type'=>"text", 'color'=>"444444", 'alpha'=>100, 'font'=>"arial", 'rotation'=>0,
@@ -168,10 +211,16 @@ array ( 'type'=>"text", 'color'=>"444444", 'alpha'=>100, 'font'=>"arial", 'rotat
 'bold'=>true, 'size'=>15, 'x'=>270, 'y'=>180, 'width'=>300, 'height'=>300, 'text'=>"Speed Multiplier: ".$multiplyer."x",
 'h_align'=>"left", 'v_align'=>"bottom" ),
 array ( 'type'=>"text", 'color'=>"444444", 'alpha'=>100, 'font'=>"arial", 'rotation'=>0,
-'bold'=>true, 'size'=>15, 'x'=>505, 'y'=>180, 'width'=>300, 'height'=>300, 'text'=>"Max Running Speed: ".$mrs." (".($mrs/2000*100)."%)",
+'bold'=>true, 'size'=>15, 'x'=>505, 'y'=>180, 'width'=>300, 'height'=>300, 'text'=>"Max Running Speed: ".round($mrs,2)." (".round($mrs/2000*100)."%)",
 'h_align'=>"left", 'v_align'=>"bottom" ),
 array ( 'type'=>"text", 'color'=>"444444", 'alpha'=>100, 'font'=>"arial", 'rotation'=>0,
 'bold'=>true, 'size'=>15, 'x'=>765, 'y'=>180, 'width'=>300, 'height'=>300, 'text'=>"Average: ".round($avgPerc,2)."%",
+'h_align'=>"left", 'v_align'=>"bottom" ),
+array ( 'type'=>"text", 'color'=>"444444", 'alpha'=>100, 'font'=>"arial", 'rotation'=>0,
+'bold'=>true, 'size'=>15, 'x'=>765, 'y'=>200, 'width'=>300, 'height'=>300, 'text'=>"Overs: ".$o1."",
+'h_align'=>"left", 'v_align'=>"bottom" ),
+array ( 'type'=>"text", 'color'=>"444444", 'alpha'=>100, 'font'=>"arial", 'rotation'=>0,
+'bold'=>true, 'size'=>15, 'x'=>45, 'y'=>220, 'width'=>300, 'height'=>300, 'text'=>"Adj Overs: ".$o2."",
 'h_align'=>"left", 'v_align'=>"bottom" ),
 array ( 'type'=>"text", 'color'=>"444444", 'alpha'=>100, 'font'=>"arial", 'rotation'=>0,
 'bold'=>true, 'size'=>15, 'x'=>45, 'y'=>180, 'width'=>300, 'height'=>300, 'text'=>"TimeSpent: ".$timespentM.":".$timespentS,
@@ -186,8 +235,12 @@ array ( 'type'=>"text", 'color'=>"444444", 'alpha'=>100, 'font'=>"arial", 'rotat
 
 
  );
+
+
+}
+
 $chart[ 'chart_pref' ] = array ( 'line_thickness'=>3, 'point_shape'=>"none", 'fill_shape'=>false );
-$chart[ 'series_color' ] = array ( "ccccfc", "ff0000", "000000", "564546", "784e3a", "677b75" );
+$chart[ 'series_color' ] = array ( "6666ff", "ff0000", "000000", "564546", "784e3a", "677b75" );
 
 $chart[ 'legend_label' ] = array ( 'layout'=>"horizontal", 'font'=>"arial", 'bold'=>true, 'size'=>12, 'color'=>"000000",
 'alpha'=>90 );
@@ -199,7 +252,7 @@ $chart[ 'axis_value' ] = array (  'min'=>0, 'max'=>125, 'font'=>"arial", 'bold'=
 'alpha'=>90, 'steps'=>5, 'prefix'=>"", 'suffix'=>"%", 'decimals'=>0, 'separator'=>"", 'show_min'=>true );
 
 $chart [ 'live_update' ] = array (   'url'    =>  "sample.php?id=".$id."&uniqueID=" . uniqid(rand(),true),
-                                     'delay'  =>  15
+                                     'delay'  =>  1
                                 );
 
 

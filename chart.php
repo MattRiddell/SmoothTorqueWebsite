@@ -9,7 +9,7 @@ require_once "PHPTelnet.php";
 
 
 if (!isset($_GET[id])){
-require "header.php";
+//require "header.php";
 
 ?>
 <form action="chart.php" method="get">
@@ -49,15 +49,14 @@ while (substr(trim($result),0,3)!="END") {
 </td></tr></table>
 </form>
 <?} else {
-require "header.php";
+//require "header.php";
 ?>
-<br \><br \><br \><br \>
 <?
 //include charts.php to access the InsertChart function
 
 $id=$_GET[id];
 if ($id>0){
-echo InsertChart ( "charts.swf", "charts_library", "sample.php?id=".$id, 1000, 548, "eeeeee", false );
+echo InsertChart ( "charts.swf", "charts_library", "sample.php?id=".$id, 1000, 548, "ffffff", false );
 }
 
 

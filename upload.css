@@ -1,0 +1,32 @@
+.progresscontainer {
+	width: 250px;
+	height: 16px;
+	background-color: #eeeeff;
+    border-style: solid;
+    border-width: 1px;
+    background-image: url(/images/ch.gif);
+    background-position: -8px -8px;
+}
+
+.progressbar {
+	width: 0px;
+	height: 16px;
+    background-image: url(/images/chb.gif);
+    background-position: -8px -8px;
+	background-color: #00ff00;
+}
+
+div.inputhead {
+	font-size: x-small;
+}
+
+.input {
+	margin-bottom: 10px;
+	width: 200px;
+	font-family: Verdana, "Bitstream Vera Sans", sans-serif;
+	font-size: small;
+}
+
+.data {
+	margin-left: 20px;
+}

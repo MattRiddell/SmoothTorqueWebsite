@@ -1,37 +1,44 @@
 <?
-$pagenum=5;
+include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(mysql_error());
+mysql_select_db("SineDialer", $link);
+
 if (isset($_POST[name])){
-    $description=$_POST[description];
-    $username=$_POST[username];
-    $password=sha1($_POST[password]);
-    $address1=$_POST[address1];
-    $address2=$_POST[address2];
-    $city=$_POST[city];
-    $country=$_POST[country];
-    $phone=$_POST[phone];
-    $fax=$_POST[fax];
-    $email=$_POST[email];
-    $website=$_POST[website];
-    $security=$_POST[security];
-    $company=$_POST[name];
+$description=$_POST[description];
+$username=$_POST[username];
+$password=sha1($_POST[password]);
+$address1=$_POST[address1];
+$address2=$_POST[address2];
+$city=$_POST[city];
+$country=$_POST[country];
+$phone=$_POST[phone];
+$fax=$_POST[fax];
+$email=$_POST[email];
+$website=$_POST[website];
+$security=$_POST[security];
+$company=$_POST[name];
+
+    $sql="INSERT INTO campaigngroup (name,description) VALUES ('$company','$description')";
+//    echo $sql;
+    $result=mysql_query($sql, $link) or die (mysql_error());;
+    $insertedID = mysql_insert_id();
 
     $sql="INSERT INTO customer (username,password,campaigngroupid,address1,address2,city,
-    country,phone,fax,email,website,security,company)
-    VALUES ('$username','$password','0','$address1','$address2','$city',
+    country,phone,fax,email,website,security,company) 
+    VALUES ('$username','$password','$insertedID','$address1','$address2','$city',
     '$country','$phone','$fax','$email','$website','$security','$company')";
 
-    require_once "PHPTelnet.php";
-    $telnet = new PHPTelnet();
-    $result = $telnet->Connect();
-    $telnet->DoCommand('sql', $result);
-    $telnet->DoCommand($sql, $result);
-    $telnet->Disconnect();
+//    echo $sql;
+    $result=mysql_query($sql, $link) or die (mysql_error());;
+
+
+
     include("customers.php");
     exit;
 }
 require "header.php";
+require "header_customer.php";
 ?>
-
+                              
 <FORM ACTION="addcustomer.php" METHOD="POST">
 <table class="tborder" align="center" border="0" cellpadding="0" cellspacing="2">
 <?
@@ -73,14 +80,8 @@ require "header.php";
 </TR><TR><TD CLASS="thead">Website</TD><TD>
 <INPUT TYPE="TEXT" NAME="website" VALUE="<?echo $row[website];?>" size="60">
 </TD>
-</TR><TR><TD CLASS="thead">Security Level</TD><TD>
-<SELECT NAME="security">
-<OPTION VALUE="10">User</OPTION>
-<OPTION VALUE="100">Admin</OPTION>
-</SELECT>
-<?
-/*<INPUT TYPE="TEXT" NAME="security" VALUE="<?echo $row[security];?>" size="60">*/
-?>
+</TR><TR><TD CLASS="thead">Security Level (Either 0 or 100)</TD><TD>
+<INPUT TYPE="TEXT" NAME="security" VALUE="<?echo $row[security];?>" size="60">
 </TD>
 </TR>
 </TR><TR><TD COLSPAN=2 ALIGN="RIGHT">
@@ -95,3 +96,4 @@ require "header.php";
 <?
 require "footer.php";
 ?>
+

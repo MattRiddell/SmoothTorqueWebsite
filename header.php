@@ -1,6 +1,4 @@
 <?
- require "sql.php";
-$SMDB=new SmDB();
  function _get_browser()
 {
   $browser = array ( //reversed array
@@ -32,125 +30,187 @@ $SMDB=new SmDB();
   return $info;
 }
 $user=$_COOKIE[user];
-$level=$_COOKIE[slevel];
-//echo $_COOKIE[slevel];
+$level=$_COOKIE[level];
+//echo "".$user." - ".$_COOKIE["loggedin"];
+
+include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(mysql_error());
+mysql_select_db("SineDialer", $link);
 if ($_COOKIE["loggedin"]==sha1("LoggedIn".$user)){
     // Logged In
     setcookie("loggedin",sha1("LoggedIn".$user),time()+6000);
     setcookie("user",$user,time()+6000);
-    setcookie("slevel",$level,time()+6000);
-    ?>
-    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-<head>
-<title>SmoothTorque</title>
-<link rel="stylesheet" type="text/css" href="css/stylelogin.css">
-<link rel="stylesheet" type="text/css" href="css/default.css">
-<script type="text/javascript" src="dropdowntabfiles/dropdowntabs.js">
-</script>
-<script type="text/javascript" src="ajax/picker.js"></script>
-<link rel="stylesheet" type="text/css" href="dropdowntabfiles/halfmoontabs.css" />
-</head>
-<body>
-<div id="moonmenu" class="halfmoon">
-<center><img src="logo.png">
-<ul>
-<li><a href="home.php">Home</a></li>
-<li><a href="campaigns.php" rel="dropmenu1_e">Campaigns</a></li>
-<li><a href="messages.php" rel="dropmenu4_e">Messages</a></li>
-<li><a href="numberPage.php" rel="dropmenu2_e">Numbers</a></li>
-<li><a href="schedule.php" rel="dropmenu3_e">Schedules</a></li>
-<li><a href="settingsPage.php">Settings</a></li>
-<?if ($level==sha1("level100")) {?>
-<li><a href="customers.php" rel="dropmenu5_e">Customers</a></li>
-<?}?>
-<li><a href="logout.php">Log Out</a></li>
-</ul>
-</div>
+    setcookie("level",$level,time()+6000);
+
+$self=$_SERVER['PHP_SELF'];
+//echo $self;
+    $menu='<CENTER>
+    <table border="0" cellpadding="3" cellspacing="0"><TR HEIGHT="19">';
+
+    //=======================================================================================================
+    // Home
+    //=======================================================================================================
+    if ($self=="/main.php"){
+        $menu.='<td style="background-image: url(/images/clb.gif);" height=20 width=0></td>';
+        $thead="thead";
+    } else {
+    $menu.='<TD CLASS="theadl2" WIDTH=0 height=20></TD>';
+        $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
+    }
+
+    $menu.='<TD class="'.$thead.'" height=28><A HREF="/main.php"><img src="/images/house.png" border="0" align="left">Home</A>&nbsp;</TD>';
+
+    //=======================================================================================================
+    // Campaigns
+    //=======================================================================================================
+    if ($self=="/campaigns.php"||$self=="/deletecampaign.php"||$self=="/editcampaign.php"||$self=="/addcampaign.php"||$self=="/stopcampaign.php"||$self=="/startcampaign.php"){
+        $thead="thead";
+    } else {
+        $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
+    }
+    $menu.='<TD class="'.$thead.'"><A HREF="/campaigns.php"><img src="/images/folder.png" border="0" align="left">Campaigns</A>&nbsp;</TD>';
+
+    //=======================================================================================================
+    // Numbers
+    //=======================================================================================================
+    if ($self=="/addnumbers.php"||$self=="/numbers.php"||$self=="/deletenumber.php"||$self=="/viewnumbers.php"||$self == "/gennumbers.php"||$self == "/upload.php"||$self =="//receive.php"){
+        $thead="thead";
+    } else {
+        $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
+    }
+    $menu.='<TD class="'.$thead.'"><A HREF="/numbers.php"><img src="/images/telephone.png" border="0" align="left">Numbers</A>&nbsp;</TD>';
+
+    //=======================================================================================================
+    // DNC Numbers
+    //=======================================================================================================
+    if ($self=="/adddncnumbers.php"||$self=="/dncnumbers.php"||$self=="/deletedncnumber.php"||$self=="/viewdncnumbers.php"||$self == "/gendncnumbers.php"||$self == "/uploaddnc.php"||$self =="//receive.php"){
+        $thead="thead";
+    } else {
+        $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
+    }
+    $menu.='<TD class="'.$thead.'"><A HREF="/dncnumbers.php"><img src="/images/telephone_error.png" border="0" align="left">DNC Numbers</A>&nbsp;</TD>';
+
+    //=======================================================================================================
+    // Messages
+    //=======================================================================================================
+    if ($self=="/editmessage.php"||$self=="/addmessage.php"||$self=="/deleteMessage.php"||$self=="/messages.php"){
+        $thead="thead";
+    } else {
+        $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
+    }
+    $menu.='<TD class="'.$thead.'"><A HREF="/messages.php"><img src="/images/sound.png" border="0" align="left">Messages</A>&nbsp;</TD>';
+    if ($level==sha1("level100")){
+
+        //=======================================================================================================
+        // Customers
+        //=======================================================================================================
+        if ($self=="/deletecustomer.php"||$self=="/addcustomer.php"||$self=="/customers.php"||$self=="/editcustomer.php"){
+            $thead="thead";
+        } else {
+            $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
+        }
+        $menu.='<TD class="'.$thead.'"><A HREF="/customers.php"><img src="/images/group.png" border="0" align="left">Customers</A>&nbsp;</TD>';
+        //=======================================================================================================
+
+        //=======================================================================================================
+        // Servers
+        //=======================================================================================================
+        if ($self=="/deleteserver.php"||$self=="/addserver.php"||$self=="/servers.php"||$self=="/editserver.php"){
+            $thead="thead";
+        } else {
+            $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
+        }
+        $menu.='<TD class="'.$thead.'"><A HREF="/servers.php"><img src="/images/server.png" border="0" align="left">Servers</A>&nbsp;</TD>';
+        //=======================================================================================================
 
 
-<br style="clear: left;" />
+        //=======================================================================================================
+        // Trunks
+        //=======================================================================================================
+        if ($self=="/trunks.php"||$self=="/edittrunk.php"||$self=="/addtrunk.php"||$self=="/setdefault.php"||$self=="/deletetrunk.php"){
+            $thead="thead";
+        } else {
+            $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
+        }
+        $menu.='<TD class="'.$thead.'"><A HREF="/trunks.php"><img src="/images/telephone_link.png" border="0" align="left">Trunks</A>&nbsp;</TD>';
+        //=======================================================================================================
 
+    }
+    //    <TD class="thead2"><A HREF="prefs.php">Preferences</A>&nbsp;&nbsp;</TD>
+    $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
 
-<!--1st drop down menu -->
+    $menu.='<TD class="'.$thead.'"><A HREF="/logout.php"><img src="/images/door_in.png" border="0" align="left">Logout</A></TD>
 
-<div id="dropmenu1_e" class="dropmenudiv_e">
-        <a href="addCampaign.php">Add Campaign</a>
-        <a href="chart.php">Monitor Campaign</a>
-        <a href="campaigns.php">View Campaigns</a>
-</div>
+    <TD CLASS="theadr2" WIDTH=0></TD>
 
-<!--2nd drop down menu -->
-<div id="dropmenu2_e" class="dropmenudiv_e" style="width: 150px;">
-<a href="gennumbers.php">Generate Numbers</a>
-<a href="menu_importNumbers.php">Import Numbers</a>
-<a href="menu_exportNumbers.php">Export Numbers</a>
-<a href="http://www.javascriptkit.com">Check Usage</a>
-</div>
+    </TR></table>
 
-<!--Messages drop down menu -->
-<div id="dropmenu4_e" class="dropmenudiv_e" style="width: 150px;">
-<a href="addmessage.php">Add Message</a>
-<a href="messages.php">View Messages</a>
-</div>
-
-<!--2nd drop down menu -->
-<div id="dropmenu3_e" class="dropmenudiv_e" style="width: 150px;">
-<a href="schedule.php">View Schedules</a>
-<a href="addschedule.php">Add Schedule</a>
-</div>
-
-<!--2nd drop down menu -->
-<div id="dropmenu5_e" class="dropmenudiv_e" style="width: 150px;">
-<a href="addcustomer.php">Add Customer</a>
-<a href="customers.php">View Customers</a>
-</div>
-
-<script type="text/javascript">
-//SYNTAX: tabdropdown.init("menu_id", [integer OR "auto"])
-tabdropdown.init("moonmenu", <?echo $pagenum;?>)
-
-</script>
-
-
-
-
-
-    <?
-
-    require_once "PHPTelnet.php";
-
-$telnet = new PHPTelnet();
-
-// if the first argument to Connect is blank,
-// PHPTelnet will connect to the local host via 127.0.0.1
-$telnet = new PHPTelnet();
-$result = $telnet->Connect();
-//echo "CONNECTION REQUEST: ".$result."<BR>";
-$telnet->DoCommand('selectcg', $result);//echo $result."<BR>";
-$telnet->DoCommand($_COOKIE[user], $result);
-//echo $result."<BR>";
-if (substr(trim($result),0,7)=="GroupID") {
-    $groupid=substr(trim($result),8);
-}
-$telnet->Disconnect();
+    ';
+    //<TD class="thead2"><A HREF="stats.php">Live Statistics</A>&nbsp;&nbsp;</TD>
 } else {
     // Not Logged In
-    $myPage=basename($_SERVER['SCRIPT_FILENAME']);
-    if ($myPage=="index.php"|$myPage=="login.php"){
+    $myPage=$_SERVER[PHP_SELF];
+    if ($myPage=="/index.php"|$myPage=="/login.php"){
         //echo "LOGGING IN ".$user." - ".$_COOKIE["loggedin"];
     } else {
-        header("Location: index.php");
+        header("Location: /");
         exit;
     }
 }
+?>
+<HTML>
+<HEAD>
+<TITLE>SmoothTorque Enterprise</TITLE>
+<link rel="stylesheet" type="text/css" href="/css/stylelogin.css">
+<link rel="stylesheet" type="text/css" href="/css/default.css">
+<link rel="stylesheet" href="/css/modal-message.css" type="text/css">
+<link rel="shortcut icon" href="/favicon.ico">
+<script type="text/javascript" src="/js/ajax.js"></script>
+<script type="text/javascript" src="/js/modal-message.js"></script>
+<script type="text/javascript" src="/js/ajax-dynamic-content.js"></script>
+<script language="javascript" type="text/javascript" src="/upload.js"></script>
+<link rel="stylesheet" href="/upload.css" type="text/css" media="screen" title="Upload" charset="utf-8" />
+  <script language="javascript">
+    function beginUpload(sid) {
+      document.postform.submit();
+        var pb = document.getElementById("progress");
+        var pb2 = document.getElementById("matt");
+        var pb3 = document.getElementById("matt2");
+        pb.parentNode.parentNode.style.display='block';
+        pb2.style.display='none';
+        pb3.style.display='none';
+        pb.parentNode.parentNode.style.display='block';
+        new ProgressTracker(sid,{
+                progressBar: pb,
+                onFailure: function(msg) {
+                        Element.hide(pb.parentNode);
+                        alert(msg);
+                }
+        });
+    }
+  </script>
+<script type="text/javascript" src="/ajax/picker.js"></script>
+<script language=javascript type='text/javascript'>
+
+function hideItem(obj) {
+    var el = document.getElementById(obj);
+    el.style.display = 'none';
+
+}
+
+</script>
+</HEAD>
+<BODY BACKGROUND="/images/bg.gif" onload="hideItem('hideShow');">
+<?
+
+if (isset($menu)){
+   ?>
+<CENTER>    <img src="/images/logo2.png">
 
 
+    <?
+    echo $menu;
+    flush();
+}
 ?>
 
-
-
-
-<center>
-<font face="arial">
+<TABLE WIDTH=100% HEIGHT="100%" BORDER="0" CELLSPACING="0" CELLPADDING="0" class="tborder3"><TR VALIGN="TOP" ><TD BGCOLOR="#ffffff">

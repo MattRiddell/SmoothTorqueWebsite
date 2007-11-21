@@ -9,7 +9,7 @@ echo "showDiv||";
 
 # enter your MySQL sever, username, and password
 
-$link = mysql_connect('localhost', 'root', '');
+include "admin/db_config.php";//mysql_connect('localhost', 'root', '');
 	
 
 # if link dies echo error
