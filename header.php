@@ -37,9 +37,9 @@ include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(my
 mysql_select_db("SineDialer", $link);
 if ($_COOKIE["loggedin"]==sha1("LoggedIn".$user)){
     // Logged In
-    setcookie("loggedin",sha1("LoggedIn".$user),time()+6000);
-    setcookie("user",$user,time()+6000);
-    setcookie("level",$level,time()+6000);
+    setcookie("loggedin",sha1("LoggedIn".$user),time()+60000);
+    setcookie("user",$user,time()+60000);
+    setcookie("level",$level,time()+60000);
 
 $self=$_SERVER['PHP_SELF'];
 //echo $self;

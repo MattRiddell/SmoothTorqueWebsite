@@ -14,16 +14,15 @@ require "header_numbers.php";
 <td>
 </td>
 <td width="260">
-<b>Number List Management.</b><br />
+<b>Do Not Call List</b><br />
 <br />
 Make a choice from one of the following: <br /><br />
-<a href="/viewnumbers.php">View existing phone numbers</a><br />
+<a href="/viewdncnumbers.php">View existing DNC numbers</a><br />
 <br />
-<a href="/upload.php">Upload numbers from a text file</a><br />
+<a href="/uploaddnc.php">Upload numbers from a text file</a><br />
 <br />
-<a href="/addnumbers.php">Type in a few test numbers</a><br />
+<a href="/adddncnumbers.php">Type in a few test numbers</a><br />
 <br />
-<a href="/gennumbers.php">Generate numbers automatically</a><br />
 </td>
 <td>
 </td></tr>
