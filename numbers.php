@@ -14,16 +14,16 @@ require "header_numbers.php";
 <td>
 </td>
 <td width="260">
-<b>Number List Management.</b><br />
+<b>Number List Management.</b>
 <br />
 Make a choice from one of the following: <br /><br />
-<a href="/viewnumbers.php">View existing phone numbers</a><br />
+<a href="/viewnumbers.php"><img src="/images/page_white.png" border="0">View existing phone numbers</a><br />
 <br />
-<a href="/upload.php">Upload numbers from a text file</a><br />
+<a href="/upload.php"><img src="/images/page_white_get.png" border="0">Upload numbers from a text file</a><br />
 <br />
-<a href="/addnumbers.php">Type in a few test numbers</a><br />
+<a href="/addnumbers.php"><img src="/images/page_white_add.png" border="0">Type in a few test numbers</a><br />
 <br />
-<a href="/gennumbers.php">Generate numbers automatically</a><br />
+<a href="/gennumbers.php"><img src="/images/page_white_lightning.png" border="0">Generate numbers automatically</a><br />
 </td>
 <td>
 </td></tr>
