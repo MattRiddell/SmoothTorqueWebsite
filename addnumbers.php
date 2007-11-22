@@ -82,6 +82,14 @@ Which campaign would you like to add numbers to?<br /><br />
         }
     }
      echo "</div><img src=\"/images/tick.gif\">Completed Saving";
+     ?>
+    <script language="javascript">
+    function delayer(){
+    window.location = "numbers.php"
+    }
+    setTimeout('delayer()', 1000);
+    </script>
+    <?
     echo "<BR></TD></TR>
         </TABLE>";
  } else {

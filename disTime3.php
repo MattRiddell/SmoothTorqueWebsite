@@ -201,7 +201,7 @@ if ($status==101){
 ?>
 </td>
 <td>
-<a href="chart.php?id=<?echo $row[id];?>" target="_blank" class="abcd"><img src="/images/chart_line.png" border="0"></a>&nbsp;
+<a href="chart.php?id=<?echo $row[id];?>" target="_blank" class="abcd"><img src="/images/chart_curve.png" border="0"></a>&nbsp;
 <img src="/images/percentImage.png" alt="<?echo
 $perc;?>%"
 class="percentImage"

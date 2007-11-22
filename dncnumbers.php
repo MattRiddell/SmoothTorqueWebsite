@@ -17,11 +17,11 @@ require "header_numbers.php";
 <b>Do Not Call List</b><br />
 <br />
 Make a choice from one of the following: <br /><br />
-<a href="/viewdncnumbers.php">View existing DNC numbers</a><br />
+<a href="/viewdncnumbers.php"><img src="/images/magnifier.png" border="0">View existing DNC numbers</a><br />
 <br />
-<a href="/uploaddnc.php">Upload numbers from a text file</a><br />
+<a href="/uploaddnc.php"><img src="/images/page_white_get.png" border="0">Upload numbers from a text file</a><br />
 <br />
-<a href="/adddncnumbers.php">Type in a few test numbers</a><br />
+<a href="/adddncnumbers.php"><img src="/images/page_white_add.png" border="0">Type in a few test numbers</a><br />
 <br />
 </td>
 <td>

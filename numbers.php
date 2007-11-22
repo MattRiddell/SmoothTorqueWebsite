@@ -17,7 +17,7 @@ require "header_numbers.php";
 <b>Number List Management.</b>
 <br />
 Make a choice from one of the following: <br /><br />
-<a href="/viewnumbers.php"><img src="/images/page_white.png" border="0">View existing phone numbers</a><br />
+<a href="/viewnumbers.php"><img src="/images/magnifier.png" border="0">View existing phone numbers</a><br />
 <br />
 <a href="/upload.php"><img src="/images/page_white_get.png" border="0">Upload numbers from a text file</a><br />
 <br />
