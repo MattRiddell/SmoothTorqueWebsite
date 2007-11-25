@@ -134,6 +134,17 @@ $self=$_SERVER['PHP_SELF'];
         $menu.='<TD class="'.$thead.'"><A HREF="/trunks.php"><img src="/images/telephone_link.png" border="0" align="left">Trunks</A>&nbsp;</TD>';
         //=======================================================================================================
 
+        //=======================================================================================================
+        // Config
+        //=======================================================================================================
+        if ($self=="/trunks.php"||$self=="/edittrunk.php"||$self=="/addtrunk.php"||$self=="/setdefault.php"||$self=="/deletetrunk.php"){
+            $thead="thead";
+        } else {
+            $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
+        }
+        $menu.='<TD class="'.$thead.'"><A HREF="/config.php"><img src="/images/cog.png" border="0" align="left">Config</A>&nbsp;</TD>';
+        //=======================================================================================================
+
     }
     //    <TD class="thead2"><A HREF="prefs.php">Preferences</A>&nbsp;&nbsp;</TD>
     $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
