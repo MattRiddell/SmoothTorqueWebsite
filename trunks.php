@@ -8,9 +8,10 @@ $campaigngroupid=mysql_result($result,0,'campaigngroupid');
 ?>
 <table class="" align="center" border="0" cellpadding="2" cellspacing="0">
 <TR>
-<TD CLASS="thead">
+<?if ($backend == 0) {?><TD CLASS="thead">
 Current
 </TD>
+<?}?>
 <TD CLASS="thead">
 Name
 </TD>
@@ -45,6 +46,7 @@ while ($row = mysql_fetch_assoc($result)) {
 
 ?>
 <TR <?echo $class;?>>
+<?if ($backend == 0) {?>
 <TD>
 <?
 if ($row["current"]==1){
@@ -59,6 +61,7 @@ if ($row["current"]==1){
 
 ?>
 </TD>
+<?}?>
 <TD>
 <?
 if (strlen($row[name])<15){

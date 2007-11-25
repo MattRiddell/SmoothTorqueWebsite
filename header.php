@@ -40,6 +40,9 @@ if ($_COOKIE["loggedin"]==sha1("LoggedIn".$user)){
     setcookie("loggedin",sha1("LoggedIn".$user),time()+60000);
     setcookie("user",$user,time()+60000);
     setcookie("level",$level,time()+60000);
+$sql = 'SELECT value FROM config WHERE parameter=\'backend\'';
+$result=mysql_query($sql, $link) or die (mysql_error());;
+$backend = mysql_result($result,0,'value');
 
 $self=$_SERVER['PHP_SELF'];
 //echo $self;
@@ -119,7 +122,9 @@ $self=$_SERVER['PHP_SELF'];
         } else {
             $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
         }
+        if ($backend == 0){
         $menu.='<TD class="'.$thead.'"><A HREF="/servers.php"><img src="/images/server.png" border="0" align="left">Servers</A>&nbsp;</TD>';
+        }
         //=======================================================================================================
 
 
@@ -137,7 +142,7 @@ $self=$_SERVER['PHP_SELF'];
         //=======================================================================================================
         // Config
         //=======================================================================================================
-        if ($self=="/config.php"){
+        if ($self=="/config.php"||$self=="/setparameter.php"){
             $thead="thead";
         } else {
             $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";

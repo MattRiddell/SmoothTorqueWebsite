@@ -15,6 +15,10 @@ $campaigngroupid=mysql_result($result,0,'campaigngroupid');
 */
 include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(mysql_error());
 mysql_select_db("SineDialer", $link);
+$sql = 'SELECT value FROM config WHERE parameter=\'backend\'';
+$result=mysql_query($sql, $link) or die (mysql_error());;
+$backend = mysql_result($result,0,'value');
+
 $sql = 'SELECT * FROM campaign WHERE groupid='.$campaigngroupid;
 $result=mysql_query($sql, $link) or die (mysql_error());;
 //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
@@ -201,7 +205,9 @@ if ($status==101){
 ?>
 </td>
 <td>
+<?if ($backend == 0) {?>
 <a href="chart.php?id=<?echo $row[id];?>" target="_blank" class="abcd"><img src="/images/chart_curve.png" border="0"></a>&nbsp;
+<?}?>
 <img src="/images/percentImage.png" alt="<?echo
 $perc;?>%"
 class="percentImage"
