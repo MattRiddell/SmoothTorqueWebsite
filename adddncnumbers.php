@@ -2,7 +2,7 @@
 require "header.php";
 require "header_numbers.php";
 
-include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(mysql_error());
+include "admin/db_config.php";
 mysql_select_db("SineDialer", $link);
 
 $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';

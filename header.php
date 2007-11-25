@@ -137,7 +137,7 @@ $self=$_SERVER['PHP_SELF'];
         //=======================================================================================================
         // Config
         //=======================================================================================================
-        if ($self=="/trunks.php"||$self=="/edittrunk.php"||$self=="/addtrunk.php"||$self=="/setdefault.php"||$self=="/deletetrunk.php"){
+        if ($self=="/config.php"){
             $thead="thead";
         } else {
             $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
