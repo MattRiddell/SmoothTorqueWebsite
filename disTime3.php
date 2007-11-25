@@ -46,8 +46,8 @@ To create your first campaign, please click the Add Campaign button above.<br />
 exit(0);
 }
 
+$user = $_COOKIE[user];
 ?>
-
 <table class="" align="center" border="0" cellpadding="2" cellspacing="0">
 <TR>
 <td style="background-image: url(/images/clb.gif);" width=2></td>
@@ -165,7 +165,13 @@ countx   = dialing
 
 
 <TD>
-<?echo "<A HREF=\"deletecampaign.php?id=".$row[id]."\"><IMG SRC=\"/images/delete.png\" BORDER=\"0\"></A>";?>
+<?
+if ($user!="demo"){
+echo "<A HREF=\"deletecampaign.php?id=".$row[id]."\"><IMG SRC=\"/images/delete.png\" BORDER=\"0\"></A>";
+} else {
+echo "<A HREF=\"#\"><IMG SRC=\"/images/delete.png\" BORDER=\"0\"></A>";
+}
+?>
 </TD>
 <TD>
 
@@ -192,11 +198,20 @@ if ($status==101){
 <IMG SRC="/images/control_play.png" BORDER="0">
 </TD>
 <td>
+<?if ($user!="demo"){?>
 <a href="stopcampaign.php?id=<?echo $row[id];?>"><img src="/images/control_stop_blue.png" border="0"></a>
+<?} else {?>
+<a href="#"><img src="/images/control_stop_blue.png" border="0"></a>
 <?
+}
 } else {
+
 ?>
+<?if ($user!="demo"){?>
 <a href="#" onclick="displayMessage('includes/livestart.php?id=<?echo $row[id];?>');return false"><IMG SRC="/images/control_play_blue.png" BORDER="0"></a><br>
+<?} else {?>
+<a href="#"><IMG SRC="/images/control_play_blue.png" BORDER="0"></a><br>
+<?}?>
 </TD>
 <td>
 <img src="/images/control_stop.png" border="0">
