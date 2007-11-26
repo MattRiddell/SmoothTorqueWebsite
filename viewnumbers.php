@@ -6,7 +6,7 @@ $campaigngroupid=mysql_result($result,0,'campaigngroupid');
 require "header_numbers.php";
 
 
-if (!isset($_POST[campaignid])){
+if (!isset($_POST[campaignid])&&!isset($_GET[campaignid])){
     ?>
 
 
@@ -55,6 +55,7 @@ From here you can chose a campaign that you would like to see the numbers for.<b
     <?
 } else {
 ?>
+<br />
 <table class="tborder" align="center" border="0" cellpadding="0" cellspacing="2">
 <TR>
 <TD CLASS="thead">
@@ -69,9 +70,33 @@ Status
 </TR>
 
 <?
-$sql = 'SELECT * FROM number WHERE campaignid='.$_POST[campaignid]." order by status asc LIMIT 50";
+$start=0;
+if(isset($_POST[campaignid])){
+    $campaignid=$_POST[campaignid];
+} else {
+    $campaignid=$_GET[campaignid];
+}
+if ($_GET[start]>0){
+    $start=$_GET[start];
+}
+$sql = 'SELECT count(*) FROM number WHERE campaignid='.$campaignid;
+$result=mysql_query($sql, $link) or die (mysql_error());;
+$max=mysql_result($result,0,'count(*)');
+
+$sql = 'SELECT * FROM number WHERE campaignid='.$campaignid.' order by status asc LIMIT '.$start.',20';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
+
+echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&start=0"><img src="/images/resultset_first.png" border="0"></a> ';
+echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&start='.($start-20).'"><img src="/images/resultset_previous.png" border="0"></a> ';
+
+for ($x=$start;$x<$start+200;$x+=20){
+echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&start='.$x.'">'.($x/20).'</a> ';
+}
+echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&start='.($x+20).'"><img src="/images/resultset_next.png" border="0"></a> ';
+echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&start='.(($max-20)+$max%20).'"><img src="/images/resultset_last.png" border="0"></a> ';
+echo '<br />';
+echo '<br />';
 while ($row = mysql_fetch_assoc($result)) {
 if ($toggle){
 $toggle=false;

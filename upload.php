@@ -22,7 +22,12 @@ Which campaign would you like to add the numbers to?<br /><br />
         <SELECT NAME="campaignid">
         <?
         //
-        $sql = 'SELECT id,name FROM campaign WHERE groupid='.$campaigngroupid;
+        $level=$_COOKIE[level];
+        if ($level==sha1("level100")) {
+            $sql = 'SELECT id,name FROM campaign';
+        } else {
+            $sql = 'SELECT id,name FROM campaign WHERE groupid='.$campaigngroupid;
+        }
         $result=mysql_query($sql, $link) or die (mysql_error());;
         //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
         while ($row = mysql_fetch_assoc($result)) {

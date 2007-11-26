@@ -3,6 +3,11 @@ require "header.php";
 $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $campaigngroupid=mysql_result($result,0,'campaigngroupid');
+
+$sql = 'SELECT count(*) FROM dncnumber';
+$result=mysql_query($sql, $link) or die (mysql_error());;
+$count=mysql_result($result,0,'count(*)');
+
 require "header_numbers.php";
 
 
@@ -14,7 +19,7 @@ require "header_numbers.php";
 <td>
 </td>
 <td width="260">
-<b>Do Not Call List</b><br />
+<b>Do Not Call List (<?echo $count;?> numbers)</b><br />
 <br />
 Make a choice from one of the following: <br /><br />
 <a href="/viewdncnumbers.php"><img src="/images/magnifier.png" border="0">View existing DNC numbers</a><br />

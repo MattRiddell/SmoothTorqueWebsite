@@ -19,7 +19,13 @@ $sql = 'SELECT value FROM config WHERE parameter=\'backend\'';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $backend = mysql_result($result,0,'value');
 
-$sql = 'SELECT * FROM campaign WHERE groupid='.$campaigngroupid;
+
+$level=$_COOKIE[level];
+if ($level==sha1("level100")) {
+    $sql = 'SELECT * FROM campaign';
+} else {
+    $sql = 'SELECT * FROM campaign WHERE groupid='.$campaigngroupid;
+}
 $result=mysql_query($sql, $link) or die (mysql_error());;
 //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
 if (mysql_num_rows($result)==0){
