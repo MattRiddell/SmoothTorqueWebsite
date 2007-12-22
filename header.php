@@ -53,10 +53,10 @@ $self=$_SERVER['PHP_SELF'];
     // Home
     //=======================================================================================================
     if ($self=="/main.php"){
-        $menu.='<td style="background-image: url(/images/clb.gif);" height=20 width=0></td>';
+        $menu.='<td style="background-image: url(/images/clb.gif);" height=19></td>';
         $thead="thead";
     } else {
-    $menu.='<TD CLASS="theadl2" WIDTH=0 height=20></TD>';
+    $menu.='<TD CLASS="theadl2" WIDTH=0 height=19></TD>';
         $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
     }
 
@@ -115,6 +115,17 @@ $self=$_SERVER['PHP_SELF'];
         //=======================================================================================================
 
         //=======================================================================================================
+        // Queues
+        //=======================================================================================================
+        if ($self=="/deletequeue.php"||$self=="/addqueue.php"||$self=="/queues.php"||$self=="/editqueue.php"){
+            $thead="thead";
+        } else {
+            $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
+        }
+        $menu.='<TD class="'.$thead.'"><A HREF="/queues.php"><img src="/images/database.png" border="0" align="left">Queues</A>&nbsp;</TD>';
+        //=======================================================================================================
+
+        //=======================================================================================================
         // Servers
         //=======================================================================================================
         if ($self=="/deleteserver.php"||$self=="/addserver.php"||$self=="/servers.php"||$self=="/editserver.php"){
@@ -154,11 +165,7 @@ $self=$_SERVER['PHP_SELF'];
     //    <TD class="thead2"><A HREF="prefs.php">Preferences</A>&nbsp;&nbsp;</TD>
     $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
 
-    $menu.='<TD class="'.$thead.'"><A HREF="/logout.php"><img src="/images/door_in.png" border="0" align="left">Logout</A></TD>
-
-    <TD CLASS="theadr2" WIDTH=0></TD>
-
-    </TR></table>
+    $menu.='<TD height="1" class="'.$thead.'"><A HREF="/logout.php"><img src="/images/door_in.png" border="0" align="left">Logout</A>&nbsp;</TD><TD CLASS="theadr2" WIDTH=0></TD></TR></table>
 
     ';
     //<TD class="thead2"><A HREF="stats.php">Live Statistics</A>&nbsp;&nbsp;</TD>
@@ -204,13 +211,80 @@ $self=$_SERVER['PHP_SELF'];
         });
     }
   </script>
+
+<style>
+<!--
+.dragme{position:relative;}
+-->
+</style>
+<script language="JavaScript1.2">
+<!--
+
+var ie=document.all;
+var nn6=document.getElementById&&!document.all;
+
+var isdrag=false;
+var x,y;
+var dobj;
+
+function movemouse(e)
+{
+  if (isdrag)
+  {
+//	alert ("hello");
+//    window.defaultStatus = "This is the status bar";
+//    document.title=nn6 ? ty + e.clientY - y : ty + event.clientY - y;
+    if ((nn6 ? ty + e.clientY - y : ty + event.clientY - y) > -57){
+        dobj.style.left = nn6 ? tx + e.clientX - x : tx + event.clientX - x;
+        dobj.style.top  = nn6 ? ty + e.clientY - y : ty + event.clientY - y;
+    } else {
+
+        dobj.style.left = nn6 ? tx + e.clientX - x : tx + event.clientX - x;
+        dobj.style.top  = -56;
+
+    }
+    return false;
+  }
+}
+
+function selectmouse(e)
+{
+  var fobj       = nn6 ? e.target : event.srcElement;
+  var topelement = nn6 ? "HTML" : "BODY";
+
+  while (fobj.tagName != topelement && fobj.className != "dragme")
+  {
+    fobj = nn6 ? fobj.parentNode : fobj.parentElement;
+  }
+
+  if (fobj.className=="dragme")
+  {
+    isdrag = true;
+    dobj = fobj;
+    tx = parseInt(dobj.style.left+0);
+    ty = parseInt(dobj.style.top+0);
+    x = nn6 ? e.clientX : event.clientX;
+    y = nn6 ? e.clientY : event.clientY;
+    document.onmousemove=movemouse;
+    return false;
+  }
+}
+
+document.onmousedown=selectmouse;
+document.onmouseup=new Function("isdrag=false");
+
+//-->
+</script>
+
+
 <script type="text/javascript" src="/ajax/picker.js"></script>
 <script language=javascript type='text/javascript'>
 
 function hideItem(obj) {
     var el = document.getElementById(obj);
+    if (el) {
     el.style.display = 'none';
-
+    }
 }
 
 </script>
@@ -229,4 +303,6 @@ if (isset($menu)){
 }
 ?>
 
-<TABLE WIDTH=100% HEIGHT="100%" BORDER="0" CELLSPACING="0" CELLPADDING="0" class="tborder3"><TR VALIGN="TOP" ><TD BGCOLOR="#ffffff">
+<TABLE WIDTH=100% HEIGHT="100%" BORDER="0" CELLSPACING="0" CELLPADDING="0" class="tborder3">
+<TR VALIGN="TOP" >
+<TD BGCOLOR="#ffffff">

@@ -23,7 +23,7 @@ $company=$_POST[name];
     $insertedID = mysql_insert_id();
 
     $sql="INSERT INTO customer (username,password,campaigngroupid,address1,address2,city,
-    country,phone,fax,email,website,security,company) 
+    country,phone,fax,email,website,security,company)
     VALUES ('$username','$password','$insertedID','$address1','$address2','$city',
     '$country','$phone','$fax','$email','$website','$security','$company')";
 
@@ -38,7 +38,7 @@ $company=$_POST[name];
 require "header.php";
 require "header_customer.php";
 ?>
-                              
+
 <FORM ACTION="addcustomer.php" METHOD="POST">
 <table class="tborder" align="center" border="0" cellpadding="0" cellspacing="2">
 <?
@@ -80,8 +80,11 @@ require "header_customer.php";
 </TR><TR><TD CLASS="thead">Website</TD><TD>
 <INPUT TYPE="TEXT" NAME="website" VALUE="<?echo $row[website];?>" size="60">
 </TD>
-</TR><TR><TD CLASS="thead">Security Level (Either 0 or 100)</TD><TD>
-<INPUT TYPE="TEXT" NAME="security" VALUE="<?echo $row[security];?>" size="60">
+</TR><TR><TD CLASS="thead">Customer Type</TD><TD>
+<SELECT NAME="security">
+<OPTION VALUE="0" <?if ($row[security]==0){echo "SELECTED";}?>>Normal Customer</OPTION>
+<OPTION VALUE="100" <?if ($row[security]==100){echo "SELECTED";}?>>Administrator</OPTION>
+</SELECT>
 </TD>
 </TR>
 </TR><TR><TD COLSPAN=2 ALIGN="RIGHT">
@@ -96,4 +99,3 @@ require "header_customer.php";
 <?
 require "footer.php";
 ?>
-

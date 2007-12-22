@@ -13,7 +13,7 @@ if (!isset($_POST[campaignid])){
     ?>
     <br /><br /><br /><br />
 <center>
-<table background="/images/sdbox.png" width="300" height="200">
+<table background="/images/sdbox.png" width="300" height="200" class="dragme">
 <TR>
 <td>
 </td>
@@ -51,7 +51,7 @@ Which campaign would you like to add numbers to?<br /><br />
  $count=0;
  $count2=0;
  ?><br /><br /><br /><br /><br />
- <table background="/images/sdbox.png" align="center" width="300" height="200" cellpadding="0" cellspacing="0">
+ <table background="/images/sdbox.png" align="center" width="300" height="200" cellpadding="0" cellspacing="0" class="dragme">
  <tr><td width=250><center>
  <table><tr><td>
 <div id="hideShow" >
@@ -108,7 +108,7 @@ Which campaign would you like to add numbers to?<br /><br />
 ?>
     <br /><br /><br /><br />
 <center>
-<table background="/images/sdbox.png" width="300" height="200">
+<table background="/images/sdbox.png" width="300" height="200" class="dragme">
     <TR>
         <td>
         </td>

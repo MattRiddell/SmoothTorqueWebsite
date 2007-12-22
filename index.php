@@ -9,13 +9,13 @@ echo "<FONT FACE=\"ARIAL\">";
        <br /><table align="center" cellpadding="0" cellspacing="0">
             <TR><TD COLSPAN=2><CENTER><IMG SRC="/images/logo2.png"></TD></TR>
         </table>
-<br />	
+<br />
 Welcome to the SmoothTorque Hosted Predictive Dialing Platform.<br />
 <br />
 If you would like to see a demonstration of the capabilities <br />of this platform, please contact Ian Lamb by emailing
 <a href="mailto:sales@venturevoip.com">Sales</a>.
         <br /><br />
-        <table background="/images/sdbox.png" align="center" width="300" height="200" cellpadding="0" cellspacing="0">
+        <table background="/images/sdbox.png" align="center" width="300" height="200" cellpadding="0" cellspacing="0" class="dragme">
             <tr><td>
 <?
 if (isset($_GET[error])){

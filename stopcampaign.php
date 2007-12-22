@@ -7,7 +7,7 @@ $out=_get_browser();
 ?>
 <br /><br /><br /><br />
 <center>
-<table background="/images/sdbox.png" width="300" height="200">
+<table background="/images/sdbox.png" width="300" height="200" class="dragme">
 <tr>
 <td>
 </td>

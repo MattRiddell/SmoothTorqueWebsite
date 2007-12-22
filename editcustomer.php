@@ -13,7 +13,7 @@ $country=$_POST[country];
 $phone=$_POST[phone];
 $fax=$_POST[fax];
 $email=$_POST[email];
-$website=$_POST[website];           
+$website=$_POST[website];
 $security=$_POST[security];
 $company=$_POST[name];
 
@@ -46,7 +46,7 @@ $result2=mysql_query($sql2, $link) or die (mysql_error());;
 $row2 = mysql_fetch_assoc($result2);
 
 ?>
-                              
+
 <FORM ACTION="editcustomer.php" METHOD="POST">
 <table class="tborder" align="center" border="0" cellpadding="0" cellspacing="2">
 <?
@@ -87,8 +87,25 @@ $row2 = mysql_fetch_assoc($result2);
 </TR><TR><TD CLASS="thead">Website</TD><TD>
 <INPUT TYPE="TEXT" NAME="website" VALUE="<?echo $row[website];?>" size="60">
 </TD>
-</TR><TR><TD CLASS="thead">Security Level (Either 0 or 100)</TD><TD>
-<INPUT TYPE="TEXT" NAME="security" VALUE="<?echo $row[security];?>" size="60">
+</TR><TR><TD CLASS="thead">Customer Type</TD><TD>
+<SELECT NAME="security">
+<OPTION VALUE="0" <?if ($row[security]==0){echo "SELECTED";}?>>Normal Customer</OPTION>
+<OPTION VALUE="100" <?if ($row[security]==100){echo "SELECTED";}?>>Administrator</OPTION>
+</SELECT>
+</TD>
+</TR><TR><TD CLASS="thead">Queue Name</TD><TD>
+<SELECT NAME="astqueuename">
+<?
+$resultss=mysql_query("SELECT name from queue_table",$link);
+while ($rowx = mysql_fetch_assoc($resultss)) {
+//    echo ."<BR>";
+    ?>
+<OPTION VALUE="<?echo $rowx[name];?>" <?if ($row[astqueuename]==$rowx[name]){echo "SELECTED";}?>><?echo $rowx[name];?></OPTION>
+<?
+}
+?>
+</SELECT>
+<a href="editqueues.php"><IMG SRC="/images/pencil.png" border="0"></a>
 </TD>
 </TR>
 </TR><TR><TD COLSPAN=2 ALIGN="RIGHT">
@@ -104,4 +121,3 @@ $row2 = mysql_fetch_assoc($result2);
 }
 require "footer.php";
 ?>
-

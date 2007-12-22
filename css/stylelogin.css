@@ -1,7 +1,7 @@
 BODY {
 	PADDING-RIGHT: 0px; PADDING-LEFT: 0px;
 	BACKGROUND: #555;
-	PADDING-BOTTOM: 0px; MARGIN: 0px; FONT: 10pt verdana,
+	PADDING-BOTTOM: 0px; MARGIN: 0px; FONT: 9pt verdana,
 geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; COLOR: #000000; PADDING-TOP: 0px
 }
 A:link {
@@ -16,12 +16,14 @@ A:hover {
 	COLOR: #ff4400
     ;
 //    font-weight: bold;
+    text-decoration: none;
 
 }
 A:active {
 	COLOR: #ff4400
     ;
-    font-weight: bold;
+//    font-weight: bold;
+    text-decoration: none;
 
 }
 .page {
@@ -78,50 +80,69 @@ outset; COLOR: #000000; BORDER-BOTTOM: #245e83 0px outset
 }
 
 .thead2 {
-background: url(/images/ch.gif);
-COLOR: #FFFFFF;
-    FONT: 11pt verdana,geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+	background: url(/images/ch.gif);
+	COLOR: #FFFFFF;
+	text-decoration: none;
+    FONT: 10pt verdana,geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
 }
 .theadl2 {
-background: url(/images/cl.gif);
-COLOR: #000000;
+    background: url(/images/cl.gif);
+    COLOR: #000000;
+	text-decoration: none;
+    FONT: 10pt verdana,geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
 }
 .theadr2 {
 background: url(/images/cr.gif);
 COLOR: #000000;
+	text-decoration: none;
+    FONT: 10pt verdana,geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+}
+.thead9 {
+    COLOR: #ffffff;
+	text-decoration: none;
+    FONT: 10pt verdana,geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
 }
 .thead {
-background: url(/images/chb.gif);
-COLOR: #ffffff;
+    background: url(/images/chb.gif);
+    COLOR: #ffffff;
 	text-decoration: none;
-    FONT: 11pt verdana,geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
-}
-.theadl {
+    FONT: 10pt verdana,geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+}.theadl {
 background: url(/images/clb.gif);
 COLOR: #000000;
+	text-decoration: none;
+    FONT: 10pt verdana,geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
 }
 .theadr {
 background: url(/images/crb.gif);
 COLOR: #000000;
+	text-decoration: none;
+    FONT: 10pt verdana,geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
 }
 .thead A:link {
 	COLOR: #000000;
 	text-decoration: none;
+    FONT: 10pt verdana,geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
 }
 .thead A:visited {
 	COLOR: #000000;
 	text-decoration: none;
+    FONT: 10pt verdana,geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
 }
 .thead2 A:link {
 	COLOR: #000000;
 	text-decoration: none;
+    FONT: 10pt verdana,geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
 }
 .thead2 A:visited {
 	COLOR: #666666;
 	text-decoration: none;
+    FONT: 10pt verdana,geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
 }
 .thead2 A:hover {
-	COLOR: #008;
+    COLOR: #666666;
+	text-decoration: none;
+    FONT: 10pt verdana,geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
 }
 
 
@@ -376,11 +397,21 @@ LEGEND {
 .bigusername {
 	FONT-SIZE: 14pt
 }
+TD.thead9 {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; PADDING-BOTTOM: 4px; PADDING-TOP: 4px;
+    background-color: #aaddee;
+}
 TD.thead {
-	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; PADDING-BOTTOM: 4px; PADDING-TOP: 4px
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; PADDING-BOTTOM: 4px; PADDING-TOP: 4px;
 }
 DIV.thead {
-	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; PADDING-BOTTOM: 4px; PADDING-TOP: 4px
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; PADDING-BOTTOM: 4px; PADDING-TOP: 4px;
+}
+TD.thead2 {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; PADDING-BOTTOM: 4px; PADDING-TOP: 4px;
+}
+DIV.thead2 {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; PADDING-BOTTOM: 4px; PADDING-TOP: 4px;
 }
 .pagenav A {
 	BACKGROUND-COLOR: #ffffff; TEXT-DECORATION: none

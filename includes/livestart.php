@@ -7,6 +7,7 @@
             <br /><br />
 			</td>
 		</tr>
+
 		<tr>
 			<td class="thead" width=200><label for="agents">Maximum Connected Calls:</label></td>
 			<td width=*><input type="text" name="agents" id="agents" size="28" value="30"></td>

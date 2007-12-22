@@ -22,7 +22,7 @@ if (mysql_num_rows($result)==0){
 ?>
 <br /><br />
 <center>
-<table background="/images/sdbox.png" width="300" height="200">
+<table background="/images/sdbox.png" width="300" height="200" class="dragme">
 <tr>
 <td>
 </td>

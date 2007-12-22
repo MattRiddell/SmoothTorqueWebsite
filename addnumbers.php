@@ -14,7 +14,7 @@ if (!isset($_POST[campaignid])){
 
     <br /><br /><br /><br />
 <center>
-<table background="/images/sdbox.png" width="300" height="200">
+<table background="/images/sdbox.png" width="300" height="200" class="dragme">
 <tr>
 <td>
 </td>
@@ -56,7 +56,7 @@ Which campaign would you like to add numbers to?<br /><br />
 } else {
  if (isset($_POST[start])){?>
     <br /><br /><br /><br /><br />
- <table background="/images/sdbox.png" align="center" width="300" height="200" cellpadding="0" cellspacing="0">
+ <table background="/images/sdbox.png" align="center" width="300" height="200" cellpadding="0" cellspacing="0" class="dragme">
             <tr><td>
 <div id="hideShow">
     Please Wait, saving Phone Numbers<br />
