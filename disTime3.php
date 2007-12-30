@@ -214,7 +214,8 @@ if ($status==101){
 
 ?>
 <?if ($user!="demo"){?>
-<a href="#" onclick="displayMessage('includes/livestart.php?id=<?echo $row[id];?>');return false"><IMG SRC="/images/control_play_blue.png" BORDER="0"></a><br>
+<a href="startcampaign.php?id=<?echo $row[id];?>&astqueuename=<?echo $row[astqueuename];?>&clid=<?echo $row[clid];?>&trclid=<?echo $row[trclid];?>&agents=<?echo $row[maxagents];?>&did=<?echo $row[did];?>&context=<?echo $row[context];?>">
+<IMG SRC="/images/control_play_blue.png" BORDER="0"></a><br>
 <?} else {?>
 <a href="#"><IMG SRC="/images/control_play_blue.png" BORDER="0"></a><br>
 <?}?>

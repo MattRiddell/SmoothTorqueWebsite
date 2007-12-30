@@ -1,5 +1,5 @@
 <?php
-$debug = false;
+$debug = true;
 $MAX_ENTRIES=241;
 include "charts.php";
 

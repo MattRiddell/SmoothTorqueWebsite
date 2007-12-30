@@ -1,66 +1,60 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Untitled Document</title>
-
-<script type="text/javascript" language="Javascript">
-
-function createXMLHttpRequest() {
-
-var ua;
-
-if(window.XMLHttpRequest) {
-    try {
-      ua = new XMLHttpRequest();
-    } catch(e) {
-      ua = false;
-    }
-  } else if(window.ActiveXObject) {
-    try {
-      ua = new ActiveXObject("Microsoft.XMLHTTP");
-    } catch(e) {
-      ua = false;
-    }
+<HTML>
+<HEAD>
+<STYLE>
+.hideable { position: relative; visibility: visible; }
+</STYLE>
+<SCRIPT>
+function hideShowGods(hide) {
+  if (document.layers)
+    document.godContainer.visibility = hide ? 'hide' : 'show';
+  else {
+    var g = document.all ? document.all.godContainer :
+              document.getElementById('godContainer');
+    g.style.visibility = hide ? 'hidden' : 'visible';
   }
-  return ua;
 }
-
-var req = createXMLHttpRequest();
-
-function sendRequest(id) {
-  req.open('get', 'func.php?id=' + id);
-  req.onreadystatechange = handleResponse;
-  req.send(null);
+function collectData () {
+  var atheist = document.form0.atheist.checked;
+  var gods = document.layers ?
+               document.godContainer.document.form1.gods :
+               document.form1.gods;
+  god = gods.options[gods.selectedIndex].value;
+  document.form2.atheist.value = atheist;
+  document.form2.gods.value = god;
 }
-
-function handleResponse() {
-
-  if(req.readyState == 4){
-    var response = req.responseText;
-    var update = new Array();
-
-    if(response.indexOf('||' != -1)) {
-      update = response.split('||');
-      document.getElementById(update[0]).innerHTML = update[1];
-    }
-  }
-  else
-  alert("loading" + ajax.readyState);
-}
-</script>
-
-</head>
-
-<body>
-
-<a href="javascript:sendRequest('myRequest');">click me.</a>
-
-<span id="showDiv">
-
-</span>
-
-</body>
-
-</html>
-
+</SCRIPT>
+</HEAD>
+<BODY>
+<TABLE>
+<TR>
+<TD VALIGN="top">
+<FORM NAME="form0">
+Atheist?
+<INPUT TYPE="checkbox" NAME="atheist"
+       ONCLICK="hideShowGods(this.checked);"
+>
+</FORM>
+</TD>
+<TD>
+<SPAN ID="godContainer" CLASS="hideable">
+<FORM NAME="form1">
+<SELECT NAME="gods">
+<OPTION VALUE="nobody">Select your GOD</OPTION>
+<OPTION VALUE="He who greps">Kibo</OPTION>
+<OPTION VALUE="He who xgreps">Xibo</OPTION>
+<OPTION VALUE="He who leaps">Jehovah
+</SELECT>
+</FORM>
+</SPAN>
+</TD>
+</TR>
+</TABLE>
+<FORM NAME="form2" ACTION="whatever"
+      ONSUBMIT="collectData(); return true;"
+>
+<INPUT TYPE="hidden" NAME="atheist" VALUE="">
+<INPUT TYPE="hidden" NAME="gods" VALUE="">
+<INPUT TYPE="SUBMIT">
+</FORM>
+</BODY>
+</HTML>

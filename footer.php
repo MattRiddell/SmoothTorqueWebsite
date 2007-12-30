@@ -22,6 +22,15 @@ function displaySmallMessage(url)
 	messageObj.setShadowDivVisible(true);	// Enable shadow for these boxes
 	messageObj.display();
 }
+function displayLargeMessage(url)
+{
+
+	messageObj.setSource(url);
+	messageObj.setCssClassMessageBox('modalDialog_contentDiv');
+	messageObj.setSize(500,340);
+	messageObj.setShadowDivVisible(true);	// Enable shadow for these boxes
+	messageObj.display();
+}
 function displayStaticMessage(messageContent,cssClass)
 {
 	messageObj.setHtmlContent(messageContent);
