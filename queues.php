@@ -1,6 +1,6 @@
 <?
 require "header.php";
-require "header_customer.php";
+require "header_queue.php";
 $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $campaigngroupid=mysql_result($result,0,'campaigngroupid');
@@ -12,37 +12,27 @@ $campaigngroupid=mysql_result($result,0,'campaigngroupid');
 Name
 </TD>
 <TD CLASS="thead">
-WebSite
+Strategy
 </TD>
 <TD CLASS="thead">
-Username
+Timeout
 </TD>
 <TD CLASS="thead">
-Address Line 1
-</TD>
-<TD CLASS="thead">
-Address Line 2
-</TD>
-<TD CLASS="thead">
-City
-</TD>
-<TD CLASS="thead">
-Country
-</TD>
-<TD CLASS="thead">
-Phone
-</TD>
-<TD CLASS="thead">
-Fax
+Members
 </TD>
 <TD CLASS="thead">
 </TD>
 </TR>
 <?
-$sql = 'SELECT * FROM customer';
+$sql = 'SELECT * FROM queue_table';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
 while ($row = mysql_fetch_assoc($result)) {
+
+$sql2 = 'SELECT count(*) FROM queue_member_table where queue_name = "'.$row[name].'"';
+$result2=mysql_query($sql2, $link) or die (mysql_error());;
+$count=mysql_result($result2,0,'count(*)');
+
 if ($toggle){
 $toggle=false;
 $class=" class=\"tborder2\"";
@@ -55,38 +45,23 @@ $class=" class=\"tborderx\"";
 <TR <?echo $class;?>>
 <TD>
 <?
-if (strlen($row[company])<15){
-echo "<A HREF=\"editcustomer.php?id=".$row[id]."\">".$row[company]."</A>";
+if (strlen($row[name])<15){
+echo "<A HREF=\"editqueue.php?name=".$row[name]."\">".$row[name]."</A>";
 } else {
-echo "<A HREF=\"editcustomer.php?id=".$row[id]."\">".trim(substr($row[company],0,15))."...</A>";
+echo "<A HREF=\"editqueue.php?name=".$row[name]."\">".trim(substr($row[company],0,15))."...</A>";
 }
 ?>
 </TD>
-<TD><A HREF="<?echo $row[website];?>" TARGET="<?echo $row[website];?>"><?echo $row[website];?></A>
+<TD><?echo $row[strategy];?>
 </TD>
 <TD>
-<?echo $row[username];?>
+<?echo $row[timeout];?>
 </TD>
 <TD>
-<?echo $row[address1];?>
+<?echo $count;?>
 </TD>
 <TD>
-<?echo $row[address2];?>
-</TD>
-<TD>
-<?echo $row[city];?>
-</TD>
-<TD>
-<?echo $row[country];?>
-</TD>
-<TD>
-<?echo $row[phone];?>
-</TD>
-<TD>
-<?echo $row[fax];?>
-</TD>
-<TD>
-<a href="#" onclick="displaySmallMessage('includes/confirmDeleteCustomer.php?id=<?echo $row[id];?>');return false"><IMG SRC="/images/delete.png" BORDER="0"></a><br>
+<a href="#" onclick="displaySmallMessage('includes/confirmDeleteQueue.php?name=<?echo $row[name];?>');return false"><IMG SRC="/images/delete.png" BORDER="0"></a><br>
 </TD>
 </TR>
 
