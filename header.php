@@ -218,6 +218,10 @@ $self=$_SERVER['PHP_SELF'];
 .dragme{position:relative;}
 -->
 </style>
+<STYLE type="text/css">
+  DIV.mypars {text-align: left}
+ </STYLE>
+
 <script language="JavaScript1.2">
 <!--
 
