@@ -1,6 +1,7 @@
 <?
-//echo date('H:i:s');
-    //exit(0);
+/*echo date('H:i:s');
+    flush();
+exit(0);*/
 if (isset($_GET[campaigngroupid])){
     $campaigngroupid = $_GET[campaigngroupid];
     //echo "refresh".date('s');
