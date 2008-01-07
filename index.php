@@ -15,7 +15,7 @@ Welcome to the SmoothTorque Hosted Predictive Dialing Platform.<br />
 If you would like to see a demonstration of the capabilities <br />of this platform, please contact Ian Lamb by emailing
 <a href="mailto:sales@venturevoip.com">Sales</a>.
         <br /><br />
-        <table background="/images/sdbox.png" align="center" width="300" height="200" cellpadding="0" cellspacing="0" class="dragme">
+        <table background="/images/sdbox.png" align="center" width="300" height="200" cellpadding="0" cellspacing="0">
             <tr><td>
 <?
 if (isset($_GET[error])){

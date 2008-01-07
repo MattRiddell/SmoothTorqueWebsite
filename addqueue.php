@@ -35,7 +35,6 @@ Please type a name for the Queue you are about to create.
 $section[4] = "The next thing you need to decide on is the ringing strategy.
 <br /><br />
 <form name=\"myform\" action=\"addqueue.php\" method=\"GET\">
-<input type=\"hidden\" name=\"queue_name\" value=\"$_GET[queue_name]\">
 
 While it may sound complicated, it's actually pretty simple. <br />
 <br />
@@ -44,7 +43,6 @@ few pages I will explain the different strategies and then you can choose
 one.<br />";
 
 $section[5] = "<form name=\"myform\" action=\"addqueue.php\" method=\"GET\">
-<input type=\"hidden\" name=\"queue_name\" value=\"$_GET[queue_name]\">
 <b>Ring All Strategy</b>
 <br /><br />
 This type of queue will cause the phone to ring
@@ -52,7 +50,6 @@ for all people who are logged into the queue until someone answers it.<br />
 <br />
 Whoever answers the call first gets it.<br /><br /><br />";
 $section[6] = "<form name=\"myform\" action=\"addqueue.php\" method=\"GET\">
-<input type=\"hidden\" name=\"queue_name\" value=\"$_GET[queue_name]\">
 <b>Round Robin Strategy</b>
 <br /><br />
 This strategy takes turns ringing each agent (person logged in to the queue).<br />
@@ -61,7 +58,6 @@ Every time a call comes in, this strategy will start with the first person
 in the queue.  <i>See Also: Round Robin with Memory</i>";
 
 $section[7] = "<form name=\"myform\" action=\"addqueue.php\" method=\"GET\">
-<input type=\"hidden\" name=\"queue_name\" value=\"$_GET[queue_name]\">
 <b>Least Recent Strategy</b>
 <br /><br />
 This strategy will call the agent who was least recently called by this queue.<br />
@@ -73,7 +69,6 @@ This strategy will call the agent who was least recently called by this queue.<b
 ";
 
 $section[8] = "<form name=\"myform\" action=\"addqueue.php\" method=\"GET\">
-<input type=\"hidden\" name=\"queue_name\" value=\"$_GET[queue_name]\">
 <b>Fewest Calls Strategy</b>
 <br /><br />
 This strategy will ring the agent with fewest completed calls from this queue.<br />
@@ -85,7 +80,6 @@ This strategy will ring the agent with fewest completed calls from this queue.<b
 ";
 
 $section[9] = "<form name=\"myform\" action=\"addqueue.php\" method=\"GET\">
-<input type=\"hidden\" name=\"queue_name\" value=\"$_GET[queue_name]\">
 <b>Random</b>
 <br /><br />
 This strategy will ring a random agent. It could be the same agent or it
@@ -98,7 +92,6 @@ could be another.
 ";
 
 $section[10] = "<form name=\"myform\" action=\"addqueue.php\" method=\"GET\">
-<input type=\"hidden\" name=\"queue_name\" value=\"$_GET[queue_name]\">
 <b>Round Robin with Memory</b>
 <br /><br />
 This strategy is similar to Round Robin except that it doesn't start from
@@ -108,9 +101,13 @@ It remembers who was the last person to be called
 and calls from the next person the following time.
 
 ";
+$selected_strategy = Array();
+$selected_strategy[$_GET[strategy]] = " selected=\"selected\"";
+$selected_autofill[$_GET[autofill]] = " selected=\"selected\"";
+$selected_reportholdtime[$_GET[reportholdtime]] = " selected=\"selected\"";
+
 
 $section[11] = "<form name=\"myform\" action=\"addqueue.php\" method=\"GET\">
-<input type=\"hidden\" name=\"queue_name\" value=\"$_GET[queue_name]\">
 Ok, so now you can select a strategy.  <br />
 <br />
 Or you can click back to review
@@ -119,16 +116,41 @@ their meanings again.
 <br >
 <center>
 <select name=\"strategy\" onchange=\"document.myform.submit();return false;\">
-<option value=\"ringall\">Ring All</option>
-<option value=\"roundrobin\">Round Robin</option>
-<option value=\"leastrecent\">Least Recent</option>
-<option value=\"fewestcalls\">Fewest Calls</option>
-<option value=\"random\">Random</option>
-<option value=\"rrmemory\">Round Robin with Memory</option>
+<option value=\"ringall\"$selected_strategy[ringall]>Ring All</option>
+<option value=\"roundrobin\"$selected_strategy[roundrobin]>Round Robin</option>
+<option value=\"leastrecent\"$selected_strategy[leastrecent]>Least Recent</option>
+<option value=\"fewestcalls\"$selected_strategy[fewestcalls]>Fewest Calls</option>
+<option value=\"random\"$selected_strategy[random]>Random</option>
+<option value=\"rrmemory\"$selected_strategy[rrmemory]>Round Robin with Memory</option>
 </select>
 </center>
 <br /><br />
 ";
+
+$section[12] = "<form name=\"myform\" action=\"addqueue.php\" method=\"GET\">
+<b>Autofill</b><br />
+<br />
+Autofill will follow queue strategy but push multiple calls through
+at same time until there are no more waiting callers or no more
+available members.<br />
+<br />Use Autofill?
+<select name=\"autofill\" onchange=\"document.myform.submit();return false;\">
+<option value=\"yes\"$selected_autofill[yes]>Yes</option>
+<option value=\"no\"$selected_autofill[no]>No</option>
+</select>
+<br />";
+
+$section[13] = "<form name=\"myform\" action=\"addqueue.php\" method=\"GET\">
+<b>Report Hold Time</b><br />
+<br />
+If you wish to play an announcement to the agent before they accept the call
+ telling them how long the customer has been holding, set this to yes.<br />
+<br />Use Report Hold Time?
+<select name=\"reportholdtime\" onchange=\"document.myform.submit();return false;\">
+<option value=\"no\"$selected_reportholdtime[no]>No</option>
+<option value=\"yes\"$selected_reportholdtime[yes]>Yes</option>
+</select>
+<br />";
 
 $currentsection=$section[1+($_GET[section]-1)];
 ?>
@@ -151,15 +173,33 @@ echo $currentsection;
 
 <div style="float:left">
 <input type="hidden" name="section" value="<?echo $_GET[section]+1;?>">
-
 <?
 $cs = $_GET[section];
 $url = "section=".($cs-1);
 if (isset($_GET[queue_name])){
     $url.="&queue_name=".$_GET[queue_name];
+    if ($_GET[section]>3){
+        ?><input type="hidden" name="queue_name" value="<?echo $_GET[queue_name];?>"><?
+    }
 }
 if (isset($_GET[strategy])){
     $url.="&strategy=".$_GET[strategy];
+    if ($_GET[section]!=11){
+        ?><input type="hidden" name="strategy" value="<?echo $_GET[strategy];?>"><?
+    }
+}
+
+if (isset($_GET[autofill])){
+    $url.="&autofill=".$_GET[autofill];
+    if ($_GET[section]!=12){
+        ?><input type="hidden" name="autofill" value="<?echo $_GET[autofill];?>"><?
+    }
+}
+if (isset($_GET[reportholdtime])){
+    $url.="&reportholdtime=".$_GET[reportholdtime];
+    if ($_GET[section]!=13){
+        ?><input type="hidden" name="reportholdtime" value="<?echo $_GET[reportholdtime];?>"><?
+    }
 }
 ?>
 <a href="addqueue.php?<?echo $url;?>">
@@ -177,18 +217,16 @@ if (isset($_GET[strategy])){
 </form>
 <?
 } else {
-$cs = $_GET[section];
-$url = "section=".($cs+1);
-if (isset($_GET[queue_name])){
-    $url.="&queue_name=".$_GET[queue_name];
-}
-if (isset($_GET[strategy])){
-    $url.="&strategy=".$_GET[strategy];
-}
+    $cs = $_GET[section];
+    $url = "section=".($cs+1);
+    if (isset($_GET[queue_name])){
+        $url.="&queue_name=".$_GET[queue_name];
+    }
+    if (isset($_GET[strategy])){
+        $url.="&strategy=".$_GET[strategy];
+    }
 ?>
-
 <div align="right">
-
 <a href="addqueue.php?<?echo $url;?>">Next
 <img src="/images/resultset_next.png" border = "0"></a>
 <?
