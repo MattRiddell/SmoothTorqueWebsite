@@ -17,7 +17,7 @@ if (isset($_POST[name])){
         $mode = 1;
     } else {
         $mode = 0;
-    )}
+    }
     $astqueuename=mysql_real_escape_string($_POST[astqueuename]);
     $maxagents=mysql_real_escape_string($_POST[agents]);
     $did=mysql_real_escape_string($_POST[did]);
