@@ -3,8 +3,8 @@ include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(my
 mysql_select_db("SineDialer", $link);
 
 if (isset($_GET[sure])){
-    $id=$_GET[id];
-    $sql="DELETE FROM servers where id=$id";
+    $id=mysql_real_escape_string($_GET[id]);
+    $sql="DELETE FROM servers where id=$id limit 1";
     $result=mysql_query($sql, $link) or die (mysql_error());;
     include("servers.php");
     exit;

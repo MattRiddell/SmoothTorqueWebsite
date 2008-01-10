@@ -21,7 +21,7 @@ sleep(1);
     if (isset($_GET[id])){
         require_once "sql.php";
         $SMDB2=new SmDB();
-        $sql="DELETE FROM campaign WHERE id=".$_GET[id];
+        $sql="DELETE FROM campaign WHERE id=".mysql_real_escape_string($_GET[id]);
         $SMDB2->executeUpdate($sql);
     }
 }

@@ -6,8 +6,8 @@ $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $campaigngroupid=mysql_result($result,0,'campaigngroupid');
 if (isset($_GET[sure])){
-    $id=$_GET[id];
-    $sql="DELETE FROM queue where queueID=$id";
+    $id=mysql_real_escape_string($_GET[id]);
+    $sql="DELETE FROM queue where queueID=$id limit 1";
     $result=mysql_query($sql, $link) or die (mysql_error());;
     include("schedule.php");
     exit;

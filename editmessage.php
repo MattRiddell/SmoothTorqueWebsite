@@ -18,7 +18,7 @@ if (isset($_POST[name])){
     }
     $telnet->Disconnect();
 */
-
+	$_POST = array_map(mysql_real_escape_string,$_POST);
     $id=$_POST[id];
     $name=$_POST[name];
     $description=$_POST[description];

@@ -5,39 +5,57 @@ mysql_select_db("SineDialer", $link);
 $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $campaigngroupid=mysql_result($result,0,'campaigngroupid');
-if (isset($_POST[id])){
-    $id=$_POST[id];
-    $name=$_POST[name];
-    $description=$_POST[description];
-    $messageid=$_POST[messageid];
-    $messageid2=$_POST[messageid2];
-    $messageid3=$_POST[messageid3];
-    $sql="UPDATE campaign SET name='$name', description='$description', messageid='$messageid',messageid2='$messageid2',messageid3='$messageid3' WHERE id=$id";
+if (isset($_POST[name])){
+    $id=mysql_real_escape_string($_POST[id]);
+    $name=mysql_real_escape_string($_POST[name]);
+    $description=mysql_real_escape_string($_POST[description]);
+    $messageid=mysql_real_escape_string($_POST[messageid]);
+    $messageid2=mysql_real_escape_string($_POST[messageid2]);
+    $messageid3=mysql_real_escape_string($_POST[messageid3]);
+    $modein=mysql_real_escape_string($_POST[mode]);
+    if ($modein == "mode_queue"){
+        $mode = 1;
+    } else {
+        $mode = 0;
+    )}
+    $astqueuename=mysql_real_escape_string($_POST[astqueuename]);
+    $maxagents=mysql_real_escape_string($_POST[agents]);
+    $did=mysql_real_escape_string($_POST[did]);
+    $clid=mysql_real_escape_string($_POST[clid]);
+    $trclid=mysql_real_escape_string($_POST[trclid]);
+    $context=mysql_real_escape_string($_POST[context]);
+
+	$sql = "UPDATE campaign SET groupid='$campaigngroupid', name='$name', description='$description',messageid='$messageid',messageid2='$messageid2',messageid3='$messageid3',mode='$mode',astqueuename='$astqueuename',did='$did',maxagents='$maxagents',clid='$clid',trclid='$trclid',context='$context' WHERE id='$_POST[id]'";
+//    echo $sql;
     $result=mysql_query($sql, $link) or die (mysql_error());;
     include("campaigns.php");
     exit;
+}else{
+	$id = mysql_real_escape_string($_GET[id]);
+	$sql = 'SELECT * FROM campaign WHERE id=\''.$id.'\' limit 1';
+	$result=mysql_query($sql,$link) or die(mysql_error());
+	$row = mysql_fetch_assoc($result);	
 }
 require "header.php";
 require "header_campaign.php";
-
 ?>
 
-
-<FORM ACTION="editcampaign.php?id=<?echo $_GET[id];?>" METHOD="POST">
+<FORM ACTION="editcampaign.php" METHOD="POST">
 <table class="tborder" align="center" border="0" cellpadding="0" cellspacing="2">
 <?
-$sql = 'SELECT * FROM campaign WHERE groupid='.$campaigngroupid.' and id='.$_GET[id].'';
-$result=mysql_query($sql, $link) or die (mysql_error());;
-//$campaigngroupid=mysql_result($result,0,'campaigngroupid');
-while ($row = mysql_fetch_assoc($result)) {
 ?>
-<TR><TD CLASS="thead">Campaign Name</TD><TD>
-<INPUT TYPE="HIDDEN" NAME="id" VALUE="<?echo $_GET[id];?>">
+<TR><TD CLASS="thead">Campaign Name
+<a href="#" onclick="displaySmallMessage('includes/help.php?section=A short name you would like to give to the campaign - preferrably one word');return false"><img src="/images/help.png" border="0"></a>
+</TD><TD>
+<INPUT TYPE="HIDDEN" NAME="id" VALUE="<?echo $row[id];?>">
 <INPUT TYPE="TEXT" NAME="name" VALUE="<?echo $row[name];?>" size="60">
 </TD>
-</TR><TR><TD CLASS="thead">Campaign Description</TD><TD>
+</TR><TR><TD CLASS="thead">Campaign Description
+<a href="#" onclick="displaySmallMessage('includes/help.php?section=A short description of the campaign in case you are not able to tell from the Campaign Name');return false"><img src="/images/help.png" border="0"></a>
+</TD><TD>
 <INPUT TYPE="TEXT" NAME="description" VALUE="<?echo $row[description];?>" size="60">
 </TD>
+</TR>
 <?
 $sql="SELECT * from campaignmessage";
 $result=mysql_query($sql,$link) or die (mysql_error());
@@ -47,8 +65,20 @@ while ($row2[$count] = mysql_fetch_assoc($result)) {
     //echo "<OPTION VALUE=\"".$row[id]."\">".$row[name]."</OPTION>";
 }
 
+$sql="SELECT * from queue_table";
+$result=mysql_query($sql,$link) or die (mysql_error());
+$count2=0;
+while ($row_queue[$count2] = mysql_fetch_assoc($result)) {
+    $count2++;
+    //echo "<OPTION VALUE=\"".$row[id]."\">".$row[name]."</OPTION>";
+}
+
+
 ?>
-</TR><TR><TD CLASS="thead">Live Message</TD><TD>
+
+<TR><TD CLASS="thead">Live Message
+<a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are running a campaign which plays a message to the user while waiting for them to press 1 then this is the message that will be used.');return false"><img src="/images/help.png" border="0"></a>
+</TD><TD>
 <SELECT name="messageid">
 <?
 for ($count2=0;$count2<$count;$count2++){
@@ -61,7 +91,8 @@ echo "<OPTION VALUE=\"".$row2[$count2][id]."\"$selected>".$row2[$count2][descrip
 ?>
 </SELECT>
 </TD>
-</TR><TR><TD CLASS="thead">Answer Machine Message</TD><TD>
+</TR><TR><TD CLASS="thead">Answer Machine Message<a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are leaving automated messages on answer machines then you can set this to a particular message you would like to have played when an answer machine is detected.  Usage of this will depend on your settings in the Type of Campaign section.');return false"><img src="/images/help.png" border="0"></a>
+</TD><TD>
 <SELECT name="messageid2">
 <?
 for ($count2=0;$count2<$count;$count2++){
@@ -74,7 +105,9 @@ echo "<OPTION VALUE=\"".$row2[$count2][id]."\"$selected>".$row2[$count2][descrip
 ?>
 </SELECT>
 </TD>
-</TR><TR><TD CLASS="thead">Transfer Message</TD><TD>
+</TR><TR><TD CLASS="thead">Transfer Message
+<a href="#" onclick="displaySmallMessage('includes/help.php?section=This is very rarely used and therefore may be set to whatever you like.  If you are using this on your own system it can be used to specify a MusicOnHold class to be played to the person while they are being transferred to the call center.  Requires direct access to the telephony backend.');return false"><img src="/images/help.png" border="0"></a>
+</TD><TD>
 <SELECT name="messageid3">
 <?
 for ($count2=0;$count2<$count;$count2++){
@@ -88,12 +121,105 @@ echo "<OPTION VALUE=\"".$row2[$count2][id]."\"$selected>".$row2[$count2][descrip
 </SELECT>
 </TD>
 </TR>
+
+
+
+
+		<tr>
+			<td class="thead" width=200>Mode
+			            <a href="#" onclick="displaySmallMessage('includes/help.php?section=What type of campaign you would like to run. <br /><br />If you are connected to the machine doing the calling then chose Queue Mode.  If you would like to receive any connected calls at a particular phone number, chose DID Mode.  Normally you will use DID Mode unless you have been told to use Queue Mode.');return false"><img src="/images/help.png" border="0"></a>
+			</td>
+            <td width=*>
+			<input type="radio" name="mode" value="didmode" rel="didmode" id="mode_did" <? echo ($row[mode]==0?"CHECKED":"");?> />
+			<label for="mode_did">DID Mode</label>
+			<input type="radio" name="mode" value="mode_queue" rel="queue" id="mode_queue"  <? echo ($row[mode]==1?"CHECKED":"");?> />
+			<label for="mode_queue">Queue Mode</label></td>
+		</tr>
+        <tr rel="queue">
+			<td class="thead" width=200><label for="agents">Queue Name
+            <a href="#" onclick="displaySmallMessage('includes/help.php?section=This is the name of a Queue on the telephone system of the provider of this system. Normally this will be assigned to you when you set up an account.');return false"><img src="/images/help.png" border="0"></a>
+            </label></td>
+			<td width=*>
+
+            <SELECT name="astqueuename">
+<?
+for ($count2=0;$count2<$count;$count2++){
+$selected="";
+if ($row[astqueuename]==$row_queue[$count2][name]){
+    $selected=" SELECTED";
+}
+echo "<OPTION VALUE=\"".$row_queue[$count2][name]."\"$selected>".$row_queue[$count2][name]."</OPTION>";
+}
+?>
+</SELECT>
+
+			</td>
+		</tr>
+		<tr rel="didmode">
+			<td class="thead" width="216px"><label for="agents">Maximum Connected Calls:
+            <a href="#" onclick="displaySmallMessage('includes/help.php?section=This is the number of concurrent calls you would like to receive on the call center number specified.  <br /><br />Normally this will be the number of staff you have.');return false"><img src="/images/help.png" border="0"></a>
+            </label></td>
+			<td width=*><input type="text" name="agents" id="agents" size="28" value="<?echo ($row[maxagents])?>"></td>
+		</tr>
+        		<tr>
+			<td class="thead"><label for="did">Caller ID:
+			<a href="#" onclick="displaySmallMessage('includes/help.php?section=The CallerID you would like to send on calls to your customers');return false"><img src="/images/help.png" border="0"></a>
+			</label></td>
+			<td><input type="text" name="clid" id="did" size=28 value="<?echo ($row[clid]);?>"></td>
+		</tr>
+        <tr rel="didmode">
+			<td class="thead"><label for="did">Call Center Phone Number:
+			<a href="#" onclick="displaySmallMessage('includes/help.php?section=The phone number you would like to have connected calls sent to. Eg: (123) 555-1234. ');return false"><img src="/images/help.png" border="0"></a>
+			</label></td>
+			<td><input type="text" name="did" id="did" size=28 value="<?echo ($row[did])?>"></td>
+		</tr>
+        <TR><TD CLASS="thead">Type of Campaign
+        <a href="#" onclick="displayLargeMessage('includes/help.php?section=<b>Load Simulation</b><br />Simple test campaign.  Does not actually make any phone calls<br /><br /><b>Answer Machine Only</b><br />Human: Hang Up. Answer Machine: Leave Message<br /><br /><b>Immediate Live Only</b><br />Human: Connect immediately to the call center. Answer Machine: hang up.<br /><br /><b>Press 1 Live Only</b><br />Human: Play the person message and then if they press 1, transfer to the call center.  Answer Machine: Hang Up.<br /><br /><b>Immediate Live and Answer Machine</b><br />Human: Connect immediately to the call center. Answer Machine: Leave the answer machine message.<br /><br /><b>Press 1 Live and Answer Machine</b><br />Human: Play the person message and then if they press 1, transfer to the call center.  Answer Machine: Leave the answer machine message.');return false"><img src="/images/help.png" border="0"></a>
+        </TD><TD>
+<SELECT NAME="context">
+<OPTION VALUE="0" <?$row[context]==0?"SELECTED":""?>>Load Simulation</OPTION>
+<OPTION VALUE="1" <?$row[context]==1?"SELECTED":""?>>Answer Machine Only</OPTION>
+<OPTION VALUE="2" <?$row[context]==2?"SELECTED":""?>>Immediate Live</OPTION>
+<OPTION VALUE="4" <?$row[context]==3?"SELECTED":""?>>Press 1 Live</OPTION>
+<OPTION VALUE="5" <?$row[context]==4?"SELECTED":""?>>Immediate Live and Answer Machine</OPTION>
+<OPTION VALUE="3" <?$row[context]==5?"SELECTED":""?>>Press 1 Live and Answer Machine</OPTION>
+<?/*<OPTION VALUE="5" <?if ($row[context]==5){echo "SELECTED";}?>>Spare 2</OPTION>
+<OPTION VALUE="6" <?if ($row[context]==6){echo "SELECTED";}?>>Spare 3</OPTION>
+<OPTION VALUE="7" <?if ($row[context]==7){echo "SELECTED";}?>>Spare 4</OPTION>
+<OPTION VALUE="8" <?if ($row[context]==8){echo "SELECTED";}?>>Spare 5</OPTION>
+<OPTION VALUE="9" <?if ($row[context]==9){echo "SELECTED";}?>>Spare 6</OPTION>
+<OPTION VALUE="10" <?if ($row[context]==10){echo "SELECTED";}?>>Spare 6</OPTION>*/?>
+</SELECT>
+</TD>
+</TR>
+<?/*        <tr class=tborder2>
+        <td colspan="2">
+<b>Load Simulation</b><br />
+Simple test campaign.  Does not actually make any phone calls<br />
+<b>Answer Machine Only</b><br />
+Human: Hang Up. Answer Machine: Leave Message<br />
+<b>Immediate Live Only</b><br />
+Human: Connect immediately to the call center. Answer Machine: hang up.<br />
+<b>Press 1 Live Only</b><br />
+Human: Play the person message and then if they press
+1, transfer to the call center.  Answer Machine: Hang Up.<br />
+<b>Immediate Live and Answer Machine</b><br />
+Human: Connect immediately to the call center. Answer Machine: Leave the answer machine message.<br />
+<b>Press 1 Live and Answer Machine</b><br />
+Human: Play the person message and then if they press
+1, transfer to the call center.  Answer Machine: Leave the answer machine message.<br />
+
+        </td></tr>*/?>
+		<tr>
+
+
+
+
 </TR><TR><TD COLSPAN=2 ALIGN="RIGHT">
-<INPUT TYPE="SUBMIT" VALUE="Save Changes">
+<INPUT TYPE="SUBMIT" VALUE="Edit Campaign">
 </TD>
 </TR>
 <?
-}
 ?>
 
 </TABLE>
@@ -101,4 +227,3 @@ echo "<OPTION VALUE=\"".$row2[$count2][id]."\"$selected>".$row2[$count2][descrip
 <?
 require "footer.php";
 ?>
-

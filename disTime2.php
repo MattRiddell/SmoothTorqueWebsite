@@ -2,7 +2,7 @@
     echo "refresh".date('s');
     exit(0);
 if (isset($_GET[campaigngroupid])){
-    $campaigngroupid = $_GET[campaigngroupid];
+    $campaigngroupid = mysql_real_escape_string($_GET[campaigngroupid]);
     echo "refresh".date('s');
     exit(0);
 }

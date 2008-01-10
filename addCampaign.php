@@ -11,12 +11,12 @@ if (substr(trim($result),0,7)=="GroupID") {
 }
 $telnet->Disconnect();
 
-    $id=$_POST[id];
-    $name=$_POST[name];
-    $description=$_POST[description];
-    $messageid=$_POST[messageid];
-    $messageid2=$_POST[messageid2];
-    $messageid3=$_POST[messageid3];
+    $id=mysql_real_escape_string($_POST[id]);
+    $name=mysql_real_escape_string($_POST[name]);
+    $description=mysql_real_escape_string($_POST[description]);
+    $messageid=mysql_real_escape_string($_POST[messageid]);
+    $messageid2=mysql_real_escape_string($_POST[messageid2]);
+    $messageid3=mysql_real_escape_string($_POST[messageid3]);
     $sql="INSERT INTO campaign (groupid,name,description,messageid,messageid2,messageid3) VALUES ('$campaigngroupid','$name', '$description', '$messageid','$messageid2','$messageid3')";
 //    echo $sql;
 

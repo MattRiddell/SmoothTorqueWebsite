@@ -4,7 +4,7 @@ mysql_select_db("SineDialer", $link);
 if (isset($_GET[id])){
     $id=$_GET[id];
 }
-$sql = 'SELECT status from queue where campaignid='.$id;
+$sql = 'SELECT status from queue where campaignid='.mysql_real_escape_string($id);
 $resultx=mysql_query($sql, $link) or die (mysql_error());;
 $status=mysql_result($resultx,0,'status');
 if (mysql_num_rows($resultx)==0) {

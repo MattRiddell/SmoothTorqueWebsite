@@ -3,19 +3,19 @@ include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(my
 mysql_select_db("SineDialer", $link);
 
 if (isset($_POST[name])){
-$description=$_POST[description];
-$username=$_POST[username];
+$description=mysql_real_escape_string($_POST[description]);
+$username=mysql_real_escape_string($_POST[username]);
 $password=sha1($_POST[password]);
-$address1=$_POST[address1];
-$address2=$_POST[address2];
-$city=$_POST[city];
-$country=$_POST[country];
-$phone=$_POST[phone];
-$fax=$_POST[fax];
-$email=$_POST[email];
-$website=$_POST[website];
-$security=$_POST[security];
-$company=$_POST[name];
+$address1=mysql_real_escape_string($_POST[address1]);
+$address2=mysql_real_escape_string($_POST[address2]);
+$city=mysql_real_escape_string($_POST[city]);
+$country=mysql_real_escape_string($_POST[country]);
+$phone=mysql_real_escape_string($_POST[phone]);
+$fax=mysql_real_escape_string($_POST[fax]);
+$email=mysql_real_escape_string($_POST[email]);
+$website=mysql_real_escape_string($_POST[website]);
+$security=mysql_real_escape_string($_POST[security]);
+$company=mysql_real_escape_string($_POST[name]);
 
     $sql="INSERT INTO campaigngroup (name,description) VALUES ('$company','$description')";
 //    echo $sql;

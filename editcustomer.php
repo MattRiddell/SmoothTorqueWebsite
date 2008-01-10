@@ -3,6 +3,9 @@ include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(my
 mysql_select_db("SineDialer", $link);
 
 if (isset($_POST[name])){
+
+$_POST = array_map(mysql_real_escape_string,$_POST);
+
 $description=$_POST[description];
 $username=$_POST[username];
 $password=sha1($_POST[password]);
@@ -35,11 +38,12 @@ $company=$_POST[name];
     exit;
 }
 require "header.php";
-require "header_customer.php";
+Require "header_customer.php";
 
 $sql = 'SELECT * FROM customer WHERE id='.$_GET[id];
 $result=mysql_query($sql, $link) or die (mysql_error());;
 while ($row = mysql_fetch_assoc($result)) {
+
 $sql2 = 'SELECT * FROM campaigngroup WHERE id='.$row[campaigngroupid];
 $result2=mysql_query($sql2, $link) or die (mysql_error());;
 
