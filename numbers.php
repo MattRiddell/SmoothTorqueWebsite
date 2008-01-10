@@ -6,6 +6,9 @@ $campaigngroupid=mysql_result($result,0,'campaigngroupid');
 require "header_numbers.php";
 
 
+$_POST = array_map(mysql_real_escape_string,$_POST);
+$_GET = array_map(mysql_real_escape_string,$_GET);
+
 ?>
 <br /><br /><br /><br />
 <center>

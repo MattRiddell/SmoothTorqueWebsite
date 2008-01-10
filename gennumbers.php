@@ -2,6 +2,10 @@
 require "header.php";
 require "header_numbers.php";
 
+
+$_POST = array_map(mysql_real_escape_string,$_POST);
+$_GET = array_map(mysql_real_escape_string,$_GET);
+
 include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(mysql_error());
 mysql_select_db("SineDialer", $link);
 

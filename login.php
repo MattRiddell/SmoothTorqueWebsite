@@ -3,6 +3,11 @@
 include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(mysql_error());
 mysql_select_db("SineDialer", $link);
 $passwordHash = sha1($_POST['pass']);
+
+
+$_POST = array_map(mysql_real_escape_string,$_POST);
+$_GET = array_map(mysql_real_escape_string,$_GET);
+
 $sql = 'SELECT password, security FROM customer WHERE username=\''.$_POST[user].'\'';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $dbpass=mysql_result($result,0,'password');

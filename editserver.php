@@ -2,6 +2,10 @@
 include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(mysql_error());
 mysql_select_db("SineDialer", $link);
 
+
+$_POST = array_map(mysql_real_escape_string,$_POST);
+$_GET = array_map(mysql_real_escape_string,$_GET);
+
 if (isset($_POST[name])){
 $description=$_POST[description];
 $username=$_POST[username];

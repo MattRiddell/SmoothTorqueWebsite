@@ -3,7 +3,10 @@ require "header.php";
 require "header_campaign.php";
 $out=_get_browser();
 //print_r($_POST);
-                   sssaaa
+
+$_POST = array_map(mysql_real_escape_string,$_POST);
+$_GET = array_map(mysql_real_escape_string,$_GET);
+
 ?>
 <br /><br /><br /><br />
 <center>

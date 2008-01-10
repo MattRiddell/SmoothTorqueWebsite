@@ -2,8 +2,11 @@
 require "header.php";
 require "header_campaign.php";
 $out=_get_browser();
+
+$_POST = array_map(mysql_real_escape_string,$_POST);
+$_GET = array_map(mysql_real_escape_string,$_GET);
+
 //print_r($_POST);
-                   sssaaa
 ?>
 <br /><br /><br /><br />
 <center>

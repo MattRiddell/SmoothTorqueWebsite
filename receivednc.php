@@ -4,6 +4,10 @@ require_once("receive_helper.php");
 require "header.php";
 require "header_numbers.php";
 ob_implicit_flush(FALSE);
+
+$_POST = array_map(mysql_real_escape_string,$_POST);
+$_GET = array_map(mysql_real_escape_string,$_GET);
+
 ?>
 <?php if(!empty($data)){?>
 <?php if(isset($data['title'])){?>
