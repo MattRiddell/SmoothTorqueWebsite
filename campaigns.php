@@ -2,7 +2,8 @@
 include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(mysql_error());
 mysql_select_db("SineDialer", $link);
 if (isset($_GET[queueID])){
-    $sql = 'update queue set status='.mysql_real_escape_string($_GET[status]).' where queueID='.mysql_real_escape_string($_GET[queueID]);
+	$_GET = array_map(mysql_real_escape_string,$_GET);
+    $sql = 'update queue set status='.($_GET[status]).' where queueID='.($_GET[queueID]);
     $result=mysql_query($sql, $link) or die (mysql_error());;
     header("Location: schedule.php?campaignid=".$_GET[campaignid]);
 }
@@ -13,7 +14,8 @@ $result=mysql_query($sql, $link) or die (mysql_error());;
 $campaigngroupid=mysql_result($result,0,'campaigngroupid');
 require "header_campaign.php";
 if (isset($_GET[campaignid])){
-$_POST[campaignid]=mysql_real_escape_string($_GET[campaignid]);
+$_GET = array_map(mysql_real_escape_string,$_GET);
+$_POST[campaignid]=($_GET[campaignid]);
 }
 $out=_get_browser();
 if ($out[browser]=="MSIE"){

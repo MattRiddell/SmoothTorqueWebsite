@@ -1,4 +1,9 @@
-<?if (isset($_POST[id])) {
+<?
+
+$_POST = array_map(mysql_real_escape_string,$_POST);
+$_GET = array_map(mysql_real_escape_string,$_GET);
+
+if (isset($_POST[id])) {
 $pagenum=1;
 require "header.php";
 require_once "PHPTelnet.php";
@@ -21,7 +26,7 @@ sleep(1);
     if (isset($_GET[id])){
         require_once "sql.php";
         $SMDB2=new SmDB();
-        $sql="DELETE FROM campaign WHERE id=".mysql_real_escape_string($_GET[id]);
+        $sql="DELETE FROM campaign WHERE id=".($_GET[id]);
         $SMDB2->executeUpdate($sql);
     }
 }

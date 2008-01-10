@@ -6,24 +6,25 @@ $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $campaigngroupid=mysql_result($result,0,'campaigngroupid');
 if (isset($_POST[name])){
-    $id=mysql_real_escape_string($_POST[id]);
-    $name=mysql_real_escape_string($_POST[name]);
-    $description=mysql_real_escape_string($_POST[description]);
-    $messageid=mysql_real_escape_string($_POST[messageid]);
-    $messageid2=mysql_real_escape_string($_POST[messageid2]);
-    $messageid3=mysql_real_escape_string($_POST[messageid3]);
-    $modein=mysql_real_escape_string($_POST[mode]);
+   	$_POST = array_map(mysql_real_escape_string,$_POST); 
+	$id=($_POST[id]);
+    $name=($_POST[name]);
+    $description=($_POST[description]);
+    $messageid=($_POST[messageid]);
+    $messageid2=($_POST[messageid2]);
+    $messageid3=($_POST[messageid3]);
+    $modein=($_POST[mode]);
     if ($modein == "mode_queue"){
         $mode = 1;
     } else {
         $mode = 0;
     }
-    $astqueuename=mysql_real_escape_string($_POST[astqueuename]);
-    $maxagents=mysql_real_escape_string($_POST[agents]);
-    $did=mysql_real_escape_string($_POST[did]);
-    $clid=mysql_real_escape_string($_POST[clid]);
-    $trclid=mysql_real_escape_string($_POST[trclid]);
-    $context=mysql_real_escape_string($_POST[context]);
+    $astqueuename=($_POST[astqueuename]);
+    $maxagents=($_POST[agents]);
+    $did=($_POST[did]);
+    $clid=($_POST[clid]);
+    $trclid=($_POST[trclid]);
+    $context=($_POST[context]);
     $sql="INSERT INTO campaign (groupid,name,description,messageid,messageid2,messageid3,mode,astqueuename,did,maxagents,clid,trclid,context) VALUES ('$campaigngroupid','$name', '$description', '$messageid','$messageid2','$messageid3','$mode','$astqueuename','$did','$maxagents','$clid','$trclid','$context')";
 //    echo $sql;
     $result=mysql_query($sql, $link) or die (mysql_error());;

@@ -17,11 +17,15 @@ function rgbhex($red,$green,$blue) {
  return "#".strtoupper($red.$green.$blue);
 }
 
+$_POST = array_map(mysql_real_escape_string,$_POST);
+$_GET = array_map(mysql_real_escape_string,$_GET);
+
+
 include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(mysql_error());
 mysql_select_db("SineDialer", $link);
 
 if (isset($_GET[campaigngroupid])){
-$campaigngroupid=mysql_real_escape_string($_GET[campaigngroupid]);
+$campaigngroupid=($_GET[campaigngroupid]);
 }
 //$sql = 'SELECT * FROM number WHERE campaignid='.$_GET[id]." LIMIT 50";
 //if (isset($id)){

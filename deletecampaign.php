@@ -5,6 +5,9 @@ mysql_select_db("SineDialer", $link);
 $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $campaigngroupid=mysql_result($result,0,'campaigngroupid');
+
+$_GET = array_map(mysql_real_escape_string, $_GET);
+
 if (isset($_GET[sure])){
     $id=$_GET[id];
     $sql="DELETE FROM campaign where id=$id";
@@ -24,11 +27,11 @@ require "header_campaign.php";
 <TR><TD>
 <?
 
-$sql = 'SELECT * FROM campaign WHERE id='.mysql_real_escape_string($_GET[id]).' limit 1';
+$sql = 'SELECT * FROM campaign WHERE id='.($_GET[id]).' limit 1';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 while ($row = mysql_fetch_assoc($result)) {
     echo "<CENTER><B>".$row[name]." - ".$row[description]."</B><BR><BR>";
-    echo '<A HREF="deletecampaign.php?id='.mysql_real_escape_string($_GET[id]).'&sure=yes">Yes, Delete it</A><BR>';
+    echo '<A HREF="deletecampaign.php?id='.($_GET[id]).'&sure=yes">Yes, Delete it</A><BR>';
     echo '<A HREF="campaigns.php">No, Don\'t Delete It</A></CENTER>';
 ?>
 </TD></TR>

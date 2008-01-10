@@ -5,25 +5,30 @@ mysql_select_db("SineDialer", $link);
 $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $campaigngroupid=mysql_result($result,0,'campaigngroupid');
+
+$_POST = array_map(mysql_real_escape_string,$_POST);
+$_GET = array_map(mysql_real_escape_string,$_GET);
+
+
 if (isset($_POST[name])){
-    $id=mysql_real_escape_string($_POST[id]);
-    $name=mysql_real_escape_string($_POST[name]);
-    $description=mysql_real_escape_string($_POST[description]);
-    $messageid=mysql_real_escape_string($_POST[messageid]);
-    $messageid2=mysql_real_escape_string($_POST[messageid2]);
-    $messageid3=mysql_real_escape_string($_POST[messageid3]);
-    $modein=mysql_real_escape_string($_POST[mode]);
-    if ($modein == "mode_queue"){
-        $mode = 1;
-    } else {
-        $mode = 0;
-    }
-    $astqueuename=mysql_real_escape_string($_POST[astqueuename]);
-    $maxagents=mysql_real_escape_string($_POST[agents]);
-    $did=mysql_real_escape_string($_POST[did]);
-    $clid=mysql_real_escape_string($_POST[clid]);
-    $trclid=mysql_real_escape_string($_POST[trclid]);
-    $context=mysql_real_escape_string($_POST[context]);
+	$id=$_POST[id];
+    	$name=$_POST[name];
+    	$description=$_POST[description];
+    	$messageid=$_POST[messageid];
+    	$messageid2=$_POST[messageid2];
+    	$messageid3=$_POST[messageid3];
+    	$modein=$_POST[mode];
+    	if ($modein == "mode_queue"){
+        	$mode = 1;
+    	} else {
+        	$mode = 0;
+    	}
+    	$astqueuename=$_POST[astqueuename];
+    	$maxagents=$_POST[agents];
+    	$did=$_POST[did];
+    	$clid=$_POST[clid];
+    	$trclid=$_POST[trclid];
+    	$context=$_POST[context];
 
 	$sql = "UPDATE campaign SET groupid='$campaigngroupid', name='$name', description='$description',messageid='$messageid',messageid2='$messageid2',messageid3='$messageid3',mode='$mode',astqueuename='$astqueuename',did='$did',maxagents='$maxagents',clid='$clid',trclid='$trclid',context='$context' WHERE id='$_POST[id]'";
 //    echo $sql;
@@ -31,7 +36,7 @@ if (isset($_POST[name])){
     include("campaigns.php");
     exit;
 }else{
-	$id = mysql_real_escape_string($_GET[id]);
+	$id = ($_GET[id]);
 	$sql = 'SELECT * FROM campaign WHERE id=\''.$id.'\' limit 1';
 	$result=mysql_query($sql,$link) or die(mysql_error());
 	$row = mysql_fetch_assoc($result);	

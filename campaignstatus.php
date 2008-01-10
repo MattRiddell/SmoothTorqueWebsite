@@ -2,9 +2,10 @@
 include "admin/db_config.php";
 mysql_select_db("SineDialer", $link);
 if (isset($_GET[id])){
+	$_GET = array_map(mysql_real_escape_string,$_GET);
     $id=$_GET[id];
 }
-$sql = 'SELECT status from queue where campaignid='.mysql_real_escape_string($id);
+$sql = 'SELECT status from queue where campaignid='.($id);
 $resultx=mysql_query($sql, $link) or die (mysql_error());;
 $status=mysql_result($resultx,0,'status');
 if (mysql_num_rows($resultx)==0) {

@@ -1,8 +1,12 @@
 <?
     echo "refresh".date('s');
     exit(0);
+
+$_GET = array_map(mysql_real_escape_string,$_GET);
+$_POST = array_map(mysql_real_escape_string,$_POST);
+
 if (isset($_GET[campaigngroupid])){
-    $campaigngroupid = mysql_real_escape_string($_GET[campaigngroupid]);
+    $campaigngroupid = ($_GET[campaigngroupid]);
     echo "refresh".date('s');
     exit(0);
 }

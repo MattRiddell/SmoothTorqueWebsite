@@ -2,8 +2,12 @@
 /*echo date('H:i:s');
     flush();
 exit(0);*/
+
+/*$_POST = array_map(mysql_real_escape_string,$_POST);
+$_GET = array_map(mysql_real_escape_string,$_GET);
+*/
 if (isset($_GET[campaigngroupid])){
-    $campaigngroupid = mysql_real_escape_string($_GET[campaigngroupid]);
+    $campaigngroupid = ($_GET[campaigngroupid]);
     //echo "refresh".date('s');
     //exit(0);
 }
@@ -18,8 +22,9 @@ include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(my
 mysql_select_db("SineDialer", $link);
 $sql = 'SELECT value FROM config WHERE parameter=\'backend\'';
 $result=mysql_query($sql, $link) or die (mysql_error());;
-$backend = mysql_result($result,0,'value');
-
+//$backend = mysql_result($result,0,'value');
+$row = mysql_fetch_assoc($result);
+$backend=$row[value];
 
 $level=$_COOKIE[level];
 if ($level==sha1("level100")) {
@@ -135,21 +140,27 @@ echo trim(substr($row[description],0,25))."...";
 </TD>
 */?>
 <?
-$sql = 'SELECT count(*) from number where campaignid='.$row[id].' and status="dialed"';
+$sql = 'SELECT count(*) as count from number where campaignid='.$row[id].' and status="dialed"';
 $result2=mysql_query($sql, $link) or die (mysql_error());;
-$count=mysql_result($result2,0,'count(*)');
+$row2 = mysql_fetch_assoc($result2);
+$count=$row2[count];
+
 $sql = 'SELECT count(*) from number where campaignid='.$row[id].' and status="dialing"';
 $result2=mysql_query($sql, $link) or die (mysql_error());;
 $countx=mysql_result($result2,0,'count(*)');
+
 $sql = 'SELECT count(*) from number where campaignid='.$row[id];
 $result2=mysql_query($sql, $link) or die (mysql_error());;
 $count2=mysql_result($result2,0,'count(*)');
+
 $sql = 'SELECT status, flags, maxcalls, progress from queue where campaignid='.$row[id];
 $resultx=mysql_query($sql, $link) or die (mysql_error());;
-$status=mysql_result($resultx,0,'status');
-$flags=mysql_result($resultx,0,'flags');
-$maxcalls=mysql_result($resultx,0,'maxcalls');
-$progress=mysql_result($resultx,0,'progress');
+$rowx = mysql_fetch_assoc($resultx);
+
+$status=$rowx[status];
+$flags=$rowx[flags];
+$maxcalls=$rowx[maxcalls];
+$progress=$rowx[progress];
 
 ?>
 <TD>
