@@ -311,3 +311,4 @@ if (isset($menu)){
 <TABLE WIDTH=100% HEIGHT="100%" BORDER="0" CELLSPACING="0" CELLPADDING="0" class="tborder3">
 <TR VALIGN="TOP" >
 <TD BGCOLOR="#ffffff">
+<?/*echo "<center><br /><font color=\"#dddddd\">".date('l dS \of F Y h:i:s A')."</font><br /><br /></center>";*/echo "<br />";?>

@@ -31,7 +31,7 @@ A:active {
 }
 TD {
 	FONT: 9pt verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
-        	text-align: center;
+        	text-align: left;
 	}
 TH {
 	FONT: 9pt verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
@@ -44,7 +44,10 @@ LI {
 	FONT: 9pt verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif
 }
 .tborder {
-	BORDER-RIGHT: #245e83 1px outset; BORDER-TOP: #245e83 1px outset; BACKGROUND: #f6f6f6; BORDER-LEFT: #245e83 1px outset; COLOR: #000000; BORDER-BOTTOM: #245e83 1px outset;
+	BORDER-RIGHT: #245e83 1px outset;
+	BORDER-TOP: #245e83 1px outset; BACKGROUND: #f6f6f6;
+	BORDER-LEFT: #245e83 1px outset; COLOR: #000000;
+	BORDER-BOTTOM: #245e83 1px outset;
 
 }
 .tborderx {
@@ -60,7 +63,7 @@ LI {
 outset; COLOR: #000000; BORDER-BOTTOM: #245e83 1px outset
 }
 .tborder3{
-	BORDER-RIGHT: #245e83 0px outset; BORDER-TOP: #000000 1px outset; BORDER-LEFT: #245e83 0px
+	BORDER-RIGHT: #245e83 0px outset; BORDER-TOP: #000033 2px outset; BORDER-LEFT: #245e83 0px
 outset; COLOR: #000000; BORDER-BOTTOM: #245e83 0px outset
 }
 .tcat {
@@ -472,4 +475,16 @@ img.percentImage {
  padding: 0;
  margin: 5px 0 0 0;
  background-position: 1px 0;
+}
+
+TD.subheader {
+   background: #eeeeee;
+   background-position: 0 -6;
+   border: 0px;
+}
+
+TD.subheader:hover {
+   background: url(/images/chb.gif);
+   background-position: 0 -6;
+   border: 0px;
 }

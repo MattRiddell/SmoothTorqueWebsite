@@ -1,6 +1,6 @@
 <?
-/*echo date('H:i:s');
-    flush();
+//echo date().date('H:i:s');
+/*    flush();
 exit(0);*/
 
 /*$_POST = array_map(mysql_real_escape_string,$_POST);
