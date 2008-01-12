@@ -116,7 +116,8 @@ $class=" class=\"tborderx\"";
 <?echo $row[status];?>
 </TD>
 <TD>
-<A HREF="deletenumber.php?campaignid=<?echo $_POST[campaignid];?>&number=<?echo $row[phonenumber];?>">Delete</A>
+<A TITLE="Delete this Number" HREF="deletenumber.php?campaignid=<?echo $_POST[campaignid];?>&number=<?echo $row[phonenumber];?>"><img src="/images/delete.png" border="0" alt="Delete Number"></A>
+<A TITLE="Reset the status of this Number" HREF="resetnumber.php?campaignid=<?echo $_POST[campaignid];?>&number=<?echo $row[phonenumber];?>"><img src="/images/control_repeat_blue.png" border="0" alt="Reset Number"></A>
 </TD>
 </TR>
 

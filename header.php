@@ -75,7 +75,7 @@ $self=$_SERVER['PHP_SELF'];
     //=======================================================================================================
     // Numbers
     //=======================================================================================================
-    if ($self=="/addnumbers.php"||$self=="/numbers.php"||$self=="/deletenumber.php"||$self=="/viewnumbers.php"||$self == "/gennumbers.php"||$self == "/upload.php"||$self =="//receive.php"){
+    if ($self=="/addnumbers.php"||$self=="/numbers.php"||$self=="/deletenumber.php"||$self=="/viewnumbers.php"||$self == "/gennumbers.php"||$self == "/upload.php"||$self =="//receive.php"||$self=="/resetnumber.php"){
         $thead="thead";
     } else {
         $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
