@@ -40,7 +40,7 @@ if (isset($_POST[queuename])){
         }
     }
     $endtime=$endhour.":".$endmin;
-    
+
     $startdate=$_POST[startdate];
     $enddate=$_POST[enddate];
     $did=$_POST[did];
@@ -77,7 +77,7 @@ if (!isset($_POST[campaignid])){
         $result=mysql_query($sql, $link) or die (mysql_error());;
         //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
         while ($row = mysql_fetch_assoc($result)) {
-            echo "<OPTION VALUE=\"".$row[id]."\">".$row[name]."</OPTION>";
+            echo "<OPTION VALUE=\"".$row[id]."\">".substr($row[name],0,22)."</OPTION>";
         }
         ?>
         </SELECT>
@@ -112,12 +112,12 @@ if (!isset($_POST[campaignid])){
 <IMG SRC="timePickerImages/timepicker.gif" BORDER="0" ALT="Pick a Time!" ONCLICK="selectTime(this,endtime)" STYLE="cursor:hand"></td>
 </TD>
 </TR><TR><TD CLASS="thead">Start Date</TD><TD>
-<input name="startdate"> 
+<input name="startdate">
 
 <input type=button value="select" onclick="displayDatePicker('startdate', false, 'ymd', '-');">
 </TD>
 </TR><TR><TD CLASS="thead">End Date</TD><TD>
-<input name="enddate"> 
+<input name="enddate">
 
 <input type=button value="select" onclick="displayDatePicker('enddate', false, 'ymd', '-');">
 </TD>
@@ -181,4 +181,3 @@ if (!isset($_POST[campaignid])){
 <?      }
 require "footer.php";
 ?>
-

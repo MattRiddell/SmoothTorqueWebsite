@@ -1,0 +1,5 @@
+for fl in *.php; do   
+mv $fl $fl.old
+sed 's/dragme2/dragme22/g' $fl.old > $fl               
+rm -f $fl.old
+done

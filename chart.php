@@ -34,7 +34,7 @@ while (substr(trim($result),0,3)!="END") {
         $row[messageid3]= $pieces[6];
 //        echo $result."<BR>";
         if ($groupid==trim($row[campaigngroupid])){
-            echo "<option value=\"$row[id]\">$row[name]</option>
+            echo "<option value=\"$row[id]\">substr($row[name],0,22)</option>
 ";
         } else {
 //            echo $groupid."!=".$row[campaigngroupid];

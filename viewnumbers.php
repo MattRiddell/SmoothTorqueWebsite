@@ -14,7 +14,7 @@ if (!isset($_POST[campaignid])&&!isset($_GET[campaignid])){
 
     <br /><br /><br /><br />
 <center>
-<table background="/images/sdbox.png" width="300" height="200" class="dragme22">
+<table background="/images/sdbox.png" width="300" height="200" class="dragme">
 <tr>
 <td>
 </td>
@@ -30,7 +30,7 @@ From here you can chose a campaign that you would like to see the numbers for.<b
         $result=mysql_query($sql, $link) or die (mysql_error());;
         //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
         while ($row = mysql_fetch_assoc($result)) {
-            echo "<OPTION VALUE=\"".$row[id]."\">".$row[name]."</OPTION>";
+            echo "<OPTION VALUE=\"".$row[id]."\">".substr($row[name],0,22)."</OPTION>";
         }
         ?>
         </SELECT>
