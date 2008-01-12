@@ -99,6 +99,9 @@ Percentage Busy
 </TR>
 <?
 while ($row = mysql_fetch_assoc($result)) {
+
+$row = array_map(stripslashes,$row);
+
 if ($toggle){
 $toggle=false;
 $class=" class=\"tborder2\"";
@@ -121,10 +124,12 @@ echo "<A HREF=\"editcampaign.php?id=".$row[id]."\">".trim(substr($row[name],0,15
 </TD>
 <TD>
 <?
-if (strlen($row[description])<25){
+$max_str_len = 25;
+
+iF (strlen($row[description])<$max_str_len){
 echo $row[description];
 } else {
-echo trim(substr($row[description],0,25))."...";
+echo trim(substr($row[description],0,$max_str_len))."...";
 }
 ?>
 </TD>

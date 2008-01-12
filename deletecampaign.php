@@ -30,6 +30,7 @@ require "header_campaign.php";
 $sql = 'SELECT * FROM campaign WHERE id='.($_GET[id]).' limit 1';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 while ($row = mysql_fetch_assoc($result)) {
+	$row = array_map(stripslashes,$row);
     echo "<CENTER><B>".$row[name]." - ".$row[description]."</B><BR><BR>";
     echo '<A HREF="deletecampaign.php?id='.($_GET[id]).'&sure=yes">Yes, Delete it</A><BR>';
     echo '<A HREF="campaigns.php">No, Don\'t Delete It</A></CENTER>';

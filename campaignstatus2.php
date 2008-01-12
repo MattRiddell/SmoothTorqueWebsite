@@ -11,7 +11,7 @@ if (mysql_num_rows($resultx)==0) {
          echo "Please Wait<br /><br />Your campaign is being stopped<BR><BR><img src=\"/images/ajax-loader.gif\"><br /><br />";
 } else {
     if ($status==102){
-        echo "<b>Campaign Stopped <img src=\"/images/tick.gif\" border=\"0\"></b><br /><br />";
+        echo "<b>Campaign Stopped <img src=\"/images/tick.gif\" border=\"0\" onLoad=\"window.location = 'campaigns.php';\"></b><br /><br />";
         ?>
     <script language="javascript">
     function delayer(){

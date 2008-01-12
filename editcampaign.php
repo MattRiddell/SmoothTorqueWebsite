@@ -6,11 +6,15 @@ $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $campaigngroupid=mysql_result($result,0,'campaigngroupid');
 
+if (isset($_POST[name])){
+
+	echo "*********".$_POST[name]."**********<br>";
+$_POST = array_map(htmlspecialchars,$_POST);
+$_GET = array_map(htmlspecialchars,$_GET);
 $_POST = array_map(mysql_real_escape_string,$_POST);
 $_GET = array_map(mysql_real_escape_string,$_GET);
 
-
-if (isset($_POST[name])){
+echo "*********".$_POST[name]."**********<br>";
 	$id=$_POST[id];
     	$name=$_POST[name];
     	$description=$_POST[description];
@@ -33,16 +37,18 @@ if (isset($_POST[name])){
 	$sql = "UPDATE campaign SET groupid='$campaigngroupid', name='$name', description='$description',messageid='$messageid',messageid2='$messageid2',messageid3='$messageid3',mode='$mode',astqueuename='$astqueuename',did='$did',maxagents='$maxagents',clid='$clid',trclid='$trclid',context='$context' WHERE id='$_POST[id]'";
 //    echo $sql;
     $result=mysql_query($sql, $link) or die (mysql_error());;
-    include("campaigns.php");
-    exit;
+    /*include("campaigns.php");
+    exit;*/
 }else{
 	$id = ($_GET[id]);
 	$sql = 'SELECT * FROM campaign WHERE id=\''.$id.'\' limit 1';
 	$result=mysql_query($sql,$link) or die(mysql_error());
 	$row = mysql_fetch_assoc($result);	
+	$row = array_map(stripslashes,$row);
 }
 require "header.php";
 require "header_campaign.php";
+
 ?>
 
 <FORM ACTION="editcampaign.php" METHOD="POST">
@@ -221,7 +227,7 @@ Human: Play the person message and then if they press
 
 
 </TR><TR><TD COLSPAN=2 ALIGN="RIGHT">
-<INPUT TYPE="SUBMIT" VALUE="Edit Campaign">
+<INPUT TYPE="SUBMIT" VALUE="Save Campaign">
 </TD>
 </TR>
 <?
