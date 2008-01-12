@@ -58,15 +58,9 @@ $campaigngroupid=$groupid;
 
 <TR><TD CLASS="thead">Message Description</TD><TD>
 <INPUT TYPE="TEXT" NAME="description" VALUE="<?echo $row[description];?>" size="60">
+<INPUT TYPE="HIDDEN" NAME="filename" VALUE="<?echo $row[filename];?><?if(isset($_GET[filename])){echo $_GET[filename];}?>" size="60">
 </TD>
 </TR>
-
-<TR><TD CLASS="thead">Message Filename</TD><TD>
-<INPUT TYPE="TEXT" NAME="filename" VALUE="<?echo $row[filename];?>" size="60">
-</TD>
-</TR>
-
-
 
 <TR><TD COLSPAN=2 ALIGN="RIGHT">
 <INPUT TYPE="SUBMIT" VALUE="Add Message">
