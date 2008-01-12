@@ -9,6 +9,17 @@ $campaigngroupid=mysql_result($result,0,'campaigngroupid');
 $_POST = array_map(mysql_real_escape_string,$_POST);
 $_GET = array_map(mysql_real_escape_string,$_GET);
 ?>
+<script>
+function EvalSound(soundobj) {
+  var thissound=document.getElementById(soundobj);
+  thissound.Play();
+}
+function EvalSound2(soundobj) {
+  var thissound=document.getElementById(soundobj);
+  thissound.Stop();
+}
+</script>
+
 
 <table class="" align="center" border="0" cellpadding="2" cellspacing="0">
 <TR>
@@ -19,7 +30,6 @@ Name
 Description
 </TD>
 <TD CLASS="thead">
-Filename
 </TD>
 <TD CLASS="thead">
 
@@ -69,7 +79,18 @@ echo trim(substr($row[description],0,25))."...";
 ?>
 </TD>
 <TD>
-<?echo $row[filename];?>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<embed src="<?echo "/uploads/".str_replace(".sln",".wav",$row[filename]);?>"
+autostart=false width=0 height=0 id="sound<?echo $row[id];?>"
+enablejavascript="true">
+
+<a href="#" onClick="EvalSound('sound<?echo $row[id];?>')" title="Play sound">
+<img src="/images/control_play_blue.png" border="0"></a>
+<a href="#" onClick="EvalSound2('sound<?echo $row[id];?>')" title="Pause sound">
+<img src="/images/control_pause_blue.png" border="0"></a>
+
+
 </TD>
 
 

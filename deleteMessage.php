@@ -1,8 +1,11 @@
 <?
-
 $_POST = array_map(mysql_real_escape_string,$_POST);
-$_GET = array_map(mysql_real_escape_string,$_GET);
 
+// Somthing is going wrong here - if you take the comments off the next
+// line, it fails
+// ==================================================
+// $_GET = array_map(mysql_real_escape_string,$_GET);
+// ==================================================
 if (isset($_POST[id])) {
     $_GET[id]=$_POST[id];
 }
@@ -13,6 +16,7 @@ if (isset($_POST[id])) {
 mysql_select_db("SineDialer", $link);
 
 $sql="DELETE FROM campaignmessage WHERE id=".($_GET[id]);
+//        echo $sql;
         $result=mysql_query($sql, $link) or die (mysql_error());;
 
         //$SMDB2->executeUpdate($sql);

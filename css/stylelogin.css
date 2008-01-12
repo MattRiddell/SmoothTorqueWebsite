@@ -31,7 +31,7 @@ A:active {
 }
 TD {
 	FONT: 9pt verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
-        	text-align: left;
+        	text-align: center;
 	}
 TH {
 	FONT: 9pt verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
@@ -48,7 +48,6 @@ LI {
 	BORDER-TOP: #245e83 1px outset; BACKGROUND: #f6f6f6;
 	BORDER-LEFT: #245e83 1px outset; COLOR: #000000;
 	BORDER-BOTTOM: #245e83 1px outset;
-
 }
 .tborderx {
 	BORDER-RIGHT: #245e83 1px outset; BORDER-TOP: #245e83 1px outset; BACKGROUND: #f2f2f2; BORDER-LEFT: #245e83 1px outset; COLOR: #000000; BORDER-BOTTOM: #245e83 1px outset;

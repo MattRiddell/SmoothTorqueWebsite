@@ -66,11 +66,7 @@ $row = mysql_fetch_assoc($result);
 
 <TR><TD CLASS="thead">Message Description</TD><TD>
 <INPUT TYPE="TEXT" NAME="description" VALUE="<?echo $row[description];?>" size="60">
-</TD>
-</TR>
-
-<TR><TD CLASS="thead">Message Filename</TD><TD>
-<INPUT TYPE="TEXT" NAME="filename" VALUE="<?echo $row[filename];?>" size="60">
+<INPUT TYPE="HIDDEN" NAME="filename" VALUE="<?echo $row[filename];?>" size="60">
 </TD>
 </TR>
 
