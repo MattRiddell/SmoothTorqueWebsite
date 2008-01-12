@@ -12,11 +12,21 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
 <script>
 function EvalSound(soundobj) {
   var thissound=document.getElementById(soundobj);
-  thissound.Play();
+  try {
+     thissound.Play();
+  } catch (e) {
+     thissound.DoPlay();
+  }
+
 }
 function EvalSound2(soundobj) {
   var thissound=document.getElementById(soundobj);
-  thissound.Stop();
+  try {
+     thissound.Stop();
+  } catch (e) {
+     thissound.DoStop();
+  }
+
 }
 </script>
 
