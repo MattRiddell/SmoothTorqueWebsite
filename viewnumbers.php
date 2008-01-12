@@ -14,7 +14,7 @@ if (!isset($_POST[campaignid])&&!isset($_GET[campaignid])){
 
     <br /><br /><br /><br />
 <center>
-<table background="/images/sdbox.png" width="300" height="200" class="dragme">
+<table background="/images/sdbox.png" width="300" height="200" class="dragme22">
 <tr>
 <td>
 </td>
@@ -117,7 +117,13 @@ $class=" class=\"tborderx\"";
 </TD>
 <TD>
 <A TITLE="Delete this Number" HREF="deletenumber.php?campaignid=<?echo $_POST[campaignid];?>&number=<?echo $row[phonenumber];?>"><img src="/images/delete.png" border="0" alt="Delete Number"></A>
+<?
+if ($row[status] != "new") {
+?>
 <A TITLE="Reset the status of this Number" HREF="resetnumber.php?campaignid=<?echo $_POST[campaignid];?>&number=<?echo $row[phonenumber];?>"><img src="/images/control_repeat_blue.png" border="0" alt="Reset Number"></A>
+<?
+}
+?>
 </TD>
 </TR>
 
