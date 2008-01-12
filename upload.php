@@ -12,7 +12,7 @@ if (!isset($_POST[campaignid])){
 
     <br /><br /><br /><br />
 <center>
-<table background="/images/sdbox.png" width="300" height="200" class="dragme2">
+<table background="/images/sdbox.png" width="300" height="200" class="dragme22">
 <tr>
 <td>
 </td>
@@ -70,7 +70,7 @@ $sid = md5(uniqid(rand()));
 
         <br /><br /><br /><br />
 <center>
-<table background="/images/sdbox.png" width="300" height="200" class="dragme2">
+<table background="/images/sdbox.png" width="300" height="200" class="dragme22">
 <tr>
 <td>
 </td>

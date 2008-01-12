@@ -215,7 +215,7 @@ $self=$_SERVER['PHP_SELF'];
 
 <style>
 <!--
-.dragme2{position:relative;}
+.dragme{position:relative;}
 -->
 </style>
 <STYLE type="text/css">
@@ -257,12 +257,12 @@ function selectmouse(e)
   var fobj       = nn6 ? e.target : event.srcElement;
   var topelement = nn6 ? "HTML" : "BODY";
 
-  while (fobj.tagName != topelement && fobj.className != "dragme2")
+  while (fobj.tagName != topelement && fobj.className != "dragme")
   {
     fobj = nn6 ? fobj.parentNode : fobj.parentElement;
   }
 
-  if (fobj.className=="dragme2")
+  if (fobj.className=="dragme")
   {
     isdrag = true;
     dobj = fobj;
