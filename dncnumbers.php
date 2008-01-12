@@ -14,7 +14,7 @@ require "header_numbers.php";
 ?>
 <br /><br /><br /><br />
 <center>
-<table background="/images/sdbox.png" width="300" height="200" class="dragme">
+<table background="/images/sdbox.png" width="300" height="200" class="dragme2">
 <tr>
 <td>
 </td>
