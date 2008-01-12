@@ -116,9 +116,9 @@ $class=" class=\"tborderx\"";
 <TD>
 <?
 if (strlen($row[name])<15){
-echo "<A HREF=\"editcampaign.php?id=".$row[id]."\">".$row[name]."</A>";
+echo "<A title=\"Edit this campaign\" HREF=\"editcampaign.php?id=".$row[id]."\">".$row[name]."</A>";
 } else {
-echo "<A HREF=\"editcampaign.php?id=".$row[id]."\">".trim(substr($row[name],0,15))."...</A>";
+echo "<A title=\"Edit this campaign\" HREF=\"editcampaign.php?id=".$row[id]."\">".trim(substr($row[name],0,15))."...</A>";
 }
 ?>
 </TD>
@@ -190,9 +190,9 @@ countx   = dialing
 <TD>
 <?
 if ($user!="demo"){
-echo "<A HREF=\"deletecampaign.php?id=".$row[id]."\"><IMG SRC=\"/images/delete.png\" BORDER=\"0\"></A>";
+echo "<A title=\"Delete this campaign\" HREF=\"deletecampaign.php?id=".$row[id]."\"><IMG SRC=\"/images/delete.png\" BORDER=\"0\"></A>";
 } else {
-echo "<A HREF=\"#\"><IMG SRC=\"/images/delete.png\" BORDER=\"0\"></A>";
+echo "<A title=\"Delete this campaign\" HREF=\"#\"><IMG SRC=\"/images/delete.png\" BORDER=\"0\"></A>";
 }
 ?>
 </TD>
@@ -222,33 +222,33 @@ if ($status==101){
 </TD>
 <td>
 <?if ($user!="demo"){?>
-<a href="stopcampaign.php?id=<?echo $row[id];?>"><img src="/images/control_stop_blue.png" border="0"></a>
+<a title="Stop running this campaign" href="stopcampaign.php?id=<?echo $row[id];?>"><img src="/images/control_stop_blue.png" border="0"></a>
 <?} else {?>
-<a href="#"><img src="/images/control_stop_blue.png" border="0"></a>
+<a href="#" title="Stop campaign (Not running)"><img src="/images/control_stop_blue.png" border="0"></a>
 <?
 }
 } else {
 
 ?>
 <?if ($user!="demo"){?>
-<a href="startcampaign.php?id=<?echo $row[id];?>&astqueuename=<?echo $row[astqueuename];?>&clid=<?echo $row[clid];?>&trclid=<?echo $row[trclid];?>&agents=<?echo $row[maxagents];?>&did=<?echo $row[did];?>&context=<?echo $row[context];?>">
+<a title="Start running this campaign" href="startcampaign.php?id=<?echo $row[id];?>&astqueuename=<?echo $row[astqueuename];?>&clid=<?echo $row[clid];?>&trclid=<?echo $row[trclid];?>&agents=<?echo $row[maxagents];?>&did=<?echo $row[did];?>&context=<?echo $row[context];?>">
 <IMG SRC="/images/control_play_blue.png" BORDER="0"></a><br>
 <?} else {?>
-<a href="#"><IMG SRC="/images/control_play_blue.png" BORDER="0"></a><br>
+<a href="#" title="Start campaign (Already started)"><IMG SRC="/images/control_play_blue.png" BORDER="0"></a><br>
 <?}?>
 </TD>
 <td>
-<img src="/images/control_stop.png" border="0">
+<img src="/images/control_stop.png" border="0" title="Stop running campaign">
 <?
 }
 ?>
 </td>
 <td>
 <?if ($backend == 0) {?>
-<a href="chart.php?id=<?echo $row[id];?>" target="_blank" class="abcd"><img src="/images/chart_curve.png" border="0"></a>&nbsp;
+<a title="View the graph for this campaign" href="chart.php?id=<?echo $row[id];?>" target="_blank" class="abcd"><img src="/images/chart_curve.png" border="0"></a>&nbsp;
 <?}?>
-<img src="/images/percentImage.png" alt="<?echo
-$perc;?>%"
+<img src="/images/percentImage.png" title="<?echo
+$perc;?>% of staff are busy"
 class="percentImage"
 style="background-position: -<?echo 119-($perc*1.2); ?>px 0pt;" border="0" />
 
