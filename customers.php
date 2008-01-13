@@ -56,9 +56,9 @@ $class=" class=\"tborderx\"";
 <TD>
 <?
 if (strlen($row[company])<15){
-echo "<A HREF=\"editcustomer.php?id=".$row[id]."\">".$row[company]."</A>";
+echo "<A HREF=\"editcustomer.php?id=".$row[id]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".$row[company]."</A>";
 } else {
-echo "<A HREF=\"editcustomer.php?id=".$row[id]."\">".trim(substr($row[company],0,15))."...</A>";
+echo "<A HREF=\"editcustomer.php?id=".$row[id]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".trim(substr($row[company],0,15))."...</A>";
 }
 ?>
 </TD>

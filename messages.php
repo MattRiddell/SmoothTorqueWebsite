@@ -73,9 +73,9 @@ while ($row = mysql_fetch_assoc($result)) {
 <TD>
 <?
 if (strlen($row[name])<15){
-echo "<A HREF=\"editmessage.php?id=".$row[id]."\">".$row[name]."</A>";
+echo "<A HREF=\"editmessage.php?id=".$row[id]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit $row[name]\">".$row[name]."</A>";
 } else {
-echo "<A HREF=\"editmessage.php?id=".$row[id]."\">".trim(substr($row[name],0,15))."...</A>";
+echo "<A HREF=\"editmessage.php?id=".$row[id]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit $row[name]\">".trim(substr($row[name],0,15))."...</A>";
 }
 ?>
 </TD>
@@ -95,9 +95,9 @@ echo trim(substr($row[description],0,25))."...";
 autostart=false width=0 height=0 id="sound<?echo $row[id];?>"
 enablejavascript="true">
 
-<a href="#" onClick="EvalSound('sound<?echo $row[id];?>')" title="Play sound">
+<a href="#" onClick="EvalSound('sound<?echo $row[id];?>')" title="Play <?echo $row[id];?>sound">
 <img src="/images/control_play_blue.png" border="0"></a>
-<a href="#" onClick="EvalSound2('sound<?echo $row[id];?>')" title="Pause sound">
+<a href="#" onClick="EvalSound2('sound<?echo $row[id];?>')" title="Pause <?echo $row[id];?>sound">
 <img src="/images/control_pause_blue.png" border="0"></a>
 
 
@@ -105,7 +105,7 @@ enablejavascript="true">
 
 
 <TD>
-<?echo "<A HREF=\"deleteMessage.php?id=".$row[id]."\"><IMG SRC=\"/images/delete.png\" BORDER=\"0\"></A>";?>
+<?echo "<A title=\"Delete the ".$row[name]." Message\" HREF=\"deleteMessage.php?id=".$row[id]."\"><IMG SRC=\"/images/delete.png\" BORDER=\"0\"></A>";?>
 </TD>
 </TR>
 

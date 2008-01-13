@@ -69,9 +69,9 @@ if ($row["current"]==1){
 <TD>
 <?
 if (strlen($row[name])<15){
-echo "<A HREF=\"edittrunk.php?id=".$row[id]."\">".$row[name]."</A>";
+echo "<A HREF=\"edittrunk.php?id=".$row[id]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".$row[name]."</A>";
 } else {
-echo "<A HREF=\"edittrunk.php?id=".$row[id]."\">".trim(substr($row[name],0,15))."...</A>";
+echo "<A HREF=\"edittrunk.php?id=".$row[id]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".trim(substr($row[name],0,15))."...</A>";
 }
 ?>
 </TD>

@@ -50,9 +50,9 @@ $class=" class=\"tborderx\"";
 <TD>
 <?
 if (strlen($row[name])<15){
-echo "<A HREF=\"editqueue.php?name=".$row[name]."\">".$row[name]."</A>";
+echo "<A HREF=\"editqueue.php?name=".$row[name]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".$row[name]."</A>";
 } else {
-echo "<A HREF=\"editqueue.php?name=".$row[name]."\">".trim(substr($row[company],0,15))."...</A>";
+echo "<A HREF=\"editqueue.php?name=".$row[name]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".trim(substr($row[company],0,15))."...</A>";
 }
 ?>
 </TD>
