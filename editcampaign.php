@@ -8,13 +8,13 @@ $campaigngroupid=mysql_result($result,0,'campaigngroupid');
 
 if (isset($_POST[name])){
 
-	echo "*********".$_POST[name]."**********<br>";
+	//echo "*********".$_POST[name]."**********<br>";
 $_POST = array_map(htmlspecialchars,$_POST);
 $_GET = array_map(htmlspecialchars,$_GET);
 $_POST = array_map(mysql_real_escape_string,$_POST);
 $_GET = array_map(mysql_real_escape_string,$_GET);
 
-echo "*********".$_POST[name]."**********<br>";
+//echo "*********".$_POST[name]."**********<br>";
 	$id=$_POST[id];
     	$name=$_POST[name];
     	$description=$_POST[description];
@@ -37,13 +37,13 @@ echo "*********".$_POST[name]."**********<br>";
 	$sql = "UPDATE campaign SET groupid='$campaigngroupid', name='$name', description='$description',messageid='$messageid',messageid2='$messageid2',messageid3='$messageid3',mode='$mode',astqueuename='$astqueuename',did='$did',maxagents='$maxagents',clid='$clid',trclid='$trclid',context='$context' WHERE id='$_POST[id]'";
 //    echo $sql;
     $result=mysql_query($sql, $link) or die (mysql_error());;
-    /*include("campaigns.php");
-    exit;*/
+    include("campaigns.php");
+    exit;
 }else{
 	$id = ($_GET[id]);
 	$sql = 'SELECT * FROM campaign WHERE id=\''.$id.'\' limit 1';
 	$result=mysql_query($sql,$link) or die(mysql_error());
-	$row = mysql_fetch_assoc($result);	
+	$row = mysql_fetch_assoc($result);
 	$row = array_map(stripslashes,$row);
 }
 require "header.php";

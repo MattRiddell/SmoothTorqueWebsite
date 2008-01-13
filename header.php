@@ -193,25 +193,6 @@ $self=$_SERVER['PHP_SELF'];
 <script type="text/javascript" src="/usableforms.js"></script>
 <script language="javascript" type="text/javascript" src="/upload.js"></script>
 <link rel="stylesheet" href="/upload.css" type="text/css" media="screen" title="Upload" charset="utf-8" />
-  <script language="javascript">
-    function beginUpload(sid) {
-      document.postform.submit();
-        var pb = document.getElementById("progress");
-        var pb2 = document.getElementById("matt");
-        var pb3 = document.getElementById("matt2");
-        pb.parentNode.parentNode.style.display='block';
-        pb2.style.display='none';
-        pb3.style.display='none';
-        pb.parentNode.parentNode.style.display='block';
-        new ProgressTracker(sid,{
-                progressBar: pb,
-                onFailure: function(msg) {
-                        Element.hide(pb.parentNode);
-                        alert(msg);
-                }
-        });
-    }
-  </script>
 
 <style>
 <!--
@@ -220,79 +201,9 @@ $self=$_SERVER['PHP_SELF'];
 </style>
 <STYLE type="text/css">
   DIV.mypars {text-align: left}
- </STYLE>
-
-<script language="JavaScript1.2">
-<!--
-
-var ie=document.all;
-var nn6=document.getElementById&&!document.all;
-
-var isdrag=false;
-var x,y;
-var dobj;
-
-function movemouse(e)
-{
-  if (isdrag)
-  {
-//	alert ("hello");
-//    window.defaultStatus = "This is the status bar";
-//    document.title=nn6 ? ty + e.clientY - y : ty + event.clientY - y;
-    if ((nn6 ? ty + e.clientY - y : ty + event.clientY - y) > -57){
-        dobj.style.left = nn6 ? tx + e.clientX - x : tx + event.clientX - x;
-        dobj.style.top  = nn6 ? ty + e.clientY - y : ty + event.clientY - y;
-    } else {
-
-        dobj.style.left = nn6 ? tx + e.clientX - x : tx + event.clientX - x;
-        dobj.style.top  = -56;
-
-    }
-    return false;
-  }
-}
-
-function selectmouse(e)
-{
-  var fobj       = nn6 ? e.target : event.srcElement;
-  var topelement = nn6 ? "HTML" : "BODY";
-
-  while (fobj.tagName != topelement && fobj.className != "dragme")
-  {
-    fobj = nn6 ? fobj.parentNode : fobj.parentElement;
-  }
-
-  if (fobj.className=="dragme")
-  {
-    isdrag = true;
-    dobj = fobj;
-    tx = parseInt(dobj.style.left+0);
-    ty = parseInt(dobj.style.top+0);
-    x = nn6 ? e.clientX : event.clientX;
-    y = nn6 ? e.clientY : event.clientY;
-    document.onmousemove=movemouse;
-    return false;
-  }
-}
-
-document.onmousedown=selectmouse;
-document.onmouseup=new Function("isdrag=false");
-
-//-->
-</script>
-
-
+</STYLE>
 <script type="text/javascript" src="/ajax/picker.js"></script>
-<script language=javascript type='text/javascript'>
-
-function hideItem(obj) {
-    var el = document.getElementById(obj);
-    if (el) {
-    el.style.display = 'none';
-    }
-}
-
-</script>
+<script type="text/javascript" src="/header.js"></script>
 </HEAD>
 <BODY BACKGROUND="/images/bg.gif" onload="hideItem('hideShow');">
 <?
