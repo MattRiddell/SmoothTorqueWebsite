@@ -245,7 +245,7 @@ if ($status==101){
 </td>
 <td>
 <?if ($backend == 0) {?>
-<a title="View the graph for this campaign" href="chart.php?id=<?echo $row[id];?>" target="_blank" class="abcd"><img src="/images/chart_curve.png" border="0"></a>&nbsp;
+<a title="View the graph for this campaign" href="test.php?id=<?echo $row[id];?>" class="abcd"><img src="/images/chart_curve.png" border="0"></a>&nbsp;
 <?}?>
 <img src="/images/percentImage.png" title="<?echo
 $perc;?>% of staff are busy"

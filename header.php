@@ -65,7 +65,8 @@ $self=$_SERVER['PHP_SELF'];
     //=======================================================================================================
     // Campaigns
     //=======================================================================================================
-    if ($self=="/campaigns.php"||$self=="/deletecampaign.php"||$self=="/editcampaign.php"||$self=="/addcampaign.php"||$self=="/stopcampaign.php"||$self=="/startcampaign.php"){
+    if ($self=="/campaigns.php"||$self=="/deletecampaign.php"||$self=="/editcampaign.php"||$self=="/addcampaign.php"||$self=="/stopcampaign.php"||$self=="/startcampaign.php"||$self=="/test.php"
+    ){
         $thead="thead";
     } else {
         $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
