@@ -3,6 +3,44 @@ require "header.php";
 require "header_queue.php";
 
 
+$is_int = array( 
+ "name" => 0,
+ "musiconhold" => 0,
+ "announce" =>0,
+ "context"=>0,
+ "timeout"=>1,
+ "monitor_join"=>1,
+ "monitor_format"=>0,
+ "queue_youarenext"=>0,
+ "queue_thereare"=>0,
+ "queue_callswaiting"=>0,
+ "queue_holdtime"=>0,
+ "queue_minutes"=>0,
+ "queue_seconds"=>0,
+ "queue_lessthan"=>0,
+ "queue_thankyou"=>0,
+ "queue_reporthold"=>0,
+ "announce_frequency"=>1,
+ "announce_round_seconds"=>1,
+ "announce_holdtime"=>0,
+ "retry"=>1,
+ "wrapuptime"=>1,
+ "maxlen"=>1,
+ "servicelevel"=>1,
+ "strategy"=>0,
+ "joinempty"=>0,
+ "leavewhenempty"=>0,
+ "eventmemberstatus"=>1,
+ "eventwhencalled"=>1,
+ "reportholdtime"=>1,
+ "memberdelay"=>1,
+ "weight"=>1,
+ "timeoutrestart"=>1,
+ "periodic_announce"=>0,
+ "periodic_announce_frequency"=>1
+);
+
+
 /* this function builds a drop down box for the strategy
    The existing strategy is passed in as an parameter
    The name for the resulting select is also passed in.
@@ -56,11 +94,15 @@ if(array_key_exists('_submit_check', $_POST)){
 	//insert stuff in to the database
 	$names = array_keys($_POST);
 	$result = "";
-	for($i = 1; $i < 2/*count($_POST)*/;$i++){
+	for($i = 1; $i <count($_POST);$i++){
 		$result .= $names[$i]."=";
-		if($_POST[$names[$i]] != "")
-			$result .= "'".$_POST[$names[$i]]."', ";
-		else
+		if($_POST[$names[$i]] != ""){
+			if($is_int[$names[$i]]){
+				$result .= $_POST[$names[$i]].", ";
+			}else{
+				$result .= "'".$_POST[$names[$i]]."', ";
+			}
+		}else
 			$result .= "NULL, ";
 	}
 	$result = substr($result,0,strlen($resut)-2);	
