@@ -47,20 +47,20 @@ $backend = mysql_result($result,0,'value');
 $self=$_SERVER['PHP_SELF'];
 //echo $self;
     $menu='<CENTER>
-    <table border="0" cellpadding="3" cellspacing="0"><TR HEIGHT="19">';
+    <table border="0" cellpadding="3" cellspacing="0"><TR HEIGHT="10">';
 
     //=======================================================================================================
     // Home
     //=======================================================================================================
     if ($self=="/main.php"){
-        $menu.='<td style="background-image: url(/images/clb.gif);" height=19></td>';
+        $menu.='<td style="background-image: url(/images/clb.gif);"></td>';
         $thead="thead";
     } else {
-    $menu.='<TD CLASS="theadl2" WIDTH=0 height=19></TD>';
+    $menu.='<TD CLASS="theadl2" WIDTH=0></TD>';
         $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
     }
 
-    $menu.='<TD class="'.$thead.'" height=28><A HREF="/main.php"><img src="/images/house.png" border="0" align="left">Home</A>&nbsp;</TD>';
+    $menu.='<TD class="'.$thead.'" height=27><A HREF="/main.php"><img src="/images/house.png" border="0" align="left">Home</A>&nbsp;</TD>';
 
     //=======================================================================================================
     // Campaigns

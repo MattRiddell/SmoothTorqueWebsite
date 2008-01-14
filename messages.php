@@ -89,6 +89,7 @@ echo trim(substr($row[description],0,25))."...";
 ?>
 </TD>
 <TD>
+<?/*?>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <embed src="<?echo "/uploads/".str_replace(".sln",".wav",$row[filename]);?>"
@@ -99,7 +100,8 @@ enablejavascript="true">
 <img src="/images/control_play_blue.png" border="0"></a>
 <a href="#" onClick="EvalSound2('sound<?echo $row[id];?>')" title="Pause <?echo $row[id];?>sound">
 <img src="/images/control_pause_blue.png" border="0"></a>
-
+<?*/?>
+<embed src="<?echo "/uploads/".str_replace(".sln",".wav",$row[filename]);?>" width="144" height="20" autostart="false" loop="false">
 
 </TD>
 

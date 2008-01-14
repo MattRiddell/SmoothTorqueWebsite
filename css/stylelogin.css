@@ -1,6 +1,6 @@
 BODY {
 	PADDING-RIGHT: 0px; PADDING-LEFT: 0px;
-	BACKGROUND: #555;
+	BACKGROUND: #333;
 	PADDING-BOTTOM: 0px; MARGIN: 0px; FONT: 9pt verdana,
 geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; COLOR: #000000; PADDING-TOP: 0px
 }
@@ -62,7 +62,7 @@ LI {
 outset; COLOR: #000000; BORDER-BOTTOM: #245e83 1px outset
 }
 .tborder3{
-	BORDER-RIGHT: #245e83 0px outset; BORDER-TOP: #000033 2px outset; BORDER-LEFT: #245e83 0px
+	BORDER-RIGHT: #245e83 0px outset; BORDER-TOP: #0000ff 1px inset; BORDER-LEFT: #245e83 0px
 outset; COLOR: #000000; BORDER-BOTTOM: #245e83 0px outset
 }
 .tcat {
