@@ -50,29 +50,25 @@ $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'
 $result = mysql_query($sql,$link) or die(mysql_error());
 $campaigngroupid = mysql_result($result,0,'campaigngroupid');
 
+$_GET = array_map(mysql_real_escape_string,$_GET);
+$_POST = array_map(mysql_real_escape_string,$_POST);
 if(array_key_exists('_submit_check', $_POST)){
 	//insert stuff in to the database
 	$names = array_keys($_POST);
 	$result = "";
-	for($i = 1; $i < count($_POST);$i++){
-		if($names[$i] != "name"){
-
-			$result .= $names[$i]."=";
-			if($_POST[$names[$i]] != "")
-				$result .= "\"".$_POST[$names[$i]]."\", ";
-			else
-				$result .= "NULL, ";
-		}
+	for($i = 1; $i < 2/*count($_POST)*/;$i++){
+		$result .= $names[$i]."=";
+		if($_POST[$names[$i]] != "")
+			$result .= "'".$_POST[$names[$i]]."', ";
+		else
+			$result .= "NULL, ";
 	}
 	$result = substr($result,0,strlen($resut)-2);	
-	$sql = "UPDATE queue_table SET  ".$result." WHERE name=\"".$_POST[name]."\"";
-	echo $sql;
-	$result = mysql_result($sql,$link) or die(mysql_error());
+	$sql = "UPDATE queue_table SET ".$result." WHERE name='".$_GET[name]."'";
+	$result = mysql_query($sql,$link) or die(mysql_error());
 	exit;
 }
 
-$_POST = array_map(mysql_real_escape_string,$_POST);
-$_GET = array_map(mysql_real_escape_string,$_GET);
 $name = $_GET[name];
 
 $sql = 'SELECT * FROM queue_table WHERE name=\''.$name.'\' limit 1';
@@ -80,7 +76,7 @@ $result = mysql_query($sql,$link) or die(mysql_error());
 $row = mysql_fetch_assoc($result);
 ?>
 
-<form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+<form method="POST" action="<?php echo $_SERVER['PHP_SELF']."?name=".$_GET[name]; ?>">
 <input type="hidden" name="_submit_check" value="1">
 <p>Basic Configuration Options</p>
 <table class="" align="center" border="0" cellpadding="2" cellspacing="0">
