@@ -31,14 +31,14 @@ function toggle(name){
 	var opened = "./images/open.png";
 	var closed = "./images/closed.png";
 
-	var element = document.getElementsByName(name);
+	var element = document.getElementById(name);
 	var img = document.getElementsByName("img_"+name);
-	if(element[0].style.display == "none"){
+	if(element.style.display == "none"){
 		img[0].src = opened;
-		element[0].style.display = "";
+		element.style.display = "";
 	}else{
 		img[0].src = closed;
-		element[0].style.display = "none";
+		element.style.display = "none";
 	}
 }
 //-->
@@ -50,6 +50,27 @@ $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'
 $result = mysql_query($sql,$link) or die(mysql_error());
 $campaigngroupid = mysql_result($result,0,'campaigngroupid');
 
+if(array_key_exists('_submit_check', $_POST)){
+	//insert stuff in to the database
+	$names = array_keys($_POST);
+	$result = "";
+	for($i = 1; $i < count($_POST);$i++){
+		if($names[$i] != "name"){
+
+			$result .= $names[$i]."=";
+			if($_POST[$names[$i]] != "")
+				$result .= "\"".$_POST[$names[$i]]."\", ";
+			else
+				$result .= "NULL, ";
+		}
+	}
+	$result = substr($result,0,strlen($resut)-2);	
+	$sql = "UPDATE queue_table SET  ".$result." WHERE name=\"".$_POST[name]."\"";
+	echo $sql;
+	$result = mysql_result($sql,$link) or die(mysql_error());
+	exit;
+}
+
 $_POST = array_map(mysql_real_escape_string,$_POST);
 $_GET = array_map(mysql_real_escape_string,$_GET);
 $name = $_GET[name];
@@ -58,15 +79,18 @@ $sql = 'SELECT * FROM queue_table WHERE name=\''.$name.'\' limit 1';
 $result = mysql_query($sql,$link) or die(mysql_error());
 $row = mysql_fetch_assoc($result);
 ?>
+
+<form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+<input type="hidden" name="_submit_check" value="1">
 <p>Basic Configuration Options</p>
 <table class="" align="center" border="0" cellpadding="2" cellspacing="0">
 <tr class="tborder2"><td class="thead">Name</td><td><input type="text" value="<?echo $row[name];?>" name="name"></td></tr>
 <tr class="tborderx"><td class="thead">Strategy</td><td><?echo make_strategy_selector($row[strategy],"strategy")?></td></tr>
-<tr class="tborder2"><td class="thead">Timeout</td><td><input type="text" value="<?echo $row[timeout]?>" name="timout"></td></tr>
+<tr class="tborder2"><td class="thead">Timeout</td><td><input type="text" value="<?echo $row[timeout]?>" name="timeout"></td></tr>
 </table>
 
 <div onClick="toggle('intermediate')"><p>Intermediate Configuration Options <img src="./images/closed.png" name="img_intermediate"></p></div>
-<table class="" align="center" border="0" cellpadding="2" cellspacing="0" name="intermediate" style="display:none">
+<table class="" align="center" border="0" cellpadding="2" cellspacing="0" id="intermediate" style="display:none">
 <tr class="tborder2"><td class="thead">Music on Hold</td><td><input type="text" value="<?echo $row[musiconhold];?>" name="musiconhold"></td><td><p onClick="resetToDefault('musiconhold','');">default</p></td></tr>
 <tr class="tborderx"><td class="thead">Announce</td><td><input type="text" value="<?echo $row[announce];?>" name="announce"></td><td><p
 onClick="resetToDefault('announce','');">default</p></td></tr>
@@ -80,32 +104,38 @@ onClick="resetToDefault('context','');">default</p></td></tr>
 </table>
 
 <div onClick="toggle('advanced')"><p>Advanced Configuration Options <img src="./images/closed.png" name="img_advanced"></p></div>
-
-<table class="" align="center" border="0" cellpadding="2" cellspacing"0" name="advanced" style="display:none">
-<tr class="tborderx"><td class="thead" colspan=3><p>Sound Files</p></td></tr>
+<div id="advanced" style="display:none">
+<p onClick="toggle('sound');">Sound Files <img src="./images/closed.png" name="img_sound"></p>
+<table class="" align="center" border="0" cellpadding="2" cellspacing"0" id="sound" style="display:none">
 <tr class="tborderx"><td class="thead">You are next</td><td><input type="text" value="<?echo $row[queue_youarenext];?>" name="queue_youarenext"></td><td><p onClick="resetToDefault('queue_youarenext','');">default</p></td></tr>
 <tr class="tborder2"><td class="thead">There are...</td><td><input type="text" value="<?echo $row[queue_thereare];?>" name="queue_thereare"></td><td><p onClick="resetToDefault('queue_thereare','');">default</p></td></tr>
 <tr class="tborderx"><td class="thead">Calls waiting</td><td><input type="text" value="<?echo $row[queue_callswaiting];?>" name="queue_callswaiting"</td><td><p onClick="resetToDefault('queue_callswaiting','');">default</p></td></tr>
-<tr class="tborder2"><td class="thead">Hold time</td><td><input type="text" value="<?echo $row[queue_holdtime];?>" name="queue_holdtime"></td><td><p onClick="resetToDefault('queue_holdtime','');">default</p></td></tr>
+<tr class="tbordeR2"><td class="thead">Hold time</td><td><input type="text" value="<?echo $row[queue_holdtime];?>" name="queue_holdtime"></td><td><p onClick="resetToDefault('queue_holdtime','');">default</p></td></tr>
 <tr class="tborderx"><td class="thead">Minutes</td><td><input type="text" value="<?echo $row[queue_minutes];?>" name="queue_minutes"></td><td><p onClick="resetToDefault('queue_minutes','');">default</p></td></tr>
 <tr class="tborder2"><td class="thead">Seconds</td><td><input type="text" value="<?echo $row[queue_seconds];?>" name="queue_seconds"></td><td><p onClick="resetToDefault('queue_seconds','');">default</p></td></tr>
 <tr class="tborderx"><td class="thead">Less than...</td><td><input type="text" value="<?echo $row[queue_lessthan];?>" name="queue_lessthan"></td><td><p onClick="resetToDefault('queue_lessthan','');">default</p></td></tr>
 <tr class="tborder2"><td class="thead">Thank you</td><td><input type="text" value="<?echo $row[queue_thankyou];?>" name="queue_thankyou"></td><td><p onClick="resetToDefault('queue_thankyou','');">default</p></td></tr>
+</table>
 
-<tr class="tborderx"><td class="thead" colspan=3><p>Recording Options</p></td></tr>
+<p onClick="toggle('recording');">Recording Options <img src="./images/closed.png" name="img_recording"></p>
+<table class="" align="center" border="0" cellpadding="2" cellspacing"0" id="recording" style="display:none">
 <tr class="tborderx"><td class="thead">Monitor Join</td><td><input type="text" value="<?echo $row[monitor_join];?>" name="monitor_join"></td><td><p onClick="resetToDefault('monitor_join','');">default</p></td></tr>
 <tr class="tborder2"><td class="thead">Monitor Format</td><td><input type="text" value="<?echo $row[monitor_format];?>" name="monitor_format"></td><td><p onClick="resetToDefault('monitor_format','');">default</p></tr>
 <tr class="tborderx"><td class="thead">Event Member Status</td><td><input type="text" value="<?echo $row[eventmemberstatus];?>" name="eventmemberstatus"></td><td><p onClick="resetToDefault('eventmemberstatus','');">default</p></td></tr>
 <tr class="tborder2"><td class="thead">Event When Called</td><td><input type="text" value="<?echo $row[eventwhencalled];?>" name="eventwhencalled"></td><td><p onClick="resetToDefault('eventwhencalled','');">default</p></tr>
+</table>
 
-<tr class="tborderx"><td class="thead" colspan=3><p>Queue Performance</p></td></tr>
+<p onClick="toggle('queue');">Queue Performance <img src="./images/closed.png" name="img_queue"></p>
+<table class="" align="center" border="0" cellpadding="2" cellspacing"0" id="queue" style="display:none">
 <tr class="tborderx"><td class="thead">Join when Empty</td><td><input type="text" value="<?echo $row[joinempty];?>" name="joinempty"></td><td><p onClick="resetToDefault('joinempty','');">default</p></td></tr>
 <tr class="tborder2"><td class="thead">Leave When Empty</td><td><input type="text" value="<?echo $row[leavewhenempty];?>" name="leavewhenempty"></td><td><p onClick="resetToDefault('leavewhenempty','');">default</p></tr>
 <tr class="tborderx"><td class="thead">Report Hold Time</td><td><input type="text" value="<?echo $row[reportholdtime];?>" name="reportholdtime"></td><td><p onClick="resetToDefault('reportholdtime','');">default</p></td></tr>
 <tr class="tborder2"><td class="thead">Weight</td><td><input type="text" value="<?echo $row[weight];?>" name="weight"></td><td><p onClick="resetToDefault('weight','');">default</p></tr>
 <tr class="tborderx"><td class="thead">Member Delay</td><td><input type="text" value="<?echo $row[memberdelay];?>" name="memberdelay"></td><td><p onClick="resetToDefault('memberdelay','');">default</p></tr>
 </table>
-
+</div>
+<input type="submit">
+</form>
 <?php
 require "footer.php";
 ?>

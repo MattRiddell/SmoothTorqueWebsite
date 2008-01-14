@@ -188,15 +188,6 @@ countx   = dialing
 
 
 <TD>
-<?
-if ($user!="demo"){
-echo "<A title=\"Delete this campaign\" HREF=\"deletecampaign.php?id=".$row[id]."\"><IMG SRC=\"/images/delete.png\" BORDER=\"0\"></A>";
-} else {
-echo "<A title=\"Delete this campaign\" HREF=\"#\"><IMG SRC=\"/images/delete.png\" BORDER=\"0\"></A>";
-}
-?>
-</TD>
-<TD>
 
 <?
 
@@ -243,16 +234,28 @@ if ($status==101){
 }
 ?>
 </td>
-<td>
+<TD>
 <?if ($backend == 0) {?>
 <a title="View the graph for this campaign" href="test.php?id=<?echo $row[id];?>" class="abcd"><img src="/images/chart_curve.png" border="0"></a>&nbsp;
 <?}?>
+<?
+if ($user!="demo"){
+echo "<A title=\"Delete this campaign\" HREF=\"deletecampaign.php?id=".$row[id]."\"><IMG SRC=\"/images/delete.png\" BORDER=\"0\"></A>";
+} else {
+echo "<A title=\"Delete this campaign\" HREF=\"#\"><IMG SRC=\"/images/delete.png\" BORDER=\"0\"></A>";
+}
+?>
+</TD>
+
+<td>
+
 <img src="/images/percentImage.png" title="<?echo
 $perc;?>% of staff are busy"
 class="percentImage"
 style="background-position: -<?echo 119-($perc*1.2); ?>px 0pt;" border="0" />
 
 </td>
+
 <td></td>
 </TR>
 
