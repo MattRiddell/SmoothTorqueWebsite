@@ -127,8 +127,8 @@ $row = mysql_fetch_assoc($result);
 <tr class="tborder2"><td class="thead">Timeout</td><td><input type="text" value="<?echo $row[timeout]?>" name="timeout"></td></tr>
 </table>
 
-<div onClick="toggle('intermediate')"><p>Intermediate Configuration Options <img src="./images/closed.png" name="img_intermediate"></p></div>
-<table class="" align="center" border="0" cellpadding="2" cellspacing="0" id="intermediate" style="display:none">
+<div onClick="toggle('misc')"><p>Miscellaneous Configuration Options <img src="./images/closed.png" name="img_misc"></p></div>
+<table class="" align="center" border="0" cellpadding="2" cellspacing="0" id="misc" style="display:none">
 <tr class="tborder2"><td class="thead">Music on Hold</td><td><input type="text" value="<?echo $row[musiconhold];?>" name="musiconhold"></td><td><p onClick="resetToDefault('musiconhold','');">default</p></td></tr>
 <tr class="tborderx"><td class="thead">Announce</td><td><input type="text" value="<?echo $row[announce];?>" name="announce"></td><td><p
 onClick="resetToDefault('announce','');">default</p></td></tr>
@@ -141,8 +141,6 @@ onClick="resetToDefault('context','');">default</p></td></tr>
 <tr class="tborder2"><td class="thead">Max Queue length</td><td><input type="text" value="<?echo $row[maxlen];?>" name="maxlen"></td><td><p onClick="resetToDefault('maxlen','');">default</p></tr>
 </table>
 
-<div onClick="toggle('advanced')"><p>Advanced Configuration Options <img src="./images/closed.png" name="img_advanced"></p></div>
-<div id="advanced" style="display:none">
 <p onClick="toggle('sound');">Sound Files <img src="./images/closed.png" name="img_sound"></p>
 <table class="" align="center" border="0" cellpadding="2" cellspacing"0" id="sound" style="display:none">
 <tr class="tborderx"><td class="thead">You are next</td><td><input type="text" value="<?echo $row[queue_youarenext];?>" name="queue_youarenext"></td><td><p onClick="resetToDefault('queue_youarenext','');">default</p></td></tr>
@@ -171,7 +169,6 @@ onClick="resetToDefault('context','');">default</p></td></tr>
 <tr class="tborder2"><td class="thead">Weight</td><td><input type="text" value="<?echo $row[weight];?>" name="weight"></td><td><p onClick="resetToDefault('weight','');">default</p></tr>
 <tr class="tborderx"><td class="thead">Member Delay</td><td><input type="text" value="<?echo $row[memberdelay];?>" name="memberdelay"></td><td><p onClick="resetToDefault('memberdelay','');">default</p></tr>
 </table>
-</div>
 <input type="submit">
 </form>
 <?php
