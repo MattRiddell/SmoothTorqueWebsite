@@ -155,17 +155,17 @@ onClick="resetToDefault('context','');">default</p></td></tr>
 
 <p onClick="toggle('recording');">Recording Options <img src="./images/closed.png" name="img_recording"></p>
 <table class="" align="center" border="0" cellpadding="2" cellspacing"0" id="recording" style="display:none">
-<tr class="tborderx"><td class="thead">Monitor Join</td><td><input type="text" value="<?echo $row[monitor_join];?>" name="monitor_join" maxlength="<?echo $is_int[monitor_join][1]?>"></td><td><p onClick="resetToDefault('monitor_join','');">default</p></td></tr>
+<tr class="tborderx"><td class="thead">Monitor Join</td><td><input type="checkbox" <?echo ($row[monitor_join]?"checked":"");?> name="monitor_join" maxlength="<?echo $is_int[monitor_join][1]?>"></td><td><p onClick="resetToDefault('monitor_join','');">default</p></td></tr>
 <tr class="tborder2"><td class="thead">Monitor Format</td><td><input type="text" value="<?echo $row[monitor_format];?>" name="monitor_format" maxlength="<?echo $is_int[monitor_format][1]?>"></td><td><p onClick="resetToDefault('monitor_format','');">default</p></tr>
-<tr class="tborderx"><td class="thead">Event Member Status</td><td><input type="text" value="<?echo $row[eventmemberstatus];?>" name="eventmemberstatus maxlength="<?echo $is_int[eventmemberstatus][1]?>""></td><td><p onClick="resetToDefault('eventmemberstatus','');">default</p></td></tr>
-<tr class="tborder2"><td class="thead">Event When Called</td><td><input type="text" value="<?echo $row[eventwhencalled];?>" name="eventwhencalled" maxlength="<?echo $is_int[eventwhencalled][1]?>"></td><td><p onClick="resetToDefault('eventwhencalled','');">default</p></tr>
+<tr class="tborderx"><td class="thead">Event Member Status</td><td><input type="checkbox" <?echo ($row[eventmemberstatus]?"checked":"");?> name="eventmemberstatus maxlength="<?echo $is_int[eventmemberstatus][1]?>""></td><td><p onClick="resetToDefault('eventmemberstatus','');">default</p></td></tr>
+<tr class="tborder2"><td class="thead">Event When Called</td><td><input type="checkbox" <?echo ($row[eventwhencalled]?"checked":"");?> name="eventwhencalled" maxlength="<?echo $is_int[eventwhencalled][1]?>"></td><td><p onClick="resetToDefault('eventwhencalled','');">default</p></tr>
 </table>
 
 <p onClick="toggle('queue');">Queue Performance <img src="./images/closed.png" name="img_queue"></p>
 <table class="" align="center" border="0" cellpadding="2" cellspacing"0" id="queue" style="display:none">
 <tr class="tborderx"><td class="thead">Join when Empty</td><td><input type="text" value="<?echo $row[joinempty];?>" name="joinempty" maxlength="<?echo $is_int[joinempty][1]?>"></td><td><p onClick="resetToDefault('joinempty','');">default</p></td></tr>
-<tr class="tborder2"><td class="thead">Leave When Empty</td><td><input type="text" value="<?echo $row[leavewhenempty];?>" name="leavewhenempty" maxlength="<?echo $is_int[leavewhenempty][1]?>"></td><td><p onClick="resetToDefault('leavewhenempty','');">default</p></tr>
-<tr class="tborderx"><td class="thead">Report Hold Time</td><td><input type="text" value="<?echo $row[reportholdtime];?>" name="reportholdtime" maxlength="<?echo $is_int[reportholdtime][1]?>"></td><td><p onClick="resetToDefault('reportholdtime','');">default</p></td></tr>
+<tr class="tborder2"><td class="thead">Leave When Empty</td><td><input type="checkbox" <?echo ($row[leavewhenempty]?"checked":"");?> name="leavewhenempty" maxlength="<?echo $is_int[leavewhenempty][1]?>"></td><td><p onClick="resetToDefault('leavewhenempty','');">default</p></tr>
+<tr class="tborderx"><td class="thead">Report Hold Time</td><td><input type="checkbox" <?echo ($row[reportholdtime]?"checked":"");?>" name="reportholdtime" maxlength="<?echo $is_int[reportholdtime][1]?>"></td><td><p onClick="resetToDefault('reportholdtime','');">default</p></td></tr>
 <tr class="tborder2"><td class="thead">Weight</td><td><input type="text" value="<?echo $row[weight];?>" name="weight" maxlength="<?echo $is_int[weight][1]?>">
 </td><td><p onClick="resetToDefault('weight','');">default</p></tr>
 <tr class="tborderx"><td class="thead">Member Delay</td><td><input type="text" value="<?echo $row[memberdelay];?>" name="memberdelay" maxlength="<?echo $is_int[memberdelay][1]?>"></td><td><p onClick="resetToDefault('memberdelay','');">default</p></tr>
