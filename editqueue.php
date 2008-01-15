@@ -122,52 +122,53 @@ $row = mysql_fetch_assoc($result);
 <input type="hidden" name="_submit_check" value="1">
 <p>Basic Configuration Options</p>
 <table class="" align="center" border="0" cellpadding="2" cellspacing="0">
-<tr class="tborder2"><td class="thead" title="The name of the queue">Name</td><td><input type="text" value="<?echo $row[name];?>" name="name"></td></tr>
+<tr class="tborder2"><td class="thead" title="The name of the queue">Name</td><td><input type="text" value="<?echo $row[name];?>" name="name" maxlength="<?echo $is_int[name][1]?>"></td></tr>
 <tr class="tborderx"><td class="thead" title="Calls are distributed among members handling a queue with one of several strategies">Strategy</td><td><?echo make_strategy_selector($row[strategy],"strategy")?></td></tr>
-<tr class="tborder2"><td class="thead">Timeout</td><td><input type="text" value="<?echo $row[timeout]?>" name="timeout"></td></tr>
+<tr class="tborder2"><td class="thead">Timeout</td><td><input type="text" value="<?echo $row[timeout]?>" name="timeout" maxlength="<?echo $is_int[timeout][1]?>"></td></tr>
 </table>
 
 <div onClick="toggle('misc')"><p>Miscellaneous Configuration Options <img src="./images/closed.png" name="img_misc"></p></div>
 <table class="" align="center" border="0" cellpadding="2" cellspacing="0" id="misc" style="display:none">
-<tr class="tborder2"><td class="thead">Music on Hold</td><td><input type="text" value="<?echo $row[musiconhold];?>" name="musiconhold"></td><td><p onClick="resetToDefault('musiconhold','');">default</p></td></tr>
-<tr class="tborderx"><td class="thead">Announce</td><td><input type="text" value="<?echo $row[announce];?>" name="announce"></td><td><p
+<tr class="tborder2"><td class="thead">Music on Hold</td><td><input type="text" value="<?echo $row[musiconhold];?>" name="musiconhold" maxlength="<?echo $is_int[musiconhold][1]?>"></td><td><p onClick="resetToDefault('musiconhold','');">default</p></td></tr>
+<tr class="tborderx"><td class="thead">Announce</td><td><input type="text" value="<?echo $row[announce];?>" name="announce" maxlength="<?echo $is_int[announce][1]?>"></td><td><p
 onClick="resetToDefault('announce','');">default</p></td></tr>
-<tr class="tborder2"><td class="thead">Context</td><td><input type="text" value="<?echo $row[context];?>" name="context"></td><td><p
+<tr class="tborder2"><td class="thead">Context</td><td><input type="text" value="<?echo $row[context];?>" name="context"  maxlength="<?echo $is_int[context][1]?>"></td><td><p
 onClick="resetToDefault('context','');">default</p></td></tr>
-<tr class="tborder2"><td class="thead">Retry</td><td><input type="text" value="<?echo $row[retry];?>" name="retry"></td><td><p onClick="resetToDefault('retry','');">default</p></td></tr>
-<tr class="tborderx"><td class="thead">Service Level</td><td><input type="text" value="<?echo $row[servicelevel];?>" name="servicelevel"></td><td><p onClick="resetToDefault('servicelevel','');">default</p></td></tr>
-<tr class="tborder2"><td class="thead">Announce Frequency</td><td><input type="text" value="<?echo $row[announce_frequency];?>" name="announce_frequency"></td><td><p onClick="resetToDefault('announce_frequency','');">default</p></tr>
-<tr class="tborderx"><td class="thead">Announce Holdtime</td><td><input type="text" value="<?echo $row[announce_holdtime];?>" name="announce_holdtime"></td><td><p onClick="resetToDefault('announce_holdtime','');">default</p></tr>
-<tr class="tborder2"><td class="thead">Max Queue length</td><td><input type="text" value="<?echo $row[maxlen];?>" name="maxlen"></td><td><p onClick="resetToDefault('maxlen','');">default</p></tr>
+<tr class="tborder2"><td class="thead">Retry</td><td><input type="text" value="<?echo $row[retry];?>" name="retry"  maxlength="<?echo $is_int[retry][1]?>"></td><td><p onClick="resetToDefault('retry','');">default</p></td></tr>
+<tr class="tborderx"><td class="thead">Service Level</td><td><input type="text" value="<?echo $row[servicelevel];?>" name="servicelevel"  maxlength="<?echo $is_int[servicelevel][1]?>"></td><td><p onClick="resetToDefault('servicelevel','');">default</p></td></tr>
+<tr class="tborder2"><td class="thead">Announce Frequency</td><td><input type="text" value="<?echo $row[announce_frequency];?>" name="announce_frequency"  maxlength="<?echo $is_int[accounce_frequency][1]?>"></td><td><p onClick="resetToDefault('announce_frequency','');">default</p></tr>
+<tr class="tborderx"><td class="thead">Announce Holdtime</td><td><input type="text" value="<?echo $row[announce_holdtime];?>" name="announce_holdtime"  maxlength="<?echo $is_int[announce_holdtime][1]?>"></td><td><p onClick="resetToDefault('announce_holdtime','');">default</p></tr>
+<tr class="tborder2"><td class="thead">Max Queue length</td><td><input type="text" value="<?echo $row[maxlen];?>" name="maxlen"  maxlength="<?echo $is_int[maxlen][1]?>"></td><td><p onClick="resetToDefault('maxlen','');">default</p></tr>
 </table>
 
 <p onClick="toggle('sound');">Sound Files <img src="./images/closed.png" name="img_sound"></p>
 <table class="" align="center" border="0" cellpadding="2" cellspacing"0" id="sound" style="display:none">
-<tr class="tborderx"><td class="thead">You are next</td><td><input type="text" value="<?echo $row[queue_youarenext];?>" name="queue_youarenext"></td><td><p onClick="resetToDefault('queue_youarenext','');">default</p></td></tr>
-<tr class="tborder2"><td class="thead">There are...</td><td><input type="text" value="<?echo $row[queue_thereare];?>" name="queue_thereare"></td><td><p onClick="resetToDefault('queue_thereare','');">default</p></td></tr>
-<tr class="tborderx"><td class="thead">Calls waiting</td><td><input type="text" value="<?echo $row[queue_callswaiting];?>" name="queue_callswaiting"</td><td><p onClick="resetToDefault('queue_callswaiting','');">default</p></td></tr>
-<tr class="tbordeR2"><td class="thead">Hold time</td><td><input type="text" value="<?echo $row[queue_holdtime];?>" name="queue_holdtime"></td><td><p onClick="resetToDefault('queue_holdtime','');">default</p></td></tr>
-<tr class="tborderx"><td class="thead">Minutes</td><td><input type="text" value="<?echo $row[queue_minutes];?>" name="queue_minutes"></td><td><p onClick="resetToDefault('queue_minutes','');">default</p></td></tr>
-<tr class="tborder2"><td class="thead">Seconds</td><td><input type="text" value="<?echo $row[queue_seconds];?>" name="queue_seconds"></td><td><p onClick="resetToDefault('queue_seconds','');">default</p></td></tr>
-<tr class="tborderx"><td class="thead">Less than...</td><td><input type="text" value="<?echo $row[queue_lessthan];?>" name="queue_lessthan"></td><td><p onClick="resetToDefault('queue_lessthan','');">default</p></td></tr>
-<tr class="tborder2"><td class="thead">Thank you</td><td><input type="text" value="<?echo $row[queue_thankyou];?>" name="queue_thankyou"></td><td><p onClick="resetToDefault('queue_thankyou','');">default</p></td></tr>
+<tr class="tborderx"><td class="thead">You are next</td><td><input type="text" value="<?echo $row[queue_youarenext];?>" name="queue_youarenext"  maxlength="<?echo $is_int[queue_youarenext][1]?>"></td><td><p onClick="resetToDefault('queue_youarenext','');">default</p></td></tr>
+<tr class="tborder2"><td class="thead">There are...</td><td><input type="text" value="<?echo $row[queue_thereare];?>" name="queue_thereare" maxlength="<?echo $is_int[queue_thereare][1]?>"></td><td><p onClick="resetToDefault('queue_thereare','');">default</p></td></tr>
+<tr class="tborderx"><td class="thead">Calls waiting</td><td><input type="text" value="<?echo $row[queue_callswaiting];?>" name="queue_callswaiting" maxlength="<?echo $is_int[queue_callswaiting][1]?>"></td><td><p onClick="resetToDefault('queue_callswaiting','');">default</p></td></tr>
+<tr class="tbordeR2"><td class="thead">Hold time</td><td><input type="text" value="<?echo $row[queue_holdtime];?>" name="queue_holdtime" maxlength="<?echo $is_int[queue_holdtime][1]?>"></td><td><p onClick="resetToDefault('queue_holdtime','');">default</p></td></tr>
+<tr class="tborderx"><td class="thead">Minutes</td><td><input type="text" value="<?echo $row[queue_minutes];?>" name="queue_minutes" maxlength="<?echo $is_int[queue_minutes][1]?>"></td><td><p onClick="resetToDefault('queue_minutes','');">default</p></td></tr>
+<tr class="tborder2"><td class="thead">Seconds</td><td><input type="text" value="<?echo $row[queue_seconds];?>" name="queue_seconds" maxlength="<?echo $is_int[queue_seconds][1]?>"></td><td><p onClick="resetToDefault('queue_seconds','');">default</p></td></tr>
+<tr class="tborderx"><td class="thead">Less than...</td><td><input type="text" value="<?echo $row[queue_lessthan];?>" name="queue_lessthan" maxlength="<?echo $is_int[queue_lessthan][1]?>"></td><td><p onClick="resetToDefault('queue_lessthan','');">default</p></td></tr>
+<tr class="tborder2"><td class="thead">Thank you</td><td><input type="text" value="<?echo $row[queue_thankyou];?>" name="queue_thankyou" maxlength="<?echo $is_int[queue_thankyou][1]?>"></td><td><p onClick="resetToDefault('queue_thankyou','');">default</p></td></tr>
 </table>
 
 <p onClick="toggle('recording');">Recording Options <img src="./images/closed.png" name="img_recording"></p>
 <table class="" align="center" border="0" cellpadding="2" cellspacing"0" id="recording" style="display:none">
-<tr class="tborderx"><td class="thead">Monitor Join</td><td><input type="text" value="<?echo $row[monitor_join];?>" name="monitor_join"></td><td><p onClick="resetToDefault('monitor_join','');">default</p></td></tr>
-<tr class="tborder2"><td class="thead">Monitor Format</td><td><input type="text" value="<?echo $row[monitor_format];?>" name="monitor_format"></td><td><p onClick="resetToDefault('monitor_format','');">default</p></tr>
-<tr class="tborderx"><td class="thead">Event Member Status</td><td><input type="text" value="<?echo $row[eventmemberstatus];?>" name="eventmemberstatus"></td><td><p onClick="resetToDefault('eventmemberstatus','');">default</p></td></tr>
-<tr class="tborder2"><td class="thead">Event When Called</td><td><input type="text" value="<?echo $row[eventwhencalled];?>" name="eventwhencalled"></td><td><p onClick="resetToDefault('eventwhencalled','');">default</p></tr>
+<tr class="tborderx"><td class="thead">Monitor Join</td><td><input type="text" value="<?echo $row[monitor_join];?>" name="monitor_join" maxlength="<?echo $is_int[monitor_join][1]?>"></td><td><p onClick="resetToDefault('monitor_join','');">default</p></td></tr>
+<tr class="tborder2"><td class="thead">Monitor Format</td><td><input type="text" value="<?echo $row[monitor_format];?>" name="monitor_format" maxlength="<?echo $is_int[monitor_format][1]?>"></td><td><p onClick="resetToDefault('monitor_format','');">default</p></tr>
+<tr class="tborderx"><td class="thead">Event Member Status</td><td><input type="text" value="<?echo $row[eventmemberstatus];?>" name="eventmemberstatus maxlength="<?echo $is_int[eventmemberstatus][1]?>""></td><td><p onClick="resetToDefault('eventmemberstatus','');">default</p></td></tr>
+<tr class="tborder2"><td class="thead">Event When Called</td><td><input type="text" value="<?echo $row[eventwhencalled];?>" name="eventwhencalled" maxlength="<?echo $is_int[eventwhencalled][1]?>"></td><td><p onClick="resetToDefault('eventwhencalled','');">default</p></tr>
 </table>
 
 <p onClick="toggle('queue');">Queue Performance <img src="./images/closed.png" name="img_queue"></p>
 <table class="" align="center" border="0" cellpadding="2" cellspacing"0" id="queue" style="display:none">
-<tr class="tborderx"><td class="thead">Join when Empty</td><td><input type="text" value="<?echo $row[joinempty];?>" name="joinempty"></td><td><p onClick="resetToDefault('joinempty','');">default</p></td></tr>
-<tr class="tborder2"><td class="thead">Leave When Empty</td><td><input type="text" value="<?echo $row[leavewhenempty];?>" name="leavewhenempty"></td><td><p onClick="resetToDefault('leavewhenempty','');">default</p></tr>
-<tr class="tborderx"><td class="thead">Report Hold Time</td><td><input type="text" value="<?echo $row[reportholdtime];?>" name="reportholdtime"></td><td><p onClick="resetToDefault('reportholdtime','');">default</p></td></tr>
-<tr class="tborder2"><td class="thead">Weight</td><td><input type="text" value="<?echo $row[weight];?>" name="weight"></td><td><p onClick="resetToDefault('weight','');">default</p></tr>
-<tr class="tborderx"><td class="thead">Member Delay</td><td><input type="text" value="<?echo $row[memberdelay];?>" name="memberdelay"></td><td><p onClick="resetToDefault('memberdelay','');">default</p></tr>
+<tr class="tborderx"><td class="thead">Join when Empty</td><td><input type="text" value="<?echo $row[joinempty];?>" name="joinempty" maxlength="<?echo $is_int[joinempty][1]?>"></td><td><p onClick="resetToDefault('joinempty','');">default</p></td></tr>
+<tr class="tborder2"><td class="thead">Leave When Empty</td><td><input type="text" value="<?echo $row[leavewhenempty];?>" name="leavewhenempty" maxlength="<?echo $is_int[leavewhenempty][1]?>"></td><td><p onClick="resetToDefault('leavewhenempty','');">default</p></tr>
+<tr class="tborderx"><td class="thead">Report Hold Time</td><td><input type="text" value="<?echo $row[reportholdtime];?>" name="reportholdtime" maxlength="<?echo $is_int[reportholdtime][1]?>"></td><td><p onClick="resetToDefault('reportholdtime','');">default</p></td></tr>
+<tr class="tborder2"><td class="thead">Weight</td><td><input type="text" value="<?echo $row[weight];?>" name="weight" maxlength="<?echo $is_int[weight][1]?>">
+</td><td><p onClick="resetToDefault('weight','');">default</p></tr>
+<tr class="tborderx"><td class="thead">Member Delay</td><td><input type="text" value="<?echo $row[memberdelay];?>" name="memberdelay" maxlength="<?echo $is_int[memberdelay][1]?>"></td><td><p onClick="resetToDefault('memberdelay','');">default</p></tr>
 </table>
 <input type="submit">
 </form>
