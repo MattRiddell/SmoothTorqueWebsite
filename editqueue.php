@@ -4,40 +4,40 @@ require "header_queue.php";
 
 
 $is_int = array( 
- "name" => 0,
- "musiconhold" => 0,
- "announce" =>0,
- "context"=>0,
- "timeout"=>1,
- "monitor_join"=>1,
- "monitor_format"=>0,
- "queue_youarenext"=>0,
- "queue_thereare"=>0,
- "queue_callswaiting"=>0,
- "queue_holdtime"=>0,
- "queue_minutes"=>0,
- "queue_seconds"=>0,
- "queue_lessthan"=>0,
- "queue_thankyou"=>0,
- "queue_reporthold"=>0,
- "announce_frequency"=>1,
- "announce_round_seconds"=>1,
- "announce_holdtime"=>0,
- "retry"=>1,
- "wrapuptime"=>1,
- "maxlen"=>1,
- "servicelevel"=>1,
- "strategy"=>0,
- "joinempty"=>0,
- "leavewhenempty"=>0,
- "eventmemberstatus"=>1,
- "eventwhencalled"=>1,
- "reportholdtime"=>1,
- "memberdelay"=>1,
- "weight"=>1,
- "timeoutrestart"=>1,
- "periodic_announce"=>0,
- "periodic_announce_frequency"=>1
+ "name" => array(0,128),
+ "musiconhold" => array(0,128),
+ "announce" => array(0,128),
+ "context"=> array(0,128),
+ "timeout"=> array(1,11),
+ "monitor_join"=> array(1,1),
+ "monitor_format"=> array(0,128),
+ "queue_youarenext"=> array(0,128),
+ "queue_thereare"=> array(0,128),
+ "queue_callswaiting"=> array(0,128),
+ "queue_holdtime"=> array(0,128),
+ "queue_minutes"=> array(0,128),
+ "queue_seconds"=> array(0,128),
+ "queue_lessthan"=> array(0,128),
+ "queue_thankyou"=> array(0,128),
+ "queue_reporthold"=> array(0,128),
+ "announce_frequency"=> array(1,11),
+ "announce_round_seconds"=> array(1,11),
+ "announce_holdtime"=> array(0,128),
+ "retry"=> array(1,11),
+ "wrapuptime"=> array(1,11),
+ "maxlen"=> array(1,11),
+ "servicelevel"=>array(1,11),
+ "strategy"=>array(0,128),
+ "joinempty"=> array(0,128),
+ "leavewhenempty"=> array(0,128),
+ "eventmemberstatus"=> array(1,128),
+ "eventwhencalled"=> array(1,128),
+ "reportholdtime"=> array(1,11),
+ "memberdelay"=> array(1,11),
+ "weight"=> array(1,11),
+ "timeoutrestart"=> array(1,11),
+ "periodic_announce"=> array(0,50),
+ "periodic_announce_frequency"=> array(1,11)
 );
 
 
@@ -47,12 +47,12 @@ $is_int = array(
 */
 function make_strategy_selector($strategy, $name){
 	$result = "<select name=\"".$name."\">\n
-		<option value=\"ringall\"".($strategy=="ringall"?" selected":"").">Ring all</option>\n
-		<option value=\"roundrobin\"".($strategy=="roundrobin"?" selected":"").">Round Robin</option>\n
-		<option value=\"leastrecent\"".($strategy=="leastrecent"?" selected":"").">Least Recent</option>\n
-		<option value=\"fewestcalls\"".($strategy=="fewestcalls"?" selected":"").">Fewest Calls</option>\n
-		<option value=\"random\"".($strategy=="random"?" selected":"").">Random</option>\n
-		<option value=\"rrmemory\"".($strategy=="rrmemory"?" selected":"").">Round Robin with Memory</option>\n
+		<option value=\"ringall\"".($strategy=="ringall"?" selected":"")." title=\"Ring all channels until one answers.\">Ring all</option>\n
+		<option value=\"roundrobin\"".($strategy=="roundrobin"?" selected":"")." title=\"Take turns ringing each available interface.\">Round Robin</option>\n
+		<option value=\"leastrecent\"".($strategy=="leastrecent"?" selected":"")." title=\"Use the interface which was least recently called by this queue.\">Least Recent</option>\n
+		<option value=\"fewestcalls\"".($strategy=="fewestcalls"?" selected":"")." title=\"Ring the one with the fewest completed calls from this queue.\">Fewest Calls</option>\n
+		<option value=\"random\"".($strategy=="random"?" selected":"")." title=\"Ring a random interface.\">Random</option>\n
+		<option value=\"rrmemory\"".($strategy=="rrmemory"?" selected":"")." title=\"Round robin with memory, remember where we left off last ring pass.\">Round Robin with Memory</option>\n
 		</select>";
 	return $result;
 }
@@ -97,7 +97,7 @@ if(array_key_exists('_submit_check', $_POST)){
 	for($i = 1; $i <count($_POST);$i++){
 		$result .= $names[$i]."=";
 		if($_POST[$names[$i]] != ""){
-			if($is_int[$names[$i]]){
+			if($is_int[$names[$i]][0]){
 				$result .= $_POST[$names[$i]].", ";
 			}else{
 				$result .= "'".$_POST[$names[$i]]."', ";
@@ -122,8 +122,8 @@ $row = mysql_fetch_assoc($result);
 <input type="hidden" name="_submit_check" value="1">
 <p>Basic Configuration Options</p>
 <table class="" align="center" border="0" cellpadding="2" cellspacing="0">
-<tr class="tborder2"><td class="thead">Name</td><td><input type="text" value="<?echo $row[name];?>" name="name"></td></tr>
-<tr class="tborderx"><td class="thead">Strategy</td><td><?echo make_strategy_selector($row[strategy],"strategy")?></td></tr>
+<tr class="tborder2"><td class="thead" title="The name of the queue">Name</td><td><input type="text" value="<?echo $row[name];?>" name="name"></td></tr>
+<tr class="tborderx"><td class="thead" title="Calls are distributed among members handling a queue with one of several strategies">Strategy</td><td><?echo make_strategy_selector($row[strategy],"strategy")?></td></tr>
 <tr class="tborder2"><td class="thead">Timeout</td><td><input type="text" value="<?echo $row[timeout]?>" name="timeout"></td></tr>
 </table>
 
