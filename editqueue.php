@@ -91,11 +91,10 @@ $campaigngroupid = mysql_result($result,0,'campaigngroupid');
 $_GET = array_map(mysql_real_escape_string,$_GET);
 $_POST = array_map(mysql_real_escape_string,$_POST);
 if(array_key_exists('_submit_check', $_POST)){
-	$_POST[monitor_join] = $_POST[monitor_join]=="on"?1:0;
-	$_POST[eventmemberstatus] = $_POST[evenmemberstatus]=="on"?1:0;
-	$_POST[eventwhencalled] = $_POST[eventwhencalled]=="on"?1:0;
-	$_POST[reportholdtime] = $_POST[reportholdtime]=="on"?1:0;
-
+	$_POST[monitor_join] = ($_POST[monitor_join]=="on"?1:0);
+	$_POST[eventwhencalled] = ($_POST[eventwhencalled]=="on"?1:0);
+	$_POST[reportholdtime] = ($_POST[reportholdtime]=="on"?1:0);
+	$_POST[eventmemberstatus] = ($_POST[eventmemberstatus]=="on"?1:0);
 
 	//insert stuff in to the database
 	$names = array_keys($_POST);
@@ -113,6 +112,7 @@ if(array_key_exists('_submit_check', $_POST)){
 	}
 	$result = substr($result,0,strlen($resut)-2);	
 	$sql = "UPDATE queue_table SET ".$result." WHERE name='".$_GET[name]."'";
+	echo $sql;
 	$result = mysql_query($sql,$link) or die(mysql_error());
 	exit;
 }
@@ -163,14 +163,14 @@ onClick="resetToDefault('context','');">default</p></td></tr>
 <table class="" align="center" border="0" cellpadding="2" cellspacing"0" id="recording" style="display:none">
 <tr class="tborderx"><td class="thead">Monitor Join<a href="#" onClick="displaySmallMessage('/includes/help.php?section=Normaly when asterisk records a conversation it will record the different sdes in different files, this option tells asterisk to join the files together at the end of the call.');return false;"><img src="./images/help.png" border="0"></a></td><td><input type="checkbox" <?echo ($row[monitor_join]?"checked":"");?> name="monitor_join" maxlength="<?echo $is_int[monitor_join][1]?>"></td><td><p onClick="resetToDefault('monitor_join','');">default</p></td></tr>
 <tr class="tborder2"><td class="thead">Monitor Format<a href="#" onClick="displaySmallMessage('/includes/help.php?section=The format for recording the calls, possible values are wav, gsm or wav49. If this option is not specified then no calls will be recorded.');return false;"><img src="./images/help.png" border="0"></a></td><td><input type="text" value="<?echo $row[monitor_format];?>" name="monitor_format" maxlength="<?echo $is_int[monitor_format][1]?>"></td><td><p onClick="resetToDefault('monitor_format','');">default</p></tr>
-<tr class="tborderx"><td class="thead">Event Member Status<a href="#" onClick="displaySmallMessage('/includes/help.php?section=If selected then the manager will generate a lot of information about the members of the queue (specifically the eveng QueueMemberStatus). WARNING This can be a lot more information.');return false;"><img src="./images/help.png" border="0"></a></td><td><input type="checkbox" <?echo ($row[eventmemberstatus]?"checked":"");?> name="eventmemberstatus maxlength="<?echo $is_int[eventmemberstatus][1]?>""></td><td><p onClick="resetToDefault('eventmemberstatus','');">default</p></td></tr>
+<tr class="tborderx"><td class="thead">Event Member Status<a href="#" onClick="displaySmallMessage('/includes/help.php?section=If selected then the manager will generate a lot of information about the members of the queue (specifically the eveng QueueMemberStatus). WARNING This can be a lot more information.');return false;"><img src="./images/help.png" border="0"></a></td><td><input type="checkbox" <?echo ($row[eventmemberstatus]?"checked":"");?> name="eventmemberstatus" maxlength="<?echo $is_int[eventmemberstatus][1]?>""></td><td><p onClick="resetToDefault('eventmemberstatus','');">default</p></td></tr>
 <tr class="tborder2"><td class="thead">Event When Called<a href="#" onClick="displaySmallMessage('/includes/help.php?section=If this option is ticked, then the following manager events will be generated: AgentCalled, AgentDump, AgentConnect and AgentComplete');return false;"><img src="./images/help.png" border="0"></a></td><td><input type="checkbox" <?echo ($row[eventwhencalled]?"checked":"");?> name="eventwhencalled" maxlength="<?echo $is_int[eventwhencalled][1]?>"></td><td><p onClick="resetToDefault('eventwhencalled','');">default</p></tr>
 </table>
 
 <p onClick="toggle('queue');">Queue Performance <img src="./images/closed.png" name="img_queue"></p>
 <table class="" align="center" border="0" cellpadding="2" cellspacing"0" id="queue" style="display:none">
 <tr class="tborderx"><td class="thead">Join when Empty<a href="#" onClick="displaySmallMessage('/includes/help.php?section=This determins if a caller is allowed to join a queue with no agents in it. Possible options: <br>Yes --- allow the callers to join queues with no members of unavailable members<br>NO --- disallow the callers to join a queue with no members<br>Strict --- the callers cannot join a queue with no members, but are allowed to join one with unavailable members');return false;"><img src="./images/help.png" border="0"></a></td><td><input type="text" value="<?echo $row[joinempty];?>" name="joinempty" maxlength="<?echo $is_int[joinempty][1]?>"></td><td><p onClick="resetToDefault('joinempty','');">default</p></td></tr>
-<tr class="tborder2"><td class="thead">Leave When Empty<a href="#" onClick="displaySmallMessage('/includes/help.php?section=If this option is checked then you will allow the removing of callers from the queue, if there are new callers which cannot join. The possibly values are the same as for joinempty.');return false;"><img src="./images/help.png" border="0"></a></td><td><input type="textbox" <?echo ($row[leavewhenempty]?"checked":"");?> name="leavewhenempty" maxlength="<?echo $is_int[leavewhenempty][1]?>"></td><td><p onClick="resetToDefault('leavewhenempty','');">default</p></tr>
+<tr class="tborder2"><td class="thead">Leave When Empty<a href="#" onClick="displaySmallMessage('/includes/help.php?section=This options allows the removing of callers from the queue, if there are new callers which cannot join. The possibly values are the same as for joinempty.');return false;"><img src="./images/help.png" border="0"></a></td><td><input type="textbox" name="leavewhenempty" maxlength="<?echo $is_int[leavewhenempty][1]?>"></td><td><p onClick="resetToDefault('leavewhenempty','');">default</p></tr>
 <tr class="tborderx"><td class="thead">Report Hold Time<a href="#" onClick="displaySmallMessage('/includes/help.php?section=Report the hold time to the agent before they talk to the person in the queue.');return false;"><img src="./images/help.png" border="0"></a></td><td><input type="checkbox" <?echo ($row[reportholdtime]?"checked":"");?>" name="reportholdtime" maxlength="<?echo $is_int[reportholdtime][1]?>"></td><td><p onClick="resetToDefault('reportholdtime','');">default</p></td></tr>
 <tr class="tborder2"><td class="thead">Weight<a href="#" onClick="displaySmallMessage('/includes/help.php?section=When a channel is included in more than one queue, the higher weighted queue will be answered first.');return false;"><img src="./images/help.png" border="0"></a></td><td><input type="text" value="<?echo $row[weight];?>" name="weight" maxlength="<?echo $is_int[weight][1]?>">
 </td><td><p onClick="resetToDefault('weight','');">default</p></tr>
