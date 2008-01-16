@@ -91,6 +91,12 @@ $campaigngroupid = mysql_result($result,0,'campaigngroupid');
 $_GET = array_map(mysql_real_escape_string,$_GET);
 $_POST = array_map(mysql_real_escape_string,$_POST);
 if(array_key_exists('_submit_check', $_POST)){
+	$_POST[monitor_join] = $_POST[monitor_join]=="on"?1:0;
+	$_POST[eventmemberstatus] = $_POST[evenmemberstatus]=="on"?1:0;
+	$_POST[eventwhencalled] = $_POST[eventwhencalled]=="on"?1:0;
+	$_POST[reportholdtime] = $_POST[reportholdtime]=="on"?1:0;
+
+
 	//insert stuff in to the database
 	$names = array_keys($_POST);
 	$result = "";
