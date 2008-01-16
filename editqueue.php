@@ -102,6 +102,11 @@ if(array_key_exists('_submit_check', $_POST)){
 	for($i = 1; $i <count($_POST);$i++){
 		$result .= $names[$i]."=";
 		if($_POST[$names[$i]] != ""){
+			if($is_int[$names[$i]][0] && !is_numeric($_POST[$names[$i]])){
+				echo "<script type=\"text/javascript\">alert('".$names[$i]." is not a number when it should be');</script>";
+				exit;
+			}
+
 			if($is_int[$names[$i]][0]){
 				$result .= $_POST[$names[$i]].", ";
 			}else{
@@ -113,6 +118,7 @@ if(array_key_exists('_submit_check', $_POST)){
 	$result = substr($result,0,strlen($resut)-2);	
 	$sql = "UPDATE queue_table SET ".$result." WHERE name='".$_GET[name]."'";
 	$result = mysql_query($sql,$link) or die(mysql_error());
+	echo "Record saved successfully";
 	exit;
 }
 
