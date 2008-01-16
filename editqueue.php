@@ -112,7 +112,6 @@ if(array_key_exists('_submit_check', $_POST)){
 	}
 	$result = substr($result,0,strlen($resut)-2);	
 	$sql = "UPDATE queue_table SET ".$result." WHERE name='".$_GET[name]."'";
-	echo $sql;
 	$result = mysql_query($sql,$link) or die(mysql_error());
 	exit;
 }
