@@ -56,6 +56,9 @@ From here you can chose a campaign that you would like to see the numbers for.<b
 
     <?
 } else {
+if (isset($_GET[campaignid])){
+    $_POST[campaignid]=$_GET[campaignid];
+}
 ?>
 <br />
 <table class="tborder" align="center" border="0" cellpadding="0" cellspacing="2">

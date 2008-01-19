@@ -180,7 +180,11 @@ countx   = dialing
     echo "<b>Current: ".$progress."</b> (Done: $count/$count2) (Remaining:".($count2-$count-$dialing).")(Dialing: $countx)";
 } else {
 	if ($count2>0){
-    echo "".$count."/".$count2."($countx)";
+        if ($countx>0){
+            echo "".$count."/".$count2." ($countx)";
+        } else {
+            echo "".$count."/".$count2;
+        }
 }
 }
 ?>
