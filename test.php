@@ -22,4 +22,7 @@ function init()
  } 
 } 
 window.onload = init; 
-</script><img src="graph.php?id=<?echo $id;?>" name="image" id="webcamimage" border="0">
+</script>
+<div id="abc">
+</div>
+<img src="graph.php?id=<?echo $id;?>" name="image" id="webcamimage" border="0">

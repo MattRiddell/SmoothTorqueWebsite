@@ -93,14 +93,6 @@ foreach ($lines2 as $line_num2 => $line2) {
 
         }
 }
-$avgPerc/=$count;
-if ($timespent<$MAX_ENTRIES) {
-        $avgPerc=0;
-        for ($i=$MAX_ENTRIES;$i>=0;$i--){
-                $avgPerc+=$chart [ 'chart_data' ][ 1 ][ $i ];
-        }       
-        $avgPerc/=$timespent;
-}
 include ( "./jpgraph.php");
 include ("./jpgraph_line.php");
 include ("./jpgraph_bar.php");
@@ -167,17 +159,16 @@ $graph2->Add($dplot[0]);
 $graph2->SetShadow();
 
 
-$txt=new Text( "Dialed: $dialed Busy Agents:$busy/$max MRS: ".round((($mrs/2000)*100))."% Mult: $multiplyer Last Speed: ".round($lastSpeed)."% Average:".round($avgPerc)."%");
-$txt->Pos( 500,342);
-$txt->SetAlign("center","","");
+$txt=new Text( "Dialed: $dialed Busy Agents:$busy/$max MRS: ".round((($mrs/2000)*100))."% Mult: $multiplyer Last Perc: ".round($lastPerc)."% Last Speed: ".round($lastSpeed)."%");
+$txt->Pos( 160,342);
 $txt->SetFont(FF_FONT2,FS_NORMAL);
-$txt->SetBox('#eeeeff','navy@1','#cccccc');
+$txt->SetBox('#eeeeee','navy@1','#cccccc');
 //$txt->SetColor("red");
 $graph2->AddText( $txt);
 
-$txt2=new Text( "Weighted: $weighted CAD: $cad Sleep: ".round($ms)."ms Max Delay Calc: ".round($m2,3)." Overs: $o1 Adjusted Overs: $o2 ");
-$txt2->Pos( 500,375);
-$txt2->SetAlign("center","","");
+$txt2=new Text( "Weighted: $weig Busy Agents:$busy/$max MRS: ".round((($mrs/2000)*100))."% Mult: $multiplyer Last Perc: 
+".round($lastPerc)."% Last Speed: ".round($lastSpeed)."%");
+$txt2->Pos( 160,375);
 $txt2->SetFont(FF_FONT2,FS_NORMAL);
 $txt2->SetBox('#eeeeee','navy@1','#cccccc');
 //$txt->SetColor("red");
