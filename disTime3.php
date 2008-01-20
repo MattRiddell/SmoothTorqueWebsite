@@ -116,9 +116,9 @@ $class=" class=\"tborderx\"";
 <TD>
 <?
 if (strlen($row[name])<15){
-echo "<A title=\"Edit this campaign\" HREF=\"editcampaign.php?id=".$row[id]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".$row[name]."</A>";
+echo "<A title=\"Edit this campaign\" HREF=\"editcampaign.php?id=".$row[id]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit This Campaign\">".$row[name]."</A>";
 } else {
-echo "<A title=\"Edit this campaign\" HREF=\"editcampaign.php?id=".$row[id]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".trim(substr($row[name],0,15))."...</A>";
+echo "<A title=\"Edit this campaign\" HREF=\"editcampaign.php?id=".$row[id]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit This Campaign\">".trim(substr($row[name],0,15))."...</A>";
 }
 ?>
 </TD>
@@ -170,7 +170,7 @@ $progress=$rowx[progress];
 ?>
 <TD>
 <?
-if ($progress!=0){
+if ($progress>0){
 /*
 progress = done in this run
 count    = dailed in db
@@ -185,7 +185,7 @@ countx   = dialing
 //
             ?>
             <img src="/images/percentImage.png" title="<?
-            echo "".$count."/".$count2." ($countx)";?>"
+            echo "".($count2-$count)."/".$count2." Numbers Remaining ($countx being dialed)";?>"
             class="percentImage"
             style="background-position: -<?echo ((($count/$count2)*100)*1.2)-1; ?>px 0pt;" border="0" />
             <?
@@ -193,7 +193,7 @@ countx   = dialing
 //            echo "".$count."/".$count2;
             ?>
             <img src="/images/percentImage.png" title="<?
-            echo "".$count."/".$count2."";?>"
+            echo "".($count2-$count)."/".$count2." Numbers Remaining";?>"
             class="percentImage"
             style="background-position: -<?echo ((($count/$count2)*100)*1.2)-1; ?>px 0pt;" border="0" />
             <?
@@ -201,7 +201,7 @@ countx   = dialing
     } else {
             ?>
             <img src="/images/percentImage.png" title="<?
-            echo "".$count."/".$count2." ";?>"
+            echo "".($count2-$count)."/".$count2." Numbers Remaining";?>"
             class="percentImage"
             style="background-position: -<?echo ((($count/$count2)*100)*1.2)-1; ?>px 0pt;" border="0" />
             <?

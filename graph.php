@@ -69,9 +69,9 @@ for ($i=1;$i<241;$i++){
         $chart [ 'chart_data' ][ 0 ][ $i ] = 240-$i;
         $chart [ 'chart_data' ][ 1 ][ $i ] = 0;
         $chart [ 'chart_data' ][ 2 ][ $i ] = 0;
-        $array1[$i] = 240-$i;
+        $array1[$i] = 0;
         $array3[$i] = 0;
-        $array2[$i] = ($mrs/2000)*100;
+        $array2[$i] = 100;
 }
 $count = 0;
 $highest = 0;
@@ -184,24 +184,32 @@ $graph2->Add($dplot3[0]);
 $graph2->Add($dplot[0]);
 $graph2->SetShadow();
 
-/*-1$sql = 'SELECT progress from queue where campaignid='.$id;
+$sql = 'SELECT progress from queue where campaignid='.$id;
 $resultx=mysql_query($sql, $link) or die (mysql_error());;
 $rowx = mysql_fetch_assoc($resultx);
 
-$progress=$rowx[progress];*/
-if ($dialed>0){
+$progress=$rowx[progress];
+/*if ($dialed>0){
     $progress=$dialed;
 } else {
     $progress=$dialed;
+}*/
+
+if ($progress<0){
+    $txt=new Text( "\n\n     This Campaign is Now Finished    \n\n");
+    $txt->Pos( 500,122);
+    $txt->SetAlign("center","","");
+    $txt->SetFont(FF_FONT2,FS_BOLD);
+    $txt->SetBox('#88ffaa@0.5','navy@0.1','#cccccc@1',0,0);
+    //$txt->SetColor("red");
+} else {
+    $txt=new Text( "  Dialed: $progress     Busy Agents:$busy/$max     Average:".round($avgPerc)."%     Time Spent: $timespentM:$timespentS     Time between calls: ".round($ms/1000,3)." Seconds ");
+    $txt->Pos( 500,342);
+    $txt->SetAlign("center","","");
+    $txt->SetFont(FF_FONT2,FS_NORMAL);
+    $txt->SetBox('#bbbbff','navy@0.1','#cccccc');
+    //$txt->SetColor("red");
 }
-
-
-$txt=new Text( "  Dialed: $progress     Busy Agents:$busy/$max     Average:".round($avgPerc)."%     Time Spent: $timespentM:$timespentS     Time between calls: ".round($ms/1000,3)." Seconds ");
-$txt->Pos( 500,342);
-$txt->SetAlign("center","","");
-$txt->SetFont(FF_FONT2,FS_NORMAL);
-$txt->SetBox('#bbbbff','navy@0.1','#cccccc');
-//$txt->SetColor("red");
 $graph2->AddText( $txt);
 if ($_GET[debug]>0){
     $txt2=new Text( " Weighted: $weighted CAD: $cad Mult: $multiplyer Sleep: ".round($ms,2)."ms Max Delay Calc: ".round($m2,3)." Overs: ($o1/$timespent)");
