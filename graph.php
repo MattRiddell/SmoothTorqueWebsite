@@ -33,7 +33,7 @@ foreach ($lines2 as $line_num => $line) {
                 if (substr(trim($line),0,3)=="Adj") {
                         $adjuster = substr(trim($line),5);
                 }
-                if (substr(trim($line),0,3)=="Wei") {    
+                if (substr(trim($line),0,3)=="Wei") {
                         $weighted = substr(trim($line),5);
                 }
                 if (substr(trim($line),0,3)=="CAD") {
@@ -54,9 +54,9 @@ foreach ($lines2 as $line_num => $line) {
 		if (substr(trim($line),0,3)=="TSP") {
                         $timespent = substr(trim($line),5);
                         $timespentM = floor($timespent/60);
-                        $timespentS = $timespent%60;  
+                        $timespentS = $timespent%60;
 //                      $timespentS = $timespent;
-                 
+
                 }
 	}
 }
@@ -107,7 +107,7 @@ if ($timespent<$MAX_ENTRIES) {
         $avgPerc=0;
         for ($i=$MAX_ENTRIES;$i>=0;$i--){
                 $avgPerc+=$chart [ 'chart_data' ][ 1 ][ $i ];
-        }       
+        }
         $avgPerc/=$timespent;
 }
 include ( "./jpgraph.php");
@@ -124,14 +124,14 @@ include "./jpgraph_regstat.php";
 $chart [ 'chart_data' ][ 2 ] = $array2;
 $chart [ 'chart_data' ][ 1 ] = $array1;
 $chart [ 'chart_data' ][ 3 ] = $array3;
- 
+
 $graph2 = new Graph(1040, 400);
 //echo $highest;
-if ($highest>12){
-	$graph2->SetScale('linlin',0,$highest,1,239);	
+if ($highest>100){
+	$graph2->SetScale('linlin',0,$highest,1,239);
 } else {
-//	$graph2->SetScale('linlin',0,$highest,1,239);	
-	$graph2->SetScale('linlin',0,125,1,239);
+//	$graph2->SetScale('linlin',0,$highest,1,239);
+	$graph2->SetScale('linlin',0,100,1,239);
 }
 //$graph2->SetScale('linlin');
 $graph2->xaxis->SetTickLabels($aaa);
@@ -150,7 +150,7 @@ for ($i=0;$i<240;$i++){
 $graph2->xaxis->SetTickLabels($datax);
 $graph2->img->SetAntiAliasing();
 $dplot3[] = new LinePLot($chart [ 'chart_data' ][ 2 ]);
-$dplot2[] = new LinePLot($chart [ 'chart_data' ][ 1 ]);
+$dplot2[] = new LinePlot($chart [ 'chart_data' ][ 1 ]);
 $dplot[] = new LinePLot($chart [ 'chart_data' ][ 3 ]);
 //$dplot[0]->SetFillColor("#ff0000@0.8");
 $dplot2[0]->SetFillGradient("#00ff00","#0000ff@0.6");
@@ -175,6 +175,7 @@ $graph2->legend->SetShadow('black@0.8',4);
 
 $graph2->legend->SetPos(0.1,0.1,'left','top');
 $dplot[0]->SetStepStyle();
+$dplot2[0]->SetStepStyle();
 //$dplot2[0]->SetStepStyle();
 $graph2->Add($dplot2[0]);
 $graph2->Add($dplot3[0]);
