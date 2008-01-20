@@ -1,9 +1,11 @@
 <?php
+include "admin/db_config.php";
+mysql_select_db("SineDialer", $link);
+
 $id=$_GET[id];
 if ($id<1){
         exit(0);
 }
-global $chart;
 $first=true;
 $lastRate=0;
 $lastPerc=0;
@@ -67,6 +69,8 @@ for ($i=1;$i<241;$i++){
         $chart [ 'chart_data' ][ 0 ][ $i ] = 240-$i;
         $chart [ 'chart_data' ][ 1 ][ $i ] = 0;
         $chart [ 'chart_data' ][ 2 ][ $i ] = 0;
+        $array1[$i] = 240-$i;
+        $array3[$i] = 0;
         $array2[$i] = ($mrs/2000)*100;
 }
 $count = 0;
@@ -76,15 +80,11 @@ foreach ($lines as $line_num => $line) {
                 if (strlen(trim($line))>0){
                         $count++;
                         $avgPerc+=trim($line);
-			if(trim($line)>$highest){
-				$highest = trim($line);
-//				echo "<b>[".trim($line)."]</b>";
-			} else {
-//				echo "[".trim($line)."]";
-			}
+                        if(trim($line)>$highest){
+                            $highest = trim($line);
+                        }
                         $array1[ $count ] = trim($line);
                         $lastPerc=trim($line);
-
                 }
         }
 }
@@ -95,11 +95,8 @@ foreach ($lines2 as $line_num2 => $line2) {
                         $count++;
                         $array3[ $count ] = trim($line2);
                         $lastSpeed=trim($line2);
-//			echo trim($line2);
-			//echo $lastspeed;
-			$xdata[$count] = $count;
+                        $xdata[$count] = $count;
                 }
-
         }
 }
 $avgPerc/=$count;
@@ -167,38 +164,55 @@ $graph2->legend->SetLayout(LEGEND_HOR);
 $graph2->img->SetMargin(35,23,05,80);
 $graph2->img->SetAntiAliasing(true);
 
-$dplot3[0]->SetLegend('Max Permitted Speed');
-$dplot2[0]->SetLegend('Percentage Busy');
-$dplot[0]->SetLegend('Current Speed');
+$dplot3[0]->SetLegend(' Ideal Maximum Speed');
+$dplot2[0]->SetLegend(' Staff on Phone');
+$dplot[0]->SetLegend(' Current Speed');
 
+$graph2->legend->SetFrameWeight(2);
 $graph2->legend->SetShadow('black@0.8',4);
+$graph2->legend->SetFillColor('black@0.5');
+$graph2->legend->SetColor('white');
+$graph2->legend->SetFont(FF_FONT2,FS_BOLD);
+$graph2->legend->SetPos(0.05,0.04,'left','top');
+$graph2->legend->SetMarkAbsSize(13);
 
-$graph2->legend->SetPos(0.1,0.1,'left','top');
 $dplot[0]->SetStepStyle();
-$dplot2[0]->SetStepStyle();
+//$dplot2[0]->SetStepStyle();
 //$dplot2[0]->SetStepStyle();
 $graph2->Add($dplot2[0]);
 $graph2->Add($dplot3[0]);
 $graph2->Add($dplot[0]);
 $graph2->SetShadow();
 
+/*-1$sql = 'SELECT progress from queue where campaignid='.$id;
+$resultx=mysql_query($sql, $link) or die (mysql_error());;
+$rowx = mysql_fetch_assoc($resultx);
 
-$txt=new Text( " Dialed: $dialed Busy Agents:$busy/$max Average:".round($avgPerc)."% Time Spent: $timespentM:$timespentS Time between calls: ".round($ms/1000,3)." Seconds");
+$progress=$rowx[progress];*/
+if ($dialed>0){
+    $progress=$dialed;
+} else {
+    $progress=$dialed;
+}
+
+
+$txt=new Text( "  Dialed: $progress     Busy Agents:$busy/$max     Average:".round($avgPerc)."%     Time Spent: $timespentM:$timespentS     Time between calls: ".round($ms/1000,3)." Seconds ");
 $txt->Pos( 500,342);
 $txt->SetAlign("center","","");
 $txt->SetFont(FF_FONT2,FS_NORMAL);
 $txt->SetBox('#bbbbff','navy@0.1','#cccccc');
 //$txt->SetColor("red");
 $graph2->AddText( $txt);
+if ($_GET[debug]>0){
+    $txt2=new Text( " Weighted: $weighted CAD: $cad Mult: $multiplyer Sleep: ".round($ms,2)."ms Max Delay Calc: ".round($m2,3)." Overs: ($o1/$timespent)");
+    $txt2->Pos( 500,375);
+    $txt2->SetAlign("center","","");
+    $txt2->SetFont(FF_FONT2,FS_NORMAL);
+    $txt2->SetBox('#bbffbb','navy@0.1','#cccccc');
+    $graph2->AddText( $txt2);
+}
 
-$txt2=new Text( " Weighted: $weighted CAD: $cad Mult: $multiplyer Sleep: ".round($ms,2)."ms Max Delay Calc: ".round($m2,3)." Overs: ($o1/$timespent)");
-$txt2->Pos( 500,375);
-$txt2->SetAlign("center","","");
-$txt2->SetFont(FF_FONT2,FS_NORMAL);
-$txt2->SetBox('#bbffbb','navy@0.1','#cccccc');
-//$txt->SetColor("red");
-$graph2->AddText( $txt2);
 //$graph2->ygrid->SetFill(true,'#EFEFEF@0.9','#BBCCFF@0.9');
-$graph2->SetBackgroundGradient('#ccccff@0.9','#0000ff@0.5',GRAD_HOR,BGRAD_PLOT);
+$graph2->SetBackgroundGradient('#0000ff@0.7','white@0.1',GRAD_HOR,BGRAD_PLOT);
 $graph2->Stroke();
 ?>

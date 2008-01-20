@@ -81,7 +81,7 @@ Transfer
 </TD>
 */?>
 <TD CLASS="thead">
-Used
+Numbers Left
 </TD>
 <TD CLASS="thead">
 
@@ -179,13 +179,34 @@ countx   = dialing
 */
     echo "<b>Current: ".$progress."</b> (Done: $count/$count2) (Remaining:".($count2-$count-$dialing).")(Dialing: $countx)";
 } else {
+    //echo ((($count/$count2)*100)*1.2);
 	if ($count2>0){
-        if ($countx>0){
-            echo "".$count."/".$count2." ($countx)";
+        if ($countx>0){ // Some are dialing
+//
+            ?>
+            <img src="/images/percentImage.png" title="<?
+            echo "".$count."/".$count2." ($countx)";?>"
+            class="percentImage"
+            style="background-position: -<?echo ((($count/$count2)*100)*1.2)-1; ?>px 0pt;" border="0" />
+            <?
         } else {
-            echo "".$count."/".$count2;
+//            echo "".$count."/".$count2;
+            ?>
+            <img src="/images/percentImage.png" title="<?
+            echo "".$count."/".$count2."";?>"
+            class="percentImage"
+            style="background-position: -<?echo ((($count/$count2)*100)*1.2)-1; ?>px 0pt;" border="0" />
+            <?
         }
-}
+    } else {
+            ?>
+            <img src="/images/percentImage.png" title="<?
+            echo "".$count."/".$count2." ";?>"
+            class="percentImage"
+            style="background-position: -<?echo ((($count/$count2)*100)*1.2)-1; ?>px 0pt;" border="0" />
+            <?
+    }
+
 }
 ?>
 </TD>

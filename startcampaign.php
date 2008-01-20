@@ -34,9 +34,28 @@ if ($_POST[context]==0) {
     echo "Press 1 Live and Answer Machine";
 }
 */
-$sql3="select * from trunk where current = 1";
-$resultx=mysql_query($sql3, $link) or die (mysql_error());;
-$dialstring=mysql_result($resultx,0,'dialstring');
+
+$sqlx = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
+$result=mysql_query($sqlx, $link) or die (mysql_error());;
+$campaigngroupid=mysql_result($result,0,'campaigngroupid');
+
+
+$sql4="select trunkid from customer where campaigngroupid = ".$campaigngroupid;
+$resultx=mysql_query($sql4, $link) or die (mysql_error());;
+$trunkid=mysql_result($resultx,0,'trunkid');
+
+if ($trunkid==-1){
+    $sql3="select dialstring from trunk where current = 1";
+    $resultx=mysql_query($sql3, $link) or die (mysql_error());;
+    $dialstring=mysql_result($resultx,0,'dialstring');
+} else {
+    $sql3="select dialstring from trunk where id = ".$trunkid;
+    $resultx=mysql_query($sql3, $link) or die (mysql_error());;
+    $dialstring=mysql_result($resultx,0,'dialstring');
+}
+
+
+
 
 $sql1="delete from queue where campaignid=".$_GET[id];
 $sql2="INSERT INTO queue (campaignid,queuename,status,details,flags,transferclid,
