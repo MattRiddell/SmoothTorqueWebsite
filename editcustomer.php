@@ -19,6 +19,7 @@ $email=$_POST[email];
 $website=$_POST[website];
 $security=$_POST[security];
 $company=$_POST[name];
+$trunkid=$_POST[trunkid];
 
     $sql="update campaigngroup set name='$company',description='$description' where id=".$_POST[campaigngroupid];
 //    echo $sql;
@@ -27,7 +28,7 @@ $company=$_POST[name];
 
     $sql="update customer set username='$username',address1='$address1',address2='$address2',
     city='$city',country='$country',phone='$phone',fax='$fax',email='$email',website='$website',
-    security='$security',company='$company' WHERE id=".$_POST[id];
+    security='$security',company='$company', trunkid='$trunkid' WHERE id=".$_POST[id];
 
     //echo $sql;
     $result=mysql_query($sql, $link) or die (mysql_error());;
@@ -109,7 +110,24 @@ while ($rowx = mysql_fetch_assoc($resultss)) {
 }
 ?>
 </SELECT>
-<a href="editqueues.php"><IMG SRC="/images/pencil.png" border="0"></a>
+<a href="queues.php"><IMG SRC="/images/pencil.png" border="0"></a>
+</TD>
+</TR><TR><TD CLASS="thead">Trunk</TD><TD>
+<SELECT NAME="trunkid">
+<?
+$resultss=mysql_query("SELECT name,id from trunk",$link);
+?>
+<OPTION VALUE="-1" <?if ($row[trunkid]==-1){echo "SELECTED";}?>>Default</OPTION>
+<?
+while ($rowx = mysql_fetch_assoc($resultss)) {
+//    echo ."<BR>";
+    ?>
+<OPTION VALUE="<?echo $rowx[id];?>" <?if ($row[trunkid]==$rowx[id]){echo "SELECTED";}?>><?echo $rowx[name];?></OPTION>
+<?
+}
+?>
+</SELECT>
+<a href="trunk.php"><IMG SRC="/images/pencil.png" border="0"></a>
 </TD>
 </TR>
 </TR><TR><TD COLSPAN=2 ALIGN="RIGHT">

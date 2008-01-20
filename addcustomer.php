@@ -17,6 +17,7 @@ $email=($_POST[email]);
 $website=($_POST[website]);
 $security=($_POST[security]);
 $company=($_POST[name]);
+$trunkid=($_POST[trunkid]);
 
     $sql="INSERT INTO campaigngroup (name,description) VALUES ('$company','$description')";
 //    echo $sql;
@@ -24,9 +25,9 @@ $company=($_POST[name]);
     $insertedID = mysql_insert_id();
 
     $sql="INSERT INTO customer (username,password,campaigngroupid,address1,address2,city,
-    country,phone,fax,email,website,security,company)
+    country,phone,fax,email,website,security,company,trunkid)
     VALUES ('$username','$password','$insertedID','$address1','$address2','$city',
-    '$country','$phone','$fax','$email','$website','$security','$company')";
+    '$country','$phone','$fax','$email','$website','$security','$company','$trunkid')";
 
 //    echo $sql;
     $result=mysql_query($sql, $link) or die (mysql_error());;
@@ -87,7 +88,39 @@ require "header_customer.php";
 <OPTION VALUE="100" <?if ($row[security]==100){echo "SELECTED";}?>>Administrator</OPTION>
 </SELECT>
 </TD>
+</TR><TR><TD CLASS="thead">Queue Name</TD><TD>
+<SELECT NAME="astqueuename">
+<?
+$resultss=mysql_query("SELECT name from queue_table",$link);
+while ($rowx = mysql_fetch_assoc($resultss)) {
+//    echo ."<BR>";
+    ?>
+<OPTION VALUE="<?echo $rowx[name];?>" <?if ($row[astqueuename]==$rowx[name]){echo "SELECTED";}?>><?echo $rowx[name];?></OPTION>
+<?
+}
+?>
+</SELECT>
+<a href="queues.php"><IMG SRC="/images/pencil.png" border="0"></a>
+</TD>
+</TR><TR><TD CLASS="thead">Trunk</TD><TD>
+<SELECT NAME="trunkid">
+<?
+$resultss=mysql_query("SELECT name,id from trunk",$link);
+?>
+<OPTION VALUE="-1" <?if ($row[trunkid]==-1){echo "SELECTED";}?>>Default</OPTION>
+<?
+while ($rowx = mysql_fetch_assoc($resultss)) {
+//    echo ."<BR>";
+    ?>
+<OPTION VALUE="<?echo $rowx[id];?>" <?if ($row[trunkid]==$rowx[id]){echo "SELECTED";}?>><?echo $rowx[name];?></OPTION>
+<?
+}
+?>
+</SELECT>
+<a href="trunks.php"><IMG SRC="/images/pencil.png" border="0"></a>
+</TD>
 </TR>
+
 </TR><TR><TD COLSPAN=2 ALIGN="RIGHT">
 <INPUT TYPE="SUBMIT" VALUE="Add Customer">
 </TD>

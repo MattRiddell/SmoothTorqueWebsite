@@ -36,10 +36,13 @@ Phone
 Fax
 </TD>
 <TD CLASS="thead">
+Trunk
+</TD>
+<TD CLASS="thead">
 </TD>
 </TR>
 <?
-$sql = 'SELECT * FROM customer';
+$sql = 'SELECT customer.*,trunk.name AS trunkname FROM customer LEFT JOIN trunk ON customer.trunkid=trunk.id';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
 while ($row = mysql_fetch_assoc($result)) {
@@ -84,6 +87,16 @@ echo "<A HREF=\"editcustomer.php?id=".$row[id]."\"><img src=\"/images/pencil.png
 </TD>
 <TD>
 <?echo $row[fax];?>
+</TD>
+<TD>
+<?
+if (strlen(trim($row[trunkname]))<1){
+    echo "Default";
+} else {
+    echo "<b>".$row[trunkname]."</b>";
+}
+?>
+
 </TD>
 <TD>
 <a href="#" onclick="displaySmallMessage('includes/confirmDeleteCustomer.php?id=<?echo $row[id];?>');return false"><IMG SRC="/images/delete.png" BORDER="0"></a><br>

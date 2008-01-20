@@ -13,7 +13,7 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
 <table class="" align="center" border="0" cellpadding="2" cellspacing="0">
 <TR>
 <?if ($backend == 0) {?><TD CLASS="thead">
-Current
+Default
 </TD>
 <?}?>
 <TD CLASS="thead">

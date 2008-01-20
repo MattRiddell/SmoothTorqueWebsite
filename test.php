@@ -23,6 +23,7 @@ function init()
 } 
 window.onload = init; 
 </script>
-<div id="abc">
-</div>
-<img src="graph.php?id=<?echo $id;?>" name="image" id="webcamimage" border="0">
+<img src="graph.php?id=<?echo $id;?>" name="image" id="webcamimage" border="0"><br />
+<a href="stopcampaign.php?id=<?echo $id;?>"><img 
+src="/images/control_stop_blue.png"  border="0">Stop This Campaign</a>
+
