@@ -7,7 +7,7 @@ echo "<FONT FACE=\"ARIAL\">";
     <CENTER>
        <?/* <table class="tborder" align="center" width="270" border="0" cellpadding="0" cellspacing="2">*/?>
        <br /><table align="center" cellpadding="0" cellspacing="0">
-            <TR><TD COLSPAN=2><CENTER><IMG SRC="/images/logo2.png"></TD></TR>
+            <TR><TD COLSPAN=2><CENTER> <img src="<?echo $config_values['LOGO'];?>">       </TD></TR>
         </table>
 <br />
 Welcome to the SmoothTorque Hosted Predictive Dialing Platform.<br />
