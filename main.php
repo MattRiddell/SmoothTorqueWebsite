@@ -9,7 +9,7 @@ require "header.php";
 <td>
 </td>
 <td width="260">
-<b>Welcome to SmoothTorque Enterprise.</b><br />
+<b>Welcome to <?echo $config_values['TITLE'];?>.</b><br />
 <br />
 To get started, go into your list of campaigns by clicking on the
 Campaigns tab at the top of this page.

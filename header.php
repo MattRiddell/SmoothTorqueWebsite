@@ -1,3 +1,20 @@
+<?php
+$config_file = "/stweb.conf";
+$comment = "#";
+
+$fp = fopen($config_file, "r");
+
+while (!feof($fp)) {
+  $line = trim(fgets($fp));
+  if ($line && substr($line,0,1)!=$comment) {
+    $pieces = explode("=", $line);
+    $option = trim($pieces[0]);
+    $value = trim($pieces[1]);
+    $config_values[$option] = $value;
+  }
+}
+fclose($fp);
+?>
 <?
  function _get_browser()
 {
@@ -183,7 +200,7 @@ $self=$_SERVER['PHP_SELF'];
 ?>
 <HTML>
 <HEAD>
-<TITLE>SmoothTorque Enterprise</TITLE>
+<TITLE><?echo $config_values['TITLE'];?></TITLE>
 <link rel="stylesheet" type="text/css" href="/css/stylelogin.css">
 <link rel="stylesheet" type="text/css" href="/css/default.css">
 <link rel="stylesheet" href="/css/modal-message.css" type="text/css">
@@ -206,12 +223,12 @@ $self=$_SERVER['PHP_SELF'];
 <script type="text/javascript" src="/ajax/picker.js"></script>
 <script type="text/javascript" src="/header.js"></script>
 </HEAD>
-<BODY BACKGROUND="/images/bg.gif" onload="hideItem('hideShow');">
+<BODY BGCOLOR="<?echo $config_values['COLOUR'];?>" onload="hideItem('hideShow');">
 <?
 
 if (isset($menu)){
    ?>
-<CENTER>    <img src="/images/logo2.png">
+<CENTER>    <img src="<?echo $config_values['LOGO'];?>">
 
 
     <?

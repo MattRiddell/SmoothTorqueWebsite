@@ -1,4 +1,13 @@
-<?include "header.php";
+<?
+if (isset($_POST[colour])){
+    $add = @fopen("/stweb.conf",'w');
+    fwrite($add,"COLOUR=$_POST[colour]\n");
+    fwrite($add,"TITLE=$_POST[title]\n");
+    fwrite($add,"LOGO=$_POST[logo]\n");
+    fclose($add);
+
+}
+include "header.php";
 if (isset($_POST[userid])){
 $sql = "UPDATE config SET value='$_POST[userid]' WHERE parameter='userid'";
 $result=mysql_query($sql, $link) or die (mysql_error());
@@ -45,8 +54,8 @@ $licencekey = mysql_result($result,0,'value');
 
 <?if ($backend == 0) {?>
 
-<br />
-<form action="config.php" method="post">
+<br /> <br />
+<form action="config.php" name="config" method="post">
 <table class="" align="center" border="0" cellpadding="2" cellspacing="0">
 <tr>
     <td CLASS="thead" colspan="2">Licence Details</td>
@@ -102,11 +111,62 @@ if ($contents<1000){
 	echo round($test-2)." Servers (Max. ".$maxchans." Channels)";
 }
 ?>
+
+
+
+
+</td>
+</tr>
+
+<tr><td colspan="2">
+<br /><br />
+</td></tr>
+
+<tr>
+<td CLASS="thead" colspan="2">Look and Feel</td>
+</tr>
+
+
+<tr  class="tborder2">
+<td>
+Background Colour:
+</td>
+<td>
+<script language=JavaScript src="/js/picker.js"></script>
+<input type="Text" name="colour" value="<?echo $config_values['COLOUR'];?>">
+<a href="javascript:TCP.popup(document.forms['config'].elements['colour'], 1)"><img width="15" height="13" border="0" alt="Click Here to Pick up the color" src="img/sel.gif"></a>
+
 </td>
 </tr>
 <tr  class="tborder2">
+<td>
+Site Name:
+</td>
+<td>
+<script language=JavaScript src="/js/picker.js"></script>
+<input type="Text" name="title" value="<?echo $config_values['TITLE'];?>">
+</td>
+</tr>
+
+</td>
+</tr>
+<tr  class="tborder2">
+<td>
+Logo Filename:
+</td>
+<td>
+<script language=JavaScript src="/js/picker.js"></script>
+<input type="Text" name="logo" value="<?echo $config_values['LOGO'];?>">
+</td>
+</tr>
+
+<tr><td colspan="2">
+<br /><br />
+</td></tr>
+
+<tr  class="tborder2">
 <td colspan="2">
-<input type="submit" value="Save Licence Details">
+<input type="submit" value="Save Config Information">
 </td>
 </tr>
 </table>
