@@ -39,13 +39,13 @@ while ($row = mysql_fetch_assoc($result)) {
 //    $row = $row1[$countx];
 if ($toggle){
 $toggle=false;
-$class=" class=\"tborder2\" onclick=\"window.location='edittrunk.php?id=".$row[id]."';\" onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f8f8f8'\"   ";
+$class=" class=\"tborder2\" onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f8f8f8'\"   ";
 } else {
 $toggle=true;
-$class=" class=\"tborderx\" onclick=\"window.location='edittrunk.php?id=".$row[id]."';\" onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f0f0f0'\" ";
+$class=" class=\"tborderx\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f0f0f0'\" ";
 }
         if ($row["current"]==1){
-$class=" class=\"tborderxxx\" onclick=\"window.location='edittrunk.php?id=".$row[id]."';\" onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#bbffbb'\" ";
+$class=" class=\"tborderxxx\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#bbffbb'\" ";
     }
 
 ?>
