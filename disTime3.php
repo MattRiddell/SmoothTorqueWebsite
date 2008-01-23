@@ -104,10 +104,10 @@ $row = array_map(stripslashes,$row);
 
 if ($toggle){
 $toggle=false;
-$class=" class=\"tborder2\" onclick=\"window.location='editcampaign.php?id=".$row[id]."';\" onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f8f8f8'\"   ";
+$class=" class=\"tborder2\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f8f8f8'\"   ";
 } else {
 $toggle=true;
-$class=" class=\"tborderx\" onclick=\"window.location='editcampaign.php?id=".$row[id]."';\" onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f0f0f0'\" ";
+$class=" class=\"tborderx\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f0f0f0'\" ";
 }
 
 ?>
