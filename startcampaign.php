@@ -35,9 +35,10 @@ if ($_POST[context]==0) {
 }
 */
 
-$sqlx = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
+$sqlx = 'SELECT campaigngroupid, username FROM customer WHERE username=\''.$_COOKIE[user].'\'';
 $result=mysql_query($sqlx, $link) or die (mysql_error());;
 $campaigngroupid=mysql_result($result,0,'campaigngroupid');
+$username=mysql_result($result,0,'username');
 
 
 $sql4="select trunkid from customer where campaigngroupid = ".$campaigngroupid;
@@ -60,11 +61,11 @@ if ($trunkid==-1){
 $sql1="delete from queue where campaignid=".$_GET[id];
 $sql2="INSERT INTO queue (campaignid,queuename,status,details,flags,transferclid,
     starttime,endtime,startdate,enddate,did,clid,context,maxcalls,maxchans,maxretries
-    ,retrytime,waittime,trunk,astqueuename) VALUES
+    ,retrytime,waittime,trunk,astqueuename, accountcode) VALUES
     ('$_GET[id]','autostart-$_GET[id]','1','No details','0','$_GET[trclid]',
     '00:00','23:59','2005-01-01','2020-01-01','$_GET[did]','$_GET[clid]',
     '$_GET[context]','$_GET[agents]','500','0'
-    ,'0','30','".$dialstring."','$_GET[astqueuename]') ";
+    ,'0','30','".$dialstring."','$_GET[astqueuename]','stl-".$username."') ";
 //    echo $sql2;
 //exit(0);
 //echo $sql2;

@@ -45,18 +45,20 @@ Trunk
 $sql = 'SELECT customer.*,trunk.name AS trunkname FROM customer LEFT JOIN trunk ON customer.trunkid=trunk.id';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
+$count = 0;
 while ($row = mysql_fetch_assoc($result)) {
+$count++;
 if ($toggle){
 $toggle=false;
-$class=" class=\"tborder2\"";
+$class=" class=\"tborder2\" onclick=\"window.location='editcustomer.php?id=".$row[id]."';\" onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f8f8f8'\"   ";
 } else {
 $toggle=true;
-$class=" class=\"tborderx\"";
+$class=" class=\"tborderx\" onclick=\"window.location='editcustomer.php?id=".$row[id]."';\" onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f0f0f0'\" ";
 }
 
 ?>
-<TR <?echo $class;?>>
-<TD>
+<TR <?echo $class;?>  >
+<TD >
 <?
 if (strlen($row[company])<15){
 echo "<A HREF=\"editcustomer.php?id=".$row[id]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".$row[company]."</A>";
@@ -89,6 +91,7 @@ echo "<A HREF=\"editcustomer.php?id=".$row[id]."\"><img src=\"/images/pencil.png
 <?echo $row[fax];?>
 </TD>
 <TD>
+
 <?
 if (strlen(trim($row[trunkname]))<1){
     echo "Default";
@@ -96,7 +99,6 @@ if (strlen(trim($row[trunkname]))<1){
     echo "<b>".$row[trunkname]."</b>";
 }
 ?>
-
 </TD>
 <TD>
 <a href="#" onclick="displaySmallMessage('includes/confirmDeleteCustomer.php?id=<?echo $row[id];?>');return false"><IMG SRC="/images/delete.png" BORDER="0"></a><br>

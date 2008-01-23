@@ -61,13 +61,12 @@ while ($row = mysql_fetch_assoc($result)) {
 //while ($countx<sizeof($row1)) {
 //    $row = $row1[$countx];
     if ($toggle){
-        $toggle=false;
-        $class=" class=\"tborder2\"";
-    } else {
-        $toggle=true;
-        $class=" class=\"tborderx\"";
-    }
-
+$toggle=false;
+$class=" class=\"tborder2\" onclick=\"window.location='editmessage.php?id=".$row[id]."';\" onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f8f8f8'\"   ";
+} else {
+$toggle=true;
+$class=" class=\"tborderx\" onclick=\"window.location='editmessage.php?id=".$row[id]."';\" onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f0f0f0'\" ";
+}
 ?>
 <TR <?echo $class;?>>
 <TD>

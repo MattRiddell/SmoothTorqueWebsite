@@ -10,7 +10,7 @@ echo "<FONT FACE=\"ARIAL\">";
             <TR><TD COLSPAN=2><CENTER> <img src="<?echo $config_values['LOGO'];?>">       </TD></TR>
         </table>
 <br />
-Welcome to the SmoothTorque Hosted Predictive Dialing Platform.<br />
+Welcome to <?echo $config_values['TITLE'];?><br />
 <br />
 If you would like to see a demonstration of the capabilities <br />of this platform, please contact Ian Lamb by emailing
 <a href="mailto:sales@venturevoip.com">Sales</a>.

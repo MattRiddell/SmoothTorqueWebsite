@@ -39,10 +39,10 @@ $count=mysql_result($result2,0,'count(*)');
 
 if ($toggle){
 $toggle=false;
-$class=" class=\"tborder2\"";
+$class=" class=\"tborder2\" onclick=\"window.location='editcampaign.php?id=".$row[id]."';\" onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f8f8f8'\"   ";
 } else {
 $toggle=true;
-$class=" class=\"tborderx\"";
+$class=" class=\"tborderx\" onclick=\"window.location='editcampaign.php?id=".$row[id]."';\" onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f0f0f0'\" ";
 }
 
 ?>

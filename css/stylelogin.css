@@ -3,6 +3,10 @@ BODY {
 	PADDING-BOTTOM: 0px; MARGIN: 0px; FONT: 9pt verdana,
 geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; COLOR: #000000; PADDING-TOP: 0px
 }
+.editable, textarea{
+	background-color: #ffffd3;
+}
+
 A:link {
     text-decoration: none;
 	COLOR: #2222fc;
@@ -54,6 +58,10 @@ LI {
 }
 .tborderxx {
 	BORDER-RIGHT: #245e83 1px outset; BORDER-TOP: #245e83 1px outset; BORDER-LEFT: #245e83 1px outset; COLOR: #000000; BORDER-BOTTOM: #245e83 1px outset;
+
+}
+.tborderxxx {
+	BORDER-RIGHT: #245e83 1px outset; BORDER-TOP: #245e83 1px outset; BACKGROUND: #bbffbb; BORDER-LEFT: #245e83 1px outset; COLOR: #000000; BORDER-BOTTOM: #245e83 1px outset;
 
 }
 .tborder2 {

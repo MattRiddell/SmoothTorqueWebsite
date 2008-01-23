@@ -205,6 +205,10 @@ $self=$_SERVER['PHP_SELF'];
 <link rel="stylesheet" type="text/css" href="/css/default.css">
 <link rel="stylesheet" href="/css/modal-message.css" type="text/css">
 <link rel="shortcut icon" href="/favicon.ico">
+
+<!-- Javascript includes -->
+<script src="prototype.js" type="text/javascript"></script>
+<script src="js/eep.js" type="text/javascript"></script>
 <script type="text/javascript" src="/js/ajax.js"></script>
 <script type="text/javascript" src="/js/modal-message.js"></script>
 <script type="text/javascript" src="/js/ajax-dynamic-content.js"></script>

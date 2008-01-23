@@ -187,13 +187,16 @@ echo "<OPTION VALUE=\"".$row_queue[$count2][name]."\"$selected>".$row_queue[$cou
         <TR><TD CLASS="thead">Type of Campaign
         <a href="#" onclick="displayLargeMessage('includes/help.php?section=<b>Load Simulation</b><br />Simple test campaign.  Does not actually make any phone calls<br /><br /><b>Answer Machine Only</b><br />Human: Hang Up. Answer Machine: Leave Message<br /><br /><b>Immediate Live Only</b><br />Human: Connect immediately to the call center. Answer Machine: hang up.<br /><br /><b>Press 1 Live Only</b><br />Human: Play the person message and then if they press 1, transfer to the call center.  Answer Machine: Hang Up.<br /><br /><b>Immediate Live and Answer Machine</b><br />Human: Connect immediately to the call center. Answer Machine: Leave the answer machine message.<br /><br /><b>Press 1 Live and Answer Machine</b><br />Human: Play the person message and then if they press 1, transfer to the call center.  Answer Machine: Leave the answer machine message.');return false"><img src="/images/help.png" border="0"></a>
         </TD><TD>
+        <?
+//        print_r($row);
+        ?>
 <SELECT NAME="context">
-<OPTION VALUE="0" <?$row[context]==0?"SELECTED":""?>>Load Simulation</OPTION>
-<OPTION VALUE="1" <?$row[context]==1?"SELECTED":""?>>Answer Machine Only</OPTION>
-<OPTION VALUE="2" <?$row[context]==2?"SELECTED":""?>>Immediate Live</OPTION>
-<OPTION VALUE="4" <?$row[context]==3?"SELECTED":""?>>Press 1 Live</OPTION>
-<OPTION VALUE="5" <?$row[context]==4?"SELECTED":""?>>Immediate Live and Answer Machine</OPTION>
-<OPTION VALUE="3" <?$row[context]==5?"SELECTED":""?>>Press 1 Live and Answer Machine</OPTION>
+<OPTION VALUE="0" <?echo $row[context]==0?"SELECTED":""?>>Load Simulation</OPTION>
+<OPTION VALUE="1" <?echo $row[context]==1?"SELECTED":""?>>Answer Machine Only</OPTION>
+<OPTION VALUE="2" <?echo $row[context]==2?"SELECTED":""?>>Immediate Live</OPTION>
+<OPTION VALUE="4" <?echo $row[context]==4?"SELECTED":""?>>Press 1 Live</OPTION>
+<OPTION VALUE="5" <?echo $row[context]==5?"SELECTED":""?>>Immediate Live and Answer Machine</OPTION>
+<OPTION VALUE="3" <?echo $row[context]==3?"SELECTED":""?>>Press 1 Live and Answer Machine</OPTION>
 <?/*<OPTION VALUE="5" <?if ($row[context]==5){echo "SELECTED";}?>>Spare 2</OPTION>
 <OPTION VALUE="6" <?if ($row[context]==6){echo "SELECTED";}?>>Spare 3</OPTION>
 <OPTION VALUE="7" <?if ($row[context]==7){echo "SELECTED";}?>>Spare 4</OPTION>
