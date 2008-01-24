@@ -4,6 +4,7 @@ if (isset($_POST[colour])){
     fwrite($add,"COLOUR=$_POST[colour]\n");
     fwrite($add,"TITLE=$_POST[title]\n");
     fwrite($add,"LOGO=$_POST[logo]\n");
+    fwrite($add,"TEXT=$_POST[text]\n");
     fclose($add);
 
 }
@@ -157,6 +158,16 @@ Logo Filename:
 <td>
 <script language=JavaScript src="/js/picker.js"></script>
 <input type="Text" name="logo" value="<?echo $config_values['LOGO'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+Opening Text:
+</td>
+<td>
+<script language=JavaScript src="/js/picker.js"></script>
+<input type="Text" name="text" value="<?echo $config_values['TEXT'];?>">
 </td>
 </tr>
 

@@ -71,7 +71,7 @@ for ($i=1;$i<241;$i++){
         $chart [ 'chart_data' ][ 2 ][ $i ] = 0;
         $array1[$i] = 0;
         $array3[$i] = 0;
-        $array2[$i] = 100;
+        $array2[$i] = $mrs/2000*100;
 }
 $count = 0;
 $highest = 0;

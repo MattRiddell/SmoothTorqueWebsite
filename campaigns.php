@@ -44,6 +44,7 @@ flush();
                 ,10000);
         });
 </script>
+<?}?>
 <div id="ajaxDiv">
 <?
 $id=$_POST[campaignid];
@@ -52,7 +53,6 @@ include "disTime3.php";
 ?>
 
 </div>
-<?}?>
 <?
 
 require "footer.php";

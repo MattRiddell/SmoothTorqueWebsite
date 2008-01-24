@@ -12,9 +12,7 @@ echo "<FONT FACE=\"ARIAL\">";
 <br />
 Welcome to <?echo $config_values['TITLE'];?><br />
 <br />
-If you would like to see a demonstration of the capabilities <br />of this platform, please contact Ian Lamb by emailing
-<a href="mailto:sales@venturevoip.com">Sales</a>.
-        <br /><br />
+<?echo $config_values['TEXT'];?>        <br /><br />
         <table background="/images/sdbox.png" align="center" width="300" height="200" cellpadding="0" cellspacing="0">
             <tr><td>
 <?
