@@ -18,6 +18,8 @@ $website=($_POST[website]);
 $security=($_POST[security]);
 $company=($_POST[name]);
 $trunkid=($_POST[trunkid]);
+$zip=($_POST[zip]);
+$state=($_POST[state]);
 
     $sql="INSERT INTO campaigngroup (name,description) VALUES ('$company','$description')";
 //    echo $sql;
@@ -25,9 +27,9 @@ $trunkid=($_POST[trunkid]);
     $insertedID = mysql_insert_id();
 
     $sql="INSERT INTO customer (username,password,campaigngroupid,address1,address2,city,
-    country,phone,fax,email,website,security,company,trunkid)
+    country,phone,fax,email,website,security,company,trunkid,zip,state)
     VALUES ('$username','$password','$insertedID','$address1','$address2','$city',
-    '$country','$phone','$fax','$email','$website','$security','$company','$trunkid')";
+    '$country','$phone','$fax','$email','$website','$security','$company','$trunkid','$zip','$state')";
 
 //    echo $sql;
     $result=mysql_query($sql, $link) or die (mysql_error());;
@@ -66,6 +68,12 @@ require "header_customer.php";
 </TD>
 </TR><TR><TD CLASS="thead">City</TD><TD>
 <INPUT TYPE="TEXT" NAME="city" VALUE="<?echo $row[city];?>" size="60">
+</TD>
+</TR><TR><TD CLASS="thead">State</TD><TD>
+<INPUT TYPE="TEXT" NAME="state" VALUE="<?echo $row[state];?>" size="60">
+</TD>
+</TR><TR><TD CLASS="thead">Zip</TD><TD>
+<INPUT TYPE="TEXT" NAME="zip" VALUE="<?echo $row[zip];?>" size="60">
 </TD>
 </TR><TR><TD CLASS="thead">Country</TD><TD>
 <INPUT TYPE="TEXT" NAME="country" VALUE="<?echo $row[country];?>" size="60">

@@ -20,6 +20,8 @@ $website=$_POST[website];
 $security=$_POST[security];
 $company=$_POST[name];
 $trunkid=$_POST[trunkid];
+$zip=$_POST[zip];
+$state=$_POST[state];
 
     $sql="update campaigngroup set name='$company',description='$description' where id=".$_POST[campaigngroupid];
 //    echo $sql;
@@ -28,7 +30,7 @@ $trunkid=$_POST[trunkid];
 
     $sql="update customer set username='$username',address1='$address1',address2='$address2',
     city='$city',country='$country',phone='$phone',fax='$fax',email='$email',website='$website',
-    security='$security',company='$company', trunkid='$trunkid' WHERE id=".$_POST[id];
+    security='$security',company='$company', trunkid='$trunkid', zip='$zip', state='$state' WHERE id=".$_POST[id];
 
     //echo $sql;
     $result=mysql_query($sql, $link) or die (mysql_error());;
@@ -76,6 +78,12 @@ $row2 = mysql_fetch_assoc($result2);
 </TD>
 </TR><TR><TD CLASS="thead">City</TD><TD>
 <INPUT TYPE="TEXT" NAME="city" VALUE="<?echo $row[city];?>" size="60">
+</TD>
+</TR><TR><TD CLASS="thead">State</TD><TD>
+<INPUT TYPE="TEXT" NAME="state" VALUE="<?echo $row[state];?>" size="60">
+</TD>
+</TR><TR><TD CLASS="thead">Zip</TD><TD>
+<INPUT TYPE="TEXT" NAME="zip" VALUE="<?echo $row[zip];?>" size="60">
 </TD>
 </TR><TR><TD CLASS="thead">Country</TD><TD>
 <INPUT TYPE="TEXT" NAME="country" VALUE="<?echo $row[country];?>" size="60">
