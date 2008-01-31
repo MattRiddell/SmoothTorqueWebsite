@@ -39,14 +39,22 @@ Fax
 Trunk
 </TD>
 <TD CLASS="thead">
+Press 1s
+</TD>
+<TD CLASS="thead">
 </TD>
 </TR>
 <?
+
 $sql = 'SELECT customer.*,trunk.name AS trunkname FROM customer LEFT JOIN trunk ON customer.trunkid=trunk.id';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
 $count = 0;
 while ($row = mysql_fetch_assoc($result)) {
+
+
+
+
 $count++;
 if ($toggle){
 $toggle=false;
@@ -98,6 +106,30 @@ if (strlen(trim($row[trunkname]))<1){
 } else {
     echo "<b>".$row[trunkname]."</b>";
 }
+?>
+</TD>
+<TD>
+<?
+/* this week */
+$sql = 'select count(*) from cdr.cdr where date(calldate)<=curdate() and date(calldate)>=DATE_ADD(CURDATE(), INTERVAL -7
+DAY)
+and dst="1" and accountcode="stl-'.$row[username].'"';
+$resultaa=mysql_query($sql, $link) or die (mysql_error());;
+$thisweek = mysql_result($resultaa,0,0);
+echo "This Week: $thisweek <br />";
+
+/* yesterday */
+$sql = 'select count(*) from cdr.cdr where date(calldate)<curdate() and date(calldate)>=DATE_ADD(CURDATE(), INTERVAL -1 DAY)
+and dst="1"  and accountcode="stl-'.$row[username].'"';
+$resultaa=mysql_query($sql, $link) or die (mysql_error());;
+$yesterday = mysql_result($resultaa,0,0);
+echo "yesterday: $yesterday <br />";
+
+/* today */
+$sql = 'select count(*) from cdr.cdr where date(calldate)=curdate() and dst="1"  and accountcode="stl-'.$row[username].'"';
+$resultaa=mysql_query($sql, $link) or die (mysql_error());;
+$today = mysql_result($resultaa,0,0);
+echo "today: $today <br />";
 ?>
 </TD>
 <TD>

@@ -1,10 +1,12 @@
 <?
+//echo $_POST[sox];
 if (isset($_POST[colour])){
     $add = @fopen("/stweb.conf",'w');
     fwrite($add,"COLOUR=$_POST[colour]\n");
     fwrite($add,"TITLE=$_POST[title]\n");
     fwrite($add,"LOGO=$_POST[logo]\n");
     fwrite($add,"TEXT=$_POST[text]\n");
+    fwrite($add,"SOX=$_POST[sox]\n");
     fclose($add);
 
 }
@@ -51,12 +53,23 @@ $licencekey = mysql_result($result,0,'value');
     <a href="setparameter.php?parameter=backend&value=1"><IMG SRC="/images/ch.gif" BORDER="1" WIDTH="16" HEIGHT="16"></a>
 <?}?>
 </td>
-<td>Windows Backend</td></tr></table>
+<td>Windows Backend</td></tr>
+
+<tr  class="tborder2">
+<td> <form action="config.php" name="config" method="post">
+Sox Path:
+</td>
+<td>
+<input type="Text" name="sox" value="<?echo $config_values['SOX'];?>">
+</td>
+</tr>
+
+</table>
 
 <?if ($backend == 0) {?>
 
 <br /> <br />
-<form action="config.php" name="config" method="post">
+
 <table class="" align="center" border="0" cellpadding="2" cellspacing="0">
 <tr>
     <td CLASS="thead" colspan="2">Licence Details</td>
@@ -144,7 +157,6 @@ Background Colour:
 Site Name:
 </td>
 <td>
-<script language=JavaScript src="/js/picker.js"></script>
 <input type="Text" name="title" value="<?echo $config_values['TITLE'];?>">
 </td>
 </tr>
@@ -156,7 +168,6 @@ Site Name:
 Logo Filename:
 </td>
 <td>
-<script language=JavaScript src="/js/picker.js"></script>
 <input type="Text" name="logo" value="<?echo $config_values['LOGO'];?>">
 </td>
 </tr>
@@ -166,7 +177,6 @@ Logo Filename:
 Opening Text:
 </td>
 <td>
-<script language=JavaScript src="/js/picker.js"></script>
 <input type="Text" name="text" value="<?echo $config_values['TEXT'];?>">
 </td>
 </tr>

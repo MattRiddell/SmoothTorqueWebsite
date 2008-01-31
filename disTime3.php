@@ -152,7 +152,43 @@ $count=$row2[count];
 
 $sql = 'SELECT count(*) from number where campaignid='.$row[id].' and status="dialing"';
 $result2=mysql_query($sql, $link) or die (mysql_error());;
-$countx=mysql_result($result2,0,'count(*)');
+$dialing=mysql_result($result2,0,'count(*)');
+
+$sql = 'SELECT count(*) from number where campaignid='.$row[id].' and status="busy"';
+$result2=mysql_query($sql, $link) or die (mysql_error());;
+$busy=mysql_result($result2,0,'count(*)');
+
+$sql = 'SELECT count(*) from number where campaignid='.$row[id].' and status="answered"';
+$result2=mysql_query($sql, $link) or die (mysql_error());;
+$answered=mysql_result($result2,0,'count(*)');
+
+$sql = 'SELECT count(*) from number where campaignid='.$row[id].' and status="hungup"';
+$result2=mysql_query($sql, $link) or die (mysql_error());;
+$hungup=mysql_result($result2,0,'count(*)');
+
+$sql = 'SELECT count(*) from number where campaignid='.$row[id].' and status="congested"';
+$result2=mysql_query($sql, $link) or die (mysql_error());;
+$congested=mysql_result($result2,0,'count(*)');
+
+$sql = 'SELECT count(*) from number where campaignid='.$row[id].' and status="timeout"';
+$result2=mysql_query($sql, $link) or die (mysql_error());;
+$timeout=mysql_result($result2,0,'count(*)');
+
+$sql = 'SELECT count(*) from number where campaignid='.$row[id].' and status like "unknown-%"';
+$result2=mysql_query($sql, $link) or die (mysql_error());;
+$unknown=mysql_result($result2,0,'count(*)');
+
+$sql = 'SELECT count(*) from number where campaignid='.$row[id].' and status="dialed"';
+$result2=mysql_query($sql, $link) or die (mysql_error());;
+$dialed=mysql_result($result2,0,'count(*)');
+
+$sql = 'SELECT count(*) from number where campaignid='.$row[id].' and status="new"';
+$result2=mysql_query($sql, $link) or die (mysql_error());;
+$new=mysql_result($result2,0,'count(*)');
+
+$sql = 'SELECT count(*) from number where campaignid='.$row[id].' and status="indnc"';
+$result2=mysql_query($sql, $link) or die (mysql_error());;
+$indnc=mysql_result($result2,0,'count(*)');
 
 $sql = 'SELECT count(*) from number where campaignid='.$row[id];
 $result2=mysql_query($sql, $link) or die (mysql_error());;
@@ -177,36 +213,21 @@ count    = dailed in db
 count2   = all numbers
 countx   = dialing
 */
-    echo "<b>Current: ".$progress."</b> (Done: $count/$count2) (Remaining:".($count2-$count-$dialing).")(Dialing: $countx)";
+//            echo "<b>Remaining: $new/$count2 Dialing: $dialing Busy: $busy Answered: $answered HungUp: $hungup Congested: $congested TimedOut: $timeout Unknown: $unknown Dialed: $dialed InDNC: $indnc</b>";
+            ?>
+            <img src="/images/percentImage.png" title="<?
+            echo "Remaining: $new/$count2 Dialing: $dialing Busy: $busy Answered: $answered HungUp: $hungup Congested: $congested TimedOut: $timeout Unknown: $unknown Dialed: $dialed InDNC: $indnc";?>"
+            class="percentImage"
+            style="background-position: -<?echo ((100-(($new/$count2)*100))*1.2)-1; ?>px 0pt;" border="0" />
+<?
 } else {
-    //echo ((($count/$count2)*100)*1.2);
-	if ($count2>0){
-        if ($countx>0){ // Some are dialing
 //
             ?>
             <img src="/images/percentImage.png" title="<?
-            echo "".($count2-$count)."/".$count2." Numbers Remaining ($countx being dialed)";?>"
-            class="percentImage"
-            style="background-position: -<?echo ((($count/$count2)*100)*1.2)-1; ?>px 0pt;" border="0" />
-            <?
-        } else {
-//            echo "".$count."/".$count2;
-            ?>
-            <img src="/images/percentImage.png" title="<?
-            echo "".($count2-$count)."/".$count2." Numbers Remaining";?>"
-            class="percentImage"
-            style="background-position: -<?echo ((($count/$count2)*100)*1.2)-1; ?>px 0pt;" border="0" />
-            <?
-        }
-    } else {
-            ?>
-            <img src="/images/percentImage.png" title="<?
-            echo "".($count2-$count)."/".$count2." Numbers Remaining";?>"
-            class="percentImage"
-            style="background-position: -<?echo ((($count/$count2)*100)*1.2)-1; ?>px 0pt;" border="0" />
-            <?
-    }
-
+            echo "Remaining: $new/$count2 Dialing: $dialing Busy: $busy Answered: $answered HungUp: $hungup Congested: $congested TimedOut: $timeout Unknown: $unknown Dialed: $dialed InDNC: $indnc";?>"
+            class="percentImage2"
+            style="background-position: -<?echo ((100-(($new/$count2)*100))*1.2)-1; ?>px 0pt;" border="0" />
+<?
 }
 ?>
 </TD>
@@ -262,6 +283,9 @@ if ($status==101){
 <TD>
 <?if ($backend == 0) {?>
 <a title="View the graph for this campaign" href="test.php?id=<?echo $row[id];?>" class="abcd"><img src="/images/chart_curve.png" border="0"></a>&nbsp;
+<?}?>
+<?if ($backend == 0) {?>
+<a title="View the report for this campaign" href="report.php?id=<?echo $row[id];?>" class="abcd"><img src="/images/chart_pie.png" border="0"></a>&nbsp;
 <?}?>
 <?
 if ($user!="demo"){

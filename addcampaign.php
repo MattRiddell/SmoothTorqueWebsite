@@ -6,7 +6,7 @@ $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $campaigngroupid=mysql_result($result,0,'campaigngroupid');
 if (isset($_POST[name])){
-   	$_POST = array_map(mysql_real_escape_string,$_POST); 
+   	$_POST = array_map(mysql_real_escape_string,$_POST);
 	$id=($_POST[id]);
     $name=($_POST[name]);
     $description=($_POST[description]);
@@ -100,8 +100,8 @@ echo "<OPTION VALUE=\"".$row2[$count2][id]."\"$selected>".$row2[$count2][descrip
 ?>
 </SELECT>
 </TD>
-</TR><TR><TD CLASS="thead">Transfer Message
-<a href="#" onclick="displaySmallMessage('includes/help.php?section=This is very rarely used and therefore may be set to whatever you like.  If you are using this on your own system it can be used to specify a MusicOnHold class to be played to the person while they are being transferred to the call center.  Requires direct access to the telephony backend.');return false"><img src="/images/help.png" border="0"></a>
+</TR><TR><TD CLASS="thead">DNC Confirmation Message
+<a href="#" onclick="displaySmallMessage('includes/help.php?section=This message is played to a customer who presses 2 to be added to DNC.');return false"><img src="/images/help.png" border="0"></a>
 </TD><TD>
 <SELECT name="messageid3">
 <?

@@ -27,9 +27,9 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
         //TODO: This file path needs to be sanitised to make sure that
         //the input doesn't get a command execution injection
         $hash=sha1(date('l dS \of F Y h:i:s A'));
-        exec('/usr/local/bin/sox '.str_replace(" ","\ ",$file[path]).' -t raw -r 8000 -s -w -c 1 /tmp/uploads/x-'.$hash.'.sln');
-        exec('/usr/local/bin/sox '.str_replace(" ","\ ",$file[path]).' -r 8000 -s -w -c 1 /tmp/uploads/x-'.$hash.'.wav');
-        exec('/usr/local/bin/sox '.str_replace(" ","\ ",$file[path]).' -r 8000 -s -w -c 1 ./uploads/x-'.$hash.'.wav');
+        exec($config_values['SOX']." ".str_replace(" ","\ ",$file[path]).' -t raw -r 8000 -s -w -c 1 /tmp/uploads/x-'.$hash.'.sln');
+        exec($config_values['SOX']." ".str_replace(" ","\ ",$file[path]).' -r 8000 -s -w -c 1 /tmp/uploads/x-'.$hash.'.wav');
+        exec($config_values['SOX']." ".str_replace(" ","\ ",$file[path]).' -r 8000 -s -w -c 1 ./uploads/x-'.$hash.'.wav');
         ?>
 <img src="/images/tick.png" onLoad="window.location = '/addmessage.php?filename=<?echo "x-".$hash.".sln";?>';">
         <?

@@ -3,7 +3,7 @@ require "header.php";
 $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $campaigngroupid=mysql_result($result,0,'campaigngroupid');
-require "header_numbers.php";
+require "header_campaign.php";
 
 $_POST = array_map(mysql_real_escape_string,$_POST);
 $_GET = array_map(mysql_real_escape_string,$_GET);
@@ -84,22 +84,22 @@ if(isset($_POST[campaignid])){
 if ($_GET[start]>0){
     $start=$_GET[start];
 }
-$sql = 'SELECT count(*) FROM number WHERE campaignid='.$campaignid;
+$sql = 'SELECT count(*) FROM number WHERE campaignid='.$campaignid.' and status=\''.$_GET[type].'\'';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $max=mysql_result($result,0,'count(*)');
 
-$sql = 'SELECT * FROM number WHERE campaignid='.$campaignid.' order by status asc LIMIT '.$start.',20';
+$sql = 'SELECT * FROM number WHERE campaignid='.$campaignid.' and status=\''.$_GET[type].'\' LIMIT '.$start.',20';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
 
-echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&start=0"><img src="/images/resultset_first.png" border="0"></a> ';
-echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&start='.($start-20).'"><img src="/images/resultset_previous.png" border="0"></a> ';
+echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&status='.$_GET[type].'&start=0"><img src="/images/resultset_first.png" border="0"></a> ';
+echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&status='.$_GET[type].'&start='.($start-20).'"><img src="/images/resultset_previous.png" border="0"></a> ';
 
 for ($x=$start;$x<$start+200;$x+=20){
-echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&start='.$x.'">'.($x/20).'</a> ';
+echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&status='.$_GET[type].'&start='.$x.'">'.($x/20).'</a> ';
 }
-echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&start='.($x+20).'"><img src="/images/resultset_next.png" border="0"></a> ';
-echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&start='.(($max-20)+$max%20).'"><img src="/images/resultset_last.png" border="0"></a> ';
+echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&status='.$_GET[type].'&start='.($x+20).'"><img src="/images/resultset_next.png" border="0"></a> ';
+echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&status='.$_GET[type].'&start='.(($max-20)+$max%20).'"><img src="/images/resultset_last.png" border="0"></a> ';
 echo '<br />';
 echo '<br />';
 while ($row = mysql_fetch_assoc($result)) {
@@ -123,7 +123,7 @@ $class=" class=\"tborderx\"";
 <?
 if ($row[status] != "new") {
 ?>
-<A TITLE="Reset the status of this Number" HREF="resetnumber.php?campaignid=<?echo $_POST[campaignid];?>&number=<?echo $row[phonenumber];?>"><img src="/images/control_repeat_blue.png" border="0" alt="Reset Number"></A>
+<A TITLE="Reset the status of this Number" HREF="resetlist.php?campaignid=<?echo $_POST[campaignid];?>&type=<?echo $_GET[type];?>&number=<?echo $row[phonenumber];?>"><img src="/images/control_repeat_blue.png" border="0" alt="Reset Number"></A>
 <?
 }
 ?>

@@ -203,7 +203,7 @@ if ($progress<0){
     $txt->SetBox('#00ff88@0.2','navy@0.1','#000000@0.8',0,5);
     //$txt->SetColor("red");
 } else {
-    $txt=new Text( "  Dialed: $progress     Busy Agents:$busy/$max     Average:".round($avgPerc)."%     Time Spent: $timespentM:$timespentS     Time between calls: ".round($ms/1000,3)." Seconds ");
+    $txt=new Text( "  Dialed: $progress   Busy Agents:$busy/$max   Average:".round($avgPerc)."%   Time Spent: $timespentM:$timespentS   Time between calls: ".round($ms/1000,3)." Seconds (".round(60/($ms/1000),2)." CPM)");
     $txt->Pos( 500,342);
     $txt->SetAlign("center","","");
     $txt->SetFont(FF_FONT2,FS_NORMAL);

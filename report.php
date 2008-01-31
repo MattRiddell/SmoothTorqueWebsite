@@ -1,0 +1,28 @@
+<?
+require "header.php";
+require "header_campaign.php";
+$id=$_GET[id];
+$debug=$_GET[debug];
+if ($id<1){
+        exit(0);
+}
+?><script>
+var webcamimage;
+var imgBase="/graph2.php?id=<?echo $id;?>&debug=<?echo $debug;?>&x="
+var c = 0;
+function count()
+{
+ webcamimage.src=imgBase + (++c);
+}
+function init()
+{
+ webcamimage = document.getElementById("webcamimage");
+ if( webcamimage )
+ {
+  setInterval("count()",3000);
+ }
+}
+window.onload = init;
+</script>
+<a href="test.php?id=<?echo $id;?>"><img src="/images/chart_curve.png"  border="0"> View Engine Status</a><br />
+<img src="graph2.php?id=<?echo $id;?>&debug=<?echo $debug;?>" name="image" id="webcamimage" border="0"><br />

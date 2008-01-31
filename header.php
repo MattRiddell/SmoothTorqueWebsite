@@ -82,7 +82,7 @@ $self=$_SERVER['PHP_SELF'];
     //=======================================================================================================
     // Campaigns
     //=======================================================================================================
-    if ($self=="/campaigns.php"||$self=="/deletecampaign.php"||$self=="/editcampaign.php"||$self=="/addcampaign.php"||$self=="/stopcampaign.php"||$self=="/startcampaign.php"||$self=="/test.php"
+    if ($self=="/campaigns.php"||$self=="/report.php"||$self=="/resetlist.php"||$self=="/list.php"||$self=="/deletecampaign.php"||$self=="/editcampaign.php"||$self=="/addcampaign.php"||$self=="/stopcampaign.php"||$self=="/startcampaign.php"||$self=="/test.php"
     ){
         $thead="thead";
     } else {

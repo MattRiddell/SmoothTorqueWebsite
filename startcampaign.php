@@ -35,10 +35,10 @@ if ($_POST[context]==0) {
 }
 */
 
-$sqlx = 'SELECT campaigngroupid, username FROM customer WHERE username=\''.$_COOKIE[user].'\'';
+$sqlx = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
 $result=mysql_query($sqlx, $link) or die (mysql_error());;
 $campaigngroupid=mysql_result($result,0,'campaigngroupid');
-$username=mysql_result($result,0,'username');
+$username=$_COOKIE[user];
 
 
 $sql4="select trunkid from customer where campaigngroupid = ".$campaigngroupid;
@@ -55,16 +55,34 @@ if ($trunkid==-1){
     $dialstring=mysql_result($resultx,0,'dialstring');
 }
 
-
-
+$dncsql = "SELECT number.phonenumber FROM number LEFT JOIN dncnumber ON number.phonenumber=dncnumber.phonenumber WHERE dncnumber.phonenumber IS NOT NULL AND number.campaignid='$_GET[id]'";
+$resultdnc=mysql_query($dncsql, $link) or die (mysql_error());;
+//echo $dncsql."<br />";
+while ($row = mysql_fetch_assoc($resultdnc)) {
+//    echo $row[phonenumber]." is in dnc<br />";
+    echo "<!-- . -->";
+    $removedncsql = "UPDATE number set status = 'indnc' where phonenumber='$row[phonenumber]'";
+    $resultremovednc=mysql_query($removedncsql, $link) or die (mysql_error());;
+}
+//exit(0);
 
 $sql1="delete from queue where campaignid=".$_GET[id];
+$did = str_replace("-","",$_GET[did]);
+$did = str_replace("(","",$did);
+$did = str_replace(")","",$did);
+$did = str_replace(" ","",$did);
+
+$dialstring = str_replace("-","",$dialstring);
+$dialstring = str_replace(" ","",$dialstring);
+$dialstring = str_replace("(","",$dialstring);
+$dialstring = str_replace(")","",$dialstring);
+
 $sql2="INSERT INTO queue (campaignid,queuename,status,details,flags,transferclid,
     starttime,endtime,startdate,enddate,did,clid,context,maxcalls,maxchans,maxretries
     ,retrytime,waittime,trunk,astqueuename, accountcode) VALUES
     ('$_GET[id]','autostart-$_GET[id]','1','No details','0','$_GET[trclid]',
-    '00:00','23:59','2005-01-01','2020-01-01','$_GET[did]','$_GET[clid]',
-    '$_GET[context]','$_GET[agents]','500','0'
+    '00:00','23:59','2005-01-01','2020-01-01','$did','$_GET[clid]',
+    '$_GET[context]','$_GET[agents]','200','0'
     ,'0','30','".$dialstring."','$_GET[astqueuename]','stl-".$username."') ";
 //    echo $sql2;
 //exit(0);
