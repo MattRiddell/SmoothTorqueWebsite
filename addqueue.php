@@ -152,6 +152,27 @@ If you wish to play an announcement to the agent before they accept the call
 </select>
 <br />";
 
+$section[14] = "<form name=\"myform\" action=\"addqueue.php\" method=\"GET\">
+<b>Context</b><br />
+<br />
+This is where you decide what happens if someone in the queue presses a single
+digit while they are in the queue. The person will then go to the extension listed in
+this context (if it exists). Be aware that the person will lose their place in the queue.<br />
+";
+
+$section[15] = "<form name=\"myform\" action=\"addqueue.php\" method=\"GET\">
+Please enter the extension for the queue.
+<br>
+<br>
+<center>
+<input type=\"text\" name=\"context\" value=\"$_GET[context]\">
+<br />";
+
+//should have a bit to review the settings, and then accept
+//also need to mention that there are more fine tuning optIons in the edit queues page
+//I think that after specifying most of the stuff above the queue is pretty much defined
+
+
 $currentsection=$section[1+($_GET[section]-1)];
 ?>
 

@@ -10,27 +10,12 @@ $result=mysql_query($sql, $link) or die (mysql_error());;
 $campaigngroupid=mysql_result($result,0,'campaigngroupid');
 
 if (isset($_POST[name])){
-/*    require_once "PHPTelnet.php";
-
-    $telnet = new PHPTelnet();
-    $result = $telnet->Connect();
-    $telnet->DoCommand('selectcg', $result);
-    $telnet->DoCommand($_COOKIE[user], $result);
-    if (substr(trim($result),0,7)=="GroupID") {
-        $campaigngroupid=substr(trim($result),8);
-    }
-    $telnet->Disconnect();
-
- */
     $name=$_POST[name];
     $dialstring=$_POST[dialstring];
-    //    $sql="INSERT INTO campaign (groupid,name,description,messageid,messageid2,messageid3) VALUES ('customerid','$name', '$description', '$filename')";
-//    echo $sql;
-
-/*    require_once "sql.php";
-    $SMDB2=new SmDB();*/
+    $maxcps=$_POST[maxcps];
+    $maxchans=$_POST[maxchans];
     $sql="update trunk ".
-         "set name='$name', dialstring='$dialstring' where id=".$_POST[id];
+         "set name='$name', dialstring='$dialstring', maxcps='$maxcps', maxchans='$maxchans' where id=".$_POST[id];
     $result=mysql_query($sql, $link) or die (mysql_error());;
 /*    $SMDB2->executeUpdate($sql);*/
 
@@ -61,6 +46,16 @@ while ($row = mysql_fetch_assoc($result)) {
 
 <TR><TD CLASS="thead">Dial String</TD><TD>
 <INPUT TYPE="TEXT" NAME="dialstring" VALUE="<?echo $row[dialstring];?>" size="60">
+</TD>
+</TR>
+
+<TR><TD CLASS="thead">Max Calls Per Second (CPS)</TD><TD>
+<INPUT TYPE="TEXT" NAME="maxcps" VALUE="<?echo $row[maxcps];?>" size="60">
+</TD>
+</TR>
+
+<TR><TD CLASS="thead">Max Channels</TD><TD>
+<INPUT TYPE="TEXT" NAME="maxchans" VALUE="<?echo $row[maxchans];?>" size="60">
 </TD>
 </TR>
 

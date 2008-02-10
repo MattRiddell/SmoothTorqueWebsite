@@ -18,12 +18,6 @@ WebSite
 Username
 </TD>
 <TD CLASS="thead">
-Address Line 1
-</TD>
-<TD CLASS="thead">
-Address Line 2
-</TD>
-<TD CLASS="thead">
 City
 </TD>
 <TD CLASS="thead">
@@ -37,9 +31,6 @@ Fax
 </TD>
 <TD CLASS="thead">
 Trunk
-</TD>
-<TD CLASS="thead">
-Press 1s
 </TD>
 <TD CLASS="thead">
 </TD>
@@ -81,19 +72,19 @@ echo "<A HREF=\"editcustomer.php?id=".$row[id]."\"><img src=\"/images/pencil.png
 <?echo $row[username];?>
 </TD>
 <TD>
-<?echo $row[address1];?>
-</TD>
-<TD>
-<?echo $row[address2];?>
-</TD>
-<TD>
 <?echo $row[city];?>
 </TD>
 <TD>
 <?echo $row[country];?>
 </TD>
 <TD>
-<?echo $row[phone];?>
+<?
+if (strlen($row[phone])<15){
+    echo $row[phone];
+} else {
+    echo substr($row[phone],15)."...";
+}
+?>
 </TD>
 <TD>
 <?echo $row[fax];?>
@@ -108,9 +99,9 @@ if (strlen(trim($row[trunkname]))<1){
 }
 ?>
 </TD>
-<TD>
-<?
-/* this week */
+<?/*<TD>
+
+ this week
 $sql = 'select count(*) from cdr.cdr where date(calldate)<=curdate() and date(calldate)>=DATE_ADD(CURDATE(), INTERVAL -7
 DAY)
 and dst="1" and accountcode="stl-'.$row[username].'"';
@@ -118,20 +109,20 @@ $resultaa=mysql_query($sql, $link) or die (mysql_error());;
 $thisweek = mysql_result($resultaa,0,0);
 echo "This Week: $thisweek <br />";
 
-/* yesterday */
+ yesterday
 $sql = 'select count(*) from cdr.cdr where date(calldate)<curdate() and date(calldate)>=DATE_ADD(CURDATE(), INTERVAL -1 DAY)
 and dst="1"  and accountcode="stl-'.$row[username].'"';
 $resultaa=mysql_query($sql, $link) or die (mysql_error());;
 $yesterday = mysql_result($resultaa,0,0);
 echo "yesterday: $yesterday <br />";
 
-/* today */
+ today
 $sql = 'select count(*) from cdr.cdr where date(calldate)=curdate() and dst="1"  and accountcode="stl-'.$row[username].'"';
 $resultaa=mysql_query($sql, $link) or die (mysql_error());;
 $today = mysql_result($resultaa,0,0);
 echo "today: $today <br />";
-?>
-</TD>
+
+</TD>  */?>
 <TD>
 <a href="#" onclick="displaySmallMessage('includes/confirmDeleteCustomer.php?id=<?echo $row[id];?>');return false"><IMG SRC="/images/delete.png" BORDER="0"></a><br>
 </TD>

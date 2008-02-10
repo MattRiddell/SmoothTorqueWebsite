@@ -46,9 +46,10 @@ $resultx=mysql_query($sql4, $link) or die (mysql_error());;
 $trunkid=mysql_result($resultx,0,'trunkid');
 
 if ($trunkid==-1){
-    $sql3="select dialstring from trunk where current = 1";
+    $sql3="select dialstring, id from trunk where current = 1";
     $resultx=mysql_query($sql3, $link) or die (mysql_error());;
     $dialstring=mysql_result($resultx,0,'dialstring');
+    $trunkid = mysql_result($resultx,0,'id');
 } else {
     $sql3="select dialstring from trunk where id = ".$trunkid;
     $resultx=mysql_query($sql3, $link) or die (mysql_error());;
@@ -79,11 +80,11 @@ $dialstring = str_replace(")","",$dialstring);
 
 $sql2="INSERT INTO queue (campaignid,queuename,status,details,flags,transferclid,
     starttime,endtime,startdate,enddate,did,clid,context,maxcalls,maxchans,maxretries
-    ,retrytime,waittime,trunk,astqueuename, accountcode) VALUES
+    ,retrytime,waittime,trunk,astqueuename, accountcode, trunkid, customerID) VALUES
     ('$_GET[id]','autostart-$_GET[id]','1','No details','0','$_GET[trclid]',
     '00:00','23:59','2005-01-01','2020-01-01','$did','$_GET[clid]',
     '$_GET[context]','$_GET[agents]','200','0'
-    ,'0','30','".$dialstring."','$_GET[astqueuename]','stl-".$username."') ";
+    ,'0','30','".$dialstring."','$_GET[astqueuename]','stl-".$username."','$trunkid','$campaigngroupid') ";
 //    echo $sql2;
 //exit(0);
 //echo $sql2;

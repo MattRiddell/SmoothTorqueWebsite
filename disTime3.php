@@ -1,8 +1,13 @@
 <?
+//$time_start = microtime(true);
+
 //echo date().date('H:i:s');
 /*    flush();
 exit(0);*/
-
+//$time_start2 = microtime(true);
+//echo "A3: ".round(microtime(true)-$time_start2,3);*/
+//echo "x";
+//exit(0);
 /*$_POST = array_map(mysql_real_escape_string,$_POST);
 $_GET = array_map(mysql_real_escape_string,$_GET);
 */
@@ -27,6 +32,7 @@ $row = mysql_fetch_assoc($result);
 $backend=$row[value];
 
 $level=$_COOKIE[level];
+
 if ($level==sha1("level100")) {
     $sql = 'SELECT * FROM campaign';
 } else {
@@ -55,7 +61,7 @@ To create your first campaign, please click the Add Campaign button above.<br />
 </center>
 
 <?
-exit(0);
+//exit(0);
 }
 
 $user = $_COOKIE[user];
@@ -98,7 +104,9 @@ Percentage Busy
 <td style="background-image: url(/images/crb.gif);" width=2></td>
 </TR>
 <?
+
 while ($row = mysql_fetch_assoc($result)) {
+//echo "A1: ".round(microtime(true)-$time_start,3);
 
 $row = array_map(stripslashes,$row);
 
@@ -145,7 +153,10 @@ echo trim(substr($row[description],0,$max_str_len))."...";
 </TD>
 */?>
 <?
-$sql = 'SELECT count(*) as count from number where campaignid='.$row[id].' and status="dialed"';
+//echo "A2: ".round(microtime(true)-$time_start,3);
+
+
+/*$sql = 'SELECT count(*) as count from number where campaignid='.$row[id].' and status="dialed"';
 $result2=mysql_query($sql, $link) or die (mysql_error());;
 $row2 = mysql_fetch_assoc($result2);
 $count=$row2[count];
@@ -181,15 +192,15 @@ $unknown=mysql_result($result2,0,'count(*)');
 $sql = 'SELECT count(*) from number where campaignid='.$row[id].' and status="dialed"';
 $result2=mysql_query($sql, $link) or die (mysql_error());;
 $dialed=mysql_result($result2,0,'count(*)');
-
+*/
 $sql = 'SELECT count(*) from number where campaignid='.$row[id].' and status="new"';
 $result2=mysql_query($sql, $link) or die (mysql_error());;
 $new=mysql_result($result2,0,'count(*)');
 
-$sql = 'SELECT count(*) from number where campaignid='.$row[id].' and status="indnc"';
+/*$sql = 'SELECT count(*) from number where campaignid='.$row[id].' and status="indnc"';
 $result2=mysql_query($sql, $link) or die (mysql_error());;
 $indnc=mysql_result($result2,0,'count(*)');
-
+*/
 $sql = 'SELECT count(*) from number where campaignid='.$row[id];
 $result2=mysql_query($sql, $link) or die (mysql_error());;
 $count2=mysql_result($result2,0,'count(*)');
@@ -197,6 +208,8 @@ $count2=mysql_result($result2,0,'count(*)');
 $sql = 'SELECT status, flags, maxcalls, progress from queue where campaignid='.$row[id];
 $resultx=mysql_query($sql, $link) or die (mysql_error());;
 $rowx = mysql_fetch_assoc($resultx);
+
+
 
 $status=$rowx[status];
 $flags=$rowx[flags];
@@ -216,7 +229,7 @@ countx   = dialing
 //            echo "<b>Remaining: $new/$count2 Dialing: $dialing Busy: $busy Answered: $answered HungUp: $hungup Congested: $congested TimedOut: $timeout Unknown: $unknown Dialed: $dialed InDNC: $indnc</b>";
             ?>
             <img src="/images/percentImage.png" title="<?
-            echo "Remaining: $new/$count2 Dialing: $dialing Busy: $busy Answered: $answered HungUp: $hungup Congested: $congested TimedOut: $timeout Unknown: $unknown Dialed: $dialed InDNC: $indnc";?>"
+            echo "Remaining: $new/$count2\"";?>"
             class="percentImage"
             style="background-position: -<?echo ((100-(($new/$count2)*100))*1.2)-1; ?>px 0pt;" border="0" />
 <?
@@ -224,7 +237,7 @@ countx   = dialing
 //
             ?>
             <img src="/images/percentImage.png" title="<?
-            echo "Remaining: $new/$count2 Dialing: $dialing Busy: $busy Answered: $answered HungUp: $hungup Congested: $congested TimedOut: $timeout Unknown: $unknown Dialed: $dialed InDNC: $indnc";?>"
+            echo "Remaining: $new/$count2\"";?>"
             class="percentImage2"
             style="background-position: -<?echo ((100-(($new/$count2)*100))*1.2)-1; ?>px 0pt;" border="0" />
 <?
@@ -285,7 +298,7 @@ if ($status==101){
 <a title="View the graph for this campaign" href="test.php?id=<?echo $row[id];?>" class="abcd"><img src="/images/chart_curve.png" border="0"></a>&nbsp;
 <?}?>
 <?if ($backend == 0) {?>
-<a title="View the report for this campaign" href="report.php?id=<?echo $row[id];?>" class="abcd"><img src="/images/chart_pie.png" border="0"></a>&nbsp;
+<a title="View the report for this campaign" href="report.php?type=today&id=<?echo $row[id];?>" class="abcd"><img src="/images/chart_pie.png" border="0"></a>&nbsp;
 <?}?>
 <?
 if ($user!="demo"){
@@ -313,3 +326,6 @@ style="background-position: -<?echo 119-($perc*1.2); ?>px 0pt;" border="0" />
 ?>
 
 </TABLE>
+<?
+
+?>

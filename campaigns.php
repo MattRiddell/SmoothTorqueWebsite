@@ -1,4 +1,7 @@
 <?
+
+$time_start = microtime(true);
+
 include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(mysql_error());
 mysql_select_db("SineDialer", $link);
 if (isset($_GET[queueID])){
@@ -28,7 +31,7 @@ flush();
         $(function(){ // jquery onload
                 window.setInterval(function(){
                     $('#ajaxDiv').loadIfModified('disTime3.php?campaigngroupid=<?echo $campaigngroupid;?>&id=<?echo $_POST[campaignid];?>');  // jquery ajax load into div
-                },10000);
+                },30000);
         });
 
 </script>
@@ -41,7 +44,7 @@ flush();
                 function(){
                     $('#ajaxDiv').load('disTime3.php?campaigngroupid=<?echo $campaigngroupid;?>&id=<?echo $_POST[campaignid];?>');  // jquery ajax load into div
                 }
-                ,10000);
+                ,30000);
         });
 </script>
 <?}?>
@@ -56,4 +59,8 @@ include "disTime3.php";
 <?
 
 require "footer.php";
+
+// Sleep for a while
+usleep(100);
+
 ?>

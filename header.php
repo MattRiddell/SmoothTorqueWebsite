@@ -1,9 +1,42 @@
 <?php
 $config_file = "/stweb.conf";
 $comment = "#";
+/*$cmd = "ps aux |grep `cat /SmoothTorque/exampled.lock`";*/
+if (file_exists("/SmoothTorque/SmoothTorque.version")) {
+	$fp2 = fopen("/SmoothTorque/SmoothTorque.version", "r");
+	while (!feof($fp2)) {
+		$line = trim(fgets($fp2));
+		if (strlen($line)>0){
+			$version = $line;
+		}
+	}
+	fclose ($fp2);
+
+	echo "<!--Version: $version<br />-->";
+}
+/*
+if (file_exists("/SmoothTorque/exampled.lock")) {
+	$fp3 = fopen("/SmoothTorque/exampled.lock", "r");
+	while (!feof($fp2)) {
+		$line = trim(fgets($fp3));
+			if (strlen($line)>0){
+			$pid = $line;
+		}
+	}
+	fclose ($fp3);
+
+	if (is_file("/proc/$pid/status")) {
+//		echo "Running";
+	} else {
+		echo "<font color=\"#ff0000\"><center><b>The server is not running</b></center></font>";
+	}
+} else {
+		echo "<font color=\"#ff0000\"><center><b>The server is not running</b></center></font>";
+/*	echo "<font color=\"#ff0000\"><center>Backend Not running<a      */
+/*href=\"startbackend.php\"><b>Start Server</b></a></center></font>";*/
+/*} */
 
 $fp = fopen($config_file, "r");
-
 while (!feof($fp)) {
   $line = trim(fgets($fp));
   if ($line && substr($line,0,1)!=$comment) {

@@ -23,6 +23,12 @@ Name
 Dial String
 </TD>
 <TD CLASS="thead">
+Max CPS
+</TD>
+<TD CLASS="thead">
+Max Chans
+</TD>
+<TD CLASS="thead">
 
 </TD>
 </TR>
@@ -83,6 +89,12 @@ echo $row[dialstring];
 echo trim(substr($row[dialstring],0,25))."...";
 }
 ?>
+</TD>
+<TD>
+<?echo $row[maxcps];?>
+</TD>
+<TD>
+<?echo $row[maxchans];?>
 </TD>
 
 <TD>

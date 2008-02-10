@@ -145,7 +145,6 @@ for ($i=0;$i<240;$i++){
         $datax[$i] = "".(int)(240-$i);
 }
 $graph2->xaxis->SetTickLabels($datax);
-$graph2->img->SetAntiAliasing();
 $dplot3[] = new LinePLot($chart [ 'chart_data' ][ 2 ]);
 $dplot2[] = new LinePlot($chart [ 'chart_data' ][ 1 ]);
 $dplot[] = new LinePLot($chart [ 'chart_data' ][ 3 ]);
@@ -156,10 +155,11 @@ $dplot3[0]->SetWeight(3);
 $dplot[0]->SetColor("#ff0000");
 $dplot3[0]->SetColor("#ffff00");
 //$graph2->mark
-$dplot[0]->SetWeight(3);
+$dplot[0]->SetWeight(2);
 $graph2->ygrid->Show(true ,true);
 $graph2->xgrid->Show();
 //$graph2->title->Set('Filled Y-grid');
+$graph2->img->SetAntiAliasing();
 $graph2->legend->SetLayout(LEGEND_HOR);
 $graph2->img->SetMargin(35,23,05,80);
 $graph2->img->SetAntiAliasing(true);
