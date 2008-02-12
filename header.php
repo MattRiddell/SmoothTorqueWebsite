@@ -7,11 +7,13 @@ if (file_exists("/SmoothTorque/SmoothTorque.version")) {
 	while (!feof($fp2)) {
 		$line = trim(fgets($fp2));
 		if (strlen($line)>0){
-			$version = $line;
+			$version = substr($line,0,strlen($line)-1);
 		}
 	}
 	fclose ($fp2);
-
+    if($version>0){
+        $version/=100;
+    }
 	echo "<!--Version: $version<br />-->";
 }
 /*

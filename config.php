@@ -45,7 +45,7 @@ $licencekey = mysql_result($result,0,'value');
     <a href="setparameter.php?parameter=backend&value=0"><IMG SRC="/images/ch.gif" BORDER="1" WIDTH="16" HEIGHT="16"></a>
 <?}?>
 </td>
-<td>Linux Backend</td>
+<td>Linux Backend (<b>Version <?echo $version;?></b>)</td>
 </tr>
 <tr  class="tborder2"><td><?if ($backend == 1) {?>
     <IMG SRC="/images/tick.png" BORDER="1" WIDTH="16" HEIGHT="16" class="abcd">
