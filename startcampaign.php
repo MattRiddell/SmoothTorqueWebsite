@@ -35,9 +35,11 @@ if ($_POST[context]==0) {
 }
 */
 
-$sqlx = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
+$sqlx = 'SELECT campaigngroupid, maxchans, maxcps FROM customer WHERE username=\''.$_COOKIE[user].'\'';
 $result=mysql_query($sqlx, $link) or die (mysql_error());;
 $campaigngroupid=mysql_result($result,0,'campaigngroupid');
+$maxchans=mysql_result($result,0,'maxchans');
+$maxcps=mysql_result($result,0,'maxcps');
 $username=$_COOKIE[user];
 
 
@@ -80,11 +82,11 @@ $dialstring = str_replace(")","",$dialstring);
 
 $sql2="INSERT INTO queue (campaignid,queuename,status,details,flags,transferclid,
     starttime,endtime,startdate,enddate,did,clid,context,maxcalls,maxchans,maxretries
-    ,retrytime,waittime,trunk,astqueuename, accountcode, trunkid, customerID) VALUES
+    ,retrytime,waittime,trunk,astqueuename, accountcode, trunkid, customerID, maxcps) VALUES
     ('$_GET[id]','autostart-$_GET[id]','1','No details','0','$_GET[trclid]',
     '00:00','23:59','2005-01-01','2020-01-01','$did','$_GET[clid]',
-    '$_GET[context]','$_GET[agents]','200','0'
-    ,'0','30','".$dialstring."','$_GET[astqueuename]','stl-".$username."','$trunkid','$campaigngroupid') ";
+    '$_GET[context]','$_GET[agents]','$maxchans','0'
+    ,'0','30','".$dialstring."','$_GET[astqueuename]','stl-".$username."','$trunkid','$campaigngroupid','$maxcps') ";
 //    echo $sql2;
 //exit(0);
 //echo $sql2;
