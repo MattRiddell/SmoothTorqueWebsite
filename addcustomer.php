@@ -20,6 +20,8 @@ $company=($_POST[name]);
 $trunkid=($_POST[trunkid]);
 $zip=($_POST[zip]);
 $state=($_POST[state]);
+$maxcps=$_POST[maxcps];
+$maxchans=$_POST[maxchans];
 
     $sql="INSERT INTO campaigngroup (name,description) VALUES ('$company','$description')";
 //    echo $sql;
@@ -27,9 +29,9 @@ $state=($_POST[state]);
     $insertedID = mysql_insert_id();
 
     $sql="INSERT INTO customer (username,password,campaigngroupid,address1,address2,city,
-    country,phone,fax,email,website,security,company,trunkid,zip,state)
+    country,phone,fax,email,website,security,company,trunkid,zip,state, maxchans, maxcps)
     VALUES ('$username','$password','$insertedID','$address1','$address2','$city',
-    '$country','$phone','$fax','$email','$website','$security','$company','$trunkid','$zip','$state')";
+    '$country','$phone','$fax','$email','$website','$security','$company','$trunkid','$zip','$state', $maxchans, $maxcps)";
 
 //    echo $sql;
     $result=mysql_query($sql, $link) or die (mysql_error());;
@@ -53,6 +55,12 @@ require "header_customer.php";
 </TD>
 </TR><TR><TD CLASS="thead">Customer Details</TD><TD>
 <INPUT TYPE="TEXT" NAME="description" VALUE="<?echo $row[description];?>" size="60">
+</TD>
+</TR><TR><TD CLASS="thead">Maximum Calls Per Second</TD><TD>
+<INPUT TYPE="TEXT" NAME="maxcps" VALUE="<?echo $row2[maxcps];?>" size="60">
+</TD>
+</TR><TR><TD CLASS="thead">Maximum Channels</TD><TD>
+<INPUT TYPE="TEXT" NAME="maxchans" VALUE="<?echo $row2[maxchans];?>" size="60">
 </TD>
 </TR><TR><TD CLASS="thead">Username</TD><TD>
 <INPUT TYPE="TEXT" NAME="username" VALUE="<?echo $row[username];?>" size="60">

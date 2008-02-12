@@ -22,6 +22,8 @@ $company=$_POST[name];
 $trunkid=$_POST[trunkid];
 $zip=$_POST[zip];
 $state=$_POST[state];
+$maxcps=$_POST[maxcps];
+$maxchans=$_POST[maxchans];
 
     $sql="update campaigngroup set name='$company',description='$description' where id=".$_POST[campaigngroupid];
 //    echo $sql;
@@ -30,7 +32,7 @@ $state=$_POST[state];
 
     $sql="update customer set username='$username',address1='$address1',address2='$address2',
     city='$city',country='$country',phone='$phone',fax='$fax',email='$email',website='$website',
-    security='$security',company='$company', trunkid='$trunkid', zip='$zip', state='$state' WHERE id=".$_POST[id];
+    security='$security',company='$company', trunkid='$trunkid', zip='$zip', state='$state' , maxcps=$maxcps, maxchans=$maxchans WHERE id=".$_POST[id];
 
     //echo $sql;
     $result=mysql_query($sql, $link) or die (mysql_error());;
@@ -66,6 +68,12 @@ $row2 = mysql_fetch_assoc($result2);
 </TD>
 </TR><TR><TD CLASS="thead">Customer Details</TD><TD>
 <INPUT TYPE="TEXT" NAME="description" VALUE="<?echo $row2[description];?>" size="60">
+</TD>
+</TR><TR><TD CLASS="thead">Maximum Calls Per Second</TD><TD>
+<INPUT TYPE="TEXT" NAME="maxcps" VALUE="<?echo $row[maxcps];?>" size="60">
+</TD>
+</TR><TR><TD CLASS="thead">Maximum Channels</TD><TD>
+<INPUT TYPE="TEXT" NAME="maxchans" VALUE="<?echo $row[maxchans];?>" size="60">
 </TD>
 </TR><TR><TD CLASS="thead">Username</TD><TD>
 <INPUT TYPE="TEXT" NAME="username" VALUE="<?echo $row[username];?>" size="60">
