@@ -14,7 +14,6 @@ if (file_exists("/SmoothTorque/SmoothTorque.version")) {
     if($version>0){
         $version/=100;
     }
-	echo "<!--Version: $version<br />-->";
 }
 /*
 if (file_exists("/SmoothTorque/exampled.lock")) {
@@ -92,6 +91,7 @@ if ($_COOKIE["loggedin"]==sha1("LoggedIn".$user)){
     setcookie("loggedin",sha1("LoggedIn".$user),time()+60000);
     setcookie("user",$user,time()+60000);
     setcookie("level",$level,time()+60000);
+	echo "<!--Version: $version<br />-->";
 $sql = 'SELECT value FROM config WHERE parameter=\'backend\'';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $backend = mysql_result($result,0,'value');
@@ -228,7 +228,8 @@ $self=$_SERVER['PHP_SELF'];
     if ($myPage=="/index.php"|$myPage=="/login.php"){
         //echo "LOGGING IN ".$user." - ".$_COOKIE["loggedin"];
     } else {
-        header("Location: /");
+?>    <META HTTP-EQUIV=REFRESH CONTENT="0; URL=/index.php">
+<?
         exit;
     }
 }
