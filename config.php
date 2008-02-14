@@ -7,6 +7,8 @@ if (isset($_POST[colour])){
     fwrite($add,"LOGO=$_POST[logo]\n");
     fwrite($add,"TEXT=$_POST[text]\n");
     fwrite($add,"SOX=$_POST[sox]\n");
+    fwrite($add,"USERID=$_POST[userid]\n");
+    fwrite($add,"LICENCE=$_POST[licencekey]\n");
     fclose($add);
 
 }
@@ -96,12 +98,16 @@ Licence Details:
 </td>
 <td>
 <?
-$handle = fopen("http://www.venturevoip.com/licence.php?userid=$userid&licence=$licencekey", "rb");
-$contents = '';
+$handle = fopen("http://www.venturevoip.com/licencest.php?userid=$userid&licence=$licencekey", "rb");
+$contents2 = '';
 while (!feof($handle)) {
-  $contents .= fread($handle, 8192);
+  $contents2 .= fread($handle, 8192);
 }
+$contents3 = explode("\n",$contents2);
+//print_r($contents3);
 fclose($handle);
+$contents = $contents3[0];
+$hash = $contents3[1];
 if ($contents<1000){
     if ($contents==0){
         echo "Unlicensed demo";
@@ -124,6 +130,7 @@ if ($contents<1000){
 	$maxchans=$contents-(10000*round($test));
 	echo round($test-2)." Servers (Max. ".$maxchans." Channels)";
 }
+echo "<br />$hash";
 ?>
 
 
