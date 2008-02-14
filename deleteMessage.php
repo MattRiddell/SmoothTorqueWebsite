@@ -15,12 +15,30 @@ if (isset($_POST[id])) {
         include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(mysql_error());
 mysql_select_db("SineDialer", $link);
 
+$count = 0;
+$sql="SELECT count(*) from campaign where messageid=".($_GET[id]);
+$result=mysql_query($sql, $link) or die (mysql_error());
+$count+=mysql_result($result,0,0);
+
+$sql="SELECT count(*) from campaign where messageid2=".($_GET[id]);
+$result=mysql_query($sql, $link) or die (mysql_error());
+$count+=mysql_result($result,0,0);
+
+$sql="SELECT count(*) from campaign where messageid3=".($_GET[id]);
+$result=mysql_query($sql, $link) or die (mysql_error());
+$count+=mysql_result($result,0,0);
+
+if ($count > 0) {
+    require "header.php";
+    echo "Sorry this message is currently being used by a campaign";
+?>    <meta http-equiv="refresh" content="0;url=/messages.php"><?
+} else {
 $sql="DELETE FROM campaignmessage WHERE id=".($_GET[id]);
 //        echo $sql;
         $result=mysql_query($sql, $link) or die (mysql_error());;
 
         //$SMDB2->executeUpdate($sql);
     }
-
+}
 ?>
 <meta http-equiv="refresh" content="0;url=/messages.php">
