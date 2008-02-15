@@ -72,7 +72,7 @@ echo mysql_result($result,0,0);
 <br />
 <a href="recycle.php?id=<?echo $_GET[id];?>&type=noanswer">
 Reset <?
-$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="noanswer"';
+$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="timeout"';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 echo mysql_result($result,0,0);
 ?> No Answer numbers</a>
