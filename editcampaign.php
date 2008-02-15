@@ -68,7 +68,7 @@ require "header_campaign.php";
 </TD>
 </TR>
 <?
-$sql="SELECT * from campaignmessage";
+$sql="SELECT * from campaignmessage where customer_id=".$campaigngroupid;
 $result=mysql_query($sql,$link) or die (mysql_error());
 $count=0;
 while ($row2[$count] = mysql_fetch_assoc($result)) {
