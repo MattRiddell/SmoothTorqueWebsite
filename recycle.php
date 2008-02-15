@@ -49,6 +49,13 @@ $result=mysql_query($sql, $link) or die (mysql_error());;
 echo mysql_result($result,0,0);
 ?> congested numbers</a>
 <br />
+<a href="recycle.php?id=<?echo $_GET[id];?>&type=dialed">
+Reset <?
+$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="dialed"';
+$result=mysql_query($sql, $link) or die (mysql_error());;
+echo mysql_result($result,0,0);
+?> congested numbers</a>
+<br />
 <br />
 </td>
 <td>
