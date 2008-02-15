@@ -2,7 +2,11 @@
 if (isset($_GET[type])){
     include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(mysql_error());
     mysql_select_db("SineDialer", $link);
-    $sql = 'UPDATE number SET status="new" where status="'.$_GET[type].'" and campaignid='.$_GET[id];
+    if ($_GET[type]=="unknown") {
+        $sql = 'UPDATE number SET status="new" where status like "unknown%" and campaignid='.$_GET[id];
+    } else {
+        $sql = 'UPDATE number SET status="new" where status="'.$_GET[type].'" and campaignid='.$_GET[id];
+    }
     $result=mysql_query($sql, $link) or die (mysql_error());;
 //    echo "Resetting status of $_GET[type] numbers in $_GET[id]";
     include "campaigns.php";
@@ -76,6 +80,13 @@ $sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="t
 $result=mysql_query($sql, $link) or die (mysql_error());;
 echo mysql_result($result,0,0);
 ?> No Answer numbers</a>
+<br />
+<a href="recycle.php?id=<?echo $_GET[id];?>&type=unknown">
+Reset <?
+$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status like "unknown%"';
+$result=mysql_query($sql, $link) or die (mysql_error());;
+echo mysql_result($result,0,0);
+?> Unknown numbers</a>
 <br />
 <br />
 </td>
