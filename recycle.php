@@ -63,6 +63,20 @@ $result=mysql_query($sql, $link) or die (mysql_error());;
 echo mysql_result($result,0,0);
 ?> dialing numbers</a>
 <br />
+<a href="recycle.php?id=<?echo $_GET[id];?>&type=amd">
+Reset <?
+$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="amd"';
+$result=mysql_query($sql, $link) or die (mysql_error());;
+echo mysql_result($result,0,0);
+?> amd numbers</a>
+<br />
+<a href="recycle.php?id=<?echo $_GET[id];?>&type=noanswer">
+Reset <?
+$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="noanswer"';
+$result=mysql_query($sql, $link) or die (mysql_error());;
+echo mysql_result($result,0,0);
+?> No Answer numbers</a>
+<br />
 <br />
 </td>
 <td>
