@@ -251,9 +251,9 @@ THIS IS CAUSING AN ERROR!
 <script type="text/javascript" src="/js/ajax.js"></script>
 <script type="text/javascript" src="/js/modal-message.js"></script>
 <script type="text/javascript" src="/js/ajax-dynamic-content.js"></script>
-<?/*
+<script type="text/javascript" src="/usableforms.js"></script><?/*
 THIS IS CAUSING AN ERROR!
-<script type="text/javascript" src="/usableforms.js"></script>*/?>
+*/?>
 <script language="javascript" type="text/javascript" src="/upload.js"></script>
 <link rel="stylesheet" href="/upload.css" type="text/css" media="screen" title="Upload" charset="utf-8" />
 
