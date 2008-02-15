@@ -70,7 +70,7 @@ $result=mysql_query($sql, $link) or die (mysql_error());;
 echo mysql_result($result,0,0);
 ?> amd numbers</a>
 <br />
-<a href="recycle.php?id=<?echo $_GET[id];?>&type=noanswer">
+<a href="recycle.php?id=<?echo $_GET[id];?>&type=timeout">
 Reset <?
 $sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="timeout"';
 $result=mysql_query($sql, $link) or die (mysql_error());;
