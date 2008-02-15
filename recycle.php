@@ -54,7 +54,14 @@ Reset <?
 $sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="dialed"';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 echo mysql_result($result,0,0);
-?> congested numbers</a>
+?> dialed numbers</a>
+<br />
+<a href="recycle.php?id=<?echo $_GET[id];?>&type=dialing">
+Reset <?
+$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="dialing"';
+$result=mysql_query($sql, $link) or die (mysql_error());;
+echo mysql_result($result,0,0);
+?> dialing numbers</a>
 <br />
 <br />
 </td>
