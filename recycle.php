@@ -4,6 +4,8 @@ if (isset($_GET[type])){
     mysql_select_db("SineDialer", $link);
     if ($_GET[type]=="unknown") {
         $sql = 'UPDATE number SET status="new" where status like "unknown%" and campaignid='.$_GET[id];
+    } else if ($_GET[type]=="all") {
+        $sql = 'UPDATE number SET status="new" where campaignid='.$_GET[id];
     } else {
         $sql = 'UPDATE number SET status="new" where status="'.$_GET[type].'" and campaignid='.$_GET[id];
     }
@@ -29,9 +31,9 @@ $sql = 'SELECT * from campaign where id='.$_GET[id];
 $result=mysql_query($sql, $link) or die (mysql_error());;
 //$backend = mysql_result($result,0,'value');
 $row = mysql_fetch_assoc($result);
-echo $row[name];
+//echo $row[name];
 ?>
-</b><br />
+</b>
 <a href="recycle.php?id=<?echo $_GET[id];?>&type=failed">
 Reset <?
 $sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="failed"';
@@ -81,12 +83,27 @@ $result=mysql_query($sql, $link) or die (mysql_error());;
 echo mysql_result($result,0,0);
 ?> No Answer numbers</a>
 <br />
+
 <a href="recycle.php?id=<?echo $_GET[id];?>&type=unknown">
 Reset <?
 $sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status like "unknown%"';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 echo mysql_result($result,0,0);
 ?> Unknown numbers</a>
+<br />
+<a href="recycle.php?id=<?echo $_GET[id];?>&type=hungup">
+Reset <?
+$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="hungup"';
+$result=mysql_query($sql, $link) or die (mysql_error());;
+echo mysql_result($result,0,0);
+?> Hungup numbers</a>
+<br />
+<a href="recycle.php?id=<?echo $_GET[id];?>&type=all">
+Reset <?
+$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status!="new"';
+$result=mysql_query($sql, $link) or die (mysql_error());;
+echo mysql_result($result,0,0);
+?> All numbers</a>
 <br />
 <br />
 </td>
