@@ -60,7 +60,7 @@ $class=" class=\"tborderx\"  onmouseover=\"style.backgroundColor='#84DFC1';\" on
 <TD >
 <?
 if (strlen($row[company])<15){
-echo "<A HREF=\"editcustomer.php?id=".$row[id]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".$row[company]."</A>";
+echo "<A HREF=\"editcustomer.php?id=".$row[id]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".$row[company]."</A>&nbsp;";
 } else {
 echo "<A HREF=\"editcustomer.php?id=".$row[id]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".trim(substr($row[company],0,15))."...</A>";
 }
@@ -69,6 +69,7 @@ echo "<A HREF=\"editcustomer.php?id=".$row[id]."\"><img src=\"/images/pencil.png
 <TD><A HREF="<?echo $row[website];?>" TARGET="<?echo $row[website];?>"><?echo $row[website];?></A>
 </TD>
 <TD>
+<?echo "<A HREF=\"changepassword.php?id=".$row[id]."\" title=\"Change Password\"><img src=\"/images/lock_edit.png\" border=\"0\" align=\"right\" title=\"Change Password\"></A>";?>
 <?echo $row[username];?>
 </TD>
 <TD>
