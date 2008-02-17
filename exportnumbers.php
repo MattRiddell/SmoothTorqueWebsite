@@ -50,7 +50,8 @@ From here you can chose a campaign that you would like to export the numbers fro
     <TD>Type:</TD><TD>
         <SELECT NAME="type">
         <OPTION VALUE="pressed1">Pressed 1</OPTION>
-        <OPTION VALUE="hungup">Answered</OPTION>
+        <OPTION VALUE="hungup">Did Not Press 1</OPTION>
+        <OPTION VALUE="answered">All Answered</OPTION>
         <OPTION VALUE="failed">Failed</OPTION>
         <OPTION VALUE="busy">Busy</OPTION>
         <OPTION VALUE="congested">Congested</OPTION>
@@ -97,6 +98,8 @@ if (isset($_GET[campaignid])){
 $start=0;
 if ($type == "unknown") {
     $sql = 'SELECT *, UNIX_TIMESTAMP(datetime) as newdate FROM number WHERE campaignid='.$campaignid.' and status like "unknown%"';
+} else if ($type == "answered") {
+    $sql = 'SELECT *, UNIX_TIMESTAMP(datetime) as newdate FROM number WHERE campaignid='.$campaignid.' and status="amd" or status="hungup" or status="pressed1"';
 } else {
     $sql = 'SELECT *, UNIX_TIMESTAMP(datetime) as newdate FROM number WHERE campaignid='.$campaignid.' and status="'.$type.'"';
 }
@@ -114,7 +117,7 @@ $class=" class=\"tborderx\"";
 ?><?
 $newdate = date('l dS \of F Y h:i:s A', $row["newdate"]);
 
-echo $row[phonenumber].",".$newdate."\n";?>
+echo $row[phonenumber].",".$newdate.",".$row[status]."\n";?>
 <?
 }
 
