@@ -21,11 +21,9 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
 <br />
 Make a choice from one of the following: <br /><br />
 <a href="/viewnumbers.php"><img src="/images/magnifier.png" border="0">View existing phone numbers</a><br />
-<br />
+<a href="/searchnumbers.php"><img src="/images/magnifier.png" border="0">Search for a phone number</a><br />
 <a href="/upload.php"><img src="/images/page_white_get.png" border="0">Upload numbers from a text file</a><br />
-<br />
 <a href="/addnumbers.php"><img src="/images/page_white_add.png" border="0">Type in a few test numbers</a><br />
-<br />
 <a href="/gennumbers.php"><img src="/images/page_white_lightning.png" border="0">Generate numbers automatically</a><br />
 </td>
 <td>
