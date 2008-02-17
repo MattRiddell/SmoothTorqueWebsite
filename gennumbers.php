@@ -71,8 +71,14 @@ Which campaign would you like to add numbers to?<br /><br />
 </td></tr></table>
 <?
  for ($i=$_POST[start];$i<=$_POST[end];$i++){
+ $count++;
     $myarray[$count]=$i;
-    $sql="INSERT IGNORE INTO number (campaignid,phonenumber,status,type) VALUES ($_POST[campaignid],$i,'new',0)";
+ }
+shuffle($myarray);
+
+ $count = 0;
+ for ($i=$_POST[start];$i<=$_POST[end];$i++){
+    $sql="INSERT IGNORE INTO number (campaignid,phonenumber,status,type) VALUES ($_POST[campaignid],$myarray[$count],'new',0)";
     $result=mysql_query($sql, $link) or die (mysql_error());;
 
     $count++;
