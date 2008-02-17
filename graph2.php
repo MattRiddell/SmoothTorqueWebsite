@@ -174,7 +174,7 @@ $browserx=array(
 /* "dialed ($dialed ".round((($dialed/$total)*100),2)."%%)",*/
  " Busy ($busy ".round((($busy/$total)*100),2)."%%)",
  /*" Answered ($answered ".round((($answered/$total)*100),2)."%%)",*/
- " Hungup ($hungup ".round((($hungup/$total)*100),2)."%%)",
+ " Didn't Press 1 ($hungup ".round((($hungup/$total)*100),2)."%%)",
  " Congested ($congested ".round((($congested/$total)*100),2)."%%)",
  " No Answer ($timeout ".round((($timeout/$total)*100),2)."%%)",
  " Unknown ($unknown ".round((($unknown/$total)*100),2)."%%)",
