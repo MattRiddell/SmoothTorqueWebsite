@@ -9,11 +9,30 @@ $campaigngroupid=mysql_result($result,0,'campaigngroupid');
 if (isset($_POST[queuename])){
     //$queueid=$_POST[queueid];
     $campaignid=$_POST[campaignid];
+$sql = 'SELECT * FROM campaign WHERE id=\''.$campaignid.'\'';
+$result=mysql_query($sql, $link) or die (mysql_error());;
+$row = mysql_fetch_assoc($result);
+//print_r($row);
+//exit(0);
+//echo "<br><br><br>";
+$trclid=mysql_result($result,0,'trclid');
+$clid=mysql_result($result,0,'clid');
+//echo "CLID: ".$clid;
+
+if (strlen($trclid)==0) {
+    $trclid = "notrclid";
+}
+$did=mysql_result($result,0,'did');
+$mode=mysql_result($result,0,'mode');
+$context=mysql_result($result,0,'context');
+$maxagents=mysql_result($result,0,'maxagents');
+$astqueuename=mysql_result($result,0,'astqueuename');
+
+    $id=$_POST[campaignid];
     $queuename=$_POST[queuename];
     $status=$_POST[status];
     $details=$_POST[details];
     $flags="0";
-    $transferclid=$_POST[transferclid];
     //9:00 am
     //5:00 pm
     $starttime=$_POST[starttime];
@@ -43,23 +62,70 @@ if (isset($_POST[queuename])){
 
     $startdate=$_POST[startdate];
     $enddate=$_POST[enddate];
-    $did=$_POST[did];
-    $clid=$_POST[clid];
-    $context=$_POST[context];
-    $maxcalls=$_POST[maxcalls];
-    $maxchans=$_POST[maxchans];
-    $maxretries=$_POST[maxretries];
-    $retrytime=$_POST[retrytime];
-    $waittime=$_POST[waittime];
-    $sql="INSERT INTO queue (campaignid,queuename,status,details,flags,transferclid,
-    starttime,endtime,startdate,enddate,did,clid,context,maxcalls,maxchans,maxretries
-    ,retrytime,waittime) VALUES
-    ('$campaignid','$queuename','$status','$details','$flags','$transferclid',
-    '$starttime','$endtime','$startdate','$enddate','$did','$clid','$context','$maxcalls','$maxchans','$maxretries'
-    ,'$retrytime','$waittime') ";
 
-//    $sql="INSERT INTO campaign (groupid,name,description,messageid,messageid2,messageid3) VALUES ('$campaigngroupid','$name', '$description', '$messageid','$messageid2','$messageid3')";
-    $result=mysql_query($sql, $link) or die (mysql_error());;
+$sqlx = 'SELECT campaigngroupid, maxchans, maxcps FROM customer WHERE username=\''.$_COOKIE[user].'\'';
+$result=mysql_query($sqlx, $link) or die (mysql_error());;
+$campaigngroupid=mysql_result($result,0,'campaigngroupid');
+$maxchans=mysql_result($result,0,'maxchans');
+$maxcps=mysql_result($result,0,'maxcps');
+$username=$_COOKIE[user];
+
+
+$sql4="select trunkid from customer where campaigngroupid = ".$campaigngroupid;
+$resultx=mysql_query($sql4, $link) or die (mysql_error());;
+$trunkid=mysql_result($resultx,0,'trunkid');
+
+if ($trunkid==-1){
+    $sql3="select dialstring, id from trunk where current = 1";
+    $resultx=mysql_query($sql3, $link) or die (mysql_error());;
+    $dialstring=mysql_result($resultx,0,'dialstring');
+    $trunkid = mysql_result($resultx,0,'id');
+} else {
+    $sql3="select dialstring from trunk where id = ".$trunkid;
+    $resultx=mysql_query($sql3, $link) or die (mysql_error());;
+    $dialstring=mysql_result($resultx,0,'dialstring');
+}
+
+$dncsql = "SELECT number.phonenumber FROM number LEFT JOIN dncnumber ON number.phonenumber=dncnumber.phonenumber WHERE dncnumber.phonenumber IS NOT NULL AND number.campaignid='$_GET[id]'";
+$resultdnc=mysql_query($dncsql, $link) or die (mysql_error());;
+//echo $dncsql."<br />";
+while ($row = mysql_fetch_assoc($resultdnc)) {
+//    echo $row[phonenumber]." is in dnc<br />";
+    echo "<!-- . -->";
+    $removedncsql = "UPDATE number set status = 'indnc' where phonenumber='$row[phonenumber]'";
+    $resultremovednc=mysql_query($removedncsql, $link) or die (mysql_error());;
+}
+//exit(0);
+
+$sql1="delete from queue where campaignid=".$id;
+$did = str_replace("-","",$did);
+$did = str_replace("(","",$did);
+$did = str_replace(")","",$did);
+$did = str_replace(" ","",$did);
+
+$dialstring = str_replace("-","",$dialstring);
+$dialstring = str_replace(" ","",$dialstring);
+$dialstring = str_replace("(","",$dialstring);
+$dialstring = str_replace(")","",$dialstring);
+/*
+if (strlen($astqueuename)==0){
+    $astqueuename = "noqueue";
+}*/
+$sql2="INSERT INTO queue (campaignid,queuename,status,details,flags,transferclid,
+    starttime,endtime,startdate,enddate,did,clid,context,maxcalls,maxchans,maxretries
+    ,retrytime,waittime,trunk,astqueuename, accountcode, trunkid, customerID, maxcps) VALUES
+    ('$id','$queuename','1','$details','0','$trclid',
+    '$starttime','$endtime','$startdate','$enddate','$did','$clid',
+    '$context','$maxagents','$maxchans','0'
+    ,'0','30','".$dialstring."','$astqueuename','stl-".$username."','$trunkid','$campaigngroupid','$maxcps') ";
+   // echo $sql2."<br />";
+//exit(0);
+//echo $sql2;
+//$resultx=mysql_query($sql1, $link) or die (mysql_error());;
+$resultx=mysql_query($sql2, $link) or die (mysql_error());;
+
+
+
     include("schedule.php");
     exit;
 }
@@ -103,73 +169,44 @@ if (!isset($_POST[campaignid])){
 </TR><TR><TD CLASS="thead">Queue Details</TD><TD>
 <INPUT TYPE="TEXT" NAME="details" VALUE="<?echo $row[details];?>" size="60">
 </TD>
-</TR><TR><TD CLASS="thead">Start Time</TD>
+</TR><TR><TD CLASS="thead">Schedule Start Time</TD>
 <td><input id='starttime' name="starttime" type='text' value='9:00 am' size=8 maxlength=8 ONBLUR="validateDatePicker(this)">
 <IMG SRC="timePickerImages/timepicker.gif" BORDER="0" ALT="Pick a Time!" ONCLICK="selectTime(this,starttime)" STYLE="cursor:hand"></td>
 </TD>
-</TR><TR><TD CLASS="thead">End Time</TD>
+</TR><TR><TD CLASS="thead">Schedule End Time</TD>
 <td><input id='endtime' name="endtime" type='text' value='5:00 pm' size=8 maxlength=8 ONBLUR="validateDatePicker(this)">
 <IMG SRC="timePickerImages/timepicker.gif" BORDER="0" ALT="Pick a Time!" ONCLICK="selectTime(this,endtime)" STYLE="cursor:hand"></td>
 </TD>
-</TR><TR><TD CLASS="thead">Start Date</TD><TD>
+</TR><TR><TD CLASS="thead">Schedule Start Date</TD><TD>
 <input name="startdate">
 
 <input type=button value="select" onclick="displayDatePicker('startdate', false, 'ymd', '-');">
 </TD>
-</TR><TR><TD CLASS="thead">End Date</TD><TD>
+</TR><TR><TD CLASS="thead">Schedule End Date</TD><TD>
 <input name="enddate">
 
 <input type=button value="select" onclick="displayDatePicker('enddate', false, 'ymd', '-');">
 </TD>
-</TR><TR><TD CLASS="thead">DID Number (ls3 for load simulation)</TD><TD>
-<INPUT TYPE="TEXT" NAME="did" VALUE="ls3" size="60">
-</TD>
-</TR><TR><TD CLASS="thead">Caller ID</TD><TD>
-<INPUT TYPE="TEXT" NAME="clid" VALUE="<?echo $row[clid];?>" size="60">
-</TD>
-</TR><TR><TD CLASS="thead">Transfer Caller ID</TD><TD>
-<INPUT TYPE="TEXT" NAME="transferclid" VALUE="<?echo $row[transferclid];?>" size="60">
-</TD>
-</TR><TR><TD CLASS="thead">Type of Campaign</TD><TD>
-<SELECT NAME="context">
-<OPTION VALUE="0">Load Simulation</OPTION>
-<?/*
-<OPTION VALUE="1">Answer Machine Only</OPTION>
-<OPTION VALUE="2">Live Only</OPTION>
-<OPTION VALUE="3">Live and Answer Machine</OPTION>
-<OPTION VALUE="4">Spare</OPTION>
-<OPTION VALUE="5">Spare 2</OPTION>
-<OPTION VALUE="6">Spare 3</OPTION>
-<OPTION VALUE="7">Spare 4</OPTION>
-<OPTION VALUE="8">Spare 5</OPTION>
-<OPTION VALUE="9">Spare 6</OPTION>
-<OPTION VALUE="10">Spare 6</OPTION>
-*/?>
-</SELECT>
-</TD>
-</TR><TR><TD CLASS="thead">Type of Schedule</TD><TD>
+</TR>
+
+
+<TR><TD CLASS="thead">Type of Schedule</TD><TD>
 <SELECT NAME="status">
 <OPTION VALUE="1">Start at this time</OPTION>
 <OPTION VALUE="2">Stop at this time</OPTION>
 </SELECT>
 </TD>
-</TR><TR><TD CLASS="thead">Max Number of Calls</TD><TD>
-<INPUT TYPE="TEXT" NAME="maxcalls" VALUE="<?echo $row[maxcalls];?>" size="60">
+</TR>
+<TR>
+<TD COLSPAN=2 ALIGN="RIGHT">
+<br />Please note that the start and end dates and times are for when you<br />
+would like the dialer to read this information.  For example, a start<br />
+time of 8am and an end time of 9am means that if the dialer reads this<br />
+entry and the time is between 8am and 9am then it should act on it.
+<br /><br />
 </TD>
-</TR><TR><TD CLASS="thead">Max Number of Channels</TD><TD>
-<INPUT TYPE="TEXT" NAME="maxchans" VALUE="<?echo $row[maxchans];?>" size="60">
-</TD>
-</TR><TR><TD CLASS="thead">Max Retries</TD><TD>
-<INPUT TYPE="TEXT" NAME="maxretries" VALUE="<?echo $row[maxretries];?>" size="60">
-</TD>
-</TR><TR><TD CLASS="thead">Retry Time</TD><TD>
-<INPUT TYPE="TEXT" NAME="retrytime" VALUE="<?echo $row[retrytime];?>" size="60">
-</TD>
-</TR><TR><TD CLASS="thead">Wait Time</TD><TD>
-<INPUT TYPE="TEXT" NAME="waittime" VALUE="<?echo $row[waittime];?>" size="60">
-</TD>
-
-</TR><TR><TD COLSPAN=2 ALIGN="RIGHT">
+</TR>
+<TR><TD COLSPAN=2 ALIGN="RIGHT">
 <INPUT TYPE="SUBMIT" VALUE="Add Schedule">
 </TD>
 </TR>

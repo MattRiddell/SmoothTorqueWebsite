@@ -154,6 +154,15 @@ $self=$_SERVER['PHP_SELF'];
         $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
     }
     $menu.='<TD class="'.$thead.'"><A HREF="/messages.php"><img src="/images/sound.png" border="0" align="left">Messages</A>&nbsp;</TD>';
+    //=======================================================================================================
+    // Schedules
+    //=======================================================================================================
+    if ($self=="/editschedule.php"||$self=="/addschedule.php"||$self=="/deleteschedule.php"||$self=="/schedule.php"){
+        $thead="thead";
+    } else {
+        $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
+    }
+    $menu.='<TD class="'.$thead.'"><A HREF="/schedule.php"><img src="/images/clock.png" border="0" align="left">Schedules</A>&nbsp;</TD>';
     if ($level==sha1("level100")){
 
         //=======================================================================================================

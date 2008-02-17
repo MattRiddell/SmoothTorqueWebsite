@@ -32,7 +32,7 @@ $campaigngroupid=($_GET[campaigngroupid]);
 //$_POST[campaignid]=$id;
 //$_GET[id]=$id;
 //}
-$sql = 'SELECT * FROM queue left join campaign ON queue.campaignid=campaign.id WHERE campaign.groupid='.$campaigngroupid;
+$sql = 'SELECT * FROM queue left join campaign ON queue.campaignid=campaign.id WHERE campaign.groupid='.$campaigngroupid.' and status>0';
 //echo $sql;
 $result=mysql_query($sql, $link) or die (mysql_error());;
 ?>
@@ -47,27 +47,12 @@ Details
 <TD CLASS="thead">
 Campaign
 </TD>
-<TD CLASS="thead">
-Start
-</TD>
-<TD CLASS="thead">
-End
-</TD>
 <?/*<TD CLASS="thead">
 
 </TD>
 */?>
 <TD CLASS="thead">
 Agents
-</TD>
-<TD CLASS="thead">
-Progress
-</TD>
-
-</TD>
-<TD CLASS="thead">
-%
-
 </TD>
 <TD CLASS="thead">
 Status
@@ -103,14 +88,19 @@ if ($row[flags]>0){
 <TD>
 <?
 if (strlen($row[queuename])>14){
+//<A HREF="editschedule.php?id=<xx?echo $row[queueID]?xx>">
 ?>
-<A HREF="editschedule.php?id=<?echo $row[queueID]?>"><?echo trim(substr($row[queuename],0,15))."...";?></A>
+<?echo trim(substr($row[queuename],0,15))."...";?>
 <?
+//</A>
 } else {
+//<A HREF="editschedule.php?id=<xx?echo $row[queueID]?xx>">
+
 ?>
-<A HREF="editschedule.php?id=<?echo $row[queueID]?>"><?echo $row[queuename];?></A>
+<?echo $row[queuename];?>
 
 <?
+//</A>
 
 }
 ?>
@@ -138,7 +128,7 @@ if (strlen($name)>9){
 <A HREF="editcampaign.php?id=<?echo $row[campaignID]?>"><?echo $name;?></A>
 
 <?
-}?>
+}/*?>
 
 </TD>
 <TD>
@@ -147,7 +137,7 @@ if (strlen($name)>9){
 <TD>
 <?echo $row[enddate]." ".$row[endtime];?>
 </TD>
-<?/*<TD>
+<?*//*<TD>
 <?
 $time=$row[timespent];
 $hours=floor($time/60/60);
@@ -170,28 +160,11 @@ echo $row[maxcalls];
 }
 ?>
 </B></TD>
-<TD><B>
-<?
-if ($row[status]==101){
-echo $row[progress];
-}
-?>
-</B></TD>
-
-<TD>
-<?
-//echo $row[flags]."/".$row[maxcalls];
-//echo $perc;
-if ($row[flags]>0){
-?>
-<img src="/images/percentImage.png" alt="<?echo $perc;?>%" class="percentImage" style="background-position: -<?echo 119-($perc*1.2); ?>px 0pt;" />
-<?}?>
-</TD>
 <TD>
 <?
 switch($row[status]){
 case 1:
-    echo "Queued";
+    echo "Start - Not Run";
     break;
 case 2:
     echo "Stop - Not Run";
@@ -201,6 +174,9 @@ case 101:
     break;
 case 102:
     echo "Processed <A HREF=\"schedule.php?status=2&campaignid=".$_POST[campaignid]."&queueID=".$row[queueID]."\"><IMG SRC=\"/images/reset.gif\" BORDER=\"0\" ALT=\"RESET\"></A>";
+    break;
+default:
+    echo "Not Running";
     break;
 }
 ?>

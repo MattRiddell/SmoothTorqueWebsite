@@ -50,33 +50,13 @@ $out=_get_browser();
 //print_r($out)
 if ($out[browser]=="MSIE"){
 ?>
-<script type="text/javascript" src="/ajax/jquery.js"></script>
-        <script type="text/javascript">
-        $(function(){ // jquery onload
-                window.setInterval(function(){ // setInterval code
-                        $('#ajaxDiv').loadIfModified('disTime.php?campaigngroupid=<?echo $campaigngroupid;?>&id=<?echo $_POST[campaignid];?>');  // jquery ajax load into div
-                },5000);
-        });
-        
-        </script>
  <?} else {?>
-<script type="text/javascript" src="/ajax/jquery.js"></script>
-        <script type="text/javascript">
-        $(function(){ // jquery onload
-                window.setInterval(function(){ // setInterval code
-                        $('#ajaxDiv').load('disTime.php?campaigngroupid=<?echo $campaigngroupid;?>&id=<?echo $_POST[campaignid];?>');  // jquery ajax load into div
-                },5000);
-        });
-        
-        </script>
-
-<?}?> 
+<?}?>
 <div id="ajaxDiv">
 <?
 $id=$_POST[campaignid];include "disTime.php";?>
-</div>   
+</div>
 <?
 
 require "footer.php";
 ?>
-
