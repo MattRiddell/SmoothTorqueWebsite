@@ -74,6 +74,9 @@ if (isset($_GET[campaignid])){
 Number
 </TD>
 <TD CLASS="thead">
+Last Updated
+</TD>
+<TD CLASS="thead">
 Status
 </TD>
 <TD CLASS="thead">
@@ -100,7 +103,7 @@ $sql = 'SELECT count(*) FROM number WHERE campaignid='.$campaignid;
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $max=mysql_result($result,0,'count(*)');
 
-$sql = 'SELECT * FROM number WHERE campaignid='.$campaignid.' and phonenumber="'.$phonenumber.'"order by status asc';
+$sql = 'SELECT *, UNIX_TIMESTAMP(datetime) as newdate FROM number WHERE campaignid='.$campaignid.' and phonenumber="'.$phonenumber.'"order by status asc';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
 
@@ -115,7 +118,10 @@ $class=" class=\"tborderx\"";
 ?>
 <TR <?echo $class;?>>
 <TD>
-<?echo $row[phonenumber];?>
+<?echo "<b>".$row[phonenumber]."</b></td><td>";
+$newdate = date(DATE_RFC822, $row["newdate"]);
+echo " ".$newdate;?>
+
 </TD>
 <TD>
 <?echo $row[status];?>
