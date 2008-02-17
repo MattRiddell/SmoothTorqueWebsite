@@ -167,8 +167,9 @@ $class=" class=\"tborderx\"";
 }
 ?>
 <TR <?echo $class;?>>
-<TD>
+<TD><b>
 <?echo $row[phonenumber];?>
+</b>
 </TD>
 <TD>
 <?
