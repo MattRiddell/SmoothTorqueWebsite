@@ -67,6 +67,9 @@ if (isset($_GET[campaignid])){
 Number
 </TD>
 <TD CLASS="thead">
+Last Updated
+</TD>
+<TD CLASS="thead">
 Status
 </TD>
 <TD CLASS="thead">
@@ -87,19 +90,71 @@ if ($_GET[start]>0){
 $sql = 'SELECT count(*) FROM number WHERE campaignid='.$campaignid;
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $max=mysql_result($result,0,'count(*)');
+if (isset($_GET[type])){
+    if ($_GET[type]!="all") {
+        if ($_GET[type]!="unknown") {
+            if (strlen($_GET[type])>0){
+            $type = " and status='$_GET[type]'";
+            }
+        } else {
+            $type = " and status like 'unknown%'";
+        }
+    }
+}
 
-$sql = 'SELECT * FROM number WHERE campaignid='.$campaignid.' order by status asc LIMIT '.$start.',20';
+$sql = 'SELECT *, UNIX_TIMESTAMP(datetime) as newdate FROM number WHERE campaignid='.$campaignid.' '.$type.' order by status asc LIMIT '.$start.',20';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
+if ($_GET[type]!="all") {
+    echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&start=0&type=all">All Numbers</a> &nbsp;';
+} else {
+    echo "<b>All Numbers</b>&nbsp;";
+}
+if ($_GET[type]!="pressed1") {
+    echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&start=0&type=pressed1">Pressed 1</a> &nbsp;';
+} else {
+    echo "<b>Pressed 1</b>&nbsp;";
+}
+if ($_GET[type]!="busy") {
+    echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&start=0&type=busy">Busy</a> &nbsp;';
+} else {
+    echo "<b>Busy</b>&nbsp;";
+}
+if ($_GET[type]!="failed") {
+    echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&start=0&type=failed">Failed</a> &nbsp;';
+} else {
+    echo "<b>Failed</b>&nbsp;";
+}
+if ($_GET[type]!="amd") {
+    echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&start=0&type=amd">Answer Machine</a> &nbsp;';
+} else {
+    echo "<b>Answer Machine</b>&nbsp;";
+}
+if ($_GET[type]!="unknown") {
+    echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&start=0&type=unknown">Unknown</a> &nbsp;';
+} else {
+    echo "<b>Unknown</b>&nbsp;";
+}
+if ($_GET[type]!="hungup") {
+    echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&start=0&type=hungup">Answered</a> &nbsp;';
+} else {
+    echo "<b>Answered</b>&nbsp;";
+}
+if ($_GET[type]!="congested") {
+    echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&start=0&type=congested">Congested</a> &nbsp;';
+} else {
+    echo "<b>Congested</b>&nbsp;";
+}
+echo "<br />";
 
-echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&start=0"><img src="/images/resultset_first.png" border="0"></a> ';
-echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&start='.($start-20).'"><img src="/images/resultset_previous.png" border="0"></a> ';
+echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&type='.$_GET[type].'&start=0"><img src="/images/resultset_first.png" border="0"></a> ';
+echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&type='.$_GET[type].'&start='.($start-20).'"><img src="/images/resultset_previous.png" border="0"></a> ';
 
 for ($x=$start;$x<$start+200;$x+=20){
-echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&start='.$x.'">'.($x/20).'</a> ';
+echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&type='.$_GET[type].'&start='.$x.'">'.($x/20).'</a> ';
 }
-echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&start='.($x+20).'"><img src="/images/resultset_next.png" border="0"></a> ';
-echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&start='.(($max-20)+$max%20).'"><img src="/images/resultset_last.png" border="0"></a> ';
+echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&type='.$_GET[type].'&start='.($x+20).'"><img src="/images/resultset_next.png" border="0"></a> ';
+echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&type='.$_GET[type].'&start='.(($max-20)+$max%20).'"><img src="/images/resultset_last.png" border="0"></a> ';
 echo '<br />';
 echo '<br />';
 while ($row = mysql_fetch_assoc($result)) {
@@ -114,6 +169,12 @@ $class=" class=\"tborderx\"";
 <TR <?echo $class;?>>
 <TD>
 <?echo $row[phonenumber];?>
+</TD>
+<TD>
+<?
+$newdate = date('l dS \of F Y h:i:s A', $row["newdate"]);
+
+echo $newdate;?>
 </TD>
 <TD>
 <?echo $row[status];?>
@@ -140,4 +201,3 @@ if ($row[status] != "new") {
 }
 require "footer.php";
 ?>
-
