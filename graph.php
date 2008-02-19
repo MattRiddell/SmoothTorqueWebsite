@@ -20,7 +20,7 @@ foreach ($lines2 as $line_num => $line) {
                         $busy=substr(trim($line),6);
                 }
                 if (substr(trim($line),0,3)=="Max") {
-                        $max = substr(trim($line),5);
+                        $max = trim(substr(trim($line),5));
                 }
                 if (substr(trim($line),0,4)=="Done") {
                         $dialed = substr(trim($line),6);
@@ -57,6 +57,12 @@ foreach ($lines2 as $line_num => $line) {
                         $timespent = substr(trim($line),5);
                         $timespentM = floor($timespent/60);
                         $timespentS = $timespent%60;
+                        if ($timespentS < 10) {
+                            $timespentS = "0".$timespentS;
+                        }
+                        if ($timespentM < 10) {
+                            $timespentM = "0".$timespentM;
+                        }
 //                      $timespentS = $timespent;
 
                 }
@@ -151,9 +157,9 @@ $dplot[] = new LinePLot($chart [ 'chart_data' ][ 3 ]);
 //$dplot[0]->SetFillColor("#ff0000@0.8");
 $dplot2[0]->SetFillGradient("#00ff00","#0000ff@0.6");
 //$dplot3[0]->SetFillGradient("#ff0000@0.5","#ff0000@0.5");
-$dplot3[0]->SetWeight(3);
+$dplot3[0]->SetWeight(2);
 $dplot[0]->SetColor("#ff0000");
-$dplot3[0]->SetColor("#ffff00");
+$dplot3[0]->SetColor("#004466");
 //$graph2->mark
 $dplot[0]->SetWeight(2);
 $graph2->ygrid->Show(true ,true);
@@ -164,11 +170,11 @@ $graph2->legend->SetLayout(LEGEND_HOR);
 $graph2->img->SetMargin(35,23,05,80);
 $graph2->img->SetAntiAliasing(true);
 
-$dplot3[0]->SetLegend(' Ideal Maximum Speed');
+$dplot3[0]->SetLegend(' Speed Attractor');
 $dplot2[0]->SetLegend(' Staff on Phone');
 $dplot[0]->SetLegend(' Current Speed');
 
-$graph2->legend->SetFrameWeight(2);
+$graph2->legend->SetFrameWeight(1);
 $graph2->legend->SetShadow('black@0.8',4);
 $graph2->legend->SetFillColor('black@0.5');
 $graph2->legend->SetColor('white');

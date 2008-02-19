@@ -31,7 +31,7 @@ flush();
         $(function(){ // jquery onload
                 window.setInterval(function(){
                     $('#ajaxDiv').loadIfModified('disTime3.php?campaigngroupid=<?echo $campaigngroupid;?>&id=<?echo $_POST[campaignid];?>');  // jquery ajax load into div
-                },30000);
+                },10000);
         });
 
 </script>
@@ -44,7 +44,7 @@ flush();
                 function(){
                     $('#ajaxDiv').load('disTime3.php?campaigngroupid=<?echo $campaigngroupid;?>&id=<?echo $_POST[campaignid];?>');  // jquery ajax load into div
                 }
-                ,30000);
+                ,10000);
         });
 </script>
 <?}?>

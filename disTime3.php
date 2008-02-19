@@ -34,9 +34,9 @@ $backend=$row[value];
 $level=$_COOKIE[level];
 
 if ($level==sha1("level100")) {
-    $sql = 'SELECT * FROM campaign';
+    $sql = 'SELECT * FROM campaign order by name';
 } else {
-    $sql = 'SELECT * FROM campaign WHERE groupid='.$campaigngroupid;
+    $sql = 'SELECT * FROM campaign WHERE groupid='.$campaigngroupid.' order by name';
 }
 $result=mysql_query($sql, $link) or die (mysql_error());;
 //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
