@@ -9,7 +9,7 @@ include("./jpgraph_pie3d.php");
 if ($edit == "today") {
     $timedate = " and date(datetime)=curdate()";
 } else if ($edit == "yesterday") {
-    $timedate = " and date(datetime)<curdate() and date(datetime)>DATE_ADD(CURDATE(), INTERVAL -1 DAY)";
+    $timedate = " and date(datetime)<curdate() and date(datetime)>DATE_ADD(CURDATE(), INTERVAL -2 DAY)";
 }
 $found = 0;
 $sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status!="new" and status!="dialing" and status!="dialed" and status!="answered" '.$timedate;
@@ -205,7 +205,7 @@ $p1->ExplodeAll();
 }
 $graph -> Add($p1);            //    <------- this line
 //$graph->setShadow();
-$graph->title->set("Remaining Numbers: $new/".($total2)." (dialing $dialing)");
+$graph->title->set("Dialed: ".($total2-$dialing-$new)." Remaining: $new Total: ".($total2)." Dialing: $dialing");
 $graph->title->SetFont( FF_FONT1, FS_BOLD);
 $graph->SetColor("#eeeeee@0.5");
 $graph->img->SetAntiAliasing();

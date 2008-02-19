@@ -27,15 +27,15 @@ if (file_exists("/SmoothTorque/exampled.lock")) {
 	fclose ($fp3);
 
 	if (is_file("/proc/$pid/status")) {
-//		echo "Running";
+		echo "Running";
 	} else {
 		echo "<font color=\"#ff0000\"><center><b>The server is not running</b></center></font>";
 	}
 } else {
-		echo "<font color=\"#ff0000\"><center><b>The server is not running</b></center></font>";
+		echo "<font color=\"#ff0000\"><center><b>The server is not running</b></center></font>";*/
 /*	echo "<font color=\"#ff0000\"><center>Backend Not running<a      */
 /*href=\"startbackend.php\"><b>Start Server</b></a></center></font>";*/
-/*} */
+////////}
 
 $fp = fopen($config_file, "r");
 while (!feof($fp)) {
