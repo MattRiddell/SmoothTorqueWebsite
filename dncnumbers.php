@@ -26,7 +26,7 @@ Make a choice from one of the following: <br /><br />
 <br />
 <a href="/uploaddnc.php"><img src="/images/page_white_get.png" border="0">Upload numbers from a text file</a><br />
 <br />
-<a href="/adddncnumbers.php"><img src="/images/page_white_add.png" border="0">Type in a few test numbers</a><br />
+<a href="/adddncnumbers.php"><img src="/images/page_white_add.png" border="0">Add DNC number(s) manually.</a><br />
 <br />
 </td>
 <td>
