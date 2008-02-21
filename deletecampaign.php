@@ -19,10 +19,10 @@ require "header.php";
 require "header_campaign.php";
 
 ?>
-           
+
 <table class="tborder" align="center" border="0" cellpadding="0" cellspacing="2">
 <TR><TD>
-<CENTER>Are you Sure You want to delete this record?<BR><BR>
+<CENTER>Are you sure you want to delete this record?<BR><BR>
 </TD></TR>
 <TR><TD>
 <?
@@ -32,8 +32,8 @@ $result=mysql_query($sql, $link) or die (mysql_error());;
 while ($row = mysql_fetch_assoc($result)) {
 	$row = array_map(stripslashes,$row);
     echo "<CENTER><B>".$row[name]." - ".$row[description]."</B><BR><BR>";
-    echo '<A HREF="deletecampaign.php?id='.($_GET[id]).'&sure=yes">Yes, Delete it</A><BR>';
-    echo '<A HREF="campaigns.php">No, Don\'t Delete It</A></CENTER>';
+    echo '<A HREF="deletecampaign.php?id='.($_GET[id]).'&sure=yes">Yes, delete it</A><BR>';
+    echo '<A HREF="campaigns.php">No, don\'t delete it</A></CENTER>';
 ?>
 </TD></TR>
 <TR><TD>
@@ -45,4 +45,3 @@ while ($row = mysql_fetch_assoc($result)) {
 }
 require "footer.php";
 ?>
-
