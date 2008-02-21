@@ -257,6 +257,190 @@ $self=$_SERVER['PHP_SELF'];
 THIS IS CAUSING AN ERROR!
 <script src="js/eep.js" type="text/javascript"></script>
 */?>
+<script language="JavaScript" type="text/JavaScript">
+
+function whatPaySelected(myval){
+if (myval == '0') {
+    if (document.all) {
+        document.all['xx1'].style.display = "none";
+        document.all['xx2'].style.display = "none";
+        document.all['xx3'].style.display = "none";
+        document.all['xx4'].style.display = "none";
+        document.all['xx5'].style.display = "none";
+        document.all['xx6'].style.display = "visible";
+    } else {
+        document.getElementById('xx1').style.display='none';
+        document.getElementById('xx2').style.display='none';
+        document.getElementById('xx3').style.display='none';
+        document.getElementById('xx4').style.display='none';
+        document.getElementById('xx5').style.display='none';
+        document.getElementById('xx6').style.display='';
+    }
+} else if (myval == '1') {
+    if (document.all) {
+        document.all['xx1'].style.display = "none";
+        document.all['xx2'].style.display = "none";
+        document.all['xx3'].style.display = "visible";
+        document.all['xx4'].style.display = "none";
+        document.all['xx5'].style.display = "visible";
+        document.all['xx6'].style.display = "visible";
+    } else {
+        document.getElementById('xx1').style.display='none';
+        document.getElementById('xx2').style.display='none';
+        document.getElementById('xx3').style.display='';
+        document.getElementById('xx4').style.display='none';
+        document.getElementById('xx5').style.display='';
+        document.getElementById('xx6').style.display='';
+    }
+} else if (myval == '2') {
+    if (document.all) {
+        document.all['xx1'].style.display = "visible";
+        document.all['xx2'].style.display = "non";
+        document.all['xx3'].style.display = "none";
+        document.all['xx4'].style.display = "none";
+        document.all['xx5'].style.display = "visible";
+        document.all['xx6'].style.display = "visible";
+    } else {
+        document.getElementById('xx1').style.display='';
+        document.getElementById('xx2').style.display='none';
+        document.getElementById('xx3').style.display='none';
+        document.getElementById('xx4').style.display='none';
+        document.getElementById('xx5').style.display='';
+        document.getElementById('xx6').style.display='';
+    }
+} else if (myval == '4') {
+    if (document.all) {
+        document.all['xx1'].style.display = "visible";
+        document.all['xx2'].style.display = "visible";
+        document.all['xx3'].style.display = "none";
+        document.all['xx4'].style.display = "visible";
+        document.all['xx5'].style.display = "visible";
+        document.all['xx6'].style.display = "visible";
+    } else {
+        document.getElementById('xx1').style.display='';
+        document.getElementById('xx2').style.display='';
+        document.getElementById('xx3').style.display='none';
+        document.getElementById('xx4').style.display='';
+        document.getElementById('xx5').style.display='';
+        document.getElementById('xx6').style.display='';
+    }
+} else if (myval == '5') {
+    if (document.all) {
+        document.all['xx1'].style.display = "visible";
+        document.all['xx2'].style.display = "none";
+        document.all['xx3'].style.display = "visible";
+        document.all['xx4'].style.display = "none";
+        document.all['xx5'].style.display = "visible";
+        document.all['xx6'].style.display = "visible";
+    } else {
+        document.getElementById('xx1').style.display='';
+        document.getElementById('xx2').style.display='none';
+        document.getElementById('xx3').style.display='';
+        document.getElementById('xx4').style.display='none';
+        document.getElementById('xx5').style.display='';
+        document.getElementById('xx6').style.display='';
+    }
+} else if (myval == '6') {
+    if (document.all) {
+        document.all['xx1'].style.display = "visible";
+        document.all['xx2'].style.display = "none";
+        document.all['xx3'].style.display = "none";
+        document.all['xx4'].style.display = "none";
+        document.all['xx5'].style.display = "visible";
+        document.all['xx6'].style.display = "visible";
+    } else {
+        document.getElementById('xx1').style.display='';
+        document.getElementById('xx2').style.display='none';
+        document.getElementById('xx3').style.display='none';
+        document.getElementById('xx4').style.display='none';
+        document.getElementById('xx5').style.display='';
+        document.getElementById('xx6').style.display='';
+    }
+} else if (myval == '7') {
+    if (document.all) {
+        document.all['xx1'].style.display = "visible";
+        document.all['xx2'].style.display = "none";
+        document.all['xx3'].style.display = "none";
+        document.all['xx4'].style.display = "none";
+        document.all['xx5'].style.display = "visible";
+        document.all['xx6'].style.display = "visible";
+    } else {
+        document.getElementById('xx1').style.display='none';
+        document.getElementById('xx2').style.display='';
+        document.getElementById('xx3').style.display='none';
+        document.getElementById('xx4').style.display='none';
+        document.getElementById('xx5').style.display='';
+        document.getElementById('xx6').style.display='';
+    }
+} else if (myval == '8') {
+    if (document.all) {
+        document.all['xx1'].style.display = "visible";
+        document.all['xx2'].style.display = "none";
+        document.all['xx3'].style.display = "none";
+        document.all['xx4'].style.display = "none";
+        document.all['xx5'].style.display = "visible";
+        document.all['xx6'].style.display = "visible";
+    } else {
+        document.getElementById('xx1').style.display='none';
+        document.getElementById('xx2').style.display='none';
+        document.getElementById('xx3').style.display='none';
+        document.getElementById('xx4').style.display='none';
+        document.getElementById('xx5').style.display='';
+        document.getElementById('xx6').style.display='';
+    }
+} else if (myval == '9') {
+    if (document.all) {
+        document.all['xx1'].style.display = "visible";
+        document.all['xx2'].style.display = "none";
+        document.all['xx3'].style.display = "none";
+        document.all['xx4'].style.display = "none";
+        document.all['xx5'].style.display = "visible";
+        document.all['xx6'].style.display = "visible";
+    } else {
+        document.getElementById('xx1').style.display='none';
+        document.getElementById('xx2').style.display='none';
+        document.getElementById('xx3').style.display='none';
+        document.getElementById('xx4').style.display='none';
+        document.getElementById('xx5').style.display='';
+        document.getElementById('xx6').style.display='';
+    }
+} else if (myval == '054') {
+    if (document.all) {
+        document.all['xx1'].style.display = "visible";
+        document.all['xx2'].style.display = "visible";
+        document.all['xx3'].style.display = "visible";
+        document.all['xx4'].style.display = "visible";
+        document.all['xx5'].style.display = "visible";
+        document.all['xx6'].style.display = "visible";
+    } else {
+        document.getElementById('xx1').style.display='';
+        document.getElementById('xx2').style.display='';
+        document.getElementById('xx3').style.display='';
+        document.getElementById('xx4').style.display='';
+        document.getElementById('xx5').style.display='';
+        document.getElementById('xx6').style.display='';
+    }
+} else if (myval == '-1') {
+
+    if (document.all) {
+        document.all['xx1'].style.display = "none";
+        document.all['xx2'].style.display = "none";
+        document.all['xx3'].style.display = "none";
+        document.all['xx4'].style.display = "none";
+        document.all['xx5'].style.display = "none";
+        document.all['xx6'].style.display = "none";
+    } else {
+        document.getElementById('xx1').style.display='none';
+        document.getElementById('xx2').style.display='none';
+        document.getElementById('xx3').style.display='none';
+        document.getElementById('xx4').style.display='none';
+        document.getElementById('xx5').style.display='none';
+        document.getElementById('xx6').style.display='none';
+    }
+}
+}
+</script>
+
 <script type="text/javascript" src="/js/ajax.js"></script>
 <script type="text/javascript" src="/js/modal-message.js"></script>
 <script type="text/javascript" src="/js/ajax-dynamic-content.js"></script>
@@ -277,7 +461,7 @@ THIS IS CAUSING AN ERROR!
 <script type="text/javascript" src="/ajax/picker.js"></script>
 <script type="text/javascript" src="/header.js"></script>
 </HEAD>
-<BODY BGCOLOR="<?echo $config_values['COLOUR'];?>" onload="hideItem('hideShow');">
+<BODY BGCOLOR="<?echo $config_values['COLOUR'];?>" onLoad="hideShow">
 <?
 
 if (isset($menu)){

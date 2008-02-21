@@ -51,7 +51,7 @@ require "header_campaign.php";
 
 ?>
 
-<FORM ACTION="editcampaign.php" METHOD="POST">
+<FORM ACTION="editcampaign.php" METHOD="POST" id="addcampaign">
 <table class="tborder" align="center" border="0" cellpadding="0" cellspacing="2">
 <?
 ?>
@@ -65,6 +65,44 @@ require "header_campaign.php";
 <a href="#" onclick="displaySmallMessage('includes/help.php?section=A short description of the campaign in case you are not able to tell from the Campaign Name');return false"><img src="/images/help.png" border="0"></a>
 </TD><TD>
 <INPUT TYPE="TEXT" NAME="description" VALUE="<?echo $row[description];?>" size="60">
+</TD>
+</TR>
+		<tr>
+			<td class="thead" width=200>Mode
+			            <a href="#" onclick="displaySmallMessage('includes/help.php?section=What type of campaign you would like to run. <br /><br />If you are connected to the machine doing the calling then chose Queue Mode.  If you would like to receive any connected calls at a particular phone number, chose DID Mode.  Normally you will use DID Mode unless you have been told to use Queue Mode.');return false"><img src="/images/help.png" border="0"></a>
+			</td>
+            <td width=*>
+			<input type="radio" name="mode" value="didmode" rel="didmode" id="mode_did" <? echo ($row[mode]==0?"CHECKED":"");?> />
+			<label for="mode_did">DID Mode</label>
+			<input type="radio" name="mode" value="mode_queue" rel="queue" id="mode_queue"  <? echo ($row[mode]==1?"CHECKED":"");?> />
+			<label for="mode_queue">Queue Mode</label></td>
+		</tr>
+        <TR><TD CLASS="thead">Type of Campaign
+        <a href="#" onclick="displayLargeMessage('includes/help.php?section=<b>Load Simulation</b><br />Simple test campaign.  Does not actually make any phone calls<br /><br /><b>Answer Machine Only</b><br />Human: Hang Up. Answer Machine: Leave Message<br /><br /><b>Immediate Live Only</b><br />Human: Connect immediately to the call center. Answer Machine: hang up.<br /><br /><b>Press 1 Live Only</b><br />Human: Play the person message and then if they press 1, transfer to the call center.  Answer Machine: Hang Up.<br /><br /><b>Immediate Live and Answer Machine</b><br />Human: Connect immediately to the call center. Answer Machine: Leave the answer machine message.<br /><br /><b>Press 1 Live and Answer Machine</b><br />Human: Play the person message and then if they press 1, transfer to the call center.  Answer Machine: Leave the answer machine message.');return false"><img src="/images/help.png" border="0" onload="whatPaySelected('<?echo $row[context];?>')"></a>
+        </TD><TD>
+        <?
+//        print_r($row);
+        ?>
+<SELECT NAME="context" id="context" onchange="whatPaySelected(this.value)">
+<OPTION VALUE="-1" SELECTED>Please chose a type of campaign...</OPTION>
+<OPTION VALUE="0" <?echo $row[context]==0?"SELECTED":""?>>Load Simulation</OPTION>
+<OPTION VALUE="1" <?echo $row[context]==1?"SELECTED":""?>>Answer Machine Only</OPTION>
+<OPTION VALUE="2" <?echo $row[context]==2?"SELECTED":""?>>Immediate Live</OPTION>
+<OPTION VALUE="4" <?echo $row[context]==4?"SELECTED":""?>>Press 1 Live Only</OPTION>
+<OPTION VALUE="5" <?echo $row[context]==5?"SELECTED":""?>>Immediate Live and Answer Machine</OPTION>
+<OPTION VALUE="3" <?echo $row[context]==3?"SELECTED":""?>>Press 1 Live and Answer Machine</OPTION>
+<OPTION VALUE="6" <?echo $row[context]==6?"SELECTED":""?>>Direct Transfer (coming soon)</OPTION>
+<OPTION VALUE="7" <?echo $row[context]==7?"SELECTED":""?>>Immediate Message Playback (coming soon)</OPTION>
+<OPTION VALUE="8" <?echo $row[context]==8?"SELECTED":""?>>Fax Broadcast (coming soon)</OPTION>
+<OPTION VALUE="9" <?echo $row[context]==9?"SELECTED":""?>>SMS Broadcast (coming soon)</OPTION>
+
+<?/*<OPTION VALUE="5" <?if ($row[context]==5){echo "SELECTED";}?>>Spare 2</OPTION>
+<OPTION VALUE="6" <?if ($row[context]==6){echo "SELECTED";}?>>Spare 3</OPTION>
+<OPTION VALUE="7" <?if ($row[context]==7){echo "SELECTED";}?>>Spare 4</OPTION>
+<OPTION VALUE="8" <?if ($row[context]==8){echo "SELECTED";}?>>Spare 5</OPTION>
+<OPTION VALUE="9" <?if ($row[context]==9){echo "SELECTED";}?>>Spare 6</OPTION>
+<OPTION VALUE="10" <?if ($row[context]==10){echo "SELECTED";}?>>Spare 6</OPTION>*/?>
+</SELECT>
 </TD>
 </TR>
 <?
@@ -91,7 +129,7 @@ while ($row_queue[$count2] = mysql_fetch_assoc($result)) {
 
 ?>
 
-<TR><TD CLASS="thead">Live Message
+<TR id="xx2"><TD CLASS="thead">Live Message
 <a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are running a campaign which plays a message to the user while waiting for them to press 1 then this is the message that will be used.');return false"><img src="/images/help.png" border="0"></a>
 </TD><TD>
 <SELECT name="messageid">
@@ -106,7 +144,7 @@ echo "<OPTION VALUE=\"".$row2[$count2][id]."\"$selected>".$row2[$count2][descrip
 ?>
 </SELECT>
 </TD>
-</TR><TR><TD CLASS="thead">Answer Machine Message<a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are leaving automated messages on answer machines then you can set this to a particular message you would like to have played when an answer machine is detected.  Usage of this will depend on your settings in the Type of Campaign section.');return false"><img src="/images/help.png" border="0"></a>
+</TR><TR id="xx3"><TD CLASS="thead">Answer Machine Message<a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are leaving automated messages on answer machines then you can set this to a particular message you would like to have played when an answer machine is detected.  Usage of this will depend on your settings in the Type of Campaign section.');return false"><img src="/images/help.png" border="0"></a>
 </TD><TD>
 <SELECT name="messageid2">
 <?
@@ -120,7 +158,7 @@ echo "<OPTION VALUE=\"".$row2[$count2][id]."\"$selected>".$row2[$count2][descrip
 ?>
 </SELECT>
 </TD>
-</TR><TR><TD CLASS="thead">DNC Confirmation Message
+</TR><TR id="xx4"><TD CLASS="thead">DNC Confirmation Message
 <a href="#" onclick="displaySmallMessage('includes/help.php?section=This message is played to a customer who presses 2 to be added to DNC.');return false"><img src="/images/help.png" border="0"></a>
 </TD><TD>
 <SELECT name="messageid3">
@@ -140,16 +178,6 @@ echo "<OPTION VALUE=\"".$row2[$count2][id]."\"$selected>".$row2[$count2][descrip
 
 
 
-		<tr>
-			<td class="thead" width=200>Mode
-			            <a href="#" onclick="displaySmallMessage('includes/help.php?section=What type of campaign you would like to run. <br /><br />If you are connected to the machine doing the calling then chose Queue Mode.  If you would like to receive any connected calls at a particular phone number, chose DID Mode.  Normally you will use DID Mode unless you have been told to use Queue Mode.');return false"><img src="/images/help.png" border="0"></a>
-			</td>
-            <td width=*>
-			<input type="radio" name="mode" value="didmode" rel="didmode" id="mode_did" <? echo ($row[mode]==0?"CHECKED":"");?> />
-			<label for="mode_did">DID Mode</label>
-			<input type="radio" name="mode" value="mode_queue" rel="queue" id="mode_queue"  <? echo ($row[mode]==1?"CHECKED":"");?> />
-			<label for="mode_queue">Queue Mode</label></td>
-		</tr>
         <tr rel="queue">
 			<td class="thead" width=200><label for="agents">Queue Name
             <a href="#" onclick="displaySmallMessage('includes/help.php?section=This is the name of a Queue on the telephone system of the provider of this system. Normally this will be assigned to you when you set up an account.');return false"><img src="/images/help.png" border="0"></a>
@@ -170,46 +198,24 @@ echo "<OPTION VALUE=\"".$row_queue[$count2][name]."\"$selected>".$row_queue[$cou
 
 			</td>
 		</tr>
-		<tr rel="didmode">
+		<tr rel="didmode" id="xx6">
 			<td class="thead" width="216px"><label for="agents">Maximum Connected Calls:
             <a href="#" onclick="displaySmallMessage('includes/help.php?section=This is the number of concurrent calls you would like to receive on the call center number specified.  <br /><br />Normally this will be the number of staff you have.');return false"><img src="/images/help.png" border="0"></a>
             </label></td>
 			<td width=*><input type="text" name="agents" id="agents" size="28" value="<?echo ($row[maxagents])?>"></td>
 		</tr>
-        		<tr>
+        		<tr id="xx5">
 			<td class="thead"><label for="did">Caller ID:
 			<a href="#" onclick="displaySmallMessage('includes/help.php?section=The CallerID you would like to send on calls to your customers');return false"><img src="/images/help.png" border="0"></a>
 			</label></td>
 			<td><input type="text" name="clid" id="did" size=28 value="<?echo ($row[clid]);?>"></td>
 		</tr>
-        <tr rel="didmode">
+        <tr rel="didmode" id="xx1">
 			<td class="thead"><label for="did">Call Center Phone Number:
 			<a href="#" onclick="displaySmallMessage('includes/help.php?section=The phone number you would like to have connected calls sent to. Eg: (123) 555-1234. ');return false"><img src="/images/help.png" border="0"></a>
 			</label></td>
 			<td><input type="text" name="did" id="did" size=28 value="<?echo ($row[did])?>"></td>
 		</tr>
-        <TR><TD CLASS="thead">Type of Campaign
-        <a href="#" onclick="displayLargeMessage('includes/help.php?section=<b>Load Simulation</b><br />Simple test campaign.  Does not actually make any phone calls<br /><br /><b>Answer Machine Only</b><br />Human: Hang Up. Answer Machine: Leave Message<br /><br /><b>Immediate Live Only</b><br />Human: Connect immediately to the call center. Answer Machine: hang up.<br /><br /><b>Press 1 Live Only</b><br />Human: Play the person message and then if they press 1, transfer to the call center.  Answer Machine: Hang Up.<br /><br /><b>Immediate Live and Answer Machine</b><br />Human: Connect immediately to the call center. Answer Machine: Leave the answer machine message.<br /><br /><b>Press 1 Live and Answer Machine</b><br />Human: Play the person message and then if they press 1, transfer to the call center.  Answer Machine: Leave the answer machine message.');return false"><img src="/images/help.png" border="0"></a>
-        </TD><TD>
-        <?
-//        print_r($row);
-        ?>
-<SELECT NAME="context">
-<OPTION VALUE="0" <?echo $row[context]==0?"SELECTED":""?>>Load Simulation</OPTION>
-<OPTION VALUE="1" <?echo $row[context]==1?"SELECTED":""?>>Answer Machine Only</OPTION>
-<OPTION VALUE="2" <?echo $row[context]==2?"SELECTED":""?>>Immediate Live</OPTION>
-<OPTION VALUE="4" <?echo $row[context]==4?"SELECTED":""?>>Press 1 Live</OPTION>
-<OPTION VALUE="5" <?echo $row[context]==5?"SELECTED":""?>>Immediate Live and Answer Machine</OPTION>
-<OPTION VALUE="3" <?echo $row[context]==3?"SELECTED":""?>>Press 1 Live and Answer Machine</OPTION>
-<?/*<OPTION VALUE="5" <?if ($row[context]==5){echo "SELECTED";}?>>Spare 2</OPTION>
-<OPTION VALUE="6" <?if ($row[context]==6){echo "SELECTED";}?>>Spare 3</OPTION>
-<OPTION VALUE="7" <?if ($row[context]==7){echo "SELECTED";}?>>Spare 4</OPTION>
-<OPTION VALUE="8" <?if ($row[context]==8){echo "SELECTED";}?>>Spare 5</OPTION>
-<OPTION VALUE="9" <?if ($row[context]==9){echo "SELECTED";}?>>Spare 6</OPTION>
-<OPTION VALUE="10" <?if ($row[context]==10){echo "SELECTED";}?>>Spare 6</OPTION>*/?>
-</SELECT>
-</TD>
-</TR>
 <?/*        <tr class=tborder2>
         <td colspan="2">
 <b>Load Simulation</b><br />

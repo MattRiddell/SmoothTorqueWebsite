@@ -45,6 +45,15 @@ require "header.php";
 require "header_customer.php";
 ?>
 
+<script type="text/javascript">
+<!--
+	function validate(){
+		return true;		
+	}
+//-->
+
+</script>
+
 <FORM ACTION="addcustomer.php" METHOD="POST">
 <table class="tborder" align="center" border="0" cellpadding="0" cellspacing="2">
 <?
@@ -138,7 +147,7 @@ while ($rowx = mysql_fetch_assoc($resultss)) {
 </TR>
 
 </TR><TR><TD COLSPAN=2 ALIGN="RIGHT">
-<INPUT TYPE="SUBMIT" VALUE="Add Customer">
+<INPUT TYPE="SUBMIT" VALUE="Add Customer" onClick="return validate();">
 </TD>
 </TR>
 <?
