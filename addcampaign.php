@@ -52,7 +52,11 @@ require "header_campaign.php";
 </TD>
 </TR>
 <?
-$sql="SELECT * from campaignmessage where customer_id=".$campaigngroupid;
+if ($_COOKIE[level] == sha1("level100")) {
+    $sql = 'SELECT * FROM campaignmessage ';
+} else {
+    $sql = 'SELECT * FROM campaignmessage WHERE customer_id='.$campaigngroupid;
+}
 $result=mysql_query($sql,$link) or die (mysql_error());
 $count=0;
 while ($row2[$count] = mysql_fetch_assoc($result)) {
