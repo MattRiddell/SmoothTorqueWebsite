@@ -128,7 +128,7 @@ $self=$_SERVER['PHP_SELF'];
     //=======================================================================================================
     // Numbers
     //=======================================================================================================
-    if ($self=="/addnumbers.php"||$self=="/numbers.php"||$self=="/deletenumber.php"||$self=="/viewnumbers.php"||$self == "/gennumbers.php"||$self == "/upload.php"||$self =="//receive.php"||$self=="/resetnumber.php"){
+    if ($self=="/addnumbers.php"||$self=="/serverlist.php"||$self=="/numbers.php"||$self=="/deletenumber.php"||$self=="/viewnumbers.php"||$self == "/gennumbers.php"||$self == "/upload.php"||$self =="//receive.php"||$self=="/resetnumber.php"){
         $thead="thead";
     } else {
         $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
@@ -440,6 +440,48 @@ if (myval == '0') {
 }
 }
 </script>
+<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript">
+    <!--
+    function f_selectAll (s_select) {
+var e_select = document.forms['customer'].elements[s_select];
+for (var i = 0; i < e_select.options.length; i++)
+e_select.options[i].selected = true;
+}
+
+    function MoveOption(objSourceElement, objTargetElement)
+    {
+        var aryTempSourceOptions = new Array();
+        var x = 0;
+
+        //looping through source element to find selected options
+        for (var i = 0; i < objSourceElement.length; i++) {
+            if (objSourceElement.options[i].selected) {
+                //need to move this option to target element
+                var intTargetLen = objTargetElement.length++;
+                objTargetElement.options[intTargetLen].text = objSourceElement.options[i].text;
+                objTargetElement.options[intTargetLen].value = objSourceElement.options[i].value;
+            }
+            else {
+                //storing options that stay to recreate select element
+                var objTempValues = new Object();
+                objTempValues.text = objSourceElement.options[i].text;
+                objTempValues.value = objSourceElement.options[i].value;
+                aryTempSourceOptions[x] = objTempValues;
+                x++;
+            }
+        }
+
+        //resetting length of source
+        objSourceElement.length = aryTempSourceOptions.length;
+        //looping through temp array to recreate source select element
+        for (var i = 0; i < aryTempSourceOptions.length; i++) {
+            objSourceElement.options[i].text = aryTempSourceOptions[i].text;
+            objSourceElement.options[i].value = aryTempSourceOptions[i].value;
+            objSourceElement.options[i].selected = false;
+        }
+    }
+    //-->
+    </SCRIPT>
 
 <script type="text/javascript" src="/js/ajax.js"></script>
 <script type="text/javascript" src="/js/modal-message.js"></script>

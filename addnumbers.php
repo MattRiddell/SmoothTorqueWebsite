@@ -21,7 +21,7 @@ if (!isset($_POST[campaignid])){
 <td width="260">
 Which campaign would you like to add numbers to?<br /><br />
 <FORM ACTION="addnumbers.php" METHOD="POST">
-    <table class="tborderxxx" align="center" border="0" cellpadding="0" cellspacing="2"><TR>
+    <table class="tborderxxx2" align="center" border="0" cellpadding="0" cellspacing="2"><TR>
     <TD>Select Campaign:</TD><TD>
         <SELECT NAME="campaignid">
         <?

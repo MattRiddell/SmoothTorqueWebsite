@@ -19,14 +19,15 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
 <td width="260">
 <b>Number List Management.</b>
 <br />
-Make a choice from one of the following: <br /><br />
-
-<a href="/viewnumbers.php"><img src="/images/magnifier.png" border="0">&nbsp; View phone numbers</a><br />
+<br />
+<a href="/serverlist.php"><img src="/images/report.png" border="0">&nbsp; Use System Lists</a><br />
+<a href="/viewnumbers.php"><img src="/images/page_white_stack.png" border="0">&nbsp; View phone numbers</a><br />
 <a href="/searchnumbers.php"><img src="/images/magnifier.png" border="0">&nbsp; Search for a phone number</a><br />
 <a href="/exportnumbers.php"><img src="/images/table_save.png" border="0">&nbsp; Export Phone Numbers</a><br />
 <a href="/upload.php"><img src="/images/page_white_get.png" border="0">&nbsp; Upload numbers from a text file</a><br />
 <a href="/addnumbers.php"><img src="/images/page_white_add.png" border="0">&nbsp; Add number(s) manually.</a><br />
 <a href="/gennumbers.php"><img src="/images/page_white_lightning.png" border="0">&nbsp; Generate numbers automatically</a><br />
+<br />
 </td>
 <td>
 </td></tr>

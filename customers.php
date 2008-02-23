@@ -12,9 +12,6 @@ $campaigngroupid=mysql_result($result,0,'campaigngroupid');
 Name
 </TD>
 <TD CLASS="thead">
-WebSite
-</TD>
-<TD CLASS="thead">
 Username
 </TD>
 <TD CLASS="thead">
@@ -25,9 +22,6 @@ Country
 </TD>
 <TD CLASS="thead">
 Phone
-</TD>
-<TD CLASS="thead">
-Fax
 </TD>
 <TD CLASS="thead">
 Trunk
@@ -66,8 +60,6 @@ echo "<A HREF=\"editcustomer.php?id=".$row[id]."\"><img src=\"/images/pencil.png
 }
 ?>
 </TD>
-<TD><A HREF="<?echo $row[website];?>" TARGET="<?echo $row[website];?>"><?echo $row[website];?></A>
-</TD>
 <TD>
 <?echo "<A HREF=\"changepassword.php?id=".$row[id]."\" title=\"Change Password\"><img src=\"/images/lock_edit.png\" border=\"0\" align=\"right\" title=\"Change Password\"></A>";?>
 <?echo $row[username];?>
@@ -86,9 +78,6 @@ if (strlen($row[phone])<15){
     echo substr($row[phone],15)."...";
 }
 ?>
-</TD>
-<TD>
-<?echo $row[fax];?>
 </TD>
 <TD>
 

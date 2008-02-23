@@ -17,13 +17,15 @@ if (!isset($_POST[campaignid])){
 <td>
 </td>
 <td width="260">
-<b>Upload Numbers</b><br /><br />
-Which campaign would you like to add the numbers to?<br /><br />
+Please select a campaign to add numbers to<br /><br />
 <FORM ACTION="upload.php" METHOD="POST">
-    <table class="tborderxxx" align="center" border="0" cellpadding="0" cellspacing="2"><TR>
-    <TD>Select Campaign:</TD><TD>
+    <table class="tborderx2xx" align="center" border="0" cellpadding="0" cellspacing="2"><TR>
+    <TD>
         <SELECT NAME="campaignid">
         <?
+        if ($_COOKIE[level] == sha1("level100")) {
+            echo "<OPTION VALUE=\"-1\">Shared List</OPTION>";
+        }
         //
         $level=$_COOKIE[level];
         if ($level==sha1("level100")) {
@@ -63,7 +65,105 @@ Which campaign would you like to add the numbers to?<br /><br />
 
     <?
 } else {
+ if ($_POST[campaignid] == -1 && !isset($_POST[name])) {
+    /*
+    Create a campaign
+    Create a new negative campaign id
+    Use this campaign id for the generation
+    */
+    ?>
+        <br /><br /><br /><br />
+<center>
+<table background="/images/sdbox.png" width="300" height="200" class="dragme22">
+    <TR>
+        <td>
+        </td>
+        <td width="260">
+            Create Administrator Number List<br />
+            <br />
+            <FORM ACTION="upload.php" METHOD="POST">
+            <table class="tborderxsxx" align="center" border="0" cellpadding="0" cellspacing="2">
+                <TR>
+                    <TD CLASS="thead">Name</TD>
+                    <TD>
+                        <INPUT TYPE="HIDDEN" NAME="campaignid" VALUE="<?echo $_POST[campaignid];?>">
+                        <INPUT TYPE="TEXT" NAME="name" VALUE="" size="20">
+                    </TD>
+                </TR>
+                <TR>
+                    <TD CLASS="thead">Description</TD>
+                    <TD>
+                        <INPUT TYPE="TEXT" NAME="description" VALUE="" size="20">
+                    </TD>
+                </TR>
+                <TR>
+                    <TD COLSPAN=2 ALIGN="RIGHT">
+                        <br />
+                        <INPUT TYPE="SUBMIT" VALUE="Create Campaign">
+                    </TD>
+                </TR>
+            </TABLE>
+        </TD>
+        <td></td>
+    </TR>
+    </table>
+</FORM>
+    <?
+ } else {
+if (isset($_POST[name])){
+// echo $_POST[name];
+$sql = "INSERT INTO campaign (name, description, groupid, messageid, messageid2, messageid3)  VALUES ('$_POST[name]', '$_POST[description]', -1, 0,0,0)";
+ $result=mysql_query($sql, $link) or die (mysql_error());;
+require "upload_helper.php";
+$sid = md5(uniqid(rand()));
 
+ ?>
+        <br /><br /><br /><br />
+<center>
+<table background="/images/sdbox.png" width="300" height="200" class="dragme22">
+<tr>
+<td>
+</td>
+<td width="260">
+<div id="matt2">
+<b>Upload Numbers</b><br /><br />
+Please select a text file with one number per line that you would
+like to upload the numbers from and then click Upload.<br /><br />
+</div>
+<form enctype="multipart/form-data" name="postform" action="/cgi-bin/upload.cgi?sid=<?php echo $sid; ?>&target=<?echo normal_target('receive.php');?>" method="post">
+        <center><table><tr><td>
+                <div id="matt">
+                <input type="file" name="file_1" />
+                <input type="hidden" value="-<?echo mysql_insert_id();?>" name="id">
+                </form> <br /><br />
+                <input type="button" onclick="beginUpload('<?php echo $sid ?>');" value="Upload">
+                </div>
+                </td></tr>
+        <tr><td colspan = 2 width=250>
+        <div id="progressbox" style="display: none">
+        Please wait while your list is uploaded.<br /><br /><br /><div class="progresscontainer"><div class="progressbar" id="progress"></div></div>
+        </div>
+
+        </td></tr>
+        </table></center>
+        </td>
+<td>
+</td></tr>
+</table>
+</center>
+
+
+
+
+
+        <br />
+ <?
+ /*
+ Create campaign, get campaign id
+ */
+
+ ?>                                          <?
+ } else {
 require "upload_helper.php";
 $sid = md5(uniqid(rand()));
 ?>
@@ -107,4 +207,4 @@ like to upload the numbers from and then click Upload.<br /><br />
 
 
         <br />
-        <?}?>
+        <?}}}?>

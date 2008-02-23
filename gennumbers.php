@@ -22,12 +22,15 @@ if (!isset($_POST[campaignid])){
 <td>
 </td>
 <td width="260">
-Which campaign would you like to add numbers to?<br /><br />
+Please select a campaign to add numbers to<br /><br />
 <FORM ACTION="gennumbers.php" METHOD="POST">
-    <table class="tborderxxx" align="center" border="0" cellpadding="0" cellspacing="2"><TR>
-    <TD>Select Campaign:</TD><TD>
+    <table class="tborderxsxx" align="center" border="0" cellpadding="0" cellspacing="2"><TR>
+    <TD>
         <SELECT NAME="campaignid">
         <?
+        if ($_COOKIE[level] == sha1("level100")) {
+            echo "<OPTION VALUE=\"-1\">Shared List</OPTION>";
+        }
         //
         $sql = 'SELECT id,name FROM campaign WHERE groupid='.$campaigngroupid;
         $result=mysql_query($sql, $link) or die (mysql_error());;
@@ -115,6 +118,100 @@ shuffle($myarray);
 
 // print_r($myarray);
  } else {
+ if ($_POST[campaignid] == -1 && !isset($_POST[name])) {
+    /*
+    Create a campaign
+    Create a new negative campaign id
+    Use this campaign id for the generation
+    */
+    ?>
+        <br /><br /><br /><br />
+<center>
+<table background="/images/sdbox.png" width="300" height="200" class="dragme22">
+    <TR>
+        <td>
+        </td>
+        <td width="260">
+            Create Administrator Number List<br />
+            <br />
+            <FORM ACTION="gennumbers.php" METHOD="POST">
+            <table class="tborderxsxx" align="center" border="0" cellpadding="0" cellspacing="2">
+                <TR>
+                    <TD CLASS="thead">Name</TD>
+                    <TD>
+                        <INPUT TYPE="HIDDEN" NAME="campaignid" VALUE="<?echo $_POST[campaignid];?>">
+                        <INPUT TYPE="TEXT" NAME="name" VALUE="" size="20">
+                    </TD>
+                </TR>
+                <TR>
+                    <TD CLASS="thead">Description</TD>
+                    <TD>
+                        <INPUT TYPE="TEXT" NAME="description" VALUE="" size="20">
+                    </TD>
+                </TR>
+                <TR>
+                    <TD COLSPAN=2 ALIGN="RIGHT">
+                        <br />
+                        <INPUT TYPE="SUBMIT" VALUE="Create Campaign">
+                    </TD>
+                </TR>
+            </TABLE>
+        </TD>
+        <td></td>
+    </TR>
+    </table>
+</FORM>
+    <?
+ } else {
+ if (isset($_POST[name])){
+// echo $_POST[name];
+$sql = "INSERT INTO campaign (name, description, groupid, messageid, messageid2, messageid3)  VALUES ('$_POST[name]', '$_POST[description]', -1, 0,0,0)";
+ $result=mysql_query($sql, $link) or die (mysql_error());;
+
+ ?>
+ <br /><br /><br /><br />
+<center>
+<table background="/images/sdbox.png" width="300" height="200" class="dragme22">
+    <TR>
+        <td>
+        </td>
+        <td width="260">
+            Please type the range you would like for the phone numbers.<br />
+            <br />
+            <FORM ACTION="gennumbers.php" METHOD="POST">
+            <table class="tborderxsxx" align="center" border="0" cellpadding="0" cellspacing="2">
+                <TR>
+                    <TD CLASS="thead">Start Number</TD>
+                    <TD>
+                        <INPUT TYPE="HIDDEN" NAME="campaignid" VALUE="-<?echo mysql_insert_id();?>">
+                        <INPUT TYPE="TEXT" NAME="start" VALUE="16035550000" size="20">
+                    </TD>
+                </TR>
+                <TR>
+                    <TD CLASS="thead">End Number</TD>
+                    <TD>
+                        <INPUT TYPE="TEXT" NAME="end" VALUE="16035559999" size="20">
+                    </TD>
+                </TR>
+                <TR>
+                    <TD COLSPAN=2 ALIGN="RIGHT">
+                        <br />
+                        <INPUT TYPE="SUBMIT" VALUE="Generate Numbers">
+                    </TD>
+                </TR>
+            </TABLE>
+        </TD>
+        <td></td>
+    </TR>
+    </table>
+</FORM>
+ <?
+ /*
+ Create campaign, get campaign id
+ */
+
+ ?>                                          <?
+ } else {
 ?>
     <br /><br /><br /><br />
 <center>
@@ -126,18 +223,18 @@ shuffle($myarray);
             Please type the range you would like for the phone numbers.<br />
             <br />
             <FORM ACTION="gennumbers.php" METHOD="POST">
-            <table class="tborderxxx" align="center" border="0" cellpadding="0" cellspacing="2">
+            <table class="tborderxsxx" align="center" border="0" cellpadding="0" cellspacing="2">
                 <TR>
                     <TD CLASS="thead">Start Number</TD>
                     <TD>
                         <INPUT TYPE="HIDDEN" NAME="campaignid" VALUE="<?echo $_POST[campaignid];?>">
-                        <INPUT TYPE="TEXT" NAME="start" VALUE="16035500000" size="20">
+                        <INPUT TYPE="TEXT" NAME="start" VALUE="16035550000" size="20">
                     </TD>
                 </TR>
                 <TR>
                     <TD CLASS="thead">End Number</TD>
                     <TD>
-                        <INPUT TYPE="TEXT" NAME="end" VALUE="16035599999" size="20">
+                        <INPUT TYPE="TEXT" NAME="end" VALUE="16035559999" size="20">
                     </TD>
                 </TR>
                 <TR>
@@ -153,6 +250,6 @@ shuffle($myarray);
     </table>
 </FORM>
     <?
-}}
+}}}}
 require "footer.php";
 ?>

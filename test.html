@@ -1,60 +1,80 @@
-<HTML>
-<HEAD>
-<STYLE>
-.hideable { position: relative; visibility: visible; }
-</STYLE>
-<SCRIPT>
-function hideShowGods(hide) {
-  if (document.layers)
-    document.godContainer.visibility = hide ? 'hide' : 'show';
-  else {
-    var g = document.all ? document.all.godContainer :
-              document.getElementById('godContainer');
-    g.style.visibility = hide ? 'hidden' : 'visible';
-  }
-}
-function collectData () {
-  var atheist = document.form0.atheist.checked;
-  var gods = document.layers ?
-               document.godContainer.document.form1.gods :
-               document.form1.gods;
-  god = gods.options[gods.selectedIndex].value;
-  document.form2.atheist.value = atheist;
-  document.form2.gods.value = god;
-}
-</SCRIPT>
-</HEAD>
-<BODY>
-<TABLE>
-<TR>
-<TD VALIGN="top">
-<FORM NAME="form0">
-Atheist?
-<INPUT TYPE="checkbox" NAME="atheist"
-       ONCLICK="hideShowGods(this.checked);"
->
-</FORM>
-</TD>
-<TD>
-<SPAN ID="godContainer" CLASS="hideable">
-<FORM NAME="form1">
-<SELECT NAME="gods">
-<OPTION VALUE="nobody">Select your GOD</OPTION>
-<OPTION VALUE="He who greps">Kibo</OPTION>
-<OPTION VALUE="He who xgreps">Xibo</OPTION>
-<OPTION VALUE="He who leaps">Jehovah
-</SELECT>
-</FORM>
-</SPAN>
-</TD>
-</TR>
-</TABLE>
-<FORM NAME="form2" ACTION="whatever"
-      ONSUBMIT="collectData(); return true;"
->
-<INPUT TYPE="hidden" NAME="atheist" VALUE="">
-<INPUT TYPE="hidden" NAME="gods" VALUE="">
-<INPUT TYPE="SUBMIT">
-</FORM>
-</BODY>
-</HTML>
+<html>
+<head>
+ <title>Move List</title>
+    <SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript">
+    <!--
+    function MoveOption(objSourceElement, objTargetElement)
+    {
+        var aryTempSourceOptions = new Array();
+        var x = 0;
+        
+        //looping through source element to find selected options
+        for (var i = 0; i < objSourceElement.length; i++) {
+            if (objSourceElement.options[i].selected) {
+                //need to move this option to target element
+                var intTargetLen = objTargetElement.length++;
+                objTargetElement.options[intTargetLen].text = objSourceElement.options[i].text;
+                objTargetElement.options[intTargetLen].value = objSourceElement.options[i].value;
+            }
+            else {
+                //storing options that stay to recreate select element
+                var objTempValues = new Object();
+                objTempValues.text = objSourceElement.options[i].text;
+                objTempValues.value = objSourceElement.options[i].value;
+                aryTempSourceOptions[x] = objTempValues;
+                x++;
+            }
+        }
+        
+        //resetting length of source
+        objSourceElement.length = aryTempSourceOptions.length;
+        //looping through temp array to recreate source select element
+        for (var i = 0; i < aryTempSourceOptions.length; i++) {
+            objSourceElement.options[i].text = aryTempSourceOptions[i].text;
+            objSourceElement.options[i].value = aryTempSourceOptions[i].value;
+            objSourceElement.options[i].selected = false;
+        }
+    }
+    //-->
+    </SCRIPT>
+</head>
+
+<body>
+<p><font face="Arial,Helvetica,sans-serif"><b>Demo for moving an Item from one list box to another</b></font></p>
+<p><font face="Arial,Helvetica,sans-serif">Select Options to enable or disable</font></p>
+<form action="" name="MoveList">
+<table>
+<tr>
+   <td align="center"><font face="Arial,Helvetica,sans-serif" size="2"><b>Enabled</b></font></td>
+   <td><p>&nbsp;</p></td>
+   <td align="center"><font face="Arial,Helvetica,sans-serif" size="2"><b>Disabled</b></font></td>
+</tr>
+<tr>
+ <td>
+    <select name="Enabled" size="5" multiple style="width: 100px;">
+     <option value="Option 1">Option 1</option>
+     <option value="Option 2">Option 2</option>
+     <option value="Option 3">Option 3</option>
+     <option value="Option 4">Option 4</option>
+     <option value="Option 5">Option 5</option>
+     <option value="Option 6">Option 6</option>
+    </select>
+    </td>
+ <td>
+    <input type="button" name="Disable" value="&nbsp;&nbsp;&nbsp; Disable -&gt; " style="width: 100px;" 
+onClick="MoveOption(this.form.Enabled, this.form.Disabled)"><br>
+    <br>
+    <input type="button" name="Enable" value=" &lt;- Enable &nbsp;&nbsp;&nbsp;" style="width: 100px;" 
+onClick="MoveOption(this.form.Disabled, this.form.Enabled)"><br>
+    </td>
+ <td>
+    <select name="Disabled" size="5" multiple style="width: 100px;">
+     <option value="Option 7">Option 7</option>
+     <option value="Option 8">Option 8</option>
+    </select>
+    </td>
+</tr>
+</table>
+</form>
+</body>
+</html>
