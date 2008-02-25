@@ -148,7 +148,7 @@ $graph2->ygrid->Show(true,true);
 $graph2->SetFrame(false,'darkblue',2);
 $graph2->SetBackgroundGradient('purple@0.9','lightblue2@0.2',GRAD_HOR,BGRAD_PLOT);
 for ($i=0;$i<240;$i++){
-        $datax[$i] = "".(int)(240-$i);
+        $datax[$i] = "".(int)(240-$i)*3;
 }
 $graph2->xaxis->SetTickLabels($datax);
 $dplot3[] = new LinePLot($chart [ 'chart_data' ][ 2 ]);

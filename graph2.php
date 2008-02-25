@@ -114,8 +114,8 @@ if ($new<1) {
 }
 
 $sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="indnc"'.$timedate;
-$result2=mysql_query($sql, $link) or die (mysql_error());;
-$indnc=mysql_result($result2,0,'count(*)');
+$result3=mysql_query($sql, $link) or die (mysql_error());;
+$indnc=mysql_result($result3,0,'count(*)');
 if ($indnc<1) {
     $indnc = 0;
 } else {

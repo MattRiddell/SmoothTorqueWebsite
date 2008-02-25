@@ -1,45 +1,23 @@
 <?
-//$time_start = microtime(true);
-
-//echo date().date('H:i:s');
-/*    flush();
-exit(0);*/
-//$time_start2 = microtime(true);
-//echo "A3: ".round(microtime(true)-$time_start2,3);*/
-//echo "x";
-//exit(0);
-/*$_POST = array_map(mysql_real_escape_string,$_POST);
-$_GET = array_map(mysql_real_escape_string,$_GET);
-*/
 if (isset($_GET[campaigngroupid])){
     $campaigngroupid = ($_GET[campaigngroupid]);
-    //echo "refresh".date('s');
-    //exit(0);
 }
 if (isset($_POST[id])){
     $id = $_POST[id];
 }
-/*$sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
-$result=mysql_query($sql, $link) or die (mysql_error());;
-$campaigngroupid=mysql_result($result,0,'campaigngroupid');
-*/
 include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(mysql_error());
 mysql_select_db("SineDialer", $link);
 $sql = 'SELECT value FROM config WHERE parameter=\'backend\'';
 $result=mysql_query($sql, $link) or die (mysql_error());;
-//$backend = mysql_result($result,0,'value');
 $row = mysql_fetch_assoc($result);
 $backend=$row[value];
-
 $level=$_COOKIE[level];
-
 if ($level==sha1("level100")) {
     $sql = 'SELECT * FROM campaign order by name';
 } else {
     $sql = 'SELECT * FROM campaign WHERE groupid='.$campaigngroupid.' order by name';
 }
 $result=mysql_query($sql, $link) or die (mysql_error());;
-//$campaigngroupid=mysql_result($result,0,'campaigngroupid');
 if (mysql_num_rows($result)==0){
 ?>
 <br /><br />
@@ -61,7 +39,6 @@ To create your first campaign, please click the Add Campaign button above.<br />
 </center>
 
 <?
-//exit(0);
 }
 
 $user = $_COOKIE[user];
@@ -76,16 +53,6 @@ Name
 <TD CLASS="thead">
 Description
 </TD>
-<?/*<TD CLASS="thead">
-Human
-</TD>
-<TD CLASS="thead">
-Answer Machine
-</TD>
-<TD CLASS="thead">
-Transfer
-</TD>
-*/?>
 <TD CLASS="thead">
 Numbers Left
 </TD>
@@ -106,17 +73,14 @@ Percentage Busy
 <?
 
 while ($row = mysql_fetch_assoc($result)) {
-//echo "A1: ".round(microtime(true)-$time_start,3);
-
-$row = array_map(stripslashes,$row);
-
-if ($toggle){
-$toggle=false;
-$class=" class=\"tborder2\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f8f8f8'\"   ";
-} else {
-$toggle=true;
-$class=" class=\"tborderx\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f0f0f0'\" ";
-}
+    $row = array_map(stripslashes,$row);
+    if ($toggle){
+        $toggle=false;
+        $class=" class=\"tborder2\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f8f8f8'\"   ";
+    } else {
+        $toggle=true;
+        $class=" class=\"tborderx\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f0f0f0'\" ";
+    }
 
 ?>
 <TR <?echo $class;?>>
@@ -141,66 +105,11 @@ echo trim(substr($row[description],0,$max_str_len))."...";
 }
 ?>
 </TD>
-<?/*
-<TD>
-<?echo $row[messageid];?>
-</TD>
-<TD>
-<?echo $row[messageid2];?>
-</TD>
-<TD>
-<?echo $row[messageid3];?>
-</TD>
-*/?>
 <?
-//echo "A2: ".round(microtime(true)-$time_start,3);
-
-
-/*$sql = 'SELECT count(*) as count from number where campaignid='.$row[id].' and status="dialed"';
-$result2=mysql_query($sql, $link) or die (mysql_error());;
-$row2 = mysql_fetch_assoc($result2);
-$count=$row2[count];
-
-$sql = 'SELECT count(*) from number where campaignid='.$row[id].' and status="dialing"';
-$result2=mysql_query($sql, $link) or die (mysql_error());;
-$dialing=mysql_result($result2,0,'count(*)');
-
-$sql = 'SELECT count(*) from number where campaignid='.$row[id].' and status="busy"';
-$result2=mysql_query($sql, $link) or die (mysql_error());;
-$busy=mysql_result($result2,0,'count(*)');
-
-$sql = 'SELECT count(*) from number where campaignid='.$row[id].' and status="answered"';
-$result2=mysql_query($sql, $link) or die (mysql_error());;
-$answered=mysql_result($result2,0,'count(*)');
-
-$sql = 'SELECT count(*) from number where campaignid='.$row[id].' and status="hungup"';
-$result2=mysql_query($sql, $link) or die (mysql_error());;
-$hungup=mysql_result($result2,0,'count(*)');
-
-$sql = 'SELECT count(*) from number where campaignid='.$row[id].' and status="congested"';
-$result2=mysql_query($sql, $link) or die (mysql_error());;
-$congested=mysql_result($result2,0,'count(*)');
-
-$sql = 'SELECT count(*) from number where campaignid='.$row[id].' and status="timeout"';
-$result2=mysql_query($sql, $link) or die (mysql_error());;
-$timeout=mysql_result($result2,0,'count(*)');
-
-$sql = 'SELECT count(*) from number where campaignid='.$row[id].' and status like "unknown-%"';
-$result2=mysql_query($sql, $link) or die (mysql_error());;
-$unknown=mysql_result($result2,0,'count(*)');
-
-$sql = 'SELECT count(*) from number where campaignid='.$row[id].' and status="dialed"';
-$result2=mysql_query($sql, $link) or die (mysql_error());;
-$dialed=mysql_result($result2,0,'count(*)');
-*/
 $sql = 'SELECT count(*) from number where campaignid='.$row[id].' and status="new"';
 $result2=mysql_query($sql, $link) or die (mysql_error());;
 $new=mysql_result($result2,0,'count(*)');
 
-/*$sql = 'SELECT count(*) from number where campaignid='.$row[id].' and status="indnc"';
-$result2=mysql_query($sql, $link) or die (mysql_error());;
-$indnc=mysql_result($result2,0,'count(*)');
-*/
 $sql = 'SELECT count(*) from number where campaignid='.$row[id];
 $result2=mysql_query($sql, $link) or die (mysql_error());;
 $count2=mysql_result($result2,0,'count(*)');
@@ -208,8 +117,6 @@ $count2=mysql_result($result2,0,'count(*)');
 $sql = 'SELECT status, flags, maxcalls, progress from queue where campaignid='.$row[id];
 $resultx=mysql_query($sql, $link) or die (mysql_error());;
 $rowx = mysql_fetch_assoc($resultx);
-
-
 
 $status=$rowx[status];
 $flags=$rowx[flags];
@@ -220,13 +127,6 @@ $progress=$rowx[progress];
 <TD>
 <?
 if ($progress>0){
-/*
-progress = done in this run
-count    = dailed in db
-count2   = all numbers
-countx   = dialing
-*/
-//            echo "<b>Remaining: $new/$count2 Dialing: $dialing Busy: $busy Answered: $answered HungUp: $hungup Congested: $congested TimedOut: $timeout Unknown: $unknown Dialed: $dialed InDNC: $indnc</b>";
             ?>
             <img src="/images/percentImage.png" title="<?
             echo "Remaining: $new/$count2\"";?>"
@@ -234,7 +134,6 @@ countx   = dialing
             style="background-position: -<?echo ((100-(($new/$count2)*100))*1.2)-1; ?>px 0pt;" border="0" />
 <?
 } else {
-//
             ?>
             <img src="/images/percentImage.png" title="<?
             echo "Remaining: $new/$count2\"";?>"
@@ -249,8 +148,6 @@ countx   = dialing
 <TD>
 
 <?
-
-//echo $flags;
 if ($maxcalls>0){
 $perc=round(($flags/$maxcalls)*100);
 } else {
@@ -259,13 +156,6 @@ $perc=0;
 if ($perc>100){
     $perc=100;
 }
-//echo $perc;
-/* status can be one of:
-1 awaiting start
-101 started
-2 awaiting stop
-102 stopped
-*/
 if ($status==101){
 ?>
 <IMG SRC="/images/control_play.png" BORDER="0">

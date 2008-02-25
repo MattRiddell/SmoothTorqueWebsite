@@ -44,13 +44,13 @@ require "header_campaign.php";
 <?
 ?>
 <TR><TD CLASS="thead">Campaign Name
-<a href="#" onclick="displaySmallMessage('includes/help.php?section=A short name you would like to give to the campaign - preferrably one word');return false"><img src="/images/help.png" border="0"></a>
+<a href="#" onclick="displaySmallMessage('includes/help.php?section=A short name you would like to give to the campaign - preferrably one word');return false" title="Campaign Name"><img src="/images/help.png" border="0"></a>
 </TD><TD>
 <INPUT TYPE="HIDDEN" NAME="id" VALUE="<?echo $_GET[id];?>">
 <INPUT TYPE="TEXT" NAME="name" VALUE="<?echo $row[name];?>" size="60">
 </TD>
 </TR><TR><TD CLASS="thead">Campaign Description
-<a href="#" onclick="displaySmallMessage('includes/help.php?section=A short description of the campaign in case you are not able to tell from the Campaign Name');return false"><img src="/images/help.png" border="0"></a>
+<a href="#" onclick="displaySmallMessage('includes/help.php?section=A short description of the campaign in case you are not able to tell from the Campaign Name');return false" title="Campaign Description"><img src="/images/help.png" border="0"></a>
 </TD><TD>
 <INPUT TYPE="TEXT" NAME="description" VALUE="<?echo $row[description];?>" size="60">
 </TD>
@@ -60,22 +60,22 @@ require "header_campaign.php";
 			            <a href="#" onclick="displaySmallMessage('includes/help.php?section=What type of campaign you would like to run. <br /><br />If you are connected to the machine doing the calling then chose Queue Mode.  If you would like to receive any connected calls at a particular phone number, chose DID Mode.  Normally you will use DID Mode unless you have been told to use Queue Mode.');return false"><img src="/images/help.png" border="0"></a>
 			</td>
             <td width=*>
-			<input type="radio" name="mode" value="didmode" rel="didmode" id="mode_did" checked/>
-			<label for="mode_did">DID Mode</label>
+			<input type="radio" name="mode" value="didmode" rel="didmode" id="mode_did" checked />
+			<label for="mode_did" title="Which number to receive the calls at">DID Mode</label>
 			<input type="radio" name="mode" value="mode_queue" rel="queue" id="mode_queue" />
-			<label for="mode_queue">Queue Mode</label></td>
+			<label for="mode_queue" title="Use this is the agents are connected to the machine doing the calling">Queue Mode</label></td>
 		</tr>
         <TR><TD CLASS="thead">Type of Campaign
-        <a href="#" onclick="displayLargeMessage('includes/help.php?section=<b>Load Simulation</b><br />Simple test campaign.  Does not actually make any phone calls<br /><br /><b>Answer Machine Only</b><br />Human: Hang Up. Answer Machine: Leave Message<br /><br /><b>Immediate Live Only</b><br />Human: Connect immediately to the call center. Answer Machine: hang up.<br /><br /><b>Press 1 Live Only</b><br />Human: Play the person message and then if they press 1, transfer to the call center.  Answer Machine: Hang Up.<br /><br /><b>Immediate Live and Answer Machine</b><br />Human: Connect immediately to the call center. Answer Machine: Leave the answer machine message.<br /><br /><b>Press 1 Live and Answer Machine</b><br />Human: Play the person message and then if they press 1, transfer to the call center.  Answer Machine: Leave the answer machine message.');return false"><img src="/images/help.png" border="0"></a>
+        <a href="#" onclick="displayLargeMessage('includes/help.php?section=<b>Load Simulation</b><br />Simple test campaign.  Does not actually make any phone calls<br /><br /><b>Answer Machine Only</b><br />Human: Hang Up. Answer Machine: Leave Message<br /><br /><b>Immediate Live Only</b><br />Human: Connect immediately to the call center. Answer Machine: hang up.<br /><br /><b>Press 1 Live Only</b><br />Human: Play the person message and then if they press 1, transfer to the call center.  Answer Machine: Hang Up.<br /><br /><b>Immediate Live and Answer Machine</b><br />Human: Connect immediately to the call center. Answer Machine: Leave the answer machine message.<br /><br /><b>Press 1 Live and Answer Machine</b><br />Human: Play the person message and then if they press 1, transfer to the call center.  Answer Machine: Leave the answer machine message.');return false"><img src="/images/help.png" border="0" title="Type Of Campaign"></a>
         </TD><TD>
 <SELECT NAME="context" id="context" onchange="whatPaySelected(this.value)">
 <OPTION VALUE="-1" SELECTED>Please chose a type of campaign...</OPTION>
-<OPTION VALUE="0">Load Simulation</OPTION>
-<OPTION VALUE="1">Answer Machine Only</OPTION>
-<OPTION VALUE="2">Immediate Live</OPTION>
-<OPTION VALUE="4">Press 1 Live Only</OPTION>
-<OPTION VALUE="5">Immediate Live and Answer Machine</OPTION>
-<OPTION VALUE="3">Press 1 Live and Answer Machine</OPTION>
+<OPTION VALUE="0" title="No phone calls are made">Load Simulation</OPTION>
+<OPTION VALUE="1" title="Only leave a message for answering machines, hang up when a person answers">Answer Machine Only</OPTION>
+<OPTION VALUE="2" title="Automatically send a person straight through to the call center">Immediate Live</OPTION>
+<OPTION VALUE="4" title="Play a message to a person, hang up for answering machines">Press 1 Live Only</OPTION>
+<OPTION VALUE="5" title="Put a person straight through to the call center, and leave a message for the answer machines">Immediate Live and Answer Machine</OPTION>
+<OPTION VALUE="3" title="Play a message to a person, if they press 1, put them through to the call center. Leave a message for answering machines">Press 1 Live and Answer Machine</OPTION>
 <OPTION VALUE="6">Direct Transfer (coming soon)</OPTION>
 <OPTION VALUE="7">Immediate Message Playback (coming soon)</OPTION>
 <OPTION VALUE="8">Fax Broadcast (coming soon)</OPTION>
@@ -91,7 +91,7 @@ require "header_campaign.php";
 </TR>
 		<tr rel="didmode" id="xx6" style="display:none">
 			<td class="thead" width=200><label for="agents">Maximum Connected Calls:
-            <a href="#" onclick="displaySmallMessage('includes/help.php?section=This is the number of concurrent calls you would like to receive on the call center number specified.  <br /><br />Normally this will be the number of staff you have.');return false"><img src="/images/help.png" border="0"></a>
+            <a href="#" onclick="displaySmallMessage('includes/help.php?section=This is the number of concurrent calls you would like to receive on the call center number specified.  <br /><br />Normally this will be the number of staff you have.');return false" title="The number of concurrent calls to be put through to the call center"><img src="/images/help.png" border="0"></a>
             </label></td>
 			<td width=*><input type="text" name="agents" id="agents" size="28" value="30"></td>
 		</tr>
@@ -119,7 +119,7 @@ while ($row_queue[$count2] = mysql_fetch_assoc($result)) {
 
 ?>
 
-<TR id="xx2" style="display:none"><TD CLASS="thead">Live Message
+<TR id="xx2" style="display:none" title="The message to play to the person who answers the phone"><TD CLASS="thead">Live Message
 <a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are running a campaign which plays a message to the user while waiting for them to press 1 then this is the message that will be used.');return false"><img src="/images/help.png" border="0"></a>
 </TD><TD>
 <SELECT name="messageid">
@@ -134,7 +134,7 @@ echo "<OPTION VALUE=\"".$row2[$count2][id]."\"$selected>".$row2[$count2][descrip
 ?>
 </SELECT>
 </TD>
-</TR><TR id="xx3"  style="display:none"><TD CLASS="thead">Answer Machine Message<a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are leaving automated messages on answer machines then you can set this to a particular message you would like to have played when an answer machine is detected.  Usage of this will depend on your settings in the Type of Campaign section.');return false"><img src="/images/help.png" border="0"></a>
+</TR><TR id="xx3"  style="display:none" title="The message to leave to the answer machine"><TD CLASS="thead">Answer Machine Message<a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are leaving automated messages on answer machines then you can set this to a particular message you would like to have played when an answer machine is detected.  Usage of this will depend on your settings in the Type of Campaign section.');return false"><img src="/images/help.png" border="0"></a>
 </TD><TD>
 <SELECT name="messageid2">
 <?

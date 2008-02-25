@@ -19,7 +19,7 @@ function init()
  webcamimage = document.getElementById("webcamimage");
  if( webcamimage )
  {
-  setInterval("count()",3000);
+  setInterval("count()",6000);
  }
 }
 window.onload = init;
