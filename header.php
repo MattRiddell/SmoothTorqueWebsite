@@ -213,14 +213,14 @@ $self=$_SERVER['PHP_SELF'];
         //=======================================================================================================
 
         //=======================================================================================================
-        // Config
+        // Admin
         //=======================================================================================================
         if ($self=="/config.php"||$self=="/setparameter.php"){
             $thead="thead";
         } else {
             $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
         }
-        $menu.='<TD class="'.$thead.'"><A HREF="/config.php"><img src="/images/cog.png" border="0" align="left">Config</A>&nbsp;</TD>';
+        $menu.='<TD class="'.$thead.'"><A HREF="/config.php"><img src="/images/cog.png" border="0" align="left">Admin</A>&nbsp;</TD>';
         //=======================================================================================================
 
     }

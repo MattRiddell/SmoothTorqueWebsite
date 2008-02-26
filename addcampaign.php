@@ -43,14 +43,14 @@ require "header_campaign.php";
 <table class="tborder" align="center" border="0" cellpadding="0" cellspacing="2">
 <?
 ?>
-<TR><TD CLASS="thead">Campaign Name
-<a href="#" onclick="displaySmallMessage('includes/help.php?section=A short name you would like to give to the campaign - preferrably one word');return false" title="Campaign Name"><img src="/images/help.png" border="0"></a>
+<TR title="The name for the campaign"><TD CLASS="thead">Campaign Name
+<a href="#" onclick="displaySmallMessage('includes/help.php?section=A short name you would like to give to the campaign - preferrably one word');return false"><img src="/images/help.png" border="0"></a>
 </TD><TD>
 <INPUT TYPE="HIDDEN" NAME="id" VALUE="<?echo $_GET[id];?>">
 <INPUT TYPE="TEXT" NAME="name" VALUE="<?echo $row[name];?>" size="60">
 </TD>
-</TR><TR><TD CLASS="thead">Campaign Description
-<a href="#" onclick="displaySmallMessage('includes/help.php?section=A short description of the campaign in case you are not able to tell from the Campaign Name');return false" title="Campaign Description"><img src="/images/help.png" border="0"></a>
+</TR><TR title="A short description of the campaign"><TD CLASS="thead">Campaign Description
+<a href="#" onclick="displaySmallMessage('includes/help.php?section=A short description of the campaign in case you are not able to tell from the Campaign Name');return false"><img src="/images/help.png" border="0"></a>
 </TD><TD>
 <INPUT TYPE="TEXT" NAME="description" VALUE="<?echo $row[description];?>" size="60">
 </TD>
@@ -148,7 +148,7 @@ echo "<OPTION VALUE=\"".$row2[$count2][id]."\"$selected>".$row2[$count2][descrip
 ?>
 </SELECT>
 </TD>
-</TR><TR  id="xx4" style="display:none"><TD CLASS="thead">DNC Confirmation Message
+</TR><TR  id="xx4" style="display:none" title="The message played to someone who wants to be put on the DNC list"><TD CLASS="thead">DNC Confirmation Message
 <a href="#" onclick="displaySmallMessage('includes/help.php?section=This message is played to a customer who presses 2 to be added to DNC.');return false"><img src="/images/help.png" border="0"></a>
 </TD><TD>
 <SELECT name="messageid3">
@@ -168,7 +168,7 @@ echo "<OPTION VALUE=\"".$row2[$count2][id]."\"$selected>".$row2[$count2][descrip
 
 
 
-        <tr rel="queue">
+        <tr rel="queue" title="The name of the queue used for agents">
 			<td class="thead" width=200><label for="agents">Queue Name
             <a href="#" onclick="displaySmallMessage('includes/help.php?section=This is the name of a Queue on the telephone system of the provider of this system. Normally this will be assigned to you when you set up an account.');return false"><img src="/images/help.png" border="0"></a>
             </label></td>
@@ -188,13 +188,13 @@ echo "<OPTION VALUE=\"".$row_queue[$count2][name]."\"$selected>".$row_queue[$cou
 
 			</td>
 		</tr>
-        		<tr id="xx5" style="display:none">
+        		<tr id="xx5" style="display:none" title="The caller id you would like to send out">
 			<td class="thead"><label for="did">Caller ID:
 			<a href="#" onclick="displaySmallMessage('includes/help.php?section=The CallerID you would like to send on calls to your customers');return false"><img src="/images/help.png" border="0"></a>
 			</label></td>
 			<td><input type="text" name="clid" id="did" size=28 value="ls3"></td>
 		</tr>
-        <tr rel="didmode" id="xx1" style="display:none">
+        <tr rel="didmode" id="xx1" style="display:none" title="The number for the call center">
 			<td class="thead"><label for="did">Call Center Phone Number:
 			<a href="#" onclick="displaySmallMessage('includes/help.php?section=The phone number you would like to have connected calls sent to. Eg: (123) 555-1234. ');return false"><img src="/images/help.png" border="0" id="x"  ></a>
 			</label></td>
