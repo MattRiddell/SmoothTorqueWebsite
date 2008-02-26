@@ -90,7 +90,7 @@ for ($i = 0; $i<mysql_num_rows($result);$i++) {
     function delayer(){
     window.location = "numbers.php"
     }
-    setTimeout('delayer()', 1000);
+    setTimeout('delayer()', 3000);
     </script>
     <?
     echo "<BR></TD></TR>
