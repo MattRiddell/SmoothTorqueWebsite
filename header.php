@@ -258,7 +258,20 @@ THIS IS CAUSING AN ERROR!
 <script src="js/eep.js" type="text/javascript"></script>
 */?>
 <script language="JavaScript" type="text/JavaScript">
+function hideshow(name){
+	var opened = "./images/open.png";
+	var closed = "./images/closed.png";
 
+	var element = document.getElementById(name);
+	var img = document.getElementsByName("img_"+name);
+	if(element.style.display == "none"){
+		img[0].src = opened;
+		element.style.display = "";
+	}else{
+		img[0].src = closed;
+		element.style.display = "none";
+	}
+}
 function whatPaySelected(myval){
 if (myval == '0') {
     if (document.all) {
@@ -519,7 +532,7 @@ THIS IS CAUSING AN ERROR!
 <script type="text/javascript" src="/ajax/picker.js"></script>
 <script type="text/javascript" src="/header.js"></script>
 </HEAD>
-<BODY BGCOLOR="<?echo $config_values['COLOUR'];?>" onLoad="hideShow">
+<BODY BGCOLOR="<?echo $config_values['COLOUR'];?>" onLoad="hideItem('hideShow');">
 <?
 
 if (isset($menu)){
