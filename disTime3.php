@@ -134,12 +134,21 @@ if ($progress>0){
             style="background-position: -<?echo ((100-(($new/$count2)*100))*1.2)-1; ?>px 0pt;" border="0" />
 <?
 } else {
+            if ($count2 > 0) {
             ?>
             <img src="/images/percentImage.png" title="<?
             echo "Remaining: $new/$count2\"";?>"
             class="percentImage2"
             style="background-position: -<?echo ((100-(($new/$count2)*100))*1.2)-1; ?>px 0pt;" border="0" />
 <?
+            } else {
+            ?>
+            <img src="/images/percentImage.png" title="<?
+            echo "Remaining: $new/$count2\"";?>"
+            class="percentImage2"
+            style="background-position: -<?echo ((100-((0)*100))*1.2)-1; ?>px 0pt;" border="0" />
+<?
+            }
 }
 ?>
 </TD>
