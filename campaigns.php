@@ -16,6 +16,17 @@ $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $campaigngroupid=mysql_result($result,0,'campaigngroupid');
 require "header_campaign.php";
+?><?
+    if ($_COOKIE[level] == sha1("level100")) {
+        if ($_GET[type]=="all") {
+            echo "<A HREF=\"campaigns.php?type=admin\">Admin Campaigns Only</A>&nbsp;/&nbsp;";
+            echo "<b>All Campaigns</b>";
+        } else {
+            echo "<b>Admin Campaigns Only</b>&nbsp;/&nbsp;";
+            echo "<A HREF=\"campaigns.php?type=all\">All Campaigns</A>";
+        }
+    }
+    ?><?
 if (isset($_GET[campaignid])){
 $_GET = array_map(mysql_real_escape_string,$_GET);
 $_POST[campaignid]=($_GET[campaignid]);
@@ -23,6 +34,7 @@ $_POST[campaignid]=($_GET[campaignid]);
 $out=_get_browser();
 if ($out[browser]=="MSIE"){
 ?>
+
  <?
 flush();
 ?>
@@ -30,7 +42,7 @@ flush();
 <script type="text/javascript">
         $(function(){ // jquery onload
                 window.setInterval(function(){
-                    $('#ajaxDiv').loadIfModified('disTime3.php?campaigngroupid=<?echo $campaigngroupid;?>&id=<?echo $_POST[campaignid];?>');  // jquery ajax load into div
+                    $('#ajaxDiv').loadIfModified('disTime3.php?campaigngroupid=<?echo $campaigngroupid;?>&id=<?echo $_POST[campaignid];?>&type=<?echo $_GET[type];?>');  // jquery ajax load into div
                 },10000);
         });
 
@@ -42,7 +54,7 @@ flush();
         $(function(){ // jquery onload
                 window.setInterval(
                 function(){
-                    $('#ajaxDiv').load('disTime3.php?campaigngroupid=<?echo $campaigngroupid;?>&id=<?echo $_POST[campaignid];?>');  // jquery ajax load into div
+                    $('#ajaxDiv').load('disTime3.php?campaigngroupid=<?echo $campaigngroupid;?>&id=<?echo $_POST[campaignid];?>&type=<?echo $_GET[type];?>');  // jquery ajax load into div
                 }
                 ,10000);
         });

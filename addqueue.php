@@ -161,7 +161,7 @@ this context (if it exists). Be aware that the person will lose their place in t
 ";
 
 $section[15] = "<form name=\"myform\" action=\"addqueue.php\" method=\"GET\">
-Please enter the extension for the queue.
+Please enter the context for the queue.
 <br>
 <br>
 <center>
@@ -169,7 +169,7 @@ Please enter the extension for the queue.
 <br />";
 
 //should have a bit to review the settings, and then accept
-//also need to mention that there are more fine tuning optIons in the edit queues page
+//also need to mention that there are more fine tuning options in the edit queues page
 //I think that after specifying most of the stuff above the queue is pretty much defined
 
 

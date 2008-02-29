@@ -47,14 +47,34 @@ require "header_customer.php";
 
 <script type="text/javascript">
 <!--
-	function validate(){
-		return true;		
+	function valid_text_field(field, msg){
+		if(field.value.length == 0){
+			field.style.background = "Red";
+			return msg + "\n";
+		}else
+			field.style.background = "White";
+		return "";
+	}
+
+	function validate(form){
+		var result = "";
+		result += valid_text_field(form.name, "You should supply a name for the customer");
+		result += valid_text_field(form.maxcps, "You need to specify the maximum number of calls per second");i
+		result += valid_text_field(form.maxchans, "You need to specify the maximum number of channels");
+		result += valid_text_field(form.username, "You need to provide a username");
+		if(result.length > 0) {
+			alert("Some fields need your attention: \n"+result);
+			return false;
+		}
+		return confirm(valid_text_field(
+			form.password,"You've provided a blank password, is this really what you want to do?"
+			));
 	}
 //-->
 
 </script>
 
-<FORM ACTION="addcustomer.php" METHOD="POST">
+<FORM onsubmit="return validate(this)" ACTION="addcustomer.php" METHOD="POST">
 <table class="tborder" align="center" border="0" cellpadding="0" cellspacing="2">
 <?
 ?>
@@ -147,7 +167,7 @@ while ($rowx = mysql_fetch_assoc($resultss)) {
 </TR>
 
 </TR><TR><TD COLSPAN=2 ALIGN="RIGHT">
-<INPUT TYPE="SUBMIT" VALUE="Add Customer" onClick="return validate();">
+<INPUT TYPE="SUBMIT" VALUE="Add Customer">
 </TD>
 </TR>
 <?

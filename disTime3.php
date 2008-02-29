@@ -12,7 +12,7 @@ $result=mysql_query($sql, $link) or die (mysql_error());;
 $row = mysql_fetch_assoc($result);
 $backend=$row[value];
 $level=$_COOKIE[level];
-if ($level==sha1("level100")) {
+if ($level==sha1("level100") && $_GET[type]=="all") {
     $sql = 'SELECT * FROM campaign order by name';
 } else {
     $sql = 'SELECT * FROM campaign WHERE groupid='.$campaigngroupid.' order by name';
