@@ -91,16 +91,33 @@ echo trim(substr($row[description],0,25))."...";
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<?if (substr($row[filename],0,2) == "x-") {
+?>
 <embed src="<?echo "/uploads/".str_replace(".sln",".wav",$row[filename]);?>"
 autostart=false width=0 height=0 id="sound<?echo $row[id];?>"
 enablejavascript="true">
 
-<a href="#" onClick="EvalSound('sound<?echo $row[id];?>')" title="Play <?echo $row[id];?>sound">
+<a href="#" onClick="EvalSound('sound<?echo $row[id];?>')" title="Play <?echo $row[name];?> sound">
 <img src="/images/control_play_blue.png" border="0"></a>
-<a href="#" onClick="EvalSound2('sound<?echo $row[id];?>')" title="Pause <?echo $row[id];?>sound">
+<a href="#" onClick="EvalSound2('sound<?echo $row[id];?>')" title="Pause <?echo $row[name];?> sound">
 <img src="/images/control_pause_blue.png" border="0"></a>
 
-<?/*?>
+<?
+
+} else {
+/* FAX FILE */
+?>
+
+
+<a href="<?echo "/uploads/".str_replace(".sln",".wav",$row[filename]);?>" title="Open <?echo $row[name];?> fax">
+<img src="/images/page.png" border="0"></a>
+
+<?
+
+}
+
+/*?>
 <embed src="<?echo "/uploads/".str_replace(".sln",".wav",$row[filename]);?>" width="144" height="20" autostart="false" loop="false">
 <?*/?>
 </TD>

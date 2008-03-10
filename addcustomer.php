@@ -66,9 +66,12 @@ require "header_customer.php";
 			alert("Some fields need your attention: \n"+result);
 			return false;
 		}
-		return confirm(valid_text_field(
+		$password = valid_text_field(
 			form.password,"You've provided a blank password, is this really what you want to do?"
 			));
+		if($password != "")
+			return confirm($password)
+		return true;
 	}
 //-->
 

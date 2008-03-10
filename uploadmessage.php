@@ -18,12 +18,22 @@ $sid = md5(uniqid(rand()));
 <td>
 </td>
 <td width="260">
+<? if ($_GET[type]=="audio") { ?>
 <div id="matt2">
 <b>Upload Message</b><br /><br />
 Please select a wave file from your computer that you would like to use
 as one of your messages and then click Upload.<br /><br />
 </div>
 <form enctype="multipart/form-data" name="postform" action="/cgi-bin/upload.cgi?sid=<?php echo $sid; ?>&target=<?echo normal_target('receivemessage.php');?>" method="post">
+<? } else if ($_GET[type]=="fax") { ?>
+<div id="matt2">
+<b>Upload Fax Message</b><br /><br />
+Please select a tiff file from your computer that you would like to use
+as one of your faxes and then click Upload.<br /><br />
+</div>
+<form enctype="multipart/form-data" name="postform" action="/cgi-bin/upload.cgi?sid=<?php echo $sid; ?>&target=<?echo normal_target('receivefaxmessage.php');?>" method="post">
+<?}?>
+
         <center><table><tr><td>
                 <div id="matt">
                 <input type="file" name="file_1" />

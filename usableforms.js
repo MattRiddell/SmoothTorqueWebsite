@@ -69,7 +69,7 @@ function prepareForm()
 		hiddenFields[0].parentNode.replaceChild(newMarker,hiddenFields[0]);
 		waitingRoom.appendChild(hiddenFields.shift());
 	}
-	
+
 	setDefaults();
 	addEvent(document,'click',showHideFields);
 }
@@ -102,7 +102,7 @@ function showHideFields(e)
 		var relatedFieldName = tg.getAttribute('for') || tg.getAttribute('htmlFor');
 		tg = document.getElementById(relatedFieldName);
 	}
-		
+
 	if (
 		!(tg.nodeName == 'SELECT' && e.type == 'change')
 		&&
@@ -158,6 +158,7 @@ function intoMainForm(relation)
 {
 	if (relation == 'none') return;
 	var Elements = hiddenFormFieldsPointers[relation];
+    if (Elements == null) return;
 	for (var i=0;i<Elements.length;i++)
 	{
 		var insertPoint = document.getElementById(relation+i);
@@ -168,7 +169,7 @@ function intoMainForm(relation)
 			for (var j=0;j<fields.length;j++)
 			{
 				if (!fields[j].getAttribute('rel')) continue;
-				if (fields[j].checked || fields[j].selected) 
+				if (fields[j].checked || fields[j].selected)
 					intoMainForm(fields[j].getAttribute('rel'));
 			}
 		}

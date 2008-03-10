@@ -2,6 +2,11 @@
 require "header.php";
 require "header_queue.php";
 
+if($_POST[check_submit]){
+	print_r($_POST);
+	//by now, we should have enough to make a good guess as to what should be in the queues.conf	
+	exit();
+}
 $section=Array();
 
 $section[0] = "This will take you through the creation of an Asterisk Based
@@ -65,14 +70,12 @@ This strategy will call the agent who was least recently called by this queue.<b
 <br />
 <br />
 <br />
-<br />
 ";
 
 $section[8] = "<form name=\"myform\" action=\"addqueue.php\" method=\"GET\">
 <b>Fewest Calls Strategy</b>
 <br /><br />
 This strategy will ring the agent with fewest completed calls from this queue.<br />
-<br />
 <br />
 <br />
 <br />
@@ -99,7 +102,6 @@ the beginning every time.  <br />
 <br />
 It remembers who was the last person to be called
 and calls from the next person the following time.
-
 ";
 $selected_strategy = Array();
 $selected_strategy[$_GET[strategy]] = " selected=\"selected\"";
@@ -152,7 +154,7 @@ If you wish to play an announcement to the agent before they accept the call
 </select>
 <br />";
 
-$section[14] = "<form name=\"myform\" action=\"addqueue.php\" method=\"GET\">
+/*$section[14] = "<form name=\"myform\" action=\"addqueue.php\" method=\"GET\">
 <b>Context</b><br />
 <br />
 This is where you decide what happens if someone in the queue presses a single
@@ -167,10 +169,25 @@ Please enter the context for the queue.
 <center>
 <input type=\"text\" name=\"context\" value=\"$_GET[context]\">
 <br />";
-
+*/
 //should have a bit to review the settings, and then accept
 //also need to mention that there are more fine tuning options in the edit queues page
 //I think that after specifying most of the stuff above the queue is pretty much defined
+
+$section[14] = "<form name=\"myform\" action=\"addqueue.php\" method=\"GET\">
+<b>Review</b><br>
+On the next page you have a chance to review the settings for the queue created.<br><br>
+If you wish to change these options, you can go back and change them. <br><br>
+There are more fine control options availiable in the edit queue page";
+
+$section [15] = "<form name=\"myform\" action=\"addqueue.php\" method=\"POST\">
+<input type=\"hidden\" name=\"check_submit\" value=\"1\">
+<b>Review</b><br>
+These are the options you've selected:<br>
+Strategy: ".$_GET[strategy]."<br>
+Report Hold Time: ".$_GET[reportholdtime]."<br>
+Auto Fill: ".$_GET[autofill]."<br><br>
+";
 
 
 $currentsection=$section[1+($_GET[section]-1)];
@@ -233,7 +250,7 @@ if (isset($_GET[reportholdtime])){
 ?>
 <div align="right">
 
-<a href="#" onclick="document.myform.submit();return false;">Next
+<a href="#" onclick="document.myform.submit();return false;"><? echo ($_GET[section] == 15? "Submit": "Next") ?>
 <img src="/images/resultset_next.png" border = "0"></a>
 </form>
 <?
@@ -248,7 +265,7 @@ if (isset($_GET[reportholdtime])){
     }
 ?>
 <div align="right">
-<a href="addqueue.php?<?echo $url;?>">Next
+<a href="addqueue.php?<?echo $url;?>"><? echo ($_GET[section] == 15? "Submit": "Next") ?>
 <img src="/images/resultset_next.png" border = "0"></a>
 <?
 }

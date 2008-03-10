@@ -11,8 +11,12 @@ if (isset($_POST[name])){
     	$id=($_POST[id]);
         $name=($_POST[name]);
         $description=($_POST[description]);
-        $messageid=($_POST[messageid]);
-        $messageid2=($_POST[messageid2]);
+        $context=$_POST[context];
+        if ($context == 8) {
+            $messageid=$_POST[faxid];
+        } else {
+    	    $messageid=$_POST[messageid];
+        }        $messageid2=($_POST[messageid2]);
         $messageid3=($_POST[messageid3]);
         $modein=($_POST[mode]);
         if ($modein == "mode_queue"){
@@ -25,7 +29,6 @@ if (isset($_POST[name])){
         $did=($_POST[did]);
         $clid=($_POST[clid]);
         $trclid=($_POST[trclid]);
-        $context=($_POST[context]);
         $sql="INSERT INTO campaign (groupid,name,description,messageid,messageid2,messageid3,mode,astqueuename,did,maxagents,clid,trclid,context) VALUES ('$campaigngroupid','$name', '$description', '$messageid','$messageid2','$messageid3','$mode','$astqueuename','$did','$maxagents','$clid','$trclid','$context')";
     //    echo $sql;
         $result=mysql_query($sql, $link) or die (mysql_error());;
@@ -55,7 +58,7 @@ require "header_campaign.php";
 <INPUT TYPE="TEXT" NAME="description" VALUE="<?echo $row[description];?>" size="60">
 </TD>
 </TR>
-		<tr>
+		<tr id="mode" style="display:none">
 			<td class="thead" width=200>Mode
 			            <a href="#" onclick="displaySmallMessage('includes/help.php?section=What type of campaign you would like to run. <br /><br />If you are connected to the machine doing the calling then chose Queue Mode.  If you would like to receive any connected calls at a particular phone number, chose DID Mode.  Normally you will use DID Mode unless you have been told to use Queue Mode.');return false"><img src="/images/help.png" border="0"></a>
 			</td>
@@ -78,7 +81,7 @@ require "header_campaign.php";
 <OPTION VALUE="3" title="Play a message to a person, if they press 1, put them through to the call center. Leave a message for answering machines">Press 1 Live and Answer Machine</OPTION>
 <OPTION VALUE="6">Direct Transfer (coming soon)</OPTION>
 <OPTION VALUE="7">Immediate Message Playback (coming soon)</OPTION>
-<OPTION VALUE="8">Fax Broadcast (coming soon)</OPTION>
+<OPTION VALUE="8" title="Ring a number, when it answers start sending a fax">Fax Broadcast</OPTION>
 <OPTION VALUE="9">SMS Broadcast (coming soon)</OPTION>
 <?/*<OPTION VALUE="5" <?if ($row[context]==5){echo "SELECTED";}?>>Spare 2</OPTION>
 <OPTION VALUE="6" <?if ($row[context]==6){echo "SELECTED";}?>>Spare 3</OPTION>
@@ -89,7 +92,7 @@ require "header_campaign.php";
 </SELECT>
 </TD>
 </TR>
-		<tr rel="didmode" id="xx6" style="display:none">
+		<tr rel="didmode" id="xx6" style="display:none" >
 			<td class="thead" width=200><label for="agents">Maximum Connected Calls:
             <a href="#" onclick="displaySmallMessage('includes/help.php?section=This is the number of concurrent calls you would like to receive on the call center number specified.  <br /><br />Normally this will be the number of staff you have.');return false" title="The number of concurrent calls to be put through to the call center"><img src="/images/help.png" border="0"></a>
             </label></td>
@@ -97,15 +100,22 @@ require "header_campaign.php";
 		</tr>
 <?
 if ($_COOKIE[level] == sha1("level100")) {
-    $sql = 'SELECT * FROM campaignmessage ';
+    $sql = 'SELECT * FROM campaignmessage where filename like "x-%"';
+    $sql_fax = 'SELECT * FROM campaignmessage where filename like "fax-%"';
 } else {
-    $sql = 'SELECT * FROM campaignmessage WHERE customer_id='.$campaigngroupid;
+    $sql = 'SELECT * FROM campaignmessage WHERE filename like "x-%" and customer_id='.$campaigngroupid;
+    $sql_fax = 'SELECT * FROM campaignmessage WHERE filename like "fax-%" and customer_id='.$campaigngroupid;
 }
 $result=mysql_query($sql,$link) or die (mysql_error());
 $count=0;
 while ($row2[$count] = mysql_fetch_assoc($result)) {
     $count++;
-    //echo "<OPTION VALUE=\"".$row[id]."\">".$row[name]."</OPTION>";
+}
+
+$result_fax=mysql_query($sql_fax,$link) or die (mysql_error());
+$count_fax=0;
+while ($row2_fax[$count_fax] = mysql_fetch_assoc($result_fax)) {
+    $count_fax++;
 }
 
 $sql="SELECT * from queue_table";
@@ -113,11 +123,40 @@ $result=mysql_query($sql,$link) or die (mysql_error());
 $count2=0;
 while ($row_queue[$count2] = mysql_fetch_assoc($result)) {
     $count2++;
-    //echo "<OPTION VALUE=\"".$row[id]."\">".$row[name]."</OPTION>";
 }
 
 
 ?>
+
+<?/*
+===================================================================================================
+                                This is for the fax message
+===================================================================================================
+*/?>
+
+
+<TR id="fax" style="display:none" title="The fax you would like to send"><TD CLASS="thead">Fax Message
+<a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are running a campaign which sends a fax to the user then this is the fax that will be used.');return false"><img src="/images/help.png" border="0"></a>
+</TD><TD>
+<SELECT name="faxid">
+<?
+for ($i=0;$i<$count_fax;$i++){
+$selected="";
+if ($row[messageid]==$row2_fax[$i][id]){
+    $selected=" SELECTED";
+}
+echo "<OPTION VALUE=\"".$row2_fax[$i][id]."\"$selected>".$row2_fax[$i][description]."</OPTION>";
+}
+?>
+</SELECT>
+</TD>
+</TR>
+
+<?/*
+===================================================================================================
+                                This is for the live message
+===================================================================================================
+*/?>
 
 <TR id="xx2" style="display:none" title="The message to play to the person who answers the phone"><TD CLASS="thead">Live Message
 <a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are running a campaign which plays a message to the user while waiting for them to press 1 then this is the message that will be used.');return false"><img src="/images/help.png" border="0"></a>
@@ -134,7 +173,16 @@ echo "<OPTION VALUE=\"".$row2[$count2][id]."\"$selected>".$row2[$count2][descrip
 ?>
 </SELECT>
 </TD>
-</TR><TR id="xx3"  style="display:none" title="The message to leave to the answer machine"><TD CLASS="thead">Answer Machine Message<a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are leaving automated messages on answer machines then you can set this to a particular message you would like to have played when an answer machine is detected.  Usage of this will depend on your settings in the Type of Campaign section.');return false"><img src="/images/help.png" border="0"></a>
+</TR>
+
+<?/*
+===================================================================================================
+                                This is for the answer machine message
+===================================================================================================
+*/?>
+
+
+<TR id="xx3"  style="display:none" title="The message to leave to the answer machine"><TD CLASS="thead">Answer Machine Message<a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are leaving automated messages on answer machines then you can set this to a particular message you would like to have played when an answer machine is detected.  Usage of this will depend on your settings in the Type of Campaign section.');return false"><img src="/images/help.png" border="0"></a>
 </TD><TD>
 <SELECT name="messageid2">
 <?
@@ -148,7 +196,16 @@ echo "<OPTION VALUE=\"".$row2[$count2][id]."\"$selected>".$row2[$count2][descrip
 ?>
 </SELECT>
 </TD>
-</TR><TR  id="xx4" style="display:none" title="The message played to someone who wants to be put on the DNC list"><TD CLASS="thead">DNC Confirmation Message
+</TR>
+
+<?/*
+===================================================================================================
+                                This is for the DNC List Message
+===================================================================================================
+*/?>
+
+
+<TR  id="xx4" style="display:none" title="The message played to someone who wants to be put on the DNC list"><TD CLASS="thead">DNC Confirmation Message
 <a href="#" onclick="displaySmallMessage('includes/help.php?section=This message is played to a customer who presses 2 to be added to DNC.');return false"><img src="/images/help.png" border="0"></a>
 </TD><TD>
 <SELECT name="messageid3">
