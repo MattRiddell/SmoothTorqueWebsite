@@ -30,8 +30,8 @@ $count+=mysql_result($result,0,0);
 
 if ($count > 0) {
     require "header.php";
-    echo "Sorry this message is currently being used by a campaign";
-?>    <meta http-equiv="refresh" content="0;url=/messages.php"><?
+    echo "<br /><br />Sorry this message is currently being used by a campaign";
+?>    <meta http-equiv="refresh" content="3;url=/messages.php"><?
 } else {
 $sql="DELETE FROM campaignmessage WHERE id=".($_GET[id]);
 //        echo $sql;

@@ -94,15 +94,15 @@ require "header_campaign.php";
 
 <OPTION VALUE="-1" SELECTED>Please chose a type of campaign...</OPTION>
 <OPTION VALUE="0" <?echo $row[context]==0?"SELECTED":""?> title="No numbers are dialed">Load Simulation</OPTION>
-<OPTION VALUE="1" <?echo $row[context]==1?"SELECTED":""?>title="Only leave a message if an answer machine is detected, hangup otherwise">Answer Machine Only</OPTION>
+<OPTION VALUE="1" <?echo $row[context]==1?"SELECTED":""?> title="Only leave a message if an answer machine is detected, hangup otherwise">Answer Machine Only</OPTION>
 <OPTION VALUE="2" <?echo $row[context]==2?"SELECTED":""?> title="Connect a person directly to the call center, don't bother with answer machines">Immediate Live</OPTION>
 <OPTION VALUE="4" <?echo $row[context]==4?"SELECTED":""?> title="Play a message to a person, and if they press 1 transfer them to the call center, don't bother with answer machines">Press 1 Live Only</OPTION>
 <OPTION VALUE="5" <?echo $row[context]==5?"SELECTED":""?> title="Connect a person directly to the call center, and leave a message on the answer machine">Immediate Live and Answer Machine</OPTION>
 <OPTION VALUE="3" <?echo $row[context]==3?"SELECTED":""?> title="Play a message to a person, if they press 1 they go to the call center, leave a message on the answer machine">Press 1 Live and Answer Machine</OPTION>
-<OPTION VALUE="6" <?echo $row[context]==6?"SELECTED":""?>>Direct Transfer (coming soon)</OPTION>
-<OPTION VALUE="7" <?echo $row[context]==7?"SELECTED":""?>>Immediate Message Playback (coming soon)</OPTION>
-<OPTION VALUE="8" <?echo $row[context]==8?"SELECTED":""?>>Fax Broadcast (coming soon)</OPTION>
-<OPTION VALUE="9" <?echo $row[context]==9?"SELECTED":""?>>SMS Broadcast (coming soon)</OPTION>
+<OPTION VALUE="6" <?echo $row[context]==6?"SELECTED":""?> title="Coming Soon"> Direct Transfer (coming soon)</OPTION>
+<OPTION VALUE="7" <?echo $row[context]==7?"SELECTED":""?> title="Coming Soon"> Immediate Message Playback (coming soon)</OPTION>
+<OPTION VALUE="8" <?echo $row[context]==8?"SELECTED":""?> title="Ring a number, when it answers start sending a fax" >Fax Broadcast</OPTION>
+<OPTION VALUE="9" <?echo $row[context]==9?"SELECTED":""?> title="Coming Soon">SMS Broadcast (coming soon)</OPTION>
 
 <?/*<OPTION VALUE="5" <?if ($row[context]==5){echo "SELECTED";}?>>Spare 2</OPTION>
 <OPTION VALUE="6" <?if ($row[context]==6){echo "SELECTED";}?>>Spare 3</OPTION>
