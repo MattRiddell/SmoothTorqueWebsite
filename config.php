@@ -27,6 +27,7 @@ if (isset($_POST[colour])){
     fwrite($add,"MENU_ADMIN=$_POST[MENU_ADMIN]\n");
     fwrite($add,"MENU_LOGOUT=$_POST[MENU_LOGOUT]\n");
     fwrite($add,"DATE_COLOUR=$_POST[DATE_COLOUR]\n");
+    fwrite($add,"MAIN_PAGE_TEXT=$_POST[MAIN_PAGE_TEXT]\n");
     fclose($add);
 
 }
@@ -346,6 +347,15 @@ Logout Menu Text:
 </td>
 <td>
 <input type="Text" name="MENU_LOGOUT" value="<?echo $config_values['MENU_LOGOUT'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+Main Page Text:
+</td>
+<td>
+<input type="Text" name="MAIN_PAGE_TEXT" value="<?echo $config_values['MAIN_PAGE_TEXT'];?>">
 </td>
 </tr>
 

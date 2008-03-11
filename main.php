@@ -11,9 +11,9 @@ require "header.php";
 <td width="260">
 <b>Welcome to <?echo $config_values['TITLE'];?>.</b><br />
 <br />
-To get started, go into your list of campaigns by clicking on the
-Campaigns tab at the top of this page.
-<br />
+<?
+echo $config_values['MAIN_PAGE_TEXT'];
+?><br />
 </td>
 <td>
 </td></tr>
