@@ -26,6 +26,7 @@ if (isset($_POST[colour])){
     fwrite($add,"MENU_TRUNKS=$_POST[MENU_TRUNKS]\n");
     fwrite($add,"MENU_ADMIN=$_POST[MENU_ADMIN]\n");
     fwrite($add,"MENU_LOGOUT=$_POST[MENU_LOGOUT]\n");
+    fwrite($add,"DATE_COLOUR=$_POST[DATE_COLOUR]\n");
     fclose($add);
 
 }
@@ -348,6 +349,17 @@ Logout Menu Text:
 </td>
 </tr>
 
+<tr  class="tborder2">
+<td>
+Date/Time Colour:
+</td>
+<td>
+<script language=JavaScript src="/js/picker.js"></script>
+<input type="Text" name="DATE_COLOUR" value="<?echo $config_values['DATE_COLOUR'];?>">
+<a href="javascript:TCP.popup(document.forms['config'].elements['DATE_COLOUR'], 1)"><img width="15" height="13" border="0" alt="Click Here to Pick the color" src="img/sel.gif"></a>
+
+</td>
+</tr>
 
 
 <tr><td colspan="2">

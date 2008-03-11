@@ -587,5 +587,5 @@ if (isset($menu)){
 <TR VALIGN="TOP" >
 <TD BGCOLOR="#ffffff">
 <?
-echo "<center><font color=\"#dddddd\">".date('l dS \of F Y h:i:s A')."</font><br /></center>";
+echo "<center><font color=\"".$config_values['DATE_COLOUR']."\">".date('l dS \of F Y h:i:s A')."</font><br /></center>";
 ?>
