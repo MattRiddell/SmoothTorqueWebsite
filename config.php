@@ -9,6 +9,11 @@ if (isset($_POST[colour])){
     fwrite($add,"SOX=$_POST[sox]\n");
     fwrite($add,"USERID=$_POST[userid]\n");
     fwrite($add,"LICENCE=$_POST[licencekey]\n");
+    fwrite($add,"CDR_HOST=$_POST[CDR_HOST]\n");
+    fwrite($add,"CDR_USER=$_POST[CDR_USER]\n");
+    fwrite($add,"CDR_PASS=$_POST[CDR_PASS]\n");
+    fwrite($add,"CDR_DB=$_POST[CDR_DB]\n");
+    fwrite($add,"CDR_TABLE=$_POST[CDR_TABLE]\n");
     fclose($add);
 
 }
@@ -37,8 +42,7 @@ $licencekey = mysql_result($result,0,'value');
 <br />
 <table class="" align="center" border="0" cellpadding="2" cellspacing="0">
 <tr>
-    <td CLASS="thead"></td>
-    <td CLASS="thead">Settings</td>
+    <td CLASS="thead" colspan="2">Settings</td>
 </tr>
 <tr  class="tborderxx"><td>
 <?if ($backend == 0) {?>
@@ -56,13 +60,58 @@ $licencekey = mysql_result($result,0,'value');
 <?}?>
 </td>
 <td>Windows Backend</td></tr>
-
+<form action="config.php" name="config" method="post">
 <tr  class="tborder2">
-<td> <form action="config.php" name="config" method="post">
+<td>
 Sox Path:
 </td>
 <td>
 <input type="Text" name="sox" value="<?echo $config_values['SOX'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+CDR Host:
+</td>
+<td>
+<input type="Text" name="CDR_HOST" value="<?echo $config_values['CDR_HOST'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+CDR Username:
+</td>
+<td>
+<input type="Text" name="CDR_USER" value="<?echo $config_values['CDR_USER'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+CDR Pass:
+</td>
+<td>
+<input type="password" name="CDR_PASS" value="<?echo $config_values['CDR_PASS'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+CDR Database:
+</td>
+<td>
+<input type="Text" name="CDR_DB" value="<?echo $config_values['CDR_DB'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+CDR Table:
+</td>
+<td>
+<input type="Text" name="CDR_TABLE" value="<?echo $config_values['CDR_TABLE'];?>">
 </td>
 </tr>
 
@@ -89,7 +138,7 @@ User ID:
 Licence Key:
 </td>
 <td>
-<input type="text" name="licencekey" value="<?echo $licencekey;?>">
+<input type="password" name="licencekey" value="<?echo $licencekey;?>">
 </td>
 </tr>
 <tr  class="tborderxx">
@@ -107,7 +156,6 @@ $contents3 = explode("\n",$contents2);
 //print_r($contents3);
 fclose($handle);
 $contents = $contents3[0];
-$hash = $contents3[1];
 if ($contents<1000){
     if ($contents==0){
         echo "Unlicensed demo";
@@ -130,7 +178,6 @@ if ($contents<1000){
 	$maxchans=$contents-(10000*round($test));
 	echo round($test-2)." Servers (Max. ".$maxchans." Channels)";
 }
-echo "<br />$hash";
 ?>
 
 
