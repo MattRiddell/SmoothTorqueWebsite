@@ -105,7 +105,9 @@ foreach ($lines2 as $line_num2 => $line2) {
                 }
         }
 }
-$avgPerc/=$count;
+if ($count > 0) {
+    $avgPerc/=$count;
+}
 if ($timespent<$MAX_ENTRIES) {
         $avgPerc=0;
         for ($i=$MAX_ENTRIES;$i>=0;$i--){

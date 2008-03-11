@@ -75,7 +75,7 @@ $did = str_replace("(","",$did);
 $did = str_replace(")","",$did);
 $did = str_replace(" ","",$did);
 
-$dialstring = str_replace("-","",$dialstring);
+//$dialstring = str_replace("-","",$dialstring);
 $dialstring = str_replace(" ","",$dialstring);
 $dialstring = str_replace("(","",$dialstring);
 $dialstring = str_replace(")","",$dialstring);
