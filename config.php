@@ -14,6 +14,18 @@ if (isset($_POST[colour])){
     fwrite($add,"CDR_PASS=$_POST[CDR_PASS]\n");
     fwrite($add,"CDR_DB=$_POST[CDR_DB]\n");
     fwrite($add,"CDR_TABLE=$_POST[CDR_TABLE]\n");
+    fwrite($add,"MENU_HOME=$_POST[MENU_HOME]\n");
+    fwrite($add,"MENU_CAMPAIGNS=$_POST[MENU_CAMPAIGNS]\n");
+    fwrite($add,"MENU_NUMBERS=$_POST[MENU_NUMBERS]\n");
+    fwrite($add,"MENU_DNC=$_POST[MENU_DNC]\n");
+    fwrite($add,"MENU_MESSAGES=$_POST[MENU_MESSAGES]\n");
+    fwrite($add,"MENU_SCHEDULES=$_POST[MENU_SCHEDULES]\n");
+    fwrite($add,"MENU_CUSTOMERS=$_POST[MENU_CUSTOMERS]\n");
+    fwrite($add,"MENU_QUEUES=$_POST[MENU_QUEUES]\n");
+    fwrite($add,"MENU_SERVERS=$_POST[MENU_SERVERS]\n");
+    fwrite($add,"MENU_TRUNKS=$_POST[MENU_TRUNKS]\n");
+    fwrite($add,"MENU_ADMIN=$_POST[MENU_ADMIN]\n");
+    fwrite($add,"MENU_LOGOUT=$_POST[MENU_LOGOUT]\n");
     fclose($add);
 
 }
@@ -234,6 +246,109 @@ Opening Text:
 <input type="Text" name="text" value="<?echo $config_values['TEXT'];?>">
 </td>
 </tr>
+
+<? /*******************************************************************/ ?>
+<? /*                           Menu Text                             */ ?>
+<? /*******************************************************************/ ?>
+
+<tr  class="tborder2">
+<td>
+Home Menu Text:
+</td>
+<td>
+<input type="Text" name="MENU_HOME" value="<?echo $config_values['MENU_HOME'];?>">
+</td>
+</tr>
+<tr  class="tborder2">
+<td>
+Campaigns Menu Text:
+</td>
+<td>
+<input type="Text" name="MENU_CAMPAIGNS" value="<?echo $config_values['MENU_CAMPAIGNS'];?>">
+</td>
+</tr>
+<tr  class="tborder2">
+<td>
+Numbers Menu Text:
+</td>
+<td>
+<input type="Text" name="MENU_NUMBERS" value="<?echo $config_values['MENU_NUMBERS'];?>">
+</td>
+</tr>
+<tr  class="tborder2">
+<td>
+DNC Numbers Menu Text:
+</td>
+<td>
+<input type="Text" name="MENU_DNC" value="<?echo $config_values['MENU_DNC'];?>">
+</td>
+</tr>
+<tr  class="tborder2">
+<td>
+Messages Menu Text:
+</td>
+<td>
+<input type="Text" name="MENU_MESSAGES" value="<?echo $config_values['MENU_MESSAGES'];?>">
+</td>
+</tr>
+<tr  class="tborder2">
+<td>
+Schedules Menu Text:
+</td>
+<td>
+<input type="Text" name="MENU_SCHEDULES" value="<?echo $config_values['MENU_SCHEDULES'];?>">
+</td>
+</tr>
+<tr  class="tborder2">
+<td>
+Customers Menu Text:
+</td>
+<td>
+<input type="Text" name="MENU_CUSTOMERS" value="<?echo $config_values['MENU_CUSTOMERS'];?>">
+</td>
+</tr>
+<tr  class="tborder2">
+<td>
+Queues Menu Text:
+</td>
+<td>
+<input type="Text" name="MENU_QUEUES" value="<?echo $config_values['MENU_QUEUES'];?>">
+</td>
+</tr>
+<tr  class="tborder2">
+<td>
+Servers Menu Text:
+</td>
+<td>
+<input type="Text" name="MENU_SERVERS" value="<?echo $config_values['MENU_SERVERS'];?>">
+</td>
+</tr>
+<tr  class="tborder2">
+<td>
+Trunks Menu Text:
+</td>
+<td>
+<input type="Text" name="MENU_TRUNKS" value="<?echo $config_values['MENU_TRUNKS'];?>">
+</td>
+</tr>
+<tr  class="tborder2">
+<td>
+Admin Menu Text:
+</td>
+<td>
+<input type="Text" name="MENU_ADMIN" value="<?echo $config_values['MENU_ADMIN'];?>">
+</td>
+</tr>
+<tr  class="tborder2">
+<td>
+Logout Menu Text:
+</td>
+<td>
+<input type="Text" name="MENU_LOGOUT" value="<?echo $config_values['MENU_LOGOUT'];?>">
+</td>
+</tr>
+
+
 
 <tr><td colspan="2">
 <br /><br />

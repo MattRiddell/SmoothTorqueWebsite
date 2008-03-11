@@ -112,7 +112,7 @@ $self=$_SERVER['PHP_SELF'];
         $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
     }
 
-    $menu.='<TD class="'.$thead.'" height=27><A HREF="/main.php"><img src="/images/house.png" border="0" align="left">Home</A>&nbsp;</TD>';
+    $menu.='<TD class="'.$thead.'" height=27><A HREF="/main.php"><img src="/images/house.png" border="0" align="left">'.$config_values['MENU_HOME'].'</A>&nbsp;</TD>';
 
     //=======================================================================================================
     // Campaigns
@@ -123,7 +123,7 @@ $self=$_SERVER['PHP_SELF'];
     } else {
         $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
     }
-    $menu.='<TD class="'.$thead.'"><A HREF="/campaigns.php"><img src="/images/folder.png" border="0" align="left">Campaigns</A>&nbsp;</TD>';
+    $menu.='<TD class="'.$thead.'"><A HREF="/campaigns.php"><img src="/images/folder.png" border="0" align="left">'.$config_values['MENU_CAMPAIGNS'].'</A>&nbsp;</TD>';
 
     //=======================================================================================================
     // Numbers
@@ -133,7 +133,7 @@ $self=$_SERVER['PHP_SELF'];
     } else {
         $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
     }
-    $menu.='<TD class="'.$thead.'"><A HREF="/numbers.php"><img src="/images/telephone.png" border="0" align="left">Numbers</A>&nbsp;</TD>';
+    $menu.='<TD class="'.$thead.'"><A HREF="/numbers.php"><img src="/images/telephone.png" border="0" align="left">'.$config_values['MENU_NUMBERS'].'</A>&nbsp;</TD>';
 
     //=======================================================================================================
     // DNC Numbers
@@ -143,7 +143,7 @@ $self=$_SERVER['PHP_SELF'];
     } else {
         $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
     }
-    $menu.='<TD class="'.$thead.'"><A HREF="/dncnumbers.php"><img src="/images/telephone_error.png" border="0" align="left">DNC Numbers</A>&nbsp;</TD>';
+    $menu.='<TD class="'.$thead.'"><A HREF="/dncnumbers.php"><img src="/images/telephone_error.png" border="0" align="left">'.$config_values['MENU_DNC'].'</A>&nbsp;</TD>';
 
     //=======================================================================================================
     // Messages
@@ -153,7 +153,7 @@ $self=$_SERVER['PHP_SELF'];
     } else {
         $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
     }
-    $menu.='<TD class="'.$thead.'"><A HREF="/messages.php"><img src="/images/sound.png" border="0" align="left">Messages</A>&nbsp;</TD>';
+    $menu.='<TD class="'.$thead.'"><A HREF="/messages.php"><img src="/images/sound.png" border="0" align="left">'.$config_values['MENU_MESSAGES'].'</A>&nbsp;</TD>';
     //=======================================================================================================
     // Schedules
     //=======================================================================================================
@@ -162,7 +162,7 @@ $self=$_SERVER['PHP_SELF'];
     } else {
         $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
     }
-    $menu.='<TD class="'.$thead.'"><A HREF="/schedule.php"><img src="/images/clock.png" border="0" align="left">Schedules</A>&nbsp;</TD>';
+    $menu.='<TD class="'.$thead.'"><A HREF="/schedule.php"><img src="/images/clock.png" border="0" align="left">'.$config_values['MENU_SCHEDULES'].'</A>&nbsp;</TD>';
     if ($level==sha1("level100")){
 
         //=======================================================================================================
@@ -173,7 +173,7 @@ $self=$_SERVER['PHP_SELF'];
         } else {
             $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
         }
-        $menu.='<TD class="'.$thead.'"><A HREF="/customers.php"><img src="/images/group.png" border="0" align="left">Customers</A>&nbsp;</TD>';
+        $menu.='<TD class="'.$thead.'"><A HREF="/customers.php"><img src="/images/group.png" border="0" align="left">'.$config_values['MENU_CUSTOMERS'].'</A>&nbsp;</TD>';
         //=======================================================================================================
 
         //=======================================================================================================
@@ -184,7 +184,7 @@ $self=$_SERVER['PHP_SELF'];
         } else {
             $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
         }
-        $menu.='<TD class="'.$thead.'"><A HREF="/queues.php"><img src="/images/database.png" border="0" align="left">Queues</A>&nbsp;</TD>';
+        $menu.='<TD class="'.$thead.'"><A HREF="/queues.php"><img src="/images/database.png" border="0" align="left">'.$config_values['MENU_QUEUES'].'</A>&nbsp;</TD>';
         //=======================================================================================================
 
         //=======================================================================================================
@@ -196,7 +196,7 @@ $self=$_SERVER['PHP_SELF'];
             $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
         }
         if ($backend == 0){
-        $menu.='<TD class="'.$thead.'"><A HREF="/servers.php"><img src="/images/server.png" border="0" align="left">Servers</A>&nbsp;</TD>';
+        $menu.='<TD class="'.$thead.'"><A HREF="/servers.php"><img src="/images/server.png" border="0" align="left">'.$config_values['MENU_SERVERS'].'</A>&nbsp;</TD>';
         }
         //=======================================================================================================
 
@@ -209,7 +209,7 @@ $self=$_SERVER['PHP_SELF'];
         } else {
             $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
         }
-        $menu.='<TD class="'.$thead.'"><A HREF="/trunks.php"><img src="/images/telephone_link.png" border="0" align="left">Trunks</A>&nbsp;</TD>';
+        $menu.='<TD class="'.$thead.'"><A HREF="/trunks.php"><img src="/images/telephone_link.png" border="0" align="left">'.$config_values['MENU_TRUNKS'].'</A>&nbsp;</TD>';
         //=======================================================================================================
 
         //=======================================================================================================
@@ -220,7 +220,7 @@ $self=$_SERVER['PHP_SELF'];
         } else {
             $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
         }
-        $menu.='<TD class="'.$thead.'"><A HREF="/config.php"><img src="/images/cog.png" border="0" align="left">Admin</A>&nbsp;</TD>';
+        $menu.='<TD class="'.$thead.'"><A HREF="/config.php"><img src="/images/cog.png" border="0" align="left">'.$config_values['MENU_ADMIN'].'</A>&nbsp;</TD>';
         //=======================================================================================================
 
     }
