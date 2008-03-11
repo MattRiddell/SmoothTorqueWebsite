@@ -22,7 +22,7 @@ if (mysql_num_rows($resultx)==0) {
     </script>
     <?
     } else {
-       echo "Please Wait<br /><br />Your campaign is being started<BR><BR><img src=\"/images/ajax-loader.gif\"><br /><br />";
+       echo "Please Wait<br /> <br />Your campaign is being started<BR><BR><img src=\"/images/ajax-loader.gif\"><br /><br />";
     }
 }
 ?>
