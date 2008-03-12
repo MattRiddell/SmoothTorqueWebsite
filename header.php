@@ -227,7 +227,7 @@ $self=$_SERVER['PHP_SELF'];
     //    <TD class="thead2"><A HREF="prefs.php">Preferences</A>&nbsp;&nbsp;</TD>
     $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
 
-    $menu.='<TD height="1" class="'.$thead.'"><A HREF="/logout.php"><img src="/images/door_in.png" border="0" align="left">Logout</A>&nbsp;</TD><TD CLASS="theadr2" WIDTH=0></TD></TR></table>
+    $menu.='<TD height="1" class="'.$thead.'"><A HREF="/logout.php"><img src="/images/door_in.png" border="0" align="left">'.$config_values['MENU_LOGOUT'].'</A>&nbsp;</TD><TD CLASS="theadr2" WIDTH=0></TD></TR></table>
 
     ';
     //<TD class="thead2"><A HREF="stats.php">Live Statistics</A>&nbsp;&nbsp;</TD>
