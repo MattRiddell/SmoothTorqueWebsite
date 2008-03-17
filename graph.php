@@ -161,7 +161,7 @@ $dplot2[] = new LinePlot($chart [ 'chart_data' ][ 1 ]);
 $runningSpeedPlot[] = new LinePLot($chart [ 'chart_data' ][ 3 ]);
 $runningSpeedPlot2[] = new LinePLot($array4);
 //$dplot[0]->SetFillColor("#ff0000@0.8");
-$dplot2[0]->SetFillGradient("#00ff00","#0000ff@0.7");
+$dplot2[0]->SetFillGradient("#0000ff","#00ff00@0.7");
 $dplot2[0]->SetWeight(1);
 //$speedAtractorPlot[0]->SetFillGradient("#ff0000@0.5","#ff0000@0.5");
 $speedAtractorPlot[0]->SetWeight(1);
