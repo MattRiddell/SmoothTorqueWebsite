@@ -8,7 +8,7 @@ mysql_select_db($config_values['CDR_DB'], $cdrlink);
 $sql = "SELECT * from ".$config_values['CDR_TABLE']." LIMIT 300";
 $result = mysql_query($sql,$cdrlink);
 $i = 0;
-echo "<table>";
+echo "<table border=1>";
 echo "<tr><td>CallDate</td><td>DContext</td><td>DST</td><td>CLID</td><td>Channel</td><td>
 DST Channel</td><td>Last App</td><td>Last Data</td><td>Duration</td><td>Billsec</td><td>Disposition</td><td>
 AMA Flags</td><td>AccountCode</td><td>UserField</td></tr>";
