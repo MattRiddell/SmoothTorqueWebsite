@@ -7,8 +7,29 @@ $cdrlink = mysql_connect($db_host, $db_user, $db_pass) OR die(mysql_error());
 mysql_select_db($config_values['CDR_DB'], $cdrlink);
 $sql = "SELECT * from ".$config_values['CDR_TABLE']." LIMIT 100";
 $result = mysql_query($sql,$cdrlink);
+$i = 0;
 while ($row = mysql_fetch_assoc($result)) {
-    echo $row[dcontext]." - ".$row[dst]."<br />";
+    $calldate[$i] = $row[calldate];
+    $dcontext[$i] = $row[dcontext];
+    $dst[$i] = $row[dst];
+    $src[$i] = $row[src];
+    $clid[$i] = $row[clid];
+    $channel[$i] = $row[channel];
+    $dstchannel[$i] = $row[dstchannel];
+    $lastapp[$i] = $row[lastapp];
+    $lastdata[$i] = $row[lastdata];
+    $duration[$i] = $row[duration];
+    $billsec[$i] = $row[billsec];
+    $disposition[$i] = $row[disposition];
+    $amaflags[$i] = $row[amaflags];
+    $accountcode[$i] = $row[accountcode];
+    $userfield[$i] = $row[userfield];
+    echo     $calldate[$i]." - ".$dcontext[$i]." - ".$dst[$i]." - ".
+    $src[$i]." - ".$clid[$i]." - ".$channel[$i]." - ".$dstchannel[$i]." - ".
+    $lastapp[$i]." - ".$lastdata[$i]." - ".$duration[$i]." - ".$billsec[$i]." - ".
+    $disposition[$i]." - ".$amaflags[$i]." - ".$accountcode[$i]." - ".$userfield[$i];
+    echo "<br />";
+    $i++;
 }
 exit(0);
 ?>
