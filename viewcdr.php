@@ -26,8 +26,8 @@ while ($row = mysql_fetch_assoc($result)) {
     $userfield[$i] = $row[userfield];
     echo     $calldate[$i]." - ".$dcontext[$i]." - ".$dst[$i]." - ".
     $src[$i]." - ".$clid[$i]." - ".$channel[$i]." - ".$dstchannel[$i]." - ".
-    $lastapp[$i]." - ".$lastdata[$i]." - ".$duration[$i]." - ".$billsec[$i]." - ".
-    $disposition[$i]." - ".$amaflags[$i]." - ".$accountcode[$i]." - ".$userfield[$i];
+    $lastapp[$i]." - ".$lastdata[$i]." - ".$duration[$i]." - ".$billsec[$i]." - <b>".
+    $disposition[$i]."</b> - ".$amaflags[$i]." - ".$accountcode[$i]." - ".$userfield[$i];
     echo "<br />";
     $i++;
 }
