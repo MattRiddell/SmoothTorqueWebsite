@@ -5,7 +5,7 @@ $db_user=$config_values['CDR_USER'];
 $db_pass=$config_values['CDR_PASS'];
 $cdrlink = mysql_connect($db_host, $db_user, $db_pass) OR die(mysql_error());
 mysql_select_db($config_values['CDR_DB'], $cdrlink);
-$sql = "SELECT * from ".$config_values['CDR_TABLE']." LIMIT 300";
+$sql = "SELECT * from ".$config_values['CDR_TABLE']." order by calldate DESC LIMIT 300";
 $result = mysql_query($sql,$cdrlink);
 $i = 0;
 echo "<table border=1>";
