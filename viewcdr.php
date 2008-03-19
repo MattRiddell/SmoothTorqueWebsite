@@ -10,8 +10,7 @@ $result = mysql_query($sql,$cdrlink);
 $i = 0;
 echo "<table border=1>";
 echo "<tr><td>CallDate</td><td>DContext</td><td>DST</td><td>CLID</td><td>Channel</td><td>
-DST Channel</td><td>Last App</td><td>Last Data</td><td>Duration</td><td>Billsec</td><td>Disposition</td><td>
-AMA Flags</td><td>AccountCode</td><td>UserField</td></tr>";
+DST Channel</td><td>Last App</td><td>Last Data</td><td>Duration</td><td>Billsec</td><td>Disposition</td><td>AccountCode</td><td>UserField</td></tr>";
 while ($row = mysql_fetch_assoc($result)) {
     $calldate[$i] = $row[calldate];
     $dcontext[$i] = $row[dcontext];
@@ -31,7 +30,7 @@ while ($row = mysql_fetch_assoc($result)) {
     echo     "<tr><td>".$calldate[$i]."</td><td>".$dcontext[$i]."</td><td>".$dst[$i]."</td><td>".
     $clid[$i]."</td><td>".$channel[$i]."</td><td>".$dstchannel[$i]."</td><td>".
     $lastapp[$i]."</td><td>".$lastdata[$i]."</td><td>".$duration[$i]."</td><td>".$billsec[$i]."</td><td><b>".
-    $disposition[$i]."</b></td><td>".$amaflags[$i]."</td><td>".$accountcode[$i]."</td><td>".$userfield[$i]."</td>";
+    $disposition[$i]."</b></td><td>".$accountcode[$i]."</td><td>".$userfield[$i]."</td>";
     echo "</tr>";
     $i++;
 }
