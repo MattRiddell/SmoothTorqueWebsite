@@ -8,7 +8,7 @@ mysql_select_db($config_values['CDR_DB'], $cdrlink);
 $sql = "SELECT * from ".$config_values['CDR_TABLE']." LIMIT 100";
 $result = mysql_query($sql,$cdrlink);
 while ($row = mysql_fetch_assoc($result)) {
-    echo $row[dcontext]."<br />";
+    echo $row[dcontext]." - ".$row[dst]."<br />";
 }
 exit(0);
 ?>
