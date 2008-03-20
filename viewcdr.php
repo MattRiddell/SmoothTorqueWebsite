@@ -5,7 +5,26 @@ $db_user=$config_values['CDR_USER'];
 $db_pass=$config_values['CDR_PASS'];
 $cdrlink = mysql_connect($db_host, $db_user, $db_pass) OR die(mysql_error());
 mysql_select_db($config_values['CDR_DB'], $cdrlink);
-$sql = "SELECT * from ".$config_values['CDR_TABLE']." order by calldate DESC LIMIT 300";
+$sql = "SELECT count(*) from ".$config_values['CDR_TABLE'];
+$result = mysql_query($sql,$cdrlink);
+$count = mysql_result($result,0,0);
+//echo $count." Total Records";
+$page = $_GET[page];
+if ($_GET[page]>0) {
+    $start = $_GET[page]*100;
+} else {
+    $start = 0;
+}
+echo '<a href="viewcdr.php?page=0"><img src="/images/resultset_first.png" border="0"></a> ';
+echo '<a href="viewcdr.php?page='.($page-1).'"><img src="/images/resultset_previous.png" border="0"></a> ';
+
+for ($i = 0;$i<($count/100);$i++) {
+    echo '<a href="viewcdr.php?page='.$i.'">'.$i.'</a> ';
+}
+
+echo '<a href="viewcdr.php?page='.($page+1).'"><img src="/images/resultset_next.png" border="0"></a> ';
+echo '<a href="viewcdr.php?page='.round($count/100).'"><img src="/images/resultset_last.png" border="0"></a> ';
+$sql = "SELECT * from ".$config_values['CDR_TABLE']." order by calldate DESC LIMIT $start,100";
 $result = mysql_query($sql,$cdrlink);
 $i = 0;
 echo "<table border=1>";
