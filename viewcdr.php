@@ -16,10 +16,22 @@ if ($_GET[page]>0) {
     $start = 0;
 }
 echo '<a href="viewcdr.php?page=0"><img src="/images/resultset_first.png" border="0"></a> ';
-echo '<a href="viewcdr.php?page='.($page-1).'"><img src="/images/resultset_previous.png" border="0"></a> ';
-
-for ($i = 0;$i<($count/100);$i++) {
-    echo '<a href="viewcdr.php?page='.$i.'">'.$i.'</a> ';
+if ($page > 0) {
+    echo '<a href="viewcdr.php?page='.($page-1).'"><img src="/images/resultset_previous.png" border="0"></a> ';
+}
+if ($page > 5) {
+    $pagex= $page-4;
+} else {
+    $pagex = 0;
+}
+for ($i = $pagex;$i<($count/100);$i++) {
+    if ($i < $page + 20) {
+        if ($page == $i) {
+            echo "<b>$i</b> ";
+        } else {
+            echo '<a href="viewcdr.php?page='.$i.'">'.$i.'</a> ';
+        }
+    }
 }
 
 echo '<a href="viewcdr.php?page='.($page+1).'"><img src="/images/resultset_next.png" border="0"></a> ';
