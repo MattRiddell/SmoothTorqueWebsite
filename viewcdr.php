@@ -46,10 +46,22 @@ while ($row = mysql_fetch_assoc($result)) {
     $amaflags[$i] = $row[amaflags];
     $accountcode[$i] = $row[accountcode];
     $userfield[$i] = $row[userfield];
-    echo     "<tr><td>".$calldate[$i]."</td><td>".$dcontext[$i]."</td><td>".
-    $clid[$i]."</td><td>".$channel[$i]."</td><td>".$dstchannel[$i]."</td><td>".
-    $lastapp[$i]."</td><td>".$lastdata[$i]."</td><td>".$duration[$i]."</td><td>".$billsec[$i]."</td><td><b>".
-    $disposition[$i]."</b></td><td>".$accountcode[$i]."</td><td>".$userfield[$i]."</td>";
+    if ($disposition[$i] == "ANSWERED") {
+        $td = "<td bgcolor=\"#00ff00\">";
+    } else if ($disposition[$i] == "NO ANSWER") {
+        $td = "<td bgcolor=\"#0000ff\">";
+    } else if ($disposition[$i] == "FAILED") {
+        $td = "<td bgcolor=\"#ff0000\">";
+    } else if ($disposition[$i] == "BUSY") {
+        $td = "<td bgcolor=\"#00ffff\">";
+    } else {
+        $td = "<td>";
+    }
+    echo     "<tr>";
+    echo $td.$calldate[$i]."</td>$td".$dcontext[$i]."</td>$td".
+    $clid[$i]."</td>$td".$channel[$i]."</td>$td".$dstchannel[$i]."</td>$td".
+    $lastapp[$i]."</td>$td".$lastdata[$i]."</td>$td".$duration[$i]."</td>$td".$billsec[$i]."</td>$td<b>".
+    $disposition[$i]."</b></td>$td".$accountcode[$i]."</td>$td".$userfield[$i]."</td>";
     echo "</tr>";
     $i++;
 }
