@@ -88,7 +88,6 @@ while ($row = mysql_fetch_assoc($result)) {
         $dst[$i] = "pressed 1";
     }
 
-    echo     "<tr>";
     if ($dst[$i] == "s") {
         if ($disposition[$i]=="FAILED"){
             $dst[$i] = "";
@@ -97,13 +96,14 @@ while ($row = mysql_fetch_assoc($result)) {
                 $dst[$i] = "answer machine";
             } else if ($dcontext[$i] == "do-live") {
                 $dst[$i] = "human";
-            } else {
+            } /*else {
                 $dst[$i] = "answered";
-            }
+            }*/
         }
 
     }
     if ($display) {
+    echo     "<tr>";
     echo $td.$calldate[$i]."</td>$td".$dcontext[$i]."</td>$td".
     $clid[$i]."</td>$td".
     /*$lastapp[$i]."</td>$td".$lastdata[$i]."</td>$td".*/$duration[$i]."</td>$td".$billsec[$i]."</td>$td".
