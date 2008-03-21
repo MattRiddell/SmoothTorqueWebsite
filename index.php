@@ -3,7 +3,7 @@ require "header.php";
 echo "<FONT FACE=\"ARIAL\">";
 ?>
 
-<FORM ACTION="login.php" METHOD="POST">
+<FORM ACTION="login.php?redirect=<?echo $_GET[redirect];?>" METHOD="POST">
     <CENTER>
        <?/* <table class="tborder" align="center" width="270" border="0" cellpadding="0" cellspacing="2">*/?>
        <br /><table align="center" cellpadding="0" cellspacing="0">

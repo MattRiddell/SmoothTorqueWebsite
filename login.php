@@ -20,7 +20,11 @@ if (trim($dbpass)==trim($passwordHash)){
         $level=sha1("level0");
     }
     setcookie("level",$level,time()+6000);
-    header("Location: /main.php");
+    if (strlen($_GET[redirect]) > 0) {
+        header("Location: ".$_GET[redirect]);
+    } else {
+        header("Location: /main.php");
+    }
     exit;
 } else {
     setcookie("loggedin","--",time()+6000);
@@ -32,5 +36,4 @@ if (trim($dbpass)==trim($passwordHash)){
 }
 require "footer.php";
 ?>
-
 

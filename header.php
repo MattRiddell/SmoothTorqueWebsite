@@ -237,7 +237,7 @@ $self=$_SERVER['PHP_SELF'];
     if ($myPage=="/index.php"|$myPage=="/login.php"){
         //echo "LOGGING IN ".$user." - ".$_COOKIE["loggedin"];
     } else {
-?>    <META HTTP-EQUIV=REFRESH CONTENT="0; URL=/index.php">
+?>    <META HTTP-EQUIV=REFRESH CONTENT="0; URL=/index.php?redirect=<?echo $myPage;?>">
 <?
         exit;
     }
