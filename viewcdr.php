@@ -41,10 +41,11 @@ $sql = "SELECT * from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' 
 
 $result = mysql_query($sql,$cdrlink);
 $i = 0;
-$titletd = "<td bgcolor=\"#000000\"><font color=\"#FFFFFF\">";
+$titletd = "<td bgcolor=\"#000000\"><font color=\"#CCCCFF\"><b>&nbsp;&nbsp;";
+$titletdc = "&nbsp;&nbsp;</td>";
 echo "<center><table border=0>";
 
-echo "<tr>".$titletd."CallDate</td>".$titletd."DContext</td>".$titletd."CLID</td>".$titletd."Duration</td>".$titletd."Billsec</td>".$titletd."Disposition</td>".$titletd."AccountCode</td>".$titletd."Phone Number</td>".$titletd."Result</td></tr>";
+echo "<tr>".$titletd."CallDate".$titletdc."".$titletd."DContext".$titletdc."".$titletd."CLID".$titletdc."".$titletd."Duration".$titletdc."".$titletd."Billsec".$titletdc."".$titletd."Disposition".$titletdc."".$titletd."AccountCode".$titletdc."".$titletd."Phone Number".$titletdc."".$titletd."Result".$titletdc."</tr>";
 while ($row = mysql_fetch_assoc($result)) {
     $calldate[$i] = $row[calldate];
     $dcontext[$i] = $row[dcontext];
@@ -63,28 +64,29 @@ while ($row = mysql_fetch_assoc($result)) {
     $userfield[$i] = $row[userfield];
     $display = true;
     if ($disposition[$i] == "ANSWERED") {
-        $td = "<td bgcolor=\"#44ff44\">";
+        $td = "<td bgcolor=\"#CCffCC\">";
     } else if ($disposition[$i] == "NO ANSWER") {
-        $td = "<td bgcolor=\"#4444ff\">";
+        $td = "<td bgcolor=\"#DDDDDD\">";
     } else if ($disposition[$i] == "FAILED") {
-        $td = "<td bgcolor=\"#444444\">";
+        $td = "<td bgcolor=\"#999999\">";
         $display = false;
     } else if ($disposition[$i] == "BUSY") {
-        $td = "<td bgcolor=\"#44ffff\">";
+        $td = "<td bgcolor=\"#99ffff\">";
     } else {
         $td = "<td>";
     }
     if ($dst[$i] != "s") {
-        $td = "<td bgcolor=\"#ff4444\">";
+        /* Failed */
+        $td = "<td bgcolor=\"#ff9999\">";
     }
     if ($dst[$i] == "timeout") {
-        $td = "<td bgcolor=\"#4444FF\">";
+        $td = "<td bgcolor=\"#DDDDDD\">";
     }
     if ($dst[$i] == "busy") {
-        $td = "<td bgcolor=\"#44FFFF\">";
+        $td = "<td bgcolor=\"#FF99FF\">";
     }
     if ($dst[$i] == "1") {
-        $td = "<td bgcolor=\"#EEEEEE\">";
+        $td = "<td bgcolor=\"#9999ff\">";
         $dst[$i] = "pressed 1";
     }
 
