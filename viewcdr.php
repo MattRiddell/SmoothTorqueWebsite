@@ -45,7 +45,7 @@ $titletd = "<td bgcolor=\"#000000\"><font color=\"#CCCCFF\"><b>&nbsp;&nbsp;";
 $titletdc = "&nbsp;&nbsp;</td>";
 echo "<center><table border=0>";
 
-echo "<tr>".$titletd."CallDate".$titletdc."".$titletd."DContext".$titletdc."".$titletd."CLID".$titletdc."".$titletd."Duration".$titletdc."".$titletd."Billsec".$titletdc."".$titletd."Disposition".$titletdc."".$titletd."AccountCode".$titletdc."".$titletd."Phone Number".$titletdc."".$titletd."Result".$titletdc."</tr>";
+echo "<tr>".$titletd."CallDate".$titletdc."".$titletd./*"DContext".$titletdc."".$titletd.*/"CLID".$titletdc."".$titletd."Duration".$titletdc."".$titletd."Billsec".$titletdc."".$titletd."Disposition".$titletdc."".$titletd."AccountCode".$titletdc."".$titletd."Phone Number".$titletdc."".$titletd."Result".$titletdc."</tr>";
 while ($row = mysql_fetch_assoc($result)) {
     $calldate[$i] = $row[calldate];
     $dcontext[$i] = $row[dcontext];
@@ -81,9 +81,11 @@ while ($row = mysql_fetch_assoc($result)) {
     }
     if ($dst[$i] == "timeout") {
         $td = "<td bgcolor=\"#DDDDDD\">";
+        $dst[$i] = "no answer";
     }
     if ($dst[$i] == "busy") {
         $td = "<td bgcolor=\"#FF99FF\">";
+        $dst[$i] = "engaged";
     }
     if ($dst[$i] == "1") {
         $td = "<td bgcolor=\"#9999ff\">";
@@ -106,7 +108,7 @@ while ($row = mysql_fetch_assoc($result)) {
     }
     if ($display) {
     echo     "<tr>";
-    echo $td.$calldate[$i]."</td>$td".$dcontext[$i]."</td>$td".
+    echo $td.$calldate[$i]."</td>$td"/*.$dcontext[$i]."</td>$td"*/.
     $clid[$i]."</td>$td".
     /*$lastapp[$i]."</td>$td".$lastdata[$i]."</td>$td".*/$duration[$i]."</td>$td".$billsec[$i]."</td>$td".
     $disposition[$i]."</td>$td".$accountcode[$i]."</td>$td".$userfield[$i]."</b></td>$td<b>".$dst[$i]."</b></td>";
