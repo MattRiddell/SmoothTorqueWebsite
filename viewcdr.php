@@ -1,5 +1,6 @@
 <?
 require "header.php";
+$currency = '$';
 $db_host=$config_values['CDR_HOST'];
 $db_user=$config_values['CDR_USER'];
 $db_pass=$config_values['CDR_PASS'];
@@ -45,7 +46,11 @@ $titletd = "<td bgcolor=\"#000000\"><font color=\"#CCCCFF\"><b>&nbsp;&nbsp;";
 $titletdc = "&nbsp;&nbsp;</td>";
 echo "<center><table border=0>";
 
-echo "<tr>".$titletd."Call Date/Time".$titletdc."".$titletd./*"DContext".$titletdc."".$titletd."Caller ID".$titletdc."".$titletd.*/"Duration".$titletdc."".$titletd."Billsec".$titletdc."".$titletd."Disposition".$titletdc."".$titletd."AccountCode".$titletdc."".$titletd."Phone Number".$titletdc."".$titletd."Result".$titletdc."</tr>";
+echo "<tr>".$titletd."Call Date/Time".$titletdc."".$titletd.
+/*"DContext".$titletdc."".$titletd."Caller ID".$titletdc."".$titletd.*/"Duration".
+$titletdc."".$titletd."Billsec".$titletdc."".$titletd."Disposition".$titletdc."".$titletd
+."AccountCode".$titletdc."".$titletd."Phone Number".$titletdc."".$titletd."Result".$titletdc.$titletd."Bill Type".$titletdc.$titletd."Cost".$titletdc.$titletd."Paid".$titletdc.
+"</tr>";
 while ($row = mysql_fetch_assoc($result)) {
     $calldate[$i] = $row[calldate];
     $dcontext[$i] = $row[dcontext];
@@ -62,6 +67,13 @@ while ($row = mysql_fetch_assoc($result)) {
     $amaflags[$i] = $row[amaflags];
     $accountcode[$i] = $row[accountcode];
     $userfield[$i] = $row[userfield];
+    $userfield2[$i] = $row[userfield2];
+    if ($userfield2[$i] != 1) {
+        $userfield2[$i] = 0;
+        $paid[$i] = '<td bgcolor="#FFEEEE"><img src="/images/cross.png" border="0" align="center">';
+    } else {
+        $paid[$i] = '<td bgcolor="#EEFFEE"><img src="/images/tick.png" border="0" align="center">';
+    }
     $display = true;
     if ($disposition[$i] == "ANSWERED") {
         $td = "<td bgcolor=\"#CCffCC\">";
@@ -106,12 +118,15 @@ while ($row = mysql_fetch_assoc($result)) {
         }
 
     }
+    $billtype[$i] = "Per Minute";
+    $cost[$i] = round((1/60)*$billsec[$i],2);
     if ($display) {
     echo     "<tr>";
     echo $td.$calldate[$i]."</td>$td"/*.$dcontext[$i]."</td>$td".
     $clid[$i]."</td>$td"*/.
     /*$lastapp[$i]."</td>$td".$lastdata[$i]."</td>$td".*/$duration[$i]."</td>$td".$billsec[$i]."</td>$td".
     $disposition[$i]."</td>$td".$accountcode[$i]."</td>$td".$userfield[$i]."</b></td>$td<b>".$dst[$i]."</b></td>";
+    echo $td.$billtype[$i]."</td>".$td.$currency.$cost[$i]."</td>".$paid[$i]."</td>";
     echo "</tr>";
     }
     $i++;

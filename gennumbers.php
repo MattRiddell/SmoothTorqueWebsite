@@ -1,4 +1,7 @@
 <?
+
+//ini_set('error_reporting', E_ALL);
+//xxxsaasasasas(sdsd);
 require "header.php";
 require "header_numbers.php";
 
@@ -77,6 +80,7 @@ Please select a campaign to add numbers to<br /><br />
  $count++;
     $myarray[$count]=$i;
  }
+// echo "done";
 shuffle($myarray);
 
  $count = 0;
