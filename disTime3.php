@@ -96,9 +96,9 @@ echo "<A title=\"Edit this campaign\" HREF=\"editcampaign.php?id=".$row[id]."\">
 </TD>
 <TD>
 <?
-$max_str_len = 25;
+$max_str_len = 15;
 
-iF (strlen($row[description])<$max_str_len){
+if (strlen($row[description])<$max_str_len){
 echo $row[description];
 } else {
 echo trim(substr($row[description],0,$max_str_len))."...";

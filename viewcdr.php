@@ -49,7 +49,10 @@ echo "<center><table border=0>";
 echo "<tr>".$titletd."Call Date/Time".$titletdc."".$titletd.
 /*"DContext".$titletdc."".$titletd."Caller ID".$titletdc."".$titletd.*/"Duration".
 $titletdc."".$titletd."Billsec".$titletdc."".$titletd."Disposition".$titletdc."".$titletd
-."AccountCode".$titletdc."".$titletd."Phone Number".$titletdc."".$titletd."Result".$titletdc.$titletd."Bill Type".$titletdc.$titletd."Cost".$titletdc.$titletd."Paid".$titletdc.
+."AccountCode".$titletdc."".$titletd."Phone Number".$titletdc."".$titletd.
+"Result".$titletdc.$titletd."Per Minute".$titletdc.$titletd.
+"Lead".$titletdc.$titletd."Connected".$titletdc.$titletd."Press1".$titletdc.$titletd.
+"Total".$titletdc.$titletd."Paid".$titletdc.
 "</tr>";
 while ($row = mysql_fetch_assoc($result)) {
     $calldate[$i] = $row[calldate];
@@ -97,7 +100,7 @@ while ($row = mysql_fetch_assoc($result)) {
     }
     if ($dst[$i] == "busy") {
         $td = "<td bgcolor=\"#FF99FF\">";
-        $dst[$i] = "engaged";
+        $dst[$i] = "busy";
     }
     if ($dst[$i] == "1") {
         $td = "<td bgcolor=\"#9999ff\">";
@@ -118,15 +121,57 @@ while ($row = mysql_fetch_assoc($result)) {
         }
 
     }
-    $billtype[$i] = "Per Minute";
-    $cost[$i] = round((1/60)*$billsec[$i],2);
+    //$billtype[$i] = "Per Minute";
+    if (!($customerid[$accountcode[$i]]>0)) {
+        $sqlx = "SELECT * from billing where accountcode = '".$accountcode[$i]."'";
+        $resultx = mysql_query($sqlx,$link);
+        $priceperminute[$accountcode[$i]] = mysql_result($resultx, 0, 'priceperminute');
+//            echo mysql_result($resultx, 0, 'priceperminute');
+        $customerid[$accountcode[$i]] = mysql_result($resultx, 0, 'customerid');
+        $firstperiod[$accountcode[$i]] = mysql_result($resultx, 0, 'firstperiod');
+        $increment[$accountcode[$i]] = mysql_result($resultx, 0, 'increment');
+        $firstperiod[$accountcode[$i]] = mysql_result($resultx, 0, 'firstperiod');
+        $credit[$accountcode[$i]] = mysql_result($resultx, 0, 'credit');
+        $pricepercall[$accountcode[$i]] = mysql_result($resultx, 0, 'pricepercall');
+        $priceperconnectedcall[$accountcode[$i]] = mysql_result($resultx, 0, 'priceperconnectedcall');
+        $priceperpress1[$accountcode[$i]] = mysql_result($resultx, 0, 'priceperpress1');
+    }
+    //$cost[$i] = round((1/60)*$billsec[$i],2);
+    $cost[$i] = 0;
+    $costperpress1[$i] = 0;
+    $costpercall[$i] = 0;
+    $costperminute[$i] = 0;
+    $costperconnect[$i] = 0;
+
+    if ($pricepercall[$accountcode[$i]] > 0) {
+        if ($display) {
+            $costpercall[$i] = round($pricepercall[$accountcode[$i]],2);
+            $cost[$i] += $costpercall[$i];
+        }
+    }
+    if ($disposition[$i] == "ANSWERED") {
+        if ($billsec[$i] > $firstperiod[$accountcode[$i]]) {
+            $costperminute[$i] = round(($priceperminute[$accountcode[$i]]/60) * $billsec[$i],2);
+            $cost[$i]+=$costperminute[$i];
+        } else {
+            $costperminute[$i] = round(($priceperminute[$accountcode[$i]]/60) * $firstperiod[$accountcode[$i]],2);
+            $cost[$i]+=$costperminute[$i];
+        }
+        $costperconnect[$i] = round($priceperconnectedcall[$accountcode[$i]],2);
+        $cost[$i]+=$costperconnect[$i];
+        if ($dst[$i] == "pressed 1") {
+            $costperpress1[$i] = round($priceperpress1[$accountcode[$i]],2);
+            $cost[$i] += $costperpress1[$i];
+        }
+    }
     if ($display) {
     echo     "<tr>";
     echo $td.$calldate[$i]."</td>$td"/*.$dcontext[$i]."</td>$td".
     $clid[$i]."</td>$td"*/.
     /*$lastapp[$i]."</td>$td".$lastdata[$i]."</td>$td".*/$duration[$i]."</td>$td".$billsec[$i]."</td>$td".
     $disposition[$i]."</td>$td".$accountcode[$i]."</td>$td".$userfield[$i]."</b></td>$td<b>".$dst[$i]."</b></td>";
-    echo $td.$billtype[$i]."</td>".$td.$currency.$cost[$i]."</td>".$paid[$i]."</td>";
+    echo $td.$currency.$costperminute[$i]."</td>".$td.$currency.$costpercall[$i]."</td>".
+    $td.$currency.$costperconnect[$i]."</td>".$td.$currency.$costperpress1[$i]."</td>".$td.$currency.$cost[$i]."</td>".$paid[$i]."</td>";
     echo "</tr>";
     }
     $i++;

@@ -252,7 +252,10 @@ $self=$_SERVER['PHP_SELF'];
 <link rel="shortcut icon" href="/favicon.ico">
 
 <!-- Javascript includes -->
+<?/*
 <script src="prototype.js" type="text/javascript"></script>
+*/
+?>
 <?/*
 THIS IS CAUSING AN ERROR!
 <script src="js/eep.js" type="text/javascript"></script>
