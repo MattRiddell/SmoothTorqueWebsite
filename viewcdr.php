@@ -4,9 +4,14 @@ $currency = '$';
 $db_host=$config_values['CDR_HOST'];
 $db_user=$config_values['CDR_USER'];
 $db_pass=$config_values['CDR_PASS'];
+if ($level==sha1("level100")){
+    $accountcode = $_GET[accountcode];
+} else {
+    $accountcode = "stl-".$_COOKIE[user];
+}
 $cdrlink = mysql_connect($db_host, $db_user, $db_pass) OR die(mysql_error());
 mysql_select_db($config_values['CDR_DB'], $cdrlink);
-$sql = "SELECT count(*) from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$_GET[accountcode]'";
+$sql = "SELECT count(*) from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode'";
 $result = mysql_query($sql,$cdrlink);
 $count = mysql_result($result,0,0);
 //echo $count." Total Records";
@@ -38,7 +43,7 @@ for ($i = $pagex;$i<($count/100);$i++) {
 echo '<a href="viewcdr.php?page='.($page+1).'"><img src="/images/resultset_next.png" border="0"></a> ';
 echo '<a href="viewcdr.php?page='.round($count/100).'"><img src="/images/resultset_last.png" border="0"></a> ';
 //$sql = "SELECT * from ".$config_values['CDR_TABLE']." order by calldate DESC LIMIT $start,100";
-$sql = "SELECT * from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$_GET[accountcode]' order by calldate DESC LIMIT $start,100";
+$sql = "SELECT * from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode' order by calldate DESC LIMIT $start,100";
 
 $result = mysql_query($sql,$cdrlink);
 $i = 0;
