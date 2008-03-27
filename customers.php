@@ -62,6 +62,7 @@ echo "<A HREF=\"editcustomer.php?id=".$row[id]."\"><img src=\"/images/pencil.png
 </TD>
 <TD>
 <?echo "<A HREF=\"billing.php?id=".$row[id]."\" title=\"View Billing Information\"><img src=\"/images/cart_edit.png\" border=\"0\" align=\"right\" title=\"View Billing Information\"></A>";?>
+<?echo "<A HREF=\"viewcdr.php?accountcode=stl-".$row[username]."\" title=\"View CDR Information\"><img src=\"/images/table.png\" border=\"0\" align=\"right\" title=\"View CDR Information\"></A>";?>
 <?echo "<A HREF=\"changepassword.php?id=".$row[id]."\" title=\"Change Password\"><img src=\"/images/lock_edit.png\" border=\"0\" align=\"right\" title=\"Change Password\"></A>";?>
 <?echo $row[username];?>
 </TD>
