@@ -597,5 +597,5 @@ if (mysql_num_rows($result)==0){
 } else {
     $credit = $config_values['CURRENCY_SYMBOL'].number_format(mysql_result($result,0,0),2);
 }
-echo "<center><font color=\"".$config_values['DATE_COLOUR']."\">".date('l dS \of F Y h:i:s A')." Credit: $credit</font><br /></center>";
+echo "<center><font color=\"".$config_values['DATE_COLOUR']."\">".date('l dS \of F Y h:i:s A')." <a href=\"viewcdr.php\">Credit: $credit</a></font><br /></center>";
 ?>

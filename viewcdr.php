@@ -5,7 +5,11 @@ $db_host=$config_values['CDR_HOST'];
 $db_user=$config_values['CDR_USER'];
 $db_pass=$config_values['CDR_PASS'];
 if ($level==sha1("level100")){
-    $accountcode = $_GET[accountcode];
+    if (isset($_GET[accountcode]) {
+        $accountcode = $_GET[accountcode];
+    } else {
+        $accountcode = "stl-".$_COOKIE[user];
+    }
 } else {
     $accountcode = "stl-".$_COOKIE[user];
 }
