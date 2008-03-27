@@ -2,9 +2,8 @@
     $user = $_COOKIE[user];
     setcookie("loggedin","--",time()+6000);
     setcookie("user",$_POST[user],time()+6000);
-    include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(mysql_error());
-mysql_select_db("SineDialer", $link);
-
+    include "admin/db_config.php";
+    mysql_select_db("SineDialer", $link);
     $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$user', 'Logout')";
     $result=mysql_query($sql, $link);
     header("Location: /index.php");
