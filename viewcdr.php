@@ -160,7 +160,18 @@ while ($row = mysql_fetch_assoc($result)) {
     }
     if ($disposition[$i] == "ANSWERED") {
         if ($billsec[$i] > $firstperiod[$accountcode[$i]]) {
-            $costperminute[$i] = round(($priceperminute[$accountcode[$i]]/60) * $billsec[$i],2);
+            if ($increment[$accountcode[$i]] == 1) {
+                $costperminute[$i] = round(($priceperminute[$accountcode[$i]]/60) * $billsec[$i],2);
+            } else {
+                /*30
+                27
+                if the increment is 30 seconds and the call is 73 seconds they should be
+                charged for 73/30 = 2.4 blocks - round up to 3 = 3*30 = 90*/
+                $blocks = ceil($billsec[$i]/$increment[$i]);
+                $newsecs = $blocks * $increment[$i];
+
+                $costperminute[$i] = round(($priceperminute[$accountcode[$i]]/60) * $newsecs,2);
+            }
             $cost[$i]+=$costperminute[$i];
         } else {
             $costperminute[$i] = round(($priceperminute[$accountcode[$i]]/60) * $firstperiod[$accountcode[$i]],2);
