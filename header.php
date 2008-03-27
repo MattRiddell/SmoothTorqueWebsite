@@ -593,9 +593,9 @@ if (isset($menu)){
 $sql = "SELECT credit from billing where accountcode = 'stl-$_COOKIE[user]'";
 $result = mysql_query($sql,$link);
 if (mysql_num_rows($result)==0){
-    $credit = "0.00";
+    $credit = $config_values['CURRENCY_SYMBOL']."0.00";
 } else {
-    $credit = number_format(mysql_result($result,0,0),2);
+    $credit = $config_values['CURRENCY_SYMBOL'].number_format(mysql_result($result,0,0),2);
 }
 echo "<center><font color=\"".$config_values['DATE_COLOUR']."\">".date('l dS \of F Y h:i:s A')." Credit: $credit</font><br /></center>";
 ?>
