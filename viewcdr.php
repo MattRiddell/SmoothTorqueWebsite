@@ -136,7 +136,7 @@ while ($row = mysql_fetch_assoc($result)) {
         echo $sqlx;
         $resultx = mysql_query($sqlx,$link);
         $priceperminute[$accountcode[$i]] = mysql_result($resultx, 0, 'priceperminute');
-//            echo mysql_result($resultx, 0, 'priceperminute');
+            echo mysql_result($resultx, 0, 'priceperminute');
         $customerid[$accountcode[$i]] = mysql_result($resultx, 0, 'customerid');
         $firstperiod[$accountcode[$i]] = mysql_result($resultx, 0, 'firstperiod');
         $increment[$accountcode[$i]] = mysql_result($resultx, 0, 'increment');
