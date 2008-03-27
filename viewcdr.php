@@ -169,9 +169,9 @@ while ($row = mysql_fetch_assoc($result)) {
                 if the increment is 30 seconds and the call is 73 seconds they should be
                 charged for 73/30 = 2.4 blocks - round up to 3 = 3*30 = 90*/
                 echo "Billsec: $billsec[$i] Increment: $increment[$i]";
-                $blocks = ceil($billsec[$i]/$increment[$i]);
+                $blocks = ceil($billsec[$i]/$increment[$accountcode[$i]]);
                 echo "Blocks: $blocks";
-                $newsecs = $blocks * $increment[$i];
+                $newsecs = $blocks * $increment[$accountcode[$i]];
                 echo "Newsecs: $newsecs";
                 $costperminute[$i] = round(($priceperminute[$accountcode[$i]]/60) * $newsecs,2);
                 echo "costperminute: $costperminute[$i]";
