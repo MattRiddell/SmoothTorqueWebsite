@@ -80,6 +80,12 @@ $dialstring = str_replace(" ","",$dialstring);
 $dialstring = str_replace("(","",$dialstring);
 $dialstring = str_replace(")","",$dialstring);
 
+/*================= Log Access ======================================*/
+$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Starting campaign')";
+$result=mysql_query($sql, $link);
+/*================= Log Access ======================================*/
+
+
 $sql2="INSERT INTO queue (campaignid,queuename,status,details,flags,transferclid,
     starttime,endtime,startdate,enddate,did,clid,context,maxcalls,maxchans,maxretries
     ,retrytime,waittime,trunk,astqueuename, accountcode, trunkid, customerID, maxcps) VALUES
