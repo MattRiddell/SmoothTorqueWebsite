@@ -52,7 +52,7 @@ $titletdc."".$titletd."Billsec".$titletdc."".$titletd."Disposition".$titletdc.""
 ."AccountCode".$titletdc."".$titletd."Phone Number".$titletdc."".$titletd.
 "Result".$titletdc.$titletd."Per Minute".$titletdc.$titletd.
 "Lead".$titletdc.$titletd."Connected".$titletdc.$titletd."Press1".$titletdc.$titletd.
-"Total".$titletdc.$titletd."Paid".$titletdc.
+"Total".$titletdc.$titletd."Charged".$titletdc.
 "</tr>";
 while ($row = mysql_fetch_assoc($result)) {
     $calldate[$i] = $row[calldate];
