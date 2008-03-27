@@ -1,6 +1,6 @@
 <?
 require "header.php";
-$currency = '$';
+$currency = $config_values['CURRENCY_SYMBOL'];
 $db_host=$config_values['CDR_HOST'];
 $db_user=$config_values['CDR_USER'];
 $db_pass=$config_values['CDR_PASS'];
