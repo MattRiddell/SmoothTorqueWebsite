@@ -29,7 +29,7 @@ if (isset($_POST[colour])){
     fwrite($add,"MENU_LOGOUT=$_POST[MENU_LOGOUT]\n");
     fwrite($add,"DATE_COLOUR=$_POST[DATE_COLOUR]\n");
     fwrite($add,"MAIN_PAGE_TEXT=$_POST[MAIN_PAGE_TEXT]\n");
-    fwrite($add,"CURRENCY=$_POST[CURRENCY]\n");
+    fwrite($add,"CURRENCY_SYMBOL=$_POST[CURRENCY_SYMBOL]\n");
     fclose($add);
 
 }
