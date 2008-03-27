@@ -25,9 +25,9 @@ if ($_GET[page]>0) {
 } else {
     $start = 0;
 }
-echo '<a href="viewcdr.php?page=0"><img src="/images/resultset_first.png" border="0"></a> ';
+    echo '<a href="viewcdr.php?page=0&accountcode='.$accountcode_in.'"><img src="/images/resultset_first.png" border="0"></a> ';
 if ($page > 0) {
-    echo '<a href="viewcdr.php?page='.($page-1).'"><img src="/images/resultset_previous.png" border="0"></a> ';
+    echo '<a href="viewcdr.php?page='.($page-1).'&accountcode='.$accountcode_in.'"><img src="/images/resultset_previous.png" border="0"></a> ';
 }
 if ($page > 5) {
     $pagex= $page-4;
