@@ -18,12 +18,13 @@ if (isset($_POST[firstperiod])){
     $priceperconnectedcall = $_POST[priceperconnectedcall];
     $priceperpress1 = $_POST[priceperpress1];
     $credit = $_POST[credit];
+    $creditlimit = $_POST[creditlimit];
 
 
     $sql="update billing ".
          "set firstperiod='$firstperiod', increment='$increment', priceperminute='$priceperminute',
          pricepercall = '$pricepercall', priceperconnectedcall='$priceperconnectedcall', priceperpress1='$priceperpress1',
-         credit='$credit' where customerid=".$customerid;
+         credit='$credit', creditlimit='$creditlimit' where customerid=".$customerid;
     $result=mysql_query($sql, $link) or die (mysql_error());;
 /*    $SMDB2->executeUpdate($sql);*/
 
@@ -47,6 +48,7 @@ if (mysql_error()=="Table 'SineDialer.billing' doesn't exist") {
   `firstperiod` int(10) unsigned default '1',
   `increment` int(10) unsigned default '1',
   `credit` double(100,10) default '0.0000000000',
+  `creditlimit` double(100,10) default '0.0000000000',
   `pricepercall` double(10,5) default '0.00000',
   `priceperconnectedcall` double(10,5) default '0.00000',
   `priceperpress1` double(10,5) default '0.00000',
@@ -116,6 +118,11 @@ while ($row = mysql_fetch_assoc($result)) {
 
 <TR><TD CLASS="thead">Credit</TD><TD>
 <INPUT TYPE="TEXT" NAME="credit" VALUE="<?echo $row[credit];?>" size="60">
+</TD>
+</TR>
+
+<TR><TD CLASS="thead">Credit Limit (0.00 for prepay)</TD><TD>
+<INPUT TYPE="TEXT" NAME="creditlimit" VALUE="<?echo $row[creditlimit];?>" size="60">
 </TD>
 </TR>
 
