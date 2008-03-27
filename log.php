@@ -1,8 +1,8 @@
 <?
     require "header.php";
-    $sql = "select * from log";
+    $sql = "select * from log order by timestamp desc";
     $result=mysql_query($sql, $link);
-    echo "<table>";
+    echo "<center><table border=\"1\">";
     echo "<tr><td>TimeStamp</td><td>Activity</td><td>User Name</td></tr>";
     while ($row = mysql_fetch_assoc($result)) {
         echo "<tr>";
