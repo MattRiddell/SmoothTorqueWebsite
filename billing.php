@@ -9,18 +9,26 @@ $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $campaigngroupid=mysql_result($result,0,'campaigngroupid');
 
-if (isset($_POST[name])){
-    $name=$_POST[name];
-    $dialstring=$_POST[dialstring];
-    $maxcps=$_POST[maxcps];
-    $maxchans=$_POST[maxchans];
-    $sql="update trunk ".
-         "set name='$name', dialstring='$dialstring', maxcps='$maxcps', maxchans='$maxchans' where id=".$_POST[id];
+if (isset($_POST[firstperiod])){
+    $firstperiod=$_POST[firstperiod];
+    $customerid = $_POST[id];
+    $priceperminute = $_POST[priceperminute];
+    $increment = $_POST[increment];
+    $pricepercall = $_POST[pricepercall];
+    $priceperconnectedcall = $_POST[priceperconnectedcall];
+    $priceperpress1 = $_POST[priceperpress1];
+    $credit = $_POST[credit];
+
+
+    $sql="update billing ".
+         "set firstperiod='$firstperiod', increment='$increment', priceperminute='$priceperminute'
+         pricepercall = '$pricepercall', priceperconnectedcall='$priceperconnectedcall', priceperpress1='$priceperpress1',
+         credit='$credit' where customerid=".$customerid;
     $result=mysql_query($sql, $link) or die (mysql_error());;
 /*    $SMDB2->executeUpdate($sql);*/
 
 
-    header("Location: /trunks.php");
+    header("Location: /customers.php");
     exit;
 }
 
