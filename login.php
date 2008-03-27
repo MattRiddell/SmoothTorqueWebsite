@@ -9,14 +9,20 @@ $_POST = array_map(mysql_real_escape_string,$_POST);
 $_GET = array_map(mysql_real_escape_string,$_GET);
 
 $sql = "INSERT INTO log (username, activity) VALUES ('$_POST[user]', 'Attempted login')";
-$result=mysql_query($sql, $link) or die (mysql_error());;
-
-/*
+$result=mysql_query($sql, $link);
+if (mysql_error() == "Table 'SineDialer.log' doesn't exist") {
+$sql = "
 CREATE TABLE `log` (
   `timestamp` timestamp NULL default NULL on update CURRENT_TIMESTAMP,
   `activity` varchar(255) default NULL,
   `username` varchar(255) default NULL
-)
+)";
+$result=mysql_query($sql, $link);
+$sql = "INSERT INTO log (username, activity) VALUES ('$_POST[user]', 'Attempted login')";
+$result=mysql_query($sql, $link);
+
+}
+/*
 
 */
 
