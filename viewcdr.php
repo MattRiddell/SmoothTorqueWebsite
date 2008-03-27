@@ -39,13 +39,13 @@ for ($i = $pagex;$i<($count/100);$i++) {
         if ($page == $i) {
             echo "<b>$i</b> ";
         } else {
-            echo '<a href="viewcdr.php?page='.$i.'">'.$i.'</a> ';
+            echo '<a href="viewcdr.php?page='.$i.'&accountcode='.$accountcode_in.'">'.$i.'</a> ';
         }
     }
 }
 
-echo '<a href="viewcdr.php?page='.($page+1).'"><img src="/images/resultset_next.png" border="0"></a> ';
-echo '<a href="viewcdr.php?page='.round($count/100).'"><img src="/images/resultset_last.png" border="0"></a> ';
+echo '<a href="viewcdr.php?page='.($page+1).'&accountcode='.$accountcode_in.'"><img src="/images/resultset_next.png" border="0"></a> ';
+echo '<a href="viewcdr.php?page='.round($count/100).'&accountcode='.$accountcode_in.'"><img src="/images/resultset_last.png" border="0"></a> ';
 //$sql = "SELECT * from ".$config_values['CDR_TABLE']." order by calldate DESC LIMIT $start,100";
 $sql = "SELECT * from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode_in' order by calldate DESC LIMIT $start,100";
 
