@@ -21,7 +21,7 @@ if (isset($_POST[firstperiod])){
 
 
     $sql="update billing ".
-         "set firstperiod='$firstperiod', increment='$increment', priceperminute='$priceperminute'
+         "set firstperiod='$firstperiod', increment='$increment', priceperminute='$priceperminute',
          pricepercall = '$pricepercall', priceperconnectedcall='$priceperconnectedcall', priceperpress1='$priceperpress1',
          credit='$credit' where customerid=".$customerid;
     $result=mysql_query($sql, $link) or die (mysql_error());;
