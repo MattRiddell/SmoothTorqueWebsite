@@ -133,10 +133,10 @@ while ($row = mysql_fetch_assoc($result)) {
     //$billtype[$i] = "Per Minute";
     if (!($customerid[$accountcode[$i]]>0)) {
         $sqlx = "SELECT * from billing where accountcode = '".$accountcode[$i]."'";
-        echo $sqlx;
+        //echo $sqlx;
         $resultx = mysql_query($sqlx,$link);
         $priceperminute[$accountcode[$i]] = mysql_result($resultx, 0, 'priceperminute');
-            echo mysql_result($resultx, 0, 'priceperminute');
+        //echo mysql_result($resultx, 0, 'priceperminute');
         $customerid[$accountcode[$i]] = mysql_result($resultx, 0, 'customerid');
         $firstperiod[$accountcode[$i]] = mysql_result($resultx, 0, 'firstperiod');
         $increment[$accountcode[$i]] = mysql_result($resultx, 0, 'increment');
@@ -168,13 +168,13 @@ while ($row = mysql_fetch_assoc($result)) {
                 27
                 if the increment is 30 seconds and the call is 73 seconds they should be
                 charged for 73/30 = 2.4 blocks - round up to 3 = 3*30 = 90*/
-                echo "Billsec: $billsec[$i] Increment: $increment[$i]";
+                //echo "Billsec: $billsec[$i] Increment: $increment[$accountcode[$i]]";
                 $blocks = ceil($billsec[$i]/$increment[$accountcode[$i]]);
-                echo "Blocks: $blocks";
+                //echo "Blocks: $blocks";
                 $newsecs = $blocks * $increment[$accountcode[$i]];
-                echo "Newsecs: $newsecs";
+                //echo "Newsecs: $newsecs";
                 $costperminute[$i] = round(($priceperminute[$accountcode[$i]]/60) * $newsecs,2);
-                echo "costperminute: $costperminute[$i]";
+                //echo "costperminute: $costperminute[$i]";
             }
             $cost[$i]+=$costperminute[$i];
         } else {
