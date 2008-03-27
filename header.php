@@ -590,5 +590,12 @@ if (isset($menu)){
 <TR VALIGN="TOP" >
 <TD BGCOLOR="#ffffff">
 <?
-echo "<center><font color=\"".$config_values['DATE_COLOUR']."\">".date('l dS \of F Y h:i:s A')."</font><br /></center>";
+$sql = "SELECT credit from billing where accountcode = 'stl-$_COOKIE[user]'";
+$result = mysql_query($sql,$link);
+if (mysql_num_rows($result)==0){
+    $credit = "0.00";
+} else {
+    $credit = round(mysql_result($result,0,0),2);
+}
+echo "<center><font color=\"".$config_values['DATE_COLOUR']."\">".date('l dS \of F Y h:i:s A')." Credit: $credit</font><br /></center>";
 ?>
