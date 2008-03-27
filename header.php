@@ -594,12 +594,14 @@ $sql = "SELECT credit, creditlimit from billing where accountcode = 'stl-$_COOKI
 $result = mysql_query($sql,$link);
 if (mysql_num_rows($result)==0){
     $credit = $config_values['CURRENCY_SYMBOL']."0.00";
-    $creditlimit = $config_values['CURRENCY_SYMBOL']."0.00";
+    $creditlimit = 0;
+    $postpay = 0;
 } else {
     $credit = $config_values['CURRENCY_SYMBOL'].number_format(mysql_result($result,0,'credit'),2);
     $creditlimit = $config_values['CURRENCY_SYMBOL'].number_format(mysql_result($result,0,'creditlimit'),2);
+    $postpay = 1;
 }
-if ($creditlimit > 0) {
+if ($postpay == 1) {
     echo "<center><font color=\"".$config_values['DATE_COLOUR']."\">".date('l dS \of F Y h:i:sA')." <a href=\"viewcdr.php\">Credit: $credit Credit Limit: $creditlimit</a></font><br /></center>";
 } else {
     echo "<center><font color=\"".$config_values['DATE_COLOUR']."\">".date('l dS \of F Y h:i:sA')." <a href=\"viewcdr.php\">Credit: $credit</a></font><br /></center>";
