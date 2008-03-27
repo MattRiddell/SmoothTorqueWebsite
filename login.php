@@ -8,6 +8,18 @@ $passwordHash = sha1($_POST['pass']);
 $_POST = array_map(mysql_real_escape_string,$_POST);
 $_GET = array_map(mysql_real_escape_string,$_GET);
 
+$sql = "INSERT INTO log (username, activity) VALUES ('$_POST[user]', 'Attempted login')";
+$result=mysql_query($sql, $link) or die (mysql_error());;
+
+/*
+CREATE TABLE `log` (
+  `timestamp` timestamp NULL default NULL on update CURRENT_TIMESTAMP,
+  `activity` varchar(255) default NULL,
+  `username` varchar(255) default NULL
+)
+
+*/
+
 $sql = 'SELECT password, security FROM customer WHERE username=\''.$_POST[user].'\'';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $dbpass=mysql_result($result,0,'password');
@@ -36,4 +48,3 @@ if (trim($dbpass)==trim($passwordHash)){
 }
 require "footer.php";
 ?>
-
