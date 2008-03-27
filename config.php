@@ -1,6 +1,7 @@
 <?
 //echo $_POST[sox];
 if (isset($_POST[colour])){
+
     $add = @fopen("/stweb.conf",'w');
     fwrite($add,"COLOUR=$_POST[colour]\n");
     fwrite($add,"TITLE=$_POST[title]\n");
@@ -33,6 +34,11 @@ if (isset($_POST[colour])){
 }
 include "header.php";
 if (isset($_POST[userid])){
+/*================= Log Access ======================================*/
+$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Config Updated')";
+$result=mysql_query($sql, $link);
+/*================= Log Access ======================================*/
+
 $sql = "UPDATE config SET value='$_POST[userid]' WHERE parameter='userid'";
 $result=mysql_query($sql, $link) or die (mysql_error());
 
@@ -74,6 +80,7 @@ $licencekey = mysql_result($result,0,'value');
 <?}?>
 </td>
 <td>Windows Backend</td></tr>
+<tr><td colspan=2><br /><a href="log.php">View System Logs</a><br /><br /></td></tr>
 <form action="config.php" name="config" method="post">
 <tr  class="tborder2">
 <td>
