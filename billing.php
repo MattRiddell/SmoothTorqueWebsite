@@ -30,7 +30,10 @@ require "header.php";
 //require "header_trunk.php";
 $campaigngroupid=$groupid;
 $sql = 'SELECT * FROM billing WHERE customerid='.$_GET[id];
-$result=mysql_query($sql, $link) or die (mysql_error());;
+$result=mysql_query($sql, $link);
+if (mysql_error()=="Table 'SineDialer.billing' doesn't exist") {
+    echo "No billing table";
+}
 if (mysql_num_rows($result) == 0) {
     $sql = 'SELECT * FROM customer WHERE id='.$_GET[id];
     $result=mysql_query($sql, $link) or die (mysql_error());;
