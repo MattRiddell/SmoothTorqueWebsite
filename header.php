@@ -590,12 +590,18 @@ if (isset($menu)){
 <TR VALIGN="TOP" >
 <TD BGCOLOR="#ffffff">
 <?
-$sql = "SELECT credit from billing where accountcode = 'stl-$_COOKIE[user]'";
+$sql = "SELECT credit, creditlimit from billing where accountcode = 'stl-$_COOKIE[user]'";
 $result = mysql_query($sql,$link);
 if (mysql_num_rows($result)==0){
     $credit = $config_values['CURRENCY_SYMBOL']."0.00";
+    $creditlimit = $config_values['CURRENCY_SYMBOL']."0.00";
 } else {
-    $credit = $config_values['CURRENCY_SYMBOL'].number_format(mysql_result($result,0,0),2);
+    $credit = $config_values['CURRENCY_SYMBOL'].number_format(mysql_result($result,0,'credit'),2);
+    $creditlimit = $config_values['CURRENCY_SYMBOL'].number_format(mysql_result($result,0,'creditlimit'),2);
 }
-echo "<center><font color=\"".$config_values['DATE_COLOUR']."\">".date('l dS \of F Y h:i:sA')." <a href=\"viewcdr.php\">Credit: $credit</a></font><br /></center>";
+if ($creditlimit > 0) {
+    echo "<center><font color=\"".$config_values['DATE_COLOUR']."\">".date('l dS \of F Y h:i:sA')." <a href=\"viewcdr.php\">Credit: $credit Credit Limit: $creditlimit</a></font><br /></center>";
+} else {
+    echo "<center><font color=\"".$config_values['DATE_COLOUR']."\">".date('l dS \of F Y h:i:sA')." <a href=\"viewcdr.php\">Credit: $credit</a></font><br /></center>";
+}
 ?>
