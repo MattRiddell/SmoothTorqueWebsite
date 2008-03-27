@@ -32,7 +32,21 @@ $campaigngroupid=$groupid;
 $sql = 'SELECT * FROM billing WHERE customerid='.$_GET[id];
 $result=mysql_query($sql, $link);
 if (mysql_error()=="Table 'SineDialer.billing' doesn't exist") {
-    echo "No billing table";
+    $sql = "CREATE TABLE `billing` (
+  `customerid` int(11) unsigned NOT NULL default '0',
+  `accountcode` varchar(250) NOT NULL default '',
+  `priceperminute` double(10,5) default '0.00000',
+  `firstperiod` int(10) unsigned default '1',
+  `increment` int(10) unsigned default '1',
+  `credit` double(100,10) default '0.0000000000',
+  `pricepercall` double(10,5) default '0.00000',
+  `priceperconnectedcall` double(10,5) default '0.00000',
+  `priceperpress1` double(10,5) default '0.00000',
+  PRIMARY KEY  (`customerid`,`accountcode`)
+)";
+$result=mysql_query($sql, $link);
+
+
 }
 if (mysql_num_rows($result) == 0) {
     $sql = 'SELECT * FROM customer WHERE id='.$_GET[id];
