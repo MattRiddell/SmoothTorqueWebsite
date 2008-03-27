@@ -141,6 +141,35 @@ if ($pressed1<1) {
     $found = 1;
 }
 
+$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="calldropped"'.$timedate;
+$result2=mysql_query($sql, $link) or die (mysql_error());;
+$calldropped=mysql_result($result2,0,'count(*)');
+if ($calldropped<1) {
+    $calldropped = 0;
+} else {
+    $found = 1;
+}
+
+$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="maxretries"'.$timedate;
+$result2=mysql_query($sql, $link) or die (mysql_error());;
+$maxretries=mysql_result($result2,0,'count(*)');
+if ($maxretries<1) {
+    $maxretries = 0;
+} else {
+    $found = 1;
+}
+
+$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="badtiff"'.$timedate;
+$result2=mysql_query($sql, $link) or die (mysql_error());;
+$badtiff=mysql_result($result2,0,'count(*)');
+if ($badtiff<1) {
+    $badtiff = 0;
+} else {
+    $found = 1;
+}
+
+
+
 //$targets=array("list.php?campaignid=$_GET[id]&type=pressed1", "list.php?campaignid=$_GET[id]&type=dialed", "list.php?campaignid=$_GET[id]&type=busy", "list.php?campaignid=$_GET[id]&type=answered", "list.php?campaignid=$_GET[id]&type=hungup", "list.php?campaignid=$_GET[id]&type=congested", "list.php?campaignid=$_GET[id]&type=dialed", "list.php?campaignid=$_GET[id]&type=unknown",  "list.php?campaignid=$_GET[id]&type=indnc");
 
 
@@ -169,7 +198,10 @@ $data=array(
  $congested/$total*100,
  $timeout/$total*100,
  $unknown/$total*100,
- $indnc/$total*100
+ $indnc/$total*100,
+ $calldropped/$total*100,
+ $maxretries/$total*100,
+ $badtiff/$total*100
 );
 
 
@@ -188,7 +220,11 @@ $browserx=array(
  " Congested ($congested ".round((($congested/$total)*100),2)."%%)",
  " No Answer ($timeout ".round((($timeout/$total)*100),2)."%%)",
  " Unknown ($unknown ".round((($unknown/$total)*100),2)."%%)",
- " In DNC List ($indnc ".round((($indnc/$total)*100),2)."%%)");
+ " In DNC List ($indnc ".round((($indnc/$total)*100),2)."%%)",
+ " Call Dropped Prematurely ($calldropped ".round((($calldropped/$total)*100),2)."%%)",
+ " Disconnected after permitted retries ($maxretries ".round((($maxretries/$total)*100),2)."%%)",
+ " Bad TIFF File ($badtiff ".round((($badtiff/$total)*100),2)."%%)"
+);
 
 $p1 = new PiePlot3D($data);
 if ($found == 1) {

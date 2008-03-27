@@ -3,8 +3,12 @@ require "header.php";
 require "header_queue.php";
 
 if($_POST[check_submit]){
-	print_r($_POST);
-	//by now, we should have enough to make a good guess as to what should be in the queues.conf	
+	$query = "INSERT INTO queue_table (name,strategy,reportholdtime) VALUES (\"$_POST[queue_name]\",\"$_POST[strategy]\",".($_POST[reportholdtime]=="no"?"0":"1").")";
+	
+	//now we need to run the above query on the DB	
+	$result=mysql_query($query, $link) or die (mysql_error());;
+	$insertedID = mysql_insert_id();
+	include("queues.php");
 	exit();
 }
 $section=Array();
