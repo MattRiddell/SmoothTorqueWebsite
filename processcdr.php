@@ -19,35 +19,11 @@ $sql = "SELECT count(*) from ".$config_values['CDR_TABLE']." WHERE dcontext!='de
 $result = mysql_query($sql,$cdrlink);
 $count = mysql_result($result,0,0);
 //echo $count." Total Records";
-$page = $_GET[page];
-if ($_GET[page]>0) {
-    $start = $_GET[page]*100;
-} else {
-    $start = 0;
-}
-    echo '<a href="viewcdr.php?page=0&accountcode='.$accountcode_in.'"><img src="/images/resultset_first.png" border="0"></a> ';
-if ($page > 0) {
-    echo '<a href="viewcdr.php?page='.($page-1).'&accountcode='.$accountcode_in.'"><img src="/images/resultset_previous.png" border="0"></a> ';
-}
-if ($page > 5) {
-    $pagex= $page-4;
-} else {
-    $pagex = 0;
-}
-for ($i = $pagex;$i<($count/100);$i++) {
-    if ($i < $page + 20) {
-        if ($page == $i) {
-            echo "<b>$i</b> ";
-        } else {
-            echo '<a href="viewcdr.php?page='.$i.'&accountcode='.$accountcode_in.'">'.$i.'</a> ';
-        }
-    }
-}
 
 echo '<a href="viewcdr.php?page='.($page+1).'&accountcode='.$accountcode_in.'"><img src="/images/resultset_next.png" border="0"></a> ';
 echo '<a href="viewcdr.php?page='.round($count/100).'&accountcode='.$accountcode_in.'"><img src="/images/resultset_last.png" border="0"></a> ';
 //$sql = "SELECT * from ".$config_values['CDR_TABLE']." order by calldate DESC LIMIT $start,100";
-$sql = "SELECT * from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode_in' order by calldate DESC LIMIT $start,100";
+$sql = "SELECT * from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode_in' order by calldate DESC";
 
 $result = mysql_query($sql,$cdrlink);
 $i = 0;
