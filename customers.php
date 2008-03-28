@@ -24,6 +24,12 @@ Country
 Phone
 </TD>
 <TD CLASS="thead">
+Credit
+</TD>
+<TD CLASS="thead">
+Credit Limit
+</TD>
+<TD CLASS="thead">
 Trunk
 </TD>
 <TD CLASS="thead">
@@ -31,7 +37,7 @@ Trunk
 </TR>
 <?
 
-$sql = 'SELECT customer.*,trunk.name AS trunkname FROM customer LEFT JOIN trunk ON customer.trunkid=trunk.id';
+$sql = 'SELECT customer.*,trunk.name AS trunkname, billing.credit as credit, billing.creditlimit as creditlimit FROM customer LEFT JOIN trunk ON customer.trunkid=trunk.id LEFT JOIN billing on customer.id=billing.customerid';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
 $count = 0;
@@ -79,6 +85,16 @@ if (strlen($row[phone])<15){
 } else {
     echo substr($row[phone],15)."...";
 }
+?>
+</TD>
+<TD>
+<?
+echo number_format($row[credit],2);
+?>
+</TD>
+<TD>
+<?
+echo number_format($row[creditlimit],2);
 ?>
 </TD>
 <TD>

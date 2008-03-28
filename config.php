@@ -160,7 +160,7 @@ User ID:
 Licence Key:
 </td>
 <td>
-<input type="password" name="licencekey" value="<?echo $licencekey;?>">
+<input type="text" name="licencekey" value="<?echo $licencekey;?>">
 </td>
 </tr>
 <tr  class="tborderxx">

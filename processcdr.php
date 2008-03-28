@@ -1,12 +1,21 @@
 <?
 require "header.php";
-$currency = '$';
+$currency = $config_values['CURRENCY_SYMBOL'];
 $db_host=$config_values['CDR_HOST'];
 $db_user=$config_values['CDR_USER'];
 $db_pass=$config_values['CDR_PASS'];
+if ($level==sha1("level100")){
+    if (isset($_GET[accountcode])) {
+        $accountcode_in = $_GET[accountcode];
+    } else {
+        $accountcode_in = "stl-".$_COOKIE[user];
+    }
+} else {
+    $accountcode_in = "stl-".$_COOKIE[user];
+}
 $cdrlink = mysql_connect($db_host, $db_user, $db_pass) OR die(mysql_error());
 mysql_select_db($config_values['CDR_DB'], $cdrlink);
-$sql = "SELECT count(*) from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' ";
+$sql = "SELECT count(*) from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode_in'";
 $result = mysql_query($sql,$cdrlink);
 $count = mysql_result($result,0,0);
 //echo $count." Total Records";
@@ -16,9 +25,9 @@ if ($_GET[page]>0) {
 } else {
     $start = 0;
 }
-echo '<a href="viewcdr.php?page=0"><img src="/images/resultset_first.png" border="0"></a> ';
+    echo '<a href="viewcdr.php?page=0&accountcode='.$accountcode_in.'"><img src="/images/resultset_first.png" border="0"></a> ';
 if ($page > 0) {
-    echo '<a href="viewcdr.php?page='.($page-1).'"><img src="/images/resultset_previous.png" border="0"></a> ';
+    echo '<a href="viewcdr.php?page='.($page-1).'&accountcode='.$accountcode_in.'"><img src="/images/resultset_previous.png" border="0"></a> ';
 }
 if ($page > 5) {
     $pagex= $page-4;
@@ -30,15 +39,15 @@ for ($i = $pagex;$i<($count/100);$i++) {
         if ($page == $i) {
             echo "<b>$i</b> ";
         } else {
-            echo '<a href="viewcdr.php?page='.$i.'">'.$i.'</a> ';
+            echo '<a href="viewcdr.php?page='.$i.'&accountcode='.$accountcode_in.'">'.$i.'</a> ';
         }
     }
 }
 
-echo '<a href="viewcdr.php?page='.($page+1).'"><img src="/images/resultset_next.png" border="0"></a> ';
-echo '<a href="viewcdr.php?page='.round($count/100).'"><img src="/images/resultset_last.png" border="0"></a> ';
+echo '<a href="viewcdr.php?page='.($page+1).'&accountcode='.$accountcode_in.'"><img src="/images/resultset_next.png" border="0"></a> ';
+echo '<a href="viewcdr.php?page='.round($count/100).'&accountcode='.$accountcode_in.'"><img src="/images/resultset_last.png" border="0"></a> ';
 //$sql = "SELECT * from ".$config_values['CDR_TABLE']." order by calldate DESC LIMIT $start,100";
-$sql = "SELECT * from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' order by calldate DESC LIMIT $start,100";
+$sql = "SELECT * from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode_in' order by calldate DESC LIMIT $start,100";
 
 $result = mysql_query($sql,$cdrlink);
 $i = 0;
@@ -124,9 +133,10 @@ while ($row = mysql_fetch_assoc($result)) {
     //$billtype[$i] = "Per Minute";
     if (!($customerid[$accountcode[$i]]>0)) {
         $sqlx = "SELECT * from billing where accountcode = '".$accountcode[$i]."'";
+        //echo $sqlx;
         $resultx = mysql_query($sqlx,$link);
         $priceperminute[$accountcode[$i]] = mysql_result($resultx, 0, 'priceperminute');
-//            echo mysql_result($resultx, 0, 'priceperminute');
+        //echo mysql_result($resultx, 0, 'priceperminute');
         $customerid[$accountcode[$i]] = mysql_result($resultx, 0, 'customerid');
         $firstperiod[$accountcode[$i]] = mysql_result($resultx, 0, 'firstperiod');
         $increment[$accountcode[$i]] = mysql_result($resultx, 0, 'increment');
@@ -151,7 +161,21 @@ while ($row = mysql_fetch_assoc($result)) {
     }
     if ($disposition[$i] == "ANSWERED") {
         if ($billsec[$i] > $firstperiod[$accountcode[$i]]) {
-            $costperminute[$i] = round(($priceperminute[$accountcode[$i]]/60) * $billsec[$i],2);
+            if ($increment[$accountcode[$i]] == 1) {
+                $costperminute[$i] = round(($priceperminute[$accountcode[$i]]/60) * $billsec[$i],2);
+            } else {
+                /*30
+                27
+                if the increment is 30 seconds and the call is 73 seconds they should be
+                charged for 73/30 = 2.4 blocks - round up to 3 = 3*30 = 90*/
+                //echo "Billsec: $billsec[$i] Increment: $increment[$accountcode[$i]]";
+                $blocks = ceil($billsec[$i]/$increment[$accountcode[$i]]);
+                //echo "Blocks: $blocks";
+                $newsecs = $blocks * $increment[$accountcode[$i]];
+                //echo "Newsecs: $newsecs";
+                $costperminute[$i] = round(($priceperminute[$accountcode[$i]]/60) * $newsecs,2);
+                //echo "costperminute: $costperminute[$i]";
+            }
             $cost[$i]+=$costperminute[$i];
         } else {
             $costperminute[$i] = round(($priceperminute[$accountcode[$i]]/60) * $firstperiod[$accountcode[$i]],2);
