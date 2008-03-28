@@ -88,6 +88,7 @@ include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(my
 mysql_select_db("SineDialer", $link);
 if ($_COOKIE["loggedin"]==sha1("LoggedIn".$user)){
     // Logged In
+    $loggedin=true;
     setcookie("loggedin",sha1("LoggedIn".$user),time()+60000);
     setcookie("user",$user,time()+60000);
     setcookie("level",$level,time()+60000);
@@ -232,6 +233,7 @@ $self=$_SERVER['PHP_SELF'];
     ';
     //<TD class="thead2"><A HREF="stats.php">Live Statistics</A>&nbsp;&nbsp;</TD>
 } else {
+    $loggedin=false;
     // Not Logged In
     $myPage=$_SERVER[PHP_SELF];
     if ($myPage=="/index.php"|$myPage=="/login.php"){
@@ -239,7 +241,7 @@ $self=$_SERVER['PHP_SELF'];
     } else {
 ?>    <META HTTP-EQUIV=REFRESH CONTENT="0; URL=/index.php?redirect=<?echo $myPage;?>">
 <?
-        exit;
+        exit(0);
     }
 }
 ?>
@@ -601,9 +603,11 @@ if (mysql_num_rows($result)==0){
     $creditlimit = $config_values['CURRENCY_SYMBOL'].number_format(mysql_result($result,0,'creditlimit'),2);
     $postpay = 1;
 }
+if ($loggedin){
 if ($postpay == 1) {
     echo "<center><font color=\"".$config_values['DATE_COLOUR']."\">".date('l dS \of F Y h:i:sA')." <a href=\"viewcdr.php\">Credit: $credit Credit Limit: $creditlimit</a></font><br /></center>";
 } else {
     echo "<center><font color=\"".$config_values['DATE_COLOUR']."\">".date('l dS \of F Y h:i:sA')." <a href=\"viewcdr.php\">Credit: $credit</a></font><br /></center>";
+}
 }
 ?>
