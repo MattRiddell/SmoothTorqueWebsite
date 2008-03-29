@@ -17,11 +17,16 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
 <td width="260">
 
 <?
+/*================= Log Access ======================================*/
+$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Stopping campaign')";
+$result=mysql_query($sql, $link);
+/*================= Log Access ======================================*/
+
 $sql1="delete from queue where campaignid=".$_GET[id];
 $sql2="INSERT INTO queue (campaignid,queuename,status,details,flags,transferclid,
     starttime,endtime,startdate,enddate,did,clid,context,maxcalls,maxchans,maxretries
     ,retrytime,waittime) VALUES
-    ('$_GET[id]','autostart-$_POST[id]','2','No details','0','0',
+    ('$_GET[id]','autostop-$_POST[id]','2','No details','0','0',
     '00:00:00','23:59:00','2005-01-01','2020-01-01','$_POST[did]','000',
     '$_POST[context]','$_POST[agents]','500','0'
     ,'0','30') ";
