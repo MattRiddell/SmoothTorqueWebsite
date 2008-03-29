@@ -16,6 +16,11 @@ $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $campaigngroupid=mysql_result($result,0,'campaigngroupid');
 require "header_campaign.php";
+/*================= Log Access ======================================*/
+$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Viewed Campaign Page')";
+$result=mysql_query($sql, $link);
+/*================= Log Access ======================================*/
+
 ?><?
     if ($_COOKIE[level] == sha1("level100")) {
         if ($_GET[type]=="all") {
