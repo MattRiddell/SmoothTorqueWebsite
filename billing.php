@@ -29,7 +29,7 @@ if (isset($_POST[firstperiod])){
 /*    $SMDB2->executeUpdate($sql);*/
 
 /*================= Log Access ======================================*/
-$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Updated a billing record for customer id: $customerid')";
+$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Updated a billing record for customer id: $customerid (Credit: $credit Credit Limit $creditlimit)')";
 $result=mysql_query($sql, $link);
 /*================= Log Access ======================================*/
 
