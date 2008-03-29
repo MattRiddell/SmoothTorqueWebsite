@@ -59,7 +59,7 @@ echo "<tr>".$titletd."Call Date/Time".$titletdc."".$titletd.
 /*"DContext".$titletdc."".$titletd."Caller ID".$titletdc."".$titletd.*/"Duration".
 $titletdc."".$titletd."Billsec".$titletdc."".$titletd."Disposition".$titletdc."".$titletd
 ."AccountCode".$titletdc."".$titletd."Phone Number".$titletdc."".$titletd.
-"Result".$titletdc.$titletd."Per Minute".$titletdc.$titletd.
+"Result".$titletdc.$titletd.$config_values['PER_MINUTE'].$titletdc.$titletd.
 "Lead".$titletdc.$titletd."Connected".$titletdc.$titletd."Press1".$titletdc.$titletd.
 "Total".$titletdc.$titletd."Charged".$titletdc.
 "</tr>";
