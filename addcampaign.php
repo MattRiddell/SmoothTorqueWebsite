@@ -32,6 +32,10 @@ if (isset($_POST[name])){
         $sql="INSERT INTO campaign (groupid,name,description,messageid,messageid2,messageid3,mode,astqueuename,did,maxagents,clid,trclid,context) VALUES ('$campaigngroupid','$name', '$description', '$messageid','$messageid2','$messageid3','$mode','$astqueuename','$did','$maxagents','$clid','$trclid','$context')";
     //    echo $sql;
         $result=mysql_query($sql, $link) or die (mysql_error());;
+/*================= Log Access ======================================*/
+$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Added a campaign')";
+$result=mysql_query($sql, $link);
+/*================= Log Access ======================================*/
         include("campaigns.php");
         exit;
     } else {

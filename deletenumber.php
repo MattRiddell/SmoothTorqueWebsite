@@ -9,6 +9,11 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
 if (isset($_GET[campaignid])){
     $sql="DELETE FROM number where campaignid=".($_GET[campaignid])." and phonenumber=".($_GET[number])." limit 1";
     $result=mysql_query($sql, $link) or die (mysql_error());;
+/*================= Log Access ======================================*/
+$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Deleted a number')";
+$result=mysql_query($sql, $link);
+/*================= Log Access ======================================*/
+
     include("numbers.php");
     exit;
 }

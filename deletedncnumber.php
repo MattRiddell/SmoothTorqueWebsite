@@ -11,6 +11,11 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
 */
 $sql="DELETE FROM dncnumber where phonenumber=".($_GET[number]);
 $result=mysql_query($sql, $link) or die (mysql_error());;
+/*================= Log Access ======================================*/
+$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Deleted a DNC number')";
+$result=mysql_query($sql, $link);
+/*================= Log Access ======================================*/
+
 include("viewdncnumbers.php");
 exit;
 ?>

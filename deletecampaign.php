@@ -12,6 +12,11 @@ if (isset($_GET[sure])){
     $id=$_GET[id];
     $sql="DELETE FROM campaign where id=$id";
     $result=mysql_query($sql, $link) or die (mysql_error());;
+    /*================= Log Access ======================================*/
+$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Deleted a campaign')";
+$result=mysql_query($sql, $link);
+/*================= Log Access ======================================*/
+
     include("campaigns.php");
     exit;
 }

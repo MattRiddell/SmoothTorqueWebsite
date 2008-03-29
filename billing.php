@@ -28,6 +28,10 @@ if (isset($_POST[firstperiod])){
     $result=mysql_query($sql, $link) or die (mysql_error());;
 /*    $SMDB2->executeUpdate($sql);*/
 
+/*================= Log Access ======================================*/
+$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Updated a billing record')";
+$result=mysql_query($sql, $link);
+/*================= Log Access ======================================*/
 
     header("Location: /customers.php");
     exit;

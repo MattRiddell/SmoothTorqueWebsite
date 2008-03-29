@@ -11,5 +11,10 @@ $campaigngroupid=mysql_result($result,0,'campaigngroupid');
 
 $sql = "INSERT INTO billing (customerid, accountcode) VALUES ($_GET[id], '$_GET[accountcode]')";
 $result=mysql_query($sql, $link) or die (mysql_error());;
+/*================= Log Access ======================================*/
+$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Added a billing record')";
+$result=mysql_query($sql, $link);
+/*================= Log Access ======================================*/
+
 header("Location: billing.php?id=".$_GET[id]);
 ?>

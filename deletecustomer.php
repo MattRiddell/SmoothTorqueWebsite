@@ -9,6 +9,11 @@ if (isset($_GET[sure])){
     $id=($_GET[id]);
     $sql="DELETE FROM customer where id=$id limit 1";
     $result=mysql_query($sql, $link) or die (mysql_error());;
+/*================= Log Access ======================================*/
+$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Deleted a customer')";
+$result=mysql_query($sql, $link);
+/*================= Log Access ======================================*/
+
     include("customers.php");
     exit;
 }
@@ -23,7 +28,7 @@ Are you Sure You want to delete this record?<BR><BR>
 <TR><TD>
 <?
 /*
-   seeing as the id is unique (given that it's the primary key), this means that we can only ever get 
+   seeing as the id is unique (given that it's the primary key), this means that we can only ever get
    one user given any ID (and thus the limit 1), there doesn't seem to much point for the while loop below
 */
 $sql = 'SELECT * FROM customer WHERE id='.($_GET[id]).' limit 1';
@@ -43,4 +48,3 @@ while ($row = mysql_fetch_assoc($result)) {
 }
 require "footer.php";
 ?>
-

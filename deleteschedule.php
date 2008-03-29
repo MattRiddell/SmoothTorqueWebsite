@@ -12,6 +12,11 @@ if (isset($_GET[sure])){
     $id=($_GET[id]);
     $sql="DELETE FROM queue where queueID=$id limit 1";
     $result=mysql_query($sql, $link) or die (mysql_error());;
+/*================= Log Access ======================================*/
+$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Deleted a schedule')";
+$result=mysql_query($sql, $link);
+/*================= Log Access ======================================*/
+
     include("schedule.php");
     exit;
 }
@@ -43,4 +48,3 @@ while ($row = mysql_fetch_assoc($result)) {
 }
 require "footer.php";
 ?>
-

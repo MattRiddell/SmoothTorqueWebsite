@@ -36,6 +36,10 @@ if ($count > 0) {
 $sql="DELETE FROM campaignmessage WHERE id=".($_GET[id]);
 //        echo $sql;
         $result=mysql_query($sql, $link) or die (mysql_error());;
+/*================= Log Access ======================================*/
+$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Deleted a message')";
+$result=mysql_query($sql, $link);
+/*================= Log Access ======================================*/
 
         //$SMDB2->executeUpdate($sql);
     }

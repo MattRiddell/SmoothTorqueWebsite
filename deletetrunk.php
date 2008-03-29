@@ -9,6 +9,11 @@ if (isset($_GET[id])){
     $id=($_GET[id]);
     $sql="delete from trunk where id=$_GET[id] limit 1";
     $result=mysql_query($sql, $link) or die (mysql_error());;
+/*================= Log Access ======================================*/
+$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Deleted a trunk')";
+$result=mysql_query($sql, $link);
+/*================= Log Access ======================================*/
+
     include("trunks.php");
     exit;
 }

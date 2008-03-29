@@ -36,6 +36,10 @@ $maxchans=$_POST[maxchans];
 //    echo $sql;
     $result=mysql_query($sql, $link) or die (mysql_error());;
 
+/*================= Log Access ======================================*/
+$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Added a customer')";
+$result=mysql_query($sql, $link);
+/*================= Log Access ======================================*/
 
 
     include("customers.php");
