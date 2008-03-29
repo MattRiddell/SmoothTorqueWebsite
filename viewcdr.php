@@ -1,5 +1,10 @@
 <?
 require "header.php";
+/*================= Log Access ======================================*/
+$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Viewed the CDR')";
+$result=mysql_query($sql, $link);
+/*================= Log Access ======================================*/
+
 $currency = $config_values['CURRENCY_SYMBOL'];
 $db_host=$config_values['CDR_HOST'];
 $db_user=$config_values['CDR_USER'];
