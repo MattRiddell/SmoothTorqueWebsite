@@ -35,6 +35,11 @@ if (isset($_POST[colour])){
 
 }
 include "header.php";
+/*================= Log Access ======================================*/
+$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Viewed the admin page')";
+$result=mysql_query($sql, $link);
+/*================= Log Access ======================================*/
+
 if (isset($_POST[userid])){
 /*================= Log Access ======================================*/
 $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Config Updated')";
