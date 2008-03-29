@@ -6,7 +6,7 @@ $result=mysql_query($sql, $link);
 /*================= Log Access ======================================*/
     $sql = "select * from log order by timestamp desc";
     $result=mysql_query($sql, $link);
-    echo "<center><table border=\"1\">";
+    echo "<br /><center><table border=\"0\">";
     echo "<tr><td>TimeStamp</td><td>Activity</td><td>User Name</td></tr>";
     while ($row = mysql_fetch_assoc($result)) {
     if ($toggle){
