@@ -17,6 +17,10 @@ if (isset($_POST[name])){
     $result=mysql_query($sql, $link) or die (mysql_error());;
 /*    $SMDB2->executeUpdate($sql);*/
 
+/*================= Log Access ======================================*/
+$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Added a trunk')";
+$result=mysql_query($sql, $link);
+/*================= Log Access ======================================*/
 
     header("Location: /trunks.php");
     exit;

@@ -2,6 +2,11 @@
 $pagenum="2";
 require "header.php";
 require "header_trunk.php";
+/*================= Log Access ======================================*/
+$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Viewed the trunks page')";
+$result=mysql_query($sql, $link);
+/*================= Log Access ======================================*/
+
 $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $campaigngroupid=mysql_result($result,0,'campaigngroupid');
