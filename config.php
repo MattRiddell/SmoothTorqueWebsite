@@ -30,6 +30,7 @@ if (isset($_POST[colour])){
     fwrite($add,"DATE_COLOUR=$_POST[DATE_COLOUR]\n");
     fwrite($add,"MAIN_PAGE_TEXT=$_POST[MAIN_PAGE_TEXT]\n");
     fwrite($add,"CURRENCY_SYMBOL=$_POST[CURRENCY_SYMBOL]\n");
+    fwrite($add,"PER_MINUTE=$_POST[PER_MINUTE]\n");
     fclose($add);
 
 }
@@ -373,6 +374,15 @@ Currency Symbol (i.e. $):
 </td>
 <td>
 <input type="Text" name="CURRENCY_SYMBOL" value="<?echo $config_values['CURRENCY_SYMBOL'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+Per Minute Wording in CDR
+</td>
+<td>
+<input type="Text" name="PER_MINUTE" value="<?echo $config_values['PER_MINUTE'];?>">
 </td>
 </tr>
 

@@ -167,7 +167,18 @@ while ($row = mysql_fetch_assoc($result)) {
                 /*30
                 27
                 if the increment is 30 seconds and the call is 73 seconds they should be
-                charged for 73/30 = 2.4 blocks - round up to 3 = 3*30 = 90*/
+                charged for 73/30 = 2.4 blocks - round up to 3 = 3*30 = 90
+
+                if the increment is 9 seconds and the call is 288 seconds they should be
+                charged for 288/9 = 32 blocks - no rounding because it is accurate.
+
+                they are then charged for $6 per minute
+
+                288/60 = 4.8 minutes
+
+                4.8 minutes * $6 per minute = 28.8
+
+                */
                 //echo "Billsec: $billsec[$i] Increment: $increment[$accountcode[$i]]";
                 $blocks = ceil($billsec[$i]/$increment[$accountcode[$i]]);
                 //echo "Blocks: $blocks";

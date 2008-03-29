@@ -178,6 +178,7 @@ while ($row = mysql_fetch_assoc($result)) {
     $i++;
 }
 echo "</table>";
+echo "About to print out totals";
 foreach ($totalcost as $key => $value) {
     echo "Key: $key Value: $value";
 }
