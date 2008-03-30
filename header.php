@@ -595,12 +595,12 @@ if (isset($menu)){
 $sql = "SELECT credit, creditlimit from billing where accountcode = 'stl-$_COOKIE[user]'";
 $result = mysql_query($sql,$link);
 if (mysql_num_rows($result)==0){
-    $credit = $config_values['CURRENCY_SYMBOL']."0.00";
+    $credit = $config_values['CURRENCY_SYMBOL']." 0.00";
     $creditlimit = 0;
     $postpay = 0;
 } else {
-    $credit = $config_values['CURRENCY_SYMBOL'].number_format(mysql_result($result,0,'credit'),2);
-    $creditlimit = $config_values['CURRENCY_SYMBOL'].number_format(mysql_result($result,0,'creditlimit'),2);
+    $credit = $config_values['CURRENCY_SYMBOL']." ".number_format(mysql_result($result,0,'credit'),2);
+    $creditlimit = $config_values['CURRENCY_SYMBOL']." ".number_format(mysql_result($result,0,'creditlimit'),2);
     $postpay = 1;
 }
 if ($loggedin){
