@@ -166,18 +166,19 @@ while ($row = mysql_fetch_assoc($result)) {
         }
     }
     if ($display) {
-        //echo     "<tr>";
-        //echo $td.$calldate[$i]."</td>$td"/*.$dcontext[$i]."</td>$td".
-        //$clid[$i]."</td>$td"*/.
-        ///*$lastapp[$i]."</td>$td".$lastdata[$i]."</td>$td".*/$duration[$i]."</td>$td".$billsec[$i]."</td>$td".
-        //$disposition[$i]."</td>$td".$accountcode[$i]."</td>$td".$userfield[$i]."</b></td>$td<b>".$dst[$i]."</b></td>";
-        //echo $td.$currency.$costperminute[$i]."</td>".$td.$currency.$costpercall[$i]."</td>".
-        //$td.$currency.$costperconnect[$i]."</td>".$td.$currency.$costperpress1[$i]."</td>".$td.$currency.$cost[$i]."</td>".$paid[$i]."</td>";
         $totalcost[$accountcode[$i]]+=$cost[$i];
-        //echo "</tr>";
+        $pos = strpos($userfield[$i], '-');
+        if ($pos === false) {
+            // This is not a split
+        } else {
+            $campaignid = substr($userfield[$i], pos + 1);
+            $sql = "SELECT cost FROM campaign WHERE id = ".$campaignid;
+            $result_campaign_cost = mysql_query($sql,$link);
+            $campaign_cost = mysql_result($result_campaign_cost,0,0);
+            $sql = "UPDATE campaign set cost = '".($campaign_cost+$cost[$i])."' WHERE id = ".$campaignid;
+        }
         $sql = "update cdr set userfield2 = '1' where calldate = '$calldate[$i]' and duration = '$duration[$i]' and accountcode = '$accountcode[$i]' and userfield = '$userfield[$i]'";
         $result_update = mysql_query($sql,$link);
-        //echo $sql."<br />";
     }
     $i++;
 }
