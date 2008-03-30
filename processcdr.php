@@ -1,4 +1,17 @@
 <?
+$config_file = "/stweb.conf";
+$fp = fopen($config_file, "r");
+while (!feof($fp)) {
+  $line = trim(fgets($fp));
+  if ($line && substr($line,0,1)!=$comment) {
+    $pieces = explode("=", $line);
+    $option = trim($pieces[0]);
+    $value = trim($pieces[1]);
+    $config_values[$option] = $value;
+  }
+}
+fclose($fp);
+
 include "admin/db_config.php";
 mysql_select_db("SineDialer", $link);
 $currency = $config_values['CURRENCY_SYMBOL'];
