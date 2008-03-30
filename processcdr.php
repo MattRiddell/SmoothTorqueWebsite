@@ -1,5 +1,6 @@
 <?
-require "header.php";
+include "admin/db_config.php";
+mysql_select_db("SineDialer", $link);
 $currency = $config_values['CURRENCY_SYMBOL'];
 $db_host=$config_values['CDR_HOST'];
 $db_user=$config_values['CDR_USER'];
@@ -184,9 +185,9 @@ echo $totalcost[$accountcode_in];
 $sqlx = "select credit,creditlimit from billing where accountcode = '$accountcode_in'";
 $result_credit = mysql_result($sqlx,$link)  or die (mysql_error());
 if (mysql_num_rows($result_credit) > 0) {
-$credit = mysql_result($result_credit,0,'credit') or die (mysql_error());
-$credit_limit = mysql_result($result_credit,0,'creditlimit');
-echo "Credit was $credit and will now be ".($credit - $totalcost[$accountcode_in])."<br />";
+    $credit = mysql_result($result_credit,0,'credit') or die (mysql_error());
+    $credit_limit = mysql_result($result_credit,0,'creditlimit');
+    echo "Credit was $credit and will now be ".($credit - $totalcost[$accountcode_in])."<br />";
 }
 echo "<hr>";
 }

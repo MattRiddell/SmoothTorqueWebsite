@@ -18,7 +18,7 @@ if (isset($_GET[campaigngroupid])){
 if (isset($_POST[id])){
     $id = $_POST[id];
 }
-include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(mysql_error());
+include "admin/db_config.php";
 mysql_select_db("SineDialer", $link);
 $sql = 'SELECT value FROM config WHERE parameter=\'backend\'';
 $result=mysql_query($sql, $link) or die (mysql_error());;
