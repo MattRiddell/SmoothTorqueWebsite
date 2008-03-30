@@ -170,6 +170,8 @@ while ($row = mysql_fetch_assoc($result)) {
         $td.$currency.$costperconnect[$i]."</td>".$td.$currency.$costperpress1[$i]."</td>".$td.$currency.$cost[$i]."</td>".$paid[$i]."</td>";
         $totalcost[$accountcode[$i]]+=$cost[$i];
         echo "</tr>";
+        $sql = "update cdr set userfield2 = '1' where calldate = '$calldate[$i]' and duration = '$duration[$i]' and accountcode = '$accountcode[$i]' and userfield = '$userfield[$i]'";
+        echo $sql."<br />";
     }
     $i++;
 }
