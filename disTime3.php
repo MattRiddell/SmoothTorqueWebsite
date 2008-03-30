@@ -65,6 +65,14 @@ Numbers Left
 <TD CLASS="thead">
 
 </TD>
+<?if ( $config_values['USE_BILLING'] == "YES") {?>
+<TD CLASS="thead">
+Cost
+</TD>
+<?}?>
+
+
+
 <TD CLASS="thead">
 Percentage Busy
 </TD>
@@ -208,6 +216,13 @@ echo "<A title=\"Delete this campaign\" HREF=\"#\"><IMG SRC=\"/images/delete.png
 }
 ?>
 </TD>
+<?if ( $config_values['USE_BILLING'] == "YES") {?>
+<TD>
+<?
+echo $config_values['CURRENCY_SYMBOL']." ".number_format($row[cost],2);
+?>
+</TD>
+<?}?>
 
 <td>
 
