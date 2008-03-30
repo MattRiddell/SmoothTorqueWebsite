@@ -183,6 +183,7 @@ while ($row = mysql_fetch_assoc($result)) {
         $totalcost[$accountcode[$i]]+=$cost[$i];
         echo "</tr>";
         $sql = "update cdr set userfield2 = '1' where calldate = '$calldate[$i]' and duration = '$duration[$i]' and accountcode = '$accountcode[$i]' and userfield = '$userfield[$i]'";
+        $result_update = mysql_query($sql,$link);
         echo $sql."<br />";
     }
     $i++;
@@ -201,6 +202,8 @@ if (mysql_num_rows($result_credit) > 0) {
     $credit = mysql_result($result_credit,0,'credit') or die (mysql_error());
     $credit_limit = mysql_result($result_credit,0,'creditlimit');
     echo "Credit was $credit and will now be ".($credit - $totalcost[$accountcode_in])."<br />";
+    $sql = "update billing set credit = ".($credit - $totalcost[$accountcode_in])." where accountcode = '$accountcode_in'";
+    $result_update=mysql_query($query, $link);
 }
 echo "<hr>";
 }
