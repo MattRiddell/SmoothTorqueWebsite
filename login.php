@@ -11,17 +11,33 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
 $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Attempted login')";
 $result=mysql_query($sql, $link);
 if (mysql_error() == "Table 'SineDialer.log' doesn't exist") {
-$sql = "
-CREATE TABLE `log` (
+    $sql = "CREATE TABLE `log` (
   `timestamp` timestamp NULL default NULL on update CURRENT_TIMESTAMP,
   `activity` varchar(255) default NULL,
   `username` varchar(255) default NULL
-)";
-$result=mysql_query($sql, $link);
+  )";
+    $result=mysql_query($sql, $link);
 $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Attempted login')";
 $result=mysql_query($sql, $link);
-
+$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created Log Table')";
+$result=mysql_query($sql, $link);
 }
+
+
+$fields = mysql_list_fields('SineDialer', 'campaign', $link);
+$columns = mysql_num_fields($fields);
+for ($i = 0; $i < $columns; $i++) {
+    $field_array[] = mysql_field_name($fields, $i);
+}
+
+if (!in_array('cost', $field_array))
+{
+    $result = mysql_query('ALTER TABLE campaign ADD cost VARCHAR(10)');
+    $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added campaign cost field')";
+    $result=mysql_query($sql, $link);
+}
+
+
 /*
 
 */
