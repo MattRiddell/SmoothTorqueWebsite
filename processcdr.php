@@ -183,7 +183,7 @@ echo "About to print out totals for $accountcode_in<br />";
 echo $totalcost[$accountcode_in];
 $sqlx = "select credit,creditlimit from billing where accountcode = '$accountcode_in'";
 $result_credit = mysql_result($sqlx,$link);
-$credit = mysql_result($result_credit,0,'credit');
+$credit = mysql_result($result_credit,0,'credit') or die (mysql_error);
 $credit_limit = mysql_result($result_credit,0,'creditlimit');
 echo "Credit was $credit and will now be ".($credit - $totalcost[$accountcode_in])."<br />";
 echo "<hr>";
