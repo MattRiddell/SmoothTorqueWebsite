@@ -64,9 +64,7 @@ if ( $config_values['USE_BILLING'] == "YES") {
     if (!$allowed_to_start) {
         /* Not enough credit - error and return */
         ?>
-        <br />
-        <br />
-        Sorry, you do not have enough credit to start a campaign. Please add some
+        Sorry, <b>you do not have enough credit to start a campaign</b>. Please add some
         credit to your account and try again.
         </td>
 <td>
