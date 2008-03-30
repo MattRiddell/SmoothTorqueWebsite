@@ -19,7 +19,7 @@ $count = mysql_result($result,0,0);
 echo '<a href="viewcdr.php?page='.($page+1).'&accountcode='.$accountcode_in.'"><img src="/images/resultset_next.png" border="0"></a> ';
 echo '<a href="viewcdr.php?page='.round($count/100).'&accountcode='.$accountcode_in.'"><img src="/images/resultset_last.png" border="0"></a> ';
 //$sql = "SELECT * from ".$config_values['CDR_TABLE']." order by calldate DESC LIMIT $start,100";
-$sql = "SELECT * from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode_in' and userfield2!='1' order by calldate DESC";
+$sql = "SELECT * from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode_in' and userfield2!='1' order by calldate DESC limit 1000";
 
 $result = mysql_query($sql,$cdrlink);
 $i = 0;
@@ -174,7 +174,7 @@ while ($row = mysql_fetch_assoc($result)) {
     $i++;
 }
 echo "</table>";
-echo "About to print out totals";
+echo "About to print out totals for $accountcode_in";
 foreach ($totalcost as $key => $value) {
     echo "Key: $key Value: $value";
 }
