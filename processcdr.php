@@ -31,7 +31,7 @@ $count = mysql_result($result,0,0);
 //echo $count." Total Records";
 
 //$sql = "SELECT * from ".$config_values['CDR_TABLE']." order by calldate DESC LIMIT $start,100";
-$sql = "SELECT * from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode_in' and userfield2!='1' order by calldate DESC limit 15000";
+$sql = "SELECT * from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode_in' and userfield2!='1' order by calldate DESC limit 5000";
 
 $result = mysql_query($sql,$cdrlink);
 $i = 0;
