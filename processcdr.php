@@ -34,21 +34,10 @@ $count = mysql_result($result,0,0);
 $sql = "SELECT * from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode_in' and userfield2!='1' order by calldate DESC limit 5000";
 
 $result = mysql_query($sql,$cdrlink);
-echo "num: ".mysql_num_rows($result)."
-";
 $i = 0;
 $titletd = "<td bgcolor=\"#000000\"><font color=\"#CCCCFF\"><b>&nbsp;&nbsp;";
 $titletdc = "&nbsp;&nbsp;</td>";
-echo "<center><table border=0>";
 
-echo "<tr>".$titletd."Call Date/Time".$titletdc."".$titletd.
-/*"DContext".$titletdc."".$titletd."Caller ID".$titletdc."".$titletd.*/"Duration".
-$titletdc."".$titletd."Billsec".$titletdc."".$titletd."Disposition".$titletdc."".$titletd
-."AccountCode".$titletdc."".$titletd."Phone Number".$titletdc."".$titletd.
-"Result".$titletdc.$titletd."Per Minute".$titletdc.$titletd.
-"Lead".$titletdc.$titletd."Connected".$titletdc.$titletd."Press1".$titletdc.$titletd.
-"Total".$titletdc.$titletd."Charged".$titletdc.
-"</tr>";
 while ($row = mysql_fetch_assoc($result)) {
     $calldate[$i] = $row[calldate];
     $dcontext[$i] = $row[dcontext];
@@ -175,39 +164,39 @@ while ($row = mysql_fetch_assoc($result)) {
         }
     }
     if ($display) {
-        echo     "<tr>";
-        echo $td.$calldate[$i]."</td>$td"/*.$dcontext[$i]."</td>$td".
-        $clid[$i]."</td>$td"*/.
-        /*$lastapp[$i]."</td>$td".$lastdata[$i]."</td>$td".*/$duration[$i]."</td>$td".$billsec[$i]."</td>$td".
-        $disposition[$i]."</td>$td".$accountcode[$i]."</td>$td".$userfield[$i]."</b></td>$td<b>".$dst[$i]."</b></td>";
-        echo $td.$currency.$costperminute[$i]."</td>".$td.$currency.$costpercall[$i]."</td>".
-        $td.$currency.$costperconnect[$i]."</td>".$td.$currency.$costperpress1[$i]."</td>".$td.$currency.$cost[$i]."</td>".$paid[$i]."</td>";
+        //echo     "<tr>";
+        //echo $td.$calldate[$i]."</td>$td"/*.$dcontext[$i]."</td>$td".
+        //$clid[$i]."</td>$td"*/.
+        ///*$lastapp[$i]."</td>$td".$lastdata[$i]."</td>$td".*/$duration[$i]."</td>$td".$billsec[$i]."</td>$td".
+        //$disposition[$i]."</td>$td".$accountcode[$i]."</td>$td".$userfield[$i]."</b></td>$td<b>".$dst[$i]."</b></td>";
+        //echo $td.$currency.$costperminute[$i]."</td>".$td.$currency.$costpercall[$i]."</td>".
+        //$td.$currency.$costperconnect[$i]."</td>".$td.$currency.$costperpress1[$i]."</td>".$td.$currency.$cost[$i]."</td>".$paid[$i]."</td>";
         $totalcost[$accountcode[$i]]+=$cost[$i];
-        echo "</tr>";
+        //echo "</tr>";
         $sql = "update cdr set userfield2 = '1' where calldate = '$calldate[$i]' and duration = '$duration[$i]' and accountcode = '$accountcode[$i]' and userfield = '$userfield[$i]'";
         $result_update = mysql_query($sql,$link);
-        echo $sql."<br />";
+        //echo $sql."<br />";
     }
     $i++;
 }
-echo "</table>";
-echo "About to print out totals for $accountcode_in<br />";
+//echo "</table>";
+//echo "About to print out totals for $accountcode_in<br />";
 //foreach ($totalcost as $key => $value) {
 //    echo "Key: $key Value: $value";
 //}
-echo $totalcost[$accountcode_in];
+//echo $totalcost[$accountcode_in];
 $sqlx = "select credit,creditlimit from billing where accountcode = '$accountcode_in'";
-echo $sqlx;
+//echo $sqlx;
 $result_credit = mysql_query($sqlx,$link)  or die (mysql_error());
 if (mysql_num_rows($result_credit) > 0) {
-    echo "More than 0 results";
+    //echo "More than 0 results";
     $credit = mysql_result($result_credit,0,'credit') or die (mysql_error());
     $credit_limit = mysql_result($result_credit,0,'creditlimit');
-    echo "Credit was $credit and will now be ".($credit - $totalcost[$accountcode_in])."<br />";
+    //echo "Credit was $credit and will now be ".($credit - $totalcost[$accountcode_in])."<br />";
     $sql = "update billing set credit = ".($credit - $totalcost[$accountcode_in])." where accountcode = '$accountcode_in'";
     $result_update=mysql_query($sql, $link);
 }
-echo "<hr>";
+//echo "<hr>";
 }
 require "footer.php";
 ?>
