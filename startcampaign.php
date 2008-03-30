@@ -42,6 +42,28 @@ $maxchans=mysql_result($result,0,'maxchans');
 $maxcps=mysql_result($result,0,'maxcps');
 $username=$_COOKIE[user];
 
+if ( $config_values['USE_BILLING'] == "YES") {
+    $sql = "Select credit from billing where accountcode = 'stl-$username'";
+    $result_credit = mysql_query($sql, $link);
+    if (mysql_num_rows($result_credit) > 0) {
+        $credit = mysql_result($result_credit,0,0);
+    } else {
+        $credit = 0;
+    }
+    if ($credit <= 0) {
+        /* Not enough credit - error and return */
+        ?>
+        <br />
+        <br />
+        <center>
+        <h1>
+        Sorry, you do not have enough credit to start a campaign. Please add some
+        credit to your account and try again.</h1>
+        <META HTTP-EQUIV=REFRESH CONTENT="5; URL=/campaigns.php">
+        <?
+        exit(0);
+    }
+}
 
 $sql4="select trunkid from customer where campaigngroupid = ".$campaigngroupid;
 $resultx=mysql_query($sql4, $link) or die (mysql_error());;
