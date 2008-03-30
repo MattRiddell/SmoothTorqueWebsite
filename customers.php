@@ -28,12 +28,14 @@ Country
 <TD CLASS="thead">
 Phone
 </TD>
+<?if ( $config_values['USE_BILLING'] == "YES") {?>
 <TD CLASS="thead">
 Credit
 </TD>
 <TD CLASS="thead">
 Credit Limit
 </TD>
+<?}?>
 <TD CLASS="thead">
 Trunk
 </TD>
@@ -96,20 +98,18 @@ if (strlen($row[phone])<15){
 }
 ?>
 </TD>
+<?if ( $config_values['USE_BILLING'] == "YES") {?>
 <TD>
 <?
-if ( $config_values['USE_BILLING'] == "YES") {
 echo $config_values['CURRENCY_SYMBOL'].number_format($row[credit],2);
-}
 ?>
 </TD>
 <TD>
 <?
-if ( $config_values['USE_BILLING'] == "YES") {
 echo $config_values['CURRENCY_SYMBOL'].number_format($row[creditlimit],2);
-}
 ?>
 </TD>
+<?}?>
 <TD>
 
 <?
