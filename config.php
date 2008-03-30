@@ -31,6 +31,7 @@ if (isset($_POST[colour])){
     fwrite($add,"MAIN_PAGE_TEXT=$_POST[MAIN_PAGE_TEXT]\n");
     fwrite($add,"CURRENCY_SYMBOL=$_POST[CURRENCY_SYMBOL]\n");
     fwrite($add,"PER_MINUTE=$_POST[PER_MINUTE]\n");
+    fwrite($add,"USE_BILLING=$_POST[USE_BILLING]\n");
     fclose($add);
 
 }
@@ -390,6 +391,21 @@ Per Minute Wording in CDR
 <input type="Text" name="PER_MINUTE" value="<?echo $config_values['PER_MINUTE'];?>">
 </td>
 </tr>
+
+<tr  class="tborder2">
+<td>
+Use the SmoothTorque Billing System
+</td>
+<td>
+<input type="radio" name="USE_BILLING" value="YES" <?if ( $config_values['USE_BILLING'] == "YES") {echo "checked";}?>> Yes<br>
+<input type="radio" name="USE_BILLING" value="NO" <?if ( $config_values['USE_BILLING'] != "YES") {echo "checked";}?>> No<br>
+
+<input type="Text" name="PER_MINUTE" value="<?echo $config_values['PER_MINUTE'];?>">
+</td>
+</tr>
+
+
+
 
 <tr  class="tborder2">
 <td>
