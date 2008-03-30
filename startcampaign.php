@@ -64,15 +64,15 @@ if ( $config_values['USE_BILLING'] == "YES") {
     if (!$allowed_to_start) {
         /* Not enough credit - error and return */
         ?>
-        Sorry, <b>you do not have enough credit to start a campaign</b>. Please add some
-        credit to your account and try again.
+        <b>Sorry, you do not have enough credit to start a campaign. Please add some
+        credit to your account and try again.</b>
         </td>
 <td>
 </td></tr>
 </table>
 </center>
 
-        <META HTTP-EQUIV=REFRESH CONTENT="5; URL=/campaigns.php">
+        <META HTTP-EQUIV=REFRESH CONTENT="10; URL=/campaigns.php">
         <?
         exit(0);
     }
