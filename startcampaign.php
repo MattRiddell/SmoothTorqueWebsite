@@ -43,14 +43,25 @@ $maxcps=mysql_result($result,0,'maxcps');
 $username=$_COOKIE[user];
 
 if ( $config_values['USE_BILLING'] == "YES") {
-    $sql = "Select credit from billing where accountcode = 'stl-$username'";
+    $sql = "Select credit, credit_limit from billing where accountcode = 'stl-$username'";
     $result_credit = mysql_query($sql, $link);
     if (mysql_num_rows($result_credit) > 0) {
-        $credit = mysql_result($result_credit,0,0);
+        $credit = mysql_result($result_credit,0,"credit");
+        $credit_limit = mysql_result($result_credit,0,"credit_limit");
     } else {
         $credit = 0;
+        $credit_limit
     }
     if ($credit <= 0) {
+        if ($credit > 0-$credit_limit) {
+            $allowed_to_start = true;
+        } else {
+            $allowed_to_start = false;
+        }
+    } else {
+        $allowed_to_start = true;
+    }
+    if (!$allowed_to_start) {
         /* Not enough credit - error and return */
         ?>
         <br />
