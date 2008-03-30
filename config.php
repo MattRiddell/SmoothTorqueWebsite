@@ -399,8 +399,6 @@ Use the SmoothTorque Billing System
 <td>
 <input type="radio" name="USE_BILLING" value="YES" <?if ( $config_values['USE_BILLING'] == "YES") {echo "checked";}?>> Yes
 <input type="radio" name="USE_BILLING" value="NO" <?if ( $config_values['USE_BILLING'] != "YES") {echo "checked";}?>> No
-
-<input type="Text" name="PER_MINUTE" value="<?echo $config_values['PER_MINUTE'];?>">
 </td>
 </tr>
 
