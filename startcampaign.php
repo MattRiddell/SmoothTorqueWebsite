@@ -44,7 +44,9 @@ $username=$_COOKIE[user];
 
 if ( $config_values['USE_BILLING'] == "YES") {
     $sql = "Select credit, credit_limit from billing where accountcode = 'stl-$username'";
+    echo $sql;
     $result_credit = mysql_query($sql, $link);
+    echo "numrows: ".mysql_num_rows($result_credit);
     if (mysql_num_rows($result_credit) > 0) {
         $credit = mysql_result($result_credit,0,"credit");
         $credit_limit = mysql_result($result_credit,0,"credit_limit");
