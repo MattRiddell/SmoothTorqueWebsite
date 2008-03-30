@@ -34,6 +34,8 @@ $count = mysql_result($result,0,0);
 $sql = "SELECT * from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode_in' and userfield2!='1' order by calldate DESC limit 5000";
 
 $result = mysql_query($sql,$cdrlink);
+echo "num: ".mysql_num_rows($result)."
+";
 $i = 0;
 $titletd = "<td bgcolor=\"#000000\"><font color=\"#CCCCFF\"><b>&nbsp;&nbsp;";
 $titletdc = "&nbsp;&nbsp;</td>";
