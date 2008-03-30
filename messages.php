@@ -98,16 +98,21 @@ echo trim(substr($row[description],0,25))."...";
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 <?if (substr($row[filename],0,2) == "x-") {
-?>
-<embed src="<?echo "/uploads/".str_replace(".sln",".wav",$row[filename]);?>"
+/*<embed src="<?echo "/uploads/".str_replace(".sln",".wav",$row[filename]);?>"
 autostart=false width=0 height=0 id="sound<?echo $row[id];?>"
-enablejavascript="true">
+enablejavascript="true">*/
+?>
 
-<a href="#" onClick="EvalSound('sound<?echo $row[id];?>')" title="Play <?echo $row[name];?> sound">
+<a href="<?echo "/uploads/".str_replace(".sln",".wav",$row[filename]);?>" title="Play <?echo $row[name];?> sound">
+<img src="/images/control_play_blue.png" border="0"></a>
+
+<?
+
+/*<a href="#" onClick="EvalSound('sound<?echo $row[id];?>')" title="Play <?echo $row[name];?> sound">
 <img src="/images/control_play_blue.png" border="0"></a>
 <a href="#" onClick="EvalSound2('sound<?echo $row[id];?>')" title="Pause <?echo $row[name];?> sound">
 <img src="/images/control_pause_blue.png" border="0"></a>
-
+*/
 <?
 
 } else {
