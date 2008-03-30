@@ -101,12 +101,12 @@ if (strlen($row[phone])<15){
 <?if ( $config_values['USE_BILLING'] == "YES") {?>
 <TD>
 <?
-echo $config_values['CURRENCY_SYMBOL'].number_format($row[credit],2);
+echo $config_values['CURRENCY_SYMBOL']." ".number_format($row[credit],2);
 ?>
 </TD>
 <TD>
 <?
-echo $config_values['CURRENCY_SYMBOL'].number_format($row[creditlimit],2);
+echo $config_values['CURRENCY_SYMBOL']." ".number_format($row[creditlimit],2);
 ?>
 </TD>
 <?}?>
