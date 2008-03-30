@@ -62,6 +62,11 @@ if ( $config_values['USE_BILLING'] == "YES") {
         $allowed_to_start = true;
     }
     if (!$allowed_to_start) {
+/*================= Log Access ======================================*/
+$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Does not have credit to start campaign')";
+$result=mysql_query($sql, $link);
+/*================= Log Access ======================================*/
+
         /* Not enough credit - error and return */
         ?>
         <b>Sorry, you do not have enough credit to start a campaign. Please add some
