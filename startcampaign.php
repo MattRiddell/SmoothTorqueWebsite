@@ -68,6 +68,12 @@ if ( $config_values['USE_BILLING'] == "YES") {
         <br />
         Sorry, you do not have enough credit to start a campaign. Please add some
         credit to your account and try again.
+        </td>
+<td>
+</td></tr>
+</table>
+</center>
+
         <META HTTP-EQUIV=REFRESH CONTENT="5; URL=/campaigns.php">
         <?
         exit(0);
