@@ -23,7 +23,7 @@ $sql = "Select accountcode from billing";
 $result_accounts = mysql_query($sql, $link);
 while ($accounts = mysql_fetch_assoc($result_accounts)) {
 
-$accountcode_in = $accounts[accountcode];
+$accountcode_in = $accounts['accountcode'];
 $cdrlink = mysql_connect($db_host, $db_user, $db_pass) OR die(mysql_error());
 mysql_select_db($config_values['CDR_DB'], $cdrlink);
 $sql = "SELECT count(*) from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode_in' and userfield2!='1'";
