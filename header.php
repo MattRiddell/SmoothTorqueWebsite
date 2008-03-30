@@ -39,11 +39,11 @@ if (file_exists("/SmoothTorque/exampled.lock")) {
 
 $fp = fopen($config_file, "r");
 while (!feof($fp)) {
-  $line = fgets($fp);
+  $line = trim(fgets($fp));
   if ($line && substr($line,0,1)!=$comment) {
     $pieces = explode("=", $line);
     $option = trim($pieces[0]);
-    $value = $pieces[1];
+    $value = trim($pieces[1]);
     $config_values[$option] = $value;
   }
 }
