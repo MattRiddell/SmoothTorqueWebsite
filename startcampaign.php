@@ -50,7 +50,7 @@ if ( $config_values['USE_BILLING'] == "YES") {
         $credit_limit = mysql_result($result_credit,0,"credit_limit");
     } else {
         $credit = 0;
-        $credit_limit
+        $credit_limit = 0;
     }
     if ($credit <= 0) {
         if ($credit > 0-$credit_limit) {
