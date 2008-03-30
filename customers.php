@@ -75,9 +75,6 @@ echo "<A HREF=\"editcustomer.php?id=".$row[id]."\"><img src=\"/images/pencil.png
 </TD>
 <TD>
 <?
-if ( $config_values['USE_BILLING'] == "YES") {
-echo "<A HREF=\"billing.php?id=".$row[id]."\" title=\"View Billing Information\"><img src=\"/images/cart_edit.png\" border=\"0\" align=\"right\" title=\"View Billing Information\"></A>";
-}
 ?>
 <?echo "<A HREF=\"viewcdr.php?accountcode=stl-".$row[username]."\" title=\"View CDR Information\"><img src=\"/images/table.png\" border=\"0\" align=\"right\" title=\"View CDR Information\"></A>";?>
 <?echo "<A HREF=\"changepassword.php?id=".$row[id]."\" title=\"Change Password\"><img src=\"/images/lock_edit.png\" border=\"0\" align=\"right\" title=\"Change Password\"></A>";?>
@@ -101,12 +98,14 @@ if (strlen($row[phone])<15){
 <?if ( $config_values['USE_BILLING'] == "YES") {?>
 <TD>
 <?
-echo $config_values['CURRENCY_SYMBOL']." ".number_format($row[credit],2);
+echo "<A HREF=\"billing.php?id=".$row[id]."\" title=\"View Billing Information\"><img src=\"/images/cart_edit.png\" border=\"0\" align=\"right\" title=\"View Billing Information\">";
+echo $config_values['CURRENCY_SYMBOL']." ".number_format($row[credit],2)."</A>";
 ?>
 </TD>
 <TD>
 <?
-echo $config_values['CURRENCY_SYMBOL']." ".number_format($row[creditlimit],2);
+echo "<A HREF=\"billing.php?id=".$row[id]."\" title=\"View Billing Information\"><img src=\"/images/cart_edit.png\" border=\"0\" align=\"right\" title=\"View Billing Information\">";
+echo $config_values['CURRENCY_SYMBOL']." ".number_format($row[creditlimit],2)."</A>";
 ?>
 </TD>
 <?}?>
