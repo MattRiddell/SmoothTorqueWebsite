@@ -4,15 +4,11 @@ $currency = $config_values['CURRENCY_SYMBOL'];
 $db_host=$config_values['CDR_HOST'];
 $db_user=$config_values['CDR_USER'];
 $db_pass=$config_values['CDR_PASS'];
-if ($level==sha1("level100")){
-    if (isset($_GET[accountcode])) {
-        $accountcode_in = $_GET[accountcode];
-    } else {
-        $accountcode_in = "stl-".$_COOKIE[user];
-    }
-} else {
-    $accountcode_in = "stl-".$_COOKIE[user];
-}
+$sql = "Select accountcode from billing";
+$result_accounts = mysql_query($sql, $link);
+while ($accounts = mysql_fetch_assoc($result_accounts)) {
+
+$accountcode_in = $accounts[accountcode];
 $cdrlink = mysql_connect($db_host, $db_user, $db_pass) OR die(mysql_error());
 mysql_select_db($config_values['CDR_DB'], $cdrlink);
 $sql = "SELECT count(*) from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode_in' and userfield2!='1'";
@@ -181,6 +177,8 @@ echo "</table>";
 echo "About to print out totals";
 foreach ($totalcost as $key => $value) {
     echo "Key: $key Value: $value";
+}
+echo "<hr>";
 }
 require "footer.php";
 ?>
