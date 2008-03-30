@@ -70,7 +70,7 @@ $result=mysql_query($sql, $link);
         /* Not enough credit - error and return */
         ?>
         <b>Sorry, you do not have enough credit to start a campaign. Please add some
-        credit to your account and try again.</b>
+        credit to your account and try again. <?echo "Credit: $credit Credit Limit: $credit_limit";?></b>
         </td>
 <td>
 </td></tr>
