@@ -5,7 +5,7 @@ $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE
 $result=mysql_query($sql, $link);
 /*================= Log Access ======================================*/
 
-$currency = $config_values['CURRENCY_SYMBOL'];
+$currency = $config_values['CURRENCY_SYMBOL']." ";
 $db_host=$config_values['CDR_HOST'];
 $db_user=$config_values['CDR_USER'];
 $db_pass=$config_values['CDR_PASS'];
