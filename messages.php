@@ -113,7 +113,6 @@ enablejavascript="true">*/
 <a href="#" onClick="EvalSound2('sound<?echo $row[id];?>')" title="Pause <?echo $row[name];?> sound">
 <img src="/images/control_pause_blue.png" border="0"></a>
 */
-<?
 
 } else {
 /* FAX FILE */
