@@ -20,6 +20,9 @@ Name
 Username
 </TD>
 <TD CLASS="thead">
+Call Details
+</TD>
+<TD CLASS="thead">
 City
 </TD>
 <TD CLASS="thead">
@@ -76,9 +79,11 @@ echo "<A HREF=\"editcustomer.php?id=".$row[id]."\"><img src=\"/images/pencil.png
 <TD>
 <?
 ?>
-<?echo "<A HREF=\"viewcdr.php?accountcode=stl-".$row[username]."\" title=\"View CDR Information\"><img src=\"/images/table.png\" border=\"0\" align=\"right\" title=\"View CDR Information\"></A>";?>
 <?echo "<A HREF=\"changepassword.php?id=".$row[id]."\" title=\"Change Password\"><img src=\"/images/lock_edit.png\" border=\"0\" align=\"right\" title=\"Change Password\"></A>";?>
 <?echo $row[username];?>
+</TD>
+<TD>
+<?echo "<A HREF=\"viewcdr.php?accountcode=stl-".$row[username]."\" title=\"View CDR Information\"><img src=\"/images/table.png\" border=\"0\" align=\"left\" title=\"View CDR Information\">View CDR</A>";?>
 </TD>
 <TD>
 <?echo $row[city];?>
