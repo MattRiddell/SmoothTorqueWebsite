@@ -1,5 +1,6 @@
 <?
 $config_file = "/stweb.conf";
+$totalcost = array();
 $comment = '';
 $fp = fopen($config_file, "r");
 while (!feof($fp)) {
@@ -200,5 +201,5 @@ if (mysql_num_rows($result_credit) > 0) {
 }
 //echo "<hr>";
 }
-require "footer.php";
+//require "footer.php";
 ?>
