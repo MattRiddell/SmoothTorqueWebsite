@@ -604,10 +604,14 @@ if (mysql_num_rows($result)==0){
     $postpay = 1;
 }
 if ($loggedin){
-if ($postpay == 1) {
-    echo "<center><font color=\"".$config_values['DATE_COLOUR']."\">".date('l dS \of F Y h:i:sA')." <a href=\"viewcdr.php\">Credit: $credit Credit Limit: $creditlimit</a></font><br /></center>";
-} else {
-    echo "<center><font color=\"".$config_values['DATE_COLOUR']."\">".date('l dS \of F Y h:i:sA')." <a href=\"viewcdr.php\">Credit: $credit</a></font><br /></center>";
-}
+    if ( $config_values['USE_BILLING'] == "YES") {
+        if ($postpay == 1) {
+            echo "<center><font color=\"".$config_values['DATE_COLOUR']."\">".date('l dS \of F Y h:i:sA')." <a href=\"viewcdr.php\">Credit: $credit Credit Limit: $creditlimit</a></font><br /></center>";
+        } else {
+            echo "<center><font color=\"".$config_values['DATE_COLOUR']."\">".date('l dS \of F Y h:i:sA')." <a href=\"viewcdr.php\">Credit: $credit</a></font><br /></center>";
+        }
+    } else {
+        echo "<center><font color=\"".$config_values['DATE_COLOUR']."\">".date('l dS \of F Y h:i:sA')."</font><br /></center>";
+    }
 }
 ?>
