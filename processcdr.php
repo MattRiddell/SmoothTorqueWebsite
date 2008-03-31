@@ -195,10 +195,12 @@ if (mysql_num_rows($result_credit) > 0) {
     //echo "More than 0 results";
     $credit = mysql_result($result_credit,0,'credit') or die (mysql_error());
     $credit_limit = mysql_result($result_credit,0,'creditlimit');
+    if (($credit - $totalcost[$accountcode_in]) != $credit) {
     echo "[".$accountcode_in."] Credit was $credit and will now be ".($credit - $totalcost[$accountcode_in])."
 ";
     $sql = "update billing set credit = ".($credit - $totalcost[$accountcode_in])." where accountcode = '$accountcode_in'";
     $result_update=mysql_query($sql, $link);
+    }
 }
 //echo "<hr>";
 }
