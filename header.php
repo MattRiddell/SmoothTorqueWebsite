@@ -236,7 +236,7 @@ $self=$_SERVER['PHP_SELF'];
     $loggedin=false;
     // Not Logged In
     $myPage=$_SERVER[PHP_SELF];
-    if ($myPage=="/index.php"|$myPage=="/login.php"){
+    if ($myPage=="/index.php"|$myPage=="/login.php"|$myPage=="/SmoothTorque/index.php"|$myPage=="/SmoothTorque/login.php"){
         //echo "LOGGING IN ".$user." - ".$_COOKIE["loggedin"];
     } else {
 ?>    <META HTTP-EQUIV=REFRESH CONTENT="0; URL=/index.php?redirect=<?echo $myPage;?>">
