@@ -13,7 +13,7 @@ echo "<FONT FACE=\"ARIAL\">";
 Welcome to <?echo $config_values['TITLE'];?><br />
 <br />
 <?echo $config_values['TEXT'];?>        <br /><br />
-        <table background="/images/sdbox.png" align="center" width="300" height="200" cellpadding="0" cellspacing="0">
+        <table background="images/sdbox.png" align="center" width="300" height="200" cellpadding="0" cellspacing="0">
             <tr><td>
 <?
 if (isset($_GET[error])){
