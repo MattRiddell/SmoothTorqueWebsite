@@ -38,7 +38,7 @@ echo '<div id="quick_start" style="display:none">';
 include 'src/quickstart.php';
 echo '</div>';
 
-echo '<h2 onClick=hideshow("campaigns")>Campaigns</h2>';
+echo '<h2 onClick=hideshow("campaigns")>'.$config_values['MENU_CAMPAIGNS'].'</h2>';
 echo '<div id="campaigns" style="display:none">';
 include 'src/campaigns.php';
 echo '</div>';
