@@ -1,20 +1,9 @@
 <?
 //require "header.php";
 include "admin/db_config.php";
-/*$config_file = "/stweb.conf";
-$comment = "#";
 
-$fp = fopen($config_file, "r");
-while (!feof($fp)) {
-  $line = trim(fgets($fp));
-  if ($line && substr($line,0,1)!=$comment) {
-    $pieces = explode("=", $line);
-    $option = trim($pieces[0]);
-    $value = trim($pieces[1]);
-    $config_values[$option] = $value;
-  }
-}
-fclose($fp);
+
+/*
 if ($config_values['ST_MYSQL_HOST'] == "") {
     $add = @fopen("/stweb.conf",'w');
     fwrite($add,"ST_MYSQL_HOST=$db_host\n");

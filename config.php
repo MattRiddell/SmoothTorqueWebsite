@@ -29,6 +29,9 @@ if (isset($_POST[colour])){
     fwrite($add,"MENU_LOGOUT=$_POST[MENU_LOGOUT]\n");
     fwrite($add,"DATE_COLOUR=$_POST[DATE_COLOUR]\n");
     fwrite($add,"MAIN_PAGE_TEXT=$_POST[MAIN_PAGE_TEXT]\n");
+    fwrite($add,"MAIN_PAGE_USERNAME=$_POST[MAIN_PAGE_USERNAME]\n");
+    fwrite($add,"MAIN_PAGE_PASSWORD=$_POST[MAIN_PAGE_PASSWORD]\n");
+    fwrite($add,"MAIN_PAGE_LOGIN=$_POST[MAIN_PAGE_LOGIN]\n");
     fwrite($add,"CURRENCY_SYMBOL=$_POST[CURRENCY_SYMBOL]\n");
     fwrite($add,"PER_MINUTE=$_POST[PER_MINUTE]\n");
     fwrite($add,"USE_BILLING=$_POST[USE_BILLING]\n");
@@ -419,6 +422,33 @@ Main Page Text:
 </td>
 <td>
 <input type="Text" name="MAIN_PAGE_TEXT" value="<?echo $config_values['MAIN_PAGE_TEXT'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+Main Page Username Text:
+</td>
+<td>
+<input type="Text" name="MAIN_PAGE_USERNAME" value="<?echo $config_values['MAIN_PAGE_USERNAME'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+Main Page Password Text:
+</td>
+<td>
+<input type="Text" name="MAIN_PAGE_PASSWORD" value="<?echo $config_values['MAIN_PAGE_PASSWORD'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+Main Page Login Text:
+</td>
+<td>
+<input type="Text" name="MAIN_PAGE_LOGIN" value="<?echo $config_values['MAIN_PAGE_LOGIN'];?>">
 </td>
 </tr>
 

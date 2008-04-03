@@ -1,5 +1,33 @@
 <?
 require "header.php";
+$config_file = "/stweb.conf";
+$comment = "#";
+
+$fp = fopen($config_file, "r");
+while (!feof($fp)) {
+  $line = trim(fgets($fp));
+  if ($line && substr($line,0,1)!=$comment) {
+    $pieces = explode("=", $line);
+    $option = trim($pieces[0]);
+    $value = trim($pieces[1]);
+    $config_values[$option] = $value;
+  }
+}
+fclose($fp);
+if ($config_values['MAIN_PAGE_USERNAME'] == "") {
+    $config_values['MAIN_PAGE_USERNAME'] = "Username";
+}
+
+if ($config_values['MAIN_PAGE_PASSWORD'] == "") {
+    $config_values['MAIN_PAGE_PASSWORD'] = "Password";
+}
+
+if ($config_values['MAIN_PAGE_LOGIN'] == "") {
+    $config_values['MAIN_PAGE_LOGIN'] = "Login";
+}
+
+
+
 echo "<FONT FACE=\"ARIAL\">";
 ?>
 
@@ -13,7 +41,7 @@ echo "<FONT FACE=\"ARIAL\">";
 Welcome to <?echo $config_values['TITLE'];?><br />
 <br />
 <?echo $config_values['TEXT'];?>        <br /><br />
-        <table background="images/sdbox.png" align="center" width="300" height="200" cellpadding="0" cellspacing="0">
+        <table background="/images/sdbox.png" align="center" width="300" height="200" cellpadding="0" cellspacing="0">
             <tr><td>
 <?
 if (isset($_GET[error])){
@@ -22,13 +50,13 @@ if (isset($_GET[error])){
 
 ?>
 
-                UserName:<br />
+                <?echo $config_values['MAIN_PAGE_USERNAME'];?>:<br />
                 <br />
                 <INPUT class="input130" TYPE="TEXT" NAME="user"><br /><br />
-                Password:<br />
+                <?echo $config_values['MAIN_PAGE_PASSWORD'];?>:<br />
                 <br />
                 <INPUT class="input130"  TYPE="PASSWORD" NAME="pass"><br /><br />
-                <INPUT TYPE="SUBMIT" VALUE="Login">
+                <INPUT TYPE="SUBMIT" VALUE="<?echo $config_values['MAIN_PAGE_LOGIN'];?>">
             </TD></TR>
         </TABLE>
     </CENTER>

@@ -71,6 +71,18 @@ if ($config_values['SPARE5'] == "") {
     $config_values['SPARE5'] = "Spare 5 (unused)";
 }
 
+if ($config_values['MAIN_PAGE_USERNAME'] == "") {
+    $config_values['MAIN_PAGE_USERNAME'] = "Username";
+}
+
+if ($config_values['MAIN_PAGE_PASSWORD'] == "") {
+    $config_values['MAIN_PAGE_PASSWORD'] = "Password";
+}
+
+if ($config_values['MAIN_PAGE_LOGIN'] == "") {
+    $config_values['MAIN_PAGE_LOGIN'] = "Login";
+}
+
 ?>
 <?
  function _get_browser()
