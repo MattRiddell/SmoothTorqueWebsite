@@ -38,7 +38,7 @@ echo "<FONT FACE=\"ARIAL\">";
             <TR><TD COLSPAN=2><CENTER> <img src="<?echo $config_values['LOGO'];?>">       </TD></TR>
         </table>
 <br />
-Welcome to <?echo $config_values['TITLE'];?><br />
+<?echo $config_values['TITLE'];?><br />
 <br />
 <?echo $config_values['TEXT'];?>        <br /><br />
         <table background="/images/sdbox.png" align="center" width="300" height="200" cellpadding="0" cellspacing="0">
