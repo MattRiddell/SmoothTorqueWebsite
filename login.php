@@ -1,6 +1,9 @@
 <?
 //require "header.php";
 include "admin/db_config.php";
+$config_file = "/stweb.conf";
+$comment = "#";
+
 $fp = fopen($config_file, "r");
 while (!feof($fp)) {
   $line = trim(fgets($fp));

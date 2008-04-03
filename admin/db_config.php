@@ -1,4 +1,6 @@
 <?
+$config_file = "/stweb.conf";
+$comment = "#";
 
 $fp = fopen($config_file, "r");
 while (!feof($fp)) {
