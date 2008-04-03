@@ -1,7 +1,7 @@
 <?
 //require "header.php";
 include "admin/db_config.php";
-$config_file = "/stweb.conf";
+/*$config_file = "/stweb.conf";
 $comment = "#";
 
 $fp = fopen($config_file, "r");
@@ -22,7 +22,7 @@ if ($config_values['ST_MYSQL_HOST'] == "") {
     fwrite($add,"ST_MYSQL_PASS=$db_pass\n");
     fclose($add);
 
-}
+}*/
 
 mysql_select_db("SineDialer", $link);
 $passwordHash = sha1($_POST['pass']);
