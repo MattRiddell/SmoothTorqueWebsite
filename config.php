@@ -121,7 +121,35 @@ Sox Path:
 
 <tr  class="tborder2">
 <td>
-CDR Host:
+SmoothTorque MySQL Host Name
+</td>
+<td>
+<input type="Text" name="ST_MYSQL_HOST" value="<?echo $db_host;?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+SmoothTorque MySQL User Name
+</td>
+<td>
+<input type="Text" name="ST_MYSQL_USER" value="<?echo $db_user;?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+SmoothTorque MySQL Password
+</td>
+<td>
+<input type="Text" name="ST_MYSQL_PASS" value="<?echo $db_pass;?>">
+</td>
+</tr>
+
+
+<tr  class="tborder2">
+<td>
+Asterisk MySQL CDR Host:
 </td>
 <td>
 <input type="Text" name="CDR_HOST" value="<?echo $config_values['CDR_HOST'];?>">
@@ -130,7 +158,7 @@ CDR Host:
 
 <tr  class="tborder2">
 <td>
-CDR Username:
+Asterisk MySQL CDR Username:
 </td>
 <td>
 <input type="Text" name="CDR_USER" value="<?echo $config_values['CDR_USER'];?>">
@@ -139,7 +167,7 @@ CDR Username:
 
 <tr  class="tborder2">
 <td>
-CDR Pass:
+Asterisk MySQL CDR Pass:
 </td>
 <td>
 <input type="password" name="CDR_PASS" value="<?echo $config_values['CDR_PASS'];?>">
@@ -148,7 +176,7 @@ CDR Pass:
 
 <tr  class="tborder2">
 <td>
-CDR Database:
+Asterisk MySQL CDR Database:
 </td>
 <td>
 <input type="Text" name="CDR_DB" value="<?echo $config_values['CDR_DB'];?>">
@@ -157,7 +185,7 @@ CDR Database:
 
 <tr  class="tborder2">
 <td>
-CDR Table:
+Asterisk MySQL CDR Table:
 </td>
 <td>
 <input type="Text" name="CDR_TABLE" value="<?echo $config_values['CDR_TABLE'];?>">
@@ -467,32 +495,6 @@ Description of spare5 context (optional)
 </td>
 </tr>
 
-<tr  class="tborder2">
-<td>
-SmoothTorque MySQL Host Name
-</td>
-<td>
-<input type="Text" name="ST_MYSQL_HOST" value="<?echo $db_host;?>">
-</td>
-</tr>
-
-<tr  class="tborder2">
-<td>
-SmoothTorque MySQL User Name
-</td>
-<td>
-<input type="Text" name="ST_MYSQL_USER" value="<?echo $db_user;?>">
-</td>
-</tr>
-
-<tr  class="tborder2">
-<td>
-SmoothTorque MySQL Password
-</td>
-<td>
-<input type="Text" name="ST_MYSQL_PASS" value="<?echo $db_pass;?>">
-</td>
-</tr>
 
 
 

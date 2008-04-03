@@ -1,6 +1,26 @@
 <?
 //require "header.php";
-include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(mysql_error());
+include "admin/db_config.php";
+$fp = fopen($config_file, "r");
+while (!feof($fp)) {
+  $line = trim(fgets($fp));
+  if ($line && substr($line,0,1)!=$comment) {
+    $pieces = explode("=", $line);
+    $option = trim($pieces[0]);
+    $value = trim($pieces[1]);
+    $config_values[$option] = $value;
+  }
+}
+fclose($fp);
+if ($config_values['ST_MYSQL_HOST'] == "") {
+    $add = @fopen("/stweb.conf",'w');
+    fwrite($add,"ST_MYSQL_HOST=$db_host\n");
+    fwrite($add,"ST_MYSQL_USER=$db_user\n");
+    fwrite($add,"ST_MYSQL_PASS=$db_pass\n");
+    fclose($add);
+
+}
+
 mysql_select_db("SineDialer", $link);
 $passwordHash = sha1($_POST['pass']);
 
