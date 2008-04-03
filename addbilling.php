@@ -1,5 +1,5 @@
 <?
-include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(mysql_error());
+include "admin/db_config.php";
 mysql_select_db("SineDialer", $link);
 
 $_POST = array_map(mysql_real_escape_string,$_POST);

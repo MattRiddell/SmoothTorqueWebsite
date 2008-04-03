@@ -48,6 +48,29 @@ while (!feof($fp)) {
   }
 }
 fclose($fp);
+
+// Set Defaults
+
+if ($config_values['SPARE1'] == "") {
+    $config_values['SPARE1'] = "Spare 1 (unused)";
+}
+
+if ($config_values['SPARE2'] == "") {
+    $config_values['SPARE2'] = "Spare 2 (unused)";
+}
+
+if ($config_values['SPARE3'] == "") {
+    $config_values['SPARE3'] = "Spare 3 (unused)";
+}
+
+if ($config_values['SPARE4'] == "") {
+    $config_values['SPARE4'] = "Spare 4 (unused)";
+}
+
+if ($config_values['SPARE5'] == "") {
+    $config_values['SPARE5'] = "Spare 5 (unused)";
+}
+
 ?>
 <?
  function _get_browser()
@@ -84,7 +107,7 @@ $user=$_COOKIE[user];
 $level=$_COOKIE[level];
 //echo "".$user." - ".$_COOKIE["loggedin"];
 
-include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(mysql_error());
+include "admin/db_config.php";
 mysql_select_db("SineDialer", $link);
 if ($_COOKIE["loggedin"]==sha1("LoggedIn".$user)){
     // Logged In

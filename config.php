@@ -37,7 +37,22 @@ if (isset($_POST[colour])){
     fwrite($add,"SPARE3=$_POST[SPARE3]\n");
     fwrite($add,"SPARE4=$_POST[SPARE4]\n");
     fwrite($add,"SPARE5=$_POST[SPARE5]\n");
+    fwrite($add,"ST_MYSQL_HOST=$_POST[ST_MYSQL_HOST]\n");
+    fwrite($add,"ST_MYSQL_USER=$_POST[ST_MYSQL_USER]\n");
+    fwrite($add,"ST_MYSQL_PASS=$_POST[ST_MYSQL_PASS]\n");
     fclose($add);
+
+    /*$add = @fopen("./admin/db_config.php",'w');
+    $script = '\<\?
+$db_host="localhost";
+$db_user="root";
+$db_pass="";
+$link = mysql_connect($db_host, $db_user, $db_pass) OR die(mysql_error());
+\?\>
+    ';
+    fwrite($add,$script);
+    fclose($add);*/
+
 
 }
 include "header.php";
@@ -449,6 +464,33 @@ Description of spare5 context (optional)
 </td>
 <td>
 <input type="Text" name="SPARE5" value="<?echo $config_values['SPARE5'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+SmoothTorque MySQL Host Name
+</td>
+<td>
+<input type="Text" name="ST_MYSQL_HOST" value="<?echo $db_host;?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+SmoothTorque MySQL User Name
+</td>
+<td>
+<input type="Text" name="ST_MYSQL_USER" value="<?echo $db_user;?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+SmoothTorque MySQL Password
+</td>
+<td>
+<input type="Text" name="ST_MYSQL_PASS" value="<?echo $db_pass;?>">
 </td>
 </tr>
 
