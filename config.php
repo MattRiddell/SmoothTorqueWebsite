@@ -32,6 +32,11 @@ if (isset($_POST[colour])){
     fwrite($add,"CURRENCY_SYMBOL=$_POST[CURRENCY_SYMBOL]\n");
     fwrite($add,"PER_MINUTE=$_POST[PER_MINUTE]\n");
     fwrite($add,"USE_BILLING=$_POST[USE_BILLING]\n");
+    fwrite($add,"SPARE1=$_POST[SPARE1]\n");
+    fwrite($add,"SPARE2=$_POST[SPARE2]\n");
+    fwrite($add,"SPARE3=$_POST[SPARE3]\n");
+    fwrite($add,"SPARE4=$_POST[SPARE4]\n");
+    fwrite($add,"SPARE5=$_POST[SPARE5]\n");
     fclose($add);
 
 }
@@ -402,6 +407,50 @@ Use the SmoothTorque Billing System
 </td>
 </tr>
 
+<tr  class="tborder2">
+<td>
+Description of spare1 context (optional)
+</td>
+<td>
+<input type="Text" name="SPARE1" value="<?echo $config_values['SPARE1'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+Description of spare2 context (optional)
+</td>
+<td>
+<input type="Text" name="SPARE2" value="<?echo $config_values['SPARE2'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+Description of spare3 context (optional)
+</td>
+<td>
+<input type="Text" name="SPARE3" value="<?echo $config_values['SPARE3'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+Description of spare4 context (optional)
+</td>
+<td>
+<input type="Text" name="SPARE4" value="<?echo $config_values['SPARE4'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+Description of spare5 context (optional)
+</td>
+<td>
+<input type="Text" name="SPARE5" value="<?echo $config_values['SPARE5'];?>">
+</td>
+</tr>
 
 
 

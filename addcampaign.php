@@ -87,6 +87,11 @@ require "header_campaign.php";
 <OPTION VALUE="7">Immediate Message Playback (coming soon)</OPTION>
 <OPTION VALUE="8" title="Ring a number, when it answers start sending a fax">Fax Broadcast</OPTION>
 <OPTION VALUE="9">SMS Broadcast (coming soon)</OPTION>
+<OPTION VALUE="10"><?echo $config_values['SPARE1'];?></OPTION>
+<OPTION VALUE="11"><?echo $config_values['SPARE2'];?></OPTION>
+<OPTION VALUE="12"><?echo $config_values['SPARE3'];?></OPTION>
+<OPTION VALUE="13"><?echo $config_values['SPARE4'];?></OPTION>
+<OPTION VALUE="14"><?echo $config_values['SPARE5'];?></OPTION>
 <?/*<OPTION VALUE="5" <?if ($row[context]==5){echo "SELECTED";}?>>Spare 2</OPTION>
 <OPTION VALUE="6" <?if ($row[context]==6){echo "SELECTED";}?>>Spare 3</OPTION>
 <OPTION VALUE="7" <?if ($row[context]==7){echo "SELECTED";}?>>Spare 4</OPTION>

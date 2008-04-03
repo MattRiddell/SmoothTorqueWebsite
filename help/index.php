@@ -1,3 +1,6 @@
+<?
+require "../header.php";
+?>
 <html>
 <head><title>SmoothTorque Linux Help Manual</title></head>
 
@@ -13,6 +16,7 @@ function hideshow(name){
 
 </script>
 <body>
+<font face="arial">
 <?php
 echo '<h1>Normal User</h1>';
 echo '<H2 onClick=hideshow("quick_start")>Quick Start</h2>';
@@ -20,7 +24,7 @@ echo '<div id="quick_start" style="display:none">';
 include 'src/quickstart.php';
 echo '</div>';
 
-echo '<h2 onClick=hideshow("campaigns")>Campaigns</h2>';
+echo '<h2 onClick=hideshow("campaigns")>Campaigns</h2><img src="../images/closed.png" name="img_misc" align="right">';
 echo '<div id="campaigns" style="display:none">';
 include 'src/campaigns.php';
 echo '</div>';
