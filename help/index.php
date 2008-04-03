@@ -32,31 +32,59 @@ This help file is tailored to your personal installation of <?echo $config_value
 
 </p>
 <?php
-echo '<h1>Normal User</h1>';
-echo '<H2 onClick=hideshow("quick_start")>Quick Start</h2>';
+echo '<h2 align="left" onClick=hideshow("quick_start")>Quick Start</h2>';
 echo '<div id="quick_start" style="display:none">';
 include 'src/quickstart.php';
 echo '</div>';
 
-echo '<h2 onClick=hideshow("campaigns")>'.$config_values['MENU_CAMPAIGNS'].'</h2>';
+echo '<h2 align="left" onClick=hideshow("campaigns")>'.$config_values['MENU_CAMPAIGNS'].'</h2>';
 echo '<div id="campaigns" style="display:none">';
 include 'src/campaigns.php';
 echo '</div>';
 
-echo '<h2 onClick=hideshow("numbers")>Numbers</h2>';
+echo '<h2 align="left" onClick=hideshow("numbers")>Numbers</h2>';
 echo '<div id="numbers" style="display:none">';
 include 'src/all_numbers.php';
 echo '</div>';
 
-echo '<h2 onClick=hideshow("messages")>Messages</h2>';
+echo '<h2 align="left" onClick=hideshow("messages")>Messages</h2>';
 echo '<div id="messages" style="display:none">';
 include 'src/messages.php';
 echo '</div>';
 
-echo '<h2 onClick=hideshow("schedules")>Schedules</h2>';
+echo '<h2 align="left" onClick=hideshow("schedules")>Schedules</h2>';
 echo '<div id="schedules" style="display:none">';
 include 'src/schedules.php';
 echo '</div>';
+
+if ($level==sha1("level100")){
+    //Admin level options
+    echo '<h2 align="left" onClick=hideshow("customers")>'.$config_values['MENU_CUSTOMERS'].'</h2>';
+    echo '<div id="customers" style="display:none">';
+    include 'src/customers.php';
+    echo '</div>';
+
+    echo '<h2 align="left" onClick=hideshow("queues")>'.$config_values['MENU_QUEUES'].'</h2>';
+    echo '<div id="queues" style="display:none">';
+    include 'src/queues.php';
+    echo '</div>';
+
+    echo '<h2 align="left" onClick=hideshow("trunks")>'.$config_values['MENU_TRUNKS'].'</h2>';
+    echo '<div id="trunks" style="display:none">';
+    include 'src/trunks.php';
+    echo '</div>';
+
+    echo '<h2 align="left" onClick=hideshow("servers")>'.$config_values['MENU_SERVERS'].'</h2>';
+    echo '<div id="servers" style="display:none">';
+    include 'src/servers.php';
+    echo '</div>';
+
+    echo '<h2 align="left" onClick=hideshow("admin")>'.$config_values['MENU_ADMIN'].'</h2>';
+    echo '<div id="admin" style="display:none">';
+    include 'src/admin.php';
+    echo '</div>';
+
+}
 
 ?>
 </td></tr></table>
