@@ -321,7 +321,7 @@ if (myval == '0') {
         document.getElementById('xx5').style.display='';
         document.getElementById('xx6').style.display='';
     }
-} } else if (myval == '11') {
+} else if (myval == '11') {
     if (document.all2) {
         document.all['xx1'].style.display = "visible";
         document.all['xx2'].style.display = "visible";
@@ -337,7 +337,7 @@ if (myval == '0') {
         document.getElementById('xx5').style.display='';
         document.getElementById('xx6').style.display='';
     }
-} } else if (myval == '12') {
+} else if (myval == '12') {
     if (document.all2) {
         document.all['xx1'].style.display = "visible";
         document.all['xx2'].style.display = "visible";
@@ -353,7 +353,7 @@ if (myval == '0') {
         document.getElementById('xx5').style.display='';
         document.getElementById('xx6').style.display='';
     }
-} } else if (myval == '13') {
+} else if (myval == '13') {
     if (document.all2) {
         document.all['xx1'].style.display = "visible";
         document.all['xx2'].style.display = "visible";
@@ -369,7 +369,7 @@ if (myval == '0') {
         document.getElementById('xx5').style.display='';
         document.getElementById('xx6').style.display='';
     }
-} } else if (myval == '14') {
+} else if (myval == '14') {
     if (document.all2) {
         document.all['xx1'].style.display = "visible";
         document.all['xx2'].style.display = "visible";
@@ -385,7 +385,7 @@ if (myval == '0') {
         document.getElementById('xx5').style.display='';
         document.getElementById('xx6').style.display='';
     }
-} } else if (myval == '15') {
+} else if (myval == '15') {
     if (document.all2) {
         document.all['xx1'].style.display = "visible";
         document.all['xx2'].style.display = "visible";
