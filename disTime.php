@@ -78,7 +78,7 @@ if ($toggle){
 if ($row[maxcalls] > 0) {
     $perc=round(($row[flags]/$row[maxcalls])*100);
 } else {
-    $perc = 0;
+   $perc = 0;
 }
 if ($perc>100){
     $perc=100;
