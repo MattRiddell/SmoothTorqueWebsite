@@ -236,7 +236,7 @@ $self=$_SERVER['PHP_SELF'];
     $loggedin=false;
     // Not Logged In
     $myPage=$_SERVER[PHP_SELF];
-    if ($myPage=="/index.php"|$myPage=="/login.php"|$myPage=="/SmoothTorque/index.php"|$myPage=="/SmoothTorque/login.php"){
+    if ($myPage=="/index.php"|$myPage=="/login.php"){
         //echo "LOGGING IN ".$user." - ".$_COOKIE["loggedin"];
     } else {
 ?>    <META HTTP-EQUIV=REFRESH CONTENT="0; URL=/index.php?redirect=<?echo $myPage;?>">
@@ -305,7 +305,103 @@ if (myval == '0') {
         document.getElementById('xx5').style.display='none';
         document.getElementById('xx6').style.display='';
     }
-} else if (myval == '1') {
+} else if (myval == '10') {
+    if (document.all2) {
+        document.all['xx1'].style.display = "visible";
+        document.all['xx2'].style.display = "visible";
+        document.all['xx3'].style.display = "visible";
+        document.all['xx4'].style.display = "visible";
+        document.all['xx5'].style.display = "visible";
+        document.all['xx6'].style.display = "visible";
+    } else {
+        document.getElementById('xx1').style.display='';
+        document.getElementById('xx2').style.display='';
+        document.getElementById('xx3').style.display='';
+        document.getElementById('xx4').style.display='';
+        document.getElementById('xx5').style.display='';
+        document.getElementById('xx6').style.display='';
+    }
+} } else if (myval == '11') {
+    if (document.all2) {
+        document.all['xx1'].style.display = "visible";
+        document.all['xx2'].style.display = "visible";
+        document.all['xx3'].style.display = "visible";
+        document.all['xx4'].style.display = "visible";
+        document.all['xx5'].style.display = "visible";
+        document.all['xx6'].style.display = "visible";
+    } else {
+        document.getElementById('xx1').style.display='';
+        document.getElementById('xx2').style.display='';
+        document.getElementById('xx3').style.display='';
+        document.getElementById('xx4').style.display='';
+        document.getElementById('xx5').style.display='';
+        document.getElementById('xx6').style.display='';
+    }
+} } else if (myval == '12') {
+    if (document.all2) {
+        document.all['xx1'].style.display = "visible";
+        document.all['xx2'].style.display = "visible";
+        document.all['xx3'].style.display = "visible";
+        document.all['xx4'].style.display = "visible";
+        document.all['xx5'].style.display = "visible";
+        document.all['xx6'].style.display = "visible";
+    } else {
+        document.getElementById('xx1').style.display='';
+        document.getElementById('xx2').style.display='';
+        document.getElementById('xx3').style.display='';
+        document.getElementById('xx4').style.display='';
+        document.getElementById('xx5').style.display='';
+        document.getElementById('xx6').style.display='';
+    }
+} } else if (myval == '13') {
+    if (document.all2) {
+        document.all['xx1'].style.display = "visible";
+        document.all['xx2'].style.display = "visible";
+        document.all['xx3'].style.display = "visible";
+        document.all['xx4'].style.display = "visible";
+        document.all['xx5'].style.display = "visible";
+        document.all['xx6'].style.display = "visible";
+    } else {
+        document.getElementById('xx1').style.display='';
+        document.getElementById('xx2').style.display='';
+        document.getElementById('xx3').style.display='';
+        document.getElementById('xx4').style.display='';
+        document.getElementById('xx5').style.display='';
+        document.getElementById('xx6').style.display='';
+    }
+} } else if (myval == '14') {
+    if (document.all2) {
+        document.all['xx1'].style.display = "visible";
+        document.all['xx2'].style.display = "visible";
+        document.all['xx3'].style.display = "visible";
+        document.all['xx4'].style.display = "visible";
+        document.all['xx5'].style.display = "visible";
+        document.all['xx6'].style.display = "visible";
+    } else {
+        document.getElementById('xx1').style.display='';
+        document.getElementById('xx2').style.display='';
+        document.getElementById('xx3').style.display='';
+        document.getElementById('xx4').style.display='';
+        document.getElementById('xx5').style.display='';
+        document.getElementById('xx6').style.display='';
+    }
+} } else if (myval == '15') {
+    if (document.all2) {
+        document.all['xx1'].style.display = "visible";
+        document.all['xx2'].style.display = "visible";
+        document.all['xx3'].style.display = "visible";
+        document.all['xx4'].style.display = "visible";
+        document.all['xx5'].style.display = "visible";
+        document.all['xx6'].style.display = "visible";
+    } else {
+        document.getElementById('xx1').style.display='';
+        document.getElementById('xx2').style.display='';
+        document.getElementById('xx3').style.display='';
+        document.getElementById('xx4').style.display='';
+        document.getElementById('xx5').style.display='';
+        document.getElementById('xx6').style.display='';
+    }
+}  else if (myval == '1') {
     if (document.all2) {
         document.all['xx1'].style.display = "none";
         document.all['xx2'].style.display = "none";
