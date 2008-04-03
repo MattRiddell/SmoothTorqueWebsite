@@ -111,7 +111,8 @@ $licencekey = mysql_result($result,0,'value');
 <?}?>
 </td>
 <td>Windows Backend</td></tr>
-<tr><td colspan=2><br /><a href="log.php">View System Logs</a><br /><br /></td></tr>
+<tr><td colspan=2><br /><a href="log.php">View System Logs</a></td></tr>
+<tr><td colspan=2><a href="./help/index.php">View Help File (Under Development)</a><br /><br /></td></tr>
 <form action="config.php" name="config" method="post">
 <tr  class="tborder2">
 <td>

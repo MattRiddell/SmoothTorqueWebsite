@@ -16,7 +16,21 @@ function hideshow(name){
 
 </script>
 <body>
-<font face="arial">
+<center>
+<table width="50%">
+<tr>
+<td>
+<font face="arial" align="left">
+<br />
+<br />
+<p align="left">
+Welcome to <?echo $config_values['TITLE'];?> help file.  Please select a category from below by clicking
+on one of the titles.
+<br />
+<br />
+This help file is tailored to your personal installation of <?echo $config_values['TITLE'];?>.
+
+</p>
 <?php
 echo '<h1>Normal User</h1>';
 echo '<H2 onClick=hideshow("quick_start")>Quick Start</h2>';
@@ -24,7 +38,7 @@ echo '<div id="quick_start" style="display:none">';
 include 'src/quickstart.php';
 echo '</div>';
 
-echo '<h2 onClick=hideshow("campaigns")>Campaigns</h2><img src="../images/closed.png" name="img_misc" align="right">';
+echo '<h2 onClick=hideshow("campaigns")>Campaigns</h2>';
 echo '<div id="campaigns" style="display:none">';
 include 'src/campaigns.php';
 echo '</div>';
@@ -45,6 +59,6 @@ include 'src/schedules.php';
 echo '</div>';
 
 ?>
-
+</td></tr></table>
 </body>
 </html>
