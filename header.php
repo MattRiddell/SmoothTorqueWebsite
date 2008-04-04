@@ -83,6 +83,14 @@ if ($config_values['MAIN_PAGE_LOGIN'] == "") {
     $config_values['MAIN_PAGE_LOGIN'] = "Login";
 }
 
+if ($config_values['ADD_CAMPAIGN'] == "") {
+    $config_values['ADD_CAMPAIGN'] = "Add Campaign";
+}
+
+if ($config_values['VIEW_CAMPAIGN'] == "") {
+    $config_values['VIEW_CAMPAIGN'] = "View Campaigns";
+}
+
 ?>
 <?
  function _get_browser()

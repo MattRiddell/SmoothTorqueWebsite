@@ -43,6 +43,8 @@ if (isset($_POST[colour])){
     fwrite($add,"ST_MYSQL_HOST=$_POST[ST_MYSQL_HOST]\n");
     fwrite($add,"ST_MYSQL_USER=$_POST[ST_MYSQL_USER]\n");
     fwrite($add,"ST_MYSQL_PASS=$_POST[ST_MYSQL_PASS]\n");
+    fwrite($add,"ADD_CAMPAIGN=$_POST[ADD_CAMPAIGN]\n");
+    fwrite($add,"VIEW_CAMPAIGN=$_POST[VIEW_CAMPAIGN]\n");
     fclose($add);
 
     /*$add = @fopen("./admin/db_config.php",'w');
@@ -92,6 +94,9 @@ $licencekey = mysql_result($result,0,'value');
 <br />
 <br />
 <table class="" align="center" border="0" cellpadding="2" cellspacing="0">
+<tr><td colspan=2><br /><a href="log.php">View System Logs</a></td></tr>
+<tr><td colspan=2><a href="./help/index.php">View Help File (Under Development)</a><br /><br /></td></tr>
+
 <tr>
     <td CLASS="thead" colspan="2">Settings</td>
 </tr>
@@ -111,8 +116,6 @@ $licencekey = mysql_result($result,0,'value');
 <?}?>
 </td>
 <td>Windows Backend</td></tr>
-<tr><td colspan=2><br /><a href="log.php">View System Logs</a></td></tr>
-<tr><td colspan=2><a href="./help/index.php">View Help File (Under Development)</a><br /><br /></td></tr>
 <form action="config.php" name="config" method="post">
 <tr  class="tborder2">
 <td>
@@ -122,6 +125,7 @@ Sox Path:
 <input type="Text" name="sox" value="<?echo $config_values['SOX'];?>">
 </td>
 </tr>
+<tr><td colspan="2"><br /><br /></td></tr><tr><td CLASS="thead" colspan="2">MySQL Settings</td>
 
 <tr  class="tborder2">
 <td>
@@ -287,6 +291,21 @@ Background Colour:
 
 </td>
 </tr>
+
+<tr  class="tborder2">
+<td>
+Date/Time Colour:
+</td>
+<td>
+<script language=JavaScript src="/js/picker.js"></script>
+<input type="Text" name="DATE_COLOUR" value="<?echo $config_values['DATE_COLOUR'];?>">
+<a href="javascript:TCP.popup(document.forms['config'].elements['DATE_COLOUR'], 1)"><img width="15" height="13" border="0" alt="Click Here to Pick the color" src="img/sel.gif"></a>
+
+</td>
+</tr>
+
+
+
 <tr  class="tborder2">
 <td>
 Site Name:
@@ -319,6 +338,7 @@ Opening Text:
 <? /*******************************************************************/ ?>
 <? /*                           Menu Text                             */ ?>
 <? /*******************************************************************/ ?>
+<tr><td colspan="2"><br /><br /></td></tr><tr><td CLASS="thead" colspan="2">Menu Text</td>
 
 <tr  class="tborder2">
 <td>
@@ -417,12 +437,33 @@ Logout Menu Text:
 </td>
 </tr>
 
+<tr><td colspan="2"><br /><br /></td></tr><tr><td CLASS="thead" colspan="2">Other Text</td>
+
+
 <tr  class="tborder2">
 <td>
 Main Page Text:
 </td>
 <td>
 <input type="Text" name="MAIN_PAGE_TEXT" value="<?echo $config_values['MAIN_PAGE_TEXT'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+Add Campaign Text:
+</td>
+<td>
+<input type="Text" name="ADD_CAMPAIGN" value="<?echo $config_values['ADD_CAMPAIGN'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+View Campaigns Text:
+</td>
+<td>
+<input type="Text" name="VIEW_CAMPAIGN" value="<?echo $config_values['VIEW_CAMPAIGN'];?>">
 </td>
 </tr>
 
@@ -453,6 +494,9 @@ Main Page Login Text:
 </td>
 </tr>
 
+<tr><td colspan="2"><br /><br /></td></tr><tr><td CLASS="thead" colspan="2">Billing Information</td>
+
+
 <tr  class="tborder2">
 <td>
 Currency Symbol (i.e. $):
@@ -471,6 +515,7 @@ Per Minute Wording in CDR
 </td>
 </tr>
 
+
 <tr  class="tborder2">
 <td>
 Use the SmoothTorque Billing System
@@ -480,6 +525,9 @@ Use the SmoothTorque Billing System
 <input type="radio" name="USE_BILLING" value="NO" <?if ( $config_values['USE_BILLING'] != "YES") {echo "checked";}?>> No
 </td>
 </tr>
+
+<tr><td colspan="2"><br /><br /></td></tr><tr><td CLASS="thead" colspan="2">Custom contexts</td>
+
 
 <tr  class="tborder2">
 <td>
@@ -529,17 +577,6 @@ Description of spare5 context (optional)
 
 
 
-<tr  class="tborder2">
-<td>
-Date/Time Colour:
-</td>
-<td>
-<script language=JavaScript src="/js/picker.js"></script>
-<input type="Text" name="DATE_COLOUR" value="<?echo $config_values['DATE_COLOUR'];?>">
-<a href="javascript:TCP.popup(document.forms['config'].elements['DATE_COLOUR'], 1)"><img width="15" height="13" border="0" alt="Click Here to Pick the color" src="img/sel.gif"></a>
-
-</td>
-</tr>
 
 
 <tr><td colspan="2">

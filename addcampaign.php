@@ -290,7 +290,7 @@ Human: Play the person message and then if they press
 
 
 </TR><TR><TD COLSPAN=2 ALIGN="RIGHT">
-<INPUT TYPE="SUBMIT" VALUE="Add Campaign">
+<INPUT TYPE="SUBMIT" VALUE="<?echo $config_values['ADD_CAMPAIGN'];?>">
 </TD>
 </TR>
 <?
