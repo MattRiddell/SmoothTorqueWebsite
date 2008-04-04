@@ -9,7 +9,10 @@
 </ul>
 
 <h4>System Lists</h4>
-<p align="left">These lists are provided by an administrator and my be along the lines of certain geographic regions, or similar.</p>
+<p align="left">These lists are provided by an administrator and may be
+along the lines of certain geographic regions, or similar. There may be a
+cost associated with using these numbers.  If so you will be informed before
+you use them.</p>
 
 <h4>Upload from a text file</h4>
 <p align="left">The text file that you use must contain numbers on seperate lines.</p>
@@ -18,7 +21,16 @@
 <p align="left">Using this method you will be presented with a box where you put numbers in.</p>
 
 <h4>Generating numbers automatically</h4>
-<p align="left">SmoothTorque generates numbers for you. See the quick start for an example of usage.</p>
+<p align="left">SmoothTorque generates numbers for you. </p>
+<p align="left">The first step is to determine the format of the numbers
+that you wish to dial. For example, if we were to generate all the numbers
+for Dunedin, New Zealand (and we're dialing internationally), then we'd
+set the start number to 006434600000 and the end number to 006434799999.
+Now, some of these numbers exist, so be careful not to use them in a real
+campaign unless you <i>really</i> want to dial the whole of Dunedin.</p>
+
+<img src="images/generate_range.png" alt="Range for numbers to automatically generate">
+
 
 <h3>Other options</h3>
 <p align="left">You can also view, search, and export number lists. When you view and export you can filter the numbers by their status. The meaning of the different status messages are outlined below.</p>
@@ -39,6 +51,7 @@
 	<tr>
 		<td  bgcolor="#eeeeee">Busy</td>
 		<td  bgcolor="#eeeeee">Numbers tried that were engaged</td>
+	</tr>
 	<tr>
 		<td  bgcolor="#eeeeee">Failed</td>
 		<td  bgcolor="#eeeeee">Numbers that failed for some reason, for example if the number doesn't exist</td>

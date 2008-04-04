@@ -42,17 +42,17 @@ echo '<div id="campaigns" style="display:none">';
 include 'src/campaigns.php';
 echo '</div>';
 
-echo '<h2 align="left" onClick=hideshow("numbers")>Numbers</h2>';
+echo '<h2 align="left" onClick=hideshow("numbers")>'.$config_values['MENU_NUMBERS'].'</h2>';
 echo '<div id="numbers" style="display:none">';
 include 'src/all_numbers.php';
 echo '</div>';
 
-echo '<h2 align="left" onClick=hideshow("messages")>Messages</h2>';
+echo '<h2 align="left" onClick=hideshow("messages")>'.$config_values['MENU_MESSAGES'].'</h2>';
 echo '<div id="messages" style="display:none">';
 include 'src/messages.php';
 echo '</div>';
 
-echo '<h2 align="left" onClick=hideshow("schedules")>Schedules</h2>';
+echo '<h2 align="left" onClick=hideshow("schedules")>'.$config_values['MENU_SCHEDULES'].'</h2>';
 echo '<div id="schedules" style="display:none">';
 include 'src/schedules.php';
 echo '</div>';
