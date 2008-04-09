@@ -129,13 +129,18 @@ $result=mysql_query($sql, $link);
 /*================= Log Access ======================================*/
 
 
+if (strlen($_GET[astqueuename])> 0) {
+    $mode = 1;
+} else {
+    $mode = 0;
+}
 $sql2="INSERT INTO queue (campaignid,queuename,status,details,flags,transferclid,
     starttime,endtime,startdate,enddate,did,clid,context,maxcalls,maxchans,maxretries
-    ,retrytime,waittime,trunk,astqueuename, accountcode, trunkid, customerID, maxcps) VALUES
+    ,retrytime,waittime,trunk,astqueuename, accountcode, trunkid, customerID, maxcps, mode) VALUES
     ('$_GET[id]','autostart-$_GET[id]','1','No details','0','$_GET[trclid]',
     '00:00','23:59','2005-01-01','2020-01-01','$did','$_GET[clid]',
     '$_GET[context]','$_GET[agents]','$maxchans','0'
-    ,'0','30','".$dialstring."','$_GET[astqueuename]','stl-".$username."','$trunkid','$campaigngroupid','$maxcps') ";
+    ,'0','30','".$dialstring."','$_GET[astqueuename]','stl-".$username."','$trunkid','$campaigngroupid','$maxcps','$mode') ";
 //    echo $sql2;
 //exit(0);
 //echo $sql2;
