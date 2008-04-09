@@ -745,9 +745,9 @@ if (mysql_num_rows($result)==0){
 if ($loggedin){
     if ( $config_values['USE_BILLING'] == "YES") {
         if ($postpay == 1) {
-            echo "<center><font color=\"".$config_values['DATE_COLOUR']."\">".date('l dS \of F Y h:i:sA')." <a href=\"viewcdr.php\">Credit: $credit Credit Limit: $creditlimit</a></font><br /></center>";
+            echo "<center><font color=\"".$config_values['DATE_COLOUR']."\">".date('l dS \of F Y h:i:sA')." Credit: $credit Credit Limit: $creditlimit <a href=\"viewcdr.php\">Billing Information</a></font><br /></center>";
         } else {
-            echo "<center><font color=\"".$config_values['DATE_COLOUR']."\">".date('l dS \of F Y h:i:sA')." <a href=\"viewcdr.php\">Credit: $credit</a></font><br /></center>";
+            echo "<center><font color=\"".$config_values['DATE_COLOUR']."\">".date('l dS \of F Y h:i:sA')." Credit: $credit <a href=\"viewcdr.php\">Billing Information</a></font><br /></center>";
         }
     } else {
         echo "<center><font color=\"".$config_values['DATE_COLOUR']."\">".date('l dS \of F Y h:i:sA')."</font><br /></center>";

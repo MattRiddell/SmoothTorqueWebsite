@@ -84,6 +84,15 @@ while ($row = mysql_fetch_assoc($result)) {
     $amaflags[$i] = $row[amaflags];
     $accountcode[$i] = $row[accountcode];
     $userfield[$i] = $row[userfield];
+    $pos = strpos($userfield[$i], '-');
+    if ($pos === false) {
+        // This is not a split
+        $phonenumber[$i] = $userfield[$i];
+    } else {
+        $campaignid = substr($userfield[$i], $pos + 1);
+        $phonenumber[$i] = substr($userfield[$i], 0, $pos);
+    }
+
     $userfield2[$i] = $row[userfield2];
     if ($userfield2[$i] != 1) {
         $userfield2[$i] = 0;
@@ -209,7 +218,7 @@ while ($row = mysql_fetch_assoc($result)) {
     echo $td.$calldate[$i]."</td>$td"/*.$dcontext[$i]."</td>$td".
     $clid[$i]."</td>$td"*/.
     /*$lastapp[$i]."</td>$td".$lastdata[$i]."</td>$td".*/$duration[$i]."</td>$td".$billsec[$i]."</td>$td".
-    $disposition[$i]."</td>$td".$accountcode[$i]."</td>$td".$userfield[$i]."</b></td>$td<b>".$dst[$i]."</b></td>";
+    $disposition[$i]."</td>$td".$accountcode[$i]."</td>$td".$phonenumber[$i]."</b></td>$td<b>".$dst[$i]."</b></td>";
     echo $td.$currency.$costperminute[$i]."</td>".$td.$currency.$costpercall[$i]."</td>".
     $td.$currency.$costperconnect[$i]."</td>".$td.$currency.$costperpress1[$i]."</td>".$td.$currency.$cost[$i]."</td>".$paid[$i]."</td>";
     echo "</tr>";

@@ -171,7 +171,7 @@ while ($row = mysql_fetch_assoc($result)) {
         if ($pos === false) {
             // This is not a split
         } else {
-            $campaignid = substr($userfield[$i], pos + 1);
+            $campaignid = substr($userfield[$i], $pos + 1);
             $sql = "SELECT cost FROM campaign WHERE id = ".$campaignid;
             $result_campaign_cost = mysql_query($sql,$link);
             $campaign_cost = mysql_result($result_campaign_cost,0,0);
