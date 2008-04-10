@@ -5,31 +5,31 @@
 
 <table>
 	<tr>
-		<th>Strategy</th>
-		<th>Description</th>
+		<th bgcolor="#000044"><font color="#ffffff">Strategy</font></th>
+		<th bgcolor="#000044"><font color="#ffffff">Description</font></th>
 	</tr>
 	<tr>
-		<td>Ring all</td>
-		<td>This simply rings all the available agents until one of them picks up.</td>
+		<td  bgcolor="#eeeeee">Ring all</td>
+		<td  bgcolor="#eeeeee">This simply rings all the available agents until one of them picks up.</td>
 	</tr>
 	<tr>
-		<td>Round Robin</td>
-		<td>This rings the agents in turn until someone picks up. It will always start at the first agent.</td>
+		<td  bgcolor="#eeeeee">Round Robin</td>
+		<td  bgcolor="#eeeeee">This rings the agents in turn until someone picks up. It will always start at the first agent.</td>
 	</tr>
 	<tr>
-		<td>Lease Recent</td>
-		<td>Selects the least recently used agent first.</td>
+		<td  bgcolor="#eeeeee">Lease Recent</td>
+		<td  bgcolor="#eeeeee">Selects the least recently used agent first.</td>
 	</tr>
 	<tr>
-		<td>Fewest Calls</td>
-		<td>Rings the agent with the fewest number of calls.</td>
+		<td  bgcolor="#eeeeee">Fewest Calls</td>
+		<td  bgcolor="#eeeeee">Rings the agent with the fewest number of calls.</td>
 	</tr>
 	<tr>
-		<td>Random</td>
-		<td>Randomly selects an agent to call from the avaliable agents.</td>
+		<td  bgcolor="#eeeeee">Random</td>
+		<td  bgcolor="#eeeeee">Randomly selects an agent to call from the avaliable agents.</td>
 	</tr>
 	<tr>
-		<td>Round Robin with Memory</td>
-		<td>Uses round robin as describe above, but starts from the agent where it was stopped before.</td>
+		<td  bgcolor="#eeeeee">Round Robin with Memory</td>
+		<td  bgcolor="#eeeeee">Uses round robin as describe above, but starts from the agent where it was stopped before.</td>
 	</tr>
 </table>
