@@ -137,6 +137,7 @@ require "header_customer.php";
 </TR><TR><TD CLASS="thead">Customer Type</TD><TD>
 <SELECT NAME="security">
 <OPTION VALUE="0" <?if ($row[security]==0){echo "SELECTED";}?>>Normal Customer</OPTION>
+<OPTION VALUE="10" <?if ($row[security]==10){echo "SELECTED";}?>>Accounts Management (coming soon)</OPTION>
 <OPTION VALUE="100" <?if ($row[security]==100){echo "SELECTED";}?>>Administrator</OPTION>
 </SELECT>
 </TD>

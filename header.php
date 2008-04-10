@@ -144,21 +144,21 @@ $self=$_SERVER['PHP_SELF'];
 //echo $self;
     $menu='<CENTER>
     <table border="0" cellpadding="3" cellspacing="0"><TR HEIGHT="10">';
-
-    //=======================================================================================================
+        //=======================================================================================================
     // Home
     //=======================================================================================================
     if ($self=="/main.php"){
         $menu.='<td style="background-image: url(/images/clb.gif);"></td>';
         $thead="thead";
     } else {
-    $menu.='<TD CLASS="theadl2" WIDTH=0></TD>';
+        $menu.='<TD CLASS="theadl2" WIDTH=0></TD>';
         $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
     }
 
     $menu.='<TD class="'.$thead.'" height=27><A HREF="/main.php"><img src="/images/house.png" border="0" align="left">'.$config_values['MENU_HOME'].'</A>&nbsp;</TD>';
 
-    //=======================================================================================================
+    if ($level==sha1("level100")||$level==sha1("level0")){
+        //=======================================================================================================
     // Campaigns
     //=======================================================================================================
     if ($self=="/campaigns.php"||$self=="/report.php"||$self=="/resetlist.php"||$self=="/list.php"||$self=="/deletecampaign.php"||$self=="/editcampaign.php"||$self=="/addcampaign.php"||$self=="/stopcampaign.php"||$self=="/startcampaign.php"||$self=="/test.php"
@@ -269,12 +269,28 @@ $self=$_SERVER['PHP_SELF'];
 
     }
     //    <TD class="thead2"><A HREF="prefs.php">Preferences</A>&nbsp;&nbsp;</TD>
+    } else {
+        //echo "Billing Administrator Login";
+        // This is for people who are logged in as a billing administrator
+        //=======================================================================================================
+        // Customers
+        //=======================================================================================================
+        if ($self=="/deletecustomer.php"||$self=="/addcustomer.php"||$self=="/customers.php"||$self=="/editcustomer.php"){
+            $thead="thead";
+        } else {
+            $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
+        }
+        $menu.='<TD class="'.$thead.'"><A HREF="/customers.php"><img src="/images/group.png" border="0" align="left">'.$config_values['MENU_CUSTOMERS'].'</A>&nbsp;</TD>';
+        //=======================================================================================================
+
+    }
     $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
 
     $menu.='<TD height="1" class="'.$thead.'"><A HREF="/logout.php"><img src="/images/door_in.png" border="0" align="left">'.$config_values['MENU_LOGOUT'].'</A>&nbsp;</TD><TD CLASS="theadr2" WIDTH=0></TD></TR></table>
 
     ';
     //<TD class="thead2"><A HREF="stats.php">Live Statistics</A>&nbsp;&nbsp;</TD>
+
 } else {
     $loggedin=false;
     // Not Logged In

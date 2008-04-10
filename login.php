@@ -63,8 +63,10 @@ if (trim($dbpass)==trim($passwordHash)){
     setcookie("user",$_POST[user],time()+6000);
     if (mysql_result($result,0,'security')==100){
         $level=sha1("level100");
-    } else {
+    } else if (mysql_result($result,0,'security')==0){
         $level=sha1("level0");
+    } else {
+        $level=sha1("level10");
     }
     setcookie("level",$level,time()+6000);
     $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Successful login')";
