@@ -26,11 +26,26 @@ function mysql_is_table($host, $user, $pass, $db, $tbl)
     else { return FALSE; }
 }
 if (mysql_is_table($dbhost,$dbuser,$dbpass,"SineDialer","billing")){
-echo "billing exists";
+//echo "billing exists";
 } else {
-echo "billing does not exist";
+//echo "billing does not exist";
+$sql = "CREATE TABLE `billing` (
+  `customerid` int(11) unsigned NOT NULL default '0',
+  `accountcode` varchar(250) NOT NULL default '',
+  `priceperminute` double(10,5) default '0.00000',
+  `firstperiod` int(10) unsigned default '1',
+  `increment` int(10) unsigned default '1',
+  `credit` double(100,10) default '0.0000000000',
+  `pricepercall` double(10,5) default '0.00000',
+  `priceperconnectedcall` double(10,5) default '0.00000',
+  `priceperpress1` double(10,5) default '0.00000',
+  `creditlimit` double(100,10) default '0.0000000000',
+  PRIMARY KEY  (`customerid`,`accountcode`)
+)";
+$result = mysql_query($sql);
+
 }
-exit(0);
+//exit(0);
 
 $passwordHash = sha1($_POST['pass']);
 
