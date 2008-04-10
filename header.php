@@ -761,12 +761,12 @@ if (mysql_num_rows($result)==0){
 if ($loggedin){
     if ( $config_values['USE_BILLING'] == "YES") {
         if ($postpay == 1) {
-            echo "<center><font color=\"".$config_values['DATE_COLOUR']."\">".date('l dS \of F Y h:i:sA')." Credit: $credit Credit Limit: $creditlimit <a href=\"viewcdr.php\"><img src=\"/images/cart_edit.png\" border=\"0\"> Billing Information</a></font><br /></center>";
+            echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img src=\"/images/help.png\" border=\"0\"> Help</a> ".date('l dS \of F Y h:i:sA')." Credit: $credit Credit Limit: $creditlimit <a href=\"viewcdr.php\"><img src=\"/images/cart_edit.png\" border=\"0\"> Billing Information</a></font><br /></center>";
         } else {
-            echo "<center><font color=\"".$config_values['DATE_COLOUR']."\">".date('l dS \of F Y h:i:sA')." Credit: $credit <a href=\"viewcdr.php\"><img src=\"/images/cart_edit.png\" border=\"0\"> Billing Information</a></font><br /></center>";
+            echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img src=\"/images/help.png\" border=\"0\"> Help</a> ".date('l dS \of F Y h:i:sA')." Credit: $credit <a href=\"viewcdr.php\"><img src=\"/images/cart_edit.png\" border=\"0\"> Billing Information</a></font><br /></center>";
         }
     } else {
-        echo "<center><font color=\"".$config_values['DATE_COLOUR']."\">".date('l dS \of F Y h:i:sA')."</font><br /></center>";
+        echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img src=\"/images/help.png\" border=\"0\"> Help</a> ".date('l dS \of F Y h:i:sA')."</font><br /></center>";
     }
 }
 ?>
