@@ -57,6 +57,10 @@ if ($config_values['PER_PAGE'] == "") {
 
 
 
+if ($config_values['NUMBERS_TITLE'] == "") {
+    $config_values['NUMBERS_TITLE'] = "Number List Management";
+}
+
 if ($config_values['USE_GENERATE'] == "") {
     $config_values['USE_GENERATE'] = "YES";
 }

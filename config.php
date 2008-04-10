@@ -53,6 +53,7 @@ if (isset($_POST[colour])){
     fwrite($add,"NUMBERS_UPLOAD=$_POST[NUMBERS_UPLOAD]\n");
     fwrite($add,"NUMBERS_EXPORT=$_POST[NUMBERS_EXPORT]\n");
     fwrite($add,"NUMBERS_SEARCH=$_POST[NUMBERS_SEARCH]\n");
+    fwrite($add,"NUMBERS_TITLE=$_POST[NUMBERS_TITLE]\n");
     fwrite($add,"USE_GENERATE=$_POST[USE_GENERATE]\n");
 
 
@@ -458,6 +459,15 @@ Number of entries to show per page:
 </td>
 <td>
 <input type="Text" name="PER_PAGE" value="<?echo $config_values['PER_PAGE'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+Number List Management Text:
+</td>
+<td>
+<input type="Text" name="NUMBERS_TITLE" value="<?echo $config_values['NUMBERS_TITLE'];?>">
 </td>
 </tr>
 
