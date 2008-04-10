@@ -55,6 +55,12 @@ if ($config_values['PER_PAGE'] == "") {
     $config_values['PER_PAGE'] = "20";
 }
 
+
+
+if ($config_values['USE_GENERATE'] == "") {
+    $config_values['USE_GENERATE'] = "YES";
+}
+
 if ($config_values['NUMBERS_VIEW'] == "") {
     $config_values['NUMBERS_VIEW'] = "View phone numbers";
 }

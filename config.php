@@ -53,6 +53,7 @@ if (isset($_POST[colour])){
     fwrite($add,"NUMBERS_UPLOAD=$_POST[NUMBERS_UPLOAD]\n");
     fwrite($add,"NUMBERS_EXPORT=$_POST[NUMBERS_EXPORT]\n");
     fwrite($add,"NUMBERS_SEARCH=$_POST[NUMBERS_SEARCH]\n");
+    fwrite($add,"USE_GENERATE=$_POST[USE_GENERATE]\n");
 
 
 
@@ -522,6 +523,18 @@ Generate numbers automatically Text:
 <input type="Text" name="NUMBERS_GENERATE" value="<?echo $config_values['NUMBERS_GENERATE'];?>">
 </td>
 </tr>
+
+<tr  class="tborder2">
+<td>
+Use the Generate numbers automatically option
+</td>
+<td>
+<input type="radio" name="USE_GENERATE" value="YES" <?if ( $config_values['USE_GENERATE'] == "YES") {echo "checked";}?>> Yes
+<input type="radio" name="USE_GENERATE" value="NO" <?if ( $config_values['USE_GENERATE'] != "YES") {echo "checked";}?>> No
+</td>
+</tr>
+
+
 
 <tr><td colspan="2"><br /><br /></td></tr><tr><td CLASS="thead" colspan="2">Other Text</td>
 
