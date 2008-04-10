@@ -13,7 +13,25 @@ if ($config_values['ST_MYSQL_HOST'] == "") {
 
 }*/
 
-mysql_select_db("SineDialer", $link);
+function mysql_is_table($host, $user, $pass, $db, $tbl)
+{
+    $tables = array();
+    $link = @mysql_connect($host, $user, $pass);
+    @mysql_select_db($db);
+    $q = @mysql_query("SHOW TABLES");
+    while ($r = @mysql_fetch_array($q)) { $tables[] = $r[0]; }
+    @mysql_free_result($q);
+    @mysql_close($link);
+    if (in_array($tbl, $tables)) { return TRUE; }
+    else { return FALSE; }
+}
+if (mysql_is_table($dbhost,$dbuser,$dbpass,"SineDialer","billing")){
+echo "billing exists";
+} else {
+echo "billing does not exist";
+}
+exit(0);
+
 $passwordHash = sha1($_POST['pass']);
 
 
