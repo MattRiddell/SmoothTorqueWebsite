@@ -10,6 +10,9 @@ From: <input name="startdate">
 <input type=button value="select" onclick="displayDatePicker('startdate', false, 'ymd', '-');"><BR>
 To: <input name="enddate">
 <input type=button value="select" onclick="displayDatePicker('enddate', false, 'ymd', '-');"><BR>
+<?if (isset($_GET[accountcode])) {?>
+<input type="hidden" name="accountcode" value="<?echo $_GET[accountcode];?>">
+<?}?>
 <input type="submit" value="Select">
 </form>
 <?
