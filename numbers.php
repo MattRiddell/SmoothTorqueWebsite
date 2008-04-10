@@ -17,7 +17,7 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
 <td>
 </td>
 <td width="260">
-<b>Number List Management.</b>
+<b><?echo $config_values['NUMBERS_TITLE'];?></b>
 <br />
 <br />
 <a href="/serverlist.php"><img src="/images/report.png" border="0">&nbsp; <?echo $config_values['NUMBERS_SYSTEM'];?></a><br />
