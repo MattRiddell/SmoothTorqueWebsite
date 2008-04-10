@@ -45,6 +45,7 @@ if (isset($_POST[colour])){
     fwrite($add,"ST_MYSQL_PASS=$_POST[ST_MYSQL_PASS]\n");
     fwrite($add,"ADD_CAMPAIGN=$_POST[ADD_CAMPAIGN]\n");
     fwrite($add,"VIEW_CAMPAIGN=$_POST[VIEW_CAMPAIGN]\n");
+    fwrite($add,"PER_PAGE=$_POST[PER_PAGE]\n");
     fclose($add);
 
     /*$add = @fopen("./admin/db_config.php",'w');
@@ -436,8 +437,17 @@ Logout Menu Text:
 </td>
 </tr>
 
-<tr><td colspan="2"><br /><br /></td></tr><tr><td CLASS="thead" colspan="2">Other Text</td>
+<tr><td colspan="2"><br /><br /></td></tr><tr><td CLASS="thead" colspan="2">Misc Settings</td>
 
+
+<tr  class="tborder2">
+<td>
+Number of entries to show per page:
+</td>
+<td>
+<input type="Text" name="PER_PAGE" value="<?echo $config_values['PER_PAGE'];?>">
+</td>
+</tr>
 
 <tr  class="tborder2">
 <td>

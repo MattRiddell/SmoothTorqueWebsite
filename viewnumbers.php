@@ -102,7 +102,7 @@ if (isset($_GET[type])){
     }
 }
 
-$sql = 'SELECT *, UNIX_TIMESTAMP(datetime) as newdate FROM number WHERE campaignid='.$campaignid.' '.$type.' order by status asc LIMIT '.$start.',20';
+$sql = 'SELECT *, UNIX_TIMESTAMP(datetime) as newdate FROM number WHERE campaignid='.$campaignid.' '.$type.' order by status asc LIMIT '.$start.','.$config_values['PER_PAGE'];
 $result=mysql_query($sql, $link) or die (mysql_error());;
 //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
 if ($_GET[type]!="all") {
@@ -148,13 +148,13 @@ if ($_GET[type]!="congested") {
 echo "<br />";
 
 echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&type='.$_GET[type].'&start=0"><img src="/images/resultset_first.png" border="0"></a> ';
-echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&type='.$_GET[type].'&start='.($start-20).'"><img src="/images/resultset_previous.png" border="0"></a> ';
+echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&type='.$_GET[type].'&start='.($start-$config_values['PER_PAGE']).'"><img src="/images/resultset_previous.png" border="0"></a> ';
 
-for ($x=$start;$x<$start+200;$x+=20){
-echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&type='.$_GET[type].'&start='.$x.'">'.($x/20).'</a> ';
+for ($x=$start;$x<$start+($config_values['PER_PAGE']*10);$x+=$config_values['PER_PAGE']){
+echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&type='.$_GET[type].'&start='.$x.'">'.($x/$config_values['PER_PAGE']).'</a> ';
 }
-echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&type='.$_GET[type].'&start='.($x+20).'"><img src="/images/resultset_next.png" border="0"></a> ';
-echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&type='.$_GET[type].'&start='.(($max-20)+$max%20).'"><img src="/images/resultset_last.png" border="0"></a> ';
+echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&type='.$_GET[type].'&start='.($x+$config_values['PER_PAGE']).'"><img src="/images/resultset_next.png" border="0"></a> ';
+echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&type='.$_GET[type].'&start='.(($max-$config_values['PER_PAGE'])+$max%$config_values['PER_PAGE']).'"><img src="/images/resultset_last.png" border="0"></a> ';
 echo '<br />';
 echo '<br />';
 while ($row = mysql_fetch_assoc($result)) {

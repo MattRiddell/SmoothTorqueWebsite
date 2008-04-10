@@ -51,6 +51,10 @@ fclose($fp);
 
 // Set Defaults
 
+if ($config_values['PER_PAGE'] == "") {
+    $config_values['PER_PAGE'] = "20";
+}
+
 if ($config_values['SPARE1'] == "") {
     $config_values['SPARE1'] = "Spare 1 (unused)";
 }
