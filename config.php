@@ -46,6 +46,18 @@ if (isset($_POST[colour])){
     fwrite($add,"ADD_CAMPAIGN=$_POST[ADD_CAMPAIGN]\n");
     fwrite($add,"VIEW_CAMPAIGN=$_POST[VIEW_CAMPAIGN]\n");
     fwrite($add,"PER_PAGE=$_POST[PER_PAGE]\n");
+    fwrite($add,"NUMBERS_VIEW=$_POST[NUMBERS_VIEW]\n");
+    fwrite($add,"NUMBERS_SYSTEM=$_POST[NUMBERS_SYSTEM]\n");
+    fwrite($add,"NUMBERS_GENERATE=$_POST[NUMBERS_GENERATE]\n");
+    fwrite($add,"NUMBERS_MANUAL=$_POST[NUMBERS_MANUAL]\n");
+    fwrite($add,"NUMBERS_UPLOAD=$_POST[NUMBERS_UPLOAD]\n");
+    fwrite($add,"NUMBERS_EXPORT=$_POST[NUMBERS_EXPORT]\n");
+    fwrite($add,"NUMBERS_SEARCH=$_POST[NUMBERS_SEARCH]\n");
+
+
+
+
+
     fclose($add);
 
     /*$add = @fopen("./admin/db_config.php",'w');
@@ -437,8 +449,7 @@ Logout Menu Text:
 </td>
 </tr>
 
-<tr><td colspan="2"><br /><br /></td></tr><tr><td CLASS="thead" colspan="2">Misc Settings</td>
-
+<tr><td colspan="2"><br /><br /></td></tr><tr><td CLASS="thead" colspan="2">Numbers Section</td>
 
 <tr  class="tborder2">
 <td>
@@ -448,6 +459,73 @@ Number of entries to show per page:
 <input type="Text" name="PER_PAGE" value="<?echo $config_values['PER_PAGE'];?>">
 </td>
 </tr>
+
+<tr  class="tborder2">
+<td>
+View phone numbers text:
+</td>
+<td>
+<input type="Text" name="NUMBERS_VIEW" value="<?echo $config_values['NUMBERS_VIEW'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+Use System Lists Text:
+</td>
+<td>
+<input type="Text" name="NUMBERS_SYSTEM" value="<?echo $config_values['NUMBERS_SYSTEM'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+Search for a phone number Text:
+</td>
+<td>
+<input type="Text" name="NUMBERS_SEARCH" value="<?echo $config_values['NUMBERS_SEARCH'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+Export Phone Numbers Text:
+</td>
+<td>
+<input type="Text" name="NUMBERS_EXPORT" value="<?echo $config_values['NUMBERS_EXPORT'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+Upload numbers from a text file Text:
+</td>
+<td>
+<input type="Text" name="NUMBERS_UPLOAD" value="<?echo $config_values['NUMBERS_UPLOAD'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+Add number(s) manually Text:
+</td>
+<td>
+<input type="Text" name="NUMBERS_MANUAL" value="<?echo $config_values['NUMBERS_MANUAL'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+Generate numbers automatically Text:
+</td>
+<td>
+<input type="Text" name="NUMBERS_GENERATE" value="<?echo $config_values['NUMBERS_GENERATE'];?>">
+</td>
+</tr>
+
+<tr><td colspan="2"><br /><br /></td></tr><tr><td CLASS="thead" colspan="2">Other Text</td>
+
+
 
 <tr  class="tborder2">
 <td>

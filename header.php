@@ -55,6 +55,34 @@ if ($config_values['PER_PAGE'] == "") {
     $config_values['PER_PAGE'] = "20";
 }
 
+if ($config_values['NUMBERS_VIEW'] == "") {
+    $config_values['NUMBERS_VIEW'] = "View phone numbers";
+}
+
+if ($config_values['NUMBERS_SYSTEM'] == "") {
+    $config_values['NUMBERS_SYSTEM'] = "Use System Lists";
+}
+
+if ($config_values['NUMBERS_GENERATE'] == "") {
+    $config_values['NUMBERS_GENERATE'] = "Generate numbers automatically";
+}
+
+if ($config_values['NUMBERS_MANUAL'] == "") {
+    $config_values['NUMBERS_MANUAL'] = "Add number(s) manually";
+}
+
+if ($config_values['NUMBERS_UPLOAD'] == "") {
+    $config_values['NUMBERS_UPLOAD'] = "Upload numbers from a text file";
+}
+
+if ($config_values['NUMBERS_EXPORT'] == "") {
+    $config_values['NUMBERS_EXPORT'] = "Export Phone Numbers";
+}
+
+if ($config_values['NUMBERS_SEARCH'] == "") {
+    $config_values['NUMBERS_SEARCH'] = "Search for a phone number";
+}
+
 if ($config_values['SPARE1'] == "") {
     $config_values['SPARE1'] = "Spare 1 (unused)";
 }
