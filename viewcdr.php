@@ -1,5 +1,22 @@
 <?
 require "header.php";
+if (!isset($_GET[startdate])){
+?>
+<br />
+Please select the dates you would like to view:<br />
+<br />
+<form action="viewcdr.php">
+From: <input name="startdate">
+<input type=button value="select" onclick="displayDatePicker('startdate', false, 'ymd', '-');"><BR>
+To: <input name="enddate">
+<input type=button value="select" onclick="displayDatePicker('enddate', false, 'ymd', '-');"><BR>
+<input type="submit" value="Select">
+</form>
+<?
+} else {
+$startdate = $_GET[startdate];
+$enddate = $_GET[startdate];
+
 /*================= Log Access ======================================*/
 $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Viewed the CDR')";
 $result=mysql_query($sql, $link);
@@ -20,7 +37,7 @@ if ($level==sha1("level100")){
 }
 $cdrlink = mysql_connect($db_host, $db_user, $db_pass) OR die(mysql_error());
 mysql_select_db($config_values['CDR_DB'], $cdrlink);
-$sql = "SELECT count(*) from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode_in'";
+$sql = "SELECT count(*) from ".$config_values['CDR_TABLE']." WHERE calldate between '".$_GET['startdate']." 00:00:00' and '".$_GET['enddate']." 23:59:59' and dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode_in'";
 $result = mysql_query($sql,$cdrlink);
 $count = mysql_result($result,0,0);
 //echo $count." Total Records";
@@ -30,9 +47,9 @@ if ($_GET[page]>0) {
 } else {
     $start = 0;
 }
-    echo '<a href="viewcdr.php?page=0&accountcode='.$accountcode_in.'"><img src="/images/resultset_first.png" border="0"></a> ';
+    echo '<a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page=0&accountcode='.$accountcode_in.'"><img src="/images/resultset_first.png" border="0"></a> ';
 if ($page > 0) {
-    echo '<a href="viewcdr.php?page='.($page-1).'&accountcode='.$accountcode_in.'"><img src="/images/resultset_previous.png" border="0"></a> ';
+    echo '<a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page='.($page-1).'&accountcode='.$accountcode_in.'"><img src="/images/resultset_previous.png" border="0"></a> ';
 }
 if ($page > 5) {
     $pagex= $page-4;
@@ -44,15 +61,15 @@ for ($i = $pagex;$i<($count/100);$i++) {
         if ($page == $i) {
             echo "<b>$i</b> ";
         } else {
-            echo '<a href="viewcdr.php?page='.$i.'&accountcode='.$accountcode_in.'">'.$i.'</a> ';
+            echo '<a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page='.$i.'&accountcode='.$accountcode_in.'">'.$i.'</a> ';
         }
     }
 }
 
-echo '<a href="viewcdr.php?page='.($page+1).'&accountcode='.$accountcode_in.'"><img src="/images/resultset_next.png" border="0"></a> ';
-echo '<a href="viewcdr.php?page='.round($count/100).'&accountcode='.$accountcode_in.'"><img src="/images/resultset_last.png" border="0"></a> ';
+echo '<a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page='.($page+1).'&accountcode='.$accountcode_in.'"><img src="/images/resultset_next.png" border="0"></a> ';
+echo '<a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page='.round($count/100).'&accountcode='.$accountcode_in.'"><img src="/images/resultset_last.png" border="0"></a> ';
 //$sql = "SELECT * from ".$config_values['CDR_TABLE']." order by calldate DESC LIMIT $start,100";
-$sql = "SELECT * from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode_in' order by calldate DESC LIMIT $start,100";
+$sql = "SELECT * from ".$config_values['CDR_TABLE']." WHERE calldate between '".$_GET['startdate']." 00:00:00' and '".$_GET['enddate']." 23:59:59' and dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode_in' order by calldate DESC LIMIT $start,100";
 
 $result = mysql_query($sql,$cdrlink);
 $i = 0;
@@ -225,6 +242,8 @@ while ($row = mysql_fetch_assoc($result)) {
     }
     $i++;
 }
+
 echo "</table>";
+}
 require "footer.php";
 ?>
