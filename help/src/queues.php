@@ -1,7 +1,7 @@
-<p>This page controls the addition of Real-Time Asterisk Queues. To add a queue follow the directions of the add queue wizard.</p>
-<p>If you wish to edit the queue settings, then you will have to be aware that there are several different types of parameters for the queue. We'll start off with the Basic Queue options</p>
+<p align="left">This page controls the addition of Real-Time Asterisk Queues. To add a queue follow the directions of the add queue wizard.</p>
+<p align="left">If you wish to edit the queue settings, then you will have to be aware that there are several different types of parameters for the queue. We'll start off with the Basic Queue options</p>
 <h3>Basic Queue Options</h3>
-<p>These options control the name of the queue, the strategy of the queue and the timeout value. The name of the queue can be anything that you desire. The timeout value determines how long to call an agent before ginving up. The various ringing strategies are outlined in the table below.</p>
+<p align="left">These options control the name of the queue, the strategy of the queue and the timeout value. The name of the queue can be anything that you desire. The timeout value determines how long to call an agent before ginving up. The various ringing strategies are outlined in the table below.</p>
 
 <table>
 	<tr>
