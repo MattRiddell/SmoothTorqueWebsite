@@ -53,7 +53,8 @@
 		<br />
 		A normal customer is only able to start/stop/add their own campaigns/numbers/messages
 		whereas an administrator has full control of the system and is able to
-		add additional customers and administrators.</td>
+		add additional customers and administrators.  There is also an account manager which is able
+		to only see the customers page and update their data.  Account managers cannot run campaigns</td>
 	</tr>
 	<tr>
 		<td  bgcolor="#eeeeee">Queue Name</td>
