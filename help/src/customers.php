@@ -49,11 +49,11 @@
 	</tr>
 	<tr>
 		<td  bgcolor="#eeeeee">Customer Type</td>
-		<td  bgcolor="#eeeeee">Selects between a normal customer or an administrator<br />
+		<td  bgcolor="#eeeeee">Selects between a normal customer, an account manager, or an administrator<br />
 		<br />
-		A normal customer is only able to start/stop/add their own campaigns/numbers/messages
+		A normal customer is only able to start, stop, add their own campaigns, numbers, messages,
 		whereas an administrator has full control of the system and is able to
-		add additional customers and administrators.  There is also an account manager which is able
+		add additional customers, trunks, servers and administrators.  There is also an account manager which is able
 		to only see the customers page and update their data.  Account managers cannot run campaigns</td>
 	</tr>
 	<tr>
