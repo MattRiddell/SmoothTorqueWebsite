@@ -11,7 +11,7 @@ $adminlists = substr($adminlists,0,strlen($adminlists)-1);
 
 
 //exit(0);
-$_POST = array_map(mysql_real_escape_string,$_POST);
+//$_POST = array_map(mysql_real_escape_string($_POST));
 
 $description=$_POST[description];
 $username=$_POST[username];
