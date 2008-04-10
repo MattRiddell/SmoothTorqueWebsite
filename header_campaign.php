@@ -20,7 +20,7 @@ if ($config_values['ADD_CAMPAIGN'] == "") {
 if ($config_values['VIEW_CAMPAIGN'] == "") {
     $config_values['VIEW_CAMPAIGN'] = "View Campaigns";
 } else {
-    echo $config_values['VIEW_CAMPAIGN'];
+    //echo $config_values['VIEW_CAMPAIGN'];
 }
 
 ?>
