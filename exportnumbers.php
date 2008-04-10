@@ -83,27 +83,28 @@ From here you can chose a campaign that you would like to export the numbers fro
     require "footer.php";
 
 } else {
-include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(mysql_error());
+include "admin/db_config.php";
 mysql_select_db("SineDialer", $link);
-
-header("Content-Type: application/octet-stream");
-header("Content-Length: $size;");
-header("Content-Disposition: attachement; filename=\"".$type." Dialer Number Export (".date('l dS \of F Y h:i:s A').".csv\")");
-
-
 if (isset($_GET[campaignid])){
     $_POST[campaignid]=$_GET[campaignid];
 }
+
+header("Content-Type: application/octet-stream");
+header("Content-Length: $size;");
+header("Content-Disposition: attachement; filename=\"".$type." Campaign ID (".$_POST[campaignid].") Dialer Number Export (".date('l dS \of F Y h:i:s A').").csv\"");
+
+
 ?><?
 $start=0;
 if ($type == "unknown") {
-    $sql = 'SELECT *, UNIX_TIMESTAMP(datetime) as newdate FROM number WHERE campaignid='.$campaignid.' and status like "unknown%"';
+    $sql = 'SELECT *, UNIX_TIMESTAMP(datetime) as newdate FROM number WHERE campaignid='.$_POST[campaignid].' and status like "unknown%"';
 } else if ($type == "answered") {
-    $sql = 'SELECT *, UNIX_TIMESTAMP(datetime) as newdate FROM number WHERE campaignid='.$campaignid.' and status="amd" or status="hungup" or status="pressed1"';
+    $sql = 'SELECT *, UNIX_TIMESTAMP(datetime) as newdate FROM number WHERE campaignid='.$_POST[campaignid].' and (status="amd" or status="hungup" or status="pressed1")';
 } else {
-    $sql = 'SELECT *, UNIX_TIMESTAMP(datetime) as newdate FROM number WHERE campaignid='.$campaignid.' and status="'.$type.'"';
+    $sql = 'SELECT *, UNIX_TIMESTAMP(datetime) as newdate FROM number WHERE campaignid='.$_POST[campaignid].' and status="'.$type.'"';
 }
 //echo $sql;
+//exit(0);
 $result=mysql_query($sql, $link) or die (mysql_error());;
 
 while ($row = mysql_fetch_assoc($result)) {
