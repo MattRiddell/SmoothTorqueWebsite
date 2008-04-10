@@ -303,20 +303,7 @@ else {
 //=============================================================
 class JpGraphErrObject {
 
-    $config_file = "/stweb.conf";
-    $comment = "#";
-    $fp = fopen($config_file, "r");
-    while (!feof($fp)) {
-      $line = trim(fgets($fp));
-      if ($line && substr($line,0,1)!=$comment) {
-        $pieces = explode("=", $line);
-        $option = trim($pieces[0]);
-        $value = trim($pieces[1]);
-        $config_values[$option] = $value;
-      }
-    }
-    fclose($fp);
-    var $iTitle = $config_values['TITLE'];
+    var $iTitle = "";
     var $iDest = false;
 
     function JpGraphErrObject() {
@@ -324,7 +311,21 @@ class JpGraphErrObject {
     }
 
     function SetTitle($aTitle) {
-	$this->iTitle = $aTitle;
+    $config_file = "/stweb.conf";
+        $comment = "#";
+        $fp = fopen($config_file, "r");
+        while (feof($fp) == false) {
+            $line = trim(fgets($fp));
+            if ($line && substr($line,0,1)!=$comment) {
+                $pieces = explode("=", $line);
+                $option = trim($pieces[0]);
+                $value = trim($pieces[1]);
+                $config_values[$option] = $value;
+            }
+        }
+
+        fclose($fp);
+	$this->iTitle = $config_values['TITLE'];
     }
 
     function SetStrokeDest($aDest) {
@@ -333,7 +334,23 @@ class JpGraphErrObject {
 
     // If aHalt is true then execution can't continue. Typical used for fatal errors.
     function Raise($aMsg,$aHalt=true) {
-	$aMsg = $this->iTitle.' '.$aMsg;
+        $config_file = "/stweb.conf";
+        $comment = "#";
+        $fp = fopen($config_file, "r");
+        while (feof($fp) == false) {
+            $line = trim(fgets($fp));
+            if ($line && substr($line,0,1)!=$comment) {
+                $pieces = explode("=", $line);
+                $option = trim($pieces[0]);
+                $value = trim($pieces[1]);
+                $config_values[$option] = $value;
+            }
+        }
+
+        fclose($fp);
+    //$iTitle = ;
+//    echo $config_values['TITLE'];
+	$aMsg = $config_values['TITLE'].' '.$aMsg;
 	if ($this->iDest) {
 	    $f = @fopen($this->iDest,'a');
 	    if( $f ) {
