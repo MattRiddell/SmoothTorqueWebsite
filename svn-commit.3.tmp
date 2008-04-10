@@ -1,0 +1,6 @@
+Add 5 spare contexts
+--This line, and those below, will be ignored--
+
+M    addcampaign.php
+M    help/index.php
+M    config.php
