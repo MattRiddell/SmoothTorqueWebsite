@@ -101,4 +101,4 @@
 
 <p align="left">There are slightly different options for the different types of campaign. For a DID Mode campaign, you have the option of sending out Caller ID information, as well as specifying the number of simultaneous calls that the call center can handel.</p>
 
-<p align="left">The Queue Mode specific option is to specify the name of the queue. Note: The queue must exist in Asterisk before you can use this feature, once the queue has been added in Asterisk, you must also tell SmoothTorque about the queue.</p>
+<p align="left">The Queue Mode specific option is to specify the name of the queue. Note: The queue must exist in Asterisk (as either a RealTime Queue --- as set up by SmoothTorque, or as a static queue in queue.conf) before you can use this feature.</p>
