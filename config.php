@@ -57,9 +57,9 @@ if (isset($_POST[colour])){
 
     fwrite($add,"USE_GENERATE=$_POST[USE_GENERATE]\n");
     fwrite($add,"DNC_NUMBERS_TITLE=$_POST[DNC_NUMBERS_TITLE]\n");
-
-
-
+    fwrite($add,"DNC_VIEW=$_POST[DNC_VIEW]\n");
+    fwrite($add,"DNC_UPLOAD=$_POST[DNC_UPLOAD]\n");
+    fwrite($add,"DNC_ADD=$_POST[DNC_ADD]\n");
 
 
     fclose($add);
@@ -466,6 +466,35 @@ Number List Management Text (Title):
 <input type="Text" name="DNC_NUMBERS_TITLE" value="<?echo $config_values['DNC_NUMBERS_TITLE'];?>">
 </td>
 </tr>
+
+<tr  class="tborder2">
+<td>
+View existing DNC numbers Text (Title):
+</td>
+<td>
+<input type="Text" name="DNC_VIEW" value="<?echo $config_values['DNC_VIEW'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+Upload DNC numbers Text (Title):
+</td>
+<td>
+<input type="Text" name="DNC_UPLOAD" value="<?echo $config_values['DNC_UPLOAD'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+Add DNC numbers Text (Title):
+</td>
+<td>
+<input type="Text" name="DNC_ADD" value="<?echo $config_values['DNC_ADD'];?>">
+</td>
+</tr>
+
+
 
 <? /*******************************************************************/ ?>
 <? /*                        Numbers Section                           */ ?>

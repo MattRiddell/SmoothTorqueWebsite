@@ -60,6 +60,17 @@ if ($config_values['PER_PAGE'] == "") {
 if ($config_values['DNC_NUMBERS_TITLE'] == "") {
     $config_values['DNC_NUMBERS_TITLE'] = "Do Not Call List";
 }
+if ($config_values['DNC_VIEW'] == "") {
+    $config_values['DNC_VIEW'] = "View existing DNC numbers";
+}
+
+if ($config_values['DNC_ADD'] == "") {
+    $config_values['DNC_ADD'] = "Add DNC number(s) manually";
+}
+
+if ($config_values['DNC_UPLOAD'] == "") {
+    $config_values['DNC_UPLOAD'] = "Upload DNC numbers from a text file";
+}
 
 if ($config_values['NUMBERS_TITLE'] == "") {
     $config_values['NUMBERS_TITLE'] = "Number List Management";
