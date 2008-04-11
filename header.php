@@ -57,6 +57,10 @@ if ($config_values['PER_PAGE'] == "") {
 
 
 
+if ($config_values['DNC_NUMBERS_TITLE'] == "") {
+    $config_values['DNC_NUMBERS_TITLE'] = "Do Not Call List";
+}
+
 if ($config_values['NUMBERS_TITLE'] == "") {
     $config_values['NUMBERS_TITLE'] = "Number List Management";
 }

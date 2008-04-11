@@ -54,7 +54,9 @@ if (isset($_POST[colour])){
     fwrite($add,"NUMBERS_EXPORT=$_POST[NUMBERS_EXPORT]\n");
     fwrite($add,"NUMBERS_SEARCH=$_POST[NUMBERS_SEARCH]\n");
     fwrite($add,"NUMBERS_TITLE=$_POST[NUMBERS_TITLE]\n");
+
     fwrite($add,"USE_GENERATE=$_POST[USE_GENERATE]\n");
+    fwrite($add,"DNC_NUMBERS_TITLE=$_POST[DNC_NUMBERS_TITLE]\n");
 
 
 
@@ -450,6 +452,24 @@ Logout Menu Text:
 <input type="Text" name="MENU_LOGOUT" value="<?echo $config_values['MENU_LOGOUT'];?>">
 </td>
 </tr>
+<? /*******************************************************************/ ?>
+<? /*                        DNC Numbers Section                      */ ?>
+<? /*******************************************************************/ ?>
+
+<tr><td colspan="2"><br /><br /></td></tr><tr><td CLASS="thead" colspan="2">DNC Numbers Section</td>
+
+<tr  class="tborder2">
+<td>
+Number List Management Text (Title):
+</td>
+<td>
+<input type="Text" name="DNC_NUMBERS_TITLE" value="<?echo $config_values['DNC_NUMBERS_TITLE'];?>">
+</td>
+</tr>
+
+<? /*******************************************************************/ ?>
+<? /*                        Numbers Section                           */ ?>
+<? /*******************************************************************/ ?>
 
 <tr><td colspan="2"><br /><br /></td></tr><tr><td CLASS="thead" colspan="2">Numbers Section</td>
 
@@ -464,7 +484,7 @@ Number of entries to show per page:
 
 <tr  class="tborder2">
 <td>
-Number List Management Text:
+Number List Management Text (Title):
 </td>
 <td>
 <input type="Text" name="NUMBERS_TITLE" value="<?echo $config_values['NUMBERS_TITLE'];?>">

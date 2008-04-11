@@ -19,7 +19,7 @@ require "header_numbers.php";
 <td>
 </td>
 <td width="260">
-<b>Do Not Call List (<?echo $count;?> numbers)</b><br />
+<b><?echo $config_values['DNC_NUMBERS_TITLE'];?> (<?echo $count;?> numbers)</b><br />
 <br />
 Make a choice from one of the following: <br /><br />
 <a href="/viewdncnumbers.php"><img src="/images/magnifier.png" border="0">View existing DNC numbers</a><br />
