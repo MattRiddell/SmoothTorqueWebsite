@@ -31,7 +31,7 @@ if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","billing")){
   `creditlimit` double(100,10) default '0.0000000000',
   PRIMARY KEY  (`customerid`,`accountcode`)
   )";
-  $result = mysql_query($sql);
+  $result = mysql_query($sql,$link);
 }
 
 /*======================================================================
@@ -43,7 +43,7 @@ if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","log")){
   `activity` varchar(255) default NULL,
   `username` varchar(255) default NULL
   )";
-  $result = mysql_query($sql);
+  $result = mysql_query($sql,$link);
   $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Attempted login')";
   $result=mysql_query($sql, $link);
   $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created Log Table')";
@@ -53,11 +53,18 @@ if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","log")){
 $passwordHash = sha1($_POST['pass']);
 
 
+//need these lines for the mysql_real_escape_string to work below;
+//if you don't have them then it tries to connect to the DB using mysql_connect()
+//so end up with access being denied because www-data (or whatever) doesn't have access without a password
+$link = mysql_connect($db_host, $db_user, $db_pass) OR die(mysql_error());
+mysql_select_db("SineDialer") or die(mysql_error());
+
+
 $_POST = array_map(mysql_real_escape_string,$_POST);
 $_GET = array_map(mysql_real_escape_string,$_GET);
 
 $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Attempted login')";
-$result=mysql_query($sql, $link);
+$result=mysql_query($sql, $link) or die(mysql_error());
 
 $fields = mysql_list_fields('SineDialer', 'campaign', $link);
 $columns = mysql_num_fields($fields);
