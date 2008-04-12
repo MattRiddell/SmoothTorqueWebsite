@@ -17,7 +17,7 @@ function mysql_is_table($host, $user, $pass, $db, $tbl)
 /*======================================================================
                             Billing Table
   ======================================================================*/
-if (!mysql_is_table($dbhost,$dbuser,$dbpass,"SineDialer","billing")){
+if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","billing")){
   $sql = "CREATE TABLE `billing` (
   `customerid` int(11) unsigned NOT NULL default '0',
   `accountcode` varchar(250) NOT NULL default '',
@@ -37,7 +37,7 @@ if (!mysql_is_table($dbhost,$dbuser,$dbpass,"SineDialer","billing")){
 /*======================================================================
                             Log Table
   ======================================================================*/
-if (!mysql_is_table($dbhost,$dbuser,$dbpass,"SineDialer","log")){
+if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","log")){
   $sql = "CREATE TABLE `log` (
   `timestamp` timestamp NULL default NULL on update CURRENT_TIMESTAMP,
   `activity` varchar(255) default NULL,
