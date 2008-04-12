@@ -83,8 +83,8 @@ require "header_campaign.php";
 <OPTION VALUE="4" title="Play a message to a person, hang up for answering machines">Press 1 Live Only</OPTION>
 <OPTION VALUE="5" title="Put a person straight through to the call center, and leave a message for the answer machines">Immediate Live and Answer Machine</OPTION>
 <OPTION VALUE="3" title="Play a message to a person, if they press 1, put them through to the call center. Leave a message for answering machines">Press 1 Live and Answer Machine</OPTION>
-<OPTION VALUE="6">Direct Transfer (coming soon)</OPTION>
-<OPTION VALUE="7">Immediate Message Playback (coming soon)</OPTION>
+<OPTION VALUE="6" title="As soon as a number is connected, transfer it to a staff memeber"> Direct Transfer</OPTION>
+<OPTION VALUE="7" title="When a call is answered, play back the message and then hang up"> Immediate Message Playback</OPTION>
 <OPTION VALUE="8" title="Ring a number, when it answers start sending a fax">Fax Broadcast</OPTION>
 <OPTION VALUE="9">SMS Broadcast (coming soon)</OPTION>
 <OPTION VALUE="10"><?echo $config_values['SPARE1'];?></OPTION>

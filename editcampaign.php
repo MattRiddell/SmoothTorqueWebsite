@@ -99,8 +99,8 @@ require "header_campaign.php";
 <OPTION VALUE="4" <?echo $row[context]==4?"SELECTED":""?> title="Play a message to a person, and if they press 1 transfer them to the call center, don't bother with answer machines">Press 1 Live Only</OPTION>
 <OPTION VALUE="5" <?echo $row[context]==5?"SELECTED":""?> title="Connect a person directly to the call center, and leave a message on the answer machine">Immediate Live and Answer Machine</OPTION>
 <OPTION VALUE="3" <?echo $row[context]==3?"SELECTED":""?> title="Play a message to a person, if they press 1 they go to the call center, leave a message on the answer machine">Press 1 Live and Answer Machine</OPTION>
-<OPTION VALUE="6" <?echo $row[context]==6?"SELECTED":""?> title="Coming Soon"> Direct Transfer (coming soon)</OPTION>
-<OPTION VALUE="7" <?echo $row[context]==7?"SELECTED":""?> title="Coming Soon"> Immediate Message Playback (coming soon)</OPTION>
+<OPTION VALUE="6" <?echo $row[context]==6?"SELECTED":""?> title="As soon as a number is connected, transfer it to a staff memeber"> Direct Transfer</OPTION>
+<OPTION VALUE="7" <?echo $row[context]==7?"SELECTED":""?> title="When a call is answered, play back the message and then hang up"> Immediate Message Playback</OPTION>
 <OPTION VALUE="8" <?echo $row[context]==8?"SELECTED":""?> title="Ring a number, when it answers start sending a fax" >Fax Broadcast</OPTION>
 <OPTION VALUE="9" <?echo $row[context]==9?"SELECTED":""?> title="Coming Soon">SMS Broadcast (coming soon)</OPTION>
 <OPTION VALUE="10" <?echo $row[context]==10?"SELECTED":""?>><?echo $config_values['SPARE1'];?></OPTION>

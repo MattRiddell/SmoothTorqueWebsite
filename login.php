@@ -86,7 +86,11 @@ if (!in_array('cost', $field_array))
 
 $sql = 'SELECT password, security FROM customer WHERE username=\''.$_POST[user].'\'';
 $result=mysql_query($sql, $link) or die (mysql_error());;
-$dbpass=mysql_result($result,0,'password');
+if (mysql_num_rows($result) > 0) {
+    $dbpass=mysql_result($result,0,'password');
+} else {
+    $dbpass = "";
+}
 if (trim($dbpass)==trim($passwordHash)){
 
     setcookie("loggedin",sha1("LoggedIn".$_POST[user]),time()+6000);
