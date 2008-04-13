@@ -1,16 +1,20 @@
 <?
-require "header.php";
-require "header_queue.php";
 
 if($_POST[check_submit]){
+    include "admin/db_config.php";
+    mysql_select_db("SineDialer", $link);
+
 	$query = "INSERT INTO queue_table (name,strategy,reportholdtime) VALUES (\"$_POST[queue_name]\",\"$_POST[strategy]\",".($_POST[reportholdtime]=="no"?"0":"1").")";
-	
-	//now we need to run the above query on the DB	
+
+	//now we need to run the above query on the DB
 	$result=mysql_query($query, $link) or die (mysql_error());;
 	$insertedID = mysql_insert_id();
 	include("queues.php");
 	exit();
 }
+require "header.php";
+require "header_queue.php";
+
 $section=Array();
 
 $section[0] = "This will take you through the creation of an Asterisk Based
