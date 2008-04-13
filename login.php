@@ -50,6 +50,98 @@ if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","log")){
   $result=mysql_query($sql, $link);
 }
 
+/*======================================================================
+                            Realtime SIP
+  ======================================================================*/
+if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","sip_buddies")){
+  $sql = "CREATE TABLE `sip_buddies` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(80) NOT NULL default '',
+  `accountcode` varchar(20) default NULL,
+  `callerid` varchar(80) default NULL,
+  `canreinvite` char(3) default 'no',
+  `context` varchar(80) default 'internal',
+  `dtmfmode` varchar(7) default 'rfc2833',
+  `host` varchar(31) default 'dynamic',
+  `language` char(2) default 'it',
+  `nat` varchar(5) default 'yes',
+  `port` varchar(5) default '5060',
+  `qualify` char(3) default NULL,
+  `secret` varchar(80) default NULL,
+  `type` varchar(6) NOT NULL default 'friend',
+  `username` varchar(80) NOT NULL default '',
+  `disallow` varchar(100) default 'all',
+  `allow` varchar(100) default 'gsm;ulaw;alaw',
+  `regseconds` int(11) NOT NULL default '0',
+  `ipaddr` varchar(150) NOT NULL default '',
+  `regexten` varchar(80) NOT NULL default '',
+  `cancallforward` char(3) default 'yes',
+  `setvar` varchar(100) NOT NULL default '',
+  `clientid` int(13) default NULL,
+  `description` varchar(100) default NULL,
+  `fullcontact` varchar(250) default NULL,
+  `visible` varchar(11) default NULL,
+  `isagent` tinyint(3) unsigned NOT NULL default '0',
+  `regserver` varchar(250) default NULL,
+  `email` varchar(250) default NULL,
+  `lastname` varchar(250) default NULL,
+  `firstname` varchar(250) default NULL,
+  `country` varchar(250) default NULL,
+  `hasaccount` int(11) default NULL,
+  `dateadded` datetime default NULL,
+  `transfer` varchar(250) default NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `name` (`name`),
+  KEY `name_2` (`name`)
+  );";
+  $result = mysql_query($sql,$link);
+}
+
+/*======================================================================
+                            Realtime IAX2
+  ======================================================================*/
+if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","iax_buddies")){
+  $sql = "CREATE TABLE `iax_buddies` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `name` varchar(32) NOT NULL default '',
+  `username` varchar(30) default NULL,
+  `type` varchar(6) NOT NULL default 'friend',
+  `secret` varchar(50) default NULL,
+  `transfer` varchar(10) default 'mediaonly',
+  `accountcode` varchar(100) default NULL,
+  `callerid` varchar(100) default NULL,
+  `context` varchar(100) default 'freevoip',
+  `host` varchar(31) NOT NULL default 'dynamic',
+  `language` varchar(5) default 'it',
+  `mailbox` varchar(50) default NULL,
+  `qualify` varchar(4) default '400',
+  `disallow` varchar(100) default 'all',
+  `allow` varchar(100) default 'gsm,ulaw,alaw',
+  `ipaddr` varchar(15) default NULL,
+  `port` int(11) default '0',
+  `regseconds` int(11) default '0',
+  `clientid` int(13) unsigned default NULL,
+  `description` varchar(100) default NULL,
+  `visible` varchar(11) default NULL,
+  `encryption` varchar(40) default NULL,
+  `auth` varchar(10) default NULL,
+  `isagent` tinyint(3) unsigned NOT NULL default '0',
+  `firstname` varchar(255) default NULL,
+  `lastname` varchar(255) default NULL,
+  `email` varchar(255) default NULL,
+  `country` varchar(255) default NULL,
+  `hasaccount` int(11) default NULL,
+  `dateadded` datetime default NULL,
+  `trunk` char(3) default 'no',
+  `sendmail` int(3) default '1',
+  `regcontext` varchar(60) default 'iaxregs',
+  `jitterbuffer` varchar(4) default 'no',
+  PRIMARY KEY  (`id`)
+  );";
+    $result = mysql_query($sql,$link);
+
+}
+
 $passwordHash = sha1($_POST['pass']);
 
 
