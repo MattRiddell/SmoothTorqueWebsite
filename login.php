@@ -45,7 +45,8 @@ if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","billinglog")){
   $sql = "CREATE TABLE `billinglog` (
   `timestamp` timestamp NULL default NULL on update CURRENT_TIMESTAMP,
   `activity` varchar(255) default NULL,
-  `username` varchar(255) default NULL
+  `username` varchar(255) default NULL,
+  `addedby` varchar(255) default NULL
   )";
   $result = mysql_query($sql,$link);
   $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created Billing Log Table')";
@@ -379,6 +380,119 @@ if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","queue")){
         $result = mysql_query($sql,$link);
 }
 
+/*======================================================================
+                         Queue_Member_Table
+  ======================================================================*/
+if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","queue_member_table")){
+  include "admin/db_config.php";
+        $sql = "Create table `queue_member_table` (
+  `uniqueid` int(10) unsigned NOT NULL auto_increment,
+  `membername` varchar(40) default NULL,
+  `queue_name` varchar(128) default NULL,
+  `interface` varchar(128) default NULL,
+  `penalty` int(11) default NULL,
+  `paused` tinyint(1) default NULL,
+  PRIMARY KEY  (`uniqueid`),
+  UNIQUE KEY `queue_interface` (`queue_name`,`interface`)
+        );";
+        $result = mysql_query($sql,$link);
+}
+
+
+/*======================================================================
+                         Queue_Table
+  ======================================================================*/
+if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","queue_table")){
+  include "admin/db_config.php";
+        $sql = "Create table `queue_table` (
+  `name` varchar(128) NOT NULL,
+  `musiconhold` varchar(128) default 'default',
+  `announce` varchar(128) default NULL,
+  `context` varchar(128) default NULL,
+  `timeout` int(11) default NULL,
+  `monitor_join` tinyint(1) default NULL,
+  `monitor_format` varchar(128) default NULL,
+  `queue_youarenext` varchar(128) default 'queue-youarenext',
+  `queue_thereare` varchar(128) default 'queue-thereare',
+  `queue_callswaiting` varchar(128) default 'queue-callswaiting',
+  `queue_holdtime` varchar(128) default 'queue-holdtime',
+  `queue_minutes` varchar(128) default 'queue-minutes',
+  `queue_seconds` varchar(128) default 'queue-seconds',
+  `queue_lessthan` varchar(128) default 'queue-less-than',
+  `queue_thankyou` varchar(128) default 'queue-thankyou',
+  `queue_reporthold` varchar(128) default NULL,
+  `announce_frequency` int(11) default 0,
+  `announce_round_seconds` int(11) default NULL,
+  `announce_holdtime` varchar(128) default NULL,
+  `retry` int(11) default NULL,
+  `wrapuptime` int(11) default NULL,
+  `maxlen` int(11) default NULL,
+  `servicelevel` int(11) default NULL,
+  `strategy` varchar(128) default NULL,
+  `joinempty` varchar(128) default NULL,
+  `leavewhenempty` varchar(128) default NULL,
+  `eventmemberstatus` tinyint(1) default NULL,
+  `eventwhencalled` tinyint(1) default NULL,
+  `reportholdtime` tinyint(1) default NULL,
+  `memberdelay` int(11) default NULL,
+  `weight` int(11) default NULL,
+  `timeoutrestart` tinyint(1) default NULL,
+  `periodic_announce` varchar(50) default NULL,
+  `periodic_announce_frequency` int(11) default NULL,
+  PRIMARY KEY  (`name`)
+        );";
+        $result = mysql_query($sql,$link);
+}
+
+
+/*======================================================================
+                         Servers
+  ======================================================================*/
+if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","servers")){
+  include "admin/db_config.php";
+        $sql = "Create table `servers` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `phonenumber` varchar(50) NOT NULL default '',
+  `stage` int(3) NOT NULL default '0',
+  `campaignid` int(3) NOT NULL default '0',
+  `timestamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`id`)
+        );";
+        $result = mysql_query($sql,$link);
+}
+
+/*======================================================================
+                         Stage
+  ======================================================================*/
+if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","stage")){
+  include "admin/db_config.php";
+        $sql = "Create table `stage` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `phonenumber` varchar(50) NOT NULL default '',
+  `stage` int(3) NOT NULL default '0',
+  `campaignid` int(3) NOT NULL default '0',
+  `timestamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`id`)
+        );";
+        $result = mysql_query($sql,$link);
+}
+
+/*======================================================================
+                        Trunk 
+  ======================================================================*/
+if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","trunk")){
+  include "admin/db_config.php";
+        $sql = "Create table `trunk` (
+  `id` int(15) unsigned NOT NULL auto_increment,
+  `name` varchar(250) NOT NULL default '',
+  `dialstring` varchar(250) NOT NULL default '',
+  `current` int(1) NOT NULL default '0',
+  `maxchans` int(11) unsigned default '100',
+  `maxcps` varchar(255) default '30',
+  PRIMARY KEY  (`id`)
+        );";
+        $result = mysql_query($sql,$link);
+}
 
 $passwordHash = sha1($_POST['pass']);
 
