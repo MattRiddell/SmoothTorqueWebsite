@@ -104,13 +104,21 @@ if (strlen($row[phone])<15){
 <TD>
 <?
 echo "<A HREF=\"billing.php?id=".$row[id]."\" title=\"View Billing Information\"><img src=\"/images/cart_edit.png\" border=\"0\" align=\"right\" title=\"View Billing Information\">";
+if (isset($row[credit])){
 echo $config_values['CURRENCY_SYMBOL']." ".number_format($row[credit],2)."</A>";
+} else {
+echo "Add Billing Account</A>";
+}
 ?>
 </TD>
 <TD>
 <?
 echo "<A HREF=\"billing.php?id=".$row[id]."\" title=\"View Billing Information\"><img src=\"/images/cart_edit.png\" border=\"0\" align=\"right\" title=\"View Billing Information\">";
+if (isset($row[credit])){
 echo $config_values['CURRENCY_SYMBOL']." ".number_format($row[creditlimit],2)."</A>";
+} else {
+echo "Add Billing Account</A>";
+}
 ?>
 </TD>
 <?}?>

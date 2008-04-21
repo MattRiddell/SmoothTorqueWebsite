@@ -64,6 +64,10 @@ if ($config_values['DNC_VIEW'] == "") {
     $config_values['DNC_VIEW'] = "View existing DNC numbers";
 }
 
+if ($config_values['MENU_ADDFUNDS'] == "") {
+    $config_values['MENU_ADDFUNDS'] = "Add Funds";
+}
+
 if ($config_values['DNC_ADD'] == "") {
     $config_values['DNC_ADD'] = "Add DNC number(s) manually";
 }
@@ -332,12 +336,12 @@ $self=$_SERVER['PHP_SELF'];
         //=======================================================================================================
         // Customers
         //=======================================================================================================
-        if ($self=="/deletecustomer.php"||$self=="/addcustomer.php"||$self=="/customers.php"||$self=="/editcustomer.php"){
+        if ($self=="/deletecustomer.php"||$self=="/addfunds.php"||$self=="/customers.php"||$self=="/editcustomer.php"){
             $thead="thead";
         } else {
             $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
         }
-        $menu.='<TD class="'.$thead.'"><A HREF="/customers.php"><img src="/images/group.png" border="0" align="left">'.$config_values['MENU_CUSTOMERS'].'</A>&nbsp;</TD>';
+        $menu.='<TD class="'.$thead.'"><A HREF="/addfunds.php"><img src="/images/group.png" border="0" align="left">'.$config_values['MENU_ADDFUNDS'].'</A>&nbsp;</TD>';
         //=======================================================================================================
 
     }

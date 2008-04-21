@@ -1,13 +1,13 @@
 <?
     require "header.php";
 /*================= Log Access ======================================*/
-$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Viewed the system logs')";
+$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Viewed the billing logs')";
 $result=mysql_query($sql, $link);
 /*================= Log Access ======================================*/
-    $sql = "select * from log order by timestamp desc";
+    $sql = "select * from billinglog order by timestamp desc";
     $result=mysql_query($sql, $link);
     echo "<br /><center><table border=\"0\">";
-    echo "<tr><td>TimeStamp</td><td>Activity</td><td>User Name</td></tr>";
+    echo "<tr><td>TimeStamp</td><td>Amount</td><td>User Name</td><td>Added By</td></tr>";
     while ($row = mysql_fetch_assoc($result)) {
     $class_bold=" class=\"tborder2x\"  onmouseover=\"style.backgroundColor='#C10000';\" onmouseout=\"style.backgroundColor='#FF6666'\"   ";
     if ($toggle){
@@ -28,6 +28,7 @@ $class=" class=\"tborderx\"  onmouseover=\"style.backgroundColor='#84DFC1';\" on
             echo "<td>$row[timestamp]</td>";
             echo "<td>$row[activity]</td>";
             echo "<td>$row[username]</td>";
+            echo "<td>$row[addedby]</td>";
         }
         echo "</tr>";
     }

@@ -36,6 +36,15 @@ if (!isset($_GET[id])) {
 
 if (isset($_POST[credit])){
     $credit = $_POST[credit];
+    $credit2 = $_POST[credit];
+$sql = 'SELECT accountcode FROM billing WHERE customerid='.$_GET[id];
+$result=mysql_query($sql, $link);
+$accountcode = mysql_result($result,0,0);
+
+
+    $sql = "select credit from billing where accountcode='$accountcode'";
+$result = mysql_query($sql, $link) or die(mysql_error());
+$before = mysql_result($result,0,0);
 
 
     $sql="update billing set credit=credit + '$credit' where customerid=".$_GET[id];
@@ -43,21 +52,31 @@ if (isset($_POST[credit])){
     $result=mysql_query($sql, $link) or die (mysql_error());;
 /*    $SMDB2->executeUpdate($sql);*/
 
-/*================= Log Access ======================================*/
-$sql = 'SELECT accountcode FROM billing WHERE customerid='.$_GET[id];
-$result=mysql_query($sql, $link);
-$accountcode = mysql_result($result,0,0);
 
+/*================= Log Access ======================================*/
 $addedby = $_COOKIE[user];
 
-$sql = "INSERT INTO billinglog (timestamp, username, activity, addedby) VALUES (NOW(), '$accountcode', '$credit.','$addedby')";
+$sql = "INSERT INTO billinglog (timestamp, username, activity, addedby) VALUES (NOW(), '$accountcode', '$credit','$addedby')";
 $result=mysql_query($sql, $link);
 
 $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', '".$addedby." Added ".$credit." credit to customer: ".$accountcode."')";
 $result=mysql_query($sql, $link);
 /*================= Log Access ======================================*/
+$sql = "select credit from billing where accountcode='$accountcode'";
+$result = mysql_query($sql, $link);
+$after = mysql_result($result,0,0);
+$result=mysql_query($sql, $link);
 
-    header("Location: /customers.php");
+    $before = $config_values['CURRENCY_SYMBOL']." ".number_format($before,2);
+    $after = $config_values['CURRENCY_SYMBOL']." ".number_format($after,2);
+    $credit2 = $config_values['CURRENCY_SYMBOL']." ".number_format($credit2,2);
+    require "header.php";
+    echo "<br />";
+    echo "<br />";
+    echo "<br />";
+    echo $credit2." added to ".$accountcode.". Their credit was $before and is now $after";
+    echo "<br />";
+    echo "<br />";
     exit;
 }
 
