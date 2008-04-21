@@ -331,12 +331,23 @@ $self=$_SERVER['PHP_SELF'];
     }
     //    <TD class="thead2"><A HREF="prefs.php">Preferences</A>&nbsp;&nbsp;</TD>
     } else {
+        /*//=======================================================================================================
+        // Customers
+        //=======================================================================================================
+        if ($self=="/deletecustomer.php"||$self=="/addcustomer.php"||$self=="/customers.php"||$self=="/editcustomer.php"){
+            $thead="thead";
+        } else {
+            $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
+        }
+        $menu.='<TD class="'.$thead.'"><A HREF="/customers.php"><img src="/images/group.png" border="0" align="left">'.$config_values['MENU_CUSTOMERS'].'</A>&nbsp;</TD>';
+        //=======================================================================================================
+        */
         //echo "Billing Administrator Login";
         // This is for people who are logged in as a billing administrator
         //=======================================================================================================
-        // Customers
+        // Add Funds
         //=======================================================================================================
-        if ($self=="/deletecustomer.php"||$self=="/addfunds.php"||$self=="/customers.php"||$self=="/editcustomer.php"){
+        if ($self=="/addfunds.php"){
             $thead="thead";
         } else {
             $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";

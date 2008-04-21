@@ -12,7 +12,13 @@ require "header.php";
 <b>Welcome to <?echo $config_values['TITLE'];?>.</b><br />
 <br />
 <?
+if ($level==sha1("level10")){
+    echo '<a href="addfunds.php">Add funds to a registered account</a><br />';
+    echo '<a href="billinglog.php">View Billing Log</a><br />';
+
+} else {
 echo $config_values['MAIN_PAGE_TEXT'];
+}
 ?><br />
 </td>
 <td>

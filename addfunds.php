@@ -11,12 +11,21 @@ $campaigngroupid=mysql_result($result,0,'campaigngroupid');
 
 if (!isset($_GET[id])) {
     require "header.php";
-    echo "<br />";
+    //echo "<br />";
     //echo "No customer selected";
     $sql = "SELECT customer.*, billing.customerid FROM customer LEFT JOIN billing ON customer.id = billing.customerid where billing.customerid is not null";
     $result = mysql_query($sql) or die(mysql_error());
-?><br /><br />
-        Please select a customer to add funds to:<br /><br />
+?>
+    <br /><br /><br /><br />
+<center>
+<table background="/images/sdbox.png" width="300" height="200" class="dragme22">
+<tr>
+<td>
+</td>
+<td width="260">
+
+
+        Please select a customer:<br /><br />
         <form action="addfunds.php" METHOD="get">
         <select name="id"><?
     while ($row = mysql_fetch_assoc($result)) {
@@ -29,7 +38,12 @@ if (!isset($_GET[id])) {
     }
     ?>        </select>  <br /><br /><input type="submit" value="Select Customer">
 
-        </form>
+        </form><br />
+</td>
+<td>
+</td></tr>
+</table>
+</center>
       <?
 } else {
 
@@ -71,13 +85,29 @@ $result=mysql_query($sql, $link);
     $after = $config_values['CURRENCY_SYMBOL']." ".number_format($after,2);
     $credit2 = $config_values['CURRENCY_SYMBOL']." ".number_format($credit2,2);
     require "header.php";
+?>
+    <br /><br /><br /><br />
+<center>
+<table background="/images/sdbox.png" width="300" height="200" class="dragme22">
+<tr>
+<td>
+</td>
+<td width="260">
+
+    <?echo $credit2." added to ".$accountcode.". Their credit was $before and is now $after";
     echo "<br />";
     echo "<br />";
-    echo "<br />";
-    echo $credit2." added to ".$accountcode.". Their credit was $before and is now $after";
-    echo "<br />";
-    echo "<br />";
-    exit;
+    echo '<a href="addfunds.php">Add funds to another account</a><br />';
+    echo '<a href="billinglog.php">View Billing Log</a><br />';
+?>
+<br />
+</td>
+<td>
+</td></tr>
+</table>
+</center>
+<?
+exit(0);
 }
 
 //require "header_campaign.php";
