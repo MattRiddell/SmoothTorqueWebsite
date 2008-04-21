@@ -25,4 +25,5 @@ if ($config_values['ST_MYSQL_HOST'] == "") {
     $db_pass=$config_values['ST_MYSQL_PASS'];
     $link = mysql_connect($db_host, $db_user, $db_pass) OR die(mysql_error());
 }
+mysql_select_db("SineDialer") or die(mysql_error());
 ?>

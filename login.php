@@ -3,15 +3,16 @@ include "admin/db_config.php";
 
 function mysql_is_table($host, $user, $pass, $db, $tbl)
 {
+	$result = FALSE;
     $tables = array();
-    $link = @mysql_connect($host, $user, $pass);
-    @mysql_select_db($db);
+    $link = mysql_connect($host, $user, $pass) or die(mysql_error());
+    mysql_select_db($db) or die(mysql_error());
     $q = @mysql_query("SHOW TABLES");
     while ($r = @mysql_fetch_array($q)) { $tables[] = $r[0]; }
     @mysql_free_result($q);
     @mysql_close($link);
-    if (in_array($tbl, $tables)) { return TRUE; }
-    else { return FALSE; }
+    if (in_array($tbl, $tables)) { $result =  TRUE; }
+	return $result;
 }
 
 /*======================================================================
@@ -40,6 +41,7 @@ if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","billing")){
   ======================================================================*/
 if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","log")){
   include "admin/db_config.php";
+
   $sql = "CREATE TABLE `log` (
   `timestamp` timestamp NULL default NULL on update CURRENT_TIMESTAMP,
   `activity` varchar(255) default NULL,
@@ -56,6 +58,7 @@ if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","log")){
                             Realtime SIP
   ======================================================================*/
 if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","sip_buddies")){
+  //echo "Not there";
   include "admin/db_config.php";
   $sql = "CREATE TABLE `sip_buddies` (
   `id` int(11) NOT NULL auto_increment,
@@ -97,7 +100,7 @@ if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","sip_buddies")){
   UNIQUE KEY `name` (`name`),
   KEY `name_2` (`name`)
   );";
-  $result = mysql_query($sql,$link);
+  $result = mysql_query($sql,$link) or die(mysql_error());
 }
 
 /*======================================================================
@@ -146,16 +149,17 @@ if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","iax_buddies")){
 
 }
 
+if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","iax_buddies")){
+  include "admin/db_config.php";
+
+
+}
+
+
 $passwordHash = sha1($_POST['pass']);
 
 
-//need these lines for the mysql_real_escape_string to work below;
-//if you don't have them then it tries to connect to the DB using mysql_connect()
-//so end up with access being denied because www-data (or whatever) doesn't have access without a password
-
-// *** Not sure why you don't just include db_config which does exactly the same thing
-// *** but meh.
-$link = mysql_connect($db_host, $db_user, $db_pass) OR die(mysql_error());
+include "admin/db_config.php";
 mysql_select_db("SineDialer") or die(mysql_error());
 
 

@@ -56,7 +56,11 @@ echo "<A HREF=\"editqueue.php?name=".$row[name]."\"><img src=\"/images/pencil.pn
 }
 ?>
 </TD>
-<TD><?echo $row[strategy];?>
+<TD>
+<a href="addagent.php">
+<img src="/images/group.png" align="left" border="0" title="Add a SIP account for an agent to connect to">
+</a>
+<?echo $row[strategy];?>
 </TD>
 <TD>
 <?echo $row[timeout];?>
