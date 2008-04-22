@@ -112,7 +112,7 @@ while ($row = mysql_fetch_assoc($result)) {
     } else {
         $campaignid = substr($userfield[$i], $pos + 1);
         $phonenumber[$i] = substr($userfield[$i], 0, $pos);
-        echo $campaignid;
+        echo "x".$campaignid."x ";
     }
 
     $userfield2[$i] = $row[userfield2];
