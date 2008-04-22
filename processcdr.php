@@ -122,6 +122,7 @@ while ($row = mysql_fetch_assoc($result)) {
         $increment[$accountcode[$i]] = mysql_result($resultx, 0, 'increment');
         $firstperiod[$accountcode[$i]] = mysql_result($resultx, 0, 'firstperiod');
         $credit[$accountcode[$i]] = mysql_result($resultx, 0, 'credit');
+        $credit_limit[$accountcode[$i]] = mysql_result($resultx, 0, 'creditlimit');
         $pricepercall[$accountcode[$i]] = mysql_result($resultx, 0, 'pricepercall');
         $priceperconnectedcall[$accountcode[$i]] = mysql_result($resultx, 0, 'priceperconnectedcall');
         $priceperpress1[$accountcode[$i]] = mysql_result($resultx, 0, 'priceperpress1');
@@ -212,7 +213,7 @@ if (mysql_num_rows($result_credit) > 0) {
         mysql_select_db("SineDialer", $link);
 
         $result_update=mysql_query($sql, $link);
-        if ($credit - $totalcost[$accountcode_in]- $totalcost[$accountcode_in] < 0) {
+        if ($credit - $totalcost[$accountcode_in]- $totalcost[$accountcode_in] < 0 - $credit_limit[$accountcode_in]) {
             //This person will run out of money if they do this again
             mysql_select_db("SineDialer", $link);
 
@@ -226,7 +227,7 @@ if (mysql_num_rows($result_credit) > 0) {
                 ,'0','30') ";
             $resultx=mysql_query($sql1, $link) or die (mysql_error());;
             $resultx=mysql_query($sql2, $link) or die (mysql_error());;
-            $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), 'System', 'Stopped campaign id $campaignid because credit of $accountcode_in was low (Credit is now $credit and they spent $totalcost[$accountcode_in] in the last minute)')";
+            $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), 'System', 'Stopped campaign id $campaignid because credit of $accountcode_in was low (Credit is now $credit and they spent $totalcost[$accountcode_in] in the last minute. Credit Limit is $credit_limit[$accountcode_in])')";
 $result=mysql_query($sql, $link) or die(mysql_error());
 
 
