@@ -175,7 +175,7 @@ while ($row = mysql_fetch_assoc($result)) {
             //$sql = "SELECT cost FROM SineDialer.campaign WHERE id = ".$campaignid;
             //$result_campaign_cost = mysql_query($sql,$link);
             //$campaign_cost = mysql_result($result_campaign_cost,0,0);
-            $sql = "UPDATE cdr SET userfield2 = '$campaignid' WHERE calldate='".$calldate[$i]."' AND dst='".$dst[$i]."'";
+            $sql = "UPDATE cdr SET userfield2 = '$campaignid' WHERE calldate='".$calldate[$i]."' AND userfield='".$userfield[$i]."'";
             echo $sql."<br>";
             mysql_query($sql,$cdrlink);
             //$sql = "UPDATE SineDialer.campaign set cost = '".($campaign_cost+$cost[$i])."' WHERE id = ".$campaignid;
