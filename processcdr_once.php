@@ -199,8 +199,8 @@ if (mysql_num_rows($result_credit) > 0) {
     if (($credit - $totalcost[$accountcode_in]) != $credit) {
     echo "[".$accountcode_in."] Credit was $credit and will now be ".($credit - $totalcost[$accountcode_in])."
 ";
-    $sql = "update billing set credit = ".($credit - $totalcost[$accountcode_in])." where accountcode = '$accountcode_in'";
-    $result_update=mysql_query($sql, $link);
+    //$sql = "update billing set credit = ".($credit - $totalcost[$accountcode_in])." where accountcode = '$accountcode_in'";
+    //$result_update=mysql_query($sql, $link);
     }
 }
 //echo "<hr>";
