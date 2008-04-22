@@ -233,7 +233,8 @@ echo "<A title=\"Delete this campaign\" HREF=\"#\"><IMG SRC=\"/images/delete.png
 <TD>
 <?
 if ($row[cost]>0) {
-    echo $config_values['CURRENCY_SYMBOL']." ".number_format($row[cost],2);
+    echo '<A HREF="viewcdr_campaign.php?campaignid='.$row[id].'">';
+    echo $config_values['CURRENCY_SYMBOL']." ".number_format($row[cost],2)."</a>";
 } else {
     echo "-";
 }
