@@ -220,7 +220,7 @@ if ($status==101){
 <?if ($backend == 0) {?>
 <a title="View the report for this campaign" href="report.php?type=today&id=<?echo $row[id];?>" class="abcd"><img src="/images/chart_pie.png" border="0"></a>&nbsp;
 <?}?>
-<a title="Recycle Numbers" href="recycle.php?id=<?echo $row[id];?>" class="abcd"><img src="/images/arrow_refresh.png" border="0"></a>&nbsp;
+<a title="Recycle Numbers" href="recycle.php?id=<?echo $row[id];?>&type_input=<?echo $_GET[type];?>" class="abcd"><img src="/images/arrow_refresh.png" border="0"></a>&nbsp;
 <?
 if ($user!="demo"){
 echo "<A title=\"Delete this campaign\" HREF=\"deletecampaign.php?id=".$row[id]."\"><IMG SRC=\"/images/delete.png\" BORDER=\"0\"></A>";

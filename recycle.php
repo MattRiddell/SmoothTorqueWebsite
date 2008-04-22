@@ -11,7 +11,8 @@ if (isset($_GET[type])){
     }
     $result=mysql_query($sql, $link) or die (mysql_error());;
 //    echo "Resetting status of $_GET[type] numbers in $_GET[id]";
-    include "campaigns.php";
+//    include "campaigns.php";
+    header("Location: campaigns.php?type=".$_GET[type_input]);
 } else {
 require "header.php";
 ?>
@@ -34,49 +35,49 @@ $row = mysql_fetch_assoc($result);
 //echo $row[name];
 ?>
 </b>
-<a href="recycle.php?id=<?echo $_GET[id];?>&type=failed">
+<a href="recycle.php?id=<?echo $_GET[id];?>&type=failed&type_input=<?echo $_GET[type_input];?>">
 Reset <?
 $sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="failed"';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 echo mysql_result($result,0,0);
 ?> failed numbers</a>
 <br />
-<a href="recycle.php?id=<?echo $_GET[id];?>&type=busy">
+<a href="recycle.php?id=<?echo $_GET[id];?>&type=busy&type_input=<?echo $_GET[type_input];?>">
 Reset <?
 $sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="busy"';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 echo mysql_result($result,0,0);
 ?> busy numbers</a>
 <br />
-<a href="recycle.php?id=<?echo $_GET[id];?>&type=congested">
+<a href="recycle.php?id=<?echo $_GET[id];?>&type=congested&type_input=<?echo $_GET[type_input];?>">
 Reset <?
 $sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="congested"';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 echo mysql_result($result,0,0);
 ?> congested numbers</a>
 <br />
-<a href="recycle.php?id=<?echo $_GET[id];?>&type=dialed">
+<a href="recycle.php?id=<?echo $_GET[id];?>&type=dialed&type_input=<?echo $_GET[type_input];?>">
 Reset <?
 $sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="dialed"';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 echo mysql_result($result,0,0);
 ?> dialed numbers</a>
 <br />
-<a href="recycle.php?id=<?echo $_GET[id];?>&type=dialing">
+<a href="recycle.php?id=<?echo $_GET[id];?>&type=dialing&type_input=<?echo $_GET[type_input];?>">
 Reset <?
 $sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="dialing"';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 echo mysql_result($result,0,0);
 ?> dialing numbers</a>
 <br />
-<a href="recycle.php?id=<?echo $_GET[id];?>&type=amd">
+<a href="recycle.php?id=<?echo $_GET[id];?>&type=amd&type_input=<?echo $_GET[type_input];?>">
 Reset <?
 $sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="amd"';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 echo mysql_result($result,0,0);
 ?> amd numbers</a>
 <br />
-<a href="recycle.php?id=<?echo $_GET[id];?>&type=timeout">
+<a href="recycle.php?id=<?echo $_GET[id];?>&type=timeout&type_input=<?echo $_GET[type_input];?>">
 Reset <?
 $sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="timeout"';
 $result=mysql_query($sql, $link) or die (mysql_error());;
@@ -84,21 +85,21 @@ echo mysql_result($result,0,0);
 ?> No Answer numbers</a>
 <br />
 
-<a href="recycle.php?id=<?echo $_GET[id];?>&type=unknown">
+<a href="recycle.php?id=<?echo $_GET[id];?>&type=unknown&type_input=<?echo $_GET[type_input];?>">
 Reset <?
 $sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status like "unknown%"';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 echo mysql_result($result,0,0);
 ?> Unknown numbers</a>
 <br />
-<a href="recycle.php?id=<?echo $_GET[id];?>&type=hungup">
+<a href="recycle.php?id=<?echo $_GET[id];?>&type=hungup&type_input=<?echo $_GET[type_input];?>">
 Reset <?
 $sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="hungup"';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 echo mysql_result($result,0,0);
 ?> Hungup numbers</a>
 <br />
-<a href="recycle.php?id=<?echo $_GET[id];?>&type=all">
+<a href="recycle.php?id=<?echo $_GET[id];?>&type=all&type_input=<?echo $_GET[type_input];?>">
 Reset <?
 $sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status!="new"';
 $result=mysql_query($sql, $link) or die (mysql_error());;
