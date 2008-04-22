@@ -56,13 +56,7 @@ while ($row = mysql_fetch_assoc($result)) {
     $amaflags[$i] = $row[amaflags];
     $accountcode[$i] = $row[accountcode];
     $userfield[$i] = $row[userfield];
-    $userfield3[$i] = $row[userfield3];
-    if ($userfield3[$i] != 1) {
-        $userfield3[$i] = 0;
-        $paid[$i] = '<td bgcolor="#FFEEEE"><img src="/images/cross.png" border="0" align="center">';
-    } else {
-        $paid[$i] = '<td bgcolor="#EEFFEE"><img src="/images/tick.png" border="0" align="center">';
-    }
+    $userfield2[$i] = $row[userfield2];
     $display = true;
     if ($disposition[$i] == "ANSWERED") {
         $td = "<td bgcolor=\"#CCffCC\">";
@@ -176,7 +170,7 @@ while ($row = mysql_fetch_assoc($result)) {
             //$result_campaign_cost = mysql_query($sql,$link);
             //$campaign_cost = mysql_result($result_campaign_cost,0,0);
             $sql = "UPDATE cdr SET userfield3 = '$campaignid' WHERE calldate='".$calldate[$i]."' AND userfield='".$userfield[$i]."'";
-//            echo $sql."<br>";
+            echo $sql."<br>";
             mysql_query($sql,$cdrlink);
             //$sql = "UPDATE SineDialer.campaign set cost = '".($campaign_cost+$cost[$i])."' WHERE id = ".$campaignid;
             //mysql_query($sql,$link);
