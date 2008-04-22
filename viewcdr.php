@@ -168,7 +168,7 @@ while ($row = mysql_fetch_assoc($result)) {
     }
     //$billtype[$i] = "Per Minute";
     if (!($customerid[$accountcode[$i]]>0)) {
-        $sqlx = "SELECT * from billing where accountcode = '".$accountcode[$i]."'";
+        $sqlx = "SELECT * from SineDialer.billing where accountcode = '".$accountcode[$i]."'";
         //echo $sqlx;
         $resultx = mysql_query($sqlx,$link);
         $priceperminute[$accountcode[$i]] = mysql_result($resultx, 0, 'priceperminute');

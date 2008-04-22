@@ -109,7 +109,7 @@ while ($row = mysql_fetch_assoc($result)) {
     }
     //$billtype[$i] = "Per Minute";
     if (!($customerid[$accountcode[$i]]>0)) {
-        $sqlx = "SELECT * from billing where accountcode = '".$accountcode[$i]."'";
+        $sqlx = "SELECT * from SineDialer.billing where accountcode = '".$accountcode[$i]."'";
         //echo $sqlx;
         $resultx = mysql_query($sqlx,$link);
         $priceperminute[$accountcode[$i]] = mysql_result($resultx, 0, 'priceperminute');
@@ -172,10 +172,10 @@ while ($row = mysql_fetch_assoc($result)) {
             // This is not a split
         } else {
             $campaignid = substr($userfield[$i], $pos + 1);
-            $sql = "SELECT cost FROM campaign WHERE id = ".$campaignid;
+            $sql = "SELECT cost FROM SineDialer.campaign WHERE id = ".$campaignid;
             $result_campaign_cost = mysql_query($sql,$link);
             $campaign_cost = mysql_result($result_campaign_cost,0,0);
-            $sql = "UPDATE campaign set cost = '".($campaign_cost+$cost[$i])."' WHERE id = ".$campaignid;
+            $sql = "UPDATE SineDialer.campaign set cost = '".($campaign_cost+$cost[$i])."' WHERE id = ".$campaignid;
             mysql_query($sql,$link);
         }
         $sql = "update cdr set userfield2 = '1' where calldate = '$calldate[$i]' and duration = '$duration[$i]' and accountcode = '$accountcode[$i]' and userfield = '$userfield[$i]'";
