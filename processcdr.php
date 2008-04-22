@@ -176,6 +176,7 @@ while ($row = mysql_fetch_assoc($result)) {
             $result_campaign_cost = mysql_query($sql,$link);
             $campaign_cost = mysql_result($result_campaign_cost,0,0);
             $sql = "UPDATE campaign set cost = '".($campaign_cost+$cost[$i])."' WHERE id = ".$campaignid;
+            mysql_query($sql,$link);
         }
         $sql = "update cdr set userfield2 = '1' where calldate = '$calldate[$i]' and duration = '$duration[$i]' and accountcode = '$accountcode[$i]' and userfield = '$userfield[$i]'";
         $result_update = mysql_query($sql,$link);
