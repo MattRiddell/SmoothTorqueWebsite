@@ -28,12 +28,19 @@ $maxchans=$_POST[maxchans];
     $result=mysql_query($sql, $link) or die (mysql_error());;
     $insertedID = mysql_insert_id();
 
+    if ($security == 10) {
+    $sql="INSERT INTO customer (username,password,campaigngroupid,address1,address2,city,
+    country,phone,fax,email,website,security,company,trunkid,zip,state)
+    VALUES ('$username','$password','$insertedID','$address1','$address2','$city',
+    '$country','$phone','$fax','$email','$website','$security','$company','$trunkid','$zip','$state')";
+    } else {
     $sql="INSERT INTO customer (username,password,campaigngroupid,address1,address2,city,
     country,phone,fax,email,website,security,company,trunkid,zip,state, maxchans, maxcps)
     VALUES ('$username','$password','$insertedID','$address1','$address2','$city',
     '$country','$phone','$fax','$email','$website','$security','$company','$trunkid','$zip','$state', $maxchans, $maxcps)";
+    }
 
-//    echo $sql;
+    //    echo $sql;
     $result=mysql_query($sql, $link) or die (mysql_error());;
 
 /*================= Log Access ======================================*/
