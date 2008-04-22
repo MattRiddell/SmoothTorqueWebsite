@@ -108,11 +108,11 @@ while ($row = mysql_fetch_assoc($result)) {
     if ($pos === false) {
         // This is not a split
         $phonenumber[$i] = $userfield[$i];
-        echo "no split";
+        //echo "no split";
     } else {
         $campaignid = substr($userfield[$i], $pos + 1);
         $phonenumber[$i] = substr($userfield[$i], 0, $pos);
-        echo "x".$campaignid."x ";
+        //echo "x".$campaignid." - $cost[$i] x ";
     }
 
     $userfield2[$i] = $row[userfield2];
