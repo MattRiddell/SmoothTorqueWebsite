@@ -42,7 +42,7 @@ if ($level==sha1("level100")){
 $cdrlink = mysql_connect($db_host, $db_user, $db_pass) OR die(mysql_error());
 mysql_select_db($config_values['CDR_DB'], $cdrlink);
 $sql = "SELECT count(*) from ".$config_values['CDR_TABLE']." WHERE calldate between '".$_GET['startdate']." 00:00:00' and '".$_GET['enddate']." 23:59:59' and dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' and userfield3='$campaignid_in' ";
-//echo $sql;
+echo $sql;
 $result = mysql_query($sql,$cdrlink) or die (mysql_error());
 $count = mysql_result($result,0,0);
 //echo $count." Total Records";
