@@ -25,7 +25,7 @@ if ($level==sha1("level100")){
 }
 $cdrlink = mysql_connect($db_host, $db_user, $db_pass) OR die(mysql_error());
 mysql_select_db($config_values['CDR_DB'], $cdrlink);
-$sql = "SELECT count(*) from ".$config_values['CDR_TABLE']." WHERE  dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' and userfield2='$campaignid_in' ";
+$sql = "SELECT count(*) from ".$config_values['CDR_TABLE']." WHERE  dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' and userfield3='$campaignid_in' ";
 echo $sql;
 $result = mysql_query($sql,$cdrlink) or die (mysql_error());
 $count = mysql_result($result,0,0);
@@ -58,7 +58,7 @@ for ($i = $pagex;$i<($count/100);$i++) {
 echo '<a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page='.($page+1).'&accountcode='.$accountcode_in.'"><img src="/images/resultset_next.png" border="0"></a> ';
 echo '<a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page='.round($count/100).'&accountcode='.$accountcode_in.'"><img src="/images/resultset_last.png" border="0"></a> ';
 //$sql = "SELECT * from ".$config_values['CDR_TABLE']." order by calldate DESC LIMIT $start,100";
-$sql = "SELECT * from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!=''  and userfield2='$campaignid_in' order by calldate DESC LIMIT $start,100";
+$sql = "SELECT * from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!=''  and userfield3='$campaignid_in' order by calldate DESC LIMIT $start,100";
 
 $result = mysql_query($sql,$cdrlink);
 $i = 0;
