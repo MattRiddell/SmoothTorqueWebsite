@@ -226,7 +226,7 @@ if (mysql_num_rows($result_credit) > 0) {
                 ,'0','30') ";
             $resultx=mysql_query($sql1, $link) or die (mysql_error());;
             $resultx=mysql_query($sql2, $link) or die (mysql_error());;
-            $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), 'System', 'Stopped campaign id $campaignid because credit of $accountcode_in was low')";
+            $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), 'System', 'Stopped campaign id $campaignid because credit of $accountcode_in was low (Credit is now $credit and they spent $totalcost[$accountcode_in] in the last minute)')";
 $result=mysql_query($sql, $link) or die(mysql_error());
 
 
