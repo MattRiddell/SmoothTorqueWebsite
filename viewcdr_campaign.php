@@ -28,7 +28,7 @@ mysql_select_db($config_values['CDR_DB'], $cdrlink);
 $sql = "SELECT count(*) from ".$config_values['CDR_TABLE']." WHERE  dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' and userfield2='$campaignid_in' ";
 $result = mysql_query($sql,$cdrlink) or die (mysql_error());
 $count = mysql_result($result,0,0);
-//echo $count." Total Records";
+echo $count." Total Records";
 $page = $_GET[page];
 if ($_GET[page]>0) {
     $start = $_GET[page]*100;
