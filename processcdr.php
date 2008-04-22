@@ -109,8 +109,11 @@ while ($row = mysql_fetch_assoc($result)) {
     }
     //$billtype[$i] = "Per Minute";
     if (!($customerid[$accountcode[$i]]>0)) {
+        mysql_select_db("SineDialer", $link);
+
         $sqlx = "SELECT * from SineDialer.billing where accountcode = '".$accountcode[$i]."'";
         //echo $sqlx;
+
         $resultx = mysql_query($sqlx,$link);
         $priceperminute[$accountcode[$i]] = mysql_result($resultx, 0, 'priceperminute');
         //echo mysql_result($resultx, 0, 'priceperminute');
@@ -171,6 +174,8 @@ while ($row = mysql_fetch_assoc($result)) {
         if ($pos === false) {
             // This is not a split
         } else {
+            mysql_select_db("SineDialer", $link);
+
             $campaignid = substr($userfield[$i], $pos + 1);
             $sql = "SELECT cost FROM SineDialer.campaign WHERE id = ".$campaignid;
             $result_campaign_cost = mysql_query($sql,$link);
@@ -179,6 +184,8 @@ while ($row = mysql_fetch_assoc($result)) {
             mysql_query($sql,$link);
         }
         $sql = "update cdr set userfield2 = '1' where calldate = '$calldate[$i]' and duration = '$duration[$i]' and accountcode = '$accountcode[$i]' and userfield = '$userfield[$i]'";
+        mysql_select_db("SineDialer", $link);
+
         $result_update = mysql_query($sql,$link);
     }
     $i++;
@@ -191,16 +198,39 @@ while ($row = mysql_fetch_assoc($result)) {
 //echo $totalcost[$accountcode_in];
 $sqlx = "select credit,creditlimit from billing where accountcode = '$accountcode_in'";
 //echo $sqlx;
+mysql_select_db("SineDialer", $link);
+
 $result_credit = mysql_query($sqlx,$link)  or die (mysql_error());
 if (mysql_num_rows($result_credit) > 0) {
     //echo "More than 0 results";
     $credit = mysql_result($result_credit,0,'credit') or die (mysql_error());
     $credit_limit = mysql_result($result_credit,0,'creditlimit');
     if (($credit - $totalcost[$accountcode_in]) != $credit) {
-    echo "[".$accountcode_in."] Credit was $credit and will now be ".($credit - $totalcost[$accountcode_in])."
+        echo "[".$accountcode_in."] Credit was $credit and will now be ".($credit - $totalcost[$accountcode_in])."
 ";
-    $sql = "update billing set credit = ".($credit - $totalcost[$accountcode_in])." where accountcode = '$accountcode_in'";
-    $result_update=mysql_query($sql, $link);
+        $sql = "update billing set credit = ".($credit - $totalcost[$accountcode_in])." where accountcode = '$accountcode_in'";
+        mysql_select_db("SineDialer", $link);
+
+        $result_update=mysql_query($sql, $link);
+        if ($credit - $totalcost[$accountcode_in]- $totalcost[$accountcode_in] < 0) {
+            //This person will run out of money if they do this again
+            mysql_select_db("SineDialer", $link);
+
+            $sql1="delete from queue where campaignid=".$campaignid;
+            $sql2="INSERT INTO queue (campaignid,queuename,status,details,flags,transferclid,
+                starttime,endtime,startdate,enddate,did,clid,context,maxcalls,maxchans,maxretries
+                ,retrytime,waittime) VALUES
+                ('$campaignid','creditstop-$campaignid','2','No details','0','0',
+                '00:00:00','23:59:00','2005-01-01','2020-01-01','123','000',
+                '0','10','500','0'
+                ,'0','30') ";
+            $resultx=mysql_query($sql1, $link) or die (mysql_error());;
+            $resultx=mysql_query($sql2, $link) or die (mysql_error());;
+            $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), 'System', 'Stopped campaign id $campaignid because credit of $accountcode_in was low')";
+$result=mysql_query($sql, $link) or die(mysql_error());
+
+
+        }
     }
 }
 //echo "<hr>";
