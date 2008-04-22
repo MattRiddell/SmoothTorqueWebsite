@@ -166,14 +166,14 @@ while ($row = mysql_fetch_assoc($result)) {
             // This is not a split
         } else {
             $campaignid = substr($userfield[$i], $pos + 1);
-            //$sql = "SELECT cost FROM SineDialer.campaign WHERE id = ".$campaignid;
-            //$result_campaign_cost = mysql_query($sql,$link);
-            //$campaign_cost = mysql_result($result_campaign_cost,0,0);
-            $sql = "UPDATE cdr SET userfield3 = '$campaignid' WHERE calldate='".$calldate[$i]."' AND userfield='".$userfield[$i]."'";
-            echo $sql."<br>";
-            mysql_query($sql,$cdrlink);
-            //$sql = "UPDATE SineDialer.campaign set cost = '".($campaign_cost+$cost[$i])."' WHERE id = ".$campaignid;
-            //mysql_query($sql,$link);
+            $sql = "SELECT cost FROM SineDialer.campaign WHERE id = ".$campaignid;
+            $result_campaign_cost = mysql_query($sql,$link);
+            $campaign_cost = mysql_result($result_campaign_cost,0,0);
+            //$sql = "UPDATE cdr SET userfield3 = '$campaignid' WHERE calldate='".$calldate[$i]."' AND userfield='".$userfield[$i]."'";
+            //echo $sql."<br>";
+            //mysql_query($sql,$cdrlink);
+            $sql = "UPDATE SineDialer.campaign set cost = '".($campaign_cost+$cost[$i])."' WHERE id = ".$campaignid;
+            mysql_query($sql,$link);
         }
         //$sql = "update cdr set userfield3 = '1' where calldate = '$calldate[$i]' and duration = '$duration[$i]' and accountcode = '$accountcode[$i]' and userfield = '$userfield[$i]'";
         //$result_update = mysql_query($sql,$link);
