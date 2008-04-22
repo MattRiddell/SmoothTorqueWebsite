@@ -232,7 +232,11 @@ echo "<A title=\"Delete this campaign\" HREF=\"#\"><IMG SRC=\"/images/delete.png
 <?if ( $config_values['USE_BILLING'] == "YES") {?>
 <TD>
 <?
-echo $config_values['CURRENCY_SYMBOL']." ".number_format($row[cost],2);
+if ($row[cost]>0) {
+    echo $config_values['CURRENCY_SYMBOL']." ".number_format($row[cost],2);
+} else {
+    echo "-";
+}
 ?>
 </TD>
 <?}?>
