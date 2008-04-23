@@ -115,7 +115,7 @@ $licencekey = mysql_result($result,0,'value');
 <br />
 <table class="" align="center" border="0" cellpadding="2" cellspacing="0">
 <tr><td colspan=2><br /><a href="log.php">View System Logs</a></td></tr>
-<tr><td colspan=2><a href="billinglog.php">View Billing Logs</a><br /><br /></td></tr>
+<tr><td colspan=2><a href="billinglog.php">View <?echo $config_values['BILLING_TEXT'];?></a><br /><br /></td></tr>
 
 <tr>
     <td CLASS="thead" colspan="2">Settings</td>
