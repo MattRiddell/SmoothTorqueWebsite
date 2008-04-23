@@ -847,9 +847,9 @@ if (mysql_num_rows($result)==0){
 if ($loggedin){
     if ( $config_values['USE_BILLING'] == "YES") {
         if ($postpay == 1) {
-            echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".date('l dS \of F Y h:i:sA')." Credit: $credit Credit Limit: $creditlimit <a href=\"viewcdr.php\"><img src=\"/images/table.png\" border=\"0\"> Call Details</a> <a href=\"billinglog_account.php\"><img src=\"/images/cart_edit.png\" border=\"0\"> Billing</a></font><br /></center>";
+            echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".date('l dS \of F Y h:i:sA')." Credit: $credit Credit Limit: $creditlimit <a href=\"viewcdr.php\"><img src=\"/images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"billinglog_account.php\"><img src=\"/images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
         } else {
-            echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".date('l dS \of F Y h:i:sA')." Credit: $credit <a href=\"viewcdr.php\"><img src=\"/images/table.png\" border=\"0\"> Call Details</a> <a href=\"billinglog_account.php\"><img src=\"/images/cart_edit.png\" border=\"0\"> Billing</a></font><br /></center>";
+            echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".date('l dS \of F Y h:i:sA')." Credit: $credit <a href=\"viewcdr.php\"><img src=\"/images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"billinglog_account.php\"><img src=\"/images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
         }
     } else {
         echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".date('l dS \of F Y h:i:sA')."</font><br /></center>";
