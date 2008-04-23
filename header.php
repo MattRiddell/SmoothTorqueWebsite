@@ -152,6 +152,14 @@ if ($config_values['VIEW_CAMPAIGN'] == "") {
     $config_values['VIEW_CAMPAIGN'] = "View Campaigns";
 }
 
+if ($config_values['CDR_TEXT'] == "") {
+    $config_values['CDR_TEXT'] = "Call Details";
+}
+
+if ($config_values['BILLING_TEXT'] == "") {
+    $config_values['BILLING_TEXT'] = "Billing Logs";
+}
+
 ?>
 <?
  function _get_browser()

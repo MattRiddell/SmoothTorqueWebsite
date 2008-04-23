@@ -55,6 +55,9 @@ if (isset($_POST[colour])){
     fwrite($add,"NUMBERS_SEARCH=$_POST[NUMBERS_SEARCH]\n");
     fwrite($add,"NUMBERS_TITLE=$_POST[NUMBERS_TITLE]\n");
 
+    fwrite($add,"BILLING_TEXT=$_POST[BILLING_TEXT]\n");
+    fwrite($add,"CDR_TEXT=$_POST[CDR_TEXT]\n");
+
     fwrite($add,"USE_GENERATE=$_POST[USE_GENERATE]\n");
     fwrite($add,"DNC_NUMBERS_TITLE=$_POST[DNC_NUMBERS_TITLE]\n");
     fwrite($add,"DNC_VIEW=$_POST[DNC_VIEW]\n");
@@ -656,6 +659,23 @@ Main Page Login Text:
 
 <tr><td colspan="2"><br /><br /></td></tr><tr><td CLASS="thead" colspan="2">Billing Information</td>
 
+<tr  class="tborder2">
+<td>
+Call Details Text (in header):
+</td>
+<td>
+<input type="Text" name="title" value="<?echo $config_values['CDR_TEXT'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+Billing Text (in header):
+</td>
+<td>
+<input type="Text" name="title" value="<?echo $config_values['BILLING_TEXT'];?>">
+</td>
+</tr>
 
 <tr  class="tborder2">
 <td>
