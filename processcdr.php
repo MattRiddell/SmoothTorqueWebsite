@@ -213,7 +213,7 @@ if (mysql_num_rows($result_credit) > 0) {
         mysql_select_db("SineDialer", $link);
 
         $result_update=mysql_query($sql, $link);
-        if ($credit - $totalcost[$accountcode_in]- $totalcost[$accountcode_in] < 0 - $credit_limit[$accountcode_in]) {
+        if ($credit - $totalcost[$accountcode_in] - $totalcost[$accountcode_in] - $totalcost[$accountcode_in] < 0 - $credit_limit[$accountcode_in]) {
             //This person will run out of money if they do this again
             mysql_select_db("SineDialer", $link);
 

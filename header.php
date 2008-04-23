@@ -378,6 +378,12 @@ $self=$_SERVER['PHP_SELF'];
 ?>
 <HTML>
 <HEAD>
+
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+
+
+
 <TITLE><?echo $config_values['TITLE'];?></TITLE>
 <link rel="stylesheet" type="text/css" href="/css/stylelogin.css">
 <link rel="stylesheet" type="text/css" href="/css/default.css">

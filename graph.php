@@ -1,7 +1,7 @@
 <?php
 include "admin/db_config.php";
 mysql_select_db("SineDialer", $link);
-
+$MAX_ENTRIES = 720;
 $id=$_GET[id];
 if ($id<1){
         exit(0);
@@ -86,7 +86,9 @@ foreach ($lines as $line_num => $line) {
         if ($count<720){
                 if (strlen(trim($line))>0){
                         $count++;
-                        $avgPerc+=trim($line);
+                        //if ($timespent > $count) {
+                            $avgPerc+=trim($line);
+                        //}
                         if(trim($line)>$highest){
                             $highest = trim($line);
                         }
@@ -108,15 +110,19 @@ foreach ($lines2 as $line_num2 => $line2) {
         }
 }
 if ($count > 0) {
-    $avgPerc/=$count;
+    if ($timespent > $count) {
+        $avgPerc/=$count;
+    } else {
+        $avgPerc/=$timespent;
+    }
 }
-if ($timespent<$MAX_ENTRIES) {
+/*if ($timespent<$MAX_ENTRIES) {
         $avgPerc=0;
-        for ($i=$MAX_ENTRIES;$i>=0;$i--){
+        for ($i=0;$i<$MAX_ENTRIES;$i++){
                 $avgPerc+=$chart [ 'chart_data' ][ 1 ][ $i ];
         }
         $avgPerc/=$timespent;
-}
+}*/
 include ( "./jpgraph.php");
 include ("./jpgraph_line.php");
 include ("./jpgraph_bar.php");

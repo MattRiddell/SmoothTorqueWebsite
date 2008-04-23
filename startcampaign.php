@@ -83,6 +83,12 @@ $result=mysql_query($sql, $link);
         <META HTTP-EQUIV=REFRESH CONTENT="10; URL=/campaigns.php">
         <?
         exit(0);
+    } else {
+/*================= Log Access ======================================*/
+$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Does have credit to start campaign (Credit: $credit Credit Limit: $credit_limit)')";
+$result=mysql_query($sql, $link);
+/*================= Log Access ======================================*/
+
     }
 }
 
