@@ -51,6 +51,9 @@ if (!isset($_GET[id])) {
 if (isset($_POST[credit])){
     $credit = $_POST[credit];
     $credit2 = $_POST[credit];
+    $receipt = $_POST[receipt];
+    $paymentmode = $_POST[paymentmode];
+
 $sql = 'SELECT accountcode FROM billing WHERE customerid='.$_GET[id];
 $result=mysql_query($sql, $link);
 $accountcode = mysql_result($result,0,0);
@@ -70,7 +73,7 @@ $before = mysql_result($result,0,0);
 /*================= Log Access ======================================*/
 $addedby = $_COOKIE[user];
 
-$sql = "INSERT INTO billinglog (timestamp, username, activity, addedby) VALUES (NOW(), '$accountcode', '$credit','$addedby')";
+$sql = "INSERT INTO billinglog (timestamp, username, activity, addedby, receipt, paymentmode) VALUES (NOW(), '$accountcode', '$credit','$addedby', '$receipt', '$paymentmode')";
 $result=mysql_query($sql, $link);
 
 $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', '".$addedby." Added ".$credit." credit to customer: ".$accountcode."')";
@@ -136,6 +139,21 @@ while ($row = mysql_fetch_assoc($result)) {
 
 <TR><TD CLASS="thead">Funds to add</TD><TD>
 <INPUT TYPE="TEXT" NAME="credit" size="60" value="0.00">
+</TD>
+</TR>
+
+<TR><TD CLASS="thead">Receipt Number</TD><TD>
+<INPUT TYPE="TEXT" NAME="receipt" size="60">
+</TD>
+</TR>
+
+<TR><TD CLASS="thead">Payment Mode</TD><TD>
+<SELECT NAME="paymentmode">
+<OPTION VALUE="Cash Payment">Cash</OPTION>
+<OPTION VALUE="Bank Deposit">Bank Deposit</OPTION>
+<OPTION VALUE="Credit Card">Credit Card</OPTION>
+<OPTION VALUE="Other">Other</OPTION>
+</SELECT>
 </TD>
 </TR>
 

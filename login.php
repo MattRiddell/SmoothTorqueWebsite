@@ -45,6 +45,8 @@ if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","billinglog")){
   $sql = "CREATE TABLE `billinglog` (
   `timestamp` timestamp NULL default NULL on update CURRENT_TIMESTAMP,
   `activity` varchar(255) default NULL,
+  `receipt` varchar(255) default NULL,
+  `paymentmode` varchar(255) default NULL,
   `username` varchar(255) default NULL,
   `addedby` varchar(255) default NULL
   )";
@@ -478,7 +480,7 @@ if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","stage")){
 }
 
 /*======================================================================
-                        Trunk 
+                        Trunk
   ======================================================================*/
 if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","trunk")){
   include "admin/db_config.php";
@@ -519,6 +521,31 @@ if (!in_array('cost', $field_array))
     $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added campaign cost field')";
     $result=mysql_query($sql, $link);
 }
+
+/*****************************************************************
+*           ALTER BILLING TABLE TO ADD receipt FIELD             *
+******************************************************************/
+
+$fields = mysql_list_fields('SineDialer', 'billinglog', $link);
+$columns = mysql_num_fields($fields);
+for ($i = 0; $i < $columns; $i++) {
+    $field_array[] = mysql_field_name($fields, $i);
+}
+
+if (!in_array('receipt', $field_array))
+{
+    $result = mysql_query('ALTER TABLE billinglog ADD receipt VARCHAR(255)');
+    $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added billinglog receipt field')";
+    $result=mysql_query($sql, $link);
+}
+
+if (!in_array('paymentmode', $field_array))
+{
+    $result = mysql_query('ALTER TABLE billinglog ADD paymentmode VARCHAR(255)');
+    $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added billinglog paymentmode field')";
+    $result=mysql_query($sql, $link);
+}
+
 
 
 /*
