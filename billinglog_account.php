@@ -5,7 +5,7 @@ if (!isset($_GET[startdate])){
 <br />
 Please select the dates you would like to view:<br />
 <br />
-<form action="billinglog.php">
+<form action="billinglog_account.php">
 From: <input name="startdate">
 <input type=button value="select" onclick="displayDatePicker('startdate', false, 'ymd', '-');"><BR>
 To: <input name="enddate">
@@ -23,7 +23,7 @@ $enddate = $_GET[startdate];
 $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Viewed the billing logs')";
 $result=mysql_query($sql, $link);
 /*================= Log Access ======================================*/
-    $sql = "select * from billinglog where timestamp between '".$_GET['startdate']." 00:00:00' and '".$_GET['enddate']." 23:59:59' order by timestamp desc";
+    $sql = "select * from billinglog where timestamp between '".$_GET['startdate']." 00:00:00' and '".$_GET['enddate']." 23:59:59' and username='stl-$_COOKIE[user]' order by timestamp desc";
     $result=mysql_query($sql, $link);
     echo "<br /><center><table border=\"0\">";
     echo "<tr><td>TimeStamp</td><td>Amount</td><td>Receipt</td><td>Payment Mode</td><td>User Name</td><td>Added By</td></tr>";
