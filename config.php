@@ -664,7 +664,7 @@ Main Page Login Text:
 Call Details Text (in header):
 </td>
 <td>
-<input type="Text" name="title" value="<?echo $config_values['CDR_TEXT'];?>">
+<input type="Text" name="CDR_TEXT" value="<?echo $config_values['CDR_TEXT'];?>">
 </td>
 </tr>
 
@@ -673,7 +673,7 @@ Call Details Text (in header):
 Billing Text (in header):
 </td>
 <td>
-<input type="Text" name="title" value="<?echo $config_values['BILLING_TEXT'];?>">
+<input type="Text" name="BILLING_TEXT" value="<?echo $config_values['BILLING_TEXT'];?>">
 </td>
 </tr>
 
