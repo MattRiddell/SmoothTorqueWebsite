@@ -11,6 +11,7 @@ $lastRate=0;
 $lastPerc=0;
 $lines2=file("/tmp/Sm".$id.".campaignProperties");
 $first=true;
+$total_count_x = 0;
 foreach ($lines2 as $line_num => $line) {
         if (strlen(trim($line))>0){
                 if (substr(trim($line),0,3)=="Min") {
@@ -83,6 +84,7 @@ for ($i=1;$i<721;$i++){
 $count = 0;
 $highest = 0;
 foreach ($lines as $line_num => $line) {
+        $total_count_x++;
         if ($count<720){
                 if (strlen(trim($line))>0){
                         $count++;
@@ -99,6 +101,7 @@ foreach ($lines as $line_num => $line) {
 }
 $count = 0;
 foreach ($lines2 as $line_num2 => $line2) {
+        $total_count_x++;
         if ($count<720){
                 if (strlen(trim($line2))>0){
                         $count++;
@@ -109,7 +112,17 @@ foreach ($lines2 as $line_num2 => $line2) {
                 }
         }
 }
-if ($count > 0) {
+if ($total_count_x == 0) {
+    $count = 720;
+    for ($i=1;$i<721;$i++){
+        $array1[$i] = 0;
+        $array2[$i] = 0;
+        $array3[$i] = 0;
+        $array4[$i] = 0;
+        $array5[$i] = 0;
+        $ms = 1000;
+    }
+} else if ($count > 0) {
     if ($timespent > $count) {
         $avgPerc/=$count;
     } else {
