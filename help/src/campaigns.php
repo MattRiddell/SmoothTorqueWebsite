@@ -1,5 +1,5 @@
 <h3>Create New Campaign</h3>
-<p align="left">Click on the Campaigns tab. When you first login there are no campaigns created for you. We're going to create one now. Click on the Add Campaign button. The next screen has a form that needs to be filled out. Follow the example in the image below.</p>
+<p align="left">Click on the <?echo $config_values['MENU_CAMPAIGNS'];?> tab. When you first login there are no campaigns created for you. We're going to create one now. Click on the Add Campaign button. The next screen has a form that needs to be filled out. Follow the example in the image below.</p>
 
 <img src="images/add_campaign.png" alt="Add campaign">
 <h3>Types of Campaign</h3>

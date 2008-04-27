@@ -2,7 +2,7 @@
 <p align="left">The aim of this part is to provide a quick introduction for <?echo $config_values['TITLE'];?>. This quick start will show you how to create campaigns. For this we're going to create a simple Load Simulation campaign.</p>
 
 <h3>Create New Campaign</h3>
-<p align="left">Click on the Campaigns tab. When you first login there are no campaigns created for you. We're going to create one now. Click on the Add Campaign button. The next screen has a form that needs to be filled out. Follow the example in the image below.</p>
+<p align="left">Click on the <?echo $config_values['MENU_CAMPAIGNS'];?> tab. When you first login there are no campaigns created for you. We're going to create one now. Click on the Add Campaign button. The next screen has a form that needs to be filled out. Follow the example in the image below.</p>
 
 <img src="images/add_campaign.png" alt="Add campaign">
 <h3>Types of Campaign</h3>
@@ -124,7 +124,7 @@ button. You will then be presented with a dialog like the one below.</p>
 <p align="left">In a normal campaign you would upload the message to be played to people who pickup the phone (or to answer machines, or to fax machines). The file has to be wav format and can be recorded in any recording software. For this campaign we don't need to bother setting a message as it's a load simulation only. For every other type of campaign, you <em>must</em> have a message.
 
 <h3>Starting the Campaign</h3>
-<p align="left">We are now ready to start the campaign. Click on the Campaigns tab, this gets you back to the list of campaigns. Press the 'play' button to start the campaign. You should breifly see a message telling you that the campaign is starting, when that message goes away you can see the status of the campaign. If you click on the line graph button, you can see the status of the engine.</p>
+<p align="left">We are now ready to start the campaign. Click on the <?echo $config_values['MENU_CAMPAIGNS'];?> tab, this gets you back to the list of campaigns. Press the 'play' button to start the campaign. You should breifly see a message telling you that the campaign is starting, when that message goes away you can see the status of the campaign. If you click on the line graph button, you can see the status of the engine.</p>
 
 <img src="images/running.png" alt="The running campaign">
 
