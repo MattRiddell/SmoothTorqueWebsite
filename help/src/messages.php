@@ -1,4 +1,4 @@
-<p align="left">SmoothTorque is capable of two types of campaigns; telephone and fax. <br />
+<p align="left"><?echo $config_values['TITLE'];?> is capable of two types of campaigns; telephone and fax. <br />
 <br />
 This is where the messages are uploaded for your campaigns. <br />
 <br />

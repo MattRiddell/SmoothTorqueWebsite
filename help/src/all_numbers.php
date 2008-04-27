@@ -21,7 +21,7 @@ you use them.</p>
 <p align="left">Using this method you will be presented with a box where you put numbers in.</p>
 
 <h4>Generating numbers automatically</h4>
-<p align="left">SmoothTorque generates numbers for you. </p>
+<p align="left"><?echo $config_values['TITLE'];?> generates numbers for you. </p>
 <p align="left">The first step is to determine the format of the numbers
 that you wish to dial. For example, if we were to generate all the numbers
 for Dunedin, New Zealand (and we're dialing internationally), then we'd

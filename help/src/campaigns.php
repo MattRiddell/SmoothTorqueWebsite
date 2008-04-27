@@ -3,7 +3,7 @@
 
 <img src="images/add_campaign.png" alt="Add campaign">
 <h3>Types of Campaign</h3>
-<p align="left">In SmoothTorque there are seven types of campaign (with more planned). Their properties are outlined in the table below.</p>
+<p align="left">In <?echo $config_values['TITLE'];?> there are seven types of campaign (with more planned). Their properties are outlined in the table below.</p>
 
 <table align="center">
 	<tr>
@@ -101,4 +101,4 @@
 
 <p align="left">There are slightly different options for the different types of campaign. For a DID Mode campaign, you have the option of sending out Caller ID information, as well as specifying the number of simultaneous calls that the call center can handel.</p>
 
-<p align="left">The Queue Mode specific option is to specify the name of the queue. Note: The queue must exist in Asterisk (as either a RealTime Queue --- as set up by SmoothTorque, or as a static queue in queue.conf) before you can use this feature.</p>
+<p align="left">The Queue Mode specific option is to specify the name of the queue. Note: The queue must exist in Asterisk (as either a RealTime Queue --- as set up by <?echo $config_values['TITLE'];?>, or as a static queue in queue.conf) before you can use this feature.</p>

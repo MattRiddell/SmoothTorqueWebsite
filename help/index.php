@@ -2,7 +2,7 @@
 require "../header.php";
 ?>
 <html>
-<head><title>SmoothTorque Linux Help Manual</title></head>
+<head><title><?echo $config_values['TITLE'];?> Help Manual</title></head>
 
 
 <script language="JavaScript" type="text/JavaScript">

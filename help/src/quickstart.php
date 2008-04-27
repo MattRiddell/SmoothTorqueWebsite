@@ -1,12 +1,12 @@
 <h3>Introduction</h3>
-<p align="left">The aim of this part is to provide a quick introduction for SmoothTorque. This quick start will show you how to create campaigns. For this we're going to create a simple Load Simulation campaign.</p>
+<p align="left">The aim of this part is to provide a quick introduction for <?echo $config_values['TITLE'];?>. This quick start will show you how to create campaigns. For this we're going to create a simple Load Simulation campaign.</p>
 
 <h3>Create New Campaign</h3>
 <p align="left">Click on the Campaigns tab. When you first login there are no campaigns created for you. We're going to create one now. Click on the Add Campaign button. The next screen has a form that needs to be filled out. Follow the example in the image below.</p>
 
 <img src="images/add_campaign.png" alt="Add campaign">
 <h3>Types of Campaign</h3>
-<p align="left">In SmoothTorque there are seven types of campaign (with
+<p align="left">In <?echo $config_values['TITLE'];?> there are seven types of campaign (with
 more planned). Their properties are outlined in the table below.</p>
 
 <table border="0">

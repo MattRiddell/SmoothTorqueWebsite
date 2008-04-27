@@ -1,6 +1,6 @@
 <p align="left">Here is where you specify the different trunks that calls can go out on. This also requires that Asterisk be correctly configured.</p>
 
-<p align="left">To add a trunk, click on the Add Trunk item. You will then have 4 fields to fill out. The first is a trunk name (this is a name that SmoothTorque can use), the next is the Dial String (examples of which are given below), the next options specify the maximum number of calls per second and the maximum number of channels this trunk can support.</p>
+<p align="left">To add a trunk, click on the Add Trunk item. You will then have 4 fields to fill out. The first is a trunk name (this is a name that <?echo $config_values['TITLE'];?> can use), the next is the Dial String (examples of which are given below), the next options specify the maximum number of calls per second and the maximum number of channels this trunk can support.</p>
 
 <p align="left">The dial strings used here are sent directly to asterisk, so should be in a format that Asterisk understands. Some example dial strings are in the table below.</p>
 <table>
