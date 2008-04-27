@@ -94,6 +94,7 @@ Percentage Busy
 <?
 
 while ($row = mysql_fetch_assoc($result)) {
+    flush();
     $row = array_map(stripslashes,$row);
     if ($toggle){
         $toggle=false;
