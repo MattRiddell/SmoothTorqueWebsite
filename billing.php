@@ -105,7 +105,7 @@ while ($row = mysql_fetch_assoc($result)) {
 </TD>
 </TR>
 
-<TR><TD CLASS="thead">Price Per Lead</TD><TD>
+<TR><TD CLASS="thead"><?echo $config_values['PER_LEAD'];?></TD><TD>
 <INPUT TYPE="TEXT" NAME="pricepercall" VALUE="<?echo $row[pricepercall];?>" size="60">
 </TD>
 </TR>

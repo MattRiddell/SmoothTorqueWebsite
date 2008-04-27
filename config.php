@@ -63,7 +63,7 @@ if (isset($_POST[colour])){
     fwrite($add,"DNC_VIEW=$_POST[DNC_VIEW]\n");
     fwrite($add,"DNC_UPLOAD=$_POST[DNC_UPLOAD]\n");
     fwrite($add,"DNC_ADD=$_POST[DNC_ADD]\n");
-
+    fwrite($add,"PER_LEAD=$_POST[PER_LEAD]\n");
 
     fclose($add);
 
@@ -692,6 +692,15 @@ Per Minute Wording in CDR
 </td>
 <td>
 <input type="Text" name="PER_MINUTE" value="<?echo $config_values['PER_MINUTE'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+Price per lead wording
+</td>
+<td>
+<input type="Text" name="PER_LEAD" value="<?echo $config_values['PER_LEAD'];?>">
 </td>
 </tr>
 

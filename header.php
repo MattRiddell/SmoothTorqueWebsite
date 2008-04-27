@@ -55,8 +55,9 @@ if ($config_values['PER_PAGE'] == "") {
     $config_values['PER_PAGE'] = "20";
 }
 
-
-
+if ($config_values['PER_LEAD'] == "") {
+    $config_values['PER_LEAD'] = "Price Per Lead";
+}
 if ($config_values['DNC_NUMBERS_TITLE'] == "") {
     $config_values['DNC_NUMBERS_TITLE'] = "Do Not Call List";
 }
