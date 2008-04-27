@@ -36,7 +36,8 @@ if (!isset($_GET[id])) {
         <?
         //echo '<A HREF="addfunds.php?id='.$row[id].'">'.$row[company].'</a>';
     }
-    ?>        </select>  <br /><br /><input type="submit" value="Select Customer">
+    ?>        </select>
+    <br /><br /><input type="submit" value="Select Customer">
 
         </form><br />
 </td>
@@ -46,8 +47,36 @@ if (!isset($_GET[id])) {
 </center>
       <?
 } else {
+if (!isset($_GET[confirm]) && isset($_POST[credit])) {
+include "header.php";
+?>
+<form action = "addfunds.php?id=<?echo $_GET[id];?>&confirm=yes" method="post">
+<input type="hidden" name="credit" value="<?echo $_POST[credit]?>">
+<input type="hidden" name="receipt" value="<?echo $_POST[receipt]?>">
+<input type="hidden" name="paymentmode" value="<?echo $_POST[paymentmode]?>">
+    <br /><br /><br /><br />
+<center>
+<table background="/images/sdbox.png" width="300" height="200" class="dragme22">
+<tr>
+<td>
+</td>
+<td width="260">
+Are you sure you would like to Add funds to <?echo $_POST[company];?>?
+Doing so will immediately update their funds. <br />
+<br />
+<input type="submit" value="Yes">
+<input type="button" value="No" onclick="window.location='addfunds.php'">
 
-
+<br />
+</td>
+<td>
+</td></tr>
+</table>
+</center>
+</form>
+<?
+exit(0);
+} else {
 if (isset($_POST[credit])){
     $credit = $_POST[credit];
     $credit2 = $_POST[credit];
@@ -112,7 +141,7 @@ $result=mysql_query($sql, $link);
 <?
 exit(0);
 }
-
+}
 //require "header_campaign.php";
 $pagenum="2";
 require "header.php";
@@ -156,6 +185,7 @@ while ($row = mysql_fetch_assoc($result)) {
 </SELECT>
 </TD>
 </TR>
+<INPUT TYPE="HIDDEN" NAME="company" value="<?echo $row[accountcode];?>">
 
 <TR><TD COLSPAN=2 ALIGN="RIGHT">
 <INPUT TYPE="SUBMIT" VALUE="Add Funds">
