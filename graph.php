@@ -113,7 +113,7 @@ foreach ($lines2 as $line_num2 => $line2) {
                 }
         }
 }
-
+$highest_ms = 0;
 if ($_GET[debug]>0){
     $count = 0;
     foreach ($lines3 as $line_num3 => $line3) {
@@ -121,9 +121,23 @@ if ($_GET[debug]>0){
             if ($count<720){
                     if (strlen(trim($line3))>0){
                             $count++;
+                            if (trim($line3) > $highest_ms) {
+                                $highest_ms = trim($line3);
+                            }
+                    }
+            }
+    }
+    $count = 0;
+    foreach ($lines3 as $line_num3 => $line3) {
+            //$total_count_x++;
+            if ($count<720){
+                    if (strlen(trim($line3))>0){
+                            $count++;
                             if (trim($line3) > 0) {
-                                $newnumber = trim($line3)/1000;
-                                $array_ms[ $count ] = 100-(20 * (log10($newnumber) + 2.7));
+                                //$newnumber = trim($line3)/1000;
+                                //$array_ms[ $count ] = 100-(20 * (log10($newnumber) + 2.7));
+                                $array_ms[ $count ] = 101-(trim($line3)/($highest_ms)* 100);
+//                                $array_ms[ $count ] = 100-(20 * (log10($newnumber) + 2.7));
                             } else {
                                 $array_ms[ $count ] = 0;
                             }

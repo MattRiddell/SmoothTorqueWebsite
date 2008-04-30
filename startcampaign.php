@@ -95,6 +95,10 @@ if ( $config_values['USE_BILLING'] == "YES") {
         if ($maxcalls < 1) {
             $allowed_to_start = false;
         }
+/*================= Log Access ======================================*/
+$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', ' is only allowed to make $maxcalls calls because their credit is ".($credit + $credit_limit)." and the total cost per call is $onecall based on an audio length of ".$length.", a per minute cost of $priceperminute and a lead cost of $pricepercall')";
+$result=mysql_query($sql, $link);
+/*================= Log Access ======================================*/
         //exit(0);
     }
     if (!$allowed_to_start) {
