@@ -523,6 +523,23 @@ if (!in_array('cost', $field_array))
 }
 
 /*****************************************************************
+*           ALTER MESSAGE TABLE TO ADD length FIELD             *
+******************************************************************/
+
+$fields = mysql_list_fields('SineDialer', 'campaignmessage', $link);
+$columns = mysql_num_fields($fields);
+for ($i = 0; $i < $columns; $i++) {
+    $field_array[] = mysql_field_name($fields, $i);
+}
+
+if (!in_array('receipt', $field_array))
+{
+    $result = mysql_query('ALTER TABLE campaignmessage ADD length VARCHAR(255)');
+    $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added campaignmessage length field')";
+    $result=mysql_query($sql, $link);
+}
+
+/*****************************************************************
 *           ALTER BILLING TABLE TO ADD receipt FIELD             *
 ******************************************************************/
 

@@ -71,6 +71,7 @@ foreach ($lines2 as $line_num => $line) {
 }
 $lines=file("/tmp/Sm".$id.".console");
 $lines2=file("/tmp/Sm".$id.".console2");
+$lines3=file("/tmp/Sm".$id.".console3");
 
 for ($i=1;$i<721;$i++){
         $chart [ 'chart_data' ][ 0 ][ $i ] = 720-$i;
@@ -112,6 +113,26 @@ foreach ($lines2 as $line_num2 => $line2) {
                 }
         }
 }
+
+if ($_GET[debug]>0){
+    $count = 0;
+    foreach ($lines3 as $line_num3 => $line3) {
+            //$total_count_x++;
+            if ($count<720){
+                    if (strlen(trim($line3))>0){
+                            $count++;
+                            if (trim($line3) > 0) {
+                                $newnumber = trim($line3)/1000;
+                                $array_ms[ $count ] = 100-(20 * (log10($newnumber) + 2.7));
+                            } else {
+                                $array_ms[ $count ] = 0;
+                            }
+                            $lastSpeed_ms=trim($line3);
+                    }
+            }
+    }
+}
+
 if ($total_count_x == 0) {
     $count = 720;
     for ($i=1;$i<721;$i++){
@@ -120,6 +141,7 @@ if ($total_count_x == 0) {
         $array3[$i] = 0;
         $array4[$i] = 0;
         $array5[$i] = 0;
+        $array_ms[$i] = 0;
         $ms = 1000;
     }
 } else if ($count > 0) {
@@ -155,10 +177,15 @@ $graph2 = new Graph(1040, 400);
 //echo $highest;
 if ($highest>100){
 	$graph2->SetScale('linlin',0,$highest,1,719);
+//	$graph2->SetYScale(0,'lin',0,$highest);
+//	$graph2->SetXScale(0,'lin',1,719);
 } else {
 //	$graph2->SetScale('linlin',0,$highest,1,239);
 	$graph2->SetScale('linlin',0,100,1,719);
 }
+
+
+
 //$graph2->SetScale('linlin');
 $graph2->xaxis->SetTickLabels($aaa);
 $graph2->xaxis->SetTextLabelInterval(1);
@@ -220,6 +247,13 @@ $graph2->Add($runningSpeedPlot2[0]);
 $graph2->Add($runningSpeedPlot[0]);
 $graph2->Add($speedAtractorPlot2[0]);
 $graph2->Add($speedAtractorPlot[0]);
+if ($_GET[debug]>0){
+//$graph2->SetYScale(2,'lin',0,500,1,719);
+
+$msPlot[] = new LinePLot($array_ms);
+    $msPlot[0]->SetWeight(2);
+    $graph2->Add($msPlot[0]);
+}
 $graph2->SetShadow();
 $graph2->img->SetAntiAliasing(true);
 

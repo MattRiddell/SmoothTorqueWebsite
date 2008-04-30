@@ -23,14 +23,15 @@ if (isset($_POST[name])){
     $name=$_POST[name];
     $description=$_POST[description];
     $filename=$_POST[filename];
+    $length=$_POST[length];
 
 //    $sql="INSERT INTO campaign (groupid,name,description,messageid,messageid2,messageid3) VALUES ('customerid','$name', '$description', '$filename')";
 //    echo $sql;
 
 /*    require_once "sql.php";
     $SMDB2=new SmDB();*/
-    $sql="insert  into campaignmessage (filename,name,description,customer_id) values".
-         "('$filename', '$name', '$description',$campaigngroupid)";
+    $sql="insert  into campaignmessage (filename,name,description,customer_id,length) values".
+         "('$filename', '$name', '$description',$campaigngroupid,'$length')";
     $result=mysql_query($sql, $link) or die (mysql_error());;
 /*    $SMDB2->executeUpdate($sql);*/
 
@@ -59,6 +60,22 @@ $campaigngroupid=$groupid;
 <TR><TD CLASS="thead">Message Description</TD><TD>
 <INPUT TYPE="TEXT" NAME="description" VALUE="<?echo $row[description];?>" size="60">
 <INPUT TYPE="HIDDEN" NAME="filename" VALUE="<?echo $row[filename];?><?if(isset($_GET[filename])){echo $_GET[filename];}?>" size="60">
+<?
+$command = $config_values['SOX']." uploads/".str_replace("sln","wav",str_replace(" ","\ ",$_GET[filename])).' -e stat';
+//$command = "sox";
+//echo $command;
+$x = exec($command." 2>&1",$y);
+$z = explode(" ",$x);
+//echo nl2br($y);
+//print_r($y);
+foreach ($y as $line) {
+    if (substr($line,0,6) == "Length") {
+        $length = trim(substr(strstr($line, ": "),2));
+        //echo $length."<br />";
+    }
+}
+?>
+<INPUT TYPE="HIDDEN" NAME="length" VALUE="<?echo $length;?>" size="60">
 </TD>
 </TR>
 

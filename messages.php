@@ -45,6 +45,9 @@ Name
 Description
 </TD>
 <TD CLASS="thead">
+Length
+</TD>
+<TD CLASS="thead">
 </TD>
 <TD CLASS="thead">
 
@@ -89,6 +92,14 @@ if (strlen($row[description])<25){
 echo $row[description];
 } else {
 echo trim(substr($row[description],0,25))."...";
+}
+?>
+</TD>
+<TD>
+<?if (substr($row[filename],0,2) == "x-") {
+echo round($row[length],2);
+} else {
+echo "N/A";
 }
 ?>
 </TD>

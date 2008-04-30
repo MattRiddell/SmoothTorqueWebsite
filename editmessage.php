@@ -23,10 +23,11 @@ if (isset($_POST[name])){
     $name=$_POST[name];
     $description=$_POST[description];
     $filename=$_POST[filename];
+    $length = $_POST[length];
 //    $sql="INSERT INTO campaign (groupid,name,description,messageid,messageid2,messageid3) VALUES ('customerid','$name', '$description', '$filename')";
 //    echo $sql;
 
-    $sql="update campaignmessage set filename='$filename',name='$name',description='$description'".
+    $sql="update campaignmessage set filename='$filename',name='$name',description='$description', length='$length'".
          " where id=$id";
 $result=mysql_query($sql, $link) or die (mysql_error());;
 
@@ -76,8 +77,23 @@ $row = mysql_fetch_assoc($result);
 <INPUT TYPE="SUBMIT" VALUE="Save Message">
 </TD>
 </TR>
+
 <?
+$command = $config_values['SOX']." uploads/".str_replace("sln","wav",str_replace(" ","\ ",$row[filename])).' -e stat';
+//$command = "sox";
+//echo $command;
+$x = exec($command." 2>&1",$y);
+$z = explode(" ",$x);
+//echo nl2br($y);
+//print_r($y);
+foreach ($y as $line) {
+    if (substr($line,0,6) == "Length") {
+        $length = trim(substr(strstr($line, ": "),2));
+        //echo $length."<br />";
+    }
+}
 ?>
+<INPUT TYPE="HIDDEN" NAME="length" VALUE="<?echo $length;?>" size="60">
 
 </TABLE>
 </FORM>
