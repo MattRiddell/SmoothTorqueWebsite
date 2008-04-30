@@ -22,7 +22,7 @@ if ($type_of_campaign == 8) {
 
 
 $found = 0;
-$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status!="new" and status!="dialing" and status!="dialed" and status!="answered" '.$timedate;
+$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status!="no-credit" status!="new" and status!="dialing" and status!="dialed" and status!="answered" '.$timedate;
 $result2=mysql_query($sql, $link) or die (mysql_error());;
 $total=mysql_result($result2,0,'count(*)');
 if ($total<1) {
@@ -116,7 +116,7 @@ if ($dialed<1) {
     $found = 1;
 }
 
-$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="new"';
+$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and (status="new" or status="no-credit")';
 $result2=mysql_query($sql, $link) or die (mysql_error());;
 $new=mysql_result($result2,0,'count(*)');
 if ($new<1) {

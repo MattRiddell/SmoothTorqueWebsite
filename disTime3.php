@@ -128,7 +128,7 @@ echo trim(substr($row[description],0,$max_str_len))."...";
 ?>
 </TD>
 <?
-$sql = 'SELECT count(*) from number where campaignid='.$row[id].' and status="new"';
+$sql = 'SELECT count(*) from number where campaignid='.$row[id].' and (status="new" or status="no-credit")';
 $result2=mysql_query($sql, $link) or die (mysql_error());;
 $new=mysql_result($result2,0,'count(*)');
 

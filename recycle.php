@@ -101,7 +101,7 @@ echo mysql_result($result,0,0);
 <br />
 <a href="recycle.php?id=<?echo $_GET[id];?>&type=all&type_input=<?echo $_GET[type_input];?>">
 Reset <?
-$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status!="new"';
+$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status!="new" and status!="no-credit"';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 echo mysql_result($result,0,0);
 ?> All numbers</a>

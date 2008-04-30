@@ -42,8 +42,19 @@ $maxchans=mysql_result($result,0,'maxchans');
 $maxcps=mysql_result($result,0,'maxcps');
 $username=$_COOKIE[user];
 
+$sqlx = "SELECT messageid FROM campaign WHERE id=$_GET[id]";
+$result=mysql_query($sqlx, $link) or die (mysql_error());;
+$messageid=mysql_result($result,0,'messageid');
+
+$sqlx = "SELECT length FROM campaignmessage WHERE id=$messageid";
+$result=mysql_query($sqlx, $link) or die (mysql_error());;
+$length=mysql_result($result,0,'length');
+
+
+
+
 if ( $config_values['USE_BILLING'] == "YES") {
-    $sql = "Select credit, creditlimit from billing where accountcode = 'stl-$username'";
+    $sql = "Select credit, creditlimit, priceperminute, pricepercall from billing where accountcode = 'stl-$username'";
 
     //echo $sql;
     $result_credit = mysql_query($sql, $link);
@@ -51,6 +62,8 @@ if ( $config_values['USE_BILLING'] == "YES") {
     if (mysql_num_rows($result_credit) > 0) {
         $credit = mysql_result($result_credit,0,"credit");
         $credit_limit = mysql_result($result_credit,0,"creditlimit");
+        $priceperminute = mysql_result($result_credit,0,"priceperminute");
+        $pricepercall = mysql_result($result_credit,0,"pricepercall");
     } else {
         $credit = 0;
         $credit_limit = 0;
@@ -63,6 +76,26 @@ if ( $config_values['USE_BILLING'] == "YES") {
         }
     } else {
         $allowed_to_start = true;
+    }
+    if ($allowed_to_start) {
+        //echo "Credit: ".$credit."<br />";
+        //echo "Credit Limit: ".$credit_limit."<br />";
+        //echo "Price Per Minute: ".$priceperminute."<br />";
+        //echo "Price Per Call: ".$pricepercall."<br />";
+        //echo "Message Length: ".$length."<br />";
+        // Each call will take the price per minute * length/60
+        $onecall = $priceperminute * ($length/60);
+        $onecall += $pricepercall;
+        //echo "One Call Should Cost: ".$onecall."<br />";
+        $real_credit = $credit + $credit_limit;
+        //echo "Real Credit: ".$real_credit."<br />";
+        $call = $real_credit/$onecall;
+        //echo "Max Calls: ".floor($call)."<br />";
+        $maxcalls = floor($call);
+        if ($maxcalls < 1) {
+            $allowed_to_start = false;
+        }
+        //exit(0);
     }
     if (!$allowed_to_start) {
 /*================= Log Access ======================================*/
@@ -116,8 +149,17 @@ while ($row = mysql_fetch_assoc($resultdnc)) {
     $removedncsql = "UPDATE number set status = 'indnc' where phonenumber='$row[phonenumber]'";
     $resultremovednc=mysql_query($removedncsql, $link) or die (mysql_error());;
 }
-//exit(0);
 
+if ( $config_values['USE_BILLING'] == "YES") {
+
+$credit_limit_sql = "UPDATE number SET status='no-credit' WHERE status='new' and campaignid='$_GET[id]'";
+$result_credit_limit_sql=mysql_query($credit_limit_sql, $link) or die (mysql_error());;
+$credit_limit_sql2 = "UPDATE number SET status='new' WHERE status='no-credit' and campaignid='$_GET[id]' limit $maxcalls";
+$result_credit_limit_sql2=mysql_query($credit_limit_sql2, $link) or die (mysql_error());;
+
+
+//exit(0);
+}
 $sql1="delete from queue where campaignid=".$_GET[id];
 $did = str_replace("-","",$_GET[did]);
 $did = str_replace("(","",$did);
