@@ -532,7 +532,7 @@ for ($i = 0; $i < $columns; $i++) {
     $field_array[] = mysql_field_name($fields, $i);
 }
 
-if (!in_array('receipt', $field_array))
+if (!in_array('campaignmessage', $field_array))
 {
     $result = mysql_query('ALTER TABLE campaignmessage ADD length VARCHAR(255)');
     $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added campaignmessage length field')";
