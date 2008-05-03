@@ -54,7 +54,7 @@ $length=mysql_result($result,0,'length');
 
 
 if ( $config_values['USE_BILLING'] == "YES") {
-    $sql = "Select credit, creditlimit, priceperminute, pricepercall from billing where accountcode = 'stl-$username'";
+    $sql = "Select credit, creditlimit, priceperminute, pricepercall, firstperiod from billing where accountcode = 'stl-$username'";
 
     //echo $sql;
     $result_credit = mysql_query($sql, $link);
@@ -64,6 +64,7 @@ if ( $config_values['USE_BILLING'] == "YES") {
         $credit_limit = mysql_result($result_credit,0,"creditlimit");
         $priceperminute = mysql_result($result_credit,0,"priceperminute");
         $pricepercall = mysql_result($result_credit,0,"pricepercall");
+        $firstperiod = mysql_result($result_credit,0,"firstperiod");
     } else {
         $credit = 0;
         $credit_limit = 0;
@@ -84,6 +85,9 @@ if ( $config_values['USE_BILLING'] == "YES") {
         //echo "Price Per Call: ".$pricepercall."<br />";
         //echo "Message Length: ".$length."<br />";
         // Each call will take the price per minute * length/60
+        if ($length < $firstperiod) {
+            $length = $firstperiod;
+        }
         $onecall = $priceperminute * ($length/60);
         $onecall += $pricepercall;
         //echo "One Call Should Cost: ".$onecall."<br />";
