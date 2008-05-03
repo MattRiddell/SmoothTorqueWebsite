@@ -1,4 +1,17 @@
 <?
+$level=$_COOKIE[level];
+
+if ($level!=sha1("level100")) {
+include "header.php";
+$ip = $_SERVER['REMOTE_ADDR'];
+echo "Attempted break in attempt from $ip ($_COOKIE[user])";
+/*================= Log Access ======================================*/
+$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', ' $ip attempted to view the admin page')";
+$result=mysql_query($sql, $link);
+/*================= Log Access ======================================*/
+
+} else {
+
 $pagenum="2";
 require "header.php";
 require "header_trunk.php";
@@ -113,6 +126,6 @@ $countx++;
 ?>
 
 </TABLE>
-<?
+<?}
 require "footer.php";
 ?>
