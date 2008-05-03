@@ -12,9 +12,13 @@ if (isset($_GET[queueID])){
 }
 
 require "header.php";
+if (!isset($_GET[campaigngroupid])) {
 $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $campaigngroupid=mysql_result($result,0,'campaigngroupid');
+} else {
+$campaigngroupid = $_GET[campaigngroupid];
+}
 require "header_campaign.php";
 /*================= Log Access ======================================*/
 $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Viewed Campaign Page')";
@@ -25,9 +29,11 @@ $result=mysql_query($sql, $link);
     if ($_COOKIE[level] == sha1("level100")) {
         if ($_GET[type]=="all") {
             echo "<A HREF=\"campaigns.php?type=admin\">Admin Campaigns Only</A>&nbsp;/&nbsp;";
+            echo "<A HREF=\"selectcustomer.php\">Select Customer</A>&nbsp;/&nbsp;";
             echo "<b>All Campaigns</b>";
         } else {
             echo "<b>Admin Campaigns Only</b>&nbsp;/&nbsp;";
+            echo "<A HREF=\"selectcustomer.php\">Select Customer</A>&nbsp;/&nbsp;";
             echo "<A HREF=\"campaigns.php?type=all\">All Campaigns</A>";
         }
     }
