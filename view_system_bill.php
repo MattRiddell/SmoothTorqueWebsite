@@ -1,4 +1,5 @@
 <?
+include "header.php";
 include "admin/db_config.php";
 mysql_select_db("SineDialer", $link);
 $resultx = mysql_query("select distinct groupid from system_billing");
@@ -8,7 +9,7 @@ while ($rowx = mysql_fetch_assoc($resultx)) {
 $result = mysql_query("select * from system_billing where groupid = ".$rowx[groupid]." order by timestamp desc LIMIT 100");
 $x = 0;
 echo "<b>Group ID: $rowx[groupid]</b><br />";
-echo '<img src="system_bill_graph.php?groupid='.$rowx[groupid].'" width="100">';
+echo '<a href="system_bill_graph.php?groupid='.$rowx[groupid].'"><img src="system_bill_graph.php?groupid='.$rowx[groupid].'" width="100" border="0"></a>';
 echo "<hr>";
 }
 ?>
