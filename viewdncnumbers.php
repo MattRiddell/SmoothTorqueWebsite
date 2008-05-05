@@ -24,7 +24,26 @@ Number
 </TR>
 
 <?
-$sql = 'SELECT * FROM dncnumber where campaignid = '.$campaigngroupid.' LIMIT 50';
+$start=0;
+if ($_GET[start]>0){
+    $start=$_GET[start];
+}
+
+$sql = 'SELECT count(*) FROM dncnumber WHERE campaignid='.$campaigngroupid;
+$result=mysql_query($sql, $link) or die (mysql_error());;
+$max=mysql_result($result,0,'count(*)');
+echo '<a href="viewdncnumbers.php?start=0"><img src="/images/resultset_first.png" border="0"></a> ';
+echo '<a href="viewdncnumbers.php?start='.($start-$config_values['PER_PAGE']).'"><img src="/images/resultset_previous.png" border="0"></a> ';
+
+for ($x=$start;$x<$start+($config_values['PER_PAGE']*10);$x+=$config_values['PER_PAGE']){
+echo '<a href="viewdncnumbers.php?start='.$x.'">'.($x/$config_values['PER_PAGE']).'</a> ';
+}
+echo '<a href="viewdncnumbers.php?start='.($x+$config_values['PER_PAGE']).'"><img src="/images/resultset_next.png" border="0"></a> ';
+echo '<a href="viewdncnumbers.php?start='.(($max-$config_values['PER_PAGE'])+$max%$config_values['PER_PAGE']).'"><img src="/images/resultset_last.png" border="0"></a> ';
+echo '<br />';
+echo '<br />';
+
+$sql = 'SELECT * FROM dncnumber where campaignid = '.$campaigngroupid.' LIMIT '.$start.','.$config_values['PER_PAGE'];
 $result=mysql_query($sql, $link) or die (mysql_error());;
 //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
 while ($row = mysql_fetch_assoc($result)) {
