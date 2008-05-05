@@ -11,7 +11,7 @@ echo "<br />";
 foreach ($test as $key => $value) {
     echo $value." ($key)<br />";
     $sql = "INSERT INTO system_billing (groupid,totalcost) VALUES ($key, $value)";
-    echo $sql;
+//    echo $sql;
     $result = mysql_query($sql);
 }
 ?>
