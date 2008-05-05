@@ -32,7 +32,11 @@ include ("./jpgraph_line.php");
 include ("./jpgraph_bar.php");
 
 $graph2 = new Graph($xsize, $ysize);
+if ($xsize<620){
+$graph2->SetMargin(50,0,0,0);
+} else {
 $graph2->SetMargin(50,20,20,20);
+}
 $graph2->legend->SetFillColor("blue@0.8");
 $graph2->SetShadow();
 $graph2->SetScale('textlin',0,$max_val,0,$size);
@@ -40,8 +44,8 @@ $graph2->SetScale('textlin',0,$max_val,0,$size);
 $graph2->xaxis->SetTextLabelInterval(1);
 $graph2->SetTickDensity(TICKD_SPARSE,TICKD_VERYSPARSE); // Many Y-ticks
 $graph2->yaxis->SetWeight(1);
-//$graph2->xgrid->SetColor('white@0.3','white@0.7');
-//$graph2->ygrid->SetColor('white@0.3','white@0.7');
+$graph2->xgrid->SetColor('white@0.3','white@0.7');
+$graph2->ygrid->SetColor('white@0.3','white@0.7');
 $graph2->xgrid->Show(true,true);
 $graph2->ygrid->Show(true,true);
 $graph2->SetFrame(false,'darkblue',2);
