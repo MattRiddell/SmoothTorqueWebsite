@@ -161,6 +161,13 @@ if ($config_values['BILLING_TEXT'] == "") {
     $config_values['BILLING_TEXT'] = "Billing Logs";
 }
 
+if ($config_values['SMTP_HOST'] == "") {
+    $config_values['SMTP_HOST'] = "localhost";
+}
+if ($config_values['SMTP_FROM'] == "") {
+    $config_values['SMTP_FROM'] = "user@mydomain.com";
+}
+
 ?>
 <?
  function _get_browser()

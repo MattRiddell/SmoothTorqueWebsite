@@ -76,6 +76,10 @@ if (isset($_POST[colour])){
     fwrite($add,"DNC_UPLOAD=$_POST[DNC_UPLOAD]\n");
     fwrite($add,"DNC_ADD=$_POST[DNC_ADD]\n");
     fwrite($add,"PER_LEAD=$_POST[PER_LEAD]\n");
+    fwrite($add,"SMTP_HOST=$_POST[SMTP_HOST]\n");
+    fwrite($add,"SMTP_USER=$_POST[SMTP_USER]\n");
+    fwrite($add,"SMTP_PASS=$_POST[SMTP_PASS]\n");
+    fwrite($add,"SMTP_FROM=$_POST[SMTP_FROM]\n");
 
     fclose($add);
 
@@ -157,6 +161,48 @@ Sox Path:
 <input type="Text" name="sox" value="<?echo $config_values['SOX'];?>">
 </td>
 </tr>
+
+<tr><td colspan="2"><br /><br /></td></tr><tr><td CLASS="thead" colspan="2">Email Settings</td>
+
+<tr  class="tborder2">
+<td>
+SMTP Host Name
+</td>
+<td>
+<input type="Text" name="SMTP_HOST" value="<?echo $config_values['SMTP_HOST'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+SMTP User Name
+</td>
+<td>
+<input type="Text" name="SMTP_USER" value="<?echo $config_values['SMTP_USER'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+SMTP Password
+</td>
+<td>
+<input type="Text" name="SMTP_PASS" value="<?echo $config_values['SMTP_PASS'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+Email from address
+</td>
+<td>
+<input type="Text" name="SMTP_FROM" value="<?echo $config_values['SMTP_FROM'];?>">
+</td>
+</tr>
+
+
+
+
 <tr><td colspan="2"><br /><br /></td></tr><tr><td CLASS="thead" colspan="2">MySQL Settings</td>
 
 <tr  class="tborder2">
