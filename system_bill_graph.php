@@ -73,7 +73,7 @@ $dplot[0]->SetFillColor('blue','red@0.95');
 
 $dplot[0]->SetColor('black');
 //if ($_GET[lang]="en"){
-$dplot[0]->SetLegend("Minutes");
+$dplot[0]->SetLegend("Total Cost");
 
 // Add the accumulated line plot to the graph
 $graph2->legend->SetLayout(LEGEND_HOR);
