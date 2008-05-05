@@ -1,4 +1,5 @@
 <?
+$max_val = $_GET[max];
 include "admin/db_config.php";
 mysql_select_db("SineDialer", $link);
 
@@ -26,7 +27,7 @@ $graph2 = new Graph(620, 300);
 $graph2->SetMargin(50,0,10,20);
 $graph2->legend->SetFillColor("blue@0.8");
 $graph2->SetShadow();
-$graph2->SetScale('textlin',0,$xdata[100],0,100);
+$graph2->SetScale('textlin',0,$max_val,0,100);
 //$graph2->xaxis->SetTickLabels($aaa);
 $graph2->xaxis->SetTextLabelInterval(1);
 $graph2->SetTickDensity(TICKD_SPARSE,TICKD_VERYSPARSE); // Many Y-ticks

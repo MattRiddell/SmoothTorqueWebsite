@@ -6,7 +6,7 @@ $resultx = mysql_query("select distinct system_billing.groupid, customer.* from 
 $x = 0;
 while ($rowx = mysql_fetch_assoc($resultx)) {
     echo "<b>Company: $rowx[company]</b><br />";
-    echo '<a href="system_bill_graph.php?groupid='.$rowx[groupid].'"><img src="system_bill_graph.php?groupid='.$rowx[groupid].'" width="100" border="0"></a>';
+    echo '<a href="system_bill_graph.php?max=10000&groupid='.$rowx[groupid].'"><img src="system_bill_graph.php?max=10000&groupid='.$rowx[groupid].'" width="100" border="0"></a>';
     echo "<br>";
 }
 ?>
