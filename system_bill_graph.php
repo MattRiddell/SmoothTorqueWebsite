@@ -1,6 +1,13 @@
 <?
 $max_val = $_GET[max];
 $size = $_GET[size];
+if (isset($_GET[xsize])) {
+$xsize=$_GET[xsize];
+$ysize=$_GET[ysize];
+} else {
+$xsize=620;
+$ysize=280;
+}
 include "admin/db_config.php";
 mysql_select_db("SineDialer", $link);
 
@@ -24,7 +31,7 @@ include ( "./jpgraph.php");
 include ("./jpgraph_line.php");
 include ("./jpgraph_bar.php");
 
-$graph2 = new Graph(620, 300);
+$graph2 = new Graph($xsize, $ysize);
 $graph2->SetMargin(50,20,20,20);
 $graph2->legend->SetFillColor("blue@0.8");
 $graph2->SetShadow();
