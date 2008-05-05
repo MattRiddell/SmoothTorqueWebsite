@@ -1,20 +1,21 @@
 <?
 $max_val = $_GET[max];
+$size = $_GET[size];
 include "admin/db_config.php";
 mysql_select_db("SineDialer", $link);
 
-$result = mysql_query("select * from system_billing where groupid = ".$_GET[groupid]." order by timestamp desc LIMIT 100");
+$result = mysql_query("select * from system_billing where groupid = ".$_GET[groupid]." order by timestamp desc LIMIT $size");
 $x = 0;
 //echo "<b>Group ID: $_GET[groupid]</b><br />";
-for ($i = 0;$i<100;$i++) {
+for ($i = 0;$i<$size;$i++) {
 $xdata[$i]=0;
 }
 while ($row = mysql_fetch_assoc($result)) {
 
-/* This is one page of customer billing (i.e. the last 100 5 minute values */
+/* This is one page of customer billing (i.e. the last $size 5 minute values */
 /* in here should be a graph for that customer showing howmuch they've */
-/* spent in the last 100 blocks */
-$z = 100-$x;
+/* spent in the last $size blocks */
+$z = $size-$x;
 //echo $z."<br />";
 $xdata[$z] = $row[totalcost];
 $x++;
@@ -27,7 +28,7 @@ $graph2 = new Graph(620, 300);
 $graph2->SetMargin(50,0,10,20);
 $graph2->legend->SetFillColor("blue@0.8");
 $graph2->SetShadow();
-$graph2->SetScale('textlin',0,$max_val,0,100);
+$graph2->SetScale('textlin',0,$max_val,0,$size);
 //$graph2->xaxis->SetTickLabels($aaa);
 $graph2->xaxis->SetTextLabelInterval(1);
 $graph2->SetTickDensity(TICKD_SPARSE,TICKD_VERYSPARSE); // Many Y-ticks
@@ -38,7 +39,7 @@ $graph2->xgrid->Show(true,true);
 $graph2->ygrid->Show(true,true);
 $graph2->SetFrame(false,'darkblue',2);
 $graph2->SetBackgroundGradient('purple@0.9','lightblue2@0.2',GRAD_HOR,BGRAD_PLOT);
-for ($i=0;$i<100;$i++){
+for ($i=0;$i<$size;$i++){
 $datax[$i] = "".(int)($i);
 }
 $graph2->xaxis->SetTickLabels($datax);
@@ -46,7 +47,7 @@ $graph2->xaxis->SetTickLabels($datax);
 $graph2->img->SetAntiAliasing();
 $dplot[] = new LinePLot($xdata);
 //$graph2->title->Set(ucfirst($_COOKIE[user]));
-//for ($i=0;$i<100;$i++){
+//for ($i=0;$i<$size;$i++){
 //$datax[$i] = "".(int)(100-$i);
 //}
 //$graph->xaxis->SetTickLabels($datax);
