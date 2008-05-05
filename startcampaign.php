@@ -164,6 +164,10 @@ $credit_limit_sql = "UPDATE number SET status='no-credit' WHERE status='new' and
 $result_credit_limit_sql=mysql_query($credit_limit_sql, $link) or die (mysql_error());;
 $credit_limit_sql2 = "UPDATE number SET status='new' WHERE status='no-credit' and campaignid='$_GET[id]' limit $maxcalls";
 $result_credit_limit_sql2=mysql_query($credit_limit_sql2, $link) or die (mysql_error());;
+} else {
+$credit_limit_sql2 = "UPDATE number SET status='new' WHERE status='no-credit' and campaignid='$_GET[id]'";
+$result_credit_limit_sql2=mysql_query($credit_limit_sql2, $link) or die (mysql_error());;
+
 }
 
 //exit(0);
