@@ -18,7 +18,7 @@ while ($rowx = mysql_fetch_assoc($resultx)) {
 for($i = 0;$i<$x;$i++) {
     $totalcost_cr = $config_values['CURRENCY_SYMBOL']." ".number_format($totalcost[$i],2);
     echo "<b>Company: $company[$i] ($totalcost_cr)</b><br />";
-    echo '<a href="system_bill_graph.php?size=300&max='.$highest.'&groupid='.$groupid[$i].'"><img src="system_bill_graph.php?size=300&max='.$highest.'&groupid='.$groupid[$i].'" width="100" border="0"></a>';
+    echo '<a href="system_bill_graph.php?size=300&max='.$highest.'&groupid='.$groupid[$i].'"><img src="system_bill_graph.php?size=300&max='.$highest.'&groupid='.$groupid[$i].'" width="300" border="0"></a>';
     echo "<br>";
 
 }
