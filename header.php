@@ -395,8 +395,14 @@ $self=$_SERVER['PHP_SELF'];
 <HTML>
 <HEAD>
 
+<?
+if ($self == "/test.php" || $self == "/report.php") {
+?>
 <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
 <META HTTP-EQUIV="Expires" CONTENT="-1">
+<?
+}
+?>
 
 
 
