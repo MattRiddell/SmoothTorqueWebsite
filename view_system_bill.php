@@ -11,13 +11,41 @@ $result=mysql_query($sql, $link);
 /*================= Log Access ======================================*/
 
 } else {
-
+if (!isset($_GET[size])) {
+    $size=144;
+} else {
+$size = $_GET[size];
+}
 include "header.php";
 include "admin/db_config.php";
 mysql_select_db("SineDialer", $link);
 $resultx = mysql_query("select distinct system_billing.groupid, customer.* from system_billing left join customer on system_billing.groupid=customer.campaigngroupid");
 $x = 0;
 $highest = 0;
+if ($size == 144) {
+    echo "<b>Today&nbsp;</b>";
+} else {
+    echo '<a href="view_system_bill.php?size=144">Today</a>&nbsp;';
+}
+if ($size == 700) {
+    echo "<b>5 Days&nbsp;</b>";
+} else {
+    echo '<a href="view_system_bill.php?size=700">5 Days</a>&nbsp;';
+}
+if ($size == 1400) {
+    echo "<b>10 Days&nbsp;</b>";
+} else {
+    echo '<a href="view_system_bill.php?size=1400">10 Days</a>&nbsp;';
+}
+if ($size == 4200) {
+    echo "<b>30 Days&nbsp;</b>";
+} else {
+    echo '<a href="view_system_bill.php?size=4200">30 Days</a>&nbsp;';
+}
+
+
+echo "<br /><br />";
+//$size_x= $size;
 while ($rowx = mysql_fetch_assoc($resultx)) {
     $result = mysql_query("select max(totalcost) from system_billing where groupid = ".$rowx[groupid]);
     $totalcost[$x] = mysql_result($result,0,0);
@@ -30,9 +58,10 @@ while ($rowx = mysql_fetch_assoc($resultx)) {
 }
 $highest = $highest + ($highest/10);
 for($i = 0;$i<$x;$i++) {
+    //echo $size_x;
     $totalcost_cr = $config_values['CURRENCY_SYMBOL']." ".number_format($totalcost[$i],2);
     echo "<b>$company[$i] ($totalcost_cr)</b><br />";
-    echo '<a href="system_bill_graph.php?xsize=640&ysize=480&size=700&max='.$highest.'&groupid='.$groupid[$i].'"><img src="system_bill_graph.php?xsize=500&ysize=100&size=700&max='.$highest.'&groupid='.$groupid[$i].'" width="500" height="100" border="0"></a>';
+    echo '<a href="system_bill_graph.php?xsize=640&ysize=480&size='.$size.'&max='.$highest.'&groupid='.$groupid[$i].'"><img src="system_bill_graph.php?xsize=500&ysize=100&size='.$size.'&max='.$highest.'&groupid='.$groupid[$i].'" width="500" height="100" border="0"></a>';
     echo "<br>";
 
 }
