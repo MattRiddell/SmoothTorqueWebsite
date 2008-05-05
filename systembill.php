@@ -1,5 +1,7 @@
 <?
-require "header.php";
+include "admin/db_config.php";
+mysql_select_db("SineDialer", $link);
+
 $result = mysql_query("select cost, groupid from campaign where cost is not NULL");
 while ($row = mysql_fetch_assoc($result)) {
 echo $row[cost]." - ".$row[groupid];

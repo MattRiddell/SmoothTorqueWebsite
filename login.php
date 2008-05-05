@@ -15,6 +15,25 @@ function mysql_is_table($host, $user, $pass, $db, $tbl)
 	return $result;
 }
 
+
+/*======================================================================
+                            System Billing Table
+  ======================================================================*/
+if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","system_billing")){
+  include "admin/db_config.php";
+  $sql = "CREATE TABLE `system_billing` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `groupid` int(11) default NULL,
+  `totalcost` double default '0',
+  `timestamp` timestamp NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`id`)
+)";
+    $result = mysql_query($sql,$link);
+  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created System Timestamp Billing Table')";
+  $result=mysql_query($sql, $link);
+}
+
+
 /*======================================================================
                             Billing Table
   ======================================================================*/
