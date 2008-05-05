@@ -39,15 +39,14 @@ $graph2->SetMargin(50,20,20,20);
 }
 $graph2->legend->SetFillColor("blue@0.8");
 $graph2->SetShadow();
-$graph2->SetScale('textlin',0,$max_val,0,$size);
+$graph2->SetScale('textlin',0,$max_val,0,$size-1);
 //$graph2->xaxis->SetTickLabels($aaa);
 $graph2->xaxis->SetTextLabelInterval(1);
-$graph2->SetTickDensity(TICKD_SPARSE,TICKD_VERYSPARSE); // Many Y-ticks
+//$graph2->SetTickDensity(TICKD_SPARSE,TICKD_VERYSPARSE); // Many Y-ticks
 $graph2->yaxis->SetWeight(1);
 $graph2->xgrid->SetColor('white@0.3','white@0.7');
 $graph2->ygrid->SetColor('white@0.3','white@0.7');
 $graph2->xgrid->Show(true,true);
-$graph2->ygrid->Show(true,true);
 $graph2->SetFrame(false,'darkblue',2);
 $graph2->SetBackgroundGradient('purple@0.9','lightblue2@0.2',GRAD_HOR,BGRAD_PLOT);
 for ($i=0;$i<$size;$i++){
@@ -79,7 +78,7 @@ $dplot[0]->SetFillColor('blue','red@0.95');
 //$dplot[0]->SetColor('black');
 //$dplot[0]->SetGradient('black','white');
 //$dplot[0]->SetFillGradient('red','red@0.85');
-//$dplot[0]->SetFillGradient('red','midnightblue@0.85');
+$dplot[0]->SetFillGradient('blue','white@0.25');
 // Then add them together to form a accumulated plot
 //$ap = new AccLinePlot($dplot);
 
