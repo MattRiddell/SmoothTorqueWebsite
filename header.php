@@ -403,8 +403,8 @@ $self=$_SERVER['PHP_SELF'];
 <link rel="shortcut icon" href="/favicon.ico">
 
 <!-- Javascript includes -->
-<script type="text/javascript" src="/js/ajax-dynamic-content.js"></script>
 <?/*
+<script type="text/javascript" src="/js/ajax-dynamic-content.js"></script>
 <script type="text/javascript" src="/js/modal-message.js"></script>
 <script type="text/javascript" src="/js/ajax.js"></script>
 <script type="text/javascript" src="/usableforms.js"></script>
