@@ -4,9 +4,11 @@ mysql_select_db("SineDialer", $link);
 
 $result = mysql_query("select cost, groupid from campaign where cost is not NULL");
 while ($row = mysql_fetch_assoc($result)) {
+if (($row[cost]+0) > 0) {
 echo $row[cost]." - ".$row[groupid];
 $test[$row[groupid]]+=$row[cost];
 echo "<br />";
+}
 }
 foreach ($test as $key => $value) {
     echo $value." ($key)<br />";
