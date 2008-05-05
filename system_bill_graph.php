@@ -25,7 +25,7 @@ include ("./jpgraph_line.php");
 include ("./jpgraph_bar.php");
 
 $graph2 = new Graph(620, 300);
-$graph2->SetMargin(50,0,10,20);
+$graph2->SetMargin(50,20,20,20);
 $graph2->legend->SetFillColor("blue@0.8");
 $graph2->SetShadow();
 $graph2->SetScale('textlin',0,$max_val,0,$size);
@@ -42,7 +42,6 @@ $graph2->SetBackgroundGradient('purple@0.9','lightblue2@0.2',GRAD_HOR,BGRAD_PLOT
 for ($i=0;$i<$size;$i++){
 $datax[$i] = "".(int)($i);
 }
-$graph2->xaxis->SetTickLabels($datax);
 $graph2->xaxis->SetTickLabels($datax);
 $graph2->img->SetAntiAliasing();
 $dplot[] = new LinePLot($xdata);
