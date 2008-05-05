@@ -22,26 +22,34 @@ mysql_select_db("SineDialer", $link);
 $resultx = mysql_query("select distinct system_billing.groupid, customer.* from system_billing left join customer on system_billing.groupid=customer.campaigngroupid");
 $x = 0;
 $highest = 0;
+?>
+<table class="tborder" align="center" border="1" cellpadding="0" cellspacing="2"><TR>
+<td class=subheader>
+</td>
+
+
+<?
 if ($size == 144) {
-    echo "<b>Today&nbsp;</b>";
+    echo "<td class=subheader><b>Today&nbsp;</b></td>";
 } else {
-    echo '<a href="view_system_bill.php?size=144">Today</a>&nbsp;';
+    echo '<td class=subheader><a href="view_system_bill.php?size=144">Today</a>&nbsp;</td>';
 }
 if ($size == 700) {
-    echo "<b>5 Days&nbsp;</b>";
+    echo "<td class=subheader><b>5 Days&nbsp;</b></td>";
 } else {
-    echo '<a href="view_system_bill.php?size=700">5 Days</a>&nbsp;';
+    echo '<td class=subheader><a href="view_system_bill.php?size=700">5 Days</a>&nbsp;</td>';
 }
 if ($size == 1400) {
-    echo "<b>10 Days&nbsp;</b>";
+    echo "<td class=subheader><b>10 Days&nbsp;</b></td>";
 } else {
-    echo '<a href="view_system_bill.php?size=1400">10 Days</a>&nbsp;';
+    echo '<td class=subheader><a href="view_system_bill.php?size=1400">10 Days</a>&nbsp;</td>';
 }
 if ($size == 4200) {
-    echo "<b>30 Days&nbsp;</b>";
+    echo "<td class=subheader><b>30 Days&nbsp;</b></td>";
 } else {
-    echo '<a href="view_system_bill.php?size=4200">30 Days</a>&nbsp;';
+    echo '<td class=subheader><a href="view_system_bill.php?size=4200">30 Days</a>&nbsp;</td>';
 }
+echo"    </TR></table>";
 
 
 echo "<br /><br />";
