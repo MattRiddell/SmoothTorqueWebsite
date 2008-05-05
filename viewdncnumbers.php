@@ -24,7 +24,7 @@ Number
 </TR>
 
 <?
-$sql = 'SELECT * FROM dncnumber LIMIT 50';
+$sql = 'SELECT * FROM dncnumber where campaignid = '.$campaigngroupid.' LIMIT 50';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
 while ($row = mysql_fetch_assoc($result)) {
