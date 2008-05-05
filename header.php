@@ -394,12 +394,24 @@ $self=$_SERVER['PHP_SELF'];
 
 
 <TITLE><?echo $config_values['TITLE'];?></TITLE>
-<link rel="stylesheet" type="text/css" href="/css/stylelogin.css">
 <link rel="stylesheet" type="text/css" href="/css/default.css">
+<?/*
+<link rel="stylesheet" type="text/css" href="/css/stylelogin.css">
 <link rel="stylesheet" href="/css/modal-message.css" type="text/css">
+<link rel="stylesheet" href="/upload.css" type="text/css" media="screen" title="Upload" charset="utf-8" />
+*/?>
 <link rel="shortcut icon" href="/favicon.ico">
 
 <!-- Javascript includes -->
+<script type="text/javascript" src="/js/ajax-dynamic-content.js"></script>
+<?/*
+<script type="text/javascript" src="/js/modal-message.js"></script>
+<script type="text/javascript" src="/js/ajax.js"></script>
+<script type="text/javascript" src="/usableforms.js"></script>
+<script language="javascript" type="text/javascript" src="/upload.js"></script>*/?>
+<script type="text/javascript" src="/ajax/picker.js"></script>
+<script type="text/javascript" src="/header.js"></script>
+
 <?/*
 <script src="prototype.js" type="text/javascript"></script>
 */
@@ -796,14 +808,9 @@ e_select.options[i].selected = true;
     //-->
     </SCRIPT>
 
-<script type="text/javascript" src="/js/ajax.js"></script>
-<script type="text/javascript" src="/js/modal-message.js"></script>
-<script type="text/javascript" src="/js/ajax-dynamic-content.js"></script>
-<script type="text/javascript" src="/usableforms.js"></script><?/*
+<?/*
 THIS IS CAUSING AN ERROR!
 */?>
-<script language="javascript" type="text/javascript" src="/upload.js"></script>
-<link rel="stylesheet" href="/upload.css" type="text/css" media="screen" title="Upload" charset="utf-8" />
 
 <style>
 <!--
@@ -813,8 +820,6 @@ THIS IS CAUSING AN ERROR!
 <STYLE type="text/css">
   DIV.mypars {text-align: left}
 </STYLE>
-<script type="text/javascript" src="/ajax/picker.js"></script>
-<script type="text/javascript" src="/header.js"></script>
 </HEAD>
 <BODY BGCOLOR="<?echo $config_values['COLOUR'];?>" onLoad="hideItem('hideShow');">
 <?
