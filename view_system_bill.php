@@ -15,6 +15,7 @@ while ($rowx = mysql_fetch_assoc($resultx)) {
     $groupid[$x] = $rowx[groupid];
     $x++;
 }
+$highest = $highest + ($highest/10);
 for($i = 0;$i<$x;$i++) {
     $totalcost_cr = $config_values['CURRENCY_SYMBOL']." ".number_format($totalcost[$i],2);
     echo "<b>Company: $company[$i] ($totalcost_cr)</b><br />";
