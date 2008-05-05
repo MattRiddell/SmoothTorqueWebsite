@@ -42,7 +42,7 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
             $data[0] = str_replace(" ","",$data[0]);
             $data[0] = str_replace("\r","",$data[0]);
             if ($isfirst) {
-                $sql.="(0,'".$data[0]."','new',1)";
+                $sql.="(".$campaignid.",'".$data[0]."','new',1)";
 
 //                $sql2 = "SET AUTOCOMMIT=0;";//BEGIN";
 //                mysql_query($sql2, $link) or die(mysql_error());
@@ -76,9 +76,9 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
                 $sq2 = "LOCK TABLES dncnumber WRITE";
                 mysql_query($sql2, $link) or die (mysql_error());;
                 $sql = "INSERT IGNORE INTO dncnumber (campaignid,phonenumber,status,type)  VALUES";
-                $sql.="(0,'".$data[0]."','new',1)";
+                $sql.="(".$campaignid.",,'".$data[0]."','new',1)";
             } else {
-				$sql.=",(0,'".$data[0]."','new',1)";
+				$sql.=",(".$campaignid.",,'".$data[0]."','new',1)";
 			}
         }
         //echo "Saving Records to the Database <br />";

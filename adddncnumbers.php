@@ -30,7 +30,7 @@ if (1) {
         $number = str_replace("-","",$number);
         $number = str_replace("(","",$number);
         $number = str_replace(")","",$number);
-        $sql="INSERT IGNORE INTO dncnumber (campaignid,phonenumber,status,type) VALUES (0,'$number','new',0)";
+        $sql="INSERT IGNORE INTO dncnumber (campaignid,phonenumber,status,type) VALUES ($campaigngroupid,'$number','new',0)";
 //        echo $sql;
         $result=mysql_query($sql, $link) or die (mysql_error());;
         echo "<!-- . -->";

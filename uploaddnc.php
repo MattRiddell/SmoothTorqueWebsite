@@ -30,7 +30,7 @@ like to upload the DNC numbers from and then click Upload.<br /><br />
         <center><table><tr><td>
                 <div id="matt">
                 <input type="file" name="file_1" />
-                <input type="hidden" value="<?echo $_POST[campaignid];?>" name="id">
+                <input type="hidden" value="<?echo $campaigngroupid;?>" name="id">
                 </form> <br /><br />
                 <input type="button" onclick="beginUpload('<?php echo $sid ?>');" value="Upload">
                 </div>
