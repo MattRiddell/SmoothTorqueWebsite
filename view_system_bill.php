@@ -8,7 +8,7 @@ while ($rowx = mysql_fetch_assoc($resultx)) {
 $result = mysql_query("select * from system_billing where groupid = ".$rowx[groupid]." order by timestamp desc LIMIT 100");
 $x = 0;
 echo "<b>Group ID: $rowx[groupid]</b><br />";
-echo '<img src="system_bill_graph.php?groupid='.$rowx[groupid].'">';
+echo '<img src="system_bill_graph.php?groupid='.$rowx[groupid].'" width="100">';
 echo "<hr>";
 }
 ?>
