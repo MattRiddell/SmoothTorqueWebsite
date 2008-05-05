@@ -8,14 +8,18 @@ while ($rowx = mysql_fetch_assoc($resultx)) {
 $result = mysql_query("select * from system_billing where groupid = ".$rowx[groupid]." LIMIT 100");
 $x = 0;
 while ($row = mysql_fetch_assoc($result)) {
+
+/* This is one page of customer billing (i.e. the last 100 5 minute values */
+/* in here should be a graph for that customer showing howmuch they've */
+/* spent in the last 100 blocks */
+
 $x++;
-echo $row[groupid];
-echo ' - $';
 echo $row[totalcost];
 echo ' - (';
 echo $row[timestamp];
 echo ")<br />";
 
 }
+echo "<hr>";
 }
 ?>
