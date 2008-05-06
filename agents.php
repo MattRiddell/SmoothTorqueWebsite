@@ -37,7 +37,11 @@ $sqlx = "SELECT * from sip_buddies WHERE name= '$row[membername]'";
 $resultx = mysql_query($sqlx);
 $regseconds = mysql_result($resultx,0,'regseconds');
 $ipaddr = mysql_result($resultx,0,'ipaddr');
-$time=(time()-$regseconds);
+if ($regseconds > 0) {
+$time=date("D M j G:i:s T Y",$regseconds);
+} else {
+$time = "Never";
+}
 
 if ($toggle){
 $toggle=false;
