@@ -1,5 +1,6 @@
 <?
 if (isset($_POST[name])) {
+    $queue_name = $_GET[queue_name];
     include "admin/db_config.php";
     mysql_select_db("SineDialer", $link);
 
@@ -18,17 +19,22 @@ if (isset($_POST[name])) {
     $sql = "INSERT INTO sip_buddies (name, accountcode, callerid, canreinvite,
     context, dtmfmode, host, language, nat, qualify, secret, type, username,
     disallow, allow) values ('$name', '$name', '$callerid', 'no',
-    'internal, '$dtmfmode', 'dynamic', 'en', 'yes', 'no', '$password', 'friend', '$name',
+    'internal', '$dtmfmode', 'dynamic', 'en', 'yes', 'no', '$password', 'friend', '$name',
     'all', '$allowed')";
-    //echo $sql;
-    $result = mysql_query($sql, $link);
+//    echo $sql;
+    $result = mysql_query($sql, $link) or die(mysql_error());
+
+    $sql = "INSERT INTO queue_member_table (membername, queue_name, interface) values
+    ('$name','$queue_name','SIP/$name')";
+    $result = mysql_query($sql, $link) or die(mysql_error());
+
     include "queues.php";
 } else {
 require "header.php";
 require "header_queue.php";
 
 ?>
-<form action = "addagent.php" method="post">
+<form action = "addagent.php?queue_name=<?echo $_GET[name];?>" method="post">
 <table class="" align="center" border="0" cellpadding="2" cellspacing="0">
 <TR>
 <td style="background-image: url(/images/clb.gif);" width=2></td>

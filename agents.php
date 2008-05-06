@@ -19,26 +19,14 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
 Name
 </TD>
 <TD CLASS="thead">
-Strategy
-</TD>
-<TD CLASS="thead">
-Timeout
-</TD>
-<TD CLASS="thead">
-Members
-</TD>
-<TD CLASS="thead">
 </TD>
 </TR>
 <?
-$sql = 'SELECT * FROM queue_table';
+$sql = "SELECT * FROM queue_member_table  where queue_name = '$_GET[name]'";
 $result=mysql_query($sql, $link) or die (mysql_error());;
 //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
 while ($row = mysql_fetch_assoc($result)) {
 
-$sql2 = 'SELECT count(*) FROM queue_member_table where queue_name = "'.$row[name].'"';
-$result2=mysql_query($sql2, $link) or die (mysql_error());;
-$count=mysql_result($result2,0,'count(*)');
 
 if ($toggle){
 $toggle=false;
@@ -52,30 +40,15 @@ $class=" class=\"tborderx\"  onmouseover=\"style.backgroundColor='#84DFC1';\" on
 <TR <?echo $class;?>>
 <TD>
 <?
-if (strlen($row[name])<15){
-echo "<A HREF=\"editqueue.php?name=".$row[name]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".$row[name]."</A>";
+if (strlen($row[membername])<15){
+echo "<A HREF=\"editagent.php?name=".$row[membername]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".$row[membername]."</A>";
 } else {
-echo "<A HREF=\"editqueue.php?name=".$row[name]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".trim(substr($row[name],0,15))."...</A>";
+echo "<A HREF=\"editagent.php?name=".$row[membername]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".trim(substr($row[membername],0,15))."...</A>";
 }
 ?>
 </TD>
 <TD>
-<a href="addagent.php?name=<?echo $row[name];?>">
-<img src="/images/group_add.png" align="left" border="0" title="Add a SIP account for an agent to connect to">
-</a>
-<a href="agents.php?name=<?echo $row[name];?>">
-<img src="/images/group.png" align="left" border="0" title="Show the agents for this queue">
-</a>
-<?echo $row[strategy];?>
-</TD>
-<TD>
-<?echo $row[timeout];?>
-</TD>
-<TD>
-<?echo $count;?>
-</TD>
-<TD>
-<a href="#" onclick="displaySmallMessage('includes/confirmDeleteQueue.php?name=<?echo $row[name];?>');return false"><IMG SRC="/images/delete.png" BORDER="0"></a><br>
+<a href="#" onclick="displaySmallMessage('includes/confirmDeleteAgent.php?name=<?echo $row[membername];?>&queue_name=<?echo $row[queue_name];?>');return false"><IMG SRC="/images/delete.png" BORDER="0"></a><br>
 </TD>
 </TR>
 
