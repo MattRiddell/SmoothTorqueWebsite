@@ -60,10 +60,10 @@ echo $row[membername];
 ?>
 </TD>
 <td>
-echo $time;
+<?echo $time;?>
 </td>
 <td>
-echo $ipaddr;
+<?echo $ipaddr;?>
 </td>
 <TD>
 <a href="#" onclick="displaySmallMessage('includes/confirmDeleteAgent.php?name=<?echo $row[membername];?>&queue_name=<?echo $row[queue_name];?>');return false"><IMG SRC="/images/delete.png" BORDER="0"></a><br>
