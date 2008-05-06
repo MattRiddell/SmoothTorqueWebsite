@@ -39,12 +39,13 @@ $class=" class=\"tborderx\"  onmouseover=\"style.backgroundColor='#84DFC1';\" on
 ?>
 <TR <?echo $class;?>>
 <TD>
-<?
+<?/*
 if (strlen($row[membername])<15){
 echo "<A HREF=\"editagent.php?name=".$row[membername]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".$row[membername]."</A>";
 } else {
 echo "<A HREF=\"editagent.php?name=".$row[membername]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".trim(substr($row[membername],0,15))."...</A>";
-}
+}*/
+echo $row[membername];
 ?>
 </TD>
 <TD>
