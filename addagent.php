@@ -19,7 +19,7 @@ if (isset($_POST[name])) {
     $sql = "INSERT INTO sip_buddies (name, accountcode, callerid, canreinvite,
     context, dtmfmode, host, language, nat, qualify, secret, type, username,
     disallow, allow) values ('$name', '$name', '$callerid', 'no',
-    'internal', '$dtmfmode', 'dynamic', 'en', 'yes', 'no', '$password', 'friend', '$name',
+    'internal', '$dtmfmode', 'dynamic', 'en', 'yes', 'yes', '$password', 'friend', '$name',
     'all', '$allowed')";
 //    echo $sql;
     $result = mysql_query($sql, $link) or die(mysql_error());
