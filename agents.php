@@ -19,6 +19,12 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
 Name
 </TD>
 <TD CLASS="thead">
+Last Seen
+</TD>
+<TD CLASS="thead">
+IP Address
+</TD>
+<TD CLASS="thead">
 </TD>
 </TR>
 <?
@@ -27,6 +33,11 @@ $result=mysql_query($sql, $link) or die (mysql_error());;
 //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
 while ($row = mysql_fetch_assoc($result)) {
 
+$sqlx = "SELECT * from sip_buddies WHERE name= '$row[membername]'";
+$resultx = mysql_query($sqlx);
+$regseconds = mysql_result($resultx,0,'regseconds');
+$ipaddr = mysql_result($resultx,0,'ipaddr');
+$time=(time()-$regseconds);
 
 if ($toggle){
 $toggle=false;
@@ -48,6 +59,12 @@ echo "<A HREF=\"editagent.php?name=".$row[membername]."\"><img src=\"/images/pen
 echo $row[membername];
 ?>
 </TD>
+<td>
+echo $time;
+</td>
+<td>
+echo $ipaddr;
+</td>
 <TD>
 <a href="#" onclick="displaySmallMessage('includes/confirmDeleteAgent.php?name=<?echo $row[membername];?>&queue_name=<?echo $row[queue_name];?>');return false"><IMG SRC="/images/delete.png" BORDER="0"></a><br>
 </TD>
