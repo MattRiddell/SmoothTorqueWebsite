@@ -9,6 +9,8 @@ $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $campaigngroupid=mysql_result($result,0,'campaigngroupid');
 ?>
+<?/* start of shadow */?>
+<table align="center"><tr><td><div class="example" id="v6"><div id="main"><div class="wrap1"><div class="wrap2"><div class="wrap3" align="center">
 
 <table class="" align="center" border="0" cellpadding="2" cellspacing="0">
 <TR>
@@ -81,6 +83,9 @@ if ($row[status] == 0){
 ?>
 
 </TABLE>
+<?/*end of shadow */?>
+</div></div></div></div></div></td></tr></table>
+
 <?
 require "footer.php";
 ?>

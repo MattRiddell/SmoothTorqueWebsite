@@ -179,6 +179,7 @@ echo "today: $today <br />";
 ?>
 
 </TABLE>
+
 <?
 require "footer.php";}
 ?>

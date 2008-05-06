@@ -28,6 +28,9 @@ $_POST = array_map(mysql_real_escape_string,$_POST);
 $_GET = array_map(mysql_real_escape_string,$_GET);
 
 ?>
+<?/* start of shadow */?>
+<table align="center"><tr><td><div class="example" id="v6"><div id="main"><div class="wrap1"><div class="wrap2"><div class="wrap3" align="center">
+
 <table class="" align="center" border="0" cellpadding="2" cellspacing="0">
 <TR>
 <?if ($backend == 0) {?><TD CLASS="thead">
@@ -126,6 +129,9 @@ $countx++;
 ?>
 
 </TABLE>
+<?/*end of shadow */?>
+</div></div></div></div></div></td></tr></table>
+
 <?}
 require "footer.php";
 ?>
