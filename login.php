@@ -542,6 +542,23 @@ if (!in_array('cost', $field_array))
 }
 
 /*****************************************************************
+*           ALTER customer TABLE TO ADD didlogin FIELD             *
+******************************************************************/
+
+$fields = mysql_list_fields('SineDialer', 'customer', $link);
+$columns = mysql_num_fields($fields);
+for ($i = 0; $i < $columns; $i++) {
+    $field_array[] = mysql_field_name($fields, $i);
+}
+
+if (!in_array('didlogin', $field_array))
+{
+    $result = mysql_query('ALTER TABLE customer ADD didlogin VARCHAR(255)');
+    $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added customer didlogin field')";
+    $result=mysql_query($sql, $link);
+}
+
+/*****************************************************************
 *           ALTER MESSAGE TABLE TO ADD length FIELD             *
 ******************************************************************/
 
