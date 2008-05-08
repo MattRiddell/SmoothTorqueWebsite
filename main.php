@@ -97,6 +97,7 @@ while ($rowx = mysql_fetch_assoc($resultx)) {
 }
 for ($i = 0;$i <$x;$i++){
 $highest += $highest_array[$i];
+//echo "Adding $company[$i]";
 }
 $highest = $highest + ($highest/10);
 //for($i = 0;$i<$x;$i++) {

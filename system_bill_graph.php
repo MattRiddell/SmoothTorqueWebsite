@@ -8,6 +8,9 @@ $ysize=$_GET[ysize];
 $xsize=620;
 $ysize=280;
 }
+    for ($i = 0;$i<$size;$i++) {
+            $xdata[$i]=0;
+    }
 include "admin/db_config.php";
 mysql_select_db("SineDialer", $link);
 $resultx = mysql_query("select distinct system_billing.groupid, customer.* from system_billing left join customer on system_billing.groupid=customer.campaigngroupid");
@@ -20,11 +23,6 @@ while ($rowx = mysql_fetch_assoc($resultx)) {
     }
     $x = 0;
     //echo "<b>Group ID: $_GET[groupid]</b><br />";
-    for ($i = 0;$i<$size;$i++) {
-        if ($_GET[groupid]> 0){
-            $xdata[$i]=0;
-        }
-    }
     while ($row = mysql_fetch_assoc($result)) {
 
         /* This is one page of customer billing (i.e. the last $size 5 minute values */
@@ -34,6 +32,7 @@ while ($rowx = mysql_fetch_assoc($resultx)) {
         //echo $z."<br />";
         if ($_GET[groupid]< 0){
             $xdata[$z] += $row[totalcost];
+//            echo $xdata[$z]."<br \>";
         } else {
             $xdata[$z] = $row[totalcost];
         }
