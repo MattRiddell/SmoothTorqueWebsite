@@ -75,7 +75,7 @@ if ($size == 4200) {
 echo"    </TR></table>";
 
 
-echo "<br /><br />";
+//echo "<br /><br />";
 //$size_x= $size;
 while ($rowx = mysql_fetch_assoc($resultx)) {
     $result = mysql_query("select max(totalcost) from system_billing where groupid = ".$rowx[groupid]);
