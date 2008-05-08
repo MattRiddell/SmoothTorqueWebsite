@@ -1,31 +1,68 @@
 <?php
 $config_file = "/stweb.conf";
-if (!file_exists($config_file)) {
-    if (is_writable($config_file)) {
-
-        // In our example we're opening $filename in append mode.
-        // The file pointer is at the bottom of the file hence
-        // that's where $somecontent will go when we fwrite() it.
-        if (!$handle = fopen($config_file, 'w')) {
-             echo "Cannot open file ($filename)";
-             exit;
-        }
-
-        // Write $somecontent to our opened file.
-        if (fwrite($handle, $default_config) === FALSE) {
-            echo "Cannot write to file ($config_file)";
-            exit;
-        }
-
-        echo "Success, wrote ($default_config) to file ($config_file)";
-
-        fclose($handle);
-
-    } else {
-        echo "The file $config_file is not writable";
-    }
-    exit(0);
-}
+$default_config = "COLOUR=#323232
+TITLE=The SmoothTorque Enterprise Predictive Dialing Platform
+LOGO=/images/logo2.png
+TEXT=For further information please email sales@venturevoip.com
+SOX=/usr/bin/sox
+USERID=VentureVoIP
+LICENCE=DRFHUJWQIWU
+CDR_HOST=localhost
+CDR_USER=root
+CDR_PASS=
+CDR_DB=phoneDB
+CDR_TABLE=cdr
+MENU_HOME=Home
+MENU_CAMPAIGNS=Campaigns
+MENU_NUMBERS=Numbers
+MENU_DNC=DNC Numbers
+MENU_MESSAGES=Messages
+MENU_SCHEDULES=Schedules
+MENU_CUSTOMERS=Customers
+MENU_QUEUES=Queues
+MENU_SERVERS=Servers
+MENU_TRUNKS=Trunks
+MENU_ADMIN=Admin
+MENU_LOGOUT=Logout
+DATE_COLOUR=#ccccff
+MAIN_PAGE_TEXT=To get started, go into your list of campaigns by clicking on the Campaigns tab at the top of this page.
+MAIN_PAGE_USERNAME=Username
+MAIN_PAGE_PASSWORD=Password
+MAIN_PAGE_LOGIN=Login
+CURRENCY_SYMBOL=$
+PER_MINUTE=Per Minute
+USE_BILLING=YES
+SPARE1=Spare 1 (unused)
+SPARE2=Spare 2 (unused)
+SPARE3=Spare 3 (unused)
+SPARE4=Spare 4 (unused)
+SPARE5=Spare 5 (unused)
+ST_MYSQL_HOST=localhost
+ST_MYSQL_USER=root
+ST_MYSQL_PASS=
+ADD_CAMPAIGN=Add Campaign
+VIEW_CAMPAIGN=View Campaigns
+PER_PAGE=200
+NUMBERS_VIEW=View phone numbers
+NUMBERS_SYSTEM=Use System Lists
+NUMBERS_GENERATE=Generate numbers automatically
+NUMBERS_MANUAL=Add number(s) manually
+NUMBERS_UPLOAD=Upload numbers from a text file
+NUMBERS_EXPORT=Export Phone Numbers
+NUMBERS_SEARCH=Search for a phone number
+NUMBERS_TITLE=Number List Management
+BILLING_TEXT=Billing Logs
+CDR_TEXT=Call Details
+USE_GENERATE=YES
+DNC_NUMBERS_TITLE=Do Not Call List
+DNC_VIEW=View existing DNC numbers
+DNC_UPLOAD=Upload DNC numbers from a text file
+DNC_ADD=Add DNC number(s) manually
+PER_LEAD=Price Per Lead
+SMTP_HOST=localhost
+SMTP_USER=
+SMTP_PASS=
+SMTP_FROM=matt@venturevoip.com";
 $comment = "#";
 /*$cmd = "ps aux |grep `cat /SmoothTorque/exampled.lock`";*/
 if (file_exists("/SmoothTorque/SmoothTorque.version")) {
@@ -77,6 +114,40 @@ fclose($fp);
 
 // Set Defaults
 
+if ($config_values['COLOUR'] == "") {
+    if (!file_exists($config_file)) {
+        echo "file does not exist";
+    }
+    if (is_writable($config_file)) {
+
+        // In our example we're opening $filename in append mode.
+        // The file pointer is at the bottom of the file hence
+        // that's where $somecontent will go when we fwrite() it.
+        if (!$handle = fopen($config_file, 'w')) {
+             echo "Cannot open file ($filename)";
+             exit;
+        }
+
+        // Write $somecontent to our opened file.
+        if (fwrite($handle, $default_config) === FALSE) {
+            echo "Cannot write to file ($config_file)";
+            exit;
+        }
+
+        $success = true;
+        fclose($handle);
+
+    } else {
+        echo "The file $config_file is not writable";
+    }
+    exit(0);
+}
+if ($success) {
+    echo "The base config files ($config_file) did not exist, ";
+    echo "but were successfully created with default values. ";
+    echo "You can either edit that file directly or simply go";
+    echo "to the Admin page in this web interface";
+}
 if ($config_values['PER_PAGE'] == "") {
     $config_values['PER_PAGE'] = "20";
 }
