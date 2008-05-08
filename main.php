@@ -88,12 +88,15 @@ while ($rowx = mysql_fetch_assoc($resultx)) {
     $result = mysql_query("select max(totalcost) from system_billing where groupid = ".$rowx[groupid]);
     $totalcost[$x] = mysql_result($result,0,0);
     if ($totalcost[$x] > $highest) {
-        $highest = $totalcost[$x];
+        $highest_array[$x] = $totalcost[$x];
     }
     $company[$x] = $rowx[company];
     $groupid[$x] = $rowx[groupid];
     $real_total_cost += $totalcost[$x];
     $x++;
+}
+for ($i = 0;$i <$x;$i++){
+$highest += $highest_array[$i];
 }
 $highest = $highest + ($highest/10);
 //for($i = 0;$i<$x;$i++) {
