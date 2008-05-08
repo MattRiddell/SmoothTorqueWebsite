@@ -11,35 +11,35 @@ $ysize=280;
 include "admin/db_config.php";
 mysql_select_db("SineDialer", $link);
 $resultx = mysql_query("select distinct system_billing.groupid, customer.* from system_billing left join customer on system_billing.groupid=customer.campaigngroupid");
-while ($rowx = mysql_fetch_assoc($results)) {
+while ($rowx = mysql_fetch_assoc($resultx)) {
 
-if ($_GET[groupid]< 0) {
-    $result = mysql_query("select totalcost from system_billing where groupid = ".$rowx[groupid]." order by timestamp desc LIMIT $size");
-} else {
-    $result = mysql_query("select totalcost from system_billing where groupid = ".$_GET[groupid]." order by timestamp desc LIMIT $size");
-}
-$x = 0;
-//echo "<b>Group ID: $_GET[groupid]</b><br />";
-for ($i = 0;$i<$size;$i++) {
-if ($_GET[groupid]> 0){
-$xdata[$i]=0;
-}
-}
-while ($row = mysql_fetch_assoc($result)) {
+    if ($_GET[groupid]< 0) {
+        $result = mysql_query("select totalcost from system_billing where groupid = ".$rowx[groupid]." order by timestamp desc LIMIT $size");
+    } else {
+        $result = mysql_query("select totalcost from system_billing where groupid = ".$_GET[groupid]." order by timestamp desc LIMIT $size");
+    }
+    $x = 0;
+    //echo "<b>Group ID: $_GET[groupid]</b><br />";
+    for ($i = 0;$i<$size;$i++) {
+        if ($_GET[groupid]> 0){
+            $xdata[$i]=0;
+        }
+    }
+    while ($row = mysql_fetch_assoc($result)) {
 
-/* This is one page of customer billing (i.e. the last $size 5 minute values */
-/* in here should be a graph for that customer showing howmuch they've */
-/* spent in the last $size blocks */
-$z = $size-$x;
-//echo $z."<br />";
-if ($_GET[groupid]< 0){
-$xdata[$z] += $row[totalcost];
-} else {
-$xdata[$z] = $row[totalcost];
-}
+        /* This is one page of customer billing (i.e. the last $size 5 minute values */
+        /* in here should be a graph for that customer showing how much they've */
+        /* spent in the last $size blocks */
+        $z = $size-$x;
+        //echo $z."<br />";
+        if ($_GET[groupid]< 0){
+            $xdata[$z] += $row[totalcost];
+        } else {
+            $xdata[$z] = $row[totalcost];
+        }
 
-$x++;
-}
+        $x++;
+    }
 
 
 }
