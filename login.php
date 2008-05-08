@@ -15,6 +15,23 @@ function mysql_is_table($host, $user, $pass, $db, $tbl)
 	return $result;
 }
 
+/*======================================================================
+                            Log Table
+  ======================================================================*/
+if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","log")){
+  include "admin/db_config.php";
+
+  $sql = "CREATE TABLE `log` (
+  `timestamp` timestamp NULL default NULL on update CURRENT_TIMESTAMP,
+  `activity` varchar(255) default NULL,
+  `username` varchar(255) default NULL
+  )";
+  $result = mysql_query($sql,$link);
+  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Attempted login')";
+  $result=mysql_query($sql, $link);
+  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created Log Table')";
+  $result=mysql_query($sql, $link);
+}
 
 /*======================================================================
                             System Billing Table
@@ -32,6 +49,299 @@ if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","system_billing")){
   $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created System Timestamp Billing Table')";
   $result=mysql_query($sql, $link);
 }
+
+/*======================================================================
+                            campaign Table
+  ======================================================================*/
+if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","campaign")){
+  include "admin/db_config.php";
+$sql = "CREATE TABLE `campaign` (
+  `id` int(200) NOT NULL auto_increment,
+  `description` varchar(250) default NULL,
+  `name` varchar(200) NOT NULL default '',
+  `groupid` int(200) NOT NULL default '0',
+  `messageid` int(200) NOT NULL default '0',
+  `campaignconfigid` int(11) NOT NULL default '0',
+  `messageid2` int(200) unsigned NOT NULL default '0',
+  `messageid3` int(200) unsigned NOT NULL default '0',
+  `astqueuename` varchar(255) default NULL,
+  `mode` int(11) default '0',
+  `clid` varchar(255) default 'nocallerid <>',
+  `trclid` varchar(255) default 'nocallerid',
+  `maxagents` int(11) default '30',
+  `did` varchar(255) default 'nodid',
+  `context` varchar(255) default 'ls3',
+  `cost` varchar(10) default NULL,
+  PRIMARY KEY  (`id`)
+)";
+
+    $result = mysql_query($sql,$link);
+  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created campaign Table')";
+  $result=mysql_query($sql, $link);
+}
+
+
+/*======================================================================
+                            campaigngroup Table
+  ======================================================================*/
+if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","campaigngroup")){
+  include "admin/db_config.php";
+$sql = "CREATE TABLE `campaigngroup` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(200) NOT NULL default '',
+  `description` varchar(200) default NULL,
+  PRIMARY KEY  (`id`)
+)";
+
+    $result = mysql_query($sql,$link);
+  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created campaigngroup Table')";
+  $result=mysql_query($sql, $link);
+    $sql = "insert  into campaigngroup values
+(1, 'VentureVoIP', 'A demonstation group which contains a single demo campaign')";
+ $result = mysql_query($sql,$link);
+
+}
+
+
+/*======================================================================
+                            campaignmessage Table
+  ======================================================================*/
+if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","campaignmessage")){
+  include "admin/db_config.php";
+$sql = "CREATE TABLE `campaignmessage` (
+  `id` int(11) NOT NULL auto_increment,
+  `filename` varchar(250) NOT NULL default '',
+  `name` varchar(200) NOT NULL default '',
+  `description` varchar(250) NOT NULL default '',
+  `customer_id` int(11) default '0',
+  `length` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
+)";
+
+    $result = mysql_query($sql,$link);
+  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created campaignmessage Table')";
+  $result=mysql_query($sql, $link);
+  $sql = "insert  into campaignmessage values
+(27, 'fax-33e5c3b94674a138bc5b390c06e2dba2e7488cb6.tiff', 'New Test Fax', 'A fax broadcasting test', 1, ''),
+(20, 'fax-454d812f68762413e83903248236096ec83c492c.tiff', 'Do_Not_Use', 'A fax file', 1, null),
+(14, 'x-afa871459b4fff189d78420ad7f3158918ca8333.sln', 'Ringin', 'The windows ring in sound', 1, '0.905500'),
+(13, 'x-aba93245ef688df351b4c1765307c1e00a7d3b2e.sln', 'Chord', 'The windows chord sound', 1, '1.099000'),
+(19, 'x-02c4778bdf0e525aa5bbfc5190a9ff7b184136b2.sln', 'Popcorn', 'Popcorn song', 1, '28.585125'),
+(23, 'x-3534874a26eccf76813a3d47549959a0175abcc7.sln', 'UMR Introduction', 'Calling on behalf of... press 1 to take a short poll.', 26, '8.981750'),
+(21, 'x-df6efd23c65b97ae1920ceb5ad7b2ee2a2732431.sln', 'Tada', 'The windows tada sound', 26, '1.939000'),
+(24, 'x-d91f8f58dd14d004a31780540d34bba034f3bb1c.sln', 'Transfer 1 -Great', 'Great -here we go', 26, '1.656625'),
+(26, 'fax-46d26b1fe019de1a711c021a01e426ce65fe4de0.tiff', 'Fax_Lara', 'Picture of lara as a test', 1, null),
+(28, 'x-f9036629b654fffe0bdee6db47521dcd2ceb84b1.sln', 'Ding', 'The windows ding alert sound', 85, '0.915750')";
+$result = mysql_query($sql,$link);
+}
+
+
+/*======================================================================
+                            cdr Table
+  ======================================================================*/
+if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","cdr")){
+  include "admin/db_config.php";
+$sql = "CREATE TABLE `cdr` (
+  `calldate` datetime NOT NULL default '0000-00-00 00:00:00',
+  `clid` varchar(80) NOT NULL default '',
+  `src` varchar(80) NOT NULL default '',
+  `dst` varchar(80) NOT NULL default '',
+  `dcontext` varchar(80) NOT NULL default '',
+  `channel` varchar(80) NOT NULL default '',
+  `dstchannel` varchar(80) NOT NULL default '',
+  `lastapp` varchar(80) NOT NULL default '',
+  `lastdata` varchar(80) NOT NULL default '',
+  `duration` int(11) NOT NULL default '0',
+  `billsec` int(11) NOT NULL default '0',
+  `disposition` varchar(45) NOT NULL default '',
+  `amaflags` int(11) NOT NULL default '0',
+  `accountcode` varchar(20) NOT NULL default '',
+  `userfield` varchar(255) NOT NULL default '',
+  `userfield2` varchar(255) NOT NULL default '',
+  `userfield3` varchar(255) NOT NULL default '',
+  `userfield4` varchar(255) NOT NULL default '',
+  `userfield5` varchar(255) NOT NULL default '',
+  PRIMARY KEY  (`dcontext`,`userfield`,`userfield2`),
+  KEY `calldate` (`calldate`),
+  KEY `dst` (`dst`),
+  KEY `accountcode` (`accountcode`)
+)";
+
+    $result = mysql_query($sql,$link);
+  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created cdr Table')";
+  $result=mysql_query($sql, $link);
+}
+
+
+/*======================================================================
+                            config Table
+  ======================================================================*/
+if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","config")){
+  include "admin/db_config.php";
+$sql = "CREATE TABLE `config` (
+  `parameter` varchar(11) NOT NULL default '0',
+  `value` varchar(110) NOT NULL
+) ";
+
+    $result = mysql_query($sql,$link);
+  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created config Table')";
+  $result=mysql_query($sql, $link);
+  $sql = "insert  into config values
+('backend', '0'),
+('userid', 'VentureVoIP'),
+('licencekey', 'DRFHUJWQIWU')";
+ $result = mysql_query($sql,$link);
+}
+
+/*======================================================================
+                            customer Table
+  ======================================================================*/
+if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","customer")){
+  include "admin/db_config.php";
+$sql = "CREATE TABLE `customer` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `username` varchar(30) NOT NULL default '',
+  `password` varchar(200) NOT NULL default '',
+  `campaigngroupid` int(10) unsigned NOT NULL default '0',
+  `address1` varchar(250) default NULL,
+  `address2` varchar(250) default NULL,
+  `city` varchar(250) default NULL,
+  `country` varchar(250) default NULL,
+  `phone` varchar(250) default NULL,
+  `email` varchar(250) default NULL,
+  `fax` varchar(250) default NULL,
+  `website` varchar(250) default NULL,
+  `security` int(3) unsigned default '0',
+  `company` varchar(250) default NULL,
+  `trunkid` int(11) default '-1',
+  `zip` varchar(25) default NULL,
+  `state` varchar(250) default NULL,
+  `maxcps` int(11) default '10',
+  `maxchans` int(11) default '100',
+  `adminlists` varchar(2555) default NULL,
+  `didlogin` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
+) ";
+
+    $result = mysql_query($sql,$link);
+  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created customer Table')";
+  $result=mysql_query($sql, $link);
+  $sql = "insert  into customer values (2, 'matt', '532b536b7b208d1f81c43c1494b55887dee3328c', 1, '156 Maitland Street', 'Kensington', 'Dunedin', 'New Zealand', '+6434742112', 'matt@venturevoip.com', '+6434742116', 'http://www.venturevoip.com/st.php', 100, 'VentureVoIP', 1, '', '', 1000, 1001, '111,102,101', '1234')";
+  $result=mysql_query($sql, $link);
+}
+
+/*======================================================================
+                            dncnumber Table
+  ======================================================================*/
+if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","dncnumber")){
+  include "admin/db_config.php";
+$sql = "CREATE TABLE `dncnumber` (
+  `campaignid` int(200) NOT NULL default '0',
+  `phonenumber` varchar(50) NOT NULL default '',
+  `status` varchar(50) NOT NULL default '',
+  `type` int(5) NOT NULL default '0',
+  PRIMARY KEY  (`campaignid`,`phonenumber`),
+  KEY `test` (`phonenumber`,`campaignid`)
+) ";
+
+    $result = mysql_query($sql,$link);
+  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created dncnumber Table')";
+  $result=mysql_query($sql, $link);
+}
+
+/*======================================================================
+                            number Table
+  ======================================================================*/
+if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","number")){
+  include "admin/db_config.php";
+$sql = "CREATE TABLE `number` (
+  `campaignid` int(200) NOT NULL default '0',
+  `phonenumber` varchar(50) NOT NULL default '',
+  `status` varchar(50) NOT NULL default '',
+  `type` int(5) NOT NULL default '0',
+  `datetime` timestamp NULL default NULL on update CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`campaignid`,`phonenumber`),
+  KEY `test` (`phonenumber`,`campaignid`),
+  KEY `status` (`campaignid`,`status`),
+  KEY `status2` (`status`)
+)";
+
+    $result = mysql_query($sql,$link);
+  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created number Table')";
+  $result=mysql_query($sql, $link);
+}
+
+
+/*======================================================================
+                            queue Table
+  ======================================================================*/
+if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","queue")){
+  include "admin/db_config.php";
+$sql = "CREATE TABLE `queue` (
+  `queueID` int(11) NOT NULL auto_increment,
+  `queuename` varchar(100) default NULL,
+  `status` tinyint(4) NOT NULL default '0',
+  `campaignID` int(11) NOT NULL default '0',
+  `details` varchar(250) default NULL,
+  `flags` int(11) NOT NULL default '0',
+  `transferclid` varchar(20) default '0',
+  `starttime` time default NULL,
+  `endtime` time default NULL,
+  `startdate` date default NULL,
+  `enddate` date default NULL,
+  `did` varchar(20) default NULL,
+  `clid` varchar(20) default NULL,
+  `context` int(1) NOT NULL default '0',
+  `maxcalls` int(11) default '100',
+  `maxchans` int(11) default '100',
+  `maxretries` int(11) default '0',
+  `retrytime` int(11) default '30',
+  `waittime` int(11) default '30',
+  `timespent` varchar(20) default '0',
+  `progress` varchar(20) default '0',
+  `expectedRate` float NOT NULL default '100',
+  `mode` varchar(120) default '0',
+  `astqueuename` varchar(20) default '',
+  `trunk` varchar(255) default 'Local/s@${EXTEN}',
+  `accountcode` varchar(255) default 'noaccount',
+  `trunkid` int(11) default '-1',
+  `customerID` int(11) default '-1',
+  `maxcps` int(11) default '31',
+  PRIMARY KEY  (`queueID`)
+) ";
+
+    $result = mysql_query($sql,$link);
+  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created queue Table')";
+  $result=mysql_query($sql, $link);
+}
+
+
+
+
+
+/*======================================================================
+                            campaignconfig Table
+  ======================================================================*/
+if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","campaignconfig")){
+  include "admin/db_config.php";
+$sql = "CREATE TABLE `campaignconfig` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `type` int(11) default '0',
+  `astqueuename` varchar(255) default NULL,
+  `did` varchar(255) default NULL,
+  `clid` varchar(255) default NULL,
+  `trclid` varchar(255) default NULL,
+  `maxchans` int(11) default '10',
+  `numagents` int(11) default '10',
+  PRIMARY KEY  (`id`)
+) ";
+
+    $result = mysql_query($sql,$link);
+  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created campaignconfig Table')";
+  $result=mysql_query($sql, $link);
+}
+
+
 
 
 /*======================================================================
@@ -74,23 +384,6 @@ if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","billinglog")){
   $result=mysql_query($sql, $link);
 }
 
-/*======================================================================
-                            Log Table
-  ======================================================================*/
-if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","log")){
-  include "admin/db_config.php";
-
-  $sql = "CREATE TABLE `log` (
-  `timestamp` timestamp NULL default NULL on update CURRENT_TIMESTAMP,
-  `activity` varchar(255) default NULL,
-  `username` varchar(255) default NULL
-  )";
-  $result = mysql_query($sql,$link);
-  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Attempted login')";
-  $result=mysql_query($sql, $link);
-  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created Log Table')";
-  $result=mysql_query($sql, $link);
-}
 
 /*======================================================================
                             Realtime SIP
@@ -400,6 +693,75 @@ if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","queue")){
         );";
         $result = mysql_query($sql,$link);
 }
+
+/*======================================================================
+                            servers Table
+  ======================================================================*/
+if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","servers")){
+  include "admin/db_config.php";
+$sql = "CREATE TABLE `servers` (
+  `id` int(11) NOT NULL auto_increment,
+  `address` varchar(250) NOT NULL default '',
+  `name` varchar(200) NOT NULL default '',
+  `username` varchar(250) NOT NULL default '',
+  `password` varchar(250) NOT NULL default '',
+  `status` int(10) default '0',
+  PRIMARY KEY  (`id`)
+)";
+
+    $result = mysql_query($sql,$link);
+  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created servers Table')";
+  $result=mysql_query($sql, $link);
+}
+
+/*======================================================================
+                            stage Table
+  ======================================================================*/
+if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","stage")){
+  include "admin/db_config.php";
+$sql = "CREATE TABLE `stage` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `phonenumber` varchar(50) NOT NULL default '',
+  `stage` int(3) NOT NULL default '0',
+  `campaignid` int(3) NOT NULL default '0',
+  `timestamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`id`)
+) ";
+
+    $result = mysql_query($sql,$link);
+  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created stage Table')";
+  $result=mysql_query($sql, $link);
+}
+
+
+/*======================================================================
+                            trunk Table
+  ======================================================================*/
+if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","trunk")){
+  include "admin/db_config.php";
+$sql = "CREATE TABLE `trunk` (
+  `id` int(15) unsigned NOT NULL auto_increment,
+  `name` varchar(250) NOT NULL default '',
+  `dialstring` varchar(250) NOT NULL default '',
+  `current` int(1) NOT NULL default '0',
+  `maxchans` int(11) unsigned default '100',
+  `maxcps` varchar(255) default '30',
+  PRIMARY KEY  (`id`)
+) ";
+
+    $result = mysql_query($sql,$link);
+  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created trunk Table')";
+  $result=mysql_query($sql, $link);
+  $sql = "insert  into trunk values
+(1, 'Load Test', 'Local/s@staff/${EXTEN}', 1, 300, '10'),
+(11, 'Local Hardware', 'Zap/g1/${EXTEN}', 0, 10, '3'),
+(13, 'Dialplan', 'Local/${EXTEN}@my_context', 0, 1000, '3'),
+(16, 'IAX2 Trunk', 'IAX2/my-provider/${EXTEN}', 0, 100, '10'),
+(17, 'SIP Trunk', 'SIP/${EXTEN}@my-provider', 0, 100, '5')";
+  $result=mysql_query($sql, $link);
+
+}
+
 
 /*======================================================================
                          Queue_Member_Table
