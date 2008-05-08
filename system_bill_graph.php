@@ -64,7 +64,7 @@ $graph2->xgrid->SetColor('white@0.3','white@0.7');
 $graph2->ygrid->SetColor('white@0.3','white@0.7');
 $graph2->xgrid->Show(true,true);
 $graph2->SetFrame(false,'darkblue',2);
-$graph2->SetBackgroundGradient('purple@0.9','lightblue2@0.2',GRAD_HOR,BGRAD_PLOT);
+$graph2->SetBackgroundGradient('blue@0.999','lightblue2@0.7',GRAD_HOR,BGRAD_PLOT);
 for ($i=0;$i<$size;$i++){
 $datax[$i] = "".(int)($i);
 }
