@@ -172,7 +172,9 @@ if ($success) {
     echo "The base config files ($config_file) did not exist, ";
     echo "but were successfully created with default values. ";
     echo "You can either edit that file directly or simply go";
-    echo "to the Admin page in this web interface";
+    echo "to the Admin page in this web interface<br /><br />";
+    echo '<a href="main.php">Go to the main page</a>';
+    exit(0);
 }
 if ($config_values['PER_PAGE'] == "") {
     $config_values['PER_PAGE'] = "20";
