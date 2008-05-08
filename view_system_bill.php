@@ -64,14 +64,14 @@ while ($rowx = mysql_fetch_assoc($resultx)) {
     $groupid[$x] = $rowx[groupid];
     $x++;
 }
-$highest = $highest + ($highest/10);
-for($i = 0;$i<$x;$i++) {
-    //echo $size_x;
-    $totalcost_cr = $config_values['CURRENCY_SYMBOL']." ".number_format($totalcost[$i],2);
-    echo "<b>$company[$i] ($totalcost_cr)</b><br />";
-    echo '<a href="system_bill_graph.php?xsize=640&ysize=480&size='.$size.'&max='.$highest.'&groupid='.$groupid[$i].'"><img src="system_bill_graph.php?xsize=500&ysize=100&size='.$size.'&max='.$highest.'&groupid='.$groupid[$i].'" width="500" height="100" border="0"></a>';
-    echo "<br>";
+    $highest = $highest + ($highest/10);
+    for($i = 0;$i<$x;$i++) {
+        //echo $size_x;
+        $totalcost_cr = $config_values['CURRENCY_SYMBOL']." ".number_format($totalcost[$i],2);
+        echo "<b>$company[$i] ($totalcost_cr)</b><br />";
+        echo '<a href="system_bill_graph.php?xsize=640&ysize=480&size='.$size.'&max='.$highest.'&groupid='.$groupid[$i].'"><img src="system_bill_graph.php?xsize=500&ysize=100&size='.$size.'&max='.$highest.'&groupid='.$groupid[$i].'" width="500" height="100" border="0"></a>';
+        echo "<br>";
 
-}
+    }
 }
 ?>

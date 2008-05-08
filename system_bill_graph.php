@@ -10,8 +10,11 @@ $ysize=280;
 }
 include "admin/db_config.php";
 mysql_select_db("SineDialer", $link);
-
-$result = mysql_query("select * from system_billing where groupid = ".$_GET[groupid]." order by timestamp desc LIMIT $size");
+if ($_GET[groupid]< 0) {
+    $result = mysql_query("select * from system_billing order by timestamp desc LIMIT $size");
+} else {
+    $result = mysql_query("select * from system_billing where groupid = ".$_GET[groupid]." order by timestamp desc LIMIT $size");
+}
 $x = 0;
 //echo "<b>Group ID: $_GET[groupid]</b><br />";
 for ($i = 0;$i<$size;$i++) {
