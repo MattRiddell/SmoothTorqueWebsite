@@ -100,7 +100,6 @@ if (file_exists("/SmoothTorque/exampled.lock")) {
 /*href=\"startbackend.php\"><b>Start Server</b></a></center></font>";*/
 ////////}
 if (file_exists($config_file)) {
-    echo "file exists";
     $fp = fopen($config_file, "r");
     while (!feof($fp)) {
       $line = trim(fgets($fp));
@@ -136,12 +135,11 @@ if (file_exists($config_file)) {
             fclose($handle);
 
         } else {
-            echo "The file $config_file is not writable";
+            echo "The file $config_file is not writable but it does exist";
             exit(0);
         }
     }
 } else {
-    echo "file does not exist";
         if (is_writable($config_file)) {
 
             // In our example we're opening $filename in append mode.
@@ -162,7 +160,11 @@ if (file_exists($config_file)) {
             fclose($handle);
 
         } else {
-            echo "The file $config_file is not writable";
+            echo "The file $config_file does not exist and we are unable";
+            echo "to write to that location. Please log in to the system";
+            echo "and type the following commands:<br /><br />";
+            echo "<code>touch /stweb.conf</code><br />";
+            echo "<code>chown www-data /stweb.conf</code>";
             exit(0);
         }
 
