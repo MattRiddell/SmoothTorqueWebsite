@@ -7,7 +7,8 @@ ob_implicit_flush(FALSE);
 
 $_POST = array_map(mysql_real_escape_string,$_POST);
 $_GET = array_map(mysql_real_escape_string,$_GET);
-
+$campaignid = $data["id"];
+//echo $campaignid;
 ?>
 <?php if(!empty($data)){?>
 <?php if(isset($data['title'])){?>
@@ -29,7 +30,6 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
         $handle = fopen($filename, "r");
         echo "<br />Importing DNC numbers, please wait<br /><br />";
         //print_r($_POST);
-        $campaignid = $data["id"];
         $sql2 = "LOCK TABLES dncnumber WRITE";
         mysql_query($sql2, $link) or die (mysql_error());;
         $sql = "INSERT IGNORE INTO dncnumber (campaignid,phonenumber,status,type) VALUES";
@@ -76,14 +76,15 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
                 $sq2 = "LOCK TABLES dncnumber WRITE";
                 mysql_query($sql2, $link) or die (mysql_error());;
                 $sql = "INSERT IGNORE INTO dncnumber (campaignid,phonenumber,status,type)  VALUES";
-                $sql.="(".$campaignid.",,'".$data[0]."','new',1)";
+                $sql.="(".$campaignid.",'".$data[0]."','new',1)";
             } else {
-				$sql.=",(".$campaignid.",,'".$data[0]."','new',1)";
+				$sql.=",(".$campaignid.",'".$data[0]."','new',1)";
 			}
         }
         //echo "Saving Records to the Database <br />";
         echo "[".$row." DNC numbers inserted]<br />\n";
         ob_flush();flush();
+        //echo $sql;
         mysql_query($sql, $link) or die (mysql_error());;
                 $sql2="COMMIT";
                 mysql_query($sql2, $link) or die (mysql_error());;
