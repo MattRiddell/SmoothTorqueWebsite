@@ -100,19 +100,18 @@ if (file_exists("/SmoothTorque/exampled.lock")) {
 /*href=\"startbackend.php\"><b>Start Server</b></a></center></font>";*/
 ////////}
 if (file_exists($config_file)) {
-$fp = fopen($config_file, "r");
-while (!feof($fp)) {
-  $line = trim(fgets($fp));
-  if ($line && substr($line,0,1)!=$comment) {
-    $pieces = explode("=", $line);
-    $option = trim($pieces[0]);
-    $value = trim($pieces[1]);
-    $config_values[$option] = $value;
-  }
-}
-fclose($fp);
-} else
-    echo "file does not exist";
+    echo "file exists";
+    $fp = fopen($config_file, "r");
+    while (!feof($fp)) {
+      $line = trim(fgets($fp));
+      if ($line && substr($line,0,1)!=$comment) {
+        $pieces = explode("=", $line);
+        $option = trim($pieces[0]);
+        $value = trim($pieces[1]);
+        $config_values[$option] = $value;
+      }
+    }
+    fclose($fp);
 
     // Set Defaults
 
@@ -138,9 +137,36 @@ fclose($fp);
 
         } else {
             echo "The file $config_file is not writable";
+            exit(0);
         }
-        exit(0);
     }
+} else {
+    echo "file does not exist";
+        if (is_writable($config_file)) {
+
+            // In our example we're opening $filename in append mode.
+            // The file pointer is at the bottom of the file hence
+            // that's where $somecontent will go when we fwrite() it.
+            if (!$handle = fopen($config_file, 'w')) {
+                 echo "Cannot open file ($filename)";
+                 exit;
+            }
+
+            // Write $somecontent to our opened file.
+            if (fwrite($handle, $default_config) === FALSE) {
+                echo "Cannot write to file ($config_file)";
+                exit;
+            }
+
+            $success = true;
+            fclose($handle);
+
+        } else {
+            echo "The file $config_file is not writable";
+            exit(0);
+        }
+
+
 }
 if ($success) {
     echo "The base config files ($config_file) did not exist, ";
