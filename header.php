@@ -1,4 +1,13 @@
 <?php
+if (! extension_loaded('gd')) {
+    echo "It looks like php-gd is not installed.  Installing it will depend ";
+    echo "on the package manager you have installed.  Here are a few examples:<br /><br />";
+    echo "Fedora/Centos:<br /><code>yum install -y php-gd</code><br /><br />";
+    echo "Debian/Ubuntu:<br /><code>apt-get install php-gd</code><br /><br />";
+    echo "Gentoo:<br /><code>emerge php-gd</code><br /><br />";
+    echo "Mandriva/Mandrake:<br /><code>urpmi php-gd</code><br /><br />";
+    exit(0);
+}
 $current_directory = dirname(__FILE__);
 $whoami = exec('whoami');
 $config_file = "/stweb.conf";
