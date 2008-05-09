@@ -67,10 +67,18 @@ SMTP_PASS=
 SMTP_FROM=matt@venturevoip.com";
 $comment = "#";
 if (!file_exists("../upload_settings.inc")) {
-    echo "The file ../upload_settings.inc does not exist.  You will need to";
-    echo "copy it from the $current_directory/cron subdirectory by typing";
+    echo "The file ../upload_settings.inc does not exist.  You will need to ";
+    echo "copy it from the $current_directory/cron subdirectory by typing ";
     echo "the following commands<br /><br />";
     echo "<code>cp $current_directory/cron/upload_settings.inc $current_directory/../</code>";
+    exit(0);
+}
+if (!file_exists("/tmp/uploads")) {
+    echo "The directory /tmp/uploads does not exist.  You will need to create ";
+    echo "it by typing the following commands<br /><br />";
+    echo "<code>mkdir /tmp/uploads<br />";
+    echo "chown $whoami /tmp/uploads<br />";
+    echo "cp $current_directory/uploads/* /tmp/uploads</code>";
     exit(0);
 }
 /*$cmd = "ps aux |grep `cat /SmoothTorque/exampled.lock`";*/
@@ -169,8 +177,8 @@ if (file_exists($config_file)) {
             fclose($handle);
 
         } else {
-            echo "The file $config_file does not exist and we are unable";
-            echo "to write to that location. Please log in to the system";
+            echo "The file $config_file does not exist and we are unable ";
+            echo "to write to that location. Please log in to the system ";
             echo "and type the following commands:<br /><br />";
             echo "<code>touch /stweb.conf</code><br />";
             echo "<code>chown $whoami /stweb.conf</code>";
@@ -182,7 +190,7 @@ if (file_exists($config_file)) {
 if ($success) {
     echo "The base config files ($config_file) did not exist, ";
     echo "but were successfully created with default values. ";
-    echo "You can either edit that file directly or simply go";
+    echo "You can either edit that file directly or simply go ";
     echo "to the Admin page in this web interface<br /><br />";
     echo '<a href="main.php">Go to the main page</a>';
     exit(0);
