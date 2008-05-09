@@ -1,4 +1,6 @@
 <?php
+$current_directory = dirname(__FILE__);
+$whoami = exec('whoami');
 $config_file = "/stweb.conf";
 $default_config = "COLOUR=#323232
 TITLE=The SmoothTorque Enterprise Predictive Dialing Platform
@@ -64,6 +66,13 @@ SMTP_USER=
 SMTP_PASS=
 SMTP_FROM=matt@venturevoip.com";
 $comment = "#";
+if (!file_exists("../upload_settings.inc")) {
+    echo "The file ../upload_settings.inc does not exist.  You will need to";
+    echo "copy it from the $current_directory/cron subdirectory by typing";
+    echo "the following commands<br /><br />";
+    echo "<code>cp $current_directory/cron/upload_settings.inc $current_directory/../</code>";
+    exit(0);
+}
 /*$cmd = "ps aux |grep `cat /SmoothTorque/exampled.lock`";*/
 if (file_exists("/SmoothTorque/SmoothTorque.version")) {
 	$fp2 = fopen("/SmoothTorque/SmoothTorque.version", "r");
@@ -164,7 +173,7 @@ if (file_exists($config_file)) {
             echo "to write to that location. Please log in to the system";
             echo "and type the following commands:<br /><br />";
             echo "<code>touch /stweb.conf</code><br />";
-            echo "<code>chown www-data /stweb.conf</code>";
+            echo "<code>chown $whoami /stweb.conf</code>";
             exit(0);
         }
 
