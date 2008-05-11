@@ -34,14 +34,16 @@ $campaignid = $data["id"];
         mysql_query($sql2, $link) or die (mysql_error());;
         $sql = "INSERT IGNORE INTO dncnumber (campaignid,phonenumber,status,type) VALUES";
         $isfirst=true;
-        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+        while (($data = fgetcsv($handle, 1000, "~")) !== FALSE) {
             //echo "Inside Loop: ".$data[0]."<br />";
             $data[0] = str_replace("(","",$data[0]);
             $data[0] = str_replace(")","",$data[0]);
             $data[0] = str_replace("-","",$data[0]);
             $data[0] = str_replace(" ","",$data[0]);
+            $data[0] = str_replace(",","",$data[0]);
             $data[0] = str_replace("\r","",$data[0]);
             if ($isfirst) {
+            echo $data[0]."<br />";
                 $sql.="(".$campaignid.",'".$data[0]."','new',1)";
 
 //                $sql2 = "SET AUTOCOMMIT=0;";//BEGIN";
