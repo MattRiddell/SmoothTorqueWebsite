@@ -76,11 +76,13 @@ SMTP_PASS=
 SMTP_FROM=matt@venturevoip.com";
 $comment = "#";
 if (!file_exists("../upload_settings.inc")) {
-    echo "The file ../upload_settings.inc does not exist.  You will need to ";
-    echo "copy it from the $current_directory/cron subdirectory by typing ";
-    echo "the following commands<br /><br />";
-    echo "<code>cp $current_directory/cron/upload_settings.inc $current_directory/../</code>";
-    exit(0);
+    if (!file_exists("../../upload_settings.inc")) {
+        echo "The file ../upload_settings.inc does not exist.  You will need to ";
+        echo "copy it from the $current_directory/cron subdirectory by typing ";
+        echo "the following commands<br /><br />";
+        echo "<code>cp $current_directory/cron/upload_settings.inc $current_directory/../</code>";
+        exit(0);
+    }
 }
 if (!file_exists("/tmp/uploads")) {
     echo "The directory /tmp/uploads does not exist.  You will need to create ";
