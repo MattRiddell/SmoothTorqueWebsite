@@ -43,7 +43,7 @@ $campaignid = $data["id"];
             $data[0] = str_replace(",","",$data[0]);
             $data[0] = str_replace("\r","",$data[0]);
             if ($isfirst) {
-            echo $data[0]."<br />";
+//            echo $data[0]."<br />";
                 $sql.="(".$campaignid.",'".$data[0]."','new',1)";
 
 //                $sql2 = "SET AUTOCOMMIT=0;";//BEGIN";
