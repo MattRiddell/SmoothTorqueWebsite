@@ -80,6 +80,7 @@ if (isset($_POST[colour])){
     fwrite($add,"SMTP_USER=$_POST[SMTP_USER]\n");
     fwrite($add,"SMTP_PASS=$_POST[SMTP_PASS]\n");
     fwrite($add,"SMTP_FROM=$_POST[SMTP_FROM]\n");
+    fwrite($add,"USE_SEPARATE_DNC=$_POST[USE_SEPARATE_DNC]\n");
 
     fclose($add);
 
@@ -281,8 +282,6 @@ Asterisk MySQL CDR Table:
 
 </table>
 
-<?if ($backend == 0) {?>
-
 <br /> <br />
 
 <table class="" align="center" border="0" cellpadding="2" cellspacing="0">
@@ -342,6 +341,7 @@ if ($contents<1000){
 	$maxchans=$contents-(10000*round($test));
 	echo round($test-2)." Servers (Max. ".$maxchans." Channels)";
 }
+
 ?>
 
 
@@ -554,6 +554,16 @@ Add DNC numbers Text (Title):
 </td>
 <td>
 <input type="Text" name="DNC_ADD" value="<?echo $config_values['DNC_ADD'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+Use separate DNC entries for separate customers
+</td>
+<td>
+<input type="radio" name="USE_SEPARATE_DNC" value="YES" <?if ( $config_values['USE_SEPARATE_DNC'] == "YES") {echo "checked";}?>> Yes
+<input type="radio" name="USE_SEPARATE_DNC" value="NO" <?if ( $config_values['USE_SEPARATE_DNC'] != "YES") {echo "checked";}?>> No
 </td>
 </tr>
 
@@ -839,5 +849,5 @@ Description of spare5 context (optional)
 </table>
 
 </form>
-<?}
+<?
 }?>

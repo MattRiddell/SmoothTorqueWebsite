@@ -28,8 +28,12 @@ $start=0;
 if ($_GET[start]>0){
     $start=$_GET[start];
 }
+if ($config_values['USE_SEPARATE_DNC'] == "YES") {
+    $sql = 'SELECT count(*) FROM dncnumber WHERE campaignid='.$campaigngroupid;
+} else {
+    $sql = 'SELECT count(*) FROM dncnumber';
+}
 
-$sql = 'SELECT count(*) FROM dncnumber WHERE campaignid='.$campaigngroupid;
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $max=mysql_result($result,0,'count(*)');
 echo '<a href="viewdncnumbers.php?start=0"><img src="/images/resultset_first.png" border="0"></a> ';
@@ -43,7 +47,15 @@ echo '<a href="viewdncnumbers.php?start='.(($max-$config_values['PER_PAGE'])+$ma
 echo '<br />';
 echo '<br />';
 
-$sql = 'SELECT * FROM dncnumber where campaignid = '.$campaigngroupid.' LIMIT '.$start.','.$config_values['PER_PAGE'];
+
+if ($config_values['USE_SEPARATE_DNC'] == "YES") {
+    $sql = 'SELECT * FROM dncnumber where campaignid = '.$campaigngroupid.' LIMIT '.$start.','.$config_values['PER_PAGE'];
+} else {
+    $sql = 'SELECT * FROM dncnumber LIMIT '.$start.','.$config_values['PER_PAGE'];
+}
+
+
+
 $result=mysql_query($sql, $link) or die (mysql_error());;
 //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
 while ($row = mysql_fetch_assoc($result)) {

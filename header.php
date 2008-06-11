@@ -73,6 +73,7 @@ PER_LEAD=Price Per Lead
 SMTP_HOST=localhost
 SMTP_USER=
 SMTP_PASS=
+USE_SEPARATE_DNC=NO
 SMTP_FROM=matt@venturevoip.com";
 $comment = "#";
 if (!file_exists("../upload_settings.inc")) {
@@ -227,6 +228,10 @@ if ($config_values['MENU_ADDFUNDS'] == "") {
 if ($config_values['DNC_ADD'] == "") {
     $config_values['DNC_ADD'] = "Add DNC number(s) manually";
 }
+if ($config_values['USE_SEPARATE_DNC'] == "") {
+    $config_values['USE_SEPARATE_DNC'] = "YES";
+}
+
 
 if ($config_values['DNC_UPLOAD'] == "") {
     $config_values['DNC_UPLOAD'] = "Upload DNC numbers from a text file";

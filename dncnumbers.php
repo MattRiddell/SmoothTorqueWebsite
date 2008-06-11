@@ -4,7 +4,11 @@ $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $campaigngroupid=mysql_result($result,0,'campaigngroupid');
 
-$sql = 'SELECT count(*) FROM dncnumber';
+if ($config_values['USE_SEPARATE_DNC'] == "YES") {
+    $sql = 'SELECT count(*) FROM dncnumber WHERE campaignid='.$campaigngroupid;
+} else {
+    $sql = 'SELECT count(*) FROM dncnumber';
+}
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $count=mysql_result($result,0,'count(*)');
 
