@@ -3,6 +3,10 @@ require "header.php";
 require "header_campaign.php";
 $id=$_GET[id];
 $debug=$_GET[debug];
+if (file("/tmp/Sm".$id.".campaignProperties") == false) {
+    echo "There is no information for this campaign";
+    exit(0);
+}
 if ($id<1){
         exit(0);
 }
