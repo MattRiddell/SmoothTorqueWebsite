@@ -4,7 +4,19 @@ require "header_campaign.php";
 $id=$_GET[id];
 $debug=$_GET[debug];
 if (file("/tmp/Sm".$id.".campaignProperties") == false) {
-    echo "There is no information for this campaign";
+    echo "There is no information for this campaign (CampaignProperties missing)";
+    exit(0);
+}
+if (file("/tmp/Sm".$id.".console") == false) {
+    echo "There is no information for this campaign (Console missing)";
+    exit(0);
+}
+if (file("/tmp/Sm".$id.".console2") == false) {
+    echo "There is no information for this campaign (Console2 missing)";
+    exit(0);
+}
+if (file("/tmp/Sm".$id.".console3") == false) {
+    echo "There is no information for this campaign (Console3 missing)";
     exit(0);
 }
 if ($id<1){
