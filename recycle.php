@@ -92,6 +92,13 @@ $result=mysql_query($sql, $link) or die (mysql_error());;
 echo mysql_result($result,0,0);
 ?> Unknown numbers</a>
 <br />
+<a href="recycle.php?id=<?echo $_GET[id];?>&type=calldropped&type_input=<?echo $_GET[type_input];?>">
+Reset <?
+$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="calldropped"';
+$result=mysql_query($sql, $link) or die (mysql_error());;
+echo mysql_result($result,0,0);
+?> Call Dropped numbers</a>
+<br />
 <a href="recycle.php?id=<?echo $_GET[id];?>&type=hungup&type_input=<?echo $_GET[type_input];?>">
 Reset <?
 $sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="hungup"';
