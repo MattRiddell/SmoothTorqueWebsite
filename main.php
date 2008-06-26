@@ -34,7 +34,7 @@ echo $config_values['MAIN_PAGE_TEXT'];
 <?
 $level=$_COOKIE[level];
 
-if ($level==sha1("level100"))
+if ($level==sha1("level100") && $config_values['USE_BILLING'] == "YES")
        {
 if (!isset($_GET[size])) {
     $size=144;
