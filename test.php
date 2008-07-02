@@ -5,18 +5,22 @@ $id=$_GET[id];
 $debug=$_GET[debug];
 if (@file("/tmp/Sm".$id.".campaignProperties") == false) {
     echo "There is no information for this campaign (CampaignProperties missing)";
+    echo '<META HTTP-EQUIV=REFRESH CONTENT="3; URL=test.php">';
     exit(0);
 }
 if (@file("/tmp/Sm".$id.".console") == false) {
     echo "There is no information for this campaign (Console missing)";
+    echo '<META HTTP-EQUIV=REFRESH CONTENT="3; URL=test.php">';
     exit(0);
 }
 if (@file("/tmp/Sm".$id.".console2") == false) {
     echo "There is no information for this campaign (Console2 missing)";
+    echo '<META HTTP-EQUIV=REFRESH CONTENT="3; URL=test.php">';
     exit(0);
 }
 if (@file("/tmp/Sm".$id.".console3") == false) {
     echo "There is no information for this campaign (Console3 missing)";
+    echo '<META HTTP-EQUIV=REFRESH CONTENT="3; URL=test.php">';
     exit(0);
 }
 if ($id<1){
