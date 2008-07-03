@@ -9,24 +9,24 @@ $campaigngroupid=mysql_result($result,0,'campaigngroupid');
 if (isset($_POST[queuename])){
     //$queueid=$_POST[queueid];
     $campaignid=$_POST[campaignid];
-$sql = 'SELECT * FROM campaign WHERE id=\''.$campaignid.'\'';
-$result=mysql_query($sql, $link) or die (mysql_error());;
-$row = mysql_fetch_assoc($result);
-//print_r($row);
-//exit(0);
-//echo "<br><br><br>";
-$trclid=mysql_result($result,0,'trclid');
-$clid=mysql_result($result,0,'clid');
-//echo "CLID: ".$clid;
+    $sql = 'SELECT * FROM campaign WHERE id=\''.$campaignid.'\'';
+    $result=mysql_query($sql, $link) or die (mysql_error());;
+    $row = mysql_fetch_assoc($result);
+    //print_r($row);
+    //exit(0);
+    //echo "<br><br><br>";
+    $trclid=mysql_result($result,0,'trclid');
+    $clid=mysql_result($result,0,'clid');
+    //echo "CLID: ".$clid;
 
-if (strlen($trclid)==0) {
-    $trclid = "notrclid";
-}
-$did=mysql_result($result,0,'did');
-$mode=mysql_result($result,0,'mode');
-$context=mysql_result($result,0,'context');
-$maxagents=mysql_result($result,0,'maxagents');
-$astqueuename=mysql_result($result,0,'astqueuename');
+    if (strlen($trclid)==0) {
+        $trclid = "notrclid";
+    }
+    $did=mysql_result($result,0,'did');
+    $mode=mysql_result($result,0,'mode');
+    $context=mysql_result($result,0,'context');
+    $maxagents=mysql_result($result,0,'maxagents');
+    $astqueuename=mysql_result($result,0,'astqueuename');
 
     $id=$_POST[campaignid];
     $queuename=$_POST[queuename];
@@ -114,7 +114,7 @@ if (strlen($astqueuename)==0){
 $sql2="INSERT INTO queue (campaignid,queuename,status,details,flags,transferclid,
     starttime,endtime,startdate,enddate,did,clid,context,maxcalls,maxchans,maxretries
     ,retrytime,waittime,trunk,astqueuename, accountcode, trunkid, customerID, maxcps) VALUES
-    ('$id','$queuename','1','$details','0','$trclid',
+    ('$id','$queuename','$status','$details','0','$trclid',
     '$starttime','$endtime','$startdate','$enddate','$did','$clid',
     '$context','$maxagents','$maxchans','0'
     ,'0','30','".$dialstring."','$astqueuename','stl-".$username."','$trunkid','$campaigngroupid','$maxcps') ";
