@@ -1,5 +1,4 @@
 <?//
-// Small Change
 require "header.php";
 $config_file = "/stweb.conf";
 $comment = "#";
