@@ -1,4 +1,4 @@
-<?//bla2
+<?//bla23
 require "header.php";
 $config_file = "/stweb.conf";
 $comment = "#";
