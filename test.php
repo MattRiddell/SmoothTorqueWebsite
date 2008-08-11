@@ -4,8 +4,11 @@ require "header_campaign.php";
 $id=$_GET[id];
 $debug=$_GET[debug];
 if (@file("/tmp/Sm".$id.".campaignProperties") == false) {
+if (isset($_GET[secondtime])) {
     echo "There is no information for this campaign (CampaignProperties missing)";
-    echo '<META HTTP-EQUIV=REFRESH CONTENT="3; URL=test.php?id='.$_GET['id'].'">';
+    } else {
+    echo '<META HTTP-EQUIV=REFRESH CONTENT="3; URL=test.php?id='.$_GET['id'].'&secondtime=yes">';
+    }
     exit(0);
 }
 if (@file("/tmp/Sm".$id.".console") == false) {
