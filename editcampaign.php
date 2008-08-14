@@ -144,6 +144,14 @@ while ($row_queue[$count2] = mysql_fetch_assoc($result)) {
     $count2++;
     //echo "<OPTION VALUE=\"".$row[id]."\">".$row[name]."</OPTION>";
 }
+$sql="SELECT astqueuename from customer where campaigngroupid=$campaigngroupid";
+$result=mysql_query($sql,$link) or die (mysql_error());
+if (mysql_num_rows($result) > 0) {
+    $row_queue[$count2][name] = mysql_result($result,0,0);
+    $count2++;
+}
+
+
 
 
 ?>
@@ -254,7 +262,7 @@ echo "<OPTION VALUE=\"".$row2[$count2][id]."\"$selected>".$row2[$count2][descrip
 
             <SELECT name="astqueuename">
 <?
-for ($count2=0;$count2<$count;$count2++){
+for ($count2=0;$count2<sizeof($row_queue);$count2++){
 $selected="";
 if ($row[astqueuename]==$row_queue[$count2][name]){
     $selected=" SELECTED";

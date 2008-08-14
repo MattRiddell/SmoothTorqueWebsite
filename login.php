@@ -904,9 +904,44 @@ if (!in_array('cost', $field_array))
 }
 
 /*****************************************************************
+*           ALTER customer TABLE TO ADD astqueuename FIELD       *
+******************************************************************/
+unset($field_array);
+$fields = mysql_list_fields('SineDialer', 'customer', $link);
+$columns = mysql_num_fields($fields);
+for ($i = 0; $i < $columns; $i++) {
+    $field_array[] = mysql_field_name($fields, $i);
+}
+if (!in_array('astqueuename', $field_array))
+{
+    $result = mysql_query('ALTER TABLE customer ADD astqueuename VARCHAR(255)');
+    $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added customer astqueuename field')";
+    $result=mysql_query($sql, $link);
+}
+
+
+/*****************************************************************
+*           ALTER sip_buddies TABLE TO ADD call-limit FIELD      *
+******************************************************************/
+unset($field_array);
+$fields = mysql_list_fields('SineDialer', 'sip_buddies', $link);
+$columns = mysql_num_fields($fields);
+for ($i = 0; $i < $columns; $i++) {
+    $field_array[] = mysql_field_name($fields, $i);
+}
+if (!in_array('call-limit', $field_array))
+{
+    $result = mysql_query('ALTER TABLE sip_buddies ADD `call-limit` int(8) default 1') or die(mysql_error());
+    $result = mysql_query('UPDATE sip_buddies SET `call-limit`=1') or die(mysql_error());
+    $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added sip_buddies call-limit field')";
+    $result=mysql_query($sql, $link);
+}
+
+
+/*****************************************************************
 *           ALTER customer TABLE TO ADD didlogin FIELD             *
 ******************************************************************/
-
+unset($field_array);
 $fields = mysql_list_fields('SineDialer', 'customer', $link);
 $columns = mysql_num_fields($fields);
 for ($i = 0; $i < $columns; $i++) {
@@ -923,7 +958,7 @@ if (!in_array('didlogin', $field_array))
 /*****************************************************************
 *           ALTER MESSAGE TABLE TO ADD length FIELD             *
 ******************************************************************/
-
+unset($field_array);
 $fields = mysql_list_fields('SineDialer', 'campaignmessage', $link);
 $columns = mysql_num_fields($fields);
 for ($i = 0; $i < $columns; $i++) {
@@ -940,7 +975,7 @@ if (!in_array('length', $field_array))
 /*****************************************************************
 *           ALTER BILLING TABLE TO ADD receipt FIELD             *
 ******************************************************************/
-
+unset($field_array);
 $fields = mysql_list_fields('SineDialer', 'billinglog', $link);
 $columns = mysql_num_fields($fields);
 for ($i = 0; $i < $columns; $i++) {

@@ -23,7 +23,7 @@ $state=($_POST[state]);
 $maxcps=$_POST[maxcps];
 $maxchans=$_POST[maxchans];
 $didlogin=$_POST[didlogin];
-
+$astqueuename=$_POST[astqueuename];
     $sql="INSERT INTO campaigngroup (name,description) VALUES ('$company','$description')";
 //    echo $sql;
     $result=mysql_query($sql, $link) or die (mysql_error());;
@@ -31,14 +31,14 @@ $didlogin=$_POST[didlogin];
 
     if ($security == 10) { /* Accounts user - they don't need to make calls */
         $sql="INSERT INTO customer (username,password,campaigngroupid,address1,address2,city,
-        country,phone,fax,email,website,security,company,trunkid,zip,state)
+        country,phone,fax,email,website,security,company,trunkid,zip,state,astqueuename)
         VALUES ('$username','$password','$insertedID','$address1','$address2','$city',
-        '$country','$phone','$fax','$email','$website','$security','$company','$trunkid','$zip','$state')";
+        '$country','$phone','$fax','$email','$website','$security','$company','$trunkid','$zip','$state','$astqueuename')";
     } else {
         $sql="INSERT INTO customer (username,password,campaigngroupid,address1,address2,city,
-        country,phone,fax,email,website,security,company,trunkid,zip,state, maxchans, maxcps, didlogin)
+        country,phone,fax,email,website,security,company,trunkid,zip,state, maxchans, maxcps, didlogin, astqueuename)
         VALUES ('$username','$password','$insertedID','$address1','$address2','$city',
-        '$country','$phone','$fax','$email','$website','$security','$company','$trunkid','$zip','$state', $maxchans, $maxcps, '$didlogin')";
+        '$country','$phone','$fax','$email','$website','$security','$company','$trunkid','$zip','$state', $maxchans, $maxcps, '$didlogin','$astqueuename')";
     }
 
     //    echo $sql;

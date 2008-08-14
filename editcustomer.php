@@ -35,7 +35,7 @@ $state=$_POST[state];
 $maxcps=$_POST[maxcps];
 $maxchans=$_POST[maxchans];
 $didlogin=$_POST[didlogin];
-
+$astqueuename=$_POST[astqueuename];
     $sql="update campaigngroup set name='$company',description='$description' where id=".$_POST[campaigngroupid];
 //    echo $sql;
     $result=mysql_query($sql, $link) or die (mysql_error());;
@@ -43,7 +43,7 @@ $didlogin=$_POST[didlogin];
 
     $sql="update customer set username='$username',address1='$address1',address2='$address2',
     city='$city',country='$country',phone='$phone',fax='$fax',email='$email',website='$website',
-    security='$security',company='$company', trunkid='$trunkid', zip='$zip', didlogin='$didlogin', state='$state' , maxcps=$maxcps, maxchans=$maxchans, adminlists='$adminlists' WHERE id=".$_POST[id];
+    security='$security',company='$company', trunkid='$trunkid', zip='$zip', didlogin='$didlogin', state='$state' , maxcps=$maxcps, maxchans=$maxchans, adminlists='$adminlists', astqueuename='$astqueuename' WHERE id=".$_POST[id];
 
     //echo $sql;
     $result=mysql_query($sql, $link) or die (mysql_error());;
