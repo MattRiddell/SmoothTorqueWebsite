@@ -8,7 +8,7 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
 if (isset($_GET[id])){
 
 $count = 0;
-$sql="SELECT count(*) from campaign where trunkid=".($_GET[id]);
+$sql="SELECT count(*) from customer where trunkid=".($_GET[id]);
 $result=mysql_query($sql, $link) or die (mysql_error());
 $count+=mysql_result($result,0,0);
 
