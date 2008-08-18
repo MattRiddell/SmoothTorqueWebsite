@@ -39,7 +39,7 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
     	$trclid=$_POST[trclid];
 
 
-	$sql = "UPDATE campaign SET groupid='$campaigngroupid', name='$name', description='$description',messageid='$messageid',messageid2='$messageid2',messageid3='$messageid3',mode='$mode',astqueuename='$astqueuename',did='$did',maxagents='$maxagents',clid='$clid',trclid='$trclid',context='$context' WHERE id='$_POST[id]'";
+	$sql = "UPDATE campaign SET"./* groupid='$campaigngroupid',*/" name='$name', description='$description',messageid='$messageid',messageid2='$messageid2',messageid3='$messageid3',mode='$mode',astqueuename='$astqueuename',did='$did',maxagents='$maxagents',clid='$clid',trclid='$trclid',context='$context' WHERE id='$_POST[id]'";
 //    echo $sql;
     $result=mysql_query($sql, $link) or die (mysql_error());;
     include("campaigns.php");
