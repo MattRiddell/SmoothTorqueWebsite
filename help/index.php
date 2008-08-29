@@ -68,6 +68,11 @@ if ($level==sha1("level100")){
     echo '<div id="queues" style="display:none">';
     include 'src/queues.php';
     echo '</div>';
+    
+    echo '<h2 align="left" onClick=hideshow("agents")>Agents<h2>';
+    echo '<div id="agents" style="display:none">';
+    include 'src/agents.php';
+    echo '</div>';
 
     echo '<h2 align="left" onClick=hideshow("trunks")>'.$config_values['MENU_TRUNKS'].'</h2>';
     echo '<div id="trunks" style="display:none">';

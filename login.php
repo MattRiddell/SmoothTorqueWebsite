@@ -302,7 +302,7 @@ $sql = "CREATE TABLE `queue` (
   `expectedRate` float NOT NULL default '100',
   `mode` varchar(120) default '0',
   `astqueuename` varchar(20) default '',
-  `trunk` varchar(255) default 'Local/s@${EXTEN}',
+  `trunk` varchar(255) default 'Local/s@\${EXTEN}',
   `accountcode` varchar(255) default 'noaccount',
   `trunkid` int(11) default '-1',
   `customerID` int(11) default '-1',
@@ -684,7 +684,7 @@ if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","queue")){
   `expectedRate` float NOT NULL default '100',
   `mode` varchar(120) default '0',
   `astqueuename` varchar(20) default '',
-  `trunk` varchar(255) default 'Local/s@${EXTEN}',
+  `trunk` varchar(255) default 'Local/s@\${EXTEN}',
   `accountcode` varchar(255) default 'noaccount',
   `trunkid` int(11) default '-1',
   `customerID` int(11) default '-1',
@@ -753,11 +753,11 @@ $sql = "CREATE TABLE `trunk` (
   $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created trunk Table')";
   $result=mysql_query($sql, $link);
   $sql = "insert  into trunk values
-(1, 'Load Test', 'Local/s@staff/${EXTEN}', 1, 300, '10'),
-(11, 'Local Hardware', 'Zap/g1/${EXTEN}', 0, 10, '3'),
-(13, 'Dialplan', 'Local/${EXTEN}@my_context', 0, 1000, '3'),
-(16, 'IAX2 Trunk', 'IAX2/my-provider/${EXTEN}', 0, 100, '10'),
-(17, 'SIP Trunk', 'SIP/${EXTEN}@my-provider', 0, 100, '5')";
+(1, 'Load Test', 'Local/s@staff/\${EXTEN}', 1, 300, '10'),
+(11, 'Local Hardware', 'Zap/g1/\${EXTEN}', 0, 10, '3'),
+(13, 'Dialplan', 'Local/\${EXTEN}@my_context', 0, 1000, '3'),
+(16, 'IAX2 Trunk', 'IAX2/my-provider/\${EXTEN}', 0, 100, '10'),
+(17, 'SIP Trunk', 'SIP/\${EXTEN}@my-provider', 0, 100, '5')";
   $result=mysql_query($sql, $link);
 
 }
