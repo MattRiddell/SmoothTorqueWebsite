@@ -1,0 +1,5 @@
+forgotten to add delete agent to svn ;)
+--This line, and those below, will be ignored--
+
+M    index.php
+A    deleteagent.php
