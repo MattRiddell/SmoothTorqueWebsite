@@ -14,7 +14,7 @@ if (!isset($_POST[campaignid])&&!isset($_GET[campaignid])){
 </td>
 <td width="260">
 <b>Manual Dialing</b><br /><br />
-From here you can chose a campaign that you would like to see the numbers for.<br /><br />
+Please select a campaign<br /><br />
 <FORM ACTION="manualdial.php" METHOD="GET">
     <table class="tborderdd" align="center" border="0" cellpadding="0" cellspacing="2"><TR>
     <TD>Select Campaign:</TD><TD>
@@ -32,7 +32,7 @@ From here you can chose a campaign that you would like to see the numbers for.<b
     </TD>
     </TR><TR>
     <TD COLSPAN=2 ALIGN="CENTER"><br />
-    <INPUT TYPE="SUBMIT" VALUE="Display Numbers">
+    <INPUT TYPE="SUBMIT" VALUE="Select Campaign">
     </TD>
     </TR></table>
     </FORM><br />
@@ -67,16 +67,15 @@ while ($row = mysql_fetch_assoc($result)) {
     $x++;
 }
 $random = (rand()%sizeof($numbers));
-echo $random." entry is ".$numbers[$random]."<br />";
+//echo $random." entry is ".$numbers[$random]."<br />";
 //$result = mysql_query("INSERT INTO number (campaignid, phonenumber, status) VALUES ($_POST[campaignid],'$numbers[$random]','new')") or die(mysql_error());
 $result = mysql_query("SELECT * FROM campaign WHERE id = $_POST[campaignid]") or die(mysql_error());
 $row = mysql_fetch_assoc($result);
 ?><a title="Start running this campaign" href="manual_startcampaign.php?phonenumber=<?=$numbers[$random];?>&id=<?=$_POST[campaignid]?>&astqueuename=<?echo $row[astqueuename];?>&clid=<?echo $row[clid];?>&trclid=<?echo $row[trclid];?>&agents=<?echo $row[maxagents];?>&did=<?echo $row[did];?>&context=<?echo $row[context];?>">
-Bla</a>
+Dial <?=$numbers[$random]?></a>
 <?
-print_r($rows[$x]);
+//print_r($rows[$x]);
 }?>
-
 
 
 

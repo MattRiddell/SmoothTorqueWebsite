@@ -125,6 +125,7 @@ $row2 = mysql_fetch_assoc($result2);
 </TR><TR><TD CLASS="thead">Customer Type</TD><TD colspan=2>
 <SELECT NAME="security">
 <OPTION VALUE="0" <?if ($row[security]==0){echo "SELECTED";}?>>Normal Customer</OPTION>
+<OPTION VALUE="5" <?if ($row[security]==5){echo "SELECTED";}?>>Agent</OPTION>
 <OPTION VALUE="10" <?if ($row[security]==10){echo "SELECTED";}?>>Accounts Management</OPTION>
 <OPTION VALUE="100" <?if ($row[security]==100){echo "SELECTED";}?>>Administrator</OPTION>
 </SELECT>

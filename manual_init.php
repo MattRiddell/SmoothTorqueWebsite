@@ -56,8 +56,8 @@ if (isset($_GET[campaignid])){
 // Ok, so we have a campaign id to use numbers from
 // How many numbers has it got?
 $result = mysql_query("UPDATE number set status = \"manual_dial\" where campaignid=$_POST[campaignid] AND status = 'new'") or die(mysql_error());
+echo "Manual Dialing Campaign Initiation Complete";
 }?>
-
 
 
 

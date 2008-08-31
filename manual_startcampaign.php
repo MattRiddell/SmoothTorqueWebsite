@@ -9,7 +9,7 @@ mysql_select_db("SineDialer", $link);
 $_POST = array_map(mysql_real_escape_string,$_POST);
 $_GET = array_map(mysql_real_escape_string,$_GET);
 $sql = "UPDATE number set status = 'new' where campaignid=$_GET[id] and phonenumber = '$_GET[phonenumber]'";
-echo $sql;
+//echo $sql;
 //exit(0);
 $result = mysql_query($sql) or die(mysql_error());
 
@@ -41,6 +41,15 @@ if ($_POST[context]==0) {
     echo "Press 1 Live and Answer Machine";
 }
 */
+
+$sqlxx = "SELECT groupid FROM campaign WHERE id = $_GET[id]";
+$result=mysql_query($sqlxx, $link) or die (mysql_error());;
+$campaigngroupid=mysql_result($result,0,'groupid');
+
+$sqlxx = "SELECT username FROM customer WHERE campaigngroupid = $campaigngroupid";
+$result=mysql_query($sqlxx, $link) or die (mysql_error());;
+$_COOKIE[user]=mysql_result($result,0,'username');
+
 
 $sqlx = 'SELECT campaigngroupid, maxchans, maxcps FROM customer WHERE username=\''.$_COOKIE[user].'\'';
 $result=mysql_query($sqlx, $link) or die (mysql_error());;
@@ -214,46 +223,7 @@ $sql2="INSERT INTO queue (campaignid,queuename,status,details,flags,transferclid
 $resultx=mysql_query($sql1, $link) or die (mysql_error());;
 $resultx=mysql_query($sql2, $link) or die (mysql_error());;
 
-exit(0);
 ?>
 </b>
-<br />
-<br />
-<?
-if ($out[browser]=="MSIE"){
-?>
-<script type="text/javascript" src="/ajax/jquery.js"></script>
-        <script type="text/javascript">
-        $(function(){ // jquery onload
-                window.setInterval(function(){ // setInterval code
-                        $('#ajaxDiv').loadIfModified('campaignstatus.php?id=<?echo $_GET[id];?>');
-                },2000);
-        });
-
-        </script>
- <?} else {?>
-<script type="text/javascript" src="/ajax/jquery.js"></script>
-        <script type="text/javascript">
-        $(function(){ // jquery onload
-                window.setInterval(function(){ // setInterval code
-                        $('#ajaxDiv').load('campaignstatus.php?id=<?echo $_GET[id];?>');
-                },2000);
-        });
-
-        </script>
-
-<?}?>
-<div id="ajaxDiv">
-<?
-$id=$_GET[id];include "campaignstatus.php";?>
-</div>
-
-<br />
-</td>
-<td>
-</td></tr>
-</table>
-</center>
-<?
-require "footer.php";
-?>
+Please wait, dialing that number.
+<META HTTP-EQUIV=REFRESH CONTENT="3; URL=manualdial.php?campaignid=<?=$_GET[id]?>">
