@@ -608,6 +608,82 @@ Logout Menu Text:
 </tr>
 </table>
 </div>
+
+
+<? /************************** Misc Text TAB *************************/ ?>
+<div class="tabbertab" title="Misc Text">
+<center>
+<table>
+
+
+<tr><td CLASS="thead" colspan="2">Other Text</td>
+
+
+
+<tr  class="tborder2">
+<td>
+Main Page Text:
+</td>
+<td>
+<input type="Text" name="MAIN_PAGE_TEXT" size="60" value="<?echo $config_values['MAIN_PAGE_TEXT'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+Add Campaign Text:
+</td>
+<td>
+<input type="Text" name="ADD_CAMPAIGN" size="60" value="<?echo $config_values['ADD_CAMPAIGN'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+View Campaigns Text:
+</td>
+<td>
+<input type="Text" name="VIEW_CAMPAIGN" size="60" value="<?echo $config_values['VIEW_CAMPAIGN'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+Main Page Username Text:
+</td>
+<td>
+<input type="Text" name="MAIN_PAGE_USERNAME" size="60" value="<?echo $config_values['MAIN_PAGE_USERNAME'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+Main Page Password Text:
+</td>
+<td>
+<input type="Text" name="MAIN_PAGE_PASSWORD" size="60" value="<?echo $config_values['MAIN_PAGE_PASSWORD'];?>">
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+Main Page Login Text:
+</td>
+<td>
+<input type="Text" name="MAIN_PAGE_LOGIN" size="60" value="<?echo $config_values['MAIN_PAGE_LOGIN'];?>">
+</td>
+</tr>
+
+
+<tr  class="tborder2">
+<td colspan="2">
+<input type="submit" value="Save Config Information">
+</td>
+</tr>
+</table>
+</div>
+
+
 <? /************************** DNC TAB *************************/ ?>
 <div class="tabbertab" title="DNC">
 <center>
@@ -624,7 +700,7 @@ Logout Menu Text:
 Number List Management Text (Title):
 </td>
 <td>
-<input type="Text" name="DNC_NUMBERS_TITLE" value="<?echo $config_values['DNC_NUMBERS_TITLE'];?>">
+<input type="Text" name="DNC_NUMBERS_TITLE" size="60" value="<?echo $config_values['DNC_NUMBERS_TITLE'];?>">
 </td>
 </tr>
 
@@ -633,7 +709,7 @@ Number List Management Text (Title):
 View existing DNC numbers Text (Title):
 </td>
 <td>
-<input type="Text" name="DNC_VIEW" value="<?echo $config_values['DNC_VIEW'];?>">
+<input type="Text" name="DNC_VIEW" size="60" value="<?echo $config_values['DNC_VIEW'];?>">
 </td>
 </tr>
 
@@ -642,7 +718,7 @@ View existing DNC numbers Text (Title):
 Upload DNC numbers Text (Title):
 </td>
 <td>
-<input type="Text" name="DNC_UPLOAD" value="<?echo $config_values['DNC_UPLOAD'];?>">
+<input type="Text" name="DNC_UPLOAD" size="60" value="<?echo $config_values['DNC_UPLOAD'];?>">
 </td>
 </tr>
 
@@ -651,7 +727,7 @@ Upload DNC numbers Text (Title):
 Add DNC numbers Text (Title):
 </td>
 <td>
-<input type="Text" name="DNC_ADD" value="<?echo $config_values['DNC_ADD'];?>">
+<input type="Text" name="DNC_ADD" size="60" value="<?echo $config_values['DNC_ADD'];?>">
 </td>
 </tr>
 
@@ -689,7 +765,7 @@ Use separate DNC entries for separate customers
 Number of entries to show per page:
 </td>
 <td>
-<input type="Text" name="PER_PAGE" value="<?echo $config_values['PER_PAGE'];?>">
+<input type="Text" name="PER_PAGE" size="60" value="<?echo $config_values['PER_PAGE'];?>">
 </td>
 </tr>
 
@@ -708,7 +784,7 @@ Allow manual dialling:
 Number List Management Text (Title):
 </td>
 <td>
-<input type="Text" name="NUMBERS_TITLE" value="<?echo $config_values['NUMBERS_TITLE'];?>">
+<input type="Text" name="NUMBERS_TITLE" size="60" value="<?echo $config_values['NUMBERS_TITLE'];?>">
 </td>
 </tr>
 
@@ -718,7 +794,7 @@ Number List Management Text (Title):
 View phone numbers text:
 </td>
 <td>
-<input type="Text" name="NUMBERS_VIEW" value="<?echo $config_values['NUMBERS_VIEW'];?>">
+<input type="Text" name="NUMBERS_VIEW" size="60" value="<?echo $config_values['NUMBERS_VIEW'];?>">
 </td>
 </tr>
 
@@ -727,7 +803,7 @@ View phone numbers text:
 Use System Lists Text:
 </td>
 <td>
-<input type="Text" name="NUMBERS_SYSTEM" value="<?echo $config_values['NUMBERS_SYSTEM'];?>">
+<input type="Text" name="NUMBERS_SYSTEM" size="60" value="<?echo $config_values['NUMBERS_SYSTEM'];?>">
 </td>
 </tr>
 
@@ -736,7 +812,7 @@ Use System Lists Text:
 Search for a phone number Text:
 </td>
 <td>
-<input type="Text" name="NUMBERS_SEARCH" value="<?echo $config_values['NUMBERS_SEARCH'];?>">
+<input type="Text" name="NUMBERS_SEARCH" size="60" value="<?echo $config_values['NUMBERS_SEARCH'];?>">
 </td>
 </tr>
 
@@ -745,7 +821,7 @@ Search for a phone number Text:
 Export Phone Numbers Text:
 </td>
 <td>
-<input type="Text" name="NUMBERS_EXPORT" value="<?echo $config_values['NUMBERS_EXPORT'];?>">
+<input type="Text" name="NUMBERS_EXPORT" size="60" value="<?echo $config_values['NUMBERS_EXPORT'];?>">
 </td>
 </tr>
 
@@ -754,7 +830,7 @@ Export Phone Numbers Text:
 Upload numbers from a text file Text:
 </td>
 <td>
-<input type="Text" name="NUMBERS_UPLOAD" value="<?echo $config_values['NUMBERS_UPLOAD'];?>">
+<input type="Text" name="NUMBERS_UPLOAD" size="60" value="<?echo $config_values['NUMBERS_UPLOAD'];?>">
 </td>
 </tr>
 
@@ -763,7 +839,7 @@ Upload numbers from a text file Text:
 Add number(s) manually Text:
 </td>
 <td>
-<input type="Text" name="NUMBERS_MANUAL" value="<?echo $config_values['NUMBERS_MANUAL'];?>">
+<input type="Text" name="NUMBERS_MANUAL" size="60" value="<?echo $config_values['NUMBERS_MANUAL'];?>">
 </td>
 </tr>
 
@@ -772,7 +848,7 @@ Add number(s) manually Text:
 Generate numbers automatically Text:
 </td>
 <td>
-<input type="Text" name="NUMBERS_GENERATE" value="<?echo $config_values['NUMBERS_GENERATE'];?>">
+<input type="Text" name="NUMBERS_GENERATE" size="60" value="<?echo $config_values['NUMBERS_GENERATE'];?>">
 </td>
 </tr>
 
@@ -785,78 +861,6 @@ Use the Generate numbers automatically option
 <input type="radio" name="USE_GENERATE" value="NO" <?if ( $config_values['USE_GENERATE'] != "YES") {echo "checked";}?>> No
 </td>
 </tr>
-
-<tr  class="tborder2">
-<td colspan="2">
-<input type="submit" value="Save Config Information">
-</td>
-</tr>
-</table>
-</div>
-<? /************************** Misc Text TAB *************************/ ?>
-<div class="tabbertab" title="Misc Text">
-<center>
-<table>
-
-
-<tr><td CLASS="thead" colspan="2">Other Text</td>
-
-
-
-<tr  class="tborder2">
-<td>
-Main Page Text:
-</td>
-<td>
-<input type="Text" name="MAIN_PAGE_TEXT" value="<?echo $config_values['MAIN_PAGE_TEXT'];?>">
-</td>
-</tr>
-
-<tr  class="tborder2">
-<td>
-Add Campaign Text:
-</td>
-<td>
-<input type="Text" name="ADD_CAMPAIGN" value="<?echo $config_values['ADD_CAMPAIGN'];?>">
-</td>
-</tr>
-
-<tr  class="tborder2">
-<td>
-View Campaigns Text:
-</td>
-<td>
-<input type="Text" name="VIEW_CAMPAIGN" value="<?echo $config_values['VIEW_CAMPAIGN'];?>">
-</td>
-</tr>
-
-<tr  class="tborder2">
-<td>
-Main Page Username Text:
-</td>
-<td>
-<input type="Text" name="MAIN_PAGE_USERNAME" value="<?echo $config_values['MAIN_PAGE_USERNAME'];?>">
-</td>
-</tr>
-
-<tr  class="tborder2">
-<td>
-Main Page Password Text:
-</td>
-<td>
-<input type="Text" name="MAIN_PAGE_PASSWORD" value="<?echo $config_values['MAIN_PAGE_PASSWORD'];?>">
-</td>
-</tr>
-
-<tr  class="tborder2">
-<td>
-Main Page Login Text:
-</td>
-<td>
-<input type="Text" name="MAIN_PAGE_LOGIN" value="<?echo $config_values['MAIN_PAGE_LOGIN'];?>">
-</td>
-</tr>
-
 
 <tr  class="tborder2">
 <td colspan="2">
