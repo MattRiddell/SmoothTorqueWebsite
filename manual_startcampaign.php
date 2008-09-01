@@ -239,5 +239,7 @@ $resultx=mysql_query($sql2, $link) or die (mysql_error());;
 </div>
 </td></tr></table>
 <br />
+Please wait, we are dialling that number...
 <br />
+
 <META HTTP-EQUIV=REFRESH CONTENT="0; URL=manualdial.php?campaignid=<?=$_GET[id]?>&dialled=<?=$numbers[$random]?>">
