@@ -145,7 +145,7 @@ $licencekey = mysql_result($result,0,'value');
 <table cellpadding="20">
 <tr>
 <td>
-<a href="check_version.php"><img src="/images/network.png" border="0" width="32"><br /><br />Check for updates</a>
+<a href="check_version.php"><img src="/images/browser.png" border="0" width="32"><br /><br />Check for updates</a>
 </td><td>
 <a href="log.php"><img src="/images/document.png" border="0" width="32"><br /><br />View System Logs</a>
 </td>
