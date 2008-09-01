@@ -1,4 +1,4 @@
-<?
+<?a
 $result = exec("/usr/bin/which svn");
 //print_r($result);
 //echo $result;
