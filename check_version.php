@@ -20,6 +20,7 @@ if (trim($local_version) != trim($remote_version)) {
 }
 
 echo "<br /><b>";
+/*
 //$local_version = exec("cat svn_version.php");
 if (!$handle = fopen("http://call.venturevoip.com/backend_version.php", 'r')) {
     echo "Can't read from remote";
@@ -37,7 +38,7 @@ if (trim($local_version) != trim($remote_version)) {
     echo "Your controller is up to date";
 }
 
-
+*/
 ?>
 <br /><br /><a href="config.php">Go Back to Config</a>
 <?
