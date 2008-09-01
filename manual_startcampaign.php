@@ -1,27 +1,32 @@
 <?
+require "header.php";
 include "admin/db_config.php";
 mysql_select_db("SineDialer", $link);
-
+echo "<br /><br />";
 //require "header.php";
 //require "header_campaign.php";
 //$out=_get_browser();
 
 $_POST = array_map(mysql_real_escape_string,$_POST);
 $_GET = array_map(mysql_real_escape_string,$_GET);
-$sql = "UPDATE number set status = 'new' where campaignid=$_GET[id] and phonenumber = '$_GET[phonenumber]'";
+$result = mysql_query("SELECT * from number where campaignid=$_GET[id] and status='manual_dial' limit 100");
+//srand(time());
+$x = 0;
+while ($row = mysql_fetch_assoc($result)) {
+    $numbers[$x] = $row[phonenumber];
+    $rows[$x] = $row;
+    $x++;
+}
+$random = (rand()%sizeof($numbers));
+
+
+$sql = "UPDATE number set status = 'new' where campaignid=$_GET[id] and phonenumber = '$numbers[$random]'";
 //echo $sql;
 //exit(0);
 $result = mysql_query($sql) or die(mysql_error());
 
 //print_r($_POST);
 ?>
-<br /><br /><br /><br />
-<center>
-<table background="/images/sdbox.png" width="300" height="200" class="dragme22">
-<tr>
-<td>
-</td>
-<td width="260">
 <?
 /*Maximum Concurrent Calls:<b> <?echo $_POST[agents];?></b><br />
 Call Center Phone Number:<b> <?echo $_POST[did];?></b><br />
@@ -225,5 +230,14 @@ $resultx=mysql_query($sql2, $link) or die (mysql_error());;
 
 ?>
 </b>
-Please wait, dialing that number.
-<META HTTP-EQUIV=REFRESH CONTENT="3; URL=manualdial.php?campaignid=<?=$_GET[id]?>">
+
+<center>
+<table border="0" cellpadding="20">
+<tr><td bgcolor = "#ffffff">
+<div id="ajaxDiv">
+<img src="/images/progress.gif" border="0">
+</div>
+</td></tr></table>
+<br />
+<br />
+<META HTTP-EQUIV=REFRESH CONTENT="0; URL=manualdial.php?campaignid=<?=$_GET[id]?>&dialled=<?=$numbers[$random]?>">

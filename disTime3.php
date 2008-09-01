@@ -130,11 +130,15 @@ echo trim(substr($row[description],0,$max_str_len))."...";
 <?
 $sql = 'SELECT count(*) from number where campaignid='.$row[id].' and (status="manual_dial" or status="new" or status="no-credit")';
 $result2=mysql_query($sql, $link) or die (mysql_error());;
-$new=mysql_result($result2,0,'count(*)');
+$new_numbers=mysql_result($result2,0,'count(*)');
+
+$sql = 'SELECT count(*) from number where campaignid='.$row[id].' and (status="manual_dial" or status="no-credit")';
+$result2=mysql_query($sql, $link) or die (mysql_error());;
+$manual_numbers=mysql_result($result2,0,'count(*)');
 
 $sql = 'SELECT count(*) from number where campaignid='.$row[id];
 $result2=mysql_query($sql, $link) or die (mysql_error());;
-$count2=mysql_result($result2,0,'count(*)');
+$total_numbers=mysql_result($result2,0,'count(*)');
 
 $sql = 'SELECT status, flags, maxcalls, progress from queue where campaignid='.$row[id];
 $resultx=mysql_query($sql, $link) or die (mysql_error());;
@@ -151,22 +155,29 @@ $progress=$rowx[progress];
 if ($progress>0){
             ?>
             <img src="/images/percentImage.png" title="<?
-            echo "Remaining: $new/$count2\"";?>"
+            echo "Remaining: $new_numbers/$total_numbers\"";?>"
             class="percentImage"
-            style="background-position: -<?echo ((100-(($new/$count2)*100))*1.2)-1; ?>px 0pt;" border="0" />
+            style="background-position: -<?echo ((100-(($new_numbers/$total_numbers)*100))*1.2)-1; ?>px 0pt;" border="0" />
 <?
-} else {
-            if ($count2 > 0) {
+}else if ($manual_numbers > 0){
             ?>
             <img src="/images/percentImage.png" title="<?
-            echo "Remaining: $new/$count2\"";?>"
+            echo "Remaining: $new_numbers/$total_numbers\"";?>"
+            class="percentImage3"
+            style="background-position: -<?echo ((100-(($new_numbers/$total_numbers)*100))*1.2)-1; ?>px 0pt;" border="0" />
+<?
+}else {
+            if ($total_numbers > 0) {
+            ?>
+            <img src="/images/percentImage.png" title="<?
+            echo "Remaining: $new_numbers/$total_numbers\"";?>"
             class="percentImage2"
-            style="background-position: -<?echo ((100-(($new/$count2)*100))*1.2)-1; ?>px 0pt;" border="0" />
+            style="background-position: -<?echo ((100-(($new_numbers/$total_numbers)*100))*1.2)-1; ?>px 0pt;" border="0" />
 <?
             } else {
             ?>
             <img src="/images/percentImage.png" title="<?
-            echo "Remaining: $new/$count2\"";?>"
+            echo "Remaining: $new_numbers/$total_numbers\"";?>"
             class="percentImage2"
             style="background-position: -<?echo ((100-((0)*100))*1.2)-1; ?>px 0pt;" border="0" />
 <?
