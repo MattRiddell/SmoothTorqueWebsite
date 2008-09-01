@@ -12,6 +12,20 @@ require "header.php";
 <b>Welcome to <?echo $config_values['TITLE'];?>.</b><br />
 <br />
 <?
+if ($level==sha1("level5")) {
+    echo "Please wait.";
+    ?>
+    <br />
+</td>
+<td>
+</td></tr>
+</table>
+</center>
+<META HTTP-EQUIV=REFRESH CONTENT="0; URL=manualdial.php">
+
+    <?
+    exit(0);
+}
 if ($level==sha1("level10")){
     echo '<a href="addfunds.php">Add funds to a registered account</a><br />';
     echo '<a href="billinglog.php">View Billing Log</a><br />';

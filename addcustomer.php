@@ -34,6 +34,11 @@ $astqueuename=$_POST[astqueuename];
         country,phone,fax,email,website,security,company,trunkid,zip,state,astqueuename)
         VALUES ('$username','$password','$insertedID','$address1','$address2','$city',
         '$country','$phone','$fax','$email','$website','$security','$company','$trunkid','$zip','$state','$astqueuename')";
+    } else if ($security == 5) { /* Agent - they don't need to make calls */
+        $sql="INSERT INTO customer (username,password,campaigngroupid,address1,address2,city,
+        country,phone,fax,email,website,security,company,trunkid,zip,state,astqueuename)
+        VALUES ('$username','$password','$insertedID','$address1','$address2','$city',
+        '$country','$phone','$fax','$email','$website','$security','$company','$trunkid','$zip','$state','$astqueuename')";
     } else {
         $sql="INSERT INTO customer (username,password,campaigngroupid,address1,address2,city,
         country,phone,fax,email,website,security,company,trunkid,zip,state, maxchans, maxcps, didlogin, astqueuename)

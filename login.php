@@ -1017,6 +1017,8 @@ if (trim($dbpass)==trim($passwordHash)){
         $level=sha1("level100");
     } else if (mysql_result($result,0,'security')==0){
         $level=sha1("level0");
+    } else if (mysql_result($result,0,'security')==5){
+        $level=sha1("level5");
     } else {
         $level=sha1("level10");
     }
