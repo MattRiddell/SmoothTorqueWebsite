@@ -1,8 +1,10 @@
 <?
 $result = exec("/usr/bin/which svn");
-print_r($result);
+//print_r($result);
 //echo $result;
 //print_r(exec($result." info -r HEAD"));
-print_r(exec($result." status --username web --password \"\" --no-auth-cache --show-updates --verbose .",$output));
+exec($result." status --username web --password \"\" --no-auth-cache --show-updates --verbose .|grep \"*\"",$output);
+echo "<pre>";
 print_r($output);
+echo "</pre>";
 ?>
