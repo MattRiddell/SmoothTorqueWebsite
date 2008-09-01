@@ -43,7 +43,7 @@ ul.tabbernav li a
  margin-left: 3px;
  border: 1px solid #778;
  border-bottom: none;
- background: #DDE;
+ background: #DDf;
  text-decoration: none;
 }
 
@@ -59,8 +59,8 @@ ul.tabbernav li a:hover
 
 ul.tabbernav li.tabberactive a
 {
- background-color: #fff;
- border-bottom: 1px solid #fff;
+ background-color: #f8f8ff;
+ border-bottom: 1px solid #f8f8ff;
 }
 
 ul.tabbernav li.tabberactive a:hover
@@ -78,6 +78,7 @@ ul.tabbernav li.tabberactive a:hover
  padding:5px;
  border:1px solid #aaa;
  border-top:0;
+ background: #f8f8ff;
 
  /* If you don't want the tab size changing whenever a tab is changed
     you can set a fixed height */

@@ -133,7 +133,9 @@ $result=mysql_query($sql, $link) or die (mysql_error());;
 $licencekey = mysql_result($result,0,'value');
 ?>
 <form action="config.php" name="config" method="post">
-<div class="tabber">
+<center>
+<table width="860px"><tr><td>
+<div class="tabber" >
 
 <? /************************** SETTINGS TAB *************************/ ?>
 
@@ -168,7 +170,7 @@ $licencekey = mysql_result($result,0,'value');
 <tr>
     <td CLASS="thead" colspan="2">Settings</td>
 </tr>
-<tr  class="tborderxx"><td>
+<tr  class="tborder2"><td>
 <?if ($backend == 0) {?>
     <IMG SRC="/images/tick.png" BORDER="1" WIDTH="16" HEIGHT="16" class="abcd">
 <?} else {?>
@@ -353,7 +355,7 @@ Asterisk MySQL CDR Table:
 <tr>
     <td CLASS="thead" colspan="2">Licence Details</td>
 </tr>
-<tr  class="tborderxx">
+<tr  class="tborder2">
 <td>
 User ID:
 </td>
@@ -369,7 +371,7 @@ Licence Key:
 <input type="text" name="licencekey" value="<?echo $licencekey;?>">
 </td>
 </tr>
-<tr  class="tborderxx">
+<tr  class="tborder2">
 <td>
 Licence Details:
 </td>
@@ -1008,7 +1010,8 @@ Description of spare5 context (optional)
 
 <div class="tabbertab" title="Credits">
 <br />
-SmoothTorque was written by Matt Riddell, Forbes Williams and Paul Crane.<br />
+<img src="/images/venturevoip.png" border="0"><br /><br />
+SmoothTorque was written by Matt Riddell, Forbes Williams and Paul Crane of <a href="http://www.venturevoip.com">VentureVoIP</a>.<br />
 <br />
 The SmoothTorque website uses the following components:<br />
 <br />
@@ -1017,12 +1020,12 @@ The SmoothTorque website uses the following components:<br />
 <a href="http://www.dhtmlgoodies.com/scripts/modal-message/demo-modal-message.html" target="_blank">DHTML modal dialog box</a><br />
 <a href="http://www.dhtmlgoodies.com" target="_blank">Ajax dynamic content</a><br />
 <a href="http://www.twilightuniverse.com" target="_blank">Simple AJAX Code-Kit</a><br />
+<a href="http://www.barelyfitz.com/projects/tabber/" target="_blank">JavaScript tabifier</a><br />
 <a href="http://www.softcomplex.com/products/tigra_color_picker/" target="_blank">Tigra Color Picker</a><br />
 <a href="http://jquery.com/" target="_blank">jQuery</a><br />
-
-
-
+<br />
+<br />
 </div>
-
+</td></tr></table>
 <?
 }?>
