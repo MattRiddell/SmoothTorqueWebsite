@@ -12,6 +12,8 @@ $result=mysql_query($sql, $link);
 
 } else {
 //echo $_POST[sox];
+//print_r($_POST);
+//exit(0);
 if (isset($_POST[colour])){
 
     $add = @fopen("/stweb.conf",'w');
@@ -130,14 +132,39 @@ $sql = 'SELECT value FROM config WHERE parameter=\'licencekey\'';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $licencekey = mysql_result($result,0,'value');
 ?>
-<br />
-<br />
-<table class="" align="center" border="0" cellpadding="2" cellspacing="0">
-<tr><td colspan=2><a href="check_version.php">Check for updates</a></td></tr>
-<tr><td colspan=2><a href="log.php">View System Logs</a></td></tr>
-<tr><td colspan=2><a href="billinglog.php">View <?echo $config_values['BILLING_TEXT'];?></a></td></tr>
-<tr><td colspan=2><a href="view_system_bill.php">View Billing Graphs</a><br /><br /></td></tr>
+<form action="config.php" name="config" method="post">
+<div class="tabber">
 
+<? /************************** SETTINGS TAB *************************/ ?>
+
+<div class="tabbertab" title="Tools">
+<br />
+<center>
+<table cellpadding="20">
+<tr>
+<td>
+<a href="check_version.php"><img src="/images/network.png" border="0" width="32"><br /><br />Check for updates</a>
+</td><td>
+<a href="log.php"><img src="/images/document.png" border="0" width="32"><br /><br />View System Logs</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="billinglog.php"><img src="/images/kcalc.png" border="0" width="32"><br /><br />View <?echo $config_values['BILLING_TEXT'];?></a>
+</td>
+<td>
+<a href="view_system_bill.php"><img src="/images/log.png" border="0" width="32"><br /><br />View Billing Graphs</a>
+</td>
+</tr></table>
+</div>
+
+
+<? /************************** SYSTEM TAB *************************/ ?>
+
+
+<div class="tabbertab" title="System">
+<center>
+<table>
 <tr>
     <td CLASS="thead" colspan="2">Settings</td>
 </tr>
@@ -157,7 +184,6 @@ $licencekey = mysql_result($result,0,'value');
 <?}?>
 </td>
 <td>Windows Backend</td></tr>
-<form action="config.php" name="config" method="post">
 <tr  class="tborder2">
 <td>
 Sox Path:
@@ -167,7 +193,19 @@ Sox Path:
 </td>
 </tr>
 
-<tr><td colspan="2"><br /><br /></td></tr><tr><td CLASS="thead" colspan="2">Email Settings</td>
+<tr  class="tborder2">
+<td colspan="2">
+<input type="submit" value="Save Config Information">
+</td>
+</tr>
+</table>
+</div>
+<? /************************** EMAIL TAB *************************/ ?>
+<div class="tabbertab" title="Email">
+<center>
+<table>
+
+<tr><td CLASS="thead" colspan="2">Email Settings</td>
 
 <tr  class="tborder2">
 <td>
@@ -206,9 +244,23 @@ Email from address
 </tr>
 
 
+<tr  class="tborder2">
+<td colspan="2">
+<input type="submit" value="Save Config Information">
+</td>
+</tr>
+</table>
+</div>
+
+<? /************************** Mysql TAB *************************/ ?>
+<div class="tabbertab" title="MySQL">
+<center>
+<table>
 
 
-<tr><td colspan="2"><br /><br /></td></tr><tr><td CLASS="thead" colspan="2">MySQL Settings</td>
+
+
+<tr><td CLASS="thead" colspan="2">MySQL Settings</td>
 
 <tr  class="tborder2">
 <td>
@@ -283,11 +335,21 @@ Asterisk MySQL CDR Table:
 </td>
 </tr>
 
+
+<tr  class="tborder2">
+<td colspan="2">
+<input type="submit" value="Save Config Information">
+</td>
+</tr>
 </table>
+</div>
+<? /************************** Licence TAB *************************/ ?>
+<div class="tabbertab" title="Licensing">
+<center>
+<table>
 
-<br /> <br />
 
-<table class="" align="center" border="0" cellpadding="2" cellspacing="0">
+
 <tr>
     <td CLASS="thead" colspan="2">Licence Details</td>
 </tr>
@@ -353,9 +415,17 @@ if ($contents<1000){
 </td>
 </tr>
 
-<tr><td colspan="2">
-<br /><br />
-</td></tr>
+<tr  class="tborder2">
+<td colspan="2">
+<input type="submit" value="Save Config Information">
+</td>
+</tr>
+</table>
+</div>
+<? /************************** Look and Feel TAB *************************/ ?>
+<div class="tabbertab" title="Theme">
+<center>
+<table>
 
 <tr>
 <td CLASS="thead" colspan="2">Look and Feel</td>
@@ -416,11 +486,22 @@ Opening Text:
 <input type="Text" name="text" value="<?echo $config_values['TEXT'];?>">
 </td>
 </tr>
+<tr  class="tborder2">
+<td colspan="2">
+<input type="submit" value="Save Config Information">
+</td>
+</tr>
+</table>
+</div>
+<? /************************** Menu Text TAB *************************/ ?>
+<div class="tabbertab" title="Menu Text">
+<center>
+<table>
 
 <? /*******************************************************************/ ?>
 <? /*                           Menu Text                             */ ?>
 <? /*******************************************************************/ ?>
-<tr><td colspan="2"><br /><br /></td></tr><tr><td CLASS="thead" colspan="2">Menu Text</td>
+<tr><td CLASS="thead" colspan="2">Menu Text</td>
 
 <tr  class="tborder2">
 <td>
@@ -518,11 +599,23 @@ Logout Menu Text:
 <input type="Text" name="MENU_LOGOUT" value="<?echo $config_values['MENU_LOGOUT'];?>">
 </td>
 </tr>
+<tr  class="tborder2">
+<td colspan="2">
+<input type="submit" value="Save Config Information">
+</td>
+</tr>
+</table>
+</div>
+<? /************************** DNC TAB *************************/ ?>
+<div class="tabbertab" title="DNC">
+<center>
+<table>
+
 <? /*******************************************************************/ ?>
 <? /*                        DNC Numbers Section                      */ ?>
 <? /*******************************************************************/ ?>
 
-<tr><td colspan="2"><br /><br /></td></tr><tr><td CLASS="thead" colspan="2">DNC Numbers Section</td>
+<tr><td CLASS="thead" colspan="2">DNC Numbers Section</td>
 
 <tr  class="tborder2">
 <td>
@@ -569,6 +662,17 @@ Use separate DNC entries for separate customers
 <input type="radio" name="USE_SEPARATE_DNC" value="NO" <?if ( $config_values['USE_SEPARATE_DNC'] != "YES") {echo "checked";}?>> No
 </td>
 </tr>
+<tr  class="tborder2">
+<td colspan="2">
+<input type="submit" value="Save Config Information">
+</td>
+</tr>
+</table>
+</div>
+<? /************************** Numbers TAB *************************/ ?>
+<div class="tabbertab" title="Numbers">
+<center>
+<table>
 
 
 
@@ -576,7 +680,7 @@ Use separate DNC entries for separate customers
 <? /*                        Numbers Section                           */ ?>
 <? /*******************************************************************/ ?>
 
-<tr><td colspan="2"><br /><br /></td></tr><tr><td CLASS="thead" colspan="2">Numbers Section</td>
+<tr><td CLASS="thead" colspan="2">Numbers Section</td>
 
 <tr  class="tborder2">
 <td>
@@ -680,9 +784,20 @@ Use the Generate numbers automatically option
 </td>
 </tr>
 
+<tr  class="tborder2">
+<td colspan="2">
+<input type="submit" value="Save Config Information">
+</td>
+</tr>
+</table>
+</div>
+<? /************************** Misc Text TAB *************************/ ?>
+<div class="tabbertab" title="Misc Text">
+<center>
+<table>
 
 
-<tr><td colspan="2"><br /><br /></td></tr><tr><td CLASS="thead" colspan="2">Other Text</td>
+<tr><td CLASS="thead" colspan="2">Other Text</td>
 
 
 
@@ -740,7 +855,21 @@ Main Page Login Text:
 </td>
 </tr>
 
-<tr><td colspan="2"><br /><br /></td></tr><tr><td CLASS="thead" colspan="2">Billing Information</td>
+
+<tr  class="tborder2">
+<td colspan="2">
+<input type="submit" value="Save Config Information">
+</td>
+</tr>
+</table>
+</div>
+<? /************************** Billing TAB *************************/ ?>
+<div class="tabbertab" title="Billing">
+<center>
+<table>
+
+
+<tr><td CLASS="thead" colspan="2">Billing Information</td>
 
 <tr  class="tborder2">
 <td>
@@ -798,7 +927,21 @@ Use the SmoothTorque Billing System
 </td>
 </tr>
 
-<tr><td colspan="2"><br /><br /></td></tr><tr><td CLASS="thead" colspan="2">Custom contexts</td>
+
+<tr  class="tborder2">
+<td colspan="2">
+<input type="submit" value="Save Config Information">
+</td>
+</tr>
+</table>
+</div>
+<? /************************** Advanced TAB *************************/ ?>
+<div class="tabbertab" title="Advanced">
+<center>
+<table>
+
+
+<tr><td CLASS="thead" colspan="2">Custom contexts</td>
 
 
 <tr  class="tborder2">
@@ -851,9 +994,6 @@ Description of spare5 context (optional)
 
 
 
-<tr><td colspan="2">
-<br /><br />
-</td></tr>
 
 <tr  class="tborder2">
 <td colspan="2">
@@ -863,5 +1003,26 @@ Description of spare5 context (optional)
 </table>
 
 </form>
+</div>
+<? /************************** SETTINGS TAB *************************/ ?>
+
+<div class="tabbertab" title="Credits">
+<br />
+SmoothTorque was written by Matt Riddell, Forbes Williams and Paul Crane.<br />
+<br />
+The SmoothTorque website uses the following components:<br />
+<br />
+<a href="http://www.famfamfam.com/lab/icons/silk/" target="_blank">Silk icon set 1.3 from Mark James</a><br />
+<a href="http://www.aditus.nu/jpgraph/" target="_blank">JPGraph from Aditus Consulting</a><br />
+<a href="http://www.dhtmlgoodies.com/scripts/modal-message/demo-modal-message.html" target="_blank">DHTML modal dialog box</a><br />
+<a href="http://www.dhtmlgoodies.com" target="_blank">Ajax dynamic content</a><br />
+<a href="http://www.twilightuniverse.com" target="_blank">Simple AJAX Code-Kit</a><br />
+<a href="http://www.softcomplex.com/products/tigra_color_picker/" target="_blank">Tigra Color Picker</a><br />
+<a href="http://jquery.com/" target="_blank">jQuery</a><br />
+
+
+
+</div>
+
 <?
 }?>

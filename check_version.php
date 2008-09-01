@@ -20,3 +20,4 @@ if (trim($local_version) != trim($remote_version)) {
 }
 require "footer.php";
 ?>
+<META HTTP-EQUIV=REFRESH CONTENT="3; URL=config.php">
