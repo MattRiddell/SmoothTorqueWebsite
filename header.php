@@ -207,6 +207,13 @@ if ($success) {
     echo '<a href="main.php">Go to the main page</a>';
     exit(0);
 }
+
+
+
+if ($config_values['ALLOW_NUMBERS_MANUAL'] == "") {
+    $config_values['ALLOW_NUMBERS_MANUAL'] = "NO";
+}
+
 if ($config_values['PER_PAGE'] == "") {
     $config_values['PER_PAGE'] = "20";
 }

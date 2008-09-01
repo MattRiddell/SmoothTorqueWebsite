@@ -1,4 +1,5 @@
 <?
+require "header.php";
 include "admin/db_config.php";
 mysql_select_db("SineDialer", $link);
 if (!isset($_POST[campaignid])&&!isset($_GET[campaignid])){
@@ -56,7 +57,10 @@ if (isset($_GET[campaignid])){
 // Ok, so we have a campaign id to use numbers from
 // How many numbers has it got?
 $result = mysql_query("UPDATE number set status = \"manual_dial\" where campaignid=$_POST[campaignid] AND status = 'new'") or die(mysql_error());
-echo "Manual Dialing Campaign Initiation Complete";
+echo "<br /><br />Manual Dialing Campaign Initiation Complete";
+?>
+<META HTTP-EQUIV=REFRESH CONTENT="3; URL=campaigns.php">
+<?
 }?>
 
 

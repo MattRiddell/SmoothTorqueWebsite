@@ -128,7 +128,7 @@ echo trim(substr($row[description],0,$max_str_len))."...";
 ?>
 </TD>
 <?
-$sql = 'SELECT count(*) from number where campaignid='.$row[id].' and (status="new" or status="no-credit")';
+$sql = 'SELECT count(*) from number where campaignid='.$row[id].' and (status="manual_dial" or status="new" or status="no-credit")';
 $result2=mysql_query($sql, $link) or die (mysql_error());;
 $new=mysql_result($result2,0,'count(*)');
 
@@ -212,6 +212,16 @@ if ($status==101){
 <img src="/images/control_stop.png" border="0" title="Stop running campaign">
 <?
 }
+
+
+if ($config_values['ALLOW_NUMBERS_MANUAL'] == "YES") {
+?>
+<a href="manual_init.php?campaignid=<?=$row[id]?>">
+<img src="/images/database_lightning.png" border="0" title="Initialise campaign for manual dialing">
+</a>
+<?
+}
+
 ?>
 </td>
 <TD>

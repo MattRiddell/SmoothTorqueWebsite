@@ -81,6 +81,8 @@ if (isset($_POST[colour])){
     fwrite($add,"SMTP_PASS=$_POST[SMTP_PASS]\n");
     fwrite($add,"SMTP_FROM=$_POST[SMTP_FROM]\n");
     fwrite($add,"USE_SEPARATE_DNC=$_POST[USE_SEPARATE_DNC]\n");
+    fwrite($add,"ALLOW_NUMBERS_MANUAL=$_POST[ALLOW_NUMBERS_MANUAL]\n");
+
 
     fclose($add);
 
@@ -586,12 +588,23 @@ Number of entries to show per page:
 
 <tr  class="tborder2">
 <td>
+Allow manual dialling:
+</td>
+<td>
+<input type="radio" name="ALLOW_NUMBERS_MANUAL" value="YES" <?if ( $config_values['ALLOW_NUMBERS_MANUAL'] == "YES") {echo "checked";}?>> Yes
+<input type="radio" name="ALLOW_NUMBERS_MANUAL" value="NO" <?if ( $config_values['ALLOW_NUMBERS_MANUAL'] != "YES") {echo "checked";}?>> No
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
 Number List Management Text (Title):
 </td>
 <td>
 <input type="Text" name="NUMBERS_TITLE" value="<?echo $config_values['NUMBERS_TITLE'];?>">
 </td>
 </tr>
+
 
 <tr  class="tborder2">
 <td>
