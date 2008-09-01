@@ -1,10 +1,10 @@
-<?a
-$result = exec("/usr/bin/which svn");
-//print_r($result);
-//echo $result;
-//print_r(exec($result." info -r HEAD"));
-exec($result." status --username web --password \"\" --no-auth-cache --show-updates --verbose .|/bin/grep \"*\"",$output);
-echo "<pre>";
-print_r($output);
-echo "</pre>";
+<?
+$local_version = exec("cat svn_version.php");
+if (!$handle = fopen("http://call.venturevoip.com/svn_version.php", 'r')) {
+    echo "Can't read from remote";
+} else {
+    $remote_version = fread($handle,4096);
+    fclose($handle);
+}
+echo "Local: $local_version Remote: $remote_version<br />";
 ?>
