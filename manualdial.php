@@ -89,12 +89,6 @@ flush();
 </script>
 <?}?>
 <center>
-<div id="ajaxDiv">
-<table border="0" cellpadding="20">
-<tr><td bgcolor = "#ffffff">
-<img src="/images/progress.gif" border="0">
-</td></tr></table>
-</div>
 <br />
 
 <?
@@ -119,10 +113,18 @@ $result = mysql_query("SELECT * FROM campaign WHERE id = $_POST[campaignid]") or
 $row = mysql_fetch_assoc($result);
 ?>
 <button type="Button" onClick="window.location='manual_startcampaign.php?id=<?=$_POST[campaignid]?>&astqueuename=<?echo $row[astqueuename];?>&clid=<?echo $row[clid];?>&trclid=<?echo $row[trclid];?>&agents=<?echo $row[maxagents];?>&did=<?echo $row[did];?>&context=<?echo $row[context];?>'">Call the Next Number</button><br />
+<br />
+<div id="ajaxDiv">
+<table border="0" cellpadding="20">
+<tr><td bgcolor = "#ffffff">
+<img src="/images/progress.gif" border="0">
+</td></tr></table>
+</div>
 
 <?
 //print_r($rows[$x]);
 }?>
+
 
 
 

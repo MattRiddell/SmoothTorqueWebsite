@@ -1,8 +1,9 @@
 <?
 require "header.php";
-$sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
+$sql = 'SELECT security,campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $campaigngroupid=mysql_result($result,0,'campaigngroupid');
+$security=mysql_result($result,0,'security');
 require "header_numbers.php";
 
 $_POST = array_map(mysql_real_escape_string,$_POST);
@@ -27,6 +28,8 @@ From here you can chose a campaign that you would like to see the numbers for.<b
         <SELECT NAME="campaignid">
         <?
         $sql = 'SELECT id,name FROM campaign WHERE groupid='.$campaigngroupid;
+	if($security >= 100)
+        	$sql = 'SELECT id,name FROM campaign';
         $result=mysql_query($sql, $link) or die (mysql_error());;
         //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
         while ($row = mysql_fetch_assoc($result)) {
