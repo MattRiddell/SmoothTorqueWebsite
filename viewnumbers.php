@@ -27,19 +27,23 @@ From here you can chose a campaign that you would like to see the numbers for.<b
     <TD>Select Campaign:</TD><TD>
         <SELECT NAME="campaignid">
         <?
-        $sql = 'SELECT id,name FROM campaign WHERE groupid='.$campaigngroupid;
+        $sql = 'SELECT id,name,groupid FROM campaign WHERE groupid='.$campaigngroupid;
 	if($security >= 100)
-        	$sql = 'SELECT id,name FROM campaign';
+        	$sql = 'SELECT id,name,groupid FROM campaign';
         $result=mysql_query($sql, $link) or die (mysql_error());;
         //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
         while ($row = mysql_fetch_assoc($result)) {
-            echo "<OPTION VALUE=\"".$row[id]."\">".substr($row[name],0,22)."</OPTION>";
+		$extra = (($row['groupid'] != $campaigngroupid)?"*":"");
+            echo "<OPTION VALUE=\"".$row[id]."\">".substr($row[name],0,22)." $extra</OPTION>";
         }
         ?>
         </SELECT>
 
     </TD>
     </TR><TR>
+    <?if($security >= 100)
+    	echo "<tr><td colspan=\"2\"><font size=\"1\">Campaigns marks with a * do not belong to you.</font></td></tr>";
+?>
     <TD COLSPAN=2 ALIGN="CENTER"><br />
     <INPUT TYPE="SUBMIT" VALUE="Display Numbers">
     </TD>
