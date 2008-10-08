@@ -944,14 +944,14 @@ if (myval == '0') {
         document.all['xx2'].style.display = "visible";
         document.all['xx3'].style.display = "none";
         document.all['xx4'].style.display = "none";
-        document.all['xx5'].style.display = "none";
+        document.all['xx5'].style.display = "visible";
         document.all['xx6'].style.display = "visible";
     } else {
         document.getElementById('xx1').style.display='none';
         document.getElementById('xx2').style.display='';
         document.getElementById('xx3').style.display='none';
         document.getElementById('xx4').style.display='none';
-        document.getElementById('xx5').style.display='none';
+        document.getElementById('xx5').style.display='';
         document.getElementById('xx6').style.display='';
     }
 } else if (myval == '8') {
