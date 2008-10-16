@@ -934,11 +934,13 @@ if (myval == '0') {
         document.getElementById('xx6').style.display='';
     }
 } else if (myval == '7') {
+/*
     if (document.all2) {
         document.all['mode'].style.display = "none";
     } else {
         document.getElementById('mode').style.display='none';
     }
+   */
     if (document.all2) {
         document.all['xx1'].style.display = "none";
         document.all['xx2'].style.display = "visible";

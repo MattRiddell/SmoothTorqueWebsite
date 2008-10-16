@@ -70,7 +70,8 @@ require "header_campaign.php";
 			<input type="radio" name="mode" value="didmode" rel="didmode" id="mode_did" checked />
 			<label for="mode_did" title="Which number to receive the calls at">DID Mode</label>
 			<input type="radio" name="mode" value="mode_queue" rel="queue" id="mode_queue" />
-			<label for="mode_queue" title="Use this is the agents are connected to the machine doing the calling">Queue Mode</label></td>
+			<label for="mode_queue" title="Use this is the agents are connected to the machine doing the calling">Queue Mode</label>
+		</td>
 		</tr>
         <TR><TD CLASS="thead">Type of Campaign
         <a href="#" onclick="displayLargeMessage('includes/help.php?section=<b>Load Simulation</b><br />Simple test campaign.  Does not actually make any phone calls<br /><br /><b>Answer Machine Only</b><br />Human: Hang Up. Answer Machine: Leave Message<br /><br /><b>Immediate Live Only</b><br />Human: Connect immediately to the call center. Answer Machine: hang up.<br /><br /><b>Press 1 Live Only</b><br />Human: Play the person message and then if they press 1, transfer to the call center.  Answer Machine: Hang Up.<br /><br /><b>Immediate Live and Answer Machine</b><br />Human: Connect immediately to the call center. Answer Machine: Leave the answer machine message.<br /><br /><b>Press 1 Live and Answer Machine</b><br />Human: Play the person message and then if they press 1, transfer to the call center.  Answer Machine: Leave the answer machine message.');return false"><img src="/images/help.png" border="0" title="Type Of Campaign"></a>
