@@ -36,11 +36,11 @@ It will make sure enough calls are made for the people who are logged in to the 
 stay busy.";
 
 $section[3] = "<form name=\"myform\" action=\"addqueue.php\" method=\"GET\">
-Please type a name for the Queue you are about to create.
+Please type a name for the Queue you are about to create (limited to 12 characters).
 <br >
 <br >
 <center>
-<input type=\"text\" name=\"queue_name\" value=\"$_GET[queue_name]\">
+<input type=\"text\" name=\"queue_name\" value=\"$_GET[queue_name]\" maxlength=\"12\">
 </center>
 <br /><br /><br /><br />
 ";
