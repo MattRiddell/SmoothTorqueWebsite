@@ -75,6 +75,7 @@ if (isset($_POST[colour])){
     fwrite($add,"USE_GENERATE=$_POST[USE_GENERATE]\n");
     fwrite($add,"DNC_NUMBERS_TITLE=$_POST[DNC_NUMBERS_TITLE]\n");
     fwrite($add,"DNC_VIEW=$_POST[DNC_VIEW]\n");
+    fwrite($add,"DNC_SEARCH=$_POST[DNC_SEARCH]\n");
     fwrite($add,"DNC_UPLOAD=$_POST[DNC_UPLOAD]\n");
     fwrite($add,"DNC_ADD=$_POST[DNC_ADD]\n");
     fwrite($add,"PER_LEAD=$_POST[PER_LEAD]\n");
@@ -713,6 +714,14 @@ View existing DNC numbers Text (Title):
 </td>
 </tr>
 
+<tr  class="tborder2">
+<td>
+Search DNC numbers Text (Title):
+</td>
+<td>
+<input type="Text" name="DNC_SEARCH" size="60" value="<?echo $config_values['DNC_SEARCH'];?>">
+</td>
+</tr>
 <tr  class="tborder2">
 <td>
 Upload DNC numbers Text (Title):

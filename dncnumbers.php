@@ -26,6 +26,8 @@ require "header_numbers.php";
 <b><?echo $config_values['DNC_NUMBERS_TITLE'];?> (<?echo $count;?> numbers)</b><br />
 <br />
 Make a choice from one of the following: <br /><br />
+<a href="searchdncnumbers.php"><img src="/images/magnifier.png" border="0"><?echo $config_values['DNC_SEARCH'];?></a><br />
+<br />
 <a href="/viewdncnumbers.php"><img src="/images/magnifier.png" border="0"><?echo $config_values['DNC_VIEW'];?></a><br />
 <br />
 <a href="/uploaddnc.php"><img src="/images/page_white_get.png" border="0">Upload numbers from a text file</a><br />
