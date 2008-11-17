@@ -11,6 +11,24 @@ if (! extension_loaded('gd')) {
 $current_directory = dirname(__FILE__);
 $whoami = exec('whoami');
 $config_file = "/stweb.conf";
+
+if ($handle = opendir('/')) {
+    while (false !== ($file = readdir($handle))) {
+        if ($file != "." && $file != "..") {
+            if (substr($file,0,6) == "stweb_") {
+                // We have found a translation
+                $translations[] = "/".$file;
+                $languages[] = substr($file,6,2);
+//                echo "$file<br />";
+            }
+        }
+    }
+    closedir($handle);
+}
+//exit(0);
+
+$language=$_COOKIE[language];
+
 $default_config = "COLOUR=#323232
 TITLE=The SmoothTorque Enterprise Predictive Dialing Platform
 LOGO=/images/logo2.png
@@ -129,6 +147,11 @@ if (file_exists("/SmoothTorque/exampled.lock")) {
 /*	echo "<font color=\"#ff0000\"><center>Backend Not running<a      */
 /*href=\"startbackend.php\"><b>Start Server</b></a></center></font>";*/
 ////////}
+
+/*
+ * Config File Parsing
+ */
+
 if (file_exists($config_file)) {
     $fp = fopen($config_file, "r");
     while (!feof($fp)) {
@@ -200,6 +223,7 @@ if (file_exists($config_file)) {
 
 
 }
+
 if ($success) {
     echo "The base config files ($config_file) did not exist, ";
     echo "but were successfully created with default values. ";
@@ -209,7 +233,37 @@ if ($success) {
     exit(0);
 }
 
-
+if (sizeof($translations) > 0) {
+    $i = 0;
+    foreach($translations as $translation) {
+        $fp = fopen($translation, "r");
+        while (!feof($fp)) {
+          $line = trim(fgets($fp));
+          if ($line && substr($line,0,1)!=$comment) {
+            $pieces = explode("=", $line);
+            $option = trim($pieces[0]);
+            $value = trim($pieces[1]);
+            $translated_values[$languages[$i]][$option] = $value;
+          }
+        }
+        fclose($fp);
+        $i++;
+    }
+}
+if ($language != "en") {
+//    echo "Using $language instead";
+    $locale = $language."_".strtoupper($language);
+//    echo $locale."<br />";
+    $result = setlocale(LC_ALL,$locale);
+//    echo $result;
+//    exit(0);
+    $config_values = $translated_values[$language];
+//    echo $config_values['MENU_HOME'];
+//    exit(0);
+}
+if ($config_values['LANGUAGE'] == "") {
+    $config_values['LANGUAGE'] = "English";
+}
 
 if ($config_values['ALLOW_NUMBERS_MANUAL'] == "") {
     $config_values['ALLOW_NUMBERS_MANUAL'] = "NO";
@@ -370,6 +424,7 @@ if ($config_values['SMTP_FROM'] == "") {
 }
 $user=$_COOKIE[user];
 $level=$_COOKIE[level];
+
 //echo "".$user." - ".$_COOKIE["loggedin"];
 
 include "admin/db_config.php";
@@ -380,6 +435,7 @@ if ($_COOKIE["loggedin"]==sha1("LoggedIn".$user)){
     setcookie("loggedin",sha1("LoggedIn".$user),time()+60000);
     setcookie("user",$user,time()+60000);
     setcookie("level",$level,time()+60000);
+    setcookie("language",$language,time()+60000);
 	echo "<!--Version: $version<br />-->";
 $sql = 'SELECT value FROM config WHERE parameter=\'backend\'';
 $result=mysql_query($sql, $link) or die (mysql_error());;
@@ -1182,14 +1238,15 @@ if (mysql_num_rows($result)==0){
     $postpay = 1;
 }
 if ($loggedin){
+//    echo "Language: $language";
     if ( $config_values['USE_BILLING'] == "YES") {
         if ($postpay == 1) {
-            echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".date('l dS \of F Y h:i:sA')." Credit: $credit Credit Limit: $creditlimit <a href=\"/viewcdr.php\"><img src=\"/images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"/billinglog_account.php\"><img src=\"/images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
+            echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(strftime('%A %d %B %Y %H:%M:%S'))." Credit: $credit Credit Limit: $creditlimit <a href=\"/viewcdr.php\"><img src=\"/images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"/billinglog_account.php\"><img src=\"/images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
         } else {
-            echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".date('l dS \of F Y h:i:sA')." Credit: $credit <a href=\"/viewcdr.php\"><img src=\"/images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"/billinglog_account.php\"><img src=\"/images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
+            echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(strftime('%A %d %B %Y %H:%M:%S'))." Credit: $credit <a href=\"/viewcdr.php\"><img src=\"/images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"/billinglog_account.php\"><img src=\"/images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
         }
     } else {
-        echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".date('l dS \of F Y h:i:sA')."</font><br /></center>";
+        echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(strftime('%A %d %B %Y %H:%M:%S'))."</font><br /></center>";
     }
 }
 ?>

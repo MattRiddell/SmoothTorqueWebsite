@@ -9,7 +9,7 @@ while (!feof($fp)) {
     $pieces = explode("=", $line);
     $option = trim($pieces[0]);
     $value = trim($pieces[1]);
-    $config_values[$option] = $value;
+    $config_values_temp[$option] = $value;
   }
 }
 fclose($fp);
@@ -20,9 +20,9 @@ if ($config_values['ST_MYSQL_HOST'] == "") {
     $db_pass="";
     $link = mysql_connect($db_host, $db_user, $db_pass) OR die(mysql_error());
 } else {
-    $db_host=$config_values['ST_MYSQL_HOST'];
-    $db_user=$config_values['ST_MYSQL_USER'];
-    $db_pass=$config_values['ST_MYSQL_PASS'];
+    $db_host=$config_values_temp['ST_MYSQL_HOST'];
+    $db_user=$config_values_temp['ST_MYSQL_USER'];
+    $db_pass=$config_values_temp['ST_MYSQL_PASS'];
     $link = mysql_connect($db_host, $db_user, $db_pass) OR die(mysql_error());
 }
 mysql_select_db("SineDialer") or die(mysql_error());

@@ -27,7 +27,6 @@ if ($config_values['MAIN_PAGE_LOGIN'] == "") {
 }
 
 
-
 echo "<FONT FACE=\"ARIAL\">";
 ?>
 
@@ -51,11 +50,20 @@ if (isset($_GET[error])){
 ?>
 
                 <?echo $config_values['MAIN_PAGE_USERNAME'];?>:<br />
-                <br />
-                <INPUT class="input130" TYPE="TEXT" NAME="user"><br /><br />
+                <INPUT class="input130" TYPE="TEXT" NAME="user"><br />
                 <?echo $config_values['MAIN_PAGE_PASSWORD'];?>:<br />
-                <br />
                 <INPUT class="input130"  TYPE="PASSWORD" NAME="pass"><br /><br />
+<?if (sizeof($translated_values) > 0) {
+    echo 'Language:<br />';
+    //echo "Translations Available";
+    echo '<select name="language">';
+    echo '<option value="en">English</option>';
+    foreach ($translated_values as $lang=>$translations) {
+
+        echo '<option value="'.$lang.'">'.$translations[LANGUAGE].'</option>';
+    }
+    echo '</select><br /><br />';
+}?>
                 <INPUT TYPE="SUBMIT" VALUE="<?echo $config_values['MAIN_PAGE_LOGIN'];?>">
             </TD></TR>
         </TABLE>

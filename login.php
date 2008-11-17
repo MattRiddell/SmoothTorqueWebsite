@@ -1013,6 +1013,7 @@ if (trim($dbpass)==trim($passwordHash)){
 
     setcookie("loggedin",sha1("LoggedIn".$_POST[user]),time()+6000);
     setcookie("user",$_POST[user],time()+6000);
+    setcookie("language",$_POST[language],time()+6000);
     if (mysql_result($result,0,'security')==100){
         $level=sha1("level100");
     } else if (mysql_result($result,0,'security')==0){

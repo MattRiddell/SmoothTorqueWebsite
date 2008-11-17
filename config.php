@@ -1,5 +1,6 @@
 <?
 $level=$_COOKIE[level];
+$language = $_COOKIE[language];
 
 if ($level!=sha1("level100")) {
 include "header.php";
@@ -15,8 +16,12 @@ $result=mysql_query($sql, $link);
 //print_r($_POST);
 //exit(0);
 if (isset($_POST[colour])){
-
-    $add = @fopen("/stweb.conf",'w');
+    if ($language != "en") {
+        $add = @fopen("/stweb_".$language.".conf",'w');
+    } else {
+        $add = @fopen("/stweb.conf",'w');
+    }
+    fwrite($add,"LANGUAGE=$_POST[LANGUAGE]\n");
     fwrite($add,"COLOUR=$_POST[colour]\n");
     fwrite($add,"TITLE=$_POST[title]\n");
     fwrite($add,"LOGO=$_POST[logo]\n");
@@ -506,6 +511,14 @@ Opening Text:
 <? /*******************************************************************/ ?>
 <tr><td CLASS="thead" colspan="2">Menu Text</td>
 
+<tr  class="tborder2">
+<td>
+Language:
+</td>
+<td>
+<input type="Text" name="LANGUAGE" value="<?echo $config_values['LANGUAGE'];?>">
+</td>
+</tr>
 <tr  class="tborder2">
 <td>
 Home Menu Text:
