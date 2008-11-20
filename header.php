@@ -11,6 +11,8 @@ if (! extension_loaded('gd')) {
 $current_directory = dirname(__FILE__);
 $whoami = exec('whoami');
 $config_file = "/stweb.conf";
+$config_file_it = "/stweb_it.conf";
+$config_file_es = "/stweb_es.conf";
 
 if ($handle = opendir('/')) {
     while (false !== ($file = readdir($handle))) {
@@ -28,6 +30,144 @@ if ($handle = opendir('/')) {
 //exit(0);
 
 $language=$_COOKIE[language];
+
+$default_config_it = "LANGUAGE=Italiano
+COLOUR=#000000
+TITLE=The SmoothTorque Enterprise Predictive Dialing Platform
+LOGO=/images/logo2.png
+TEXT=For further information please email sales@venturevoip.com
+SOX=/usr/bin/sox
+USERID=VentureVoIP
+LICENCE=DRFHUJWQIWU
+CDR_HOST=localhost
+CDR_USER=root
+CDR_PASS=
+CDR_DB=phoneDB
+CDR_TABLE=cdr
+MENU_HOME=Home
+MENU_CAMPAIGNS=Campagne
+MENU_NUMBERS=Numeri
+MENU_DNC=DNC Numeri
+MENU_MESSAGES=Messaggi
+MENU_SCHEDULES=Orari
+MENU_CUSTOMERS=Clienti
+MENU_QUEUES=Code
+MENU_SERVERS=Servers
+MENU_TRUNKS=Linee telefoniche
+MENU_ADMIN=Amministrazione
+MENU_LOGOUT=Logout
+DATE_COLOUR=#9999FF
+MAIN_PAGE_TEXT=Per iniziare, vai nel tuo elenco di campagne facendo clic sulla scheda Campagne nella parte superiore di questa pagina.
+MAIN_PAGE_USERNAME=Nome utente
+MAIN_PAGE_PASSWORD=Password
+MAIN_PAGE_LOGIN=Accesso
+CURRENCY_SYMBOL=€
+PER_MINUTE=Al minuto
+USE_BILLING=YES
+SPARE1=Spare 1 (inutilizzati)
+SPARE2=Spare 2 (inutilizzati)
+SPARE3=Spare 3 (inutilizzati)
+SPARE4=Spare 4 (inutilizzati)
+SPARE5=Spare 5 (inutilizzati)
+ST_MYSQL_HOST=localhost
+ST_MYSQL_USER=root
+ST_MYSQL_PASS=
+ADD_CAMPAIGN=Aggiungi campagna
+VIEW_CAMPAIGN=Visualizza campagne
+PER_PAGE=200
+NUMBERS_VIEW=Visualizza i numeri di telefono
+NUMBERS_SYSTEM=Utilizzare System elenchi
+NUMBERS_GENERATE=Generare automaticamente il numero
+NUMBERS_MANUAL=Aggiungere manualmente i numeri
+NUMBERS_UPLOAD=Carica numeri da un file di testo
+NUMBERS_EXPORT=Esporta i numeri di telefono
+NUMBERS_SEARCH=Ricerca di un numero di telefono
+NUMBERS_TITLE=Numero della lista di gestione
+BILLING_TEXT=Log di fatturazione
+CDR_TEXT=Chiama Dettagli
+USE_GENERATE=YES
+DNC_NUMBERS_TITLE=DNC Numeri
+DNC_VIEW=Vedere numeri esistenti DNC
+DNC_SEARCH=Cerca DNC numeri
+DNC_UPLOAD=Carica DNC numeri da un file di testo
+DNC_ADD=Aggiungi DNC numeri manualmente
+PER_LEAD=Prezzo per portare
+SMTP_HOST=localhost
+SMTP_USER=
+SMTP_PASS=
+SMTP_FROM=matt@venturevoip.com
+USE_SEPARATE_DNC=NO
+ALLOW_NUMBERS_MANUAL=YES
+";
+
+$default_config_es="LANGUAGE=Español
+COLOUR=#000000
+TITLE=The SmoothTorque Enterprise Predictive Dialing Platform
+LOGO=/images/logo2.png
+TEXT=For further information please email sales@venturevoip.com
+SOX=/usr/bin/sox
+USERID=VentureVoIP
+LICENCE=DRFHUJWQIWU
+CDR_HOST=localhost
+CDR_USER=root
+CDR_PASS=
+CDR_DB=phoneDB
+CDR_TABLE=cdr
+MENU_HOME=Página principal
+MENU_CAMPAIGNS=Campañas
+MENU_NUMBERS=Números
+MENU_DNC=DNC Números
+MENU_MESSAGES=Mensajes
+MENU_SCHEDULES=Listas
+MENU_CUSTOMERS=Clientes
+MENU_QUEUES=Colas
+MENU_SERVERS=Servidores
+MENU_TRUNKS=Líneas telefónicas
+MENU_ADMIN=Administración
+MENU_LOGOUT=Logout
+DATE_COLOUR=#9999FF
+MAIN_PAGE_TEXT=Para empezar, vaya en su lista de campañas, haga clic en la pestaña Campañas en la parte superior de esta página.
+MAIN_PAGE_USERNAME=Nombre de usuario
+MAIN_PAGE_PASSWORD=Contraseña
+MAIN_PAGE_LOGIN=Inicio de sesión
+CURRENCY_SYMBOL=€
+PER_MINUTE=Por minuto
+USE_BILLING=YES
+SPARE1=Spare 1 (no utilizados)
+SPARE2=Spare 2 (no utilizados)
+SPARE3=Spare 3 (no utilizados)
+SPARE4=Spare 4 (no utilizados)
+SPARE5=Spare 5 (no utilizados)
+ST_MYSQL_HOST=localhost
+ST_MYSQL_USER=root
+ST_MYSQL_PASS=
+ADD_CAMPAIGN=Añadir Campaña
+VIEW_CAMPAIGN=Ver Campañas
+PER_PAGE=200
+NUMBERS_VIEW=Ver los números de teléfono
+NUMBERS_SYSTEM=Utilice sistema de listas
+NUMBERS_GENERATE=Generar automáticamente los números
+NUMBERS_MANUAL=Añadir manualmente los números de
+NUMBERS_UPLOAD=Cargar los números de un archivo de texto
+NUMBERS_EXPORT=Exportación números de teléfono
+NUMBERS_SEARCH=Búsqueda de un número de teléfono
+NUMBERS_TITLE=Número de la gerencia de la lista
+BILLING_TEXT=Registros de facturación
+CDR_TEXT=Detalles de las llamadas
+USE_GENERATE=YES
+DNC_NUMBERS_TITLE=Lista de No Llamar
+DNC_VIEW=Ver los números de DNC
+DNC_SEARCH=Buscar números DNC
+DNC_UPLOAD=Subir DNC números de un archivo de texto
+DNC_ADD=Añadir manualmente los números de DNC
+PER_LEAD=Precio por plomo
+SMTP_HOST=localhost
+SMTP_USER=
+SMTP_PASS=
+SMTP_FROM=matt@venturevoip.com
+USE_SEPARATE_DNC=NO
+ALLOW_NUMBERS_MANUAL=YES
+";
 
 $default_config = "COLOUR=#323232
 TITLE=The SmoothTorque Enterprise Predictive Dialing Platform
@@ -151,7 +291,12 @@ if (file_exists("/SmoothTorque/exampled.lock")) {
 /*
  * Config File Parsing
  */
-
+if (!file_exists($config_file_it)) {
+    // Italian does not exist
+}
+if (!file_exists($config_file_es)) {
+    // Spanish does not exist
+}
 if (file_exists($config_file)) {
     $fp = fopen($config_file, "r");
     while (!feof($fp)) {
