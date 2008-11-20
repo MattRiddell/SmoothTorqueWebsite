@@ -14,7 +14,7 @@ while (!feof($fp)) {
 }
 fclose($fp);
 
-if ($config_values['ST_MYSQL_HOST'] == "") {
+if ($config_values_temp['ST_MYSQL_HOST'] == "") {
     $db_host="localhost";
     $db_user="root";
     $db_pass="";
