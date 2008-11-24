@@ -74,9 +74,10 @@ Which campaign would you like to add numbers to?<br /><br />
         $number = str_replace("-","",$number);
         $number = str_replace("(","",$number);
         $number = str_replace(")","",$number);
-        $sql="INSERT IGNORE INTO number (campaignid,phonenumber,status,type) VALUES ($_POST[campaignid],'$number','new',0)";
-//        echo $sql;
-        $result=mysql_query($sql, $link) or die (mysql_error());;
+        if (strlen(trim($number)) > 0) {
+            $sql="INSERT IGNORE INTO number (campaignid,phonenumber,status,type) VALUES ($_POST[campaignid],'$number','new',0)";
+            $result=mysql_query($sql, $link) or die (mysql_error());;
+        }
         echo "<!-- . -->";
         flush();
         }
