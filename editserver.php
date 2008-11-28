@@ -44,7 +44,7 @@ $row=mysql_fetch_assoc($result);
 </TR>
 
 <TR><TD CLASS="thead">Asterisk Server Password</TD><TD>
-<INPUT TYPE="TEXT" NAME="password" VALUE="<?echo $row[password];?>" size="60">
+<INPUT TYPE="password" NAME="password" VALUE="xxxxxxxxxxxx" size="60">
 </TD>
 </TR>
 
