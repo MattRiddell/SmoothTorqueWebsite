@@ -153,6 +153,8 @@ $licencekey = mysql_result($result,0,'value');
 <td>
 <a href="check_version.php"><img src="/images/browser.png" border="0" width="32"><br /><br />Check for updates</a>
 </td><td>
+<a href="mailto:smoothtorque@venturevoip.com"><img src="/images/ftp.png" border="0" width="32"><br /><br />Submit Support Request</a>
+</td><td>
 <a href="log.php"><img src="/images/document.png" border="0" width="32"><br /><br />View System Logs</a>
 </td>
 </tr>
