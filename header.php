@@ -293,6 +293,56 @@ if (file_exists("/SmoothTorque/exampled.lock")) {
  */
 if (!file_exists($config_file_it)) {
     // Italian does not exist
+    if (is_writable($config_file_it)) {
+        if (!$handle = fopen($config_file_it, 'w')) {
+            echo "Cannot open file ($filename)";
+            exit;
+        }
+        // Write $somecontent to our opened file.
+        if (fwrite($handle, $default_config_it) === FALSE) {
+            echo "Cannot write to file ($config_file_it)";
+            exit;
+        }
+
+        $success = true;
+        fclose($handle);
+    } else {
+        echo "The config file $config_file_it does not exist, and is not";
+        echo "writeable.  Please issue the following commands:<br /><br />";
+        echo "<code>touch $config_file_it</code><br />";
+        echo "<code>chown $whoami /stweb_it.conf</code>";
+    }
+} else {
+    // The italian config file exists. Does it have any content?
+    $fp = fopen($config_file_it, "r");
+    while (!feof($fp)) {
+      $line = trim(fgets($fp));
+      if ($line && substr($line,0,1)!=$comment) {
+        $pieces = explode("=", $line);
+        $option = trim($pieces[0]);
+        $value = trim($pieces[1]);
+        $config_values_it[$option] = $value;
+      }
+    }
+    fclose($fp);
+
+    // Set Defaults
+    if ($config_values_it['COLOUR'] == "") {
+        if (is_writable($config_file_it)) {
+            if (!$handle = fopen($config_file_it, 'w')) {
+                echo "Cannot open file ($filename)";
+                exit;
+            }
+            // Write $somecontent to our opened file.
+            if (fwrite($handle, $default_config_it) === FALSE) {
+                echo "Cannot write to file ($config_file_it)";
+                exit;
+            }
+
+            $success = true;
+            fclose($handle);
+        }
+    }
 }
 if (!file_exists($config_file_es)) {
     // Spanish does not exist

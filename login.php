@@ -10,7 +10,7 @@ function mysql_is_table($host, $user, $pass, $db, $tbl)
     $q = @mysql_query("SHOW TABLES");
     while ($r = @mysql_fetch_array($q)) { $tables[] = $r[0]; }
     @mysql_free_result($q);
-    @mysql_close($link);
+//    @mysql_close($link);
     if (in_array($tbl, $tables)) { $result =  TRUE; }
 	return $result;
 }
@@ -706,13 +706,28 @@ $sql = "CREATE TABLE `servers` (
   `username` varchar(250) NOT NULL default '',
   `password` varchar(250) NOT NULL default '',
   `status` int(10) default '0',
+  `readonly` int(10) default '0',
   PRIMARY KEY  (`id`)
 )";
 
-    $result = mysql_query($sql,$link);
+  $result = mysql_query($sql,$link);
   $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created servers Table')";
   $result=mysql_query($sql, $link);
 }
+
+$fields = mysql_list_fields('SineDialer', 'servers');
+$columns = mysql_num_fields($fields);
+for ($i = 0; $i < $columns; $i++) {
+    $field_array[] = mysql_field_name($fields, $i);
+}
+
+if (!in_array('readonly', $field_array))
+{
+    $result = mysql_query('ALTER TABLE servers ADD readonly int(10)');
+    $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added server readonly field')";
+    $result=mysql_query($sql, $link);
+}
+
 
 /*======================================================================
                             stage Table
