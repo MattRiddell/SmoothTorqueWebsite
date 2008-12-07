@@ -16,6 +16,28 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
 </td>
 <td width="260">
 <?
+$sql = "SELECT count(*) FROM number WHERE status='new' and campaignid='$_GET[id]'";
+//echo $sql;
+$result = mysql_query($sql);
+$num_numbers = mysql_result($result,0,0);
+//echo $num_numbers;
+//exit(0);
+if ($num_numbers <1) {
+        /* Not enough credit - error and return */
+        ?>
+        <b>There are no available numbers for this campaign to run - please
+        either add some numbers or recycle the current ones.</b>
+        </td>
+<td>
+</td></tr>
+</table>
+</center>
+
+        <META HTTP-EQUIV=REFRESH CONTENT="10; URL=/campaigns.php">
+        <?
+        exit(0);
+
+}
 /*Maximum Concurrent Calls:<b> <?echo $_POST[agents];?></b><br />
 Call Center Phone Number:<b> <?echo $_POST[did];?></b><br />
 Type of campaign:<b>
