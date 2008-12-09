@@ -291,30 +291,31 @@ if (file_exists("/SmoothTorque/exampled.lock")) {
 /*
  * Config File Parsing
  */
-if (!file_exists($config_file_it)) {
+
+ if (!file_exists($config_file_es)) {
     // Italian does not exist
-    if (is_writable($config_file_it)) {
-        if (!$handle = fopen($config_file_it, 'w')) {
+    if (is_writable($config_file_es)) {
+        if (!$handle = fopen($config_file_es, 'w')) {
             echo "Cannot open file ($filename)";
             exit;
         }
         // Write $somecontent to our opened file.
-        if (fwrite($handle, $default_config_it) === FALSE) {
-            echo "Cannot write to file ($config_file_it)";
+        if (fwrite($handle, $default_config_es) === FALSE) {
+            echo "Cannot write to file ($config_file_es)";
             exit;
         }
 
         $success = true;
         fclose($handle);
     } else {
-        echo "The config file $config_file_it does not exist, and is not";
+        echo "The config file $config_file_es does not exist, and is not";
         echo "writeable.  Please issue the following commands:<br /><br />";
-        echo "<code>touch $config_file_it</code><br />";
-        echo "<code>chown $whoami /stweb_it.conf</code>";
+        echo "<code>touch $config_file_es</code><br />";
+        echo "<code>chown $whoami /stweb_es.conf</code>";
     }
 } else {
-    // The italian config file exists. Does it have any content?
-    $fp = fopen($config_file_it, "r");
+    // The spanish config file exists. Does it have any content?
+    $fp = fopen($config_file_es, "r");
     while (!feof($fp)) {
       $line = trim(fgets($fp));
       if ($line && substr($line,0,1)!=$comment) {
@@ -328,14 +329,14 @@ if (!file_exists($config_file_it)) {
 
     // Set Defaults
     if ($config_values_it['COLOUR'] == "") {
-        if (is_writable($config_file_it)) {
-            if (!$handle = fopen($config_file_it, 'w')) {
+        if (is_writable($config_file_es)) {
+            if (!$handle = fopen($config_file_es, 'w')) {
                 echo "Cannot open file ($filename)";
                 exit;
             }
             // Write $somecontent to our opened file.
-            if (fwrite($handle, $default_config_it) === FALSE) {
-                echo "Cannot write to file ($config_file_it)";
+            if (fwrite($handle, $default_config_es) === FALSE) {
+                echo "Cannot write to file ($config_file_es)";
                 exit;
             }
 
@@ -344,9 +345,7 @@ if (!file_exists($config_file_it)) {
         }
     }
 }
-if (!file_exists($config_file_es)) {
-    // Spanish does not exist
-}
+
 if (file_exists($config_file)) {
     $fp = fopen($config_file, "r");
     while (!feof($fp)) {
