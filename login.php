@@ -216,7 +216,7 @@ $sql = "CREATE TABLE `customer` (
   `trunkid` int(11) default '-1',
   `zip` varchar(25) default NULL,
   `state` varchar(250) default NULL,
-  `maxcps` int(11) default '10',
+  `maxcps` int(11) default '1',
   `maxchans` int(11) default '100',
   `adminlists` varchar(2555) default NULL,
   `didlogin` varchar(255) default NULL,

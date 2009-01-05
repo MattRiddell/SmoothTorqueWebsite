@@ -57,6 +57,7 @@ From here you can chose a campaign that you would like to export the numbers fro
         <OPTION VALUE="congested">Congested</OPTION>
         <OPTION VALUE="amd">Answer Machine</OPTION>
         <OPTION VALUE="timeout">No Answer</OPTION>
+        <OPTION VALUE="indnc">DNC Numbers</OPTION>
         <OPTION VALUE="unknown">Unknown</OPTION>
         </SELECT>
 
@@ -102,7 +103,7 @@ if ($type == "unknown") {
     $sql = 'SELECT *, UNIX_TIMESTAMP(datetime) as newdate FROM number WHERE campaignid='.$_POST[campaignid].' and (status="amd" or status="hungup" or status="pressed1")';
 } else {
     $sql = 'SELECT *, UNIX_TIMESTAMP(datetime) as newdate FROM number WHERE campaignid='.$_POST[campaignid].' and status="'.$type.'"';
-}
+} 
 //echo $sql;
 //exit(0);
 $result=mysql_query($sql, $link) or die (mysql_error());;
