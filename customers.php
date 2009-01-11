@@ -60,7 +60,7 @@ Trunk
 </TR>
 <?
 
-$sql = 'SELECT customer.*,trunk.name AS trunkname, billing.credit as credit, billing.creditlimit as creditlimit FROM customer LEFT JOIN trunk ON customer.trunkid=trunk.id LEFT JOIN billing on customer.id=billing.customerid';
+$sql = 'SELECT customer.*,trunk.name AS trunkname, billing.credit as credit, billing.creditlimit as creditlimit FROM customer LEFT JOIN trunk ON customer.trunkid=trunk.id LEFT JOIN billing on customer.id=billing.customerid order by customer.company';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
 $count = 0;

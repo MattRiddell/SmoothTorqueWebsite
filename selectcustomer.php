@@ -2,7 +2,7 @@
     require "header.php";
     //echo "<br />";
     //echo "No customer selected";
-    $sql = "SELECT customer.* FROM customer";
+    $sql = "SELECT customer.* FROM customer order by customer.company";
     $result = mysql_query($sql) or die(mysql_error());
 ?>
     <br /><br /><br /><br />
