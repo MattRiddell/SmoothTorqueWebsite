@@ -9,6 +9,9 @@ if ($id<1){
 $first=true;
 $lastRate=0;
 $lastPerc=0;
+if (!file_exists("/tmp/Sm".$id.".campaignProperties")) {
+	exit(0);
+}
 $lines2=file("/tmp/Sm".$id.".campaignProperties");
 $first=true;
 $total_count_x = 0;
@@ -44,6 +47,9 @@ foreach ($lines2 as $line_num => $line) {
                 }
                 if (substr(trim($line),0,2)=="MS") {
                     $ms = substr(trim($line),4);
+                    if ($ms == "inf" || $ms == "NAN") {
+                        $ms = 20000;
+                    }
                 }
                 if (substr(trim($line),0,2)=="M2") {
                     $m2 = substr(trim($line),4);
