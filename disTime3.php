@@ -52,6 +52,7 @@ To create your first campaign, please click the Add Campaign button above.<br />
 </center>
 
 <?
+exit(0);
 }
 
 $user = $_COOKIE[user];
