@@ -112,6 +112,9 @@ foreach ($lines2 as $line_num2 => $line2) {
         if ($count<720){
                 if (strlen(trim($line2))>0){
                         $count++;
+                       if (trim($line2) == "nan") {
+                               $line2 = "0";
+                       }
                         $array3[ $count ] = trim($line2);
                         $array4[ $count+1 ] = $array3[ $count ]-0.5;
                         $lastSpeed=trim($line2);
@@ -119,7 +122,7 @@ foreach ($lines2 as $line_num2 => $line2) {
                 }
         }
 }
-$highest_ms = 0;
+$highest_ms = 1;
 if ($_GET[debug]>0){
     $count = 0;
     foreach ($lines3 as $line_num3 => $line3) {
@@ -142,7 +145,11 @@ if ($_GET[debug]>0){
                             if (trim($line3) > 0) {
                                 //$newnumber = trim($line3)/1000;
                                 //$array_ms[ $count ] = 100-(20 * (log10($newnumber) + 2.7));
+                               if (!($highest_ms > 0)) {
+                                       $highest_ms = 1;
+                               }
                                 $array_ms[ $count ] = 101-(trim($line3)/($highest_ms)* 100);
+
 //                                $array_ms[ $count ] = 100-(20 * (log10($newnumber) + 2.7));
                             } else {
                                 $array_ms[ $count ] = 0;
@@ -277,16 +284,16 @@ $msPlot[] = new LinePLot($array_ms);
 $graph2->SetShadow();
 $graph2->img->SetAntiAliasing(true);
 
-$sql = 'SELECT progress from queue where campaignid='.$id;
+/*$sql = 'SELECT progress from queue where campaignid='.$id;
 $resultx=mysql_query($sql, $link) or die (mysql_error());;
 $rowx = mysql_fetch_assoc($resultx);
 
-$progress=$rowx[progress];
-/*if ($dialed>0){
+$progress=$rowx[progress];*/
+if ($dialed>0){
     $progress=$dialed;
 } else {
     $progress=$dialed;
-}*/
+}
 
 
 if ($progress<0){
@@ -297,7 +304,11 @@ if ($progress<0){
     $txt->SetBox('#00ff88@0.2','navy@0.1','#000000@0.8',0,5);
     //$txt->SetColor("red");
 } else {
-    $txt=new Text( "  Dialed: $progress   Busy Agents:$busy/$max   Average:".round($avgPerc)."%   Time Spent: $timespentM:$timespentS   Time between calls: ".round($ms/1000,3)." Seconds (".round(60/($ms/1000),2)." CPM)");
+//$txt = new Text($ms);
+    if (!($ms > 0)) {
+       $ms = 1;
+       }
+    $txt=new Text( "  Dialed: $progress   Busy Agents:$busy/$max   Average:".round($avgPerc)."%   Time Spent: $timespentM:$timespentS   Time between calls: ".round($ms/1000,3)." Seconds (".round(1/($ms/1000),3)." CPS)");
     $txt->Pos( 500,342);
     $txt->SetAlign("center","","");
     $txt->SetFont(FF_FONT2,FS_NORMAL);

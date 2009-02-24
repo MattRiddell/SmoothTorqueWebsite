@@ -18,7 +18,7 @@ To: <input name="enddate">
 <?
 } else {
 $startdate = $_GET[startdate];
-$enddate = $_GET[startdate];
+$enddate = $_GET[enddate];
 
 /*================= Log Access ======================================*/
 $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Viewed the CDR')";
