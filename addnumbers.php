@@ -69,6 +69,11 @@ Which campaign would you like to add numbers to?<br /><br />
     foreach ($split as $number){
         //$myarray[$count]=$i;
         if (strlen($number>0)){
+        $numbers = explode("\t",$number);
+        $number = $numbers[0];
+        $numbers = explode(",",$number);
+        $number = $numbers[0];
+
         $number = str_replace("\r","",$number);
         $number = str_replace(" ","",$number);
         $number = str_replace("-","",$number);
