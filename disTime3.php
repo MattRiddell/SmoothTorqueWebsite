@@ -111,9 +111,9 @@ while ($row = mysql_fetch_assoc($result)) {
 <TD>
 <?
 if (strlen($row[name])<15){
-echo "<A title=\"Edit this campaign\" HREF=\"editcampaign.php?id=".$row[id]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit This Campaign\">".$row[name]."</A>";
+echo "<A title=\"Edit this campaign\" HREF=\"editcampaign.php?id=".$row[id]."\"><img width=\"16\" height=\"16\" src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit This Campaign\">".$row[name]."</A>";
 } else {
-echo "<A title=\"Edit this campaign\" HREF=\"editcampaign.php?id=".$row[id]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit This Campaign\">".trim(substr($row[name],0,15))."...</A>";
+echo "<A title=\"Edit this campaign\" HREF=\"editcampaign.php?id=".$row[id]."\"><img width=\"16\" height=\"16\" src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit This Campaign\">".trim(substr($row[name],0,15))."...</A>";
 }
 ?>
 </TD>
@@ -155,14 +155,14 @@ $progress=$rowx[progress];
 <?
 if ($progress>0){
             ?>
-            <img src="/images/percentImage.png" title="<?
+            <img src="/images/percentImage.png" width="123" height="12" title="<?
             echo "Remaining: $new_numbers/$total_numbers\"";?>"
             class="percentImage"
             style="background-position: -<?echo ((100-(($new_numbers/$total_numbers)*100))*1.2)-1; ?>px 0pt;" border="0" />
 <?
 }else if ($manual_numbers > 0){
             ?>
-            <img src="/images/percentImage.png" title="<?
+            <img src="/images/percentImage.png" width="123" height="12" title="<?
             echo "Remaining: $new_numbers/$total_numbers\"";?>"
             class="percentImage3"
             style="background-position: -<?echo ((100-(($new_numbers/$total_numbers)*100))*1.2)-1; ?>px 0pt;" border="0" />
@@ -170,14 +170,14 @@ if ($progress>0){
 }else {
             if ($total_numbers > 0) {
             ?>
-            <img src="/images/percentImage.png" title="<?
+            <img src="/images/percentImage.png" width="123" height="12" title="<?
             echo "Remaining: $new_numbers/$total_numbers\"";?>"
             class="percentImage2"
             style="background-position: -<?echo ((100-(($new_numbers/$total_numbers)*100))*1.2)-1; ?>px 0pt;" border="0" />
 <?
             } else {
             ?>
-            <img src="/images/percentImage.png" title="<?
+            <img src="/images/percentImage.png" width="123" height="12" title="<?
             echo "Remaining: $new_numbers/$total_numbers\"";?>"
             class="percentImage2"
             style="background-position: -<?echo ((100-((0)*100))*1.2)-1; ?>px 0pt;" border="0" />
@@ -201,13 +201,13 @@ if ($perc>100){
 }
 if ($status==101){
 ?>
-<IMG SRC="/images/control_play.png" BORDER="0">
+<IMG SRC="/images/control_play.png" BORDER="0" width="16" height="16" >
 </TD>
 <td>
 <?if ($user!="demo"){?>
-<a title="Stop running this campaign" href="stopcampaign.php?id=<?echo $row[id];?>"><img src="/images/control_stop_blue.png" border="0"></a>
+<a title="Stop running this campaign" href="stopcampaign.php?id=<?echo $row[id];?>"><img width="16" height="16" src="/images/control_stop_blue.png" border="0"></a>
 <?} else {?>
-<a href="#" title="Stop campaign (Not running)"><img src="/images/control_stop_blue.png" border="0"></a>
+<a href="#" title="Stop campaign (Not running)"><img width="16" height="16" src="/images/control_stop_blue.png" border="0"></a>
 <?
 }
 } else {
@@ -215,13 +215,13 @@ if ($status==101){
 ?>
 <?if ($user!="demo"){?>
 <a title="Start running this campaign" href="startcampaign.php?id=<?echo $row[id];?>&astqueuename=<?echo $row[astqueuename];?>&clid=<?echo $row[clid];?>&trclid=<?echo $row[trclid];?>&agents=<?echo $row[maxagents];?>&did=<?echo $row[did];?>&context=<?echo $row[context];?>">
-<IMG SRC="/images/control_play_blue.png" BORDER="0"></a><br>
+<IMG width="16" height="16" SRC="/images/control_play_blue.png" BORDER="0"></a><br>
 <?} else {?>
-<a href="#" title="Start campaign (Already started)"><IMG SRC="/images/control_play_blue.png" BORDER="0"></a><br>
+<a href="#" title="Start campaign (Already started)"><IMG width="16" height="16" SRC="/images/control_play_blue.png" BORDER="0"></a><br>
 <?}?>
 </TD>
 <td>
-<img src="/images/control_stop.png" border="0" title="Stop running campaign">
+<img width="16" height="16" src="/images/control_stop.png" border="0" title="Stop running campaign">
 <?
 }
 
@@ -229,7 +229,7 @@ if ($status==101){
 if ($config_values['ALLOW_NUMBERS_MANUAL'] == "YES") {
 ?>
 <a href="manual_init.php?campaignid=<?=$row[id]?>">
-<img src="/images/database_lightning.png" border="0" title="Initialise campaign for manual dialing">
+<img width="16" height="16" src="/images/database_lightning.png" border="0" title="Initialise campaign for manual dialing">
 </a>
 <?
 }
@@ -238,17 +238,17 @@ if ($config_values['ALLOW_NUMBERS_MANUAL'] == "YES") {
 </td>
 <TD>
 <?if ($backend == 0) {?>
-<a title="View the graph for this campaign" href="test.php?id=<?echo $row[id];?>" class="abcd"><img src="/images/chart_curve.png" border="0"></a>&nbsp;
+<a title="View the graph for this campaign" href="test.php?id=<?echo $row[id];?>" class="abcd"><img width="16" height="16" src="/images/chart_curve.png" border="0"></a>&nbsp;
 <?}?>
 <?if ($backend == 0) {?>
-<a title="View the report for this campaign" href="report.php?type=today&id=<?echo $row[id];?>" class="abcd"><img src="/images/chart_pie.png" border="0"></a>&nbsp;
+<a title="View the report for this campaign" href="report.php?type=today&id=<?echo $row[id];?>" class="abcd"><img width="16" height="16" src="/images/chart_pie.png" border="0"></a>&nbsp;
 <?}?>
-<a title="Recycle Numbers" href="recycle.php?id=<?echo $row[id];?>&type_input=<?echo $_GET[type];?>" class="abcd"><img src="/images/arrow_refresh.png" border="0"></a>&nbsp;
+<a title="Recycle Numbers" href="recycle.php?id=<?echo $row[id];?>&type_input=<?echo $_GET[type];?>" class="abcd"><img width="16" height="16" src="/images/arrow_refresh.png" border="0"></a>&nbsp;
 <?
 if ($user!="demo"){
-echo "<A title=\"Delete this campaign\" HREF=\"deletecampaign.php?id=".$row[id]."\"><IMG SRC=\"/images/delete.png\" BORDER=\"0\"></A>";
+echo "<A title=\"Delete this campaign\" HREF=\"deletecampaign.php?id=".$row[id]."\"><IMG width=\"16\" height=\"16\" SRC=\"/images/delete.png\" BORDER=\"0\"></A>";
 } else {
-echo "<A title=\"Delete this campaign\" HREF=\"#\"><IMG SRC=\"/images/delete.png\" BORDER=\"0\"></A>";
+echo "<A title=\"Delete this campaign\" HREF=\"#\"><IMG SRC=\"/images/delete.png\" BORDER=\"0\" width=\"16\" height=\"16\" ></A>";
 }
 ?>
 </TD>
@@ -267,7 +267,7 @@ if ($row[cost]>0) {
 
 <td>
 
-<img src="/images/percentImage.png" title="<?echo
+<img src="/images/percentImage.png" width="123" height="12" title="<?echo
 $perc;?>% of staff are busy"
 class="percentImage"
 style="background-position: -<?echo 119-($perc*1.2); ?>px 0pt;" border="0" />

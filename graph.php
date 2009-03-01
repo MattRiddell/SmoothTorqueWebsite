@@ -278,7 +278,9 @@ if ($_GET[debug]>0){
 //$graph2->SetYScale(2,'lin',0,500,1,719);
 
 $msPlot[] = new LinePLot($array_ms);
-    $msPlot[0]->SetWeight(2);
+    $msPlot[0]->SetWeight(3);
+    $msPlot[0]->SetColor("#ffff00");
+
     $graph2->Add($msPlot[0]);
 }
 $graph2->SetShadow();

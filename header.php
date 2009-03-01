@@ -128,7 +128,7 @@ if (!($_COOKIE["loggedin"]==sha1("LoggedIn".$user))){
         $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
     }
 
-    $menu.='<TD class="'.$thead.'" height=27><A HREF="/main.php"><img src="/images/house.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_HOME']).'</A>&nbsp;</TD>';
+    $menu.='<TD class="'.$thead.'" height=27><A HREF="/main.php"><img width="16" height="16" src="/images/house.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_HOME']).'</A>&nbsp;</TD>';
 
     if ($level==sha1("level100")||$level==sha1("level0")){
     //=======================================================================================================
@@ -140,7 +140,7 @@ if (!($_COOKIE["loggedin"]==sha1("LoggedIn".$user))){
     } else {
         $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
     }
-    $menu.='<TD class="'.$thead.'"><A HREF="/campaigns.php"><img src="/images/folder.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_CAMPAIGNS']).'</A>&nbsp;</TD>';
+    $menu.='<TD class="'.$thead.'"><A HREF="/campaigns.php"><img width="16" height="16"  src="/images/folder.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_CAMPAIGNS']).'</A>&nbsp;</TD>';
 
     //=======================================================================================================
     // Numbers
@@ -150,7 +150,7 @@ if (!($_COOKIE["loggedin"]==sha1("LoggedIn".$user))){
     } else {
         $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
     }
-    $menu.='<TD class="'.$thead.'"><A HREF="/numbers.php"><img src="/images/telephone.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_NUMBERS']).'</A>&nbsp;</TD>';
+    $menu.='<TD class="'.$thead.'"><A HREF="/numbers.php"><img width="16" height="16"  src="/images/telephone.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_NUMBERS']).'</A>&nbsp;</TD>';
 
     //=======================================================================================================
     // DNC Numbers
@@ -160,7 +160,7 @@ if (!($_COOKIE["loggedin"]==sha1("LoggedIn".$user))){
     } else {
         $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
     }
-    $menu.='<TD class="'.$thead.'"><A HREF="/dncnumbers.php"><img src="/images/telephone_error.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_DNC']).'</A>&nbsp;</TD>';
+    $menu.='<TD class="'.$thead.'"><A HREF="/dncnumbers.php"><img width="16" height="16"  src="/images/telephone_error.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_DNC']).'</A>&nbsp;</TD>';
 
     //=======================================================================================================
     // Messages
@@ -170,7 +170,7 @@ if (!($_COOKIE["loggedin"]==sha1("LoggedIn".$user))){
     } else {
         $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
     }
-    $menu.='<TD class="'.$thead.'"><A HREF="/messages.php"><img src="/images/sound.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_MESSAGES']).'</A>&nbsp;</TD>';
+    $menu.='<TD class="'.$thead.'"><A HREF="/messages.php"><img width="16" height="16"  src="/images/sound.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_MESSAGES']).'</A>&nbsp;</TD>';
     //=======================================================================================================
     // Schedules
     //=======================================================================================================
@@ -179,7 +179,7 @@ if (!($_COOKIE["loggedin"]==sha1("LoggedIn".$user))){
     } else {
         $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
     }
-    $menu.='<TD class="'.$thead.'"><A HREF="/schedule.php"><img src="/images/clock.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_SCHEDULES']).'</A>&nbsp;</TD>';
+    $menu.='<TD class="'.$thead.'"><A HREF="/schedule.php"><img width="16" height="16"  src="/images/clock.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_SCHEDULES']).'</A>&nbsp;</TD>';
     if ($level==sha1("level100")){
 
         //=======================================================================================================
@@ -190,7 +190,7 @@ if (!($_COOKIE["loggedin"]==sha1("LoggedIn".$user))){
         } else {
             $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
         }
-        $menu.='<TD class="'.$thead.'"><A HREF="/customers.php"><img src="/images/group.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_CUSTOMERS']).'</A>&nbsp;</TD>';
+        $menu.='<TD class="'.$thead.'"><A HREF="/customers.php"><img width="16" height="16"  src="/images/group.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_CUSTOMERS']).'</A>&nbsp;</TD>';
         //=======================================================================================================
 
         //=======================================================================================================
@@ -201,7 +201,7 @@ if (!($_COOKIE["loggedin"]==sha1("LoggedIn".$user))){
         } else {
             $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
         }
-        $menu.='<TD class="'.$thead.'"><A HREF="/queues.php"><img src="/images/database.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_QUEUES']).'</A>&nbsp;</TD>';
+        $menu.='<TD class="'.$thead.'"><A HREF="/queues.php"><img width="16" height="16"  src="/images/database.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_QUEUES']).'</A>&nbsp;</TD>';
         //=======================================================================================================
 
         //=======================================================================================================
@@ -213,7 +213,7 @@ if (!($_COOKIE["loggedin"]==sha1("LoggedIn".$user))){
             $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
         }
         if ($backend == 0){
-        $menu.='<TD class="'.$thead.'"><A HREF="/servers.php"><img src="/images/server.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_SERVERS']).'</A>&nbsp;</TD>';
+        $menu.='<TD class="'.$thead.'"><A HREF="/servers.php"><img width="16" height="16"  src="/images/server.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_SERVERS']).'</A>&nbsp;</TD>';
         }
         //=======================================================================================================
 
@@ -226,7 +226,7 @@ if (!($_COOKIE["loggedin"]==sha1("LoggedIn".$user))){
         } else {
             $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
         }
-        $menu.='<TD class="'.$thead.'"><A HREF="/trunks.php"><img src="/images/telephone_link.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_TRUNKS']).'</A>&nbsp;</TD>';
+        $menu.='<TD class="'.$thead.'"><A HREF="/trunks.php"><img width="16" height="16"  src="/images/telephone_link.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_TRUNKS']).'</A>&nbsp;</TD>';
         //=======================================================================================================
 
         //=======================================================================================================
@@ -237,7 +237,7 @@ if (!($_COOKIE["loggedin"]==sha1("LoggedIn".$user))){
         } else {
             $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
         }
-        $menu.='<TD class="'.$thead.'"><A HREF="/config.php"><img src="/images/cog.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_ADMIN']).'</A>&nbsp;</TD>';
+        $menu.='<TD class="'.$thead.'"><A HREF="/config.php"><img width="16" height="16"  src="/images/cog.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_ADMIN']).'</A>&nbsp;</TD>';
         //=======================================================================================================
 
     }
@@ -251,7 +251,7 @@ if (!($_COOKIE["loggedin"]==sha1("LoggedIn".$user))){
         } else {
             $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
         }
-        $menu.='<TD class="'.$thead.'"><A HREF="/customers.php"><img src="/images/group.png" border="0" align="left">'.$config_values['MENU_CUSTOMERS'].'</A>&nbsp;</TD>';
+        $menu.='<TD class="'.$thead.'"><A HREF="/customers.php"><img width="16" height="16"  src="/images/group.png" border="0" align="left">'.$config_values['MENU_CUSTOMERS'].'</A>&nbsp;</TD>';
         //=======================================================================================================
         */
 
@@ -265,13 +265,13 @@ if (!($_COOKIE["loggedin"]==sha1("LoggedIn".$user))){
         } else {
             $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
         }
-        $menu.='<TD class="'.$thead.'"><A HREF="/addfunds.php"><img src="/images/group.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_ADDFUNDS']).'</A>&nbsp;</TD>';
+        $menu.='<TD class="'.$thead.'"><A HREF="/addfunds.php"><img width="16" height="16"  src="/images/group.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_ADDFUNDS']).'</A>&nbsp;</TD>';
         //=======================================================================================================
 
     }
     $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
 
-    $menu.='<TD height="1" class="'.$thead.'"><A HREF="/logout.php"><img src="/images/door_in.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_LOGOUT']).'</A>&nbsp;</TD><TD CLASS="theadr2" WIDTH=0></TD></TR></table>
+    $menu.='<TD height="1" class="'.$thead.'"><A HREF="/logout.php"><img width="16" height="16"  src="/images/door_in.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_LOGOUT']).'</A>&nbsp;</TD><TD CLASS="theadr2" WIDTH=0></TD></TR></table>
 
     ';
     //<TD class="thead2"><A HREF="stats.php">Live Statistics</A>&nbsp;&nbsp;</TD>
@@ -903,12 +903,12 @@ if ($loggedin){
 //    echo "Language: $language";
     if ( $config_values['USE_BILLING'] == "YES") {
         if ($postpay == 1) {
-            echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(strftime('%A %d %B %Y %H:%M:%S'))." Credit: $credit Credit Limit: $creditlimit <a href=\"/viewcdr.php\"><img src=\"/images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"/billinglog_account.php\"><img src=\"/images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
+            echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img width=\"16\" height=\"16\"  src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(strftime('%A %d %B %Y %H:%M:%S'))." Credit: $credit Credit Limit: $creditlimit <a href=\"/viewcdr.php\"><img width=\"16\" height=\"16\" src=\"/images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"/billinglog_account.php\"><img width=\"16\" height=\"16\" src=\"/images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
         } else {
-            echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(strftime('%A %d %B %Y %H:%M:%S'))." Credit: $credit <a href=\"/viewcdr.php\"><img src=\"/images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"/billinglog_account.php\"><img src=\"/images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
+            echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img width=\"16\" height=\"16\"  src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(strftime('%A %d %B %Y %H:%M:%S'))." Credit: $credit <a href=\"/viewcdr.php\"><img width=\"16\" height=\"16\"  src=\"/images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"/billinglog_account.php\"><img width=\"16\" height=\"16\"  src=\"/images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
         }
     } else {
-        echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(strftime('%A %d %B %Y %H:%M:%S'))."</font><br /></center>";
+        echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img width=\"16\" height=\"16\"  src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(strftime('%A %d %B %Y %H:%M:%S'))."</font><br /></center>";
     }
 }
 ?>
