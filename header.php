@@ -27,12 +27,12 @@ if (!file_exists("../upload_settings.inc")) {
         exit(0);
     }
 }
-if (!file_exists("/tmp/uploads")) {
-    echo "The directory /tmp/uploads does not exist.  You will need to create ";
+if (!file_exists("/var/tmp/uploads")) {
+    echo "The directory /var/tmp/uploads does not exist.  You will need to create ";
     echo "it by typing the following commands<br /><br />";
-    echo "<code>mkdir /tmp/uploads<br />";
-    echo "chown $whoami /tmp/uploads<br />";
-    echo "cp $current_directory/uploads/* /tmp/uploads</code>";
+    echo "<code>mkdir /var/tmp/uploads<br />";
+    echo "chown $whoami /var/tmp/uploads<br />";
+    echo "cp $current_directory/uploads/* /var/tmp/uploads</code>";
     exit(0);
 }
 /*$cmd = "ps aux |grep `cat /SmoothTorque/exampled.lock`";*/

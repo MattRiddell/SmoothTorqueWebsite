@@ -27,7 +27,7 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
         //TODO: This file path needs to be sanitised to make sure that
         //the input doesn't get a command execution injection
         $hash=sha1(date('l dS \of F Y h:i:s A'));
-        exec("cp ".str_replace(" ","\ ",$file[path]).' /tmp/uploads/fax-'.$hash.'.tiff');
+        exec("cp ".str_replace(" ","\ ",$file[path]).' /var/tmp/uploads/fax-'.$hash.'.tiff');
         exec("cp ".str_replace(" ","\ ",$file[path]).' ./uploads/fax-'.$hash.'.tiff');
         ?>
 <img src="/images/tick.png" onLoad="window.location = '/addmessage.php?filename=<?echo "fax-".$hash.".tiff";?>';">
