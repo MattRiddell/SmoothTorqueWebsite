@@ -49,6 +49,7 @@ From here you can chose a campaign that you would like to export the numbers fro
     </TR><TR>
     <TD>Type:</TD><TD>
         <SELECT NAME="type">
+        <OPTION VALUE="all">All Numbers</OPTION>
         <OPTION VALUE="pressed1">Pressed 1</OPTION>
         <OPTION VALUE="hungup">Did Not Press 1</OPTION>
         <OPTION VALUE="answered">All Answered</OPTION>
@@ -101,6 +102,8 @@ if ($type == "unknown") {
     $sql = 'SELECT *, UNIX_TIMESTAMP(datetime) as newdate FROM number WHERE campaignid='.$_POST[campaignid].' and status like "unknown%"';
 } else if ($type == "answered") {
     $sql = 'SELECT *, UNIX_TIMESTAMP(datetime) as newdate FROM number WHERE campaignid='.$_POST[campaignid].' and (status="amd" or status="hungup" or status="pressed1")';
+} else if ($type == "all") {
+    $sql = 'SELECT *, UNIX_TIMESTAMP(datetime) as newdate FROM number WHERE campaignid='.$_POST[campaignid];
 } else {
     $sql = 'SELECT *, UNIX_TIMESTAMP(datetime) as newdate FROM number WHERE campaignid='.$_POST[campaignid].' and status="'.$type.'"';
 } 
