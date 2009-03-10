@@ -70,7 +70,10 @@ $messageid=mysql_result($result,0,'messageid');
 
 $sqlx = "SELECT length FROM campaignmessage WHERE id=$messageid";
 $result=mysql_query($sqlx, $link) or die (mysql_error());;
-$length=mysql_result($result,0,'length');
+unset($length);
+if (mysql_num_rows($result) > 0) {
+	$length=mysql_result($result,0,'length');
+}
 
 
 
