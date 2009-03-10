@@ -115,7 +115,11 @@ if ( $config_values['USE_BILLING'] == "YES") {
         //echo "One Call Should Cost: ".$onecall."<br />";
         $real_credit = $credit + $credit_limit;
         //echo "Real Credit: ".$real_credit."<br />";
+	if ($onecall > 0) {
         $call = $real_credit/$onecall;
+	} else {
+		$call = 99999999999999999;
+	}
         //echo "Max Calls: ".floor($call)."<br />";
         $maxcalls = floor($call);
         if ($maxcalls < 1) {
