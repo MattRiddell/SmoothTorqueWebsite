@@ -18,13 +18,15 @@ if (isset($_GET[type])){
 } else {
     /* We don't know what to reset, so let's draw the choices */
     require "header.php";
+
+    /* Define a function to print out an entry so we don't repeat the code */
     function print_count($id, $status, $text) {
         global $link;
         $sql = 'SELECT count(*) from number where campaignid='.$id.' and status="'.$status.'"';
         $result=mysql_query($sql, $link) or die (mysql_error());;
         if (mysql_result($result,0,0) > 0) {
             ?><a href="recycle.php?id=<?=$id;?>&type=<?=$status?>&type_input=<?echo $_GET[type_input];?>"><?
-            echo "Reset ".mysql_result($result,0,0)." $text</a><br />";;
+            echo "Reset ".number_format(mysql_result($result,0,0))." $text</a><br />";;
         }
     }
 ?>
@@ -32,9 +34,7 @@ if (isset($_GET[type])){
 <br /><br /><br /><br />
 <center>
 <?box_start();?>
-<center><b>Recycle Numbers:</b>
-<br />
-<br />
+<center><h2>Recycle Numbers:</h2>
 <?
 include "admin/db_config.php";
 mysql_select_db("SineDialer", $link);
@@ -53,7 +53,7 @@ print_count($_GET[id], "timeout", "no answer numbers");
 Reset <?
 $sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status like "unknown%"';
 $result=mysql_query($sql, $link) or die (mysql_error());;
-echo mysql_result($result,0,0);
+echo number_format(mysql_result($result,0,0));
 ?> Unknown numbers</a>
 <br />
 <?
@@ -62,20 +62,13 @@ print_count($_GET[id], "hungup", "hungup numbers");
 ?>
 
 <a href="recycle.php?id=<?echo $_GET[id];?>&type=all&type_input=<?echo $_GET[type_input];?>">
-Reset <?
-$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status!="new" ';
+<b>Reset all <?
+$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' ';
 $result=mysql_query($sql, $link) or die (mysql_error());;
-echo mysql_result($result,0,0);
-?> All numbers</a>
-<?/*
-<br />
-<br />
-</td>
-<td>
-</td></tr>
-</table>
-*/
-box_end();?>
+echo number_format(mysql_result($result,0,0));
+?> numbers</b></a>
+<br /><br />
+<?box_end();?>
 </center>
 <?
 }
