@@ -1,7 +1,9 @@
 <?
 if (isset($_GET[type])){
-    include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(mysql_error());
+    /* We now know what to reset so let's do it */
+    include "admin/db_config.php";
     mysql_select_db("SineDialer", $link);
+
     if ($_GET[type]=="unknown") {
         $sql = 'UPDATE number SET status="new" where status like "unknown%" and campaignid='.$_GET[id];
     } else if ($_GET[type]=="all") {
@@ -10,80 +12,42 @@ if (isset($_GET[type])){
         $sql = 'UPDATE number SET status="new" where status="'.$_GET[type].'" and campaignid='.$_GET[id];
     }
     $result=mysql_query($sql, $link) or die (mysql_error());;
-//    echo "Resetting status of $_GET[type] numbers in $_GET[id]";
-//    include "campaigns.php";
+    /* Return to the campaign page */
     header("Location: campaigns.php?type=".$_GET[type_input]);
+    exit(0);
 } else {
-require "header.php";
+    /* We don't know what to reset, so let's draw the choices */
+    require "header.php";
+    function print_count($id, $status, $text) {
+        global $link;
+        $sql = 'SELECT count(*) from number where campaignid='.$id.' and status="'.$status.'"';
+        $result=mysql_query($sql, $link) or die (mysql_error());;
+        if (mysql_result($result,0,0) > 0) {
+            ?><a href="recycle.php?id=<?=$id;?>&type=<?=$status?>&type_input=<?echo $_GET[type_input];?>"><?
+            echo "Reset ".mysql_result($result,0,0)." $text</a><br />";;
+        }
+    }
 ?>
 
 <br /><br /><br /><br />
 <center>
-<table background="/images/sdbox.png" width="300" height="200" class="dragme22">
-<tr>
-<td>
-</td>
-<td width="260">
-<b>Recycle Numbers:<br />
+<?box_start();?>
+<center><b>Recycle Numbers:</b>
+<br />
+<br />
 <?
-include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(mysql_error());
+include "admin/db_config.php";
 mysql_select_db("SineDialer", $link);
-$sql = 'SELECT * from campaign where id='.$_GET[id];
-$result=mysql_query($sql, $link) or die (mysql_error());;
-//$backend = mysql_result($result,0,'value');
-$row = mysql_fetch_assoc($result);
-//echo $row[name];
 ?>
-</b>
-<a href="recycle.php?id=<?echo $_GET[id];?>&type=failed&type_input=<?echo $_GET[type_input];?>">
-Reset <?
-$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="failed"';
-$result=mysql_query($sql, $link) or die (mysql_error());;
-echo mysql_result($result,0,0);
-?> failed numbers</a>
-<br />
-<a href="recycle.php?id=<?echo $_GET[id];?>&type=busy&type_input=<?echo $_GET[type_input];?>">
-Reset <?
-$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="busy"';
-$result=mysql_query($sql, $link) or die (mysql_error());;
-echo mysql_result($result,0,0);
-?> busy numbers</a>
-<br />
-<a href="recycle.php?id=<?echo $_GET[id];?>&type=congested&type_input=<?echo $_GET[type_input];?>">
-Reset <?
-$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="congested"';
-$result=mysql_query($sql, $link) or die (mysql_error());;
-echo mysql_result($result,0,0);
-?> congested numbers</a>
-<br />
-<a href="recycle.php?id=<?echo $_GET[id];?>&type=dialed&type_input=<?echo $_GET[type_input];?>">
-Reset <?
-$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="dialed"';
-$result=mysql_query($sql, $link) or die (mysql_error());;
-echo mysql_result($result,0,0);
-?> dialed numbers</a>
-<br />
-<a href="recycle.php?id=<?echo $_GET[id];?>&type=dialing&type_input=<?echo $_GET[type_input];?>">
-Reset <?
-$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="dialing"';
-$result=mysql_query($sql, $link) or die (mysql_error());;
-echo mysql_result($result,0,0);
-?> dialing numbers</a>
-<br />
-<a href="recycle.php?id=<?echo $_GET[id];?>&type=amd&type_input=<?echo $_GET[type_input];?>">
-Reset <?
-$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="amd"';
-$result=mysql_query($sql, $link) or die (mysql_error());;
-echo mysql_result($result,0,0);
-?> amd numbers</a>
-<br />
-<a href="recycle.php?id=<?echo $_GET[id];?>&type=timeout&type_input=<?echo $_GET[type_input];?>">
-Reset <?
-$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="timeout"';
-$result=mysql_query($sql, $link) or die (mysql_error());;
-echo mysql_result($result,0,0);
-?> No Answer numbers</a>
-<br />
+<?
+print_count($_GET[id], "failed", "failed numbers");
+print_count($_GET[id], "busy", "busy numbers");
+print_count($_GET[id], "congested", "congested numbers");
+print_count($_GET[id], "dialed", "dialed numbers");
+print_count($_GET[id], "dialing", "dialing numbers");
+print_count($_GET[id], "amd", "answer machine numbers");
+print_count($_GET[id], "timeout", "no answer numbers");
+?>
 
 <a href="recycle.php?id=<?echo $_GET[id];?>&type=unknown&type_input=<?echo $_GET[type_input];?>">
 Reset <?
@@ -92,32 +56,26 @@ $result=mysql_query($sql, $link) or die (mysql_error());;
 echo mysql_result($result,0,0);
 ?> Unknown numbers</a>
 <br />
-<a href="recycle.php?id=<?echo $_GET[id];?>&type=calldropped&type_input=<?echo $_GET[type_input];?>">
-Reset <?
-$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="calldropped"';
-$result=mysql_query($sql, $link) or die (mysql_error());;
-echo mysql_result($result,0,0);
-?> Call Dropped numbers</a>
-<br />
-<a href="recycle.php?id=<?echo $_GET[id];?>&type=hungup&type_input=<?echo $_GET[type_input];?>">
-Reset <?
-$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="hungup"';
-$result=mysql_query($sql, $link) or die (mysql_error());;
-echo mysql_result($result,0,0);
-?> Hungup numbers</a>
-<br />
+<?
+print_count($_GET[id], "calldropped", "calldropped numbers");
+print_count($_GET[id], "hungup", "hungup numbers");
+?>
+
 <a href="recycle.php?id=<?echo $_GET[id];?>&type=all&type_input=<?echo $_GET[type_input];?>">
 Reset <?
-$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status!="new" and status!="no-credit"';
+$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status!="new" ';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 echo mysql_result($result,0,0);
 ?> All numbers</a>
+<?/*
 <br />
 <br />
 </td>
 <td>
 </td></tr>
 </table>
+*/
+box_end();?>
 </center>
 <?
 }

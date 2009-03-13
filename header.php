@@ -1,4 +1,6 @@
 <?php
+$cwd = "/".basename(dirname(__FILE__));
+require $cwd."/functions/functions.php";
 $current_directory = dirname(__FILE__);
 $whoami = exec('whoami');
 
@@ -365,6 +367,7 @@ function deleteCookie(name, path, domain) {
 </script>
 
 <script type="text/javascript" src="/tabber.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/style.css">
 <link rel="stylesheet" href="/example.css" TYPE="text/css" MEDIA="screen">
 <link rel="stylesheet" href="/example-print.css" TYPE="text/css" MEDIA="print">
 

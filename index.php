@@ -81,6 +81,7 @@ if ($config_values['MAIN_PAGE_LOGIN'] == "") {
 echo "<FONT FACE=\"ARIAL\">";
 ?>
 
+
 <FORM ACTION="login.php?redirect=<?echo $_GET[redirect];?>" METHOD="POST">
     <CENTER>
        <?/* <table class="tborder" align="center" width="270" border="0" cellpadding="0" cellspacing="2">*/?>
@@ -91,7 +92,8 @@ echo "<FONT FACE=\"ARIAL\">";
 <?echo $config_values['TITLE'];?><br />
 <br />
 <?echo $config_values['TEXT'];?>        <br /><br />
-        <table background="/images/sdbox.png" align="center" width="300" height="200" cellpadding="0" cellspacing="0">
+<?box_start();?>
+            <table align="center" width="300" height="200" cellpadding="0" cellspacing="0">
             <tr><td>
 <?
 if (isset($_GET[error])){
@@ -120,6 +122,8 @@ if (isset($_GET[error])){
         </TABLE>
     </CENTER>
 </FORM>
+<?box_end();?>
+
 <?
 require "footer.php";
 ?>
