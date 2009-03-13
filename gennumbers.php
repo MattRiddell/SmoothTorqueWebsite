@@ -76,10 +76,24 @@ Please select a campaign to add numbers to<br /><br />
 </div>
 </td></tr></table>
 <?
+
+ /* Problem here - for loops treat the numbers as ints - so strip leading
+    zeros - read the zeros first to apply them later */
+
+unset($starter);
+if (substr($_POST[start],0,3) == "000") {
+    $starter = "000";
+} else if (substr($_POST[start],0,2) == "00") {
+    $starter = "00";
+} else if (substr($_POST[start],0,1) == "00") {
+    $starter = "0";
+}
  for ($i=$_POST[start];$i<=$_POST[end];$i++){
  $count++;
-    $myarray[$count]=$i;
+    $myarray[$count]=$starter.$i;
  }
+
+
 // echo "done";
 shuffle($myarray);
 
