@@ -92,7 +92,7 @@ if (isset($_GET[campaignid])){
 }
 
 header("Content-Type: application/octet-stream");
-header("Content-Length: $size;");
+//header("Content-Length: $size;");
 header("Content-Disposition: attachement; filename=\"".$type." Campaign ID (".$_POST[campaignid].") Dialer Number Export (".date('l dS \of F Y h:i:s A').").csv\"");
 
 
@@ -112,6 +112,7 @@ if ($type == "unknown") {
 $result=mysql_query($sql, $link) or die (mysql_error());;
 
 while ($row = mysql_fetch_assoc($result)) {
+flush();
 if ($toggle){
 $toggle=false;
 $class=" class=\"tborder2\"";
