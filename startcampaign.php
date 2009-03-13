@@ -121,7 +121,7 @@ if ( $config_values['USE_BILLING'] == "YES") {
 	if ($onecall > 0) {
         $call = $real_credit/$onecall;
 	} else {
-		$call = 99999999999999999;
+		$call = 999999999;
 	}
         //echo "Max Calls: ".floor($call)."<br />";
         $maxcalls = floor($call);
