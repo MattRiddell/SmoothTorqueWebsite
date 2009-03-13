@@ -82,7 +82,7 @@ if ( $config_values['USE_BILLING'] == "YES") {
     $sql = "Select credit, creditlimit, priceperminute, pricepercall, firstperiod from billing where accountcode = 'stl-$username'";
 
     //echo $sql;
-    $result_credit = mysql_query($sql, $link);
+    $result_credit = mysql_query($sql, $link) or die("a:".mysql_error());
     //echo "numrows: ".mysql_num_rows($result_credit);
     if (mysql_num_rows($result_credit) > 0) {
         $credit = mysql_result($result_credit,0,"credit");
@@ -163,39 +163,39 @@ $result=mysql_query($sql, $link);
 }
 
 $sql4="select trunkid from customer where campaigngroupid = ".$campaigngroupid;
-$resultx=mysql_query($sql4, $link) or die (mysql_error());;
+$resultx=mysql_query($sql4, $link) or die ("b:".mysql_error());;
 $trunkid=mysql_result($resultx,0,'trunkid');
 
 if ($trunkid==-1){
     $sql3="select dialstring, id from trunk where current = 1";
-    $resultx=mysql_query($sql3, $link) or die (mysql_error());;
+    $resultx=mysql_query($sql3, $link) or die ("c:".mysql_error());;
     $dialstring=mysql_result($resultx,0,'dialstring');
     $trunkid = mysql_result($resultx,0,'id');
 } else {
     $sql3="select dialstring from trunk where id = ".$trunkid;
-    $resultx=mysql_query($sql3, $link) or die (mysql_error());;
+    $resultx=mysql_query($sql3, $link) or die ("d:".mysql_error());;
     $dialstring=mysql_result($resultx,0,'dialstring');
 }
 
 $dncsql = "SELECT number.phonenumber FROM number LEFT JOIN dncnumber ON number.phonenumber=dncnumber.phonenumber WHERE dncnumber.phonenumber IS NOT NULL AND number.campaignid='$_GET[id]'";
-$resultdnc=mysql_query($dncsql, $link) or die (mysql_error());;
+$resultdnc=mysql_query($dncsql, $link) or die ("e:".mysql_error());;
 //echo $dncsql."<br />";
 while ($row = mysql_fetch_assoc($resultdnc)) {
 //    echo $row[phonenumber]." is in dnc<br />";
     echo "<!-- . -->";
     $removedncsql = "UPDATE number set status = 'indnc' where phonenumber='$row[phonenumber]'";
-    $resultremovednc=mysql_query($removedncsql, $link) or die (mysql_error());;
+    $resultremovednc=mysql_query($removedncsql, $link) or die ("f:".mysql_error());;
 }
 
 if ( $config_values['USE_BILLING'] == "YES") {
 if ($_GET[context] != 0) {
 $credit_limit_sql = "UPDATE number SET status='no-credit' WHERE status='new' and campaignid='$_GET[id]'";
-$result_credit_limit_sql=mysql_query($credit_limit_sql, $link) or die (mysql_error());;
+$result_credit_limit_sql=mysql_query($credit_limit_sql, $link) or die ("g:".mysql_error());;
 $credit_limit_sql2 = "UPDATE number SET status='new' WHERE status='no-credit' and campaignid='$_GET[id]' limit $maxcalls";
-$result_credit_limit_sql2=mysql_query($credit_limit_sql2, $link) or die (mysql_error());;
+$result_credit_limit_sql2=mysql_query($credit_limit_sql2, $link) or die ("h:".mysql_error());;
 } else {
 $credit_limit_sql2 = "UPDATE number SET status='new' WHERE status='no-credit' and campaignid='$_GET[id]'";
-$result_credit_limit_sql2=mysql_query($credit_limit_sql2, $link) or die (mysql_error());;
+$result_credit_limit_sql2=mysql_query($credit_limit_sql2, $link) or die ("i:".mysql_error());;
 
 }
 
@@ -233,8 +233,8 @@ $sql2="INSERT INTO queue (campaignid,queuename,status,details,flags,transferclid
 //    echo $sql2;
 //exit(0);
 //echo $sql2;
-$resultx=mysql_query($sql1, $link) or die (mysql_error());;
-$resultx=mysql_query($sql2, $link) or die (mysql_error());;
+$resultx=mysql_query($sql1, $link) or die ("j:".mysql_error());;
+$resultx=mysql_query($sql2, $link) or die ("k:".mysql_error());;
 
 
 ?>
