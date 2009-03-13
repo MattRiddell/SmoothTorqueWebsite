@@ -93,7 +93,13 @@ echo "<A HREF=\"editcustomer.php?id=".$row[id]."\"><img src=\"/images/pencil.png
 <?
 ?>
 <?echo "<A HREF=\"changepassword.php?id=".$row[id]."\" title=\"Change Password\"><img src=\"/images/lock_edit.png\" border=\"0\" align=\"right\" title=\"Change Password\"></A>";?>
-<?echo $row[username];?>
+<?
+if (strlen($row[username])<15){
+    echo $row[username];
+} else {
+    echo trim(substr($row[username],0,15))."...";
+}
+?>
 </TD>
 <TD>
 <?echo "<A HREF=\"viewcdr.php?accountcode=stl-".$row[username]."\" title=\"View CDR Information\"><img src=\"/images/table.png\" border=\"0\" align=\"left\" title=\"View CDR Information\">View CDR</A>";?>
@@ -120,7 +126,7 @@ echo "<A HREF=\"billing.php?id=".$row[id]."\" title=\"View Billing Information\"
 if (isset($row[credit])){
 echo $config_values['CURRENCY_SYMBOL']." ".number_format($row[credit],2)."</A>";
 } else {
-echo "Add Billing Account</A>";
+echo "Add Billing</A>";
 }
 ?>
 </TD>
@@ -130,7 +136,7 @@ echo "<A HREF=\"billing.php?id=".$row[id]."\" title=\"View Billing Information\"
 if (isset($row[credit])){
 echo $config_values['CURRENCY_SYMBOL']." ".number_format($row[creditlimit],2)."</A>";
 } else {
-echo "Add Billing Account</A>";
+echo "Add Billing</A>";
 }
 ?>
 </TD>
