@@ -2,8 +2,7 @@
 
 /* Find out what the base directory name is for two reasons:
     1. So we can include files
-    2. So we can explain how to set up things that are missing
-*/
+    2. So we can explain how to set up things that are missing */
 $current_directory = dirname(__FILE__);
 
 /* Load in the functions we may need - these are the list of available
@@ -13,6 +12,7 @@ $current_directory = dirname(__FILE__);
 */
 require "/".$current_directory."/functions/functions.php";
 
+/* Find out what user the webserver is running as */
 $whoami = exec('whoami');
 
 /* Get Cookies */
@@ -20,114 +20,62 @@ $language=$_COOKIE[language];
 $user=$_COOKIE[user];
 $level=$_COOKIE[level];
 
+/* Make sure we have the environment set up correctly - if not give the
+   user some information about how to remedy the situation - these
+   functions are mainly for an installer */
+check_for_gd_library();
+check_for_upload_settings();
+check_for_upload_directory($whoami);
 
-
-if (!extension_loaded('gd')) {
-    echo "It looks like php-gd is not installed.  Installing it will depend ";
-    echo "on the package manager you have installed.  Here are a few examples:<br /><br />";
-    echo "Fedora/Centos:<br /><code>yum install -y php-gd</code><br /><br />";
-    echo "Debian/Ubuntu:<br /><code>apt-get install php-gd</code><br /><br />";
-    echo "Gentoo:<br /><code>emerge php-gd</code><br /><br />";
-    echo "Mandriva/Mandrake:<br /><code>urpmi php-gd</code><br /><br />";
-    exit(0);
-}
-if (!file_exists("../upload_settings.inc")) {
-    if (!file_exists("../../upload_settings.inc")) {
-        echo "The file ../upload_settings.inc does not exist.  You will need to ";
-        echo "copy it from the $current_directory/cron subdirectory by typing ";
-        echo "the following commands<br /><br />";
-        echo "<code>cp $current_directory/cron/upload_settings.inc $current_directory/../</code>";
-        exit(0);
-    }
-}
-if (!file_exists("/var/tmp/uploads")) {
-    echo "The directory /var/tmp/uploads does not exist.  You will need to create ";
-    echo "it by typing the following commands<br /><br />";
-    echo "<code>mkdir /var/tmp/uploads<br />";
-    echo "chown $whoami /var/tmp/uploads<br />";
-    echo "cp $current_directory/uploads/* /var/tmp/uploads</code>";
-    exit(0);
-}
+/* This was temporarily used to check for the running of the backend.
+   Not currently used because of permission problems, but may be
+   resurrected in the future */
 /*$cmd = "ps aux |grep `cat /SmoothTorque/exampled.lock`";*/
-if (file_exists("/SmoothTorque/SmoothTorque.version")) {
-	$fp2 = fopen("/SmoothTorque/SmoothTorque.version", "r");
-	while (!feof($fp2)) {
-		$line = trim(fgets($fp2));
-		if (strlen($line)>0){
-			$version = substr($line,0,strlen($line)-1);
-		}
-	}
-	fclose ($fp2);
-    if($version>0){
-        $version/=100;
-    }
-}
 
-/*
- * Config File Parsing
- */
+/* See if we can find out the version of the SmoothTorque backend that is
+   currently installed - we use this so we can inform about updates etc */
+$version = get_backend_version();
 
-
+/* Config File Parsing */
 require "default_configs.php";
 
-function _get_browser() {
-    $browser = array ( //reversed array
-      "OPERA",
-      "MSIE",            // parent
-      "NETSCAPE",
-      "FIREFOX",
-      "SAFARI",
-      "KONQUEROR",
-      "MOZILLA"        // parent
-    );
-
-    $info[browser] = "OTHER";
-
-    foreach ($browser as $parent) {
-        if ( ($s = strpos(strtoupper($_SERVER['HTTP_USER_AGENT']), $parent)) !== FALSE ) {
-            $f = $s + strlen($parent);
-            $version = substr($_SERVER['HTTP_USER_AGENT'], $f, 5);
-            $version = preg_replace('/[^0-9,.]/','',$version);
-            $info[browser] = $parent;
-            $info[version] = $version;
-            break; // first match wins
-        }
-    }
-    return $info;
-}
-
-
-
+/* Load in the database connection values and chose the database name */
 include "admin/db_config.php";
 mysql_select_db("SineDialer", $link);
 
-
 /* Check if the user is logged in */
 if (!($_COOKIE["loggedin"]==sha1("LoggedIn".$user))){
-    // Not Logged In
+    /* The user is not logged in */
     $loggedin=false;
     $myPage=$_SERVER[PHP_SELF];
-    if ($myPage=="/index.php"|$myPage=="/login.php"){
-        //echo "LOGGING IN ".$user." - ".$_COOKIE["loggedin"];
-    } else {
+    if (!($myPage=="/index.php"|$myPage=="/login.php")){
+        /* Because header is included in login and the main page we don't
+           want to redirect them constantly while they are trying to log
+           in.  If they are not on these pages and they are not logged in
+           they should be sent to the main page - but we remember via the
+           redirect variable the page they were trying to get to. */
         ?><META HTTP-EQUIV=REFRESH CONTENT="0; URL=/index.php?redirect=<?echo $myPage;?>"><?
         exit(0);
     }
 
 } else {
-    // Logged In
+    /* The user is currently logged in */
     $loggedin=true;
+    /* Set all the cookies again to extend login time - they're not inactive */
     setcookie("loggedin",sha1("LoggedIn".$user),time()+60000);
     setcookie("user",$user,time()+60000);
     setcookie("level",$level,time()+60000);
     setcookie("language",$language,time()+60000);
+
 	echo "<!--Version: $version<br />-->";
+
+    /* Find out whether the backend is running on Windows or Linux */
 	$sql = 'SELECT value FROM config WHERE parameter=\'backend\'';
 	$result=mysql_query($sql, $link) or die (mysql_error());;
 	$backend = mysql_result($result,0,'value');
 
 	$self=$_SERVER['PHP_SELF'];
-	//echo $self;
+
     $menu='<CENTER>
     <table border="0" cellpadding="3" cellspacing="0"><TR HEIGHT="10">';
     //=======================================================================================================
