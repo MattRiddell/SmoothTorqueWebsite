@@ -5,14 +5,15 @@ require "header.php";
 <br /><br /><br /><br />
 <center>
 <?
-box_start();
-/*
+//box_start();
+?>
 <table background="/images/sdbox.png" width="300" height="200" class="dragme22">
 <tr>
 <td>
 </td>
 <td width="260">
-*/?>
+<center>
+
 <b>Welcome to <?echo $config_values['TITLE'];?>.</b><br />
 <br />
 
@@ -21,8 +22,10 @@ box_start();
 if ($level==sha1("level5")) {
     /* Manual Dialing agent logging in */
     echo "Please wait."; ?>
-<?/*    <br /></td><td></td></tr></table>*/
-box_end();?>
+    <br /></td><td></td></tr></table>
+    <?
+//box_end();
+?>
 
     </center>
     <META HTTP-EQUIV=REFRESH CONTENT="0; URL=manualdial.php">
@@ -39,15 +42,16 @@ if ($level==sha1("level10")){
     echo $config_values['MAIN_PAGE_TEXT'];
 }
 
-
-/*<br />
+?>
+<br />
 </td>
 <td>
 </td></tr>
 </table>
 </center>
-*/
-box_end();
+<?
+
+//box_end();
 
 $level=$_COOKIE[level];
 
