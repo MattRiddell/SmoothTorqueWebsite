@@ -79,7 +79,7 @@ if ($row[status] == 0){
 } else if ($row[status] == 1){
     echo "<img src=\"/images/tick.png\">";
     echo "<a href=\"resetserver2.php?id=$row[id]\"><img src=\"/images/control_stop_blue.png\" border=\"0\"></a>";
-} else if ($row[status] == 2){
+} else {
     echo "<img src=\"/images/clock.png\">";
     echo "<a href=\"resetserver.php?id=$row[id]\"><img src=\"/images/control_play_blue.png\" border=\"0\"></a>";
 }
