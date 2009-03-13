@@ -109,7 +109,7 @@ if (isset($_GET[type])){
     }
 }
 
-$sql = 'SELECT *, UNIX_TIMESTAMP(datetime) as newdate FROM number WHERE campaignid='.$campaignid.' '.$type.' order by status asc LIMIT '.$start.','.$config_values['PER_PAGE'];
+$sql = 'SELECT *, UNIX_TIMESTAMP(datetime) as newdate FROM number WHERE campaignid='.$campaignid.' '.$type.' order by status asc, phonenumber LIMIT '.$start.','.$config_values['PER_PAGE'];
 $result=mysql_query($sql, $link) or die (mysql_error());;
 //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
 if ($_GET[type]!="all") {
