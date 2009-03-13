@@ -91,17 +91,17 @@ if (substr($_POST[start],0,3) == "000") {
  for ($i=$_POST[start];$i<=$_POST[end];$i++){
     $count++;
     $myarray[$count]=$starter.($i+0);
-    echo "$count is ".$myarray[$count]."<br />";
+//    echo "$count is ".$myarray[$count]."<br />";
  }
 
 
-echo "done";
-exit(0);
 shuffle($myarray);
 
  $count = 0;
  for ($i=$_POST[start];$i<=$_POST[end];$i++){
     $sql="INSERT IGNORE INTO number (campaignid,phonenumber,status,type) VALUES ($_POST[campaignid],$myarray[$count],'new',0)";
+    echo $sql;
+    exit(0);
     $result=mysql_query($sql, $link) or die (mysql_error());;
 
     $count++;
