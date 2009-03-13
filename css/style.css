@@ -1,3 +1,29 @@
+/*core drop shadow rules*/
+.wrap1, .wrap2, .wrap3 {
+        display:inline-table;
+        /* \*/display:block;/**/}
+.wrap1 {
+        float:left;
+        background:url(/images/shadow.gif) right bottom no-repeat;}
+.wrap2 {background:url(/images/corner_bl.gif) left bottom no-repeat;}
+.wrap3 {
+        padding:0 8px 8px 0;
+        background:url(/images/corner_tr.gif) right top no-repeat;}
+.wrap3 table {
+       display:block;
+        border:1px solid #ccc;
+
+        border-color:#efefef #ccc #ccc #efefef;}
+#v6 .wrap1 {background:url(/images/shadow.gif) right bottom no-repeat;}
+#v6 .wrap2 {background:url(/images/corner_bl.gif) -4px 100% no-repeat;}
+#v6 .wrap3 {
+        padding:0 16px 16px 0;
+        background:url(/images/corner_tr.gif) 100% -4px no-repeat;}
+.example {clear:both;
+}
+  table.center {}
+
+
 /*--------------------------------------------------|
 | dTree 2.05 | www.destroydrop.com/javascript/tree/ |
 |---------------------------------------------------|

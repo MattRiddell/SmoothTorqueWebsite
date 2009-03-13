@@ -1,3 +1,391 @@
+function hideshow(name){
+	var opened = "./images/open.png";
+	var closed = "./images/closed.png";
+
+	var element = document.getElementById(name);
+	var img = document.getElementsByName("img_"+name);
+	if(element.style.display == "none"){
+		img[0].src = opened;
+		element.style.display = "";
+	}else{
+		img[0].src = closed;
+		element.style.display = "none";
+	}
+}
+
+function whatPaySelected(myval){
+    if (document.all2) {
+        document.all['mode'].style.display = "visible";
+    } else {
+        document.getElementById('mode').style.display='';
+    }
+
+	if (myval == '0') {
+    		if (document.all2) {
+        		document.all['mode'].style.display = "none";
+    		} else {
+        		document.getElementById('mode').style.display='none';
+    		}
+    		if (document.all2) {
+        		document.all['xx1'].style.display = "none";
+        		document.all['xx2'].style.display = "none";
+        		document.all['xx3'].style.display = "none";
+        		document.all['xx4'].style.display = "none";
+        		document.all['xx5'].style.display = "none";
+        		document.all['xx6'].style.display = "visible";
+    		} else {
+        		document.getElementById('xx1').style.display='none';
+        		document.getElementById('xx2').style.display='none';
+        		document.getElementById('xx3').style.display='none';
+        		document.getElementById('xx4').style.display='none';
+        		document.getElementById('xx5').style.display='none';
+        		document.getElementById('xx6').style.display='';
+    		}
+	} else if (myval == '10') {
+    		if (document.all2) {
+        		document.all['xx1'].style.display = "visible";
+        		document.all['xx2'].style.display = "visible";
+        		document.all['xx3'].style.display = "visible";
+        		document.all['xx4'].style.display = "visible";
+        		document.all['xx5'].style.display = "visible";
+        		document.all['xx6'].style.display = "visible";
+    		} else {
+        		document.getElementById('xx1').style.display='';
+        		document.getElementById('xx2').style.display='';
+        		document.getElementById('xx3').style.display='';
+        		document.getElementById('xx4').style.display='';
+        		document.getElementById('xx5').style.display='';
+        		document.getElementById('xx6').style.display='';
+    		}
+	} else if (myval == '11') {
+    		if (document.all2) {
+        		document.all['xx1'].style.display = "visible";
+        		document.all['xx2'].style.display = "visible";
+        		document.all['xx3'].style.display = "visible";
+        		document.all['xx4'].style.display = "visible";
+        		document.all['xx5'].style.display = "visible";
+        		document.all['xx6'].style.display = "visible";
+    		} else {
+        		document.getElementById('xx1').style.display='';
+        		document.getElementById('xx2').style.display='';
+        		document.getElementById('xx3').style.display='';
+        		document.getElementById('xx4').style.display='';
+        		document.getElementById('xx5').style.display='';
+        		document.getElementById('xx6').style.display='';
+    		}
+	} else if (myval == '12') {
+    		if (document.all2) {
+        		document.all['xx1'].style.display = "visible";
+        		document.all['xx2'].style.display = "visible";
+        		document.all['xx3'].style.display = "visible";
+        		document.all['xx4'].style.display = "visible";
+        		document.all['xx5'].style.display = "visible";
+        		document.all['xx6'].style.display = "visible";
+    		} else {
+        		document.getElementById('xx1').style.display='';
+        		document.getElementById('xx2').style.display='';
+        		document.getElementById('xx3').style.display='';
+        		document.getElementById('xx4').style.display='';
+        		document.getElementById('xx5').style.display='';
+        		document.getElementById('xx6').style.display='';
+    		}
+	} else if (myval == '13') {
+    if (document.all2) {
+        document.all['xx1'].style.display = "visible";
+        document.all['xx2'].style.display = "visible";
+        document.all['xx3'].style.display = "visible";
+        document.all['xx4'].style.display = "visible";
+        document.all['xx5'].style.display = "visible";
+        document.all['xx6'].style.display = "visible";
+    } else {
+        document.getElementById('xx1').style.display='';
+        document.getElementById('xx2').style.display='';
+        document.getElementById('xx3').style.display='';
+        document.getElementById('xx4').style.display='';
+        document.getElementById('xx5').style.display='';
+        document.getElementById('xx6').style.display='';
+    }
+} else if (myval == '14') {
+    if (document.all2) {
+        document.all['xx1'].style.display = "visible";
+        document.all['xx2'].style.display = "visible";
+        document.all['xx3'].style.display = "visible";
+        document.all['xx4'].style.display = "visible";
+        document.all['xx5'].style.display = "visible";
+        document.all['xx6'].style.display = "visible";
+    } else {
+        document.getElementById('xx1').style.display='';
+        document.getElementById('xx2').style.display='';
+        document.getElementById('xx3').style.display='';
+        document.getElementById('xx4').style.display='';
+        document.getElementById('xx5').style.display='';
+        document.getElementById('xx6').style.display='';
+    }
+} else if (myval == '15') {
+    if (document.all2) {
+        document.all['xx1'].style.display = "visible";
+        document.all['xx2'].style.display = "visible";
+        document.all['xx3'].style.display = "visible";
+        document.all['xx4'].style.display = "visible";
+        document.all['xx5'].style.display = "visible";
+        document.all['xx6'].style.display = "visible";
+    } else {
+        document.getElementById('xx1').style.display='';
+        document.getElementById('xx2').style.display='';
+        document.getElementById('xx3').style.display='';
+        document.getElementById('xx4').style.display='';
+        document.getElementById('xx5').style.display='';
+        document.getElementById('xx6').style.display='';
+    }
+}  else if (myval == '1') {
+    if (document.all2) {
+        document.all['xx1'].style.display = "none";/*the number for the call center*/
+        document.all['xx2'].style.display = "none";/*press 1 message*/
+        document.all['xx3'].style.display = "visible";/*answer machine message*/
+        document.all['xx4'].style.display = "none";/*dnc message*/
+        document.all['xx5'].style.display = "visible";/*caller id*/
+        document.all['xx6'].style.display = "visible";/*imax connected calls*/
+    } else {
+        document.getElementById('xx1').style.display='none';
+        document.getElementById('xx2').style.display='none';
+        document.getElementById('xx3').style.display='';
+        document.getElementById('xx4').style.display='none';
+        document.getElementById('xx5').style.display='';
+        document.getElementById('xx6').style.display='';
+    }
+} else if (myval == '2') {
+    if (document.all2) {
+        document.all['xx1'].style.display = "visible";
+        document.all['xx2'].style.display = "none";
+        document.all['xx3'].style.display = "none";
+        document.all['xx4'].style.display = "none";
+        document.all['xx5'].style.display = "visible";
+        document.all['xx6'].style.display = "visible";
+    } else {
+        document.getElementById('xx1').style.display='';
+        document.getElementById('xx2').style.display='none';
+        document.getElementById('xx3').style.display='none';
+        document.getElementById('xx4').style.display='none';
+        document.getElementById('xx5').style.display='';
+        document.getElementById('xx6').style.display='';
+    }
+} else if (myval == '3') {
+    if (document.all2) {
+        document.all['xx1'].style.display = "visible";
+        document.all['xx2'].style.display = "visible";
+        document.all['xx3'].style.display = "visible";
+        document.all['xx4'].style.display = "visible";
+        document.all['xx5'].style.display = "visible";
+        document.all['xx6'].style.display = "visible";
+    } else {
+        document.getElementById('xx1').style.display='';
+        document.getElementById('xx2').style.display='';
+        document.getElementById('xx3').style.display='';
+        document.getElementById('xx4').style.display='';
+        document.getElementById('xx5').style.display='';
+        document.getElementById('xx6').style.display='';
+    }
+} else if (myval == '4') {
+    if (document.all2) {
+        document.all['xx1'].style.display = "visible";
+        document.all['xx2'].style.display = "visible";
+        document.all['xx3'].style.display = "none";
+        document.all['xx4'].style.display = "visible";
+        document.all['xx5'].style.display = "visible";
+        document.all['xx6'].style.display = "visible";
+    } else {
+        document.getElementById('xx1').style.display='';
+        document.getElementById('xx2').style.display='';
+        document.getElementById('xx3').style.display='none';
+        document.getElementById('xx4').style.display='';
+        document.getElementById('xx5').style.display='';
+        document.getElementById('xx6').style.display='';
+    }
+} else if (myval == '5') {
+    if (document.all2) {
+        document.all['xx1'].style.display = "visible";
+        document.all['xx2'].style.display = "none";
+        document.all['xx3'].style.display = "visible";
+        document.all['xx4'].style.display = "none";
+        document.all['xx5'].style.display = "visible";
+        document.all['xx6'].style.display = "visible";
+    } else {
+        document.getElementById('xx1').style.display='';
+        document.getElementById('xx2').style.display='none';
+        document.getElementById('xx3').style.display='';
+        document.getElementById('xx4').style.display='none';
+        document.getElementById('xx5').style.display='';
+        document.getElementById('xx6').style.display='';
+    }
+} else if (myval == '6') {
+    if (document.all2) {
+        document.all['xx1'].style.display = "visible";
+        document.all['xx2'].style.display = "none";
+        document.all['xx3'].style.display = "none";
+        document.all['xx4'].style.display = "none";
+        document.all['xx5'].style.display = "visible";
+        document.all['xx6'].style.display = "visible";
+    } else {
+        document.getElementById('xx1').style.display='';
+        document.getElementById('xx2').style.display='none';
+        document.getElementById('xx3').style.display='none';
+        document.getElementById('xx4').style.display='none';
+        document.getElementById('xx5').style.display='';
+        document.getElementById('xx6').style.display='';
+    }
+} else if (myval == '7') {
+/*
+    if (document.all2) {
+        document.all['mode'].style.display = "none";
+    } else {
+        document.getElementById('mode').style.display='none';
+    }
+   */
+    if (document.all2) {
+        document.all['xx1'].style.display = "none";
+        document.all['xx2'].style.display = "visible";
+        document.all['xx3'].style.display = "none";
+        document.all['xx4'].style.display = "none";
+        document.all['xx5'].style.display = "visible";
+        document.all['xx6'].style.display = "visible";
+    } else {
+        document.getElementById('xx1').style.display='none';
+        document.getElementById('xx2').style.display='';
+        document.getElementById('xx3').style.display='none';
+        document.getElementById('xx4').style.display='none';
+        document.getElementById('xx5').style.display='';
+        document.getElementById('xx6').style.display='';
+    }
+} else if (myval == '8') {
+    if (document.all2) {
+        document.all['mode'].style.display = "none";
+    } else {
+        document.getElementById('mode').style.display='none';
+    }
+    if (document.all2) {
+        document.all['fax'].style.display = "visible";
+    } else {
+        document.getElementById('fax').style.display='';
+    }
+
+
+    if (document.all2) {
+        document.all['xx1'].style.display = "none";
+        document.all['xx2'].style.display = "none";
+        document.all['xx3'].style.display = "none";
+        document.all['xx4'].style.display = "none";
+        document.all['xx5'].style.display = "visible";
+        document.all['xx6'].style.display = "none";
+    } else {
+        document.getElementById('xx1').style.display='none';
+        document.getElementById('xx2').style.display='none';
+        document.getElementById('xx3').style.display='none';
+        document.getElementById('xx4').style.display='none';
+        document.getElementById('xx5').style.display='';
+        document.getElementById('xx6').style.display='none';
+    }
+} else if (myval == '9') {
+    if (document.all2) {
+        document.all['mode'].style.display = "none";
+    } else {
+        document.getElementById('mode').style.display='none';
+    }
+    if (document.all2) {
+        document.all['xx1'].style.display = "none";
+        document.all['xx2'].style.display = "visible";
+        document.all['xx3'].style.display = "none";
+        document.all['xx4'].style.display = "none";
+        document.all['xx5'].style.display = "visible";
+        document.all['xx6'].style.display = "visible";
+    } else {
+        document.getElementById('xx1').style.display='none';
+        document.getElementById('xx2').style.display='';
+        document.getElementById('xx3').style.display='none';
+        document.getElementById('xx4').style.display='none';
+        document.getElementById('xx5').style.display='';
+        document.getElementById('xx6').style.display='';
+    }
+} else if (myval == '054') {
+    if (document.all2) {
+        document.all['xx1'].style.display = "visible";
+        document.all['xx2'].style.display = "visible";
+        document.all['xx3'].style.display = "visible";
+        document.all['xx4'].style.display = "visible";
+        document.all['xx5'].style.display = "visible";
+        document.all['xx6'].style.display = "visible";
+    } else {
+        document.getElementById('xx1').style.display='';
+        document.getElementById('xx2').style.display='';
+        document.getElementById('xx3').style.display='';
+        document.getElementById('xx4').style.display='';
+        document.getElementById('xx5').style.display='';
+        document.getElementById('xx6').style.display='';
+    }
+} else if (myval == '-1') {
+    if (document.all2) {
+        document.all['mode'].style.display = "none";
+    } else {
+        document.getElementById('mode').style.display='none';
+    }
+    if (document.all2) {
+        document.all['xx1'].style.display = "none";
+        document.all['xx2'].style.display = "none";
+        document.all['xx3'].style.display = "none";
+        document.all['xx4'].style.display = "none";
+        document.all['xx5'].style.display = "none";
+        document.all['xx6'].style.display = "none";
+    } else {
+        document.getElementById('xx1').style.display='none';
+        document.getElementById('xx2').style.display='none';
+        document.getElementById('xx3').style.display='none';
+        document.getElementById('xx4').style.display='none';
+        document.getElementById('xx5').style.display='none';
+        document.getElementById('xx6').style.display='none';
+    }
+}
+}
+    <!--
+    function f_selectAll (s_select) {
+var e_select = document.forms['customer'].elements[s_select];
+for (var i = 0; i < e_select.options.length; i++)
+e_select.options[i].selected = true;
+}
+
+    function MoveOption(objSourceElement, objTargetElement)
+    {
+        var aryTempSourceOptions = new Array();
+        var x = 0;
+
+        //looping through source element to find selected options
+        for (var i = 0; i < objSourceElement.length; i++) {
+            if (objSourceElement.options[i].selected) {
+                //need to move this option to target element
+                var intTargetLen = objTargetElement.length++;
+                objTargetElement.options[intTargetLen].text = objSourceElement.options[i].text;
+                objTargetElement.options[intTargetLen].value = objSourceElement.options[i].value;
+            }
+            else {
+                //storing options that stay to recreate select element
+                var objTempValues = new Object();
+                objTempValues.text = objSourceElement.options[i].text;
+                objTempValues.value = objSourceElement.options[i].value;
+                aryTempSourceOptions[x] = objTempValues;
+                x++;
+            }
+        }
+
+        //resetting length of source
+        objSourceElement.length = aryTempSourceOptions.length;
+        //looping through temp array to recreate source select element
+        for (var i = 0; i < aryTempSourceOptions.length; i++) {
+            objSourceElement.options[i].text = aryTempSourceOptions[i].text;
+            objSourceElement.options[i].value = aryTempSourceOptions[i].value;
+            objSourceElement.options[i].selected = false;
+        }
+    }
+    //-->
+
+
 /************************************************************************************************************
 *	DHTML modal dialog box
 *
