@@ -1,5 +1,5 @@
 <?php
-$cwd = "/".basename(dirname(__FILE__));
+$cwd = "/".dirname(__FILE__);
 require $cwd."/functions/functions.php";
 $current_directory = dirname(__FILE__);
 $whoami = exec('whoami');
