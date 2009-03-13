@@ -265,7 +265,7 @@ $graph->Stroke();
 
 
 $found = 0;
-$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status!="no-credit" and status!="new" and status!="dialing" and status!="dialed" and status!="answered" '.$timedate;
+$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status!="no-credit" and status!="new" and status!="dialing" and status!="dialed"  '.$timedate;
 $result2=mysql_query($sql, $link) or die (mysql_error());;
 $total=mysql_result($result2,0,'count(*)');
 if ($total<1) {
@@ -301,6 +301,15 @@ $result2=mysql_query($sql, $link) or die (mysql_error());;
 $amd=mysql_result($result2,0,'count(*)');
 if ($amd<1) {
     $amd = 0;
+} else {
+    $found = 1;
+}
+
+$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="answered"'.$timedate;
+$result2=mysql_query($sql, $link) or die (mysql_error());;
+$answered=mysql_result($result2,0,'count(*)');
+if ($answered<1) {
+    $answered = 0;
 } else {
     $found = 1;
 }
@@ -412,7 +421,8 @@ $pressed1/$total*100,
  $congested/$total*100,
  $timeout/$total*100,
  $unknown/$total*100,
- $indnc/$total*100
+ $indnc/$total*100,
+ $answered/$total*100
 );
 
 
@@ -426,8 +436,8 @@ $browserx=array(
  " Answer Machine ($amd ".round((($amd/$total)*100),2)."%%)",
 /* "dialed ($dialed ".round((($dialed/$total)*100),2)."%%)",*/
  " Busy ($busy ".round((($busy/$total)*100),2)."%%)",
- /*" Answered ($answered ".round((($answered/$total)*100),2)."%%)",*/
- " Answered ($hungup ".round((($hungup/$total)*100),2)."%%)",
+ " Answered ($answered ".round((($answered/$total)*100),2)."%%)",
+ " Hungup ($hungup ".round((($hungup/$total)*100),2)."%%)",
  " Congested ($congested ".round((($congested/$total)*100),2)."%%)",
  " No Answer ($timeout ".round((($timeout/$total)*100),2)."%%)",
  " Unknown ($unknown ".round((($unknown/$total)*100),2)."%%)",
