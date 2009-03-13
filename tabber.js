@@ -1,3 +1,5 @@
+
+
 /* Optional: Temporarily hide the "tabber" class so it does not "flash"
    on the page as plain HTML. After tabber runs, the class is changed
    to "tabberlive" and it will appear. */
@@ -41,7 +43,7 @@ var tabberOptions = {
     setCookie(c, i);
   }
 };
-
+var tabberOptions = {'onClick':function(){hideItem('hideShow');}};
 /*==================================================
   Cookie functions
   ==================================================*/

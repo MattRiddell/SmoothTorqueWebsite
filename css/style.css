@@ -1,3 +1,7 @@
+.dragme{position:relative;}
+DIV.mypars {text-align: left}
+
+
 /*core drop shadow rules*/
 .wrap1, .wrap2, .wrap3 {
         display:inline-table;

@@ -79,19 +79,16 @@ $menu = get_menu_html($config_values, $self, $level);
 /* Start printing out the HTML page */
 ?>
 <html>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <TITLE><?echo $config_values['TITLE'];?></TITLE>
 <?
-/* If we are on one of the realtime graph pages we don't want it to be
-   cached */
-if ($self == "/test.php" || $self == "/report.php") {
-?>
+/* If we are on one of the realtime graph pages we don't want it to be cached */
+if ($self == "/test.php" || $self == "/report.php") {?>
 <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
 <META HTTP-EQUIV="Expires" CONTENT="-1">
-<?
-}
-?>
+<?}?>
 <script type="text/javascript" src="/tabber.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 <link rel="stylesheet" href="/example.css" TYPE="text/css" MEDIA="screen">
@@ -101,53 +98,12 @@ if ($self == "/test.php" || $self == "/report.php") {
 <!-- Javascript includes -->
 <script type="text/javascript" src="/ajax/picker.js"></script>
 <script type="text/javascript" src="/header.js"></script>
-<style>
-<!--
-.dragme{position:relative;}
--->
-</style>
-<STYLE type="text/css">
-  DIV.mypars {text-align: left}
-</STYLE>
+</head>
 
-
-<style type="text/css">
-<!--
-
-
--->
-</style>
-
-
-
-
-
-<script type="text/javascript">
-var tabberOptions = {'onClick':function(){hideItem('hideShow');}};
-</script>
-
-
-
-</HEAD>
-
-
-
-
-
-
-<BODY BGCOLOR="<?echo $config_values['COLOUR'];?>" >
-<?
-
-if (isset($menu)){
-   ?>
-<CENTER>    <img src="<?echo $config_values['LOGO'];?>">
-
-
-    <?
-    echo $menu;
-    flush();
-}
-?>
+<body bgcolor="<?echo $config_values['COLOUR'];?>" >
+<?if (isset($menu)){?>
+<center><img src="<?echo $config_values['LOGO'];?>">
+<?echo $menu;flush();}?>
 
 <TABLE WIDTH=100% HEIGHT="100%" BORDER="0" CELLSPACING="0" CELLPADDING="0" class="tborder3">
 <TR VALIGN="TOP" >
