@@ -1,7 +1,8 @@
 <?php
-$cwd = "/".dirname(__FILE__);
-require $cwd."/functions/functions.php";
+//$cwd = dirname(__FILE__);
 $current_directory = dirname(__FILE__);
+require "/".$current_directory."/functions/functions.php";
+
 $whoami = exec('whoami');
 
 /* Get Cookies */

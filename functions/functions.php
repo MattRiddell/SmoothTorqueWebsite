@@ -1,27 +1,15 @@
 <?
-/* The function provided by this include will read in settings stored in
-   the config file and put the results into the $config_values array.
+require $current_directory."/functions/read_config_file.php";
 
-   i.e.:
+require $current_directory."/functions/bitmask.php";
 
-   $config_values['FILL_STYLE'] = "gradient";
+require $current_directory."/functions/authentication.php";
 
-   It also specifies default values for fields that are used so that if
-   there is a problem loading the file the system can continue with a
-   default set of entries.
-*/
-$config_file = $cwd."/config/c3.conf";
-require $cwd."/functions/read_config_file.php";
+require $current_directory."/functions/sanitize.php";
 
-require $cwd."/functions/bitmask.php";
+require $current_directory."/functions/urls.php";
 
-require $cwd."/functions/authentication.php";
-
-require $cwd."/functions/sanitize.php";
-
-require $cwd."/functions/urls.php";
-
-require $cwd."/functions/layout.php";
+require $current_directory."/functions/layout.php";
 
   function sec2hms ($sec, $padHours = false)
   {
