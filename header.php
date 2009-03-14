@@ -59,6 +59,8 @@ if (!($_COOKIE["loggedin"]==sha1("LoggedIn".$user))){
            redirect variable the page they were trying to get to. */
         ?><META HTTP-EQUIV=REFRESH CONTENT="0; URL=/index.php?redirect=<?echo $myPage;?>"><?
         exit(0);
+    } else {
+        exit(0);
     }
 }
 
