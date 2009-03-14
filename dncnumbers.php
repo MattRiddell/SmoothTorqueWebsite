@@ -21,8 +21,11 @@ require "header_numbers.php";
 <center>
 <h3><?echo $config_values['DNC_NUMBERS_TITLE'];?> (<?echo $count;?> numbers)</h3>
 <a href="searchdncnumbers.php"><img src="/images/magnifier.png" border="0"> <?echo $config_values['DNC_SEARCH'];?></a><br />
+<br />
 <a href="/viewdncnumbers.php"><img src="/images/magnifier.png" border="0"> <?echo $config_values['DNC_VIEW'];?></a><br />
+<br />
 <a href="/uploaddnc.php"><img src="/images/page_white_get.png" border="0"> <?echo $config_values['DNC_UPLOAD'];?></a><br />
+<br />
 <a href="/adddncnumbers.php"><img src="/images/page_white_add.png" border="0"> <?echo $config_values['DNC_ADD'];?></a><br />
 <br />
 </center>

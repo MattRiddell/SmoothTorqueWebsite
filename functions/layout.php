@@ -1,7 +1,7 @@
 <?
 if (!function_exists('box_start') ) {
-     function box_start() {
-        echo '<div id="box"><!--- box border --><div id="lb"><div id="rb"><div id="bb"><div id="blc"><div id="brc"><div id="tb"><div id="tlc"><div id="trc"><div id="boxcontent">';
+     function box_start($size = "400") {
+        echo '<div id="box" style="width:'.$size.'px;"><!--- box border --><div id="lb"><div id="rb"><div id="bb"><div id="blc"><div id="brc"><div id="tb"><div id="tlc"><div id="trc"><div id="boxcontent">';
      }
 }
 if (!function_exists('box_end') ) {

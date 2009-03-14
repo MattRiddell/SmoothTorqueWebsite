@@ -5,16 +5,18 @@ require "header.php";
 <br /><br /><br /><br />
 <center>
 <?
-//box_start();
+box_start(330);
+
 ?>
-<table background="/images/sdbox.png" width="300" height="200" class="dragme22">
+<table width="300" height="200" class="dragme22">
 <tr>
 <td>
 </td>
 <td width="260">
+
 <center>
 
-<b>Welcome to <?echo $config_values['TITLE'];?>.</b><br />
+<b><?echo $config_values['TITLE'];?></b><br />
 <br />
 
 
@@ -24,7 +26,7 @@ if ($level==sha1("level5")) {
     echo "Please wait."; ?>
     <br /></td><td></td></tr></table>
     <?
-//box_end();
+box_end();
 ?>
 
     </center>
@@ -51,7 +53,7 @@ if ($level==sha1("level10")){
 </center>
 <?
 
-//box_end();
+box_end();
 
 $level=$_COOKIE[level];
 

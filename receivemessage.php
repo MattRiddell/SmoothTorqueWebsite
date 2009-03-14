@@ -1,8 +1,19 @@
 <?php
+/* When you upload a file, you are uploading to the perl file. Once this
+   is complete it is sent to this file.  The purpose of receivemessage.php
+   is to create a few files:
+        1. /var/tmp/uploads/x-SHA_OF_FILE.sln - for playing on Asterisk
+        2. /var/tmp/uploads/x-SHA_OF_FILE.wav - for asterisk but wav
+        3. ./uploads/x-SHA_OF_FILE.wav - for the web interface
+   Once it has created these files (by using sox to convert), it redirects
+   to addmessage.php which allows you to specify details for it. */
+
 require_once("read_settings.php");
 require_once("receive_helper.php");
+
 require "header.php";
 require "header_numbers.php";
+
 ob_implicit_flush(FALSE);
 
 $_POST = array_map(mysql_real_escape_string,$_POST);
