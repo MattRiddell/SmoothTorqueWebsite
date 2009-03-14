@@ -47,6 +47,7 @@ include "admin/db_config.php";
 mysql_select_db("SineDialer", $link);
 
 /* Check if the user is logged in */
+$loggedin=true;
 if (!($_COOKIE["loggedin"]==sha1("LoggedIn".$user))){
     /* The user is not logged in */
     $loggedin=false;
@@ -60,23 +61,23 @@ if (!($_COOKIE["loggedin"]==sha1("LoggedIn".$user))){
         ?><META HTTP-EQUIV=REFRESH CONTENT="0; URL=/index.php?redirect=<?echo $myPage;?>"><?
         exit(0);
     } else {
-        exit(0);
+//        exit(0);
+        $loggedin=false;
     }
 }
 
-/* If we have made it this far then the user is logged in - all future
-   code assumes this. */
-$loggedin=true;
 
-/* Set all the cookies again to extend login time - they're not inactive */
-setcookie("loggedin",sha1("LoggedIn".$user),time()+60000);
-setcookie("user",$user,time()+60000);
-setcookie("level",$level,time()+60000);
-setcookie("language",$language,time()+60000);
+if ($loggedin) {
+    /* Set all the cookies again to extend login time - they're not inactive */
+    setcookie("loggedin",sha1("LoggedIn".$user),time()+60000);
+    setcookie("user",$user,time()+60000);
+    setcookie("level",$level,time()+60000);
+    setcookie("language",$language,time()+60000);
 
-/* Get the menu structure based on the config values, the current
-   page, and the security level of the person viewing the page */
-$menu = get_menu_html($config_values, $self, $level);
+    /* Get the menu structure based on the config values, the current
+       page, and the security level of the person viewing the page */
+    $menu = get_menu_html($config_values, $self, $level);
+}
 
 /* Start printing out the HTML page */
 ?>
@@ -104,7 +105,7 @@ if ($self == "/test.php" || $self == "/report.php") {?>
 
 <body bgcolor="<?echo $config_values['COLOUR'];?>" >
 
-<?if (isset($menu)){?>
+<?if (isset($menu) && $loggedin == true){?>
 <center><img src="<?echo $config_values['LOGO'];?>">
 <?echo $menu;flush();}?>
 
@@ -112,6 +113,7 @@ if ($self == "/test.php" || $self == "/report.php") {?>
 <tr valign="TOP" >
 <td bgcolor="#ffffff">
 <?
+if ($loggedin) {
 if (!($config_values['USE_BILLING'] == "YES")) {
     /* The billing system is not enabled so don't bother printing links
        related to credit etc */
@@ -137,5 +139,6 @@ if (!($config_values['USE_BILLING'] == "YES")) {
     } else {
         echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img width=\"16\" height=\"16\"  src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(strftime('%A %d %B %Y %H:%M:%S'))." Credit: $credit <a href=\"/viewcdr.php\"><img width=\"16\" height=\"16\"  src=\"/images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"/billinglog_account.php\"><img width=\"16\" height=\"16\"  src=\"/images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
     }
+}
 }
 ?>

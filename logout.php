@@ -1,7 +1,6 @@
 <?
-    $user = $_COOKIE[user];
     setcookie("loggedin","--",time()+6000);
-    setcookie("user",$_POST[user],time()+6000);
+    setcookie("user","--",time()+6000);
 
     /*================= Log Access ======================================*/
     include "admin/db_config.php";
@@ -13,4 +12,3 @@
     header("Location: /index.php");
     exit;
 ?>
-
