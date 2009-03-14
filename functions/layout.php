@@ -9,6 +9,16 @@ if (!function_exists('box_end') ) {
         echo '</div><!--- end of box border --></div></div></div></div></div></div></div></div></div>';
      }
 }
+if (!function_exists('shadow_start') ) {
+     function shadow_start() {
+        echo '<table align="center"><tr><td><div class="example" id="v6"><div id="main"><div class="wrap1"><div class="wrap2"><div class="wrap3" align="center">';
+     }
+}
+if (!function_exists('shadow_end') ) {
+     function shadow_end() {
+        echo '</div></div></div></div></div></td></tr></table>';
+     }
+}
 if (!function_exists('box_button') ) {
      function box_button($name,$image,$url,$description) {
 ?><div style="width:50%;height:80px;display:inline-table">

@@ -22,6 +22,7 @@ $result=mysql_query($sql, $link);
 $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $campaigngroupid=mysql_result($result,0,'campaigngroupid');
+shadow_start();
 ?>
 
 <table class="" align="center" border="0" cellpadding="2" cellspacing="0">
@@ -187,5 +188,6 @@ echo "today: $today <br />";
 </TABLE>
 
 <?
+shadow_end();
 require "footer.php";}
 ?>
