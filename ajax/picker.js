@@ -540,13 +540,13 @@ function adjustiFrame(pickerDiv, iFrameDiv)
     currentCtl.src=imagePath + "timepicker.gif"
   }
 
-  document.onkeypress = function hideTimePicker1 () { 
-    if (event.keyCode==27){
-      if (!bShow){
-        closeTimePicker();
-      }
-    }
-  }
+//  document.onkeypress = function hideTimePicker1 () { 
+//    if (event.keyCode==27){
+//      if (!bShow){
+//        closeTimePicker();
+//      }
+//    }
+//  }
 
   function isDigit(c) {
     

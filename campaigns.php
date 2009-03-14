@@ -27,16 +27,18 @@ $result=mysql_query($sql, $link);
 
 ?><?
     if ($_COOKIE[level] == sha1("level100")) {
+    box_start();?><table align="center" border="0" width="100%" cellpadding="0" cellspacing="10"><TR><td><?
         if ($_GET[type]=="all") {
-            echo "<A HREF=\"campaigns.php?type=admin\">Admin Campaigns Only</A>&nbsp;/&nbsp;";
+            echo "<A HREF=\"campaigns.php?type=admin\">Admin Campaigns</A>&nbsp;/&nbsp;";
             echo "<A HREF=\"selectcustomer.php\">Select Customer</A>&nbsp;/&nbsp;";
             echo "<b>All Campaigns</b>";
         } else {
-            echo "<b>Admin Campaigns Only</b>&nbsp;/&nbsp;";
+            echo "<b>Admin Campaigns</b>&nbsp;/&nbsp;";
             echo "<A HREF=\"selectcustomer.php\">Select Customer</A>&nbsp;/&nbsp;";
             echo "<A HREF=\"campaigns.php?type=all\">All Campaigns</A>";
         }
     }
+    ?></td></tr></table><?box_end();
     ?><?
 if (isset($_GET[campaignid])){
 $_GET = array_map(mysql_real_escape_string,$_GET);
