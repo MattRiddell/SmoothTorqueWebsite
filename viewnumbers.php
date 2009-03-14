@@ -14,13 +14,9 @@ if (!isset($_POST[campaignid])&&!isset($_GET[campaignid])){
 
 
     <br /><br /><br /><br />
+<?box_start();?>
 <center>
-<table background="/images/sdbox.png" width="300" height="200" class="dragme22">
-<tr>
-<td>
-</td>
-<td width="260">
-<b>View Numbers</b><br /><br />
+<h3>View Numbers</h3>
 From here you can chose a campaign that you would like to see the numbers for.<br /><br />
 <FORM ACTION="viewnumbers.php" METHOD="POST">
     <table class="tborderdd" align="center" border="0" cellpadding="0" cellspacing="2"><TR>
@@ -49,12 +45,7 @@ From here you can chose a campaign that you would like to see the numbers for.<b
     </TD>
     </TR></table>
     </FORM><br />
-</td>
-<td>
-</td></tr>
-</table>
-</center>
-
+<?box_end();?>
 
 
 
@@ -68,6 +59,7 @@ if (isset($_GET[campaignid])){
 }
 ?>
 <br />
+
 <table class="tborder" align="center" border="0" cellpadding="0" cellspacing="2">
 <TR>
 <TD CLASS="thead">
@@ -164,6 +156,7 @@ echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&type='.$_GET[type].'&s
 echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&type='.$_GET[type].'&start='.(($max-$config_values['PER_PAGE'])+$max%$config_values['PER_PAGE']).'"><img src="/images/resultset_last.png" border="0"></a> ';
 echo '<br />';
 echo '<br />';
+
 while ($row = mysql_fetch_assoc($result)) {
 if ($toggle){
 $toggle=false;
