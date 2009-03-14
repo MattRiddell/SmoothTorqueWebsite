@@ -11,15 +11,18 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
 
 ?>
 <br /><br /><br /><br />
-<center>
+<?
+/*<center>
 <table background="/images/sdbox.png" width="300" height="200" class="dragme22">
 <tr>
 <td>
 </td>
 <td width="260">
-<b><?echo $config_values['NUMBERS_TITLE'];?></b>
-<br />
-<br />
+*/
+box_start();
+?>
+<center>
+<h3><?echo $config_values['NUMBERS_TITLE'];?></h3>
 <a href="/serverlist.php"><img src="/images/report.png" border="0">&nbsp; <?echo $config_values['NUMBERS_SYSTEM'];?></a><br />
 <a href="/viewnumbers.php"><img src="/images/page_white_stack.png" border="0">&nbsp; <?echo $config_values['NUMBERS_VIEW'];?></a><br />
 <a href="/searchnumbers.php"><img src="/images/magnifier.png" border="0">&nbsp; <?echo $config_values['NUMBERS_SEARCH'];?></a><br />
@@ -34,12 +37,17 @@ if ($config_values['USE_GENERATE'] == "YES") {
 }
 ?>
 <br />
+</center>
+
+<?
+/*
 </td>
 <td>
 </td></tr>
 </table>
 </center>
-<?
+*/
+box_end();
 require "footer.php";
 
 
