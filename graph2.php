@@ -173,7 +173,7 @@ if ($badtiff<1) {
 //$targets=array("list.php?campaignid=$_GET[id]&type=pressed1", "list.php?campaignid=$_GET[id]&type=dialed", "list.php?campaignid=$_GET[id]&type=busy", "list.php?campaignid=$_GET[id]&type=answered", "list.php?campaignid=$_GET[id]&type=hungup", "list.php?campaignid=$_GET[id]&type=congested", "list.php?campaignid=$_GET[id]&type=dialed", "list.php?campaignid=$_GET[id]&type=unknown",  "list.php?campaignid=$_GET[id]&type=indnc");
 
 
-$graph = new PieGraph(730, 450,  "car");
+$graph = new PieGraph(730, 450,  "auto");
 $graph -> SetScale("textlin");
 if ($found == 0) {
     $unknown = 1;
@@ -227,12 +227,11 @@ $browserx=array(
 );
 
 $p1 = new PiePlot3D($data);
-if ($found == 1) {
+/*if ($found == 1) {
 $p1->SetSliceColors(array(
  '#00ff00',
  '#0000ff',
  "#000000",
- /*"#00ffff",*/
  "#ffff00",
  "#ff0000",
  "#888888",
@@ -242,6 +241,7 @@ $p1->SetSliceColors(array(
 } else {
     $p1->SetSliceColors(array('#EEEEEE'));
 }
+*/
 $p1->SetLegends($browserx);
 $p1->SetAngle(70);
 $p1->SetCenter(0.37,0.5);
@@ -396,7 +396,7 @@ if ($pressed1<1) {
 //$targets=array("list.php?campaignid=$_GET[id]&type=pressed1", "list.php?campaignid=$_GET[id]&type=dialed", "list.php?campaignid=$_GET[id]&type=busy", "list.php?campaignid=$_GET[id]&type=answered", "list.php?campaignid=$_GET[id]&type=hungup", "list.php?campaignid=$_GET[id]&type=congested", "list.php?campaignid=$_GET[id]&type=dialed", "list.php?campaignid=$_GET[id]&type=unknown",  "list.php?campaignid=$_GET[id]&type=indnc");
 
 
-$graph = new PieGraph(730, 450,  "car");
+$graph = new PieGraph(730, 450,  "auto");
 $graph -> SetScale("textlin");
 if ($found == 0) {
     $unknown = 1;
@@ -426,6 +426,19 @@ $pressed1/$total*100,
 );
 
 
+$data=array(
+$pressed1,
+ $amd,
+/* $dialed/$total*100,*/
+ $busy,
+/* $answered/$total*100,*/
+ $answered,
+ $hungup,
+ $congested,
+ $timeout,
+ $unknown,
+ $indnc
+);
 
 
 
@@ -444,12 +457,11 @@ $browserx=array(
  " In DNC List ($indnc ".round((($indnc/$total)*100),2)."%%)");
 
 $p1 = new PiePlot3D($data);
-if ($found == 1) {
+/*if ($found == 1) {
 $p1->SetSliceColors(array(
  '#00ff00',
  '#0000ff',
  "#000000",
- /*"#00ffff",*/
  "#ffff00",
  "#ff0000",
  "#888888",
@@ -458,7 +470,7 @@ $p1->SetSliceColors(array(
  "#ffffff")     );
 } else {
     $p1->SetSliceColors(array('#EEEEEE'));
-}
+}*/
 $p1->SetLegends($browserx);
 $p1->SetAngle(70);
 $p1->SetCenter(0.37,0.5);
@@ -470,7 +482,7 @@ $graph -> Add($p1);            //    <------- this line
 //$graph->setShadow();
 $graph->title->set("Dialed: ".($total2-$dialing-$new)." Remaining: $new Total: ".($total2)." Dialing: $dialing");
 $graph->title->SetFont( FF_FONT1, FS_BOLD);
-$graph->SetColor("#eeeeee@0.5");
+//$graph->SetColor("#eeeeee@0.5");
 $graph->img->SetAntiAliasing();
 $graph->SetFrame(false,'darkblue',2);
 //$graph->SetBackgroundGradient('#0000ff@0.7','white@0.1',GRAD_HOR,BGRAD_PLOT);
