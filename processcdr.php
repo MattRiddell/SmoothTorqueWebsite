@@ -27,19 +27,22 @@ while ($accounts = mysql_fetch_assoc($result_accounts)) {
 $accountcode_in = $accounts['accountcode'];
 $cdrlink = mysql_connect($db_host, $db_user, $db_pass) OR die(mysql_error());
 mysql_select_db($config_values['CDR_DB'], $cdrlink);
-$sql = "SELECT count(*) from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode_in' and userfield2!='1'";
+$sql = "SELECT count(*) from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation' 
+	and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode_in' and userfield2!='1'";
 $result = mysql_query($sql,$cdrlink);
 $count = mysql_result($result,0,0);
-//echo $count." Total Records";
+echo $count." Total Records for $accountcode_in\n";
 
 //$sql = "SELECT * from ".$config_values['CDR_TABLE']." order by calldate DESC LIMIT $start,100";
-$sql = "SELECT * from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode_in' and userfield2!='1' order by calldate DESC limit 5000";
+$sql = "SELECT        * from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation' 
+        and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode_in' and userfield2!='1' 
+        order by calldate DESC limit 5000";
 
 $result = mysql_query($sql,$cdrlink);
 $i = 0;
 $titletd = "<td bgcolor=\"#000000\"><font color=\"#CCCCFF\"><b>&nbsp;&nbsp;";
 $titletdc = "&nbsp;&nbsp;</td>";
-
+echo mysql_num_rows($result)." Records this run for $accountcode_in\n";
 while ($row = mysql_fetch_assoc($result)) {
     $calldate[$i] = $row[calldate];
     $dcontext[$i] = $row[dcontext];
@@ -180,14 +183,21 @@ while ($row = mysql_fetch_assoc($result)) {
             $campaignid = substr($userfield[$i], $pos + 1);
             $sql = "SELECT cost FROM SineDialer.campaign WHERE id = ".$campaignid;
             $result_campaign_cost = mysql_query($sql,$link);
+	    if (mysql_num_rows($result_campaign_cost) > 0) {
             $campaign_cost = mysql_result($result_campaign_cost,0,0);
+	    } else {
+	         $campaign_cost = 0;
+	    }
             $sql = "UPDATE SineDialer.campaign set cost = '".($campaign_cost+$cost[$i])."' WHERE id = ".$campaignid;
             mysql_query($sql,$link);
         }
         $sql = "update cdr set userfield2 = '1' where calldate = '$calldate[$i]' and duration = '$duration[$i]' and accountcode = '$accountcode[$i]' and userfield = '$userfield[$i]'";
-        mysql_select_db("SineDialer", $link);
+	echo $i."/5000\r";
+//	echo $sql."\n";
+//        mysql_select_db("SineDialer", $link);
 
-        $result_update = mysql_query($sql,$link);
+        $result_update = mysql_query($sql,$cdrlink);
+//	echo "result: ".$result_update."\n";
     }
     $i++;
 }
