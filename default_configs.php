@@ -37,7 +37,8 @@ MAIN_PAGE_PASSWORD=Password
 MAIN_PAGE_LOGIN=Accesso
 CURRENCY_SYMBOL=€
 PER_MINUTE=Al minuto
-USE_BILLING=YES
+USE_BILLING=NO
+FRONT_PAGE_BILLING=YES
 SPARE1=Spare 1 (inutilizzati)
 SPARE2=Spare 2 (inutilizzati)
 SPARE3=Spare 3 (inutilizzati)
@@ -107,7 +108,8 @@ MAIN_PAGE_PASSWORD=Contraseña
 MAIN_PAGE_LOGIN=Inicio de sesión
 CURRENCY_SYMBOL=€
 PER_MINUTE=Por minuto
-USE_BILLING=YES
+USE_BILLING=NO
+FRONT_PAGE_BILLING=YES
 SPARE1=Spare 1 (no utilizados)
 SPARE2=Spare 2 (no utilizados)
 SPARE3=Spare 3 (no utilizados)
@@ -176,7 +178,8 @@ MAIN_PAGE_PASSWORD=Password
 MAIN_PAGE_LOGIN=Login
 CURRENCY_SYMBOL=$
 PER_MINUTE=Per Minute
-USE_BILLING=YES
+USE_BILLING=NO
+FRONT_PAGE_BILLING=YES
 SPARE1=Spare 1 (unused)
 SPARE2=Spare 2 (unused)
 SPARE3=Spare 3 (unused)
@@ -537,5 +540,12 @@ if ($config_values['SMTP_HOST'] == "") {
 if ($config_values['SMTP_FROM'] == "") {
     $config_values['SMTP_FROM'] = "user@mydomain.com";
 }
+if ($config_values['FRONT_PAGE_BILLING'] == "") {
+    $config_values['FRONT_PAGE_BILLING'] = "YES";
+}
+if ($config_values['USE_BILLING'] == "") {
+    $config_values['USE_BILLING'] = "NO";
+}
+
 
 ?>

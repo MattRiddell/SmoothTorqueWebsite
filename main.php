@@ -56,7 +56,7 @@ if ($level==sha1("level10")){
 $level=$_COOKIE[level];
 
 /* If we are an administrator and billing is enabled */
-if ($level==sha1("level100") && $config_values['USE_BILLING'] == "YES") {
+if ($level==sha1("level100") && $config_values['USE_BILLING'] == "YES" && $config_values['FRONT_PAGE_BILLING'] == "YES") {
     if (!isset($_GET[size])) {
         $size=144;
     } else {

@@ -54,6 +54,7 @@ if (isset($_POST[colour])){
     fwrite($add,"CURRENCY_SYMBOL=$_POST[CURRENCY_SYMBOL]\n");
     fwrite($add,"PER_MINUTE=$_POST[PER_MINUTE]\n");
     fwrite($add,"USE_BILLING=$_POST[USE_BILLING]\n");
+    fwrite($add,"FRONT_PAGE_BILLING=$_POST[FRONT_PAGE_BILLING]\n");
     fwrite($add,"SPARE1=$_POST[SPARE1]\n");
     fwrite($add,"SPARE2=$_POST[SPARE2]\n");
     fwrite($add,"SPARE3=$_POST[SPARE3]\n");
@@ -949,6 +950,16 @@ Price per lead wording
 
 <tr  class="tborder2">
 <td>
+Display billing on front page for admin
+</td>
+<td>
+<input type="radio" name="FRONT_PAGE_BILLING" value="YES" <?if ( $config_values['FRONT_PAGE_BILLING'] == "YES") {echo "checked";}?>> Yes
+<input type="radio" name="FRONT_PAGE_BILLING" value="NO" <?if ( $config_values['FRONT_PAGE_BILLING'] != "YES") {echo "checked";}?>> No
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
 Use the SmoothTorque Billing System
 </td>
 <td>
@@ -956,6 +967,7 @@ Use the SmoothTorque Billing System
 <input type="radio" name="USE_BILLING" value="NO" <?if ( $config_values['USE_BILLING'] != "YES") {echo "checked";}?>> No
 </td>
 </tr>
+
 
 
 <tr  class="tborder2">
