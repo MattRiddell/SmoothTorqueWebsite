@@ -101,35 +101,39 @@ if ($self == "/test.php" || $self == "/report.php") {?>
 </head>
 
 <body bgcolor="<?echo $config_values['COLOUR'];?>" >
+
 <?if (isset($menu)){?>
 <center><img src="<?echo $config_values['LOGO'];?>">
 <?echo $menu;flush();}?>
 
-<TABLE WIDTH=100% HEIGHT="100%" BORDER="0" CELLSPACING="0" CELLPADDING="0" class="tborder3">
-<TR VALIGN="TOP" >
-<TD BGCOLOR="#ffffff">
+<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" class="tborder3">
+<tr valign="TOP" >
+<td bgcolor="#ffffff">
 <?
-$sql = "SELECT credit, creditlimit from billing where accountcode = 'stl-$_COOKIE[user]'";
-$result = mysql_query($sql,$link);
-if (mysql_num_rows($result)==0){
-    $credit = $config_values['CURRENCY_SYMBOL']." 0.00";
-    $creditlimit = 0;
-    $postpay = 0;
+if (!($config_values['USE_BILLING'] == "YES")) {
+    /* The billing system is not enabled so don't bother printing links
+       related to credit etc */
+    echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img width=\"16\" height=\"16\"  src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(strftime('%A %d %B %Y %H:%M:%S'))."</font><br /></center>";
 } else {
-    $credit = $config_values['CURRENCY_SYMBOL']." ".number_format(mysql_result($result,0,'credit'),2);
-    $creditlimit = $config_values['CURRENCY_SYMBOL']." ".number_format(mysql_result($result,0,'creditlimit'),2);
-    $postpay = 1;
-}
-if ($loggedin){
-//    echo "Language: $language";
-    if ( $config_values['USE_BILLING'] == "YES") {
-        if ($postpay == 1) {
-            echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img width=\"16\" height=\"16\"  src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(strftime('%A %d %B %Y %H:%M:%S'))." Credit: $credit Credit Limit: $creditlimit <a href=\"/viewcdr.php\"><img width=\"16\" height=\"16\" src=\"/images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"/billinglog_account.php\"><img width=\"16\" height=\"16\" src=\"/images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
-        } else {
-            echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img width=\"16\" height=\"16\"  src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(strftime('%A %d %B %Y %H:%M:%S'))." Credit: $credit <a href=\"/viewcdr.php\"><img width=\"16\" height=\"16\"  src=\"/images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"/billinglog_account.php\"><img width=\"16\" height=\"16\"  src=\"/images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
-        }
+    /* Find out how much credit and what the credit limit is for this
+       customer */
+    $sql = "SELECT credit, creditlimit from billing where accountcode = 'stl-$_COOKIE[user]'";
+    $result = mysql_query($sql,$link);
+    if (mysql_num_rows($result)==0){
+        /* They have no billing account - set to defaults */
+        $credit = $config_values['CURRENCY_SYMBOL']." 0.00";
+        $creditlimit = 0;
+        $postpay = 0;
     } else {
-        echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img width=\"16\" height=\"16\"  src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(strftime('%A %d %B %Y %H:%M:%S'))."</font><br /></center>";
+        /* They have a billing account - set up the variables */
+        $credit = $config_values['CURRENCY_SYMBOL']." ".number_format(mysql_result($result,0,'credit'),2);
+        $creditlimit = $config_values['CURRENCY_SYMBOL']." ".number_format(mysql_result($result,0,'creditlimit'),2);
+        $postpay = 1;
+    }
+    if ($postpay == 1) {
+        echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img width=\"16\" height=\"16\"  src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(strftime('%A %d %B %Y %H:%M:%S'))." Credit: $credit Credit Limit: $creditlimit <a href=\"/viewcdr.php\"><img width=\"16\" height=\"16\" src=\"/images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"/billinglog_account.php\"><img width=\"16\" height=\"16\" src=\"/images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
+    } else {
+        echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img width=\"16\" height=\"16\"  src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(strftime('%A %d %B %Y %H:%M:%S'))." Credit: $credit <a href=\"/viewcdr.php\"><img width=\"16\" height=\"16\"  src=\"/images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"/billinglog_account.php\"><img width=\"16\" height=\"16\"  src=\"/images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
     }
 }
 ?>
