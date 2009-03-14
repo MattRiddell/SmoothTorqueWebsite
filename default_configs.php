@@ -541,7 +541,7 @@ if ($config_values['SMTP_FROM'] == "") {
     $config_values['SMTP_FROM'] = "user@mydomain.com";
 }
 if ($config_values['FRONT_PAGE_BILLING'] == "") {
-    $config_values['FRONT_PAGE_BILLING'] = "YES";
+    $config_values['FRONT_PAGE_BILLING'] = "NO";
 }
 if ($config_values['USE_BILLING'] == "") {
     $config_values['USE_BILLING'] = "NO";
