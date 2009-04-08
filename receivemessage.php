@@ -35,12 +35,35 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
 	  <?foreach($files as $file) {
         //print_r($file);
 
+	/* Because the new version of Sox (>14.0) requires different options 
+	 * we need to find out which version is being run 
+	 */
+	
+	exec($config_values['SOX']." --version",$retval);
+	$split = explode(":",$retval[0]);
+	$sox_version = substr(trim($split[1]), 5);
+	/* $sox_major is now 14, $sox_minor is 1 and $sox_point is 0 */
+	list($sox_major, $sox_minor, $sox_point) = explode(".",$sox_version);	
+
+	if ($sox_major <= 14) {
+		if ($sox_minor < 1) {
+			/* Use -w option */
+			$sox_options = "-w -s -c 1";
+		} else {
+			/* Use -2 option */
+			$sox_options = "-2 -s -c 1";
+		}
+	} else {
+		/* Use -2 option */
+		$sox_options = "-2 -s -c 1";
+	}
+
         //TODO: This file path needs to be sanitised to make sure that
         //the input doesn't get a command execution injection
         $hash=sha1(date('l dS \of F Y h:i:s A'));
-        exec($config_values['SOX']." ".str_replace(" ","\ ",$file[path]).' -t raw -r 8000 -w -s -c 1 /var/tmp/uploads/x-'.$hash.'.sln');
-        exec($config_values['SOX']." ".str_replace(" ","\ ",$file[path]).' -r 8000 -s -w -c 1 /var/tmp/uploads/x-'.$hash.'.wav');
-        exec($config_values['SOX']." ".str_replace(" ","\ ",$file[path]).' -r 8000 -s -w -c 1 ./uploads/x-'.$hash.'.wav');
+        exec($config_values['SOX']." ".str_replace(" ","\ ",$file[path]).' -t raw -r 8000 '.$sox_options.' /var/tmp/uploads/x-'.$hash.'.sln');
+        exec($config_values['SOX']." ".str_replace(" ","\ ",$file[path]).' -r 8000 '.$sox_options.' /var/tmp/uploads/x-'.$hash.'.wav');
+        exec($config_values['SOX']." ".str_replace(" ","\ ",$file[path]).' -r 8000 '.$sox_options.' ./uploads/x-'.$hash.'.wav');
         ?>
 <img src="/images/tick.png" onLoad="window.location = '/addmessage.php?filename=<?echo "x-".$hash.".sln";?>';">
         <?
