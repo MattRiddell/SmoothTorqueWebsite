@@ -427,6 +427,7 @@ if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","sip_buddies")){
   `hasaccount` int(11) default NULL,
   `dateadded` datetime default NULL,
   `transfer` varchar(250) default NULL,
+  `lastms` varchar(250) default NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `name_2` (`name`)
