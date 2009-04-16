@@ -1012,6 +1012,22 @@ if (!in_array('paymentmode', $field_array))
     $result=mysql_query($sql, $link);
 }
 
+/*****************************************************************
+*           ALTER SIP_BUDDIES TABLE TO ADD lastms FIELD             *
+******************************************************************/
+unset($field_array);
+$fields = mysql_list_fields('SineDialer', 'sip_buddies', $link);
+$columns = mysql_num_fields($fields);
+for ($i = 0; $i < $columns; $i++) {
+    $field_array[] = mysql_field_name($fields, $i);
+}
+
+if (!in_array('lastms', $field_array))
+{
+    $result = mysql_query('ALTER TABLE sip_buddies ADD lastms VARCHAR(255)');
+    $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added sip_buddies lastms field')";
+    $result=mysql_query($sql, $link);
+}
 
 
 /*
