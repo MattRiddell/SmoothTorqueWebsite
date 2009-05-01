@@ -14,7 +14,7 @@ foreach ($lines as $line) {
 	$val = pow(10,$variables);
 	for ($i = 0;$i < $val; $i++) {
 		$result = sprintf("%06d",$i);
-		echo $prefix.$result."\n";
+		echo "INSERT INTO SineDialer.number (campaignid, phonenumber, status) values (5, '".$prefix.$result."','new');\n";
 	}
 //	echo "\n";
 }

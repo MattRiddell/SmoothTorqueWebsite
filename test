@@ -1,0 +1,2 @@
+
+INSERT INTO SineDialer.number (campaignid, phonenumber, status) values (5, '032000457','new');

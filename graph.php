@@ -291,6 +291,12 @@ $resultx=mysql_query($sql, $link) or die (mysql_error());;
 $rowx = mysql_fetch_assoc($resultx);
 
 $progress=$rowx[progress];*/
+
+$sql = 'SELECT status from queue where campaignid='.$id;
+$resultx=mysql_query($sql, $link) or die (mysql_error());;
+$rowx = mysql_fetch_assoc($resultx);
+$status=$rowx[status];
+
 if ($dialed>0){
     $progress=$dialed;
 } else {
@@ -298,7 +304,7 @@ if ($dialed>0){
 }
 
 
-if ($progress<0){
+if ($progress<0||$status < 0){
     $txt=new Text( "\n\n     This Campaign is Now Finished    \n\n");
     $txt->Pos( 500,122);
     $txt->SetAlign("center","","");

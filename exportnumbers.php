@@ -103,9 +103,9 @@ if ($type == "unknown") {
 } else if ($type == "answered") {
     $sql = 'SELECT *, UNIX_TIMESTAMP(datetime) as newdate FROM number WHERE campaignid='.$_POST[campaignid].' and (status="amd" or status="hungup" or status="pressed1")';
 } else if ($type == "all") {
-    $sql = 'SELECT *, UNIX_TIMESTAMP(datetime) as newdate FROM number WHERE campaignid='.$_POST[campaignid];
+    $sql = 'SELECT *, UNIX_TIMESTAMP(datetime) as newdate FROM number WHERE campaignid='.$_POST[campaignid].' order by phonenumber';
 } else {
-    $sql = 'SELECT *, UNIX_TIMESTAMP(datetime) as newdate FROM number WHERE campaignid='.$_POST[campaignid].' and status="'.$type.'"';
+    $sql = 'SELECT *, UNIX_TIMESTAMP(datetime) as newdate FROM number WHERE campaignid='.$_POST[campaignid].' and status="'.$type.'" order by phonenumber';
 } 
 //echo $sql;
 //exit(0);
