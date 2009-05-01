@@ -47,6 +47,7 @@ print_count($_GET[id], "dialed", "dialed numbers");
 print_count($_GET[id], "dialing", "dialing numbers");
 print_count($_GET[id], "amd", "answer machine numbers");
 print_count($_GET[id], "timeout", "no answer numbers");
+print_count($_GET[id], "answered", "answerd numbers");
 ?>
 
 <a href="recycle.php?id=<?echo $_GET[id];?>&type=unknown&type_input=<?echo $_GET[type_input];?>">
