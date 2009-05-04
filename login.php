@@ -194,6 +194,72 @@ $sql = "CREATE TABLE `config` (
 }
 
 /*======================================================================
+                            rates Table
+  ======================================================================*/
+if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","rates")){
+  include "admin/db_config.php";
+$sql = "CREATE TABLE `rates` (
+  `campaignid` int(11) NOT NULL,
+  `idx` int(11) NOT NULL,
+  `value` double NOT NULL,
+  KEY `campaignid` (`campaignid`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+";
+
+    $result = mysql_query($sql,$link);
+  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created rates Table')";
+  $result=mysql_query($sql, $link);
+}
+/*======================================================================
+                            profracs Table
+  ======================================================================*/
+if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","profracs")){
+  include "admin/db_config.php";
+$sql = "
+CREATE TABLE `profracs` (
+  `campaignid` int(11) NOT NULL,
+  `idx` int(11) NOT NULL,
+  `value` double NOT NULL,
+  KEY `campaignid` (`campaignid`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+ ";
+
+    $result = mysql_query($sql,$link);
+  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created profracs Table')";
+  $result=mysql_query($sql, $link);
+}
+/*======================================================================
+                            campaign_stats Table
+  ======================================================================*/
+if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","campaign_stats")){
+  include "admin/db_config.php";
+$sql = "
+CREATE TABLE `campaign_stats` (
+  `campaignid` int(11) NOT NULL,
+  `min_agents` int(11) default NULL,
+  `busy_agents` int(11) default NULL,
+  `total_agents` int(11) default NULL,
+  `dialed` int(11) default NULL,
+  `speed_multiplyer` double default NULL,
+  `max_running_speed` double default NULL,
+  `adjuster` int(11) default NULL,
+  `time_spent` bigint(20) default NULL,
+  `weighted` double default NULL,
+  `cummulative_area_diff` double default NULL,
+  `ms_sleep` double default NULL,
+  `max_delay_calc` double default NULL,
+  `overs_1` int(11) default NULL,
+  `overs_2` double default NULL,
+  PRIMARY KEY  (`campaignid`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+ ";
+
+    $result = mysql_query($sql,$link);
+  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created campaign_stats Table')";
+  $result=mysql_query($sql, $link);
+}
+/*======================================================================
                             customer Table
   ======================================================================*/
 if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","customer")){
