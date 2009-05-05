@@ -35,7 +35,9 @@ var imgBase="/graph.php?id=<?echo $id;?>&debug=<?echo $debug;?>&x="
 var c = 0;
 function count()
 {
+ alert("loading");
  webcamimage.src=imgBase + (++c);
+ alert("loaded");
 }
 function init()
 {
