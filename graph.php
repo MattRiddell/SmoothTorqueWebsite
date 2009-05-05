@@ -116,9 +116,9 @@ if (mysql_num_rows($result) > 0) {
 
 if (!$mysql_campaign_stats) {
     $lines=file("/tmp/Sm".$id.".console");
+    $lines2=file("/tmp/Sm".$id.".console2");
+    $lines3=file("/tmp/Sm".$id.".console3");
 }
-$lines2=file("/tmp/Sm".$id.".console2");
-$lines3=file("/tmp/Sm".$id.".console3");
 
 /* Initialise the arrays */
 for ($i=1;$i<721;$i++){
