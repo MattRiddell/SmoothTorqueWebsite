@@ -216,7 +216,7 @@ if ($total_count_x == 0) {
 
 include ( "./jpgraph.php");
 include ("./jpgraph_line.php");
-include ("./jpgraph_bar.php");
+//include ("./jpgraph_bar.php");
 include "./jpgraph_regstat.php";
 $chart [ 'chart_data' ][ 2 ] = $array2;
 $chart [ 'chart_data' ][ 1 ] = $array1;
@@ -228,6 +228,10 @@ if ($highest>100){
 	$graph2->SetScale('linlin',0,100,1,719);
 }
 
+/* Create the tick labels */
+for ($i=0;$i<720;$i++){
+        $datax[$i] = "".(int)(720-$i);
+}
 $graph2->xaxis->SetTickLabels($aaa);
 $graph2->xaxis->SetTextLabelInterval(1);
 $graph2->yaxis->SetWeight(1);
@@ -237,21 +241,30 @@ $graph2->xgrid->Show(true,true);
 $graph2->ygrid->Show(true,true);
 $graph2->SetFrame(false,'darkblue',2);
 $graph2->SetBackgroundGradient('purple@0.9','lightblue2@0.2',GRAD_HOR,BGRAD_PLOT);
-for ($i=0;$i<720;$i++){
-        $datax[$i] = "".(int)(720-$i);
-}
 $graph2->xaxis->SetTickLabels($datax);
-$speedAtractorPlot[] = new LinePLot($chart [ 'chart_data' ][ 2 ]);
-$speedAtractorPlot2[] = new LinePLot($array5);
+$graph2->ygrid->Show(true ,true);
+$graph2->xgrid->Show();
+$graph2->legend->SetLayout(LEGEND_HOR);
+$graph2->img->SetMargin(35,23,05,80);
+$graph2->legend->SetFrameWeight(1);
+$graph2->legend->SetShadow('black@0.8',4);
+$graph2->legend->SetFillColor('black@0.5');
+$graph2->legend->SetColor('white');
+$graph2->legend->SetFont(FF_FONT2,FS_BOLD);
+$graph2->legend->SetPos(0.05,0.04,'left','top');
+$graph2->legend->SetMarkAbsSize(13);
+
 $dplot2[] = new LinePlot($chart [ 'chart_data' ][ 1 ]);
 $dplot2[0]->SetLegend(' Staff on Phone');
 $dplot2[0]->SetFillGradient("#0000ff@0.99","#009933");
 $dplot2[0]->SetWeight(1);
 
+$speedAtractorPlot[] = new LinePLot($chart [ 'chart_data' ][ 2 ]);
 $speedAtractorPlot[0]->SetWeight(1);
 $speedAtractorPlot[0]->SetColor("#00FF00");
 $speedAtractorPlot[0]->SetLegend(' Speed Attractor');
 
+$speedAtractorPlot2[] = new LinePLot($array5);
 $speedAtractorPlot2[0]->SetWeight(3);
 $speedAtractorPlot2[0]->SetColor("#000000");
 
@@ -266,17 +279,6 @@ $runningSpeedPlot2[0]->SetColor("#000000@0.9");
 $runningSpeedPlot2[0]->SetWeight(2);
 $runningSpeedPlot2[0]->SetStepStyle(true);
 
-$graph2->ygrid->Show(true ,true);
-$graph2->xgrid->Show();
-$graph2->legend->SetLayout(LEGEND_HOR);
-$graph2->img->SetMargin(35,23,05,80);
-$graph2->legend->SetFrameWeight(1);
-$graph2->legend->SetShadow('black@0.8',4);
-$graph2->legend->SetFillColor('black@0.5');
-$graph2->legend->SetColor('white');
-$graph2->legend->SetFont(FF_FONT2,FS_BOLD);
-$graph2->legend->SetPos(0.05,0.04,'left','top');
-$graph2->legend->SetMarkAbsSize(13);
 $graph2->Add($dplot2[0]);
 $graph2->Add($runningSpeedPlot2[0]);
 $graph2->Add($runningSpeedPlot[0]);
