@@ -332,6 +332,6 @@ if ($_GET[debug]>0){
     $graph2->AddText( $txt2);
 }
 
-$graph2->SetBackgroundGradient('#CCCCFF@0.8','white@0.6',GRAD_HOR,BGRAD_PLOT);
+$graph2->SetBackgroundGradient('#CCCCFF@0.4','white@0.6',GRAD_HOR,BGRAD_PLOT);
 $graph2->Stroke();
 ?>
