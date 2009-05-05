@@ -41,8 +41,12 @@ if (!(mysql_num_rows($result) > 0)) {
 var webcamimage;
 var imgBase="/graph.php?id=<?echo $id;?>&debug=<?echo $debug;?>&x="
 var c = 0;
+var x = 0;
 function count()
 {
+ x = 0;
+ waiting = document.getElementById("waiting");
+ waiting.style.visibility = 'hidden';
  loading = document.getElementById("loading");
  loading.style.visibility = 'visible';
  webcamimage.src=imgBase + (++c) + '&rand='+Math.random();
@@ -54,24 +58,35 @@ function init()
  {
   setInterval("count()",10000);
  }
- count();
+  setInterval("incr()",1000);
+}
+function incr() {
+ waiting = document.getElementById("waiting");
+ if (waiting.style.visibility == 'visible') {
+  waiting.innerHTML = '<font color="#88cc88"><img src="/images/sm_progress.gif">&nbsp;Waiting '+(10-x)+' seconds';
+ }
+ x++;
 }
 function hide_image()
 {
-    loading = document.getElementById("loading");
+ waiting = document.getElementById("waiting");
     loading.style.visibility = 'hidden';
+ waiting.style.visibility = 'visible';
+  waiting.innerHTML = '<font color="#88cc88"><img src="/images/sm_progress.gif">&nbsp;Waiting '+(10-x)+' seconds';
+    loading = document.getElementById("loading");
 }
 window.onload = init;
 </script>
 <a href="stopcampaign.php?id=<?echo $id;?>"><img src="/images/control_stop_blue.png"  border="0"> Stop This Campaign</a>&nbsp;
 <a href="report.php?type=today&id=<?echo $id;?>"><img src="/images/chart_pie.png"  border="0"> View Number Stats</a><br />
-<div id="loading" >
-<img src="/images/bl_progress.gif">&nbsp;
-<font color="#88cc88">Please wait, downloading updated graph</font>
+<img src="graph.php?id=<?echo $id;?>&debug=<?echo $debug;?>" name="image" id="webcamimage" border="0" onload="hide_image();"><br />
+<span id="waiting">
+</span>
+<span id="loading">
+<font color="#88cc88">Downloading updated graph</font>
 &nbsp;
 <img src="/images/bl_progress.gif">
-</div>
-<img src="graph.php?id=<?echo $id;?>&debug=<?echo $debug;?>" name="image" id="webcamimage" border="0" onload="hide_image();"><br />
+</span>
 <?
 require "footer.php";
 ?>

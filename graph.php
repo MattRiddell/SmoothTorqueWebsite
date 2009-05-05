@@ -399,7 +399,7 @@ if ($progress<0||$status < 0){
     $txt->Pos( 500,122);
     $txt->SetAlign("center","","");
     $txt->SetFont(FF_FONT2,FS_BOLD);
-    $txt->SetBox('#00ff88@0.2','navy@0.1','#000000@0.8',0,5);
+    $txt->SetBox('#ccffcc@0.1','navy@0.1','#000000@0.8',0,8);
 } else {
     if (!($ms > 0)) {
        $ms = 1;
