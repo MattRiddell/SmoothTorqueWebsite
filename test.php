@@ -52,7 +52,7 @@ function init()
  webcamimage = document.getElementById("webcamimage");
  if( webcamimage )
  {
-  setInterval("count()",8000);
+  setInterval("count()",3000);
  }
  count();
 }
