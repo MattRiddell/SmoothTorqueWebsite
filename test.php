@@ -36,8 +36,6 @@ if (!(mysql_num_rows($result) > 0)) {
     if ($id<1){
         exit(0);
     }
-} else {
-    echo "Using MySQL";
 }
 ?><script>
 var webcamimage;
