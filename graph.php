@@ -15,7 +15,7 @@ $first=true;
 $lastRate=0;
 $lastPerc=0;
 
-$result = mysql_query("SELECT * FROM config WHERE parameter = m_c_stats");
+$result = mysql_query("SELECT * FROM config WHERE parameter = 'm_c_stats'");
 if (mysql_num_rows($result) > 0) {
     $result = mysql_query("SELECT * FROM campaign_stats WHERE campaignid = $id");
     if (mysql_num_rows($result) == 0) {
