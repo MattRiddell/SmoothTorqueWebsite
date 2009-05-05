@@ -150,7 +150,7 @@ if (!$mysql_campaign_stats) {
     }
 } else {
     /* Using MySQL Stats */
-    $result = mysql_query("SELECT * FROM SineDialer.profracs WHERE campaignid = $id order by idx");
+    $result = mysql_query("SELECT * FROM SineDialer.profracs WHERE campaignid = $id order by idx desc");
     if (mysql_num_rows($result) > 0) {
         while ($row = mysql_fetch_assoc($result)) {
             $total_count_x++;
