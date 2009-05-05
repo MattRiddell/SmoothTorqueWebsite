@@ -44,7 +44,7 @@ function init()
  webcamimage = document.getElementById("webcamimage");
  if( webcamimage )
  {
-  setInterval("count()",10000);
+  setInterval("count()",8000);
  }
 }
 function hide_image()
@@ -56,7 +56,7 @@ window.onload = init;
 </script>
 <a href="stopcampaign.php?id=<?echo $id;?>"><img src="/images/control_stop_blue.png"  border="0"> Stop This Campaign</a>&nbsp;
 <a href="report.php?type=today&id=<?echo $id;?>"><img src="/images/chart_pie.png"  border="0"> View Number Stats</a><br />
-<div id="loading" ><img src="/images/sm_progress.gif"></div>
+<div id="loading" ><img src="/images/ajax-loader.gif"></div>
 <img src="graph.php?id=<?echo $id;?>&debug=<?echo $debug;?>" name="image" id="webcamimage" border="0" onload="hide_image();"><br />
 <?
 require "footer.php";
