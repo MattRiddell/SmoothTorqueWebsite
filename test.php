@@ -54,6 +54,7 @@ function init()
  {
   setInterval("count()",8000);
  }
+ count();
 }
 function hide_image()
 {
