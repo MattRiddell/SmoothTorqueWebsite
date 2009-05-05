@@ -210,40 +210,77 @@ if (!$mysql_campaign_stats) {
         }
     }
 }
-/* ======================= */
-/* Get x Information */
-/* ======================= */
+/* ======================== */
+/* Get ms sleep Information */
+/* ======================== */
 
 $highest_ms = 1;
 if ($_GET[debug]>0){
     $count = 0;
-    foreach ($lines3 as $line_num3 => $line3) {
-        //$total_count_x++;
-        if ($count<720){
-            if (strlen(trim($line3))>0){
-                $count++;
-                if (trim($line3) > $highest_ms) {
-                    $highest_ms = trim($line3);
+    if (!$mysql_campaign_stats) {
+        /* Using File Based Stats */
+        foreach ($lines3 as $line_num3 => $line3) {
+            //$total_count_x++;
+            if ($count<720){
+                if (strlen(trim($line3))>0){
+                    $count++;
+                    if (trim($line3) > $highest_ms) {
+                        $highest_ms = trim($line3);
+                    }
                 }
             }
         }
-    }
-    $count = 0;
-    foreach ($lines3 as $line_num3 => $line3) {
-        if ($count<720){
-            if (strlen(trim($line3))>0){
-                $count++;
-                if (trim($line3) > 0) {
-                   if (!($highest_ms > 0)) {
-                           $highest_ms = 1;
-                   }
-                    $array_ms[ $count ] = 101-(trim($line3)/($highest_ms)* 100);
-                } else {
-                    $array_ms[ $count ] = 0;
+        $count = 0;
+        foreach ($lines3 as $line_num3 => $line3) {
+            if ($count<720){
+                if (strlen(trim($line3))>0){
+                    $count++;
+                    if (trim($line3) > 0) {
+                       if (!($highest_ms > 0)) {
+                               $highest_ms = 1;
+                       }
+                        $array_ms[ $count ] = 101-(trim($line3)/($highest_ms)* 100);
+                    } else {
+                        $array_ms[ $count ] = 0;
+                    }
+                    $lastSpeed_ms=trim($line3);
                 }
-                $lastSpeed_ms=trim($line3);
             }
         }
+    } else {
+        /* Using MySQL Stats */
+        $result = mysql_query("SELECT * FROM SineDialer.sleeps WHERE campaignid = $id order by idx desc");
+        if (mysql_num_rows($result) > 0) {
+            while ($row = mysql_fetch_assoc($result)) {
+                if ($count<720){
+                    if (strlen($row[value])>0){
+                        $count++;
+                        if ($row[value] > $highest_ms) {
+                            $highest_ms = $row[value];
+                        }
+                    }
+                }
+            }
+        }
+        $count = 0;
+        $result = mysql_query("SELECT * FROM SineDialer.sleeps WHERE campaignid = $id order by idx desc");
+        if (mysql_num_rows($result) > 0) {
+            while ($row = mysql_fetch_assoc($result)) {
+                if ($count<720){
+                    if (strlen($row[value])>0){
+                        $count++;
+                        if ($row[value] > 0) {
+                           if (!($highest_ms > 0)) {
+                                   $highest_ms = 1;
+                           }
+                            $array_ms[ $count ] = 101-($row[value]/($highest_ms)* 100);
+                        } else {
+                            $array_ms[ $count ] = 0;
+                        }
+                        $lastSpeed_ms=$row[value];
+                    }
+                }
+            }
     }
 }
 
