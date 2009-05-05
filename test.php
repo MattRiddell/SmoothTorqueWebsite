@@ -45,7 +45,7 @@ function count()
 {
  loading = document.getElementById("loading");
  loading.style.visibility = 'visible';
- webcamimage.src=imgBase + (++c);
+ webcamimage.src=imgBase + (++c) + '&rand='+Math.random();
 }
 function init()
 {
