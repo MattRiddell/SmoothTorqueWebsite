@@ -1,33 +1,43 @@
 <?
 require "header.php";
 require "header_campaign.php";
+include "admin/db_config.php";
+mysql_select_db("SineDialer", $link);
 $id=$_GET[id];
 $debug=$_GET[debug];
-if (file_exists("/tmp/Sm".$id.".campaignProperties") == false) {
-if (isset($_GET[secondtime])) {
-    echo "Your campaign has finished";
-    } else {
-    echo '<META HTTP-EQUIV=REFRESH CONTENT="3; URL=test.php?id='.$_GET['id'].'&secondtime=yes">';
-    }
-    exit(0);
-}
-if (file_exists("/tmp/Sm".$id.".console") == false) {
-    echo "There is no information for this campaign (Console missing)";
-    echo '<META HTTP-EQUIV=REFRESH CONTENT="3; URL=test.php?id='.$_GET['id'].'">';
-    exit(0);
-}
-if (file_exists("/tmp/Sm".$id.".console2") == false) {
-    echo "There is no information for this campaign (Console2 missing)";
-    echo '<META HTTP-EQUIV=REFRESH CONTENT="3; URL=test.php?id='.$_GET['id'].'">';
-    exit(0);
-}
-if (file_exists("/tmp/Sm".$id.".console3") == false) {
-    echo "There is no information for this campaign (Console3 missing)";
-    echo '<META HTTP-EQUIV=REFRESH CONTENT="3; URL=test.php?id='.$_GET['id'].'">';
-    exit(0);
-}
-if ($id<1){
+
+$result = mysql_query("SELECT * FROM SineDialer.config WHERE parameter = 'm_c_stats'");
+if (!(mysql_num_rows($result) > 0)) {
+
+
+    if (file_exists("/tmp/Sm".$id.".campaignProperties") == false) {
+        if (isset($_GET[secondtime])) {
+            echo "Your campaign has finished";
+        } else {
+            echo '<META HTTP-EQUIV=REFRESH CONTENT="3; URL=test.php?id='.$_GET['id'].'&secondtime=yes">';
+        }
         exit(0);
+    }
+    if (file_exists("/tmp/Sm".$id.".console") == false) {
+        echo "There is no information for this campaign (Console missing)";
+        echo '<META HTTP-EQUIV=REFRESH CONTENT="3; URL=test.php?id='.$_GET['id'].'">';
+        exit(0);
+    }
+    if (file_exists("/tmp/Sm".$id.".console2") == false) {
+        echo "There is no information for this campaign (Console2 missing)";
+        echo '<META HTTP-EQUIV=REFRESH CONTENT="3; URL=test.php?id='.$_GET['id'].'">';
+        exit(0);
+    }
+    if (file_exists("/tmp/Sm".$id.".console3") == false) {
+        echo "There is no information for this campaign (Console3 missing)";
+        echo '<META HTTP-EQUIV=REFRESH CONTENT="3; URL=test.php?id='.$_GET['id'].'">';
+        exit(0);
+    }
+    if ($id<1){
+        exit(0);
+    }
+} else {
+    echo "Using MySQL";
 }
 ?><script>
 var webcamimage;
