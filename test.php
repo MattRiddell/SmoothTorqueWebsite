@@ -35,6 +35,8 @@ var imgBase="/graph.php?id=<?echo $id;?>&debug=<?echo $debug;?>&x="
 var c = 0;
 function count()
 {
+ loading = document.getElementById("loading");
+ loading.style.visibility = 'visible';
  webcamimage.src=imgBase + (++c);
 }
 function init()
@@ -47,12 +49,14 @@ function init()
 }
 function hide_image()
 {
-    alert('done');
+    loading = document.getElementById("loading");
+    loading.style.visibility = 'hidden';
 }
 window.onload = init;
 </script>
 <a href="stopcampaign.php?id=<?echo $id;?>"><img src="/images/control_stop_blue.png"  border="0"> Stop This Campaign</a>&nbsp;
 <a href="report.php?type=today&id=<?echo $id;?>"><img src="/images/chart_pie.png"  border="0"> View Number Stats</a><br />
+<div id="loading" style="display:none">loading</div>
 <img src="graph.php?id=<?echo $id;?>&debug=<?echo $debug;?>" name="image" id="webcamimage" border="0" onload="hide_image();"><br />
 <?
 require "footer.php";
