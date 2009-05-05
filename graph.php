@@ -15,8 +15,10 @@ $first=true;
 $lastRate=0;
 $lastPerc=0;
 
+$mysql_campaign_stats = false;
 $result = mysql_query("SELECT * FROM config WHERE parameter = 'm_c_stats'");
 if (mysql_num_rows($result) > 0) {
+    $mysql_campaign_stats = true;
     $result = mysql_query("SELECT * FROM campaign_stats WHERE campaignid = $id");
     if (mysql_num_rows($result) == 0) {
         exit(0);
@@ -364,7 +366,11 @@ if ($progress<0||$status < 0){
 }
 $graph2->AddText( $txt);
 if ($_GET[debug]>0){
-    $txt2=new Text( " Weighted: $weighted CAD: $cad Mult: $multiplyer Sleep: ".round($ms,2)."ms Max Delay Calc: ".round($m2,3)." Overs: ($o1/$timespent)");
+    if ($mysql_campaign_stats) {
+        $m_c_s = "MySQL Stats";
+    }
+
+    $txt2=new Text( " Weighted: $weighted CAD: $cad Mult: $multiplyer Sleep: ".round($ms,2)."ms Max Delay Calc: ".round($m2,3)." Overs: ($o1/$timespent) Source: $m_c_s");
     $txt2->Pos( 500,375);
     $txt2->SetAlign("center","","");
     $txt2->SetFont(FF_FONT2,FS_NORMAL);
