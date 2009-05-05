@@ -202,6 +202,7 @@ $sql = "CREATE TABLE `rates` (
   `campaignid` int(11) NOT NULL,
   `idx` int(11) NOT NULL,
   `value` double NOT NULL,
+  UNIQUE KEY `c_i` (`campaignid`,`idx`),
   KEY `campaignid` (`campaignid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 ";
@@ -227,6 +228,25 @@ CREATE TABLE `profracs` (
 
     $result = mysql_query($sql,$link);
   $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created profracs Table')";
+  $result=mysql_query($sql, $link);
+}
+/*======================================================================
+                            sleeps Table
+  ======================================================================*/
+if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","sleeps")){
+  include "admin/db_config.php";
+$sql = "
+CREATE TABLE `sleeps` (
+  `campaignid` int(11) NOT NULL,
+  `idx` int(11) NOT NULL,
+  `value` double NOT NULL,
+  UNIQUE KEY `c_i` (`campaignid`,`idx`),
+  KEY `campaignid` (`campaignid`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+ ";
+
+    $result = mysql_query($sql,$link);
+  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created sleeps Table')";
   $result=mysql_query($sql, $link);
 }
 /*======================================================================

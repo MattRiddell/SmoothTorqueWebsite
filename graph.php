@@ -133,7 +133,11 @@ for ($i=1;$i<721;$i++){
 $count = 0;
 $highest = 0;
 
+/* ======================= */
+/* Get Profrac Information */
+/* ======================= */
 if (!$mysql_campaign_stats) {
+    /* Using File Based Stats */
     foreach ($lines as $line_num => $line) {
         $total_count_x++;
         if ($count<720){
@@ -166,23 +170,49 @@ if (!$mysql_campaign_stats) {
 
 }
 
+/* ====================== */
+/* Get Speed Information */
+/* ====================== */
 
 $count = 0;
-foreach ($lines2 as $line_num2 => $line2) {
-    $total_count_x++;
-    if ($count<720){
-        if (strlen(trim($line2))>0){
-            $count++;
-            if (trim($line2) == "nan") {
-               $line2 = "0";
+if (!$mysql_campaign_stats) {
+    /* Using File Based Stats */
+    foreach ($lines2 as $line_num2 => $line2) {
+        $total_count_x++;
+        if ($count<720){
+            if (strlen(trim($line2))>0){
+                $count++;
+                if (trim($line2) == "nan") {
+                   $line2 = "0";
+                }
+                $array3[ $count ] = trim($line2);
+                $array4[ $count+1 ] = $array3[ $count ]-0.5;
+                $lastSpeed=trim($line2);
+                $xdata[$count] = $count;
             }
-            $array3[ $count ] = trim($line2);
-            $array4[ $count+1 ] = $array3[ $count ]-0.5;
-            $lastSpeed=trim($line2);
-            $xdata[$count] = $count;
+        }
+    }
+} else {
+    /* Using MySQL Stats */
+    $result = mysql_query("SELECT * FROM SineDialer.rates WHERE campaignid = $id order by idx desc");
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_assoc($result)) {
+            $total_count_x++;
+            if ($count<720){
+                if ($row[value]>0){
+                    $count++;
+                    $array3[ $count ] = $row[value];
+                    $array4[ $count+1 ] = $array3[ $count ]-0.5;
+                    $lastSpeed=$row[value];
+                    $xdata[$count] = $count;
+                }
+            }
         }
     }
 }
+/* ======================= */
+/* Get x Information */
+/* ======================= */
 
 $highest_ms = 1;
 if ($_GET[debug]>0){
