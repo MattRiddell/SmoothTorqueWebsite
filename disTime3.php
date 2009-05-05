@@ -129,6 +129,7 @@ echo trim(substr($row[description],0,$max_str_len))."...";
 ?>
 </TD>
 <?
+/*
 $sql = 'SELECT count(*) from number where campaignid='.$row[id].' and (status="manual_dial" or status="new" or status="no-credit")';
 $result2=mysql_query($sql, $link) or die (mysql_error());;
 $new_numbers=mysql_result($result2,0,'count(*)');
@@ -140,7 +141,7 @@ $manual_numbers=mysql_result($result2,0,'count(*)');
 $sql = 'SELECT count(*) from number where campaignid='.$row[id];
 $result2=mysql_query($sql, $link) or die (mysql_error());;
 $total_numbers=mysql_result($result2,0,'count(*)');
-
+*/
 $sql = 'SELECT status, flags, maxcalls, progress from queue where campaignid='.$row[id];
 $resultx=mysql_query($sql, $link) or die (mysql_error());;
 $rowx = mysql_fetch_assoc($resultx);
@@ -152,7 +153,7 @@ $progress=$rowx[progress];
 
 ?>
 <TD>
-<?
+<?/*
 if ($progress>0){
             ?>
             <img src="/images/percentImage.png" width="123" height="12" title="<?
@@ -184,7 +185,7 @@ if ($progress>0){
 <?
             }
 }
-?>
+*/?>
 </TD>
 
 
