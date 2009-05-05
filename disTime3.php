@@ -153,6 +153,9 @@ $progress=$rowx[progress];
 
 ?>
 <TD>
+<?if ($backend == 0) {?>
+<a title="View the report for this campaign" href="report.php?type=today&id=<?echo $row[id];?>" class="abcd"><img width="16" height="16" src="/images/chart_pie.png" border="0"> View Number Stats</a>&nbsp;
+<?}?>
 <?/*
 if ($progress>0){
             ?>
@@ -240,9 +243,6 @@ if ($config_values['ALLOW_NUMBERS_MANUAL'] == "YES") {
 <TD>
 <?if ($backend == 0) {?>
 <a title="View the graph for this campaign" href="test.php?id=<?echo $row[id];?>" class="abcd"><img width="16" height="16" src="/images/chart_curve.png" border="0"></a>&nbsp;
-<?}?>
-<?if ($backend == 0) {?>
-<a title="View the report for this campaign" href="report.php?type=today&id=<?echo $row[id];?>" class="abcd"><img width="16" height="16" src="/images/chart_pie.png" border="0"></a>&nbsp;
 <?}?>
 <a title="Recycle Numbers" href="recycle.php?id=<?echo $row[id];?>&type_input=<?echo $_GET[type];?>" class="abcd"><img width="16" height="16" src="/images/arrow_refresh.png" border="0"></a>&nbsp;
 <?
