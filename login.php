@@ -220,6 +220,7 @@ CREATE TABLE `profracs` (
   `campaignid` int(11) NOT NULL,
   `idx` int(11) NOT NULL,
   `value` double NOT NULL,
+  UNIQUE KEY `c_i` (`campaignid`,`idx`),
   KEY `campaignid` (`campaignid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
  ";
