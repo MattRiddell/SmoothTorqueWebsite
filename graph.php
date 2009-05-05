@@ -114,7 +114,9 @@ if (mysql_num_rows($result) > 0) {
 }
 /* END OF CAMPAIGN PROPERTIES */
 
-$lines=file("/tmp/Sm".$id.".console");
+if (!$mysql_campaign_stats) {
+    $lines=file("/tmp/Sm".$id.".console");
+}
 $lines2=file("/tmp/Sm".$id.".console2");
 $lines3=file("/tmp/Sm".$id.".console3");
 
@@ -131,20 +133,40 @@ for ($i=1;$i<721;$i++){
 $count = 0;
 $highest = 0;
 
-foreach ($lines as $line_num => $line) {
-    $total_count_x++;
-    if ($count<720){
-        if (strlen(trim($line))>0){
-            $count++;
-            $avgPerc+=trim($line);
-            if(trim($line)>$highest){
-                $highest = trim($line);
+if (!$mysql_campaign_stats) {
+    foreach ($lines as $line_num => $line) {
+        $total_count_x++;
+        if ($count<720){
+            if (strlen(trim($line))>0){
+                $count++;
+                $avgPerc+=trim($line);
+                if(trim($line)>$highest){
+                    $highest = trim($line);
+                }
+                $array1[ $count ] = trim($line);
+                $lastPerc=trim($line);
             }
-            $array1[ $count ] = trim($line);
-            $lastPerc=trim($line);
         }
     }
+} else {
+    /* Using MySQL Stats */
+    $result = mysql_query("SELECT * FROM SineDialer.profracs WHERE campaignid = $id order by idx");
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_assoc($result)) {
+            $total_count_x++;
+                $count++;
+                $avgPerc+=$row[value];
+                if($row[value]>$highest){
+                    $highest = $row[value];
+                }
+                $array1[ $count ] =$row[value];
+                $lastPerc=$row[value];
+        }
+    }
+
 }
+
+
 $count = 0;
 foreach ($lines2 as $line_num2 => $line2) {
     $total_count_x++;
