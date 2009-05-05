@@ -1,80 +1,119 @@
 <?php
 include "admin/db_config.php";
 mysql_select_db("SineDialer", $link);
+
+/* The number of seconds we monitor */
 $MAX_ENTRIES = 720;
+
+/* The campaign ID */
 $id=$_GET[id];
 if ($id<1){
         exit(0);
 }
+
 $first=true;
 $lastRate=0;
 $lastPerc=0;
-if (!file_exists("/tmp/Sm".$id.".campaignProperties")) {
-	exit(0);
-}
-$lines2=file("/tmp/Sm".$id.".campaignProperties");
-$first=true;
-$total_count_x = 0;
-foreach ($lines2 as $line_num => $line) {
+
+$result = mysql_query("SELECT * FROM config WHERE parameter = m_c_stats");
+if (mysql_num_rows($result) > 0) {
+    $result = mysql_query("SELECT * FROM campaign_stats WHERE campaignid = $id");
+    if (mysql_num_rows($result) == 0) {
+        exit(0);
+    }
+    $row = mysql_fetch_assoc($result);
+    $min = $row[min_agents];
+    $busy = $row[busy_agents];
+    $max = $row[total_agents];
+    $dialed = $row[dialed];
+    $multiplyer = $row[speed_multiplyer];
+    $mrs = $row[max_running_speed];
+    $adjuster = $row[adjuster];
+    $weighted = $row[weighted];
+    $cad = $row[cummulative_area_diff];
+    $ms = $row[ms_sleep];
+    $m2 = $row[max_delay_calc];
+    $o1 = $row[overs_1];
+    $o2 = $row[overs_2];
+    $timespent = $row[time_spent];
+    $timespentM = floor($timespent/60);
+    $timespentS = $timespent%60;
+    if ($timespentS < 10) {
+        $timespentS = "0".$timespentS;
+    }
+    if ($timespentM < 10) {
+        $timespentM = "0".$timespentM;
+    }
+} else {
+    /* We do not have a MySQL stat backend */
+	if (!file_exists("/tmp/Sm".$id.".campaignProperties")) {
+	    exit(0);
+	}
+	$lines2=file("/tmp/Sm".$id.".campaignProperties");
+	$first=true;
+	$total_count_x = 0;
+	foreach ($lines2 as $line_num => $line) {
         if (strlen(trim($line))>0){
-                if (substr(trim($line),0,3)=="Min") {
-                        $min=substr(trim($line),5);
+            if (substr(trim($line),0,3)=="Min") {
+                $min=substr(trim($line),5);
+            }
+            if (substr(trim($line),0,3)=="Tot") {
+                $busy=substr(trim($line),6);
+            }
+            if (substr(trim($line),0,3)=="Max") {
+                $max = trim(substr(trim($line),5));
+            }
+            if (substr(trim($line),0,4)=="Done") {
+                $dialed = substr(trim($line),6);
+            }
+            if (substr(trim($line),0,4)=="Mult") {
+                $multiplyer = substr(trim($line),6);
+            }
+            if (substr(trim($line),0,3)=="MRS") {
+                $mrs = substr(trim($line),5);
+            }
+            if (substr(trim($line),0,3)=="Adj") {
+                $adjuster = substr(trim($line),5);
+            }
+            if (substr(trim($line),0,3)=="Wei") {
+                $weighted = substr(trim($line),5);
+            }
+            if (substr(trim($line),0,3)=="CAD") {
+                $cad = substr(trim($line),5);
+            }
+            if (substr(trim($line),0,2)=="MS") {
+                $ms = substr(trim($line),4);
+                if ($ms == "inf" || $ms == "NAN") {
+                    $ms = 20000;
                 }
-                if (substr(trim($line),0,3)=="Tot") {
-                        $busy=substr(trim($line),6);
+            }
+            if (substr(trim($line),0,2)=="M2") {
+                $m2 = substr(trim($line),4);
+            }
+            if (substr(trim($line),0,2)=="O1") {
+                $o1 = substr(trim($line),4);
+            }
+            if (substr(trim($line),0,2)=="O2") {
+                $o2 = substr(trim($line),4);
+            }
+            if (substr(trim($line),0,3)=="TSP") {
+                $timespent = substr(trim($line),5);
+                $timespentM = floor($timespent/60);
+                $timespentS = $timespent%60;
+                if ($timespentS < 10) {
+                    $timespentS = "0".$timespentS;
                 }
-                if (substr(trim($line),0,3)=="Max") {
-                        $max = trim(substr(trim($line),5));
+                if ($timespentM < 10) {
+                    $timespentM = "0".$timespentM;
                 }
-                if (substr(trim($line),0,4)=="Done") {
-                        $dialed = substr(trim($line),6);
-                }
-                if (substr(trim($line),0,4)=="Mult") {
-                        $multiplyer = substr(trim($line),6);
-                }
-                if (substr(trim($line),0,3)=="MRS") {
-                        $mrs = substr(trim($line),5);
-                }
-
-                if (substr(trim($line),0,3)=="Adj") {
-                        $adjuster = substr(trim($line),5);
-                }
-                if (substr(trim($line),0,3)=="Wei") {
-                        $weighted = substr(trim($line),5);
-                }
-                if (substr(trim($line),0,3)=="CAD") {
-                        $cad = substr(trim($line),5);
-                }
-                if (substr(trim($line),0,2)=="MS") {
-                    $ms = substr(trim($line),4);
-                    if ($ms == "inf" || $ms == "NAN") {
-                        $ms = 20000;
-                    }
-                }
-                if (substr(trim($line),0,2)=="M2") {
-                    $m2 = substr(trim($line),4);
-                }
-                if (substr(trim($line),0,2)=="O1") {
-                    $o1 = substr(trim($line),4);
-                }
-                if (substr(trim($line),0,2)=="O2") {
-                    $o2 = substr(trim($line),4);
-                }
-		if (substr(trim($line),0,3)=="TSP") {
-                        $timespent = substr(trim($line),5);
-                        $timespentM = floor($timespent/60);
-                        $timespentS = $timespent%60;
-                        if ($timespentS < 10) {
-                            $timespentS = "0".$timespentS;
-                        }
-                        if ($timespentM < 10) {
-                            $timespentM = "0".$timespentM;
-                        }
-//                      $timespentS = $timespent;
-
-                }
+	        }
+	    }
 	}
 }
+/* END OF CAMPAIGN PROPERTIES */
+
+
+
 $lines=file("/tmp/Sm".$id.".console");
 $lines2=file("/tmp/Sm".$id.".console2");
 $lines3=file("/tmp/Sm".$id.".console3");
