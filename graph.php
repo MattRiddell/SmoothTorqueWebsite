@@ -127,6 +127,7 @@ for ($i=1;$i<721;$i++){
     $chart [ 'chart_data' ][ 2 ][ $i ] = 0;
     $array1[$i] = 0;
     $array3[$i] = 0;
+    $array4[$i] = 0;
     $array2[$i] = $mrs/2000*100;
     $array5[$i] = ($mrs/2000*100);
 }
@@ -186,7 +187,11 @@ if (!$mysql_campaign_stats) {
                    $line2 = "0";
                 }
                 $array3[ $count ] = trim($line2);
-                $array4[ $count+1 ] = $array3[ $count ]-0.5;
+		if ($array3[$count] > 0.5) {
+                	$array4[ $count+1 ] = $array3[ $count ]-0.5;
+		} else {
+			$array4[ $count+1 ] = 0;
+		}
                 $lastSpeed=trim($line2);
                 $xdata[$count] = $count;
             }
@@ -202,7 +207,11 @@ if (!$mysql_campaign_stats) {
                 if ($row[value]>0){
                     $count++;
                     $array3[ $count ] = $row[value];
-                    $array4[ $count+1 ] = $array3[ $count ]-0.5;
+	            if ($array3[$count] > 0.5) {
+                	$array4[ $count+1 ] = $array3[ $count ]-0.5;
+		    } else {
+			$array4[ $count+1 ] = 0;
+		    }
                     $lastSpeed=$row[value];
                     $xdata[$count] = $count;
                 }
