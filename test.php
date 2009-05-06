@@ -1,6 +1,7 @@
 <?
 /*
-$Id$
+$Author$
+$Date$
 */
 require "header.php";
 require "header_campaign.php";
