@@ -143,7 +143,7 @@ if (!isset($_POST[campaignid])){
         $result=mysql_query($sql, $link) or die (mysql_error());;
         //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
         while ($row = mysql_fetch_assoc($result)) {
-            echo "<OPTION VALUE=\"".$row[id]."\">".substr($row[name],0,22)."</OPTION>";
+            echo "<OPTION VALUE=\"".$row[id]."\">".substr(stripslashes($row[name]),0,22)."</OPTION>";
         }
         ?>
         </SELECT>
