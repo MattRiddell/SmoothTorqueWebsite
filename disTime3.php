@@ -1,4 +1,19 @@
 <?
+/* Find out what the base directory name is for two reasons:
+    1. So we can include files
+    2. So we can explain how to set up things that are missing */
+$current_directory = dirname(__FILE__);
+
+/* What page we are currently on - this is used to highlight the menu
+   system as well as to not cache certain pages like the graphs */
+$self=$_SERVER['PHP_SELF'];
+
+/* Load in the functions we may need - these are the list of available
+   custom functions - for more information, read the comments in the
+   functions.php file - most functions are in their own file in the
+   functions subdirectory */
+require "/".$current_directory."/functions/functions.php";
+
 $config_file = "/stweb.conf";
 $fp = fopen($config_file, "r");
 while (!feof($fp)) {

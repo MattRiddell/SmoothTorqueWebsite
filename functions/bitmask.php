@@ -10,6 +10,8 @@ $SUPPORT = 128;
 $TELESALES_STATS = 256;
 $RECEPTION = 512;
 
+if (!function_exists('safeBitCheck') ) {
+
 function safeBitCheck($number,$comparison) {
     if( $number < 2147483647 ) {
         return ($number & $comparison)==$comparison;
@@ -25,5 +27,5 @@ function safeBitCheck($number,$comparison) {
     }
 }
 
-
+}
 ?>
