@@ -402,8 +402,13 @@ if ($dialed>0){
 } else {
     $progress=$dialed;
 }
-
-if ($progress<0||$status < 0){
+if ($timespent == 0) {
+    $txt=new Text( "\n\n     Please Wait. Campaign is being started    \n\n");
+    $txt->Pos( 500,122);
+    $txt->SetAlign("center","","");
+    $txt->SetFont(FF_FONT2,FS_BOLD);
+    $txt->SetBox('#ccccff@0.1','navy@0.1','#000000@0.8',0,8);
+} else if ($progress<0||$status < 0){
     $txt=new Text( "\n\n     This Campaign is Now Finished    \n\n");
     $txt->Pos( 500,122);
     $txt->SetAlign("center","","");
