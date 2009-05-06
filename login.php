@@ -161,7 +161,7 @@ $sql = "CREATE TABLE `cdr` (
   `userfield3` varchar(255) NOT NULL default '',
   `userfield4` varchar(255) NOT NULL default '',
   `userfield5` varchar(255) NOT NULL default '',
-  PRIMARY KEY  (`dcontext`,`userfield`,`userfield2`),
+  KEY  (`dcontext`,`userfield`,`userfield2`),
   KEY `calldate` (`calldate`),
   KEY `dst` (`dst`),
   KEY `accountcode` (`accountcode`)
