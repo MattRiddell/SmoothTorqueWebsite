@@ -212,6 +212,23 @@ $sql = "CREATE TABLE `rates` (
   $result=mysql_query($sql, $link);
 }
 /*======================================================================
+                            engine_stats Table
+  ======================================================================*/
+if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","engine_stats")){
+  include "admin/db_config.php";
+$sql = "
+CREATE TABLE `engine_stats` (
+ `stat` varchar(250) NOT NULL,
+ `value` varchar(250) NOT NULL default 'null',
+ PRIMARY KEY  (`stat`)
+ ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+ ";
+
+    $result = mysql_query($sql,$link);
+  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created profracs Table')";
+  $result=mysql_query($sql, $link);
+}
+/*======================================================================
                             profracs Table
   ======================================================================*/
 if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","profracs")){
