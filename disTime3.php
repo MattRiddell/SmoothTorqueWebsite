@@ -109,16 +109,16 @@ while ($row = mysql_fetch_assoc($result)) {
 <td></td>
 <TD>
 <?
-if (strlen($row[name])<15){
+if (strlen($row[name])<35){
 echo "<A title=\"Edit this campaign\" HREF=\"editcampaign.php?id=".$row[id]."\"><img width=\"16\" height=\"16\" src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit This Campaign\">".$row[name]."</A>";
 } else {
-echo "<A title=\"Edit this campaign\" HREF=\"editcampaign.php?id=".$row[id]."\"><img width=\"16\" height=\"16\" src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit This Campaign\">".trim(substr($row[name],0,15))."...</A>";
+echo "<A title=\"Edit this campaign\" HREF=\"editcampaign.php?id=".$row[id]."\"><img width=\"16\" height=\"16\" src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit This Campaign\">".trim(substr($row[name],0,35))."...</A>";
 }
 ?>
 </TD>
 <TD>
 <?
-$max_str_len = 15;
+$max_str_len = 45;
 
 if (strlen($row[description])<$max_str_len){
 echo $row[description];
