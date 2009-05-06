@@ -46,6 +46,7 @@ var webcamimage;
 var imgBase="/graph.php?id=<?echo $id;?>&debug=<?echo $debug;?>&x="
 var c = 0;
 var x = 0;
+var done_image = 0;
 function count()
 {
  x = 0;
@@ -53,6 +54,7 @@ function count()
  //waiting.style.visibility = 'hidden';
  //loading = document.getElementById("loading");
  //loading.style.visibility = 'visible';
+ done_image = 0;
  waiting.innerHTML = '<font color="#88cc88">Downloading updated graph</font>&nbsp;<img src="/images/bl_progress.gif">';
  webcamimage.src=imgBase + (++c) + '&rand='+Math.random();
 }
@@ -67,13 +69,16 @@ function init()
 }
 function incr() {
  waiting = document.getElementById("waiting");
- if (x<10) {
+ if (done_image ==1) {
   waiting.innerHTML = '<font color="#88cc88"><img src="/images/sm_progress.gif">&nbsp;Waiting '+(10-x)+' seconds';
+ } else {
+  waiting.innerHTML = '<font color="#88cc88">Downloading updated graph</font>&nbsp;<img src="/images/bl_progress.gif">';
  }
  x++;
 }
 function hide_image()
 {
+  done_image = 1;
  waiting = document.getElementById("waiting");
     //loading.style.visibility = 'hidden';
  //waiting.style.visibility = 'visible';
@@ -86,11 +91,6 @@ window.onload = init;
 <a href="report.php?type=today&id=<?echo $id;?>"><img src="/images/chart_pie.png"  border="0"> View Number Stats</a><br />
 <img src="graph.php?id=<?echo $id;?>&debug=<?echo $debug;?>" name="image" id="webcamimage" border="0" onload="hide_image();"><br />
 <span id="waiting">
-</span>
-<span id="loading">
-<font color="#88cc88">Downloading updated graph</font>
-&nbsp;
-<img src="/images/bl_progress.gif">
 </span>
 <?
 require "footer.php";
