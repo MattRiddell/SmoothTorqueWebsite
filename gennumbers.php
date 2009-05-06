@@ -35,11 +35,11 @@ Please select a campaign to add numbers to<br /><br />
             echo "<OPTION VALUE=\"-1\">Shared List</OPTION>";
         }
         //
-        $sql = 'SELECT id,name FROM campaign WHERE groupid='.$campaigngroupid;
+        $sql = 'SELECT id,name FROM campaign WHERE groupid='.$campaigngroupid.' ORDER BY name';
         $result=mysql_query($sql, $link) or die (mysql_error());;
         //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
         while ($row = mysql_fetch_assoc($result)) {
-            echo "<OPTION VALUE=\"".$row[id]."\">".substr($row[name],0,22)."</OPTION>";
+            echo "<OPTION VALUE=\"".$row[id]."\">".substr(stripslashes($row[name]),0,22)."</OPTION>";
         }
         ?>
         </SELECT>
