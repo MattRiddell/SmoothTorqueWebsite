@@ -1,4 +1,4 @@
-<?//New test2
+<?
 require "header.php";
 require "header_campaign.php";
 include "admin/db_config.php";
