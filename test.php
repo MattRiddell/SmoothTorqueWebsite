@@ -78,11 +78,14 @@ function hide_image()
 }
 window.onload = init;
 </script>
+<?box_start();?>
+<center>
 <a href="stopcampaign.php?id=<?echo $id;?>"><img src="/images/control_stop_blue.png"  border="0"> Stop This Campaign</a>&nbsp;
 <a href="report.php?type=today&id=<?echo $id;?>"><img src="/images/chart_pie.png"  border="0"> View Number Stats</a><br />
 <div id="waiting" style="height:20px">
 <img src="/images/ajax-loader.gif">
 </div>
+<?box_end();?>
 <img src="graph.php?id=<?echo $id;?>&debug=<?echo $debug;?>" name="image" id="webcamimage" border="0" onload="hide_image();"><br />
 <?
 require "footer.php";

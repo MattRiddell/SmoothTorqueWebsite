@@ -36,19 +36,4 @@ box_start(295);
 
 
     </TR></table><?box_end();?>
-    <?box_start(720);?>
-    <center>
-    <img width="16" height="16" src="/images/pencil.png" border="0">&nbsp;Edit Campaign&nbsp;
-    <img width="16" height="16" src="/images/chart_pie.png" border="0">&nbsp;View Number Stats&nbsp;
-    <img width="16" height="16" src="/images/control_stop_blue.png" border="0"> Stop Campaign
-    <img width="16" height="16" src="/images/control_play_blue.png" border="0"> Start Campaign
-    <br />
-<?    if ($config_values['ALLOW_NUMBERS_MANUAL'] == "YES") {?>
-    <img width="16" height="16" src="/images/database_lightning.png" border="0"> Initialise Manual Dialing
-    <?}?>
-    <img width="16" height="16" src="/images/chart_curve.png" border="0"> Realtime stats
-    <img width="16" height="16" src="/images/table.png" border="0"> View Numbers
-    <img width="16" height="16" src="/images/delete.png" border="0"> Delete Campaign
-    </center>
-    <?box_end();?><br />
 <?flush();?>
