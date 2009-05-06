@@ -47,11 +47,8 @@ function count()
 {
  x = 0;
  waiting = document.getElementById("waiting");
- //waiting.style.visibility = 'hidden';
- //loading = document.getElementById("loading");
- //loading.style.visibility = 'visible';
  done_image = 0;
- waiting.innerHTML = '<font color="#88cc88">Downloading updated graph</font>&nbsp;<img src="/images/bl_progress.gif">';
+ waiting.innerHTML = '<img src="/images/ajax-loader.gif">';
  webcamimage.src=imgBase + (++c) + '&rand='+Math.random();
 }
 function init()
@@ -62,31 +59,30 @@ function init()
   setInterval("count()",10000);
  }
   setInterval("incr()",1000);
+  incr();
 }
 function incr() {
  waiting = document.getElementById("waiting");
  if (done_image ==1) {
-  waiting.innerHTML = '<font color="#88cc88"><img src="/images/sm_progress.gif">&nbsp;Waiting '+(10-x)+' seconds';
+  waiting.innerHTML = '<font color="#88cc88">Waiting '+(10-x)+' seconds';
  } else {
-  waiting.innerHTML = '<font color="#88cc88">Downloading updated graph</font>&nbsp;<img src="/images/bl_progress.gif">';
+  waiting.innerHTML = '<img src="/images/ajax-loader.gif">';
  }
  x++;
 }
 function hide_image()
 {
   done_image = 1;
- waiting = document.getElementById("waiting");
-    //loading.style.visibility = 'hidden';
- //waiting.style.visibility = 'visible';
-  waiting.innerHTML = '<font color="#88cc88"><img src="/images/sm_progress.gif">&nbsp;Waiting '+(10-x)+' seconds';
-    //loading = document.getElementById("loading");
+  waiting = document.getElementById("waiting");
+  waiting.innerHTML = '<font color="#88cc88">Waiting '+(10-x)+' seconds';
 }
 window.onload = init;
 </script>
 <a href="stopcampaign.php?id=<?echo $id;?>"><img src="/images/control_stop_blue.png"  border="0"> Stop This Campaign</a>&nbsp;
 <a href="report.php?type=today&id=<?echo $id;?>"><img src="/images/chart_pie.png"  border="0"> View Number Stats</a><br />
-<span id="waiting">
-</span><br />
+<div id="waiting" style="height:20px">
+<img src="/images/ajax-loader.gif">
+</div>
 <img src="graph.php?id=<?echo $id;?>&debug=<?echo $debug;?>" name="image" id="webcamimage" border="0" onload="hide_image();"><br />
 <?
 require "footer.php";
