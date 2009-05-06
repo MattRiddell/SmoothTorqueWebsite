@@ -50,5 +50,5 @@ box_start(295);
     <img width="16" height="16" src="/images/table.png" border="0"> View Numbers
     <img width="16" height="16" src="/images/delete.png" border="0"> Delete Campaign
     </center>
-    <?box_end();?>
+    <?box_end();?><br />
 <?flush();?>
