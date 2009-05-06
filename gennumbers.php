@@ -130,6 +130,15 @@ shuffle($myarray);
     }
  }
  echo "Phone Numbers Saved<img src=\"/images/tick.gif\">";
+      ?>
+    <script language="javascript">
+    function delayer(){
+    window.location = "numbers.php"
+    }
+    setTimeout('delayer()', 1000);
+    </script>
+    <?
+
 
 ?>
                </TD></TR>
