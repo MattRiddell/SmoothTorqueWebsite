@@ -50,9 +50,10 @@ function count()
 {
  x = 0;
  waiting = document.getElementById("waiting");
- waiting.style.visibility = 'hidden';
- loading = document.getElementById("loading");
- loading.style.visibility = 'visible';
+ //waiting.style.visibility = 'hidden';
+ //loading = document.getElementById("loading");
+ //loading.style.visibility = 'visible';
+ waiting.innerHTML = '<font color="#88cc88">Downloading updated graph</font>&nbsp;<img src="/images/bl_progress.gif">';
  webcamimage.src=imgBase + (++c) + '&rand='+Math.random();
 }
 function init()
@@ -66,7 +67,7 @@ function init()
 }
 function incr() {
  waiting = document.getElementById("waiting");
- if (waiting.style.visibility == 'visible') {
+ if (x<10) {
   waiting.innerHTML = '<font color="#88cc88"><img src="/images/sm_progress.gif">&nbsp;Waiting '+(10-x)+' seconds';
  }
  x++;
@@ -74,10 +75,10 @@ function incr() {
 function hide_image()
 {
  waiting = document.getElementById("waiting");
-    loading.style.visibility = 'hidden';
- waiting.style.visibility = 'visible';
+    //loading.style.visibility = 'hidden';
+ //waiting.style.visibility = 'visible';
   waiting.innerHTML = '<font color="#88cc88"><img src="/images/sm_progress.gif">&nbsp;Waiting '+(10-x)+' seconds';
-    loading = document.getElementById("loading");
+    //loading = document.getElementById("loading");
 }
 window.onload = init;
 </script>
