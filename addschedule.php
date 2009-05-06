@@ -139,7 +139,7 @@ if (!isset($_POST[campaignid])){
         <SELECT NAME="campaignid">
         <?
         //
-        $sql = 'SELECT id,name FROM campaign WHERE groupid='.$campaigngroupid;
+        $sql = 'SELECT id,name FROM campaign WHERE groupid='.$campaigngroupid.' ORDER BY name';
         $result=mysql_query($sql, $link) or die (mysql_error());;
         //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
         while ($row = mysql_fetch_assoc($result)) {
