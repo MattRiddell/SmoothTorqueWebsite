@@ -64,7 +64,7 @@ function init()
 function incr() {
  waiting = document.getElementById("waiting");
  if (done_image ==1) {
-  waiting.innerHTML = '<font color="#88cc88">Waiting '+(10-x)+' seconds';
+  waiting.innerHTML = '<font color="#88cc88">Next update in '+(10-x)+' seconds';
  } else {
   waiting.innerHTML = '<img src="/images/ajax-loader.gif">';
  }
@@ -74,7 +74,7 @@ function hide_image()
 {
   done_image = 1;
   waiting = document.getElementById("waiting");
-  waiting.innerHTML = '<font color="#88cc88">Waiting '+(10-x)+' seconds';
+  waiting.innerHTML = '<font color="#88cc88">Next update in '+(10-x)+' seconds';
 }
 window.onload = init;
 </script>
