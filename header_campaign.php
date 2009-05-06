@@ -23,13 +23,13 @@ box_start(295);
     if ($_COOKIE[level] == sha1("level100")) {
 
         if ($_GET[type]=="all") {
-            echo "<TD class=\"subheader\"><A HREF=\"campaigns.php?type=admin\">Admin Campaigns</A></TD>";
-            echo "<TD class=\"subheader\"><A HREF=\"selectcustomer.php\">Select Customer</A></TD>";
-            echo "<TD class=\"subheader\"><b>All Campaigns</b></TD>";
+            echo "<TD class=\"subheader\"><A HREF=\"campaigns.php?type=admin\"><img src=\"images/cog.png\" border=\"0\">&nbsp;Admin Campaigns</A></TD>";
+            echo "<TD class=\"subheader\"><A HREF=\"selectcustomer.php\"><img src=\"images/user.png\" border=\"0\">&nbsp;Select Customer</A></TD>";
+            echo "<TD class=\"subheader\"><b><img src=\"images/folder.png\" border=\"0\">&nbsp;All Campaigns</b></TD>";
         } else {
-            echo "<TD class=\"subheader\"><b>Admin Campaigns</b></TD>";
-            echo "<TD class=\"subheader\"><A HREF=\"selectcustomer.php\">Select Customer</A></TD>";
-            echo "<TD class=\"subheader\"><A HREF=\"campaigns.php?type=all\">All Campaigns</A></TD>";
+            echo "<TD class=\"subheader\"><b><img src=\"images/cog.png\" border=\"0\">&nbsp;Admin Campaigns</b></TD>";
+            echo "<TD class=\"subheader\"><A HREF=\"selectcustomer.php\"><img src=\"images/user.png\" border=\"0\">&nbsp;Select Customer</A></TD>";
+            echo "<TD class=\"subheader\"><A HREF=\"campaigns.php?type=all\"><img src=\"images/folder.png\" border=\"0\">&nbsp;All Campaigns</A></TD>";
         }
     }
     ?>
