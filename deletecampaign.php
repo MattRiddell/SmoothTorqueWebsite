@@ -23,30 +23,15 @@ $result=mysql_query($sql, $link);
 require "header.php";
 require "header_campaign.php";
 
-?>
-
-<table class="tborder" align="center" border="0" cellpadding="0" cellspacing="2">
-<TR><TD>
-<CENTER>Are you sure you want to delete this record?<BR><BR>
-</TD></TR>
-<TR><TD>
-<?
-
+box_start();
 $sql = 'SELECT * FROM campaign WHERE id='.($_GET[id]).' limit 1';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 while ($row = mysql_fetch_assoc($result)) {
 	$row = array_map(stripslashes,$row);
     echo "<CENTER><B>".$row[name]." - ".$row[description]."</B><BR><BR>";
-    echo '<A HREF="deletecampaign.php?id='.($_GET[id]).'&sure=yes">Yes, delete it</A><BR>';
-    echo '<A HREF="campaigns.php">No, don\'t delete it</A></CENTER>';
-?>
-</TD></TR>
-<TR><TD>
-
-</TD></TR>
-</TABLE>
-</FORM>
-<?
+    echo '<A HREF="deletecampaign.php?id='.($_GET[id]).'&sure=yes"><img src="images/tick.png" border="0">&nbsp;Yes, delete it</A><BR>';
+    echo '<A HREF="campaigns.php"><img src="images/cross.png" border="0">&nbsp;No, don\'t delete it</A></CENTER>';
+box_end();
 }
 require "footer.php";
 ?>
