@@ -13,11 +13,11 @@ if (isset($_GET[queueID])){
 
 require "header.php";
 if (!isset($_GET[campaigngroupid])) {
-$sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
-$result=mysql_query($sql, $link) or die (mysql_error());;
-$campaigngroupid=mysql_result($result,0,'campaigngroupid');
+    $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
+    $result=mysql_query($sql, $link) or die (mysql_error());;
+    $campaigngroupid=mysql_result($result,0,'campaigngroupid');
 } else {
-$campaigngroupid = $_GET[campaigngroupid];
+    $campaigngroupid = $_GET[campaigngroupid];
 }
 require "header_campaign.php";
 /*================= Log Access ======================================*/

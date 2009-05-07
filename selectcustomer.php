@@ -20,7 +20,7 @@
     while ($row = mysql_fetch_assoc($result)) {
         //echo $row[id]." - ".$row[customerid]."<br>";
         ?>
-       <option value="<?echo $row[id];?>"><?echo $row[company];?></option>
+       <option value="<?echo $row[campaigngroupid];?>"><?echo $row[company];?></option>
 
         <?
         //echo '<A HREF="addfunds.php?id='.$row[id].'">'.$row[company].'</a>';
