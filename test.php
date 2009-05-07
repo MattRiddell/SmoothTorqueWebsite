@@ -46,14 +46,14 @@ var done_image = 0;
 function count()
 {
  x = 0;
- waiting = document.getElementById("waiting");
+ waiting = document.getElementById("div_waiting");
  done_image = 0;
  waiting.innerHTML = '<img src="/images/ajax-loader.gif">';
  webcamimage.src=imgBase + (++c) + '&rand='+Math.random();
 }
 function init()
 {
- webcamimage = document.getElementById("webcamimage");
+ webcamimage = document.getElementById("image_webcamimage");
  if( webcamimage )
  {
   setInterval("count()",10000);
@@ -62,7 +62,7 @@ function init()
   incr();
 }
 function incr() {
- waiting = document.getElementById("waiting");
+ waiting = document.getElementById("div_waiting");
  if (done_image ==1) {
   waiting.innerHTML = '<font color="#008800"><b>Next update in '+(10-x)+' seconds';
  } else {
@@ -73,7 +73,7 @@ function incr() {
 function hide_image()
 {
   done_image = 1;
-  waiting = document.getElementById("waiting");
+  waiting = document.getElementById("div_waiting");
   waiting.innerHTML = '<font color="#008800"><b>Next update in '+(10-x)+' seconds';
 }
 window.onload = init;
@@ -82,11 +82,11 @@ window.onload = init;
 <center>
 <a href="stopcampaign.php?id=<?echo $id;?>"><img src="/images/control_stop_blue.png"  border="0"> Stop This Campaign</a>&nbsp;
 <a href="report.php?type=today&id=<?echo $id;?>"><img src="/images/chart_pie.png"  border="0"> View Number Stats</a><br />
-<div id="waiting" style="height:16px">
+<div id="div_waiting" style="height:16px">
 <img src="/images/ajax-loader.gif">
 </div>
 <?box_end();?>
-<img src="graph.php?id=<?echo $id;?>&debug=<?echo $debug;?>" name="image" id="webcamimage" border="0" onload="hide_image();"><br />
+<img src="graph.php?id=<?echo $id;?>&debug=<?echo $debug;?>" name="image" id="image_webcamimage" border="0" onload="hide_image();"><br />
 <?
 require "footer.php";
 ?>
