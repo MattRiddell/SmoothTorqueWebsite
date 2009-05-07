@@ -9,7 +9,7 @@ if ($config_values['VIEW_CAMPAIGN'] == "") {
     //echo $config_values['VIEW_CAMPAIGN'];
 }
 if ($_COOKIE[level] == sha1("level100")) {
-box_start(680);
+box_start(700);
 } else {
 box_start(295);
 }
