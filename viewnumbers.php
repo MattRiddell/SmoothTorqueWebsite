@@ -17,7 +17,7 @@ if (!isset($_POST[campaignid])&&!isset($_GET[campaignid])){
 <?box_start();?>
 <center>
 <h3>View Numbers</h3>
-From here you can chose a campaign that you would like to see the numbers for.<br /><br />
+From here you can chose a campaign that<br />you would like to see the numbers for.<br /><br />
 <FORM ACTION="viewnumbers.php" METHOD="POST">
     <table class="tborderdd" align="center" border="0" cellpadding="0" cellspacing="2"><TR>
     <TD>Select Campaign:</TD><TD>
@@ -38,7 +38,7 @@ From here you can chose a campaign that you would like to see the numbers for.<b
     </TD>
     </TR><TR>
     <?if($security >= 100)
-    	echo "<tr><td colspan=\"2\"><font size=\"1\">Campaigns marks with a * do not belong to you.</font></td></tr>";
+    	echo "<tr><td colspan=\"2\"><font size=\"1\">(Campaigns marked with a * do not belong to you)</font></td></tr>";
 ?>
     <TD COLSPAN=2 ALIGN="CENTER"><br />
     <INPUT TYPE="SUBMIT" VALUE="Display Numbers">
