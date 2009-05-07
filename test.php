@@ -64,7 +64,7 @@ function init()
 function incr() {
  waiting = document.getElementById("waiting");
  if (done_image ==1) {
-  waiting.innerHTML = '<font color="#88cc88">Next update in '+(10-x)+' seconds';
+  waiting.innerHTML = '<font color="#008800"><b>Next update in '+(10-x)+' seconds';
  } else {
   waiting.innerHTML = '<img src="/images/ajax-loader.gif">';
  }
@@ -74,7 +74,7 @@ function hide_image()
 {
   done_image = 1;
   waiting = document.getElementById("waiting");
-  waiting.innerHTML = '<font color="#88cc88">Next update in '+(10-x)+' seconds';
+  waiting.innerHTML = '<font color="#008800"><b>Next update in '+(10-x)+' seconds';
 }
 window.onload = init;
 </script>
@@ -82,7 +82,7 @@ window.onload = init;
 <center>
 <a href="stopcampaign.php?id=<?echo $id;?>"><img src="/images/control_stop_blue.png"  border="0"> Stop This Campaign</a>&nbsp;
 <a href="report.php?type=today&id=<?echo $id;?>"><img src="/images/chart_pie.png"  border="0"> View Number Stats</a><br />
-<div id="waiting" style="height:20px">
+<div id="waiting" style="height:16px">
 <img src="/images/ajax-loader.gif">
 </div>
 <?box_end();?>
