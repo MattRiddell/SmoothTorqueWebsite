@@ -70,7 +70,7 @@ To create your first campaign, please click the Add Campaign button above.<br />
 exit(0);
 }
 ?>
-    <?box_start(720);?>
+    <?box_start(580);?>
     <center>
     <img width="16" height="16" src="/images/pencil.png" border="0">&nbsp;Edit Campaign&nbsp;
     <img width="16" height="16" src="/images/chart_pie.png" border="0">&nbsp;View Number Stats&nbsp;
