@@ -6,213 +6,99 @@ $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $campaigngroupid=mysql_result($result,0,'campaigngroupid');
 
-if (isset($_POST[queuename])){
-    //$queueid=$_POST[queueid];
-    $campaignid=$_POST[campaignid];
-$sql = 'SELECT * FROM campaign WHERE id=\''.$campaignid.'\'';
-$result=mysql_query($sql, $link) or die (mysql_error());;
-$row = mysql_fetch_assoc($result);
-//print_r($row);
-//exit(0);
-//echo "<br><br><br>";
-$trclid=mysql_result($result,0,'trclid');
-$clid=mysql_result($result,0,'clid');
-//echo "CLID: ".$clid;
-
-if (strlen($trclid)==0) {
-    $trclid = "notrclid";
-}
-$did=mysql_result($result,0,'did');
-$mode=mysql_result($result,0,'mode');
-$context=mysql_result($result,0,'context');
-$maxagents=mysql_result($result,0,'maxagents');
-$astqueuename=mysql_result($result,0,'astqueuename');
-
-    $id=$_POST[campaignid];
-    $queuename=$_POST[queuename];
-    $status=$_POST[status];
-    $details=$_POST[details];
-    $flags="0";
-    //9:00 am
-    //5:00 pm
-    $starttime=$_POST[starttime];
-    $starthour=strtok($starttime,": ");
-    $startmin=strtok(": ");
-    $startperiod=strtok(": ");
-    if ($startperiod=="pm"){
-        $starthour+=12;
-    } else {
-        if ($starthour==12){
-            $starthour=0;
-        }
-    }
-    $starttime=$starthour.":".$startmin;
-    $endtime=$_POST[endtime];
-    $endhour=strtok($endtime,": ");
-    $endmin=strtok(": ");
-    $endperiod=strtok(": ");
-    if ($endperiod=="pm"){
-        $endhour+=12;
-    } else {
-        if ($endhour==12){
-            $endhour=0;
-        }
-    }
-    $endtime=$endhour.":".$endmin;
-
-    $startdate=$_POST[startdate];
-    $enddate=$_POST[enddate];
-
-$sqlx = 'SELECT campaigngroupid, maxchans, maxcps FROM customer WHERE username=\''.$_COOKIE[user].'\'';
-$result=mysql_query($sqlx, $link) or die (mysql_error());;
-$campaigngroupid=mysql_result($result,0,'campaigngroupid');
-$maxchans=mysql_result($result,0,'maxchans');
-$maxcps=mysql_result($result,0,'maxcps');
-$username=$_COOKIE[user];
-
-
-$sql4="select trunkid from customer where campaigngroupid = ".$campaigngroupid;
-$resultx=mysql_query($sql4, $link) or die (mysql_error());;
-$trunkid=mysql_result($resultx,0,'trunkid');
-
-if ($trunkid==-1){
-    $sql3="select dialstring, id from trunk where current = 1";
-    $resultx=mysql_query($sql3, $link) or die (mysql_error());;
-    $dialstring=mysql_result($resultx,0,'dialstring');
-    $trunkid = mysql_result($resultx,0,'id');
-} else {
-    $sql3="select dialstring from trunk where id = ".$trunkid;
-    $resultx=mysql_query($sql3, $link) or die (mysql_error());;
-    $dialstring=mysql_result($resultx,0,'dialstring');
-}
-
-$dncsql = "SELECT number.phonenumber FROM number LEFT JOIN dncnumber ON number.phonenumber=dncnumber.phonenumber WHERE dncnumber.phonenumber IS NOT NULL AND number.campaignid='$_GET[id]'";
-$resultdnc=mysql_query($dncsql, $link) or die (mysql_error());;
-//echo $dncsql."<br />";
-while ($row = mysql_fetch_assoc($resultdnc)) {
-//    echo $row[phonenumber]." is in dnc<br />";
-    echo "<!-- . -->";
-    $removedncsql = "UPDATE number set status = 'indnc' where phonenumber='$row[phonenumber]'";
-    $resultremovednc=mysql_query($removedncsql, $link) or die (mysql_error());;
-}
-//exit(0);
-
-$sql1="delete from queue where campaignid=".$id;
-$did = str_replace("-","",$did);
-$did = str_replace("(","",$did);
-$did = str_replace(")","",$did);
-$did = str_replace(" ","",$did);
-
-$dialstring = str_replace("-","",$dialstring);
-$dialstring = str_replace(" ","",$dialstring);
-$dialstring = str_replace("(","",$dialstring);
-$dialstring = str_replace(")","",$dialstring);
-/*
-if (strlen($astqueuename)==0){
-    $astqueuename = "noqueue";
-}*/
-$sql2="INSERT INTO queue (campaignid,queuename,status,details,flags,transferclid,
-    starttime,endtime,startdate,enddate,did,clid,context,maxcalls,maxchans,maxretries
-    ,retrytime,waittime,trunk,astqueuename, accountcode, trunkid, customerID, maxcps) VALUES
-    ('$id','$queuename','1','$details','0','$trclid',
-    '$starttime','$endtime','$startdate','$enddate','$did','$clid',
-    '$context','$maxagents','$maxchans','0'
-    ,'0','30','".$dialstring."','$astqueuename','stl-".$username."','$trunkid','$campaigngroupid','$maxcps') ";
-   // echo $sql2."<br />";
-//exit(0);
-//echo $sql2;
-//$resultx=mysql_query($sql1, $link) or die (mysql_error());;
-$resultx=mysql_query($sql2, $link) or die (mysql_error());;
-
-
-
-    include("schedule.php");
-    exit;
-}
 require "header.php";
 require "header_schedule.php";
-if (!isset($_GET[id])){
+if (isset($_POST[queuename])){
+    $campaignid=sanitize($_POST[campaignid],false);
+    $name = sanitize($_POST[queuename]);
+    $description = sanitize($_POST[details]);
+    $regularity = sanitize($_POST[regularity]);
+    $username = sanitize($_COOKIE[user]);
+
+    $start_exploded = explode(" ",$_POST[starttime]);
+    $temp_time_exploded = explode(":",$start_exploded[0]);
+    $start_hour = $temp_time_exploded[0];
+    $start_minute = $temp_time_exploded[1];
+    if ($start_exploded[1] == "pm") {
+        $start_hour += 12;
+    }
+
+    $end_exploded = explode(" ",$_POST[endtime]);
+    $temp_time_exploded = explode(":",$end_exploded[0]);
+    $end_hour = $temp_time_exploded[0];
+    $end_minute = $temp_time_exploded[1];
+    if ($end_exploded[1] == "pm") {
+        $end_hour += 12;
+    }
+    $id = sanitize($_POST[id]);
+    //$sql = "INSERT INTO schedule (name, description, campaignid, start_hour, start_minute, end_hour, end_minute, regularity, username)
+    //           VALUES   ($name, $description, $campaignid, $start_hour, $start_minute, $end_hour, $end_minute, $regularity, $username)";
+    $sql = "UPDATE schedule set name=$name, description=$description, start_hour=$start_hour, start_minute=$start_minute,
+            end_hour=$end_hour, end_minute=$end_minute, regularity=$regularity, username=$username WHERE id = $id";
+    //echo $sql;
+    $result = mysql_query($sql) or die(mysql_error());
+    box_start(330);
     ?>
-    <FORM ACTION="addschedule.php" METHOD="POST">
-    <table class="tborder" align="center" border="0" cellpadding="0" cellspacing="2"><TR>
-    <TD>Select Campaign:</TD><TD>
-        <SELECT NAME="campaignid">
-        <?
-        //
-        $sql = 'SELECT id,name FROM campaign WHERE groupid='.$campaigngroupid;
-        $result=mysql_query($sql, $link) or die (mysql_error());;
-        //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
-        while ($row = mysql_fetch_assoc($result)) {
-            echo "<OPTION VALUE=\"".$row[id]."\">".substr($row[name],0,22)."</OPTION>";
-        }
-        ?>
-        </SELECT>
-
-    </TD>
-    </TR><TR>
-    <TD COLSPAN=2 ALIGN="CENTER">
-    <INPUT TYPE="SUBMIT" VALUE="Add Schedule">
-    </TD>
-    </TR></table>
-    </FORM>
+    Saved your schedule<br />
+    <img src="/images/tick.png" onLoad="window.location = 'schedule.php'">
     <?
-} else {
-$sql = 'SELECT * FROM queue WHERE queueid=\''.$_GET[id].'\'';
-$result=mysql_query($sql, $link) or die (mysql_error());;
+    box_end();
+    exit;
+}
+$result = mysql_query("SELECT * FROM schedule WHERE id = ".sanitize($_GET[id]));
 $row = mysql_fetch_assoc($result);
-//print_r($row);
-
 ?>
-<FORM ACTION="addschedule.php" METHOD="POST">
+
+<FORM ACTION="editschedule.php" METHOD="POST">
 <table class="tborder" align="center" border="0" cellpadding="0" cellspacing="2">
 <?
 ?>
-<TR><TD CLASS="thead">Queue Name</TD><TD>
-<INPUT TYPE="HIDDEN" NAME="queueid" VALUE="<?echo $_GET[id];?>">
-<INPUT TYPE="TEXT" NAME="queuename" VALUE="<?echo $row[queuename];?>" size="60">
+<TR><TD CLASS="thead">Schedule Name</TD><TD>
+<INPUT TYPE="HIDDEN" NAME="id" VALUE="<?echo $_GET[id];?>">
+<INPUT TYPE="TEXT" NAME="queuename" VALUE="<?echo $row[name];?>" size="60">
 </TD>
-</TR><TR><TD CLASS="thead">Queue Details</TD><TD>
-<INPUT TYPE="TEXT" NAME="details" VALUE="<?echo $row[details];?>" size="60">
+</TR><TR><TD CLASS="thead">Schedule Details</TD><TD>
+<INPUT TYPE="TEXT" NAME="details" VALUE="<?echo $row[description];?>" size="60">
 </TD>
 </TR><TR><TD CLASS="thead">Schedule Start Time</TD>
-<td><input id='starttime' name="starttime" type='text' value='<?echo $row[starttime];?>' size=8 maxlength=8 ONBLUR="validateDatePicker(this)">
+<td><input id='starttime' name="starttime" type='text' value='<?
+
+if ($row[start_hour]>12) {
+    echo ($row[start_hour]-12).":".$row[start_minute]." pm";
+} else {
+echo ($row[start_hour]-0).":".$row[start_minute]." am";
+}
+
+?>' size=8 maxlength=8 ONBLUR="validateDatePicker(this)">
 <IMG SRC="timePickerImages/timepicker.gif" BORDER="0" ALT="Pick a Time!" ONCLICK="selectTime(this,starttime)" STYLE="cursor:hand"></td>
 </TD>
 </TR><TR><TD CLASS="thead">Schedule End Time</TD>
-<td><input id='endtime' name="endtime" type='text' value='<?echo $row[endtime];?>' size=8 maxlength=8 ONBLUR="validateDatePicker(this)">
+<td><input id='endtime' name="endtime" type='text' value='<?
+
+if ($row[end_hour]>12) {
+    echo ($row[end_hour]-12).":".$row[end_minute]." pm";
+} else {
+echo ($row[end_hour]-0).":".$row[end_minute]." am";
+}
+
+?>' size=8 maxlength=8 ONBLUR="validateDatePicker(this)">
 <IMG SRC="timePickerImages/timepicker.gif" BORDER="0" ALT="Pick a Time!" ONCLICK="selectTime(this,endtime)" STYLE="cursor:hand"></td>
-</TD>
-</TR><TR><TD CLASS="thead">Schedule Start Date</TD><TD>
-<input name="startdate" value="<?echo $row[startdate];?>">
-
-<input type=button value="select" onclick="displayDatePicker('startdate', false, 'ymd', '-');">
-</TD>
-</TR><TR><TD CLASS="thead">Schedule End Date</TD><TD>
-<input name="enddate" value="<?echo $row[startdate];?>">
-
-<input type=button value="select" onclick="displayDatePicker('enddate', false, 'ymd', '-');">
-</TD>
-</TR>
-
-
-<TR><TD CLASS="thead">Type of Schedule</TD><TD>
-<SELECT NAME="status">
-<OPTION VALUE="1">Start at this time</OPTION>
-<OPTION VALUE="2">Stop at this time</OPTION>
-</SELECT>
 </TD>
 </TR>
 <TR>
-<TD COLSPAN=2 ALIGN="RIGHT">
-<br />Please note that the start and end dates and times are for when you<br />
-would like the dialer to read this information.  For example, a start<br />
-time of 8am and an end time of 9am means that if the dialer reads this<br />
-entry and the time is between 8am and 9am then it should act on it.
-<br /><br />
+<TD CLASS="thead">How often to run</TD>
+<TD>
+<select name="regularity">
+<option value="every-day">Every Day</option>
+<option value="mon-fri">Monday to Friday</option>
+<option value="mon-sat">Monday to Saturday</option>
+</select>
 </TD>
 </TR>
+
+
 <TR><TD COLSPAN=2 ALIGN="RIGHT">
-<INPUT TYPE="SUBMIT" VALUE="Add Schedule">
+<INPUT TYPE="SUBMIT" VALUE="Save Schedule">
 </TD>
 </TR>
 <?
@@ -220,6 +106,7 @@ entry and the time is between 8am and 9am then it should act on it.
 
 </TABLE>
 </FORM>
-<?      }
+<?
 require "footer.php";
 ?>
+
