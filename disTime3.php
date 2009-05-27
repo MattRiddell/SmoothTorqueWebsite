@@ -49,24 +49,18 @@ $result=mysql_query($sql, $link) or die (mysql_error());;
 if (mysql_num_rows($result)==0){
 ?>
 <br /><br />
-<center>
-<table background="/images/sdbox.png" width="300" height="200" class="dragme22">
-<tr>
-<td>
-</td>
-<td width="260">
+<?box_start(330);
+echo "<center><img src=\"/images/icons/gtk-dialog-info.png\" border=\"0\" width=\"64\" height=\"64\"><br />";
+?>
+
 <b>You don't have any campaigns created.</b><br />
 <br />
 A campaign is a collection of phone numbers you would like to call.<br />
 <br />
 To create your first campaign, please click the Add Campaign button above.<br />
-</td>
-<td>
-</td></tr>
-</table>
-</center>
 
 <?
+box_end();
 exit(0);
 }
 ?>

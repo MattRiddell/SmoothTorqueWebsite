@@ -1058,7 +1058,7 @@ SmoothTorque was written by the following staff from <a href="http://www.venture
 <b>Paul Crane</b>: Documentation<br />
 <b>Chris MacGregor</b>: Translations<br />
 <br />
-The SmoothTorque website uses the following components:<br />
+This SmoothTorque website uses the following components:<br />
 <br />
 <a href="http://www.famfamfam.com/lab/icons/silk/" target="_blank">Silk icon set 1.3 from Mark James</a><br />
 <a href="http://www.aditus.nu/jpgraph/" target="_blank">JPGraph from Aditus Consulting</a><br />

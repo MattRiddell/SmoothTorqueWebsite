@@ -16,6 +16,30 @@ function mysql_is_table($host, $user, $pass, $db, $tbl)
 }
 
 /*======================================================================
+                            Schedule Table
+  ======================================================================*/
+if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","schedule")){
+  include "admin/db_config.php";
+
+  $sql = "CREATE TABLE `schedule` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `name` varchar(255) default NULL,
+  `description` varchar(255) default NULL,
+  `campaignid` int default NULL,
+  `start_hour` tinyint(2) zerofill  default NULL,
+  `start_minute` tinyint(2) zerofill default NULL,
+  `end_hour` tinyint(2) zerofill  default NULL,
+  `end_minute` tinyint(2) zerofill  default NULL,
+  `regularity` varchar(255) default NULL,
+  `username` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
+  )";
+  $result=mysql_query($sql, $link) or die (mysql_error());
+  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created Scedule Table')";
+  $result=mysql_query($sql, $link);
+}
+
+/*======================================================================
                             Log Table
   ======================================================================*/
 if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","log")){

@@ -32,8 +32,8 @@ $campaigngroupid=($_GET[campaigngroupid]);
 //$_POST[campaignid]=$id;
 //$_GET[id]=$id;
 //}
-$sql = 'SELECT * FROM queue left join campaign ON queue.campaignid=campaign.id WHERE campaign.groupid='.$campaigngroupid.' and status>0';
-//echo $sql;
+$sql = 'SELECT * FROM schedule LEFT JOIN campaign ON schedule.campaignid = campaign.id WHERE campaign.groupid='.$campaigngroupid.'';
+//echo $sql."<br />";
 $result=mysql_query($sql, $link) or die (mysql_error());;
 ?>
 <table align="center" border="0" cellpadding="2" cellspacing="0">
@@ -64,7 +64,7 @@ Status
 
 <?
 while ($row = mysql_fetch_assoc($result)) {
-$sql2= 'SELECT name from campaign where id='.$row[campaignID];
+$sql2= 'SELECT name from campaign where id='.$row[campaignid];
 $result2=mysql_query($sql2, $link) or die (mysql_error());;
 $name=mysql_result($result2,0,'name');
 
