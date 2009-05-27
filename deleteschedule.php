@@ -36,11 +36,15 @@ $result=mysql_query($sql, $link);
 }
 require "header.php";
 require "header_schedule.php";
-
+box_start();
 ?>
-<table class="tborder" align="center" border="0" cellpadding="0" cellspacing="2">
+<br />
+
+<table class="tborderzzzzz" align="center" border="0" cellpadding="0" cellspacing="2">
 <TR><TD>
-Are you Sure You want to delete this record?<BR><BR>
+<img src="images/icons/gtk-dialog-warning.png" border="0" width="64" height="64"><br />
+<br />
+Are you Sure You want to<br /> delete this record?<BR><BR>
 </TD></TR>
 <TR><TD>
 <?
@@ -48,9 +52,11 @@ Are you Sure You want to delete this record?<BR><BR>
 $sql = 'SELECT * FROM schedule WHERE id='.sanitize($_GET[id]);
 $result=mysql_query($sql, $link) or die (mysql_error());;
 while ($row = mysql_fetch_assoc($result)) {
-    echo "<CENTER><B>".$row[name]." - ".$row[description]."</B><BR><BR>";
-    echo '<A HREF="deleteschedule.php?id='.$_GET[id].'&sure=yes">Yes, Delete it</A><BR>';
-    echo '<A HREF="schedule.php">No, Don\'t Delete It</A></CENTER>';
+    echo "<CENTER><b>".$row[name]."</b><br />".$row[description]."<BR><BR>";
+    echo '<A HREF="deleteschedule.php?id='.$_GET[id].'&sure=yes"><img src="images/tick.png" border="0">&nbsp;Yes, Delete it</A><br />';
+    echo "<br />";
+    echo '<A HREF="schedule.php"><img src="images/cross.png" border="0">&nbsp;No, Don\'t Delete It</A></CENTER>';
+    echo "<br />";
 ?>
 </TD></TR>
 <TR><TD>
@@ -59,6 +65,7 @@ while ($row = mysql_fetch_assoc($result)) {
 </TABLE>
 </FORM>
 <?
+box_end();
 }
 require "footer.php";
 ?>
