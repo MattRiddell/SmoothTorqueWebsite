@@ -49,16 +49,19 @@ $result=mysql_query($sql, $link) or die (mysql_error());;
 if (mysql_num_rows($result)==0){
 ?>
 <br /><br />
-<?box_start(330);
-echo "<center><img src=\"/images/icons/gtk-dialog-info.png\" border=\"0\" width=\"64\" height=\"64\"><br />";
+<?box_start();
+echo "<br /><center><img src=\"/images/icons/gtk-dialog-info.png\" border=\"0\" width=\"64\" height=\"64\"><br /><br />";
 ?>
 
 <b>You don't have any campaigns created.</b><br />
 <br />
-A campaign is a collection of phone numbers you would like to call.<br />
+A campaign is a collection of phone <br />numbers you would like to call.<br />
 <br />
-To create your first campaign, please click the Add Campaign button above.<br />
-
+<a href="addcampaign.php">
+<img src="images/icons/gtk-add.png" border="0" width="64" height="64"><br />
+Click here to create your first campaign</a><br /> or click the Add Campaign button above.
+<br />
+<br />
 <?
 box_end();
 exit(0);
@@ -66,15 +69,16 @@ exit(0);
 ?>
     <?box_start(580);?>
     <center>
+    <b>Key for the icons below:</b><br />
     <img width="16" height="16" src="/images/pencil.png" border="0">&nbsp;Edit Campaign&nbsp;
-    <img width="16" height="16" src="/images/chart_pie.png" border="0">&nbsp;View Number Stats&nbsp;
+    <img width="16" height="16" src="/images/chart_pie.png" border="0">&nbsp;View Number Statistics&nbsp;
     <img width="16" height="16" src="/images/control_stop_blue.png" border="0"> Stop Campaign
     <img width="16" height="16" src="/images/control_play_blue.png" border="0"> Start Campaign
     <br />
 <?    if ($config_values['ALLOW_NUMBERS_MANUAL'] == "YES") {?>
     <img width="16" height="16" src="/images/database_lightning.png" border="0"> Initialise Manual Dialing
     <?}?>
-    <img width="16" height="16" src="/images/chart_curve.png" border="0"> Realtime stats
+    <img width="16" height="16" src="/images/chart_curve.png" border="0"> Realtime Campaign Monitor
     <img width="16" height="16" src="/images/table.png" border="0"> View Numbers
     <img width="16" height="16" src="/images/delete.png" border="0"> Delete Campaign
     </center>
