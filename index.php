@@ -20,7 +20,7 @@ require "admin/db_config.php";
 $current_directory = dirname(__FILE__);
 require "/".$current_directory."/functions/functions.php";
 $url = $_SERVER[SERVER_NAME];
-$sql = "SELECT * FROM web_config WHERE \"en\" url = ".sanitize($url);
+$sql = "SELECT * FROM web_config WHERE LANG=\"en\" AND url = ".sanitize($url);
 $result_url = mysql_query($sql);
 if (mysql_num_rows($result_url) == 0) {
     $url = "default";
