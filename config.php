@@ -17,7 +17,13 @@ $result=mysql_query($sql, $link);
 /*================= Log Access ======================================*/
 
 } else {
-
+if (isset($_GET[delete_server])) {
+    $server = sanitize($_GET[delete_server]);
+    $lang = sanitize($_GET[LANG]);
+    $sql = "DELETE FROM web_config WHERE url = $server AND LANG = $lang";
+    mysql_query($sql);
+    unset($_POST[colour]);
+}
 if (isset($_POST[url_to_add])) {
     $copy_from = sanitize($_POST[copy_from]);
     $url_to_write = sanitize($_POST[url_to_add]);
@@ -385,15 +391,33 @@ Asterisk MySQL CDR Table:
 <tr>
 <td CLASS="thead" colspan="2">Multitenant Hosting</td>
 </tr>
-<tr  class="tborder2">
+<tr class="tborder2">
 <td colspan="2">
 <?
-$result = mysql_query("SELECT distinct url FROM web_config");
-if (mysql_num_rows($result) > 1) {
-    echo "Currently defined servers:<br />";
+$result = mysql_query("SELECT url, language, LANG FROM web_config WHERE url != 'default' ORDER BY url");
+if (mysql_num_rows($result) > 0) {
+    echo "Currently defined servers:</td></tr>";
     while ($row = mysql_fetch_assoc($result)) {
-        echo $row[url]." Language: ".$row[language];
+        echo "<tr class=\"tborder2\"><td><b>".$row[url]."</b></td><td>Language: ".$row[language]."&nbsp;<a href=\"config.php?delete_server=$row[url]&LANG=$row[LANG]\"><img src=\"images/cross.png\" border=\"0\"></td></tr>";
+        $servers[$row[url]] = 1;
     }
+    ?>
+<tr class="tborder2"><td CLASS="thead" colspan="2">Add new server</td>
+</tr><tr class="tborder2"><td>
+<form action="config.php" method="POST">
+New URL:</td><td> <input type="text" name="url_to_add" value=""></td></tr>
+<tr class="tborder2"><td>Copy From: </td><td><select name="copy_from">
+<option value="default">Default Configs</option>
+<?
+foreach ($servers as $url=>$bla) {
+    echo "<option value=\"$url\">$url</option>";
+}
+?>
+</select></td></tr>
+<tr><td colspan="2">
+<input type="submit" value="Add URL">
+</form>
+    <?
 } else {
 ?>
 You are not currently set up for multitenant hosting<br />
