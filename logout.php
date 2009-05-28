@@ -3,6 +3,7 @@
     setcookie("user","--",time()+6000);
     setcookie("level","--",time()+6000);
     setcookie("url","--",time()+6000);
+    setcookie("language","--",time()+6000);
 
     /*================= Log Access ======================================*/
     include "admin/db_config.php";
