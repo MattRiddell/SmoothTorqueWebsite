@@ -17,6 +17,26 @@ $result=mysql_query($sql, $link);
 /*================= Log Access ======================================*/
 
 } else {
+
+if (isset($_POST[url_to_add])) {
+    $copy_from = sanitize($_POST[copy_from]);
+    $url_to_write = sanitize($_POST[url_to_add]);
+    $result = mysql_query("SELECT * FROM web_config WHERE url = $copy_from");
+    while ($row = mysql_fetch_assoc($result)) {
+        $sql1 = "INSERT INTO web_config (url, ";
+        $sql2 = ") VALUES ($url_to_write, ";
+        foreach ($row as $field=>$value) {
+            if ($field != "url") {
+            $sql1.= $field.",";
+            $sql2.= sanitize($value).",";
+            }
+        }
+        $sql = substr($sql1,0,strlen($sql1)-1).substr($sql2,0,strlen($sql2)-1).")";
+        $resultx = mysql_query($sql);
+    }
+    unset($_POST[colour]);
+}
+
 //echo $_POST[sox];
 //print_r($_POST);
 //exit(0);
@@ -357,7 +377,47 @@ Asterisk MySQL CDR Table:
 </tr>
 </table>
 </div>
-<? /************************** Licence TAB *************************/ ?>
+
+
+<div class="tabbertab" title="Hosting">
+<center>
+<table>
+<tr>
+<td CLASS="thead" colspan="2">Multitenant Hosting</td>
+</tr>
+<tr  class="tborder2">
+<td colspan="2">
+<?
+$result = mysql_query("SELECT distinct url FROM web_config");
+if (mysql_num_rows($result) > 1) {
+    echo "Currently defined servers:<br />";
+    while ($row = mysql_fetch_assoc($result)) {
+        echo $row[url]." Language: ".$row[language];
+    }
+} else {
+?>
+You are not currently set up for multitenant hosting<br />
+<br />
+Please enter a URL you would like to set up. (i.e. call.venturevoip.com)<br />
+<br />
+Once you have added a url, you can log in from that URL and configure the system.<br />
+<br />
+<form action="config.php?add_url=1" method="POST">
+<input type="text" name="url_to_add" value="">
+<input type="hidden" name="copy_from" value="default">
+<input type="submit" value="Add URL">
+</form>
+<?
+}
+?>
+</td>
+</tr>
+
+</table>
+</div>
+
+
+<? /*
 <div class="tabbertab" title="Licensing">
 <center>
 <table>
@@ -436,6 +496,8 @@ if ($contents<1000){
 </tr>
 </table>
 </div>
+*/
+?>
 <? /************************** Look and Feel TAB *************************/ ?>
 <div class="tabbertab" title="Theme">
 <center>
