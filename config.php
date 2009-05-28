@@ -24,7 +24,7 @@ if (isset($_GET[delete_server])) {
     mysql_query($sql);
     unset($_POST[colour]);
 }
-if (isset($_POST[url_to_add])) {
+if (strlen($_POST[url_to_add])> 0) {
     $copy_from = sanitize($_POST[copy_from]);
     $url_to_write = sanitize($_POST[url_to_add]);
     $result = mysql_query("SELECT * FROM web_config WHERE url = $copy_from");
