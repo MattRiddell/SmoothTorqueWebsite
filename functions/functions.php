@@ -11,6 +11,23 @@ require $current_directory."/functions/urls.php";
 
 require $current_directory."/functions/layout.php";
 
+if (!function_exists('mysql_is_table') ) {
+function mysql_is_table($host, $user, $pass, $db, $tbl)
+{
+	$result = FALSE;
+    $tables = array();
+    $link = mysql_connect($host, $user, $pass) or die(mysql_error());
+    mysql_select_db($db) or die(mysql_error());
+    $q = @mysql_query("SHOW TABLES");
+    while ($r = @mysql_fetch_array($q)) { $tables[] = $r[0]; }
+    @mysql_free_result($q);
+//    @mysql_close($link);
+    if (in_array($tbl, $tables)) { $result =  TRUE; }
+	return $result;
+}
+}
+
+
 if (!function_exists('sec2hms') ) {
   function sec2hms ($sec, $padHours = false) {
 

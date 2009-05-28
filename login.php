@@ -1,5 +1,7 @@
 <?
 include "admin/db_config.php";
+$current_directory = dirname(__FILE__);
+require "/".$current_directory."/functions/functions.php";
 
 function mysql_is_table($host, $user, $pass, $db, $tbl)
 {
@@ -15,11 +17,11 @@ function mysql_is_table($host, $user, $pass, $db, $tbl)
 	return $result;
 }
 
+
 /*======================================================================
                             Schedule Table
   ======================================================================*/
 if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","schedule")){
-  include "admin/db_config.php";
 
   $sql = "CREATE TABLE `schedule` (
   `id` int(10) unsigned NOT NULL auto_increment,
@@ -43,7 +45,6 @@ if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","schedule")){
                             Log Table
   ======================================================================*/
 if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","log")){
-  include "admin/db_config.php";
 
   $sql = "CREATE TABLE `log` (
   `timestamp` timestamp NULL default NULL on update CURRENT_TIMESTAMP,
@@ -1174,6 +1175,17 @@ if (trim($dbpass)==trim($passwordHash)){
     setcookie("loggedin",sha1("LoggedIn".$_POST[user]),time()+6000);
     setcookie("user",$_POST[user],time()+6000);
     setcookie("language",$_POST[language],time()+6000);
+
+    /********************************************************/
+    $url = $_SERVER[SERVER_NAME];
+    $sql = "SELECT * FROM web_config WHERE LANG=".sanitize($_POST[language])." AND url = ".sanitize($url);
+    $result_url = mysql_query($sql);
+    if (mysql_num_rows($result_url) == 0) {
+        $url = "default";
+    }
+    setcookie("url",$url,time()+6000);
+    /********************************************************/
+
     if (mysql_result($result,0,'security')==100){
         $level=sha1("level100");
     } else if (mysql_result($result,0,'security')==0){

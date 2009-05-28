@@ -1,6 +1,11 @@
 <?
 $level=$_COOKIE[level];
 $language = $_COOKIE[language];
+$url = $_COOKIE[url];
+include "admin/db_config.php";
+
+$current_directory = dirname(__FILE__);
+require "/".$current_directory."/functions/functions.php";
 
 if ($level!=sha1("level100")) {
 include "header.php";
@@ -16,84 +21,82 @@ $result=mysql_query($sql, $link);
 //print_r($_POST);
 //exit(0);
 if (isset($_POST[colour])){
-    if ($language != "en") {
+    /*if ($language != "en") {
         $add = @fopen("/stweb_".$language.".conf",'w');
     } else {
         $add = @fopen("/stweb.conf",'w');
-    }
-    fwrite($add,"LANGUAGE=$_POST[LANGUAGE]\n");
-    fwrite($add,"COLOUR=$_POST[colour]\n");
-    fwrite($add,"TITLE=$_POST[title]\n");
-    fwrite($add,"LOGO=$_POST[logo]\n");
-    fwrite($add,"TEXT=$_POST[text]\n");
-    fwrite($add,"SOX=$_POST[sox]\n");
-    fwrite($add,"USERID=$_POST[userid]\n");
-    fwrite($add,"LICENCE=$_POST[licencekey]\n");
-    fwrite($add,"CDR_HOST=$_POST[CDR_HOST]\n");
-    fwrite($add,"CDR_USER=$_POST[CDR_USER]\n");
-    fwrite($add,"CDR_PASS=$_POST[CDR_PASS]\n");
-    fwrite($add,"CDR_DB=$_POST[CDR_DB]\n");
-    fwrite($add,"CDR_TABLE=$_POST[CDR_TABLE]\n");
-    fwrite($add,"MENU_HOME=$_POST[MENU_HOME]\n");
-    fwrite($add,"MENU_CAMPAIGNS=$_POST[MENU_CAMPAIGNS]\n");
-    fwrite($add,"MENU_NUMBERS=$_POST[MENU_NUMBERS]\n");
-    fwrite($add,"MENU_DNC=$_POST[MENU_DNC]\n");
-    fwrite($add,"MENU_MESSAGES=$_POST[MENU_MESSAGES]\n");
-    fwrite($add,"MENU_SCHEDULES=$_POST[MENU_SCHEDULES]\n");
-    fwrite($add,"MENU_CUSTOMERS=$_POST[MENU_CUSTOMERS]\n");
-    fwrite($add,"MENU_QUEUES=$_POST[MENU_QUEUES]\n");
-    fwrite($add,"MENU_SERVERS=$_POST[MENU_SERVERS]\n");
-    fwrite($add,"MENU_TRUNKS=$_POST[MENU_TRUNKS]\n");
-    fwrite($add,"MENU_ADMIN=$_POST[MENU_ADMIN]\n");
-    fwrite($add,"MENU_LOGOUT=$_POST[MENU_LOGOUT]\n");
-    fwrite($add,"DATE_COLOUR=$_POST[DATE_COLOUR]\n");
-    fwrite($add,"MAIN_PAGE_TEXT=$_POST[MAIN_PAGE_TEXT]\n");
-    fwrite($add,"MAIN_PAGE_USERNAME=$_POST[MAIN_PAGE_USERNAME]\n");
-    fwrite($add,"MAIN_PAGE_PASSWORD=$_POST[MAIN_PAGE_PASSWORD]\n");
-    fwrite($add,"MAIN_PAGE_LOGIN=$_POST[MAIN_PAGE_LOGIN]\n");
-    fwrite($add,"CURRENCY_SYMBOL=$_POST[CURRENCY_SYMBOL]\n");
-    fwrite($add,"PER_MINUTE=$_POST[PER_MINUTE]\n");
-    fwrite($add,"USE_BILLING=$_POST[USE_BILLING]\n");
-    fwrite($add,"FRONT_PAGE_BILLING=$_POST[FRONT_PAGE_BILLING]\n");
-    fwrite($add,"SPARE1=$_POST[SPARE1]\n");
-    fwrite($add,"SPARE2=$_POST[SPARE2]\n");
-    fwrite($add,"SPARE3=$_POST[SPARE3]\n");
-    fwrite($add,"SPARE4=$_POST[SPARE4]\n");
-    fwrite($add,"SPARE5=$_POST[SPARE5]\n");
+    }*/
+    $add = @fopen("/stweb.conf",'w');
+    /***************************************************/
     fwrite($add,"ST_MYSQL_HOST=$_POST[ST_MYSQL_HOST]\n");
     fwrite($add,"ST_MYSQL_USER=$_POST[ST_MYSQL_USER]\n");
     fwrite($add,"ST_MYSQL_PASS=$_POST[ST_MYSQL_PASS]\n");
-    fwrite($add,"ADD_CAMPAIGN=$_POST[ADD_CAMPAIGN]\n");
-    fwrite($add,"VIEW_CAMPAIGN=$_POST[VIEW_CAMPAIGN]\n");
-    fwrite($add,"PER_PAGE=$_POST[PER_PAGE]\n");
-    fwrite($add,"NUMBERS_VIEW=$_POST[NUMBERS_VIEW]\n");
-    fwrite($add,"NUMBERS_SYSTEM=$_POST[NUMBERS_SYSTEM]\n");
-    fwrite($add,"NUMBERS_GENERATE=$_POST[NUMBERS_GENERATE]\n");
-    fwrite($add,"NUMBERS_MANUAL=$_POST[NUMBERS_MANUAL]\n");
-    fwrite($add,"NUMBERS_UPLOAD=$_POST[NUMBERS_UPLOAD]\n");
-    fwrite($add,"NUMBERS_EXPORT=$_POST[NUMBERS_EXPORT]\n");
-    fwrite($add,"NUMBERS_SEARCH=$_POST[NUMBERS_SEARCH]\n");
-    fwrite($add,"NUMBERS_TITLE=$_POST[NUMBERS_TITLE]\n");
-
-    fwrite($add,"BILLING_TEXT=$_POST[BILLING_TEXT]\n");
-    fwrite($add,"CDR_TEXT=$_POST[CDR_TEXT]\n");
-
-    fwrite($add,"USE_GENERATE=$_POST[USE_GENERATE]\n");
-    fwrite($add,"DNC_NUMBERS_TITLE=$_POST[DNC_NUMBERS_TITLE]\n");
-    fwrite($add,"DNC_VIEW=$_POST[DNC_VIEW]\n");
-    fwrite($add,"DNC_SEARCH=$_POST[DNC_SEARCH]\n");
-    fwrite($add,"DNC_UPLOAD=$_POST[DNC_UPLOAD]\n");
-    fwrite($add,"DNC_ADD=$_POST[DNC_ADD]\n");
-    fwrite($add,"PER_LEAD=$_POST[PER_LEAD]\n");
-    fwrite($add,"SMTP_HOST=$_POST[SMTP_HOST]\n");
-    fwrite($add,"SMTP_USER=$_POST[SMTP_USER]\n");
-    fwrite($add,"SMTP_PASS=$_POST[SMTP_PASS]\n");
-    fwrite($add,"SMTP_FROM=$_POST[SMTP_FROM]\n");
-    fwrite($add,"USE_SEPARATE_DNC=$_POST[USE_SEPARATE_DNC]\n");
-    fwrite($add,"ALLOW_NUMBERS_MANUAL=$_POST[ALLOW_NUMBERS_MANUAL]\n");
-
-
+    /***************************************************/
     fclose($add);
+    mysql_query("UPDATE web_config SET language=".sanitize($_POST[LANGUAGE])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET colour=".sanitize($_POST[colour])." WHERE url = ".sanitize($url));
+    mysql_query("UPDATE web_config SET title=".sanitize($_POST[title])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET logo=".sanitize($_POST[logo])." WHERE url = ".sanitize($url));
+    mysql_query("UPDATE web_config SET contact_text=".sanitize($_POST[text])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET sox=".sanitize($_POST[sox])." WHERE url = ".sanitize($url));
+    mysql_query("UPDATE web_config SET userid=".sanitize($_POST[userid])." WHERE url = ".sanitize($url));
+    mysql_query("UPDATE web_config SET licence=".sanitize($_POST[licence])." WHERE url = ".sanitize($url));
+    mysql_query("UPDATE web_config SET cdr_host=".sanitize($_POST[CDR_HOST])." WHERE url = ".sanitize($url));
+    mysql_query("UPDATE web_config SET cdr_user=".sanitize($_POST[CDR_USER])." WHERE url = ".sanitize($url));
+    mysql_query("UPDATE web_config SET cdr_pass=".sanitize($_POST[CDR_PASS])." WHERE url = ".sanitize($url));
+    mysql_query("UPDATE web_config SET cdr_db=".sanitize($_POST[CDR_DB])." WHERE url = ".sanitize($url));
+    mysql_query("UPDATE web_config SET cdr_table=".sanitize($_POST[CDR_TABLE])." WHERE url = ".sanitize($url));
+    mysql_query("UPDATE web_config SET menu_home=".sanitize($_POST[MENU_HOME])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET menu_campaigns=".sanitize($_POST[MENU_CAMPAIGNS])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET menu_numbers=".sanitize($_POST[MENU_NUMBERS])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET menu_dnc=".sanitize($_POST[MENU_DNC])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET menu_messages=".sanitize($_POST[MENU_MESSAGES])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET menu_schedules=".sanitize($_POST[MENU_SCHEDULES])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET menu_queues=".sanitize($_POST[MENU_QUEUES])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET menu_servers=".sanitize($_POST[MENU_SERVERS])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET menu_trunks=".sanitize($_POST[MENU_TRUNKS])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET menu_admin=".sanitize($_POST[MENU_ADMIN])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET menu_logout=".sanitize($_POST[MENU_LOGOUT])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET date_colour=".sanitize($_POST[DATE_COLOUR])." WHERE url = ".sanitize($url));
+    mysql_query("UPDATE web_config SET main_page_text=".sanitize($_POST[MAIN_PAGE_TEXT])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET main_page_username=".sanitize($_POST[MAIN_PAGE_USERNAME])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET main_page_password=".sanitize($_POST[MAIN_PAGE_PASSWORD])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET main_page_login=".sanitize($_POST[MAIN_PAGE_LOGIN])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET currency_symbol=".sanitize($_POST[CURRENCY_SYMBOL])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET per_minute=".sanitize($_POST[PER_MINUTE])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET use_billing=".sanitize($_POST[USE_BILLING])." WHERE url = ".sanitize($url));
+    mysql_query("UPDATE web_config SET front_page_billing=".sanitize($_POST[FRONT_PAGE_BILLING])." WHERE url = ".sanitize($url));
+    mysql_query("UPDATE web_config SET spare1=".sanitize($_POST[SPARE1])." WHERE url = ".sanitize($url));
+    mysql_query("UPDATE web_config SET spare2=".sanitize($_POST[SPARE2])." WHERE url = ".sanitize($url));
+    mysql_query("UPDATE web_config SET spare3=".sanitize($_POST[SPARE3])." WHERE url = ".sanitize($url));
+    mysql_query("UPDATE web_config SET spare4=".sanitize($_POST[SPARE4])." WHERE url = ".sanitize($url));
+    mysql_query("UPDATE web_config SET spare5=".sanitize($_POST[SPARE5])." WHERE url = ".sanitize($url));
+    mysql_query("UPDATE web_config SET add_campaign=".sanitize($_POST[ADD_CAMPAIGN])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET view_campaign=".sanitize($_POST[VIEW_CAMPAIGN])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET per_page=".sanitize($_POST[PER_PAGE])." WHERE url = ".sanitize($url));
+    mysql_query("UPDATE web_config SET numbers_view=".sanitize($_POST[NUMBERS_VIEW])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET numbers_system=".sanitize($_POST[NUMBERS_SYSTEM])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET numbers_generate=".sanitize($_POST[NUMBERS_GENERATE])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET numbers_manual=".sanitize($_POST[NUMBERS_MANUAL])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET numbers_upload=".sanitize($_POST[NUMBERS_UPLOAD])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET numbers_export=".sanitize($_POST[NUMBERS_EXPORT])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET numbers_title=".sanitize($_POST[NUMBERS_TITLE])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET billing_text=".sanitize($_POST[BILLING_TEXT])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET cdr_text=".sanitize($_POST[CDR_TEXT])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET use_generate=".sanitize($_POST[USE_GENERATE])." WHERE url = ".sanitize($url));
+    mysql_query("UPDATE web_config SET dnc_numbers_title=".sanitize($_POST[DNC_NUMBERS_TITLE])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET dnc_view=".sanitize($_POST[DNC_VIEW])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET dnc_search=".sanitize($_POST[DNC_SEARCH])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET dnc_upload=".sanitize($_POST[DNC_UPLOAD])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET dnc_add=".sanitize($_POST[DNC_ADD])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET per_lead=".sanitize($_POST[PER_LEAD])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+    mysql_query("UPDATE web_config SET smtp_host=".sanitize($_POST[SMTP_HOST])." WHERE url = ".sanitize($url));
+    mysql_query("UPDATE web_config SET smtp_user=".sanitize($_POST[SMTP_USER])." WHERE url = ".sanitize($url));
+    mysql_query("UPDATE web_config SET smtp_pass=".sanitize($_POST[SMTP_PASS])." WHERE url = ".sanitize($url));
+    mysql_query("UPDATE web_config SET smtp_from=".sanitize($_POST[SMTP_FROM])." WHERE url = ".sanitize($url));
+    mysql_query("UPDATE web_config SET use_separate_dnc=".sanitize($_POST[USE_SEPARATE_DNC])." WHERE url = ".sanitize($url));
+    mysql_query("UPDATE web_config SET allow_numbers_manual=".sanitize($_POST[ALLOW_NUMBERS_MANUAL])." WHERE url = ".sanitize($url));
+
 
     /*$add = @fopen("./admin/db_config.php",'w');
     $script = '\<\?

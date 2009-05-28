@@ -106,14 +106,19 @@ if (isset($_GET[error])){
                 <INPUT class="input130" TYPE="TEXT" NAME="user"><br />
                 <?echo $config_values['MAIN_PAGE_PASSWORD'];?>:<br />
                 <INPUT class="input130"  TYPE="PASSWORD" NAME="pass"><br /><br />
-<?if (sizeof($config_values_array) > 0) {
+<?
+$result = mysql_query("SELECT LANG, language FROM web_config WHERE url = ".sanitize($url));
+if (mysql_num_rows($result) == 0) {
+    $result = mysql_query("SELECT LANG, language FROM web_config WHERE url = 'default'");
+}
+if (mysql_num_rows($result) > 0) {
     echo 'Language:<br />';
     //echo "Translations Available";
     echo '<select name="language">';
 //    echo '<option value="en">English</option>';
-    foreach ($config_values_array as $lang=>$translations) {
+    while ($row = mysql_fetch_assoc($result)) {
 
-        echo '<option value="'.$lang.'">'.$config_values_array[$lang][LANGUAGE].'</option>';
+        echo '<option value="'.$row[LANG].'">'.$row[language].'</option>';
     }
     echo '</select><br /><br />';
 }?>
