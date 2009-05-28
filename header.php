@@ -137,7 +137,11 @@ if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","web_config")){
 
 if ((!(isset($_COOKIE[language])))||$_COOKIE[language] == "--") {
     $_COOKIE[language] = "en";
-}$url = $_COOKIE[url];
+}
+if ($_COOKIE[url] == "--") {
+    $_COOKIE[url] = $_SERVER[SERVER_NAME];
+}
+$url = $_COOKIE[url];
 
 $result = mysql_query("SELECT * FROM web_config WHERE LANG = ".sanitize($_COOKIE[language])." AND url = ".sanitize($url)) or die(mysql_error());
 if (mysql_num_rows($result) == 0) {
