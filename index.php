@@ -17,6 +17,8 @@
 /* site. Because we may have no cookie set, we should temporarily set it*/
 
 require "admin/db_config.php";
+$current_directory = dirname(__FILE__);
+require "/".$current_directory."/functions/functions.php";
 $url = $_SERVER[SERVER_NAME];
 $sql = "SELECT * FROM web_config WHERE LANG=".sanitize($_POST[language])." AND url = ".sanitize($url);
 $result_url = mysql_query($sql);
