@@ -14,69 +14,17 @@
  */
 
 /* Read the header file.  This is done on pretty much every page of the
-/* site. */
+/* site. Because we may have no cookie set, we should temporarily set it*/
+
+require "admin/db_config.php";
+$url = $_SERVER[SERVER_NAME];
+$sql = "SELECT * FROM web_config WHERE LANG=".sanitize($_POST[language])." AND url = ".sanitize($url);
+$result_url = mysql_query($sql);
+if (mysql_num_rows($result_url) == 0) {
+    $url = "default";
+}
+setcookie("url",$url,time()+6000);
 require "header.php";
-
-// Read the main config file
-$config_file = "/stweb.conf";
-
-// A comment in the above file is defined here
-$comment = "#";
-
-// Open the config file
-$fp = fopen($config_file, "r");
-
-// Loop through the file
-while (!feof($fp)) {
-  // Get a line from the file
-  $line = trim(fgets($fp));
-
-  /* if line exists and is not started by the comment defined above
-   * By default a comment is defined as a line starting with #
-   */
-  if ($line && substr($line,0,strlen($comment))!=$comment) {
-    // Get out the pieces of the line separated by the = sign
-    $pieces = explode("=", $line);
-
-    // The option is the piece before the =
-    $option = trim($pieces[0]);
-
-    // The value is the piece after the =
-    $value = trim($pieces[1]);
-
-    // Now set the value in the overall array
-    $config_values[$option] = $value;
-  }
-}
-
-// Close the file
-fclose($fp);
-
-// Set some defaults that will be required for the front page
-if ($config_values['MAIN_PAGE_USERNAME'] == "") {
-    $config_values['MAIN_PAGE_USERNAME'] = "Username";
-}
-
-if ($config_values['MAIN_PAGE_PASSWORD'] == "") {
-    $config_values['MAIN_PAGE_PASSWORD'] = "Password";
-}
-
-if ($config_values['MAIN_PAGE_LOGIN'] == "") {
-    $config_values['MAIN_PAGE_LOGIN'] = "Login";
-}
-
-if ($config_values['TITLE'] == "") {
-    $config_values['TITLE'] = "SmoothTorque Predictive Dialing Platform";
-}
-
-if ($config_values['TEXT'] == "") {
-    $config_values['TEXT'] = "For further information please email sales@venturevoip.com";
-}
-
-if ($config_values['MAIN_PAGE_LOGIN'] == "") {
-    $config_values['MAIN_PAGE_LOGIN'] = "Login";
-}
-
 
 echo "<FONT FACE=\"ARIAL\">";
 ?>

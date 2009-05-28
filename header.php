@@ -156,7 +156,7 @@ if (mysql_num_rows($result) == 0) {
 $row = NULL;
 while ($row = mysql_fetch_assoc($result) ) {
     foreach ($row as $key=>$value) {
-        if ($field != "contact_text") {
+        if ($key != "contact_text") {
             $config_values[strtoupper($key)] = $value;
         } else {
             $config_values["TEXT"] = $value;
