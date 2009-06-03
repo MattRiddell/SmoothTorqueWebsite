@@ -206,7 +206,6 @@ if (!($_COOKIE["loggedin"]==sha1("LoggedIn".$user))){
         ?><META HTTP-EQUIV=REFRESH CONTENT="0; URL=/index.php?redirect=<?echo $myPage;?>"><?
         exit(0);
     } else {
-//        exit(0);
         $loggedin=false;
     }
 }
@@ -304,7 +303,4 @@ if ($loggedin) {
         unset($creditlimit);
     }
 }
-echo "<p align=\"left\">";
-print_pre(get_defined_vars());
-echo "</p>";
 ?>
