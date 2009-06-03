@@ -1,42 +1,52 @@
 <?php
 
 /* Find out what the base directory name is for two reasons:
-    1. So we can include files
-    2. So we can explain how to set up things that are missing */
+ *  1. So we can include files
+ *  2. So we can explain how to set up things that are missing
+ */
 $current_directory = dirname(__FILE__);
 
 /* What page we are currently on - this is used to highlight the menu
-   system as well as to not cache certain pages like the graphs */
+ * system as well as to not cache certain pages like the graphs
+ */
 $self=$_SERVER['PHP_SELF'];
 
 /* Load in the functions we may need - these are the list of available
-   custom functions - for more information, read the comments in the
-   functions.php file - most functions are in their own file in the
-   functions subdirectory */
+ * custom functions - for more information, read the comments in the
+ * functions.php file - most functions are in their own file in the
+ * functions subdirectory
+ */
 require "/".$current_directory."/functions/functions.php";
 
-/* Find out what user the webserver is running as */
+/* Find out what user the webserver is running as - this looks like you
+   could also get it from $HTTP_ENV_VARS[APACHE_RUN_USER] but I'm a little
+   concerned about the fact it mentions apache - i.e. won't work with
+   another server type - this'll have to do for the moment
+*/
 $whoami = exec('whoami');
 
-/* Get Cookies */
+/* Get the required Cookies */
 $language=$_COOKIE[language];
 $user=$_COOKIE[user];
 $level=$_COOKIE[level];
 
 /* Make sure we have the environment set up correctly - if not give the
-   user some information about how to remedy the situation - these
-   functions are mainly for an installer */
+ * user some information about how to remedy the situation - these
+ * functions are mainly for the installer
+ */
 check_for_gd_library();
 check_for_upload_settings();
 check_for_upload_directory($whoami);
 
 /* This was temporarily used to check for the running of the backend.
-   Not currently used because of permission problems, but may be
-   resurrected in the future */
+ * Not currently used because of permission problems, but may be
+ * resurrected in the future
+ */
 /*$cmd = "ps aux |grep `cat /SmoothTorque/exampled.lock`";*/
 
 /* See if we can find out the version of the SmoothTorque backend that is
-   currently installed - we use this so we can inform about updates etc */
+ * currently installed - we use this so we can inform about updates etc
+ */
 $version = get_backend_version();
 
 /* Load in the database connection values and chose the database name */
@@ -83,17 +93,17 @@ if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","web_config")){
     smtp_from VARCHAR(250), use_separate_dnc VARCHAR(250),
     allow_numbers_manual VARCHAR(250)
   )";
-  $result=mysql_query($sql, $link) or die (mysql_error());
+  mysql_query($sql, $link) or die (mysql_error());
   $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created web_config Table')";
-  $result=mysql_query($sql, $link);
+  mysql_query($sql, $link);
 
   /*
-  Check if the files are present.
-  If not just create the info in the database.
-  If so, read the info out of the database.
-  Once done with this loop read the info out of the db and into
-  $config_values based on the language cookie and the url
-  */
+   * Check if the files are present.
+   * If not just create the info in the database.
+   * If so, read the info out of the database.
+   * Once done with this loop read the info out of the db and into
+   * $config_values based on the language cookie and the url
+   */
   $config_files[en] = "/stweb.conf";
   $config_files[it] = "/stweb_it.conf";
   $config_files[es] = "/stweb_es.conf";
@@ -103,8 +113,6 @@ if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","web_config")){
                                      ('default', 'it', 'Italiano', '#000000', 'The SmoothTorque Enterprise Predictive Dialing Platform', '/images/logo2.png', 'For further information please email sales@venturevoip.com', '/usr/bin/sox', 'VentureVoIP', 'DRFHUJWQIWU', 'localhost', 'root', '', 'phoneDB', 'cdr', 'Home', 'Campagne', 'Numeri', 'DNC Numeri', 'Messaggi', 'Orari', 'Clienti', 'Code', 'Servers', 'Linee telefoniche', 'Amministrazione', 'Logout', '#9999FF', 'Per iniziare, vai nel tuo elenco di campagne facendo clic sulla scheda Campagne nella parte superiore di questa pagina.', 'Nome utente', 'Password', 'Accesso', '€', 'Al minuto', 'YES', null, 'Spare 1 (inutilizzati)', 'Spare 2 (inutilizzati)', 'Spare 3 (inutilizzati)', 'Spare 4 (inutilizzati)', 'Spare 5 (inutilizzati)', 'localhost', 'root', '', 'Aggiungi campagna', 'Visualizza campagne', '200', 'Visualizza i numeri di telefono', 'Utilizzare System elenchi', 'Generare automaticamente il numero', 'Aggiungere manualmente i numeri', 'Carica numeri da un file di testo', 'Esporta i numeri di telefono', 'Ricerca di un numero di telefono', 'Numero della lista di gestione', 'Log di fatturazione', 'Chiama Dettagli', 'YES', 'DNC Numeri', 'Vedere numeri esistenti DNC', 'Cerca DNC numeri', 'Carica DNC numeri da un file di testo', 'Aggiungi DNC numeri manualmente', 'Prezzo per portare', 'localhost', '', '', 'matt@venturevoip.com', 'NO', 'YES')";
   $sql_defaults[es] = "INSERT INTO web_config (url, LANG, language,colour,title,logo,contact_text,sox,userid,licence,cdr_host,cdr_user,cdr_pass,cdr_db,cdr_table,menu_home,menu_campaigns,menu_numbers,menu_dnc,menu_messages,menu_schedules,menu_customers,menu_queues,menu_servers,menu_trunks,menu_admin,menu_logout,date_colour,main_page_text,main_page_username,main_page_password,main_page_login,currency_symbol,per_minute,use_billing,front_page_billing,spare1,spare2,spare3,spare4,spare5,st_mysql_host,st_mysql_user,st_mysql_pass,add_campaign,view_campaign,per_page,numbers_view,numbers_system,numbers_generate,numbers_manual,numbers_upload,numbers_export,numbers_search,numbers_title,billing_text,cdr_text,use_generate,dnc_numbers_title,dnc_view,dnc_search,dnc_upload,dnc_add,per_lead,smtp_host,smtp_user,smtp_pass,smtp_from,use_separate_dnc,allow_numbers_manual) VALUES
                                      ('default', 'es', 'Español', '#000000', 'The SmoothTorque Enterprise Predictive Dialing Platform', '/images/logo2.png', 'For further information please email sales@venturevoip.com', '/usr/bin/sox', 'VentureVoIP', 'DRFHUJWQIWU', 'localhost', 'root', '', 'phoneDB', 'cdr', 'Página principal', 'Campañas', 'Números', 'DNC Números', 'Mensajes', 'Listas', 'Clientes', 'Colas', 'Servidores', 'Líneas telefónicas', 'Administración', 'Logout', '#9999FF', 'Para empezar, vaya en su lista de campañas, haga clic en la pestaña Campañas en la parte superior de esta página.', 'Nombre de usuario', 'Contraseña', 'Inicio de sesión', '€', 'Por minuto', 'YES', null, 'Spare 1 (no utilizados)', 'Spare 2 (no utilizados)', 'Spare 3 (no utilizados)', 'Spare 4 (no utilizados)', 'Spare 5 (no utilizados)', 'localhost', 'root', '', 'Añadir Campaña', 'Ver Campañas', '200', 'Ver los números de teléfono', 'Utilice sistema de listas', 'Generar automáticamente los números', 'Añadir manualmente los números de', 'Cargar los números de un archivo de texto', 'Exportación números de teléfono', 'Búsqueda de un número de teléfono', 'Número de la gerencia de la lista', 'Registros de facturación', 'Detalles de las llamadas', 'YES', 'Lista de No Llamar', 'Ver los números de DNC', 'Buscar números DNC', 'Subir DNC números de un archivo de texto', 'Añadir manualmente los números de DNC', 'Precio por plomo', 'localhost', '', '', 'matt@venturevoip.com', 'NO', 'YES')";
-
-  //require "default_configs.php";
   foreach ($config_files as $current_language=>$filename) {
       if (file_exists($filename)) {
           $fp = fopen($filename, "r");
@@ -127,36 +135,47 @@ if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","web_config")){
               }
           }
           fclose($fp);
+          unset($option);
+          unset($value);
+          unset($fp);
+          unset($line);
           $sql = substr($sql1,0,strlen($sql1)-1).substr($sql2,0,strlen($sql2)-1).")";
-          $result = mysql_query($sql) or die(mysql_error());
+          mysql_query($sql) or die(mysql_error());
       } else {
-          $result = mysql_query($sql_defaults[$current_language]) or die(mysql_error());
+          mysql_query($sql_defaults[$current_language]) or die(mysql_error());
       }
   }
 }
-
+/* If we have no language set, let's use English - this is mainly because
+ * header.php is also called from index.php where we couldn't possibly
+ * know the language.
+ */
 if ((!(isset($_COOKIE[language])))||$_COOKIE[language] == "--") {
     $_COOKIE[language] = "en";
 }
+/* Same goes for the server name */
 if ($_COOKIE[url] == "--") {
     $_COOKIE[url] = $_SERVER[SERVER_NAME];
 }
+
+/* Set a variable so we don't need to keep reading the cookies */
 $url = $_COOKIE[url];
 
-$result = mysql_query("SELECT * FROM web_config WHERE LANG = ".sanitize($_COOKIE[language])." AND url = ".sanitize($url)) or die(mysql_error());
-if (mysql_num_rows($result) == 0) {
-    // No entry found for this url - use the default
+/* We now have a language and a server name */
+$result_config = mysql_query("SELECT * FROM web_config WHERE LANG = ".sanitize($_COOKIE[language])." AND url = ".sanitize($url)) or die(mysql_error());
+if (mysql_num_rows($result_config) == 0) {
+    /* No entry found for this url - use the default */
     $sql = "SELECT * FROM web_config WHERE LANG = ".sanitize($_COOKIE[language])." AND url = 'default'";
-    //echo $sql;
-    $result = mysql_query($sql) or die(mysql_error());
+    $result_config = mysql_query($sql) or die("Unable to load config information from mysql: ".mysql_error());
 }
 
-if (mysql_num_rows($result) == 0) {
-    echo "Still no config!";
+if (mysql_num_rows($result_config) == 0) {
+    echo "Even though we were sucessful reading the config, it has no values.  Please send an email to smoothtorque@venturevoip.com";
     exit(0);
 }
-$header_row = NULL;
-while ($header_row = mysql_fetch_assoc($result) ) {
+
+/* Now that we have the config values, put them into the array */
+while ($header_row = mysql_fetch_assoc($result_config) ) {
     foreach ($header_row as $key=>$value) {
         if ($key != "contact_text") {
             $config_values[strtoupper($key)] = $value;
@@ -165,6 +184,10 @@ while ($header_row = mysql_fetch_assoc($result) ) {
         }
     }
 }
+unset($key);
+unset($value);
+unset($result_config);
+unset($header_row);
 
 mysql_select_db("SineDialer", $link);
 
@@ -230,38 +253,58 @@ if ($self == "/test.php" || $self == "/report.php") {?>
 
 <?if (isset($menu) && $loggedin == true){?>
 <center><img src="<?echo $config_values['LOGO'];?>">
-<?echo $menu;flush();}?>
+<?
+echo $menu;
+flush();
+unset($menu);
+}?>
 
 <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" class="tborder3">
 <tr valign="TOP" >
 <td bgcolor="#ffffff">
 <?
 if ($loggedin) {
-if (!($config_values['USE_BILLING'] == "YES")) {
-    /* The billing system is not enabled so don't bother printing links
-       related to credit etc */
-    echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img width=\"16\" height=\"16\"  src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(strftime('%A %d %B %Y %H:%M:%S'))."</font><br /></center>";
-} else {
-    /* Find out how much credit and what the credit limit is for this
-       customer */
-    $sql = "SELECT credit, creditlimit from billing where accountcode = 'stl-$_COOKIE[user]'";
-    $result = mysql_query($sql,$link);
-    if (mysql_num_rows($result)==0){
-        /* They have no billing account - set to defaults */
-        $credit = $config_values['CURRENCY_SYMBOL']." 0.00";
-        $creditlimit = 0;
-        $postpay = 0;
+    if (!($config_values['USE_BILLING'] == "YES")) {
+        /* The billing system is not enabled so don't bother printing links
+           related to credit etc */
+        echo "<center>";
+        echo "<font color=\"".$config_values['DATE_COLOUR']."\">";
+        echo "<a href=\"/help/index.php\">";
+        echo "<img width=\"16\" height=\"16\"  src=\"/images/help.png\" border=\"0\">";
+        echo "<b> Help</b>";
+        echo "</a>";
+        echo "&nbsp;".ucwords(strftime('%A %d %B %Y %H:%M:%S'));
+        echo "</font>";
+        echo "</center>";
+        echo "<br />";
     } else {
-        /* They have a billing account - set up the variables */
-        $credit = $config_values['CURRENCY_SYMBOL']." ".number_format(mysql_result($result,0,'credit'),2);
-        $creditlimit = $config_values['CURRENCY_SYMBOL']." ".number_format(mysql_result($result,0,'creditlimit'),2);
-        $postpay = 1;
-    }
-    if ($postpay == 1) {
-        echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img width=\"16\" height=\"16\"  src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(strftime('%A %d %B %Y %H:%M:%S'))." Credit: $credit Credit Limit: $creditlimit <a href=\"/viewcdr.php\"><img width=\"16\" height=\"16\" src=\"/images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"/billinglog_account.php\"><img width=\"16\" height=\"16\" src=\"/images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
-    } else {
-        echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img width=\"16\" height=\"16\"  src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(strftime('%A %d %B %Y %H:%M:%S'))." Credit: $credit <a href=\"/viewcdr.php\"><img width=\"16\" height=\"16\"  src=\"/images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"/billinglog_account.php\"><img width=\"16\" height=\"16\"  src=\"/images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
+        /* Find out how much credit and what the credit limit is for this
+           customer */
+        $sql = "SELECT credit, creditlimit from billing where accountcode = 'stl-$_COOKIE[user]'";
+        $result_credit = mysql_query($sql,$link);
+        if (mysql_num_rows($result_credit)==0){
+            /* They have no billing account - set to defaults */
+            $credit = $config_values['CURRENCY_SYMBOL']." 0.00";
+            $creditlimit = 0;
+            $postpay = 0;
+        } else {
+            /* They have a billing account - set up the variables */
+            $credit = $config_values['CURRENCY_SYMBOL']." ".number_format(mysql_result($result_credit,0,'credit'),2);
+            $creditlimit = $config_values['CURRENCY_SYMBOL']." ".number_format(mysql_result($result_credit,0,'creditlimit'),2);
+            $postpay = 1;
+        }
+        if ($postpay == 1) {
+            echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img width=\"16\" height=\"16\"  src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(strftime('%A %d %B %Y %H:%M:%S'))." Credit: $credit Credit Limit: $creditlimit <a href=\"/viewcdr.php\"><img width=\"16\" height=\"16\" src=\"/images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"/billinglog_account.php\"><img width=\"16\" height=\"16\" src=\"/images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
+        } else {
+            echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img width=\"16\" height=\"16\"  src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(strftime('%A %d %B %Y %H:%M:%S'))." Credit: $credit <a href=\"/viewcdr.php\"><img width=\"16\" height=\"16\"  src=\"/images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"/billinglog_account.php\"><img width=\"16\" height=\"16\"  src=\"/images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
+        }
+        unset($result_credit);
+        unset($postpay);
+        unset($credit);
+        unset($creditlimit);
     }
 }
-}
+echo "<p align=\"left\">";
+print_pre(get_defined_vars());
+echo "</p>";
 ?>
