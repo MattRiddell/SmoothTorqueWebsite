@@ -155,9 +155,9 @@ if (mysql_num_rows($result) == 0) {
     echo "Still no config!";
     exit(0);
 }
-$row = NULL;
-while ($row = mysql_fetch_assoc($result) ) {
-    foreach ($row as $key=>$value) {
+$header_row = NULL;
+while ($header_row = mysql_fetch_assoc($result) ) {
+    foreach ($header_row as $key=>$value) {
         if ($key != "contact_text") {
             $config_values[strtoupper($key)] = $value;
         } else {
