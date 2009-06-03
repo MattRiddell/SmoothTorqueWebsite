@@ -1,21 +1,24 @@
 <?
-$config_file = "/stweb.conf";
-$totalcost = array();
-$comment = '';
-$fp = fopen($config_file, "r");
-while (!feof($fp)) {
-  $line = trim(fgets($fp));
-  if ($line && substr($line,0,1)!=$comment) {
-    $pieces = explode("=", $line);
-    $option = trim($pieces[0]);
-    $value = trim($pieces[1]);
-    $config_values[$option] = $value;
-  }
-}
-fclose($fp);
-
 include "admin/db_config.php";
 mysql_select_db("SineDialer", $link);
+$totalcost = array();
+$result_config = mysql_query("SELECT * FROM web_config WHERE LANG = en AND url = 'default'") or die(mysql_error());
+if (mysql_num_rows($result_config) == 0) {
+    echo "Even though we were sucessful reading the config, it has no values.  Please send an email to smoothtorque@venturevoip.com";
+    exit(0);
+}
+
+/* Now that we have the config values, put them into the array */
+while ($header_row = mysql_fetch_assoc($result_config) ) {
+    foreach ($header_row as $key=>$value) {
+        if ($key != "contact_text") {
+            $config_values[strtoupper($key)] = $value;
+        } else {
+            $config_values["TEXT"] = $value;
+        }
+    }
+}
+
 $currency = $config_values['CURRENCY_SYMBOL'];
 $db_host=$config_values['CDR_HOST'];
 $db_user=$config_values['CDR_USER'];
@@ -27,15 +30,15 @@ while ($accounts = mysql_fetch_assoc($result_accounts)) {
 $accountcode_in = $accounts['accountcode'];
 $cdrlink = mysql_connect($db_host, $db_user, $db_pass) OR die(mysql_error());
 mysql_select_db($config_values['CDR_DB'], $cdrlink);
-$sql = "SELECT count(*) from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation' 
+$sql = "SELECT count(*) from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation'
 	and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode_in' and userfield2!='1'";
 $result = mysql_query($sql,$cdrlink);
 $count = mysql_result($result,0,0);
 echo $count." Total Records for $accountcode_in\n";
 
 //$sql = "SELECT * from ".$config_values['CDR_TABLE']." order by calldate DESC LIMIT $start,100";
-$sql = "SELECT        * from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation' 
-        and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode_in' and userfield2!='1' 
+$sql = "SELECT        * from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation'
+        and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode_in' and userfield2!='1'
         order by calldate DESC limit 5000";
 
 $result = mysql_query($sql,$cdrlink);
