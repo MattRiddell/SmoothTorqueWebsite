@@ -1,9 +1,14 @@
 <?
+/* If you do not want to pull the config information for the default host
+ * then you _MUST_ change the value url to the url you would like to use.
+ * I.E. call.venturevoip.com
+ */
+$url = "default";
 include "admin/db_config.php";
 mysql_select_db("SineDialer", $link) or die("Unable to connect: ".mysql_error());
 $totalcost = array();
 echo "Loading config information...\n";
-$result_config = mysql_query("SELECT * FROM web_config WHERE LANG = 'en' AND url = 'default'") or die(mysql_error());
+$result_config = mysql_query("SELECT * FROM web_config WHERE LANG = 'en' AND url = '$url'") or die(mysql_error());
 if (mysql_num_rows($result_config) == 0) {
     echo "Even though we were sucessful reading the config, it has no values.  Please send an email to smoothtorque@venturevoip.com";
     exit(0);
