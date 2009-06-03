@@ -1,13 +1,13 @@
 <?
 include "admin/db_config.php";
-mysql_select_db("SineDialer", $link);
+mysql_select_db("SineDialer", $link) or die("Unable to connect: ".mysql_error());
 $totalcost = array();
+echo "Loading config information...\n";
 $result_config = mysql_query("SELECT * FROM web_config WHERE LANG = 'en' AND url = 'default'") or die(mysql_error());
 if (mysql_num_rows($result_config) == 0) {
     echo "Even though we were sucessful reading the config, it has no values.  Please send an email to smoothtorque@venturevoip.com";
     exit(0);
 }
-
 /* Now that we have the config values, put them into the array */
 while ($header_row = mysql_fetch_assoc($result_config) ) {
     foreach ($header_row as $key=>$value) {
@@ -18,6 +18,7 @@ while ($header_row = mysql_fetch_assoc($result_config) ) {
         }
     }
 }
+echo "Config loaded\n";
 
 $currency = $config_values['CURRENCY_SYMBOL'];
 $db_host=$config_values['CDR_HOST'];
