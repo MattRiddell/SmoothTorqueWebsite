@@ -2,7 +2,7 @@
 include "admin/db_config.php";
 mysql_select_db("SineDialer", $link);
 $totalcost = array();
-$result_config = mysql_query("SELECT * FROM web_config WHERE LANG = en AND url = 'default'") or die(mysql_error());
+$result_config = mysql_query("SELECT * FROM web_config WHERE LANG = 'en' AND url = 'default'") or die(mysql_error());
 if (mysql_num_rows($result_config) == 0) {
     echo "Even though we were sucessful reading the config, it has no values.  Please send an email to smoothtorque@venturevoip.com";
     exit(0);
