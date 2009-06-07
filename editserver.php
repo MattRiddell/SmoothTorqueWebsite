@@ -8,7 +8,11 @@ if (isset($_POST[name])){
     $username=$_POST[username];
     $password=$_POST[password];
     $address=$_POST[address];
-    $sql="update servers  set address='$address',username='$username',password='$password',name='$name' where id=$id";
+    if ($_POST[password] == 'xxxxxxxxxxxx') {
+	    $sql="update servers  set address='$address',username='$username',name='$name' where id=$id";
+    } else {
+	    $sql="update servers  set address='$address',username='$username',password='$password',name='$name' where id=$id";
+    }
     $result=mysql_query($sql, $link) or die (mysql_error());;
     header("Location: servers.php");
     exit;
