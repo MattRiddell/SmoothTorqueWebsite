@@ -42,7 +42,7 @@ Status
 </TD>
 </TR>
 <?
-$sql = 'SELECT * FROM servers';
+$sql = 'SELECT * FROM servers order by name';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
 while ($row = mysql_fetch_assoc($result)) {
