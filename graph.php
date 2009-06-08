@@ -309,7 +309,11 @@ if ($total_count_x == 0) {
     if ($timespent > $count) {
         $avgPerc/=$count;
     } else {
-        $avgPerc/=$timespent;
+	if ($timespent > 0) {
+        	$avgPerc/=$timespent;
+	} else {
+		$avgPerc = 0.1;
+	}
     }
 }
 
