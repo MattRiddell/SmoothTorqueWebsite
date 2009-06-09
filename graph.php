@@ -199,6 +199,48 @@ if (!$mysql_campaign_stats) {
     }
 } else {
     /* Using MySQL Stats */
+    if ($_GET[debug]!=1000){
+    $result = mysql_query("SELECT * FROM SineDialer.rates WHERE campaignid = $id order by idx desc");
+    $highest_rate = 0;
+    $lowest_rate = 2000;
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_assoc($result)) {
+            $total_count_x++;
+            if ($count<720){
+                if ($row[value]>$highest_rate && $row[value] > 0){
+			$highest_rate = $row[value];
+                }
+                if ($row[value]<$lowest_rate && $row[value] > 0){
+			$lowest_rate = $row[value];
+                }
+            }
+        }
+    }
+    $result = mysql_query("SELECT * FROM SineDialer.rates WHERE campaignid = $id order by idx desc");
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_assoc($result)) {
+            $total_count_x++;
+            if ($count<720){
+                if ($row[value]>0){
+                    $count++;
+			if ($highest_rate-$lowest_rate == 0) {
+				$range_rate = 1000;
+			} else {
+				$range_rate = $highest_rate-$lowest_rate;
+			}
+                    $array3[ $count ] = 100* (($row[value]-$lowest_rate)/($range_rate));
+	            if ($array3[$count] > 0.5) {
+                	$array4[ $count+1 ] = $array3[ $count ]-0.5;
+		    } else {
+			$array4[ $count+1 ] = 0;
+		    }
+                    $lastSpeed=$row[value];
+                    $xdata[$count] = $count;
+                }
+            }
+        }
+    }
+    } else {
     $result = mysql_query("SELECT * FROM SineDialer.rates WHERE campaignid = $id order by idx desc");
     if (mysql_num_rows($result) > 0) {
         while ($row = mysql_fetch_assoc($result)) {
@@ -218,6 +260,8 @@ if (!$mysql_campaign_stats) {
             }
         }
     }
+    }
+
 }
 /* ======================== */
 /* Get ms sleep Information */
@@ -258,6 +302,7 @@ if ($_GET[debug]>0){
         }
     } else {
         /* Using MySQL Stats */
+	$lowest_ms = 10000;
         $result = mysql_query("SELECT * FROM SineDialer.sleeps WHERE campaignid = $id order by idx desc");
         if (mysql_num_rows($result) > 0) {
             while ($row = mysql_fetch_assoc($result)) {
@@ -266,6 +311,9 @@ if ($_GET[debug]>0){
                         $count++;
                         if ($row[value] > $highest_ms) {
                             $highest_ms = $row[value];
+                        }
+                        if ($row[value] < $lowest_ms) {
+                            $lowest_ms = $row[value];
                         }
                     }
                 }
@@ -282,7 +330,12 @@ if ($_GET[debug]>0){
                            if (!($highest_ms > 0)) {
                                    $highest_ms = 1;
                            }
-                            $array_ms[ $count ] = 101-($row[value]/($highest_ms)* 100);
+				if ($highest_ms - $lowest_ms == 0) {
+					$range_ms = 1000;
+				} else {
+					$range_ms = $highest_ms - $lowest_ms;
+				}
+                            $array_ms[ $count ] = 101-(($row[value]-$lowest_ms)/($range_ms)* 100);
                         } else {
                             $array_ms[ $count ] = 0;
                         }
@@ -435,6 +488,7 @@ if ($_GET[debug]>0){
     }
 
     $txt2=new Text( " Weighted: $weighted CAD: $cad Mult: $multiplyer Sleep: ".round($ms,2)."ms Max Delay Calc: ".round($m2,3)." Overs: ($o1/$timespent) Source: $m_c_s");
+//Would it be possible for you to stop this campaign and start it again one minute later? I need to restart the back end - Matt Riddell
     $txt2->Pos( 500,375);
     $txt2->SetAlign("center","","");
     $txt2->SetFont(FF_FONT2,FS_NORMAL);
