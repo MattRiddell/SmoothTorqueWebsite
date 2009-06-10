@@ -240,6 +240,9 @@ if (!$mysql_campaign_stats) {
             }
         }
     }
+/*	for ($i = 0;$i<sizeof($array2);$i++) {
+		$array2[$i] = 100* ($array2[$i]-$lowest_rate)/($range_rate);
+	}*/
     } else {
     $result = mysql_query("SELECT * FROM SineDialer.rates WHERE campaignid = $id order by idx desc");
     if (mysql_num_rows($result) > 0) {
@@ -378,15 +381,24 @@ $chart [ 'chart_data' ][ 2 ] = $array2;
 $chart [ 'chart_data' ][ 1 ] = $array1;
 $chart [ 'chart_data' ][ 3 ] = $array3;
 $graph2 = new Graph(1040, 400);
-if ($highest>100){
-	$graph2->SetScale('linlin',0,$highest,1,719);
+$length = 720;
+if ($timespent <$length)  {
+	$show = $timespent;
 } else {
-	$graph2->SetScale('linlin',0,100,1,719);
+	$show = $length;
+}
+if ($show<30) {
+	$show = 30;
+}
+if ($highest>100){
+	$graph2->SetScale('linlin',0,$highest,0,$show-2);
+} else {
+	$graph2->SetScale('linlin',0,100,0,$show-1);
 }
 
 /* Create the tick labels */
-for ($i=0;$i<720;$i++){
-        $datax[$i] = "".(int)(720-$i);
+for ($i=0;$i<$show;$i++){
+        $datax[$i] = "".(int)((0-$i)+$show);
 }
 $graph2->xaxis->SetTickLabels($aaa);
 $graph2->xaxis->SetTextLabelInterval(1);
@@ -410,19 +422,30 @@ $graph2->legend->SetFont(FF_FONT2,FS_BOLD);
 $graph2->legend->SetPos(0.05,0.04,'left','top');
 $graph2->legend->SetMarkAbsSize(13);
 
+
+$chart [ 'chart_data' ][ 1 ] = array_slice($chart [ 'chart_data' ][ 1 ], $length - $show+0, $show);
+$chart [ 'chart_data' ][ 2 ] = array_slice($chart [ 'chart_data' ][ 2 ], $length - $show);
+$chart [ 'chart_data' ][ 3 ] = array_slice($chart [ 'chart_data' ][ 3 ], $length - $show+0);
+if (isset($array_ms)) {
+	$array_ms = array_slice($array_ms, $length - $show+0);
+}
+$array5 = array_slice($array5, $length - $show+0);
+$array4 = array_slice($array4, $length - $show+1);
+//$chart [ 'chart_data' ][ 4 ] = array_slice($chart [ 'chart_data' ][ 4 ], $length - $show);
+
 $dplot2[] = new LinePlot($chart [ 'chart_data' ][ 1 ]);
 $dplot2[0]->SetLegend(' Staff on Phone');
 $dplot2[0]->SetFillGradient("#0000ff@0.99","#009933");
 $dplot2[0]->SetWeight(1);
 
-$speedAtractorPlot[] = new LinePLot($chart [ 'chart_data' ][ 2 ]);
+/*$speedAtractorPlot[] = new LinePLot($chart [ 'chart_data' ][ 2 ]);
 $speedAtractorPlot[0]->SetWeight(1);
 $speedAtractorPlot[0]->SetColor("#00FF00");
 $speedAtractorPlot[0]->SetLegend(' Speed Attractor');
 
 $speedAtractorPlot2[] = new LinePLot($array5);
 $speedAtractorPlot2[0]->SetWeight(3);
-$speedAtractorPlot2[0]->SetColor("#000000");
+$speedAtractorPlot2[0]->SetColor("#000000");*/
 
 $runningSpeedPlot[] = new LinePLot($chart [ 'chart_data' ][ 3 ]);
 $runningSpeedPlot[0]->SetLegend(' Current Speed');
@@ -438,8 +461,8 @@ $runningSpeedPlot2[0]->SetStepStyle(true);
 $graph2->Add($dplot2[0]);
 $graph2->Add($runningSpeedPlot2[0]);
 $graph2->Add($runningSpeedPlot[0]);
-$graph2->Add($speedAtractorPlot2[0]);
-$graph2->Add($speedAtractorPlot[0]);
+//$graph2->Add($speedAtractorPlot2[0]);
+//$graph2->Add($speedAtractorPlot[0]);
 if ($_GET[debug]>0){
     $msPlot[] = new LinePLot($array_ms);
     $msPlot[0]->SetWeight(3);
