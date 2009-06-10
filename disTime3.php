@@ -14,18 +14,26 @@ $self=$_SERVER['PHP_SELF'];
    functions subdirectory */
 require "/".$current_directory."/functions/functions.php";
 
-$config_file = "/stweb.conf";
-$fp = fopen($config_file, "r");
-while (!feof($fp)) {
-  $line = trim(fgets($fp));
-  if ($line && substr($line,0,1)!=$comment) {
-    $pieces = explode("=", $line);
-    $option = trim($pieces[0]);
-    $value = trim($pieces[1]);
-    $config_values[$option] = $value;
-  }
+$url = "default";
+include "admin/db_config.php";
+mysql_select_db("SineDialer", $link) or die("Unable to connect: ".mysql_error());
+$totalcost = array();
+//echo "Loading config information...\n";
+$result_config = mysql_query("SELECT * FROM web_config WHERE LANG = 'en' AND url = '$url'") or die(mysql_error());
+if (mysql_num_rows($result_config) == 0) {
+    echo "Even though we were sucessful reading the config, it has no values.  Please send an email to smoothtorque@venturevoip.com";
+    exit(0);
 }
-fclose($fp);
+/* Now that we have the config values, put them into the array */
+while ($header_row = mysql_fetch_assoc($result_config) ) {
+    foreach ($header_row as $key=>$value) {
+        if ($key != "contact_text") {
+            $config_values[strtoupper($key)] = $value;
+        } else {
+            $config_values["TEXT"] = $value;
+        }
+    }
+}
 
 if (isset($_GET[campaigngroupid])){
     $campaigngroupid = ($_GET[campaigngroupid]);
@@ -33,7 +41,6 @@ if (isset($_GET[campaigngroupid])){
 if (isset($_POST[id])){
     $id = $_POST[id];
 }
-include "admin/db_config.php";
 mysql_select_db("SineDialer", $link);
 $sql = 'SELECT value FROM config WHERE parameter=\'backend\'';
 $result=mysql_query($sql, $link) or die (mysql_error());;
@@ -122,11 +129,24 @@ Percentage Busy
 <td style="background-image: url(/images/crb.gif);" width=2></td>
 </TR>
 <?
-
 while ($row = mysql_fetch_assoc($result)) {
+
+$sql = 'SELECT status, flags, maxcalls, progress from queue where campaignid='.$row[id];
+$resultx=mysql_query($sql, $link) or die (mysql_error());;
+$rowx = mysql_fetch_assoc($resultx);
+
+$status=$rowx[status];
+$flags=$rowx[flags];
+$maxcalls=$rowx[maxcalls];
+$progress=$rowx[progress];
+
+
+
     flush();
     $row = array_map(stripslashes,$row);
-    if ($toggle){
+    if ($status == 101) {
+        $class=" class=\"tborder_active\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f8f8f8'\"   ";
+    } else if ($toggle){
         $toggle=false;
         $class=" class=\"tborder2\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f8f8f8'\"   ";
     } else {
@@ -171,14 +191,7 @@ $sql = 'SELECT count(*) from number where campaignid='.$row[id];
 $result2=mysql_query($sql, $link) or die (mysql_error());;
 $total_numbers=mysql_result($result2,0,'count(*)');
 */
-$sql = 'SELECT status, flags, maxcalls, progress from queue where campaignid='.$row[id];
-$resultx=mysql_query($sql, $link) or die (mysql_error());;
-$rowx = mysql_fetch_assoc($resultx);
 
-$status=$rowx[status];
-$flags=$rowx[flags];
-$maxcalls=$rowx[maxcalls];
-$progress=$rowx[progress];
 
 ?>
 <TD>
