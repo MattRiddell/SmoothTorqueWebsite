@@ -467,7 +467,9 @@ LI {
 }
 .tborderx {
 	BORDER-RIGHT: #245e83 1px outset; BORDER-TOP: #245e83 1px outset; BACKGROUND: #f2f2f2; BORDER-LEFT: #245e83 1px outset; COLOR: #000000; BORDER-BOTTOM: #245e83 1px outset;
-
+}
+.tborder_active {
+	BORDER-RIGHT: #245e83 1px outset; BORDER-TOP: #245e83 1px outset; BACKGROUND: #66f266; BORDER-LEFT: #245e83 1px outset; COLOR: #000000; BORDER-BOTTOM: #245e83 1px outset;
 }
 .tborderxx {
 	BORDER-RIGHT: #245e83 1px outset; BORDER-TOP: #245e83 1px outset; BORDER-LEFT: #245e83 1px outset; COLOR: #000000; BORDER-BOTTOM: #245e83 1px outset;
