@@ -145,7 +145,7 @@ $progress=$rowx[progress];
     flush();
     $row = array_map(stripslashes,$row);
     if ($status == 101) {
-        $class=" class=\"tborder_active\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f8f8f8'\"   ";
+        $class=" class=\"tborder_active\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#88f888'\"   ";
     } else if ($toggle){
         $toggle=false;
         $class=" class=\"tborder2\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f8f8f8'\"   ";
