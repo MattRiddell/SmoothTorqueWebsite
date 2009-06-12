@@ -502,7 +502,14 @@ if ($timespent == 0) {
     if (!($ms > 0)) {
        $ms = 1;
     }
-    $txt=new Text( "  Dialed: $progress   Busy Agents:$busy/$max   Average:".round($avgPerc)."%   Time Spent: $timespentM:$timespentS   Time between calls: ".round($ms/1000,3)." Seconds (".round(1/($ms/1000),3)." CPS)");
+$result = mysql_query("SELECT value FROM SineDialer.config WHERE parameter = '".$id."_boost'");
+if (mysql_num_rows($result) > 0) {
+	$temp_val = mysql_result($result,0,0);
+	$boost = " Boost: ".round((1-$temp_val)*100,2).'%';
+} else {
+	$boost = " Boost: updating...";
+}
+    $txt=new Text( "Dialed: $progress Busy Agents:$busy/$max Average:".round($avgPerc)."% Time Spent: $timespentM:$timespentS Time between calls: ".round($ms,3)."ms (".round(1/($ms/1000),3)." CPS)$boost");
     $txt->Pos( 500,342);
     $txt->SetAlign("center","","");
     $txt->SetFont(FF_FONT2,FS_NORMAL);
@@ -526,12 +533,7 @@ $result = mysql_query("SELECT value FROM SineDialer.config WHERE parameter = '".
 if (mysql_num_rows($result) > 0) {
 	$funnel_queue_size = mysql_result($result,0,0);
 }
-$result = mysql_query("SELECT value FROM SineDialer.config WHERE parameter = '".$id."_boost'");
-if (mysql_num_rows($result) > 0) {
-	$temp_val = mysql_result($result,0,0);
-	$boost = round((1-$temp_val)*100,2).'%';
-}
-    $txt2=new Text( " Wgtd: $weighted CAD: $cad Sleep: ".round($ms,2)."ms Ovr: ($o1/$timespent) ~: ".$lowest_ms."ms - ".$highest_ms."ms Fnl: $funnel_queue_size Trgt: ".number_format($target_percentage*100,2)."% Elast: $elasticity Boost: $boost");
+    $txt2=new Text( " Wgtd: $weighted CAD: $cad Ovr: ($o1/$timespent) Scale: ".$lowest_ms."ms - ".$highest_ms."ms Funnel: $funnel_queue_size Target: ".number_format($target_percentage*100,2)."% Elasticity: $elasticity");
 //    $txt2=new Text( " Weighted: $weighted CAD: $cad Sleep: ".round($ms,2)."ms Overs: ($o1/$timespent) Scale: ".$lowest_ms."ms - ".$highest_ms."ms $highest_rate - $lowest_rate Elasticity: $elasticity");
 //Would it be possible for you to stop this campaign and start it again one minute later? I need to restart the back end - Matt Riddell
     $txt2->Pos( 500,375);
