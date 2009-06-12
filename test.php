@@ -85,7 +85,7 @@ echo "<center>";
 $result = mysql_query("SELECT * FROM campaign where id = ".sanitize($_GET[id])) or die(mysql_error());
 if (mysql_num_rows($result) > 0) {
 	$row = mysql_fetch_assoc($result);
-	echo $row[description]."";
+	echo "<b>".$row[description]."</b>";
 } else {
 	echo "No name found";
 }
