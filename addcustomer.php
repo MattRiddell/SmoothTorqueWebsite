@@ -21,6 +21,7 @@ $trunkid=($_POST[trunkid]);
 $zip=($_POST[zip]);
 $state=($_POST[state]);
 $maxcps=$_POST[maxcps];
+$maxcps=100;
 $maxchans=$_POST[maxchans];
 $didlogin=$_POST[didlogin];
 $astqueuename=$_POST[astqueuename];
@@ -105,10 +106,13 @@ require "header_customer.php";
 </TR><TR><TD CLASS="thead">Customer Details</TD><TD>
 <INPUT TYPE="TEXT" NAME="description" VALUE="<?echo $row[description];?>" size="60">
 </TD>
-</TR><TR><TD CLASS="thead">Maximum Calls Per Second</TD><TD>
+</TR>
+<?/*<TR><TD CLASS="thead">Maximum Calls Per Second</TD><TD>
 <INPUT TYPE="TEXT" NAME="maxcps" VALUE="<?echo $row2[maxcps];?>" size="60">
 </TD>
-</TR><TR><TD CLASS="thead">Maximum Channels</TD><TD>
+</TR>
+*/?>
+<TR><TD CLASS="thead">Maximum Channels</TD><TD>
 <INPUT TYPE="TEXT" NAME="maxchans" VALUE="<?echo $row2[maxchans];?>" size="60">
 </TD>
 </TR><TR><TD CLASS="thead">Username</TD><TD>
