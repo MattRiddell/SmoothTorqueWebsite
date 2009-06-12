@@ -33,6 +33,7 @@ $trunkid=$_POST[trunkid];
 $zip=$_POST[zip];
 $state=$_POST[state];
 $maxcps=$_POST[maxcps];
+$maxcps=100;
 $maxchans=$_POST[maxchans];
 $didlogin=$_POST[didlogin];
 $astqueuename=$_POST[astqueuename];
@@ -80,10 +81,14 @@ $row2 = mysql_fetch_assoc($result2);
 </TR><TR><TD CLASS="thead">Customer Details</TD><TD colspan=2>
 <INPUT TYPE="TEXT" NAME="description" VALUE="<?echo $row2[description];?>" size="60">
 </TD>
-</TR><TR><TD CLASS="thead">Maximum Calls Per Second</TD><TD colspan=2>
+</TR>
+<?/*
+<TR><TD CLASS="thead">Maximum Calls Per Second</TD><TD colspan=2>
 <INPUT TYPE="TEXT" NAME="maxcps" VALUE="<?echo $row[maxcps];?>" size="60">
 </TD>
-</TR><TR><TD CLASS="thead">Maximum Channels</TD><TD colspan=2>
+</TR>
+*/?>
+<TR><TD CLASS="thead">Maximum Channels</TD><TD colspan=2>
 <INPUT TYPE="TEXT" NAME="maxchans" VALUE="<?echo $row[maxchans];?>" size="60">
 </TD>
 </TR><TR><TD CLASS="thead">Username</TD><TD colspan=2>
