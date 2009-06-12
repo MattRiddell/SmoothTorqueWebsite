@@ -29,9 +29,9 @@ Please select a campaign to add numbers to<br /><br />
         //
         $level=$_COOKIE[level];
         if ($level==sha1("level100")) {
-            $sql = 'SELECT id,name FROM campaign';
+            $sql = 'SELECT id,name FROM campaign order by name';
         } else {
-            $sql = 'SELECT id,name FROM campaign WHERE groupid='.$campaigngroupid;
+            $sql = 'SELECT id,name FROM campaign WHERE groupid='.$campaigngroupid.' order by name';
         }
         $result=mysql_query($sql, $link) or die (mysql_error());;
         //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
