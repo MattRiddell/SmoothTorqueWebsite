@@ -1082,6 +1082,20 @@ if (!in_array('call-limit', $field_array))
     $result=mysql_query($sql, $link);
 }
 
+/*======================================================================
+                         Stats Only Users
+  ======================================================================*/
+if ( ! mysql_is_table($db_host, $db_user, $db_pass, "SineDialer", "statuser") ) {
+        include "admin/db_config.php";
+        $sql = "Create table `statuser` (
+                                `id` int(10) unsigned NOT NULL auto_increment,
+                                `campaignid` int(3) NOT NULL default '0',
+                                `hash` varchar(255) NOT NULL default '',
+                                PRIMARY KEY  (`id`)
+                        );";
+        $result = mysql_query($sql,$link);
+}
+
 
 /*****************************************************************
 *           ALTER customer TABLE TO ADD didlogin FIELD             *
