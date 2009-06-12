@@ -40,6 +40,9 @@ Status
 </TD>
 <TD CLASS="thead">
 </TD>
+<TD CLASS="thead">
+Current Status
+</TD>
 </TR>
 <?
 $sql = 'SELECT * FROM servers order by name';
@@ -88,6 +91,35 @@ if ($row[status] == 0){
 <TD>
 <a href="#" onclick="displaySmallMessage('includes/confirmDeleteServer.php?id=<?echo $row[id];?>');return false"><IMG SRC="/images/delete.png" BORDER="0"></a><br>
 </TD>
+<td>
+<?
+//$resultx = mysql_query("SELECT value FROM SineDialer.config WHERE parameter = 's_".$row[name]."_connected"'");
+$sql = "SELECT value FROM SineDialer.config WHERE parameter = 's_".$row[name]."_connected'";
+$resultx = mysql_query($sql) or die(mysql_error());
+if (mysql_num_rows($resultx) > 0) {
+	switch( mysql_result($resultx,0,0)) {
+		case 1:
+			echo "Active";
+			break;
+		default:
+			break;
+	}
+} else {
+	echo "Updating";
+}
+$sql = "SELECT value FROM SineDialer.config WHERE parameter = 's_".$row[name]."_calls'";
+$resultx = mysql_query($sql) or die(mysql_error());
+if (mysql_num_rows($resultx) > 0) {
+	$num_chans =  mysql_result($resultx,0,0);
+	if ($num_chans > 0) {
+		echo " (<b>".round($num_chans)." channels</b>)";
+	}
+} else {
+	echo "Updating...";
+}
+?>
+
+</td>
 </TR>
 
 <?
