@@ -1,107 +1,25 @@
 <?
- function _get_browser()
-{
-  $browser = array ( //reversed array
-   "OPERA",
-   "MSIE",            // parent
-   "NETSCAPE",
-   "FIREFOX",
-   "SAFARI",
-   "KONQUEROR",
-   "MOZILLA"        // parent
-  );
-
-  $info[browser] = "OTHER";
-
-  foreach ($browser as $parent)
-  {
-   if ( ($s = strpos(strtoupper($_SERVER['HTTP_USER_AGENT']), $parent)) !== FALSE )
-   {
-     $f = $s + strlen($parent);
-     $version = substr($_SERVER['HTTP_USER_AGENT'], $f, 5);
-     $version = preg_replace('/[^0-9,.]/','',$version);
-
-     $info[browser] = $parent;
-     $info[version] = $version;
-     break; // first match wins
-   }
-  }
-
-  return $info;
-}
 $level=$_COOKIE[level];
-$out=_get_browser();
-$total_chans = 0;
-if ($level!=sha1("level100")) {
-include "header.php";
-$ip = $_SERVER['REMOTE_ADDR'];
-echo "Attempted break in attempt from $ip ($_COOKIE[user])";
-/*================= Log Access ======================================*/
-$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', ' $ip attempted to view the admin page')";
-$result=mysql_query($sql, $link);
-/*================= Log Access ======================================*/
+/* Find out what the base directory name is for two reasons:
+    1. So we can include files
+    2. So we can explain how to set up things that are missing */
+$current_directory = dirname(__FILE__);
 
-} else {
-require "header.php";
-require "header_server.php";
+/* What page we are currently on - this is used to highlight the menu
+   system as well as to not cache certain pages like the graphs */
+$self=$_SERVER['PHP_SELF'];
 
-$_POST = array_map(mysql_real_escape_string,$_POST);
-$_GET = array_map(mysql_real_escape_string,$_GET);
+/* Load in the functions we may need - these are the list of available
+   custom functions - for more information, read the comments in the
+   functions.php file - most functions are in their own file in the
+   functions subdirectory */
+require "/".$current_directory."/functions/functions.php";
 
-$sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
-$result=mysql_query($sql, $link) or die (mysql_error());;
-$campaigngroupid=mysql_result($result,0,'campaigngroupid');
-
-$tot =0;
-$sql = 'SELECT value FROM SineDialer.config WHERE parameter like \'s_%_calls\'';
-$resultx = mysql_query($sql) or die(mysql_error());
-if (mysql_num_rows($resultx) > 0) {
-	while ($row_x = mysql_fetch_assoc($resultx)) {
-		$tot+=$row_x[value];
-	}
-}
-
-
-$out=_get_browser();
-if ($out[browser]=="MSIE"){
-?>
-<script type="text/javascript" src="/ajax/jquery.js"></script>
-<script type="text/javascript">
-        $(function(){ // jquery onload
-                window.setInterval(function(){
-		        $('#ajaxDiv').loadIfModified('server_total.php');  // jquery ajax load into div
-		        $('#ajaxDiv2').loadIfModified('server_details.php');  // jquery ajax load into div
-                },5000);
-        });
-
-</script>
-<?} else {?>
-<script type="text/javascript" src="/ajax/jquery.js"></script>
-<script type="text/javascript">
-
-        $(function(){ // jquery onload
-                window.setInterval(
-                function(){
-		        $('#ajaxDiv').load('server_total.php');  // jquery ajax load into div
-		        $('#ajaxDiv2').load('server_details.php');  // jquery ajax load into div
-                }
-                ,5000);
-        });
-</script>
-<?}?>
-
-
-<div id = "ajaxDiv">
-<?
-
-box_start();
-echo "<center>Total channels across all servers: <b>$tot</b></center>";;
-box_end();
+$url = "default";
+include "admin/db_config.php";
+mysql_select_db("SineDialer", $link) or die("Unable to connect: ".mysql_error());
 
 ?>
-</div>
-<div id = "ajaxDiv2">
-
 <?/* start of shadow */?>
 <table align="center"><tr><td><div class="example" id="v6"><div id="main"><div class="wrap1"><div class="wrap2"><div class="wrap3" align="center">
 
@@ -211,8 +129,6 @@ if (mysql_num_rows($resultx) > 0) {
 </TABLE>
 <?/*end of shadow */?>
 </div></div></div></div></div></td></tr></table>
-</div>
 <?
 require "footer.php";
-}
 ?>
