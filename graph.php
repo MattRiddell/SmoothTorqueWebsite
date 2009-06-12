@@ -505,11 +505,15 @@ if ($timespent == 0) {
 $result = mysql_query("SELECT value FROM SineDialer.config WHERE parameter = '".$id."_boost'");
 if (mysql_num_rows($result) > 0) {
 	$temp_val = mysql_result($result,0,0);
-	$boost = " Boost: ".round((1-$temp_val)*100,2).'%';
+	if ($temp_val < 1) {
+		$boost = " Boost: ".round((1-$temp_val)*100,2).'%';
+	} else {
+		$boost = " Boost: Off";
+	}
 } else {
 	$boost = " Boost: updating...";
 }
-    $txt=new Text( "Dialed: $progress Busy Agents:$busy/$max Average:".round($avgPerc)."% Time Spent: $timespentM:$timespentS Time between calls: ".round($ms,3)."ms (".round(1/($ms/1000),3)." CPS)$boost");
+    $txt=new Text( "Dialed: $progress Busy Agents:$busy/$max Average:".round($avgPerc)."% Time Spent: $timespentM:$timespentS Time between calls: ".round($ms)."ms (".round(1/($ms/1000),3)." CPS)$boost");
     $txt->Pos( 500,342);
     $txt->SetAlign("center","","");
     $txt->SetFont(FF_FONT2,FS_NORMAL);
