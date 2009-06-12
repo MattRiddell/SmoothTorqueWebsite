@@ -377,6 +377,7 @@ include ( "./jpgraph.php");
 include ("./jpgraph_line.php");
 //include ("./jpgraph_bar.php");
 include "./jpgraph_regstat.php";
+include ("./jpgraph_log.php");
 $chart [ 'chart_data' ][ 2 ] = $array2;
 $chart [ 'chart_data' ][ 1 ] = $array1;
 $chart [ 'chart_data' ][ 3 ] = $array3;
@@ -413,7 +414,7 @@ $graph2->xaxis->SetTickLabels($datax);
 $graph2->ygrid->Show(true ,true);
 $graph2->xgrid->Show();
 $graph2->legend->SetLayout(LEGEND_HOR);
-$graph2->img->SetMargin(35,23,05,80);
+$graph2->img->SetMargin(35,53,5,80);
 $graph2->legend->SetFrameWeight(1);
 $graph2->legend->SetShadow('black@0.8',4);
 $graph2->legend->SetFillColor('black@0.5');
@@ -467,7 +468,10 @@ if ($_GET[debug]>0){
     $msPlot[] = new LinePLot($array_ms);
     $msPlot[0]->SetWeight(3);
     $msPlot[0]->SetColor("#ffff00");
+    $msPlot[0]->SetLegend(' Calls per second');
     $graph2->Add($msPlot[0]);
+//	$graph2->SetY2Scale("lin",$lowest_ms, $highest_ms);
+//	$graph2->SetY2Scale("lin",0, 100);
 }
 $graph2->SetShadow();
 $graph2->img->SetAntiAliasing(true);
@@ -509,8 +513,26 @@ if ($_GET[debug]>0){
     if ($mysql_campaign_stats) {
         $m_c_s = "MySQL Stats";
     }
-
-    $txt2=new Text( " Weighted: $weighted CAD: $cad Mult: $multiplyer Sleep: ".round($ms,2)."ms Max Delay Calc: ".round($m2,3)." Overs: ($o1/$timespent) Source: $m_c_s");
+$result = mysql_query("SELECT value FROM SineDialer.config WHERE parameter = '".$id."_el'");
+if (mysql_num_rows($result) > 0) {
+	$temp_val = mysql_result($result,0,0);
+	$elasticity = round(($temp_val)*100,2).'%';
+}
+$result = mysql_query("SELECT value FROM SineDialer.config WHERE parameter = '".$id."_tp'");
+if (mysql_num_rows($result) > 0) {
+	$target_percentage = mysql_result($result,0,0);
+}
+$result = mysql_query("SELECT value FROM SineDialer.config WHERE parameter = '".$id."_fqs'");
+if (mysql_num_rows($result) > 0) {
+	$funnel_queue_size = mysql_result($result,0,0);
+}
+$result = mysql_query("SELECT value FROM SineDialer.config WHERE parameter = '".$id."_boost'");
+if (mysql_num_rows($result) > 0) {
+	$temp_val = mysql_result($result,0,0);
+	$boost = round((1-$temp_val)*100,2).'%';
+}
+    $txt2=new Text( " Wgtd: $weighted CAD: $cad Sleep: ".round($ms,2)."ms Ovr: ($o1/$timespent) ~: ".$lowest_ms."ms - ".$highest_ms."ms Fnl: $funnel_queue_size Trgt: ".number_format($target_percentage*100,2)."% Elast: $elasticity Boost: $boost");
+//    $txt2=new Text( " Weighted: $weighted CAD: $cad Sleep: ".round($ms,2)."ms Overs: ($o1/$timespent) Scale: ".$lowest_ms."ms - ".$highest_ms."ms $highest_rate - $lowest_rate Elasticity: $elasticity");
 //Would it be possible for you to stop this campaign and start it again one minute later? I need to restart the back end - Matt Riddell
     $txt2->Pos( 500,375);
     $txt2->SetAlign("center","","");
