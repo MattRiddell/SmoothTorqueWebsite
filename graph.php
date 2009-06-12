@@ -537,9 +537,8 @@ $result = mysql_query("SELECT value FROM SineDialer.config WHERE parameter = '".
 if (mysql_num_rows($result) > 0) {
 	$funnel_queue_size = mysql_result($result,0,0);
 }
-    $txt2=new Text( " Wgtd: $weighted CAD: $cad Ovr: ($o1/$timespent) Scale: ".$lowest_ms."ms - ".$highest_ms."ms Funnel: $funnel_queue_size Target: ".number_format($target_percentage*100,2)."% Elasticity: $elasticity");
-//    $txt2=new Text( " Weighted: $weighted CAD: $cad Sleep: ".round($ms,2)."ms Overs: ($o1/$timespent) Scale: ".$lowest_ms."ms - ".$highest_ms."ms $highest_rate - $lowest_rate Elasticity: $elasticity");
-//Would it be possible for you to stop this campaign and start it again one minute later? I need to restart the back end - Matt Riddell
+    $txt2=new Text( "Weight: $weighted CAD: $cad Overs: ".round(($o1/$timespent)*100,3)."% Scale: ".$lowest_ms."ms-".$highest_ms."ms Funnel: $funnel_queue_size Target: ".number_format($target_percentage*100,2)."% Elasticity: $elasticity");
+//    $txt2=new Text( "Weight: $weighted CAD: $cad Overs: $o1/$timespent (".round(($o1/$timespent)*100,3)."%) Scale: ".$lowest_ms."ms-".$highest_ms."ms Funnel: $funnel_queue_size Target: ".number_format($target_percentage*100,2)."% Elasticity: $elasticity");
     $txt2->Pos( 500,375);
     $txt2->SetAlign("center","","");
     $txt2->SetFont(FF_FONT2,FS_NORMAL);
