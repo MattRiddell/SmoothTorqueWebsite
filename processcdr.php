@@ -46,7 +46,7 @@ echo $count." Total Records for $accountcode_in\n";
 $sql = "SELECT        * from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation'
         and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode_in' and userfield2!='1'
         order by calldate DESC limit 5000";
-
+//echo $sql;
 $result = mysql_query($sql,$cdrlink);
 $i = 0;
 $titletd = "<td bgcolor=\"#000000\"><font color=\"#CCCCFF\"><b>&nbsp;&nbsp;";
