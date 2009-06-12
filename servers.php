@@ -180,13 +180,14 @@ $resultx = mysql_query($sql) or die(mysql_error());
 if (mysql_num_rows($resultx) > 0) {
 	switch( mysql_result($resultx,0,0)) {
 		case 1:
-			echo "Active";
+	//		echo "Active";
 			break;
 		default:
+			echo "Status: ".mysql_result($resultx,0,0);
 			break;
 	}
 } else {
-	echo "Updating";
+	echo "<font color=\"blue\">Updating...</font>";
 }
 $sql = "SELECT value FROM SineDialer.config WHERE parameter = 's_".$row[name]."_calls'";
 $resultx = mysql_query($sql) or die(mysql_error());
@@ -197,7 +198,7 @@ if (mysql_num_rows($resultx) > 0) {
 		echo " (<b>".round($num_chans)." channels</b>)";
 	}
 } else {
-	echo "Updating...";
+	echo " <font color=\"blue\">Updating...</font>";
 }
 ?>
 
