@@ -204,8 +204,8 @@ $sql = "CREATE TABLE `cdr` (
 if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","config")){
   include "admin/db_config.php";
 $sql = "CREATE TABLE `config` (
-  `parameter` varchar(11) NOT NULL default '0',
-  `value` varchar(110) NOT NULL
+  `parameter` varchar(255) NOT NULL default '0',
+  `value` varchar(255) NOT NULL
 ) ";
 
     $result = mysql_query($sql,$link);
@@ -218,6 +218,16 @@ $sql = "CREATE TABLE `config` (
  $result = mysql_query($sql,$link);
 }
 
+/* Check if the length of the parameter field is 255 - if not make it so */
+$result = mysql_query("SELECT parameter, value FROM config");
+$param_length = mysql_field_len($result, 0);
+$value_length = mysql_field_len($result, 1);
+if ($param_length != 255) {
+    $sql = "ALTER TABLE config MODIFY parameter VARCHAR(255)";
+    $result=mysql_query($sql, $link);
+    $sql = "ALTER TABLE config MODIFY value VARCHAR(255)";
+    $result=mysql_query($sql, $link);
+}
 /*======================================================================
                             rates Table
   ======================================================================*/
