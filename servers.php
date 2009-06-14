@@ -187,7 +187,7 @@ if (mysql_num_rows($resultx) > 0) {
 			break;
 	}
 } else {
-	echo "<font color=\"blue\">Updating...</font>";
+	echo "<font color=\"blue\"><img src=\"/images/sq_progress.gif\"></font>";
 }
 $sql = "SELECT value FROM SineDialer.config WHERE parameter = 's_".$row[name]."_calls'";
 $resultx = mysql_query($sql) or die(mysql_error());
@@ -196,9 +196,11 @@ if (mysql_num_rows($resultx) > 0) {
 	$total_chans += $num_chans;
 	if ($num_chans > 0) {
 		echo " (<b>".round($num_chans)." channels</b>)";
+	} else {
+		echo " <font color=\"lightgrey\">(".round($num_chans)." channels)</font>";
 	}
 } else {
-	echo " <font color=\"blue\">Updating...</font>";
+	echo " <font color=\"blue\"><img src=\"/images/sq_progress.gif\"></font>";
 }
 ?>
 
