@@ -19,7 +19,11 @@ while ($row = mysql_fetch_assoc($result)){
 box_start(600);
 echo "<center>";
 echo "<b>MySQL Statistics:<br /></b>";
-echo "Connections: $connections Queries: ".number_format($questions)." Uptime: $uptime";
+$result = mysql_query("SELECT value FROM SineDialer.config WHERE parameter = 'mysql_queue'");
+if (mysql_num_rows($result) > 0) {
+	$pending = "Pending MySQL Writes: ".mysql_result($result,0,0)." ";
+}
+echo "Connections: $connections Queries: ".number_format($questions)." ".$pending."Uptime: $uptime";
 box_end();
 $result = mysql_query("SHOW TABLE STATUS");
 ?>
@@ -48,15 +52,15 @@ while ($row = mysql_fetch_assoc($result)) {
 
 		if ($size < 1) {
 			$size *= 1024;
-			$tdstyle = " style=\"background: #ddffdd\"";
+			$tdstyle = " style=\"background: #ddffdd  url('images/grad_grey.jpg');\"";
 			$size_text = "Kb";
 			$digits = 0;
 		} else if ($size<1024) {
-			$tdstyle = " style=\"background: #ffdd88\"";
+			$tdstyle = " style=\"background: #ffdd88 url('images/grad_orange.gif');\"";
 			$size_text = "Mb";
 			$digits = 1;
 		} else if ($size <10240) {
-			$tdstyle = " style=\"background: #ff8844\"";
+			$tdstyle = " style=\"background: #ff8844 url('images/grad_red.gif');\"";
 			$size/=1024;
 	                $size_text = "Gb";
 			$digits = 2;
