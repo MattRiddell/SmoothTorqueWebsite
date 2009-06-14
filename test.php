@@ -40,7 +40,7 @@ if (!(mysql_num_rows($result) > 0)) {
 ?><script>
 var webcamimage;
 <?
-if (file_exists("./images/live/campaign_".$id.".png")) {
+if (file_exists("images/live/campaign_".$id.".png")) {
 ?>
 var imgBase="/images/live/campaign_<?echo $id;?>.png&debug=<?echo $debug;?>&x="
 <?
