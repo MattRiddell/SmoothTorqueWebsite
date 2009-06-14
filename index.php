@@ -26,6 +26,7 @@ if (mysql_num_rows($result_url) == 0) {
     $url = "default";
 }
 setcookie("url",$url,time()+6000);
+$_COOKIE[url] = $url;
 require "header.php";
 
 echo "<FONT FACE=\"ARIAL\">";
