@@ -39,7 +39,17 @@ if (!(mysql_num_rows($result) > 0)) {
 }
 ?><script>
 var webcamimage;
+<?
+if (file_exists("./images/live/campaign_".$id.".png")) {
+?>
+var imgBase="/images/live/campaign_<?echo $id;?>.png&debug=<?echo $debug;?>&x="
+<?
+} else {
+?>
 var imgBase="/graph.php?id=<?echo $id;?>&debug=<?echo $debug;?>&x="
+<?
+}
+?>
 var c = 0;
 var x = 0;
 var done_image = 0;
