@@ -72,7 +72,7 @@ function init()
  webcamimage = document.getElementById("image_webcamimage");
  if( webcamimage )
  {
-  setInterval("count()",10000);
+  setInterval("count()",5000);
  }
   setInterval("incr()",1000);
   incr();
@@ -80,7 +80,7 @@ function init()
 function incr() {
  waiting = document.getElementById("div_waiting");
  if (done_image ==1) {
-  waiting.innerHTML = '<font color="#008800"><b>Next update in '+(10-x)+' seconds';
+  waiting.innerHTML = '<font color="#008800"><b>Next update in '+(5-x)+' seconds';
  } else {
   waiting.innerHTML = '<img src="/images/ajax-loader.gif">';
  }
@@ -90,7 +90,7 @@ function hide_image()
 {
   done_image = 1;
   waiting = document.getElementById("div_waiting");
-  waiting.innerHTML = '<font color="#008800"><b>Next update in '+(10-x)+' seconds';
+  waiting.innerHTML = '<font color="#008800"><b>Next update in '+(5-x)+' seconds';
 }
 window.onload = init;
 </script>
