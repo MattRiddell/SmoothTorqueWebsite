@@ -31,8 +31,8 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
         echo "<br />Importing numbers, please wait<br /><br />";
         //print_r($_POST);
         $campaignid = $data["id"];
-        $sql2 = "LOCK TABLES number WRITE";
-        mysql_query($sql2, $link) or die (mysql_error());;
+        //$sql2 = "LOCK TABLES number WRITE";
+        //mysql_query($sql2, $link) or die (mysql_error());;
         $sql = "INSERT IGNORE INTO number (campaignid,phonenumber,status,type) VALUES";
         $isfirst=true;
         while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
@@ -66,16 +66,16 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
                 echo "".$row." numbers imported<br />\n";
                 ob_flush();flush();
                 //echo "saving $sql";
-                mysql_query($sql, $link) or die (mysql_error());;
-                $sql2="COMMIT";
-                mysql_query($sql2, $link) or die (mysql_error());;
-                $sql2="UNLOCK TABLES";
-                mysql_query($sql2, $link) or die (mysql_error());;
+                //mysql_query($sql, $link) or die (mysql_error());;
+                //$sql2="COMMIT";
+                //mysql_query($sql2, $link) or die (mysql_error());;
+                //$sql2="UNLOCK TABLES";
+                //mysql_query($sql2, $link) or die (mysql_error());;
 
 
 				$display = 0;
-                $sq2 = "LOCK TABLES number WRITE";
-                mysql_query($sql2, $link) or die (mysql_error());;
+                //$sq2 = "LOCK TABLES number WRITE";
+                //mysql_query($sql2, $link) or die (mysql_error());;
                 $sql = "INSERT IGNORE INTO number (campaignid,phonenumber,status,type)  VALUES";
                 $sql.="(".$campaignid.",'".$data[0]."','new',0)";
             } else {
@@ -86,10 +86,10 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
         echo "[".$row." numbers inserted]<br />\n";
         ob_flush();flush();
         mysql_query($sql, $link) or die (mysql_error());;
-                $sql2="COMMIT";
-                mysql_query($sql2, $link) or die (mysql_error());;
-                $sql2="UNLOCK TABLES";
-                mysql_query($sql2, $link) or die (mysql_error());;
+                //$sql2="COMMIT";
+                //mysql_query($sql2, $link) or die (mysql_error());;
+                //$sql2="UNLOCK TABLES";
+                //mysql_query($sql2, $link) or die (mysql_error());;
 
 			/*$sql2 = "SET AUTOCOMMIT=1;";
 		mysql_query($sql2, $link) or die (mysql_error());;*/
