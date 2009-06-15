@@ -27,7 +27,7 @@ echo "Connections: $connections Queries: ".number_format($questions)." ".$pendin
 box_end();
 $result = mysql_query("SHOW TABLE STATUS");
 ?>
-<center><table class="tborder2p" cellspacing="0" boreder="0" cellpadding="5">
+<center><table class="tborder2p" cellspacing="1" boreder="0" cellpadding="5">
 <tr>
 <td CLASS="thead">Name</td>
 <td CLASS="thead">Rows</td>
@@ -52,11 +52,11 @@ while ($row = mysql_fetch_assoc($result)) {
 
 		if ($size < 1) {
 			$size *= 1024;
-			$tdstyle = " style=\"background: #ddffdd  url('images/grad_green.gif');\"";
+			$tdstyle = " style=\"background: #eeffee \"";
 			$size_text = "Kb";
 			$digits = 0;
 		} else if ($size<1024) {
-			$tdstyle = " style=\"background: #ffdd88 url('images/grad_grey.jpg');\"";
+			$tdstyle = " style=\"background: #ffdd88 url('images/grad_green.gif');\"";
 			$size_text = "Mb";
 			$digits = 1;
 		} else if ($size <10240) {
