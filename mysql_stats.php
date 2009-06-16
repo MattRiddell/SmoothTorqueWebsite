@@ -115,7 +115,7 @@ while ($row = mysql_fetch_assoc($result)) {
 		}
 		if ($row[Engine] == "InnoDB") {
 			if ($size_text != "Gb") {
-				$tdstyle = " style=\"background: #8888ff url('images/grad_blue.png')\"";
+//				$tdstyle = " style=\"background: #8888ff url('images/grad_blue.png')\"";
 			}
 			echo "<td".$tdstyle.">$row[Name]</td>";
 			echo "<td".$tdstyle.">".number_format($rows)." (approx)</td>";

@@ -44,16 +44,16 @@ echo "<b>Long Running MySQL Threads:</b><br />";
 $result = mysql_query("SHOW PROCESSLIST");
 echo "<br /><center><table border=\"0\" class=\"tborder\">";
 while ($row = mysql_fetch_assoc($result)) {
-	if ($row[Command] != 'Sleep' && $row[Time] > 1) {
+	if ($row[Command] != 'Sleep' && $row[Time] > 2) {
 		echo "<tr>";
 		if ($row[State] == 'Locked') {
-			echo "<td><p align=\"left\"><b>Locked:</b></font> $row[Info]<br /><b>Time:</b> ".sec2hms($row[Time])." <b>Host:</b> ".$row[User]."@".$row[Host]."</td>";
+			echo "<td><p align=\"left\" style=\"color:#ff0000\"><b>Locked:</b></font> $row[Info]<br /><b>Time:</b> ".sec2hms($row[Time])." <b>Host:</b> ".$row[User]."@".$row[Host]."</td>";
 		} else if ($row[State] == 'updating' ||$row[State] == 'Updating' ||$row[State] == 'update') {
-			echo "<td><p align=\"left\"><b>Updating:</b> $row[Info]<br /><b>Time:</b> ".sec2hms($row[Time])." <b>Host:</b> ".$row[User]."@".$row[Host]."</td>";
+			echo "<td><p align=\"left\" style=\"color:#000000\"><b>Updating:</b> $row[Info]<br /><b>Time:</b> ".sec2hms($row[Time])." <b>Host:</b> ".$row[User]."@".$row[Host]."</td>";
 		} else if ($row[State] == 'Sorting result') {
-			echo "<td><p align=\"left\"><b>Sorting result:</b> $row[Info]<br /> <b>Time:</b> ".sec2hms($row[Time])." <b>Host:</b> ".$row[User]."@".$row[Host]."</td>";
+			echo "<td><p align=\"left\" style=\"color:#000000\"><b>Sorting result:</b> $row[Info]<br /> <b>Time:</b> ".sec2hms($row[Time])." <b>Host:</b> ".$row[User]."@".$row[Host]."</td>";
 		} else if ($row[State] == 'Sending data') {
-			echo "<td><p align=\"left\"><b>Sending data:</b> $row[Info]<br /> <b>Time:</b> ".sec2hms($row[Time])." <b>Host:</b> ".$row[User]."@".$row[Host]."</td>";
+			echo "<td><p align=\"left\" style=\"color:#008800\"><b>Sending data:</b> $row[Info]<br /> <b>Time:</b> ".sec2hms($row[Time])." <b>Host:</b> ".$row[User]."@".$row[Host]."</td>";
 		} else {
 			if ($row[Info] != "SHOW PROCESSLIST") {
 				echo "<td><p align=\"left\">";
