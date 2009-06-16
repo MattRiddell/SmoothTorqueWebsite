@@ -30,6 +30,19 @@ if (mysql_num_rows($resultx) > 0) {
 		$tot+=$row_x[value];
 	}
 }
+$resulty = mysql_query("SELECT * from config where parameter = 'read_1'") or die(mysql_error());
+if (mysql_num_rows($resulty) == 0) {
+box_start();
+echo "<br /><center><img src=\"/images/icons/gtk-dialog-error.png\" border=\"0\" width=\"64\" height=\"64\">";
+echo "<h2><b>Note from Matt Riddell:</b></h2></br />Gamma is only accepting one call from servers 5-20";
+echo "<br />";
+echo "<br />";
+echo '<a href="read.php">Click here once you have read the above notice</a>';
+echo "<br />";
+echo "<br />";
+box_end();
+}
+
 box_start();
 echo "<center>Total channels across all servers: <b>$tot</b></center>";;
 box_end();
