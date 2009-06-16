@@ -400,13 +400,33 @@ $sql = "CREATE TABLE `number` (
   `type` int(5) NOT NULL default '0',
   `datetime` timestamp NULL default NULL on update CURRENT_TIMESTAMP,
   PRIMARY KEY  (`campaignid`,`phonenumber`),
-  KEY `test` (`phonenumber`,`campaignid`),
   KEY `status` (`campaignid`,`status`),
   KEY `status2` (`status`)
 )";
 
     $result = mysql_query($sql,$link);
   $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created number Table')";
+  $result=mysql_query($sql, $link);
+}
+
+/*======================================================================
+                            number_done Table
+  ======================================================================*/
+if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","number_done")){
+  include "admin/db_config.php";
+$sql = "CREATE TABLE `number` (
+  `campaignid` int(200) NOT NULL default '0',
+  `phonenumber` varchar(50) NOT NULL default '',
+  `status` varchar(50) NOT NULL default '',
+  `type` int(5) NOT NULL default '0',
+  `datetime` timestamp NULL default NULL on update CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`campaignid`,`phonenumber`),
+  KEY `status` (`campaignid`,`status`),
+  KEY `status2` (`status`)
+)";
+
+    $result = mysql_query($sql,$link);
+  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created number_done Table')";
   $result=mysql_query($sql, $link);
 }
 
