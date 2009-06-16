@@ -414,7 +414,7 @@ $sql = "CREATE TABLE `number` (
   ======================================================================*/
 if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","number_done")){
   include "admin/db_config.php";
-$sql = "CREATE TABLE `number` (
+$sql = "CREATE TABLE `number_done` (
   `campaignid` int(200) NOT NULL default '0',
   `phonenumber` varchar(50) NOT NULL default '',
   `status` varchar(50) NOT NULL default '',
