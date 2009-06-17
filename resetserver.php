@@ -9,6 +9,10 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
     $id=$_GET[id];
     $sql="update servers set status=1 where id=$id";
     $result=mysql_query($sql, $link) or die (mysql_error());;
+
+    $sql="insert into queue (status, campaignID, flags) VALUES (4, '$id', 1)";
+    $result=mysql_query($sql, $link) or die (mysql_error());;
+
     include("servers.php");
     exit;
 ?>
