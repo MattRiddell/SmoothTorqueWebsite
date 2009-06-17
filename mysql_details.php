@@ -29,6 +29,7 @@ while ($row = mysql_fetch_assoc($result)){
         }
         if ($row[Variable_name] == 'Uptime') {
                 $uptime = sec2hms($row['Value']);
+		$uptime_s = $row['Value'];
         }
         if ($row[Variable_name] == 'Connections') {
                 $connections = number_format($row['Value']);
@@ -36,9 +37,9 @@ while ($row = mysql_fetch_assoc($result)){
 }
 $result = mysql_query("SELECT value FROM SineDialer.config WHERE parameter = 'mysql_queue'") or die(mysql_error());
 if (mysql_num_rows($result) > 0) {
-        $pending = "Pending MySQL Writes: ".mysql_result($result,0,0)." ";
+        $pending = "Queued Writes: ".mysql_result($result,0,0)." ";
 }
-echo "Connections: $connections Queries: ".number_format($questions)." ".$pending."Uptime: $uptime<br /><br />";
+echo "Connections: $connections Queries: ".number_format($questions)." (".number_format($questions/$uptime_s,3)."/sec) ".$pending."Uptime: $uptime<br /><br />";
 
 echo "<b>Long Running MySQL Threads:</b><br />";
 $result = mysql_query("SHOW PROCESSLIST");
