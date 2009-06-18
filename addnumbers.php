@@ -80,7 +80,7 @@ Which campaign would you like to add numbers to?<br /><br />
         $number = str_replace("(","",$number);
         $number = str_replace(")","",$number);
         if (strlen(trim($number)) > 0) {
-            $sql="INSERT IGNORE INTO number (campaignid,phonenumber,status,type) VALUES ($_POST[campaignid],'$number','new',0)";
+            $sql="INSERT IGNORE INTO number (campaignid,phonenumber,status,type, random_sort) VALUES ($_POST[campaignid],'$number','new',0, ROUND(RAND() * 999999999))";
             $result=mysql_query($sql, $link) or die (mysql_error());;
         }
         echo "<!-- . -->";
