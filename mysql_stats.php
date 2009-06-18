@@ -1,6 +1,9 @@
 <?
 require "header.php";
 require "header_server.php";
+if (isset($_GET[kill])) {
+	$result = mysql_query("KILL $_GET[kill]") or die (mysql_error());
+}
  function _get_browser()
 {
   $browser = array ( //reversed array
