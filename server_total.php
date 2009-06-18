@@ -34,7 +34,7 @@ $resulty = mysql_query("SELECT * from config where parameter = 'read_1'") or die
 if (mysql_num_rows($resulty) == 0) {
 box_start();
 echo "<br /><center><img src=\"/images/icons/gtk-dialog-info.png\" border=\"0\" width=\"64\" height=\"64\">";
-echo "<br /><br />I've added real time server control - you can now start and stop severs without restarting SmoothTorque";
+echo "<br /><br />I've added real time server control - you can now start and stop severs (even during a campaign) without restarting SmoothTorque";
 echo "<br />";
 echo "<br />";
 echo '<a href="read.php">Click here once you have read the above notice</a>';
