@@ -46,7 +46,7 @@ require "header.php";
 require "header_server.php";
 ?>
 
-        <script type="text/javascript" src="js/dojo/dojo.js" djConfig="parseOnLoad:true, isDebug:false"></script>                                
+        <script type="text/javascript" src="js/dojo/dojo.js" djConfig="parseOnLoad:false, isDebug:false"></script>                                
         <script type="text/javascript">
 		dojo.require("dojo.NodeList-fx");
 
