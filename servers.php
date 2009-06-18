@@ -44,7 +44,16 @@ $result=mysql_query($sql, $link);
 } else {
 require "header.php";
 require "header_server.php";
+?>
 
+        <script type="text/javascript" src="js/dojo/dojo.js" djConfig="parseOnLoad:true, isDebug:false"></script>                                
+        <script type="text/javascript">
+		dojo.require("dojo.NodeList-fx");
+
+	</script>
+
+
+<?
 $_POST = array_map(mysql_real_escape_string,$_POST);
 $_GET = array_map(mysql_real_escape_string,$_GET);
 
@@ -70,7 +79,7 @@ if ($out[browser]=="MSIE"){
         $(function(){ // jquery onload
                 window.setInterval(function(){
 		        $('#ajaxDiv').loadIfModified('server_total.php');  // jquery ajax load into div
-		        $('#ajaxDiv2').loadIfModified('server_details.php');  // jquery ajax load into div
+		        $('#ajaxDiv2').loadIfModified('server_details.php<?if (isset($_GET[debug]))echo "?debug=".$_GET[debug];?>');  // jquery ajax load into div
                 },5000);
         });
 
@@ -83,7 +92,7 @@ if ($out[browser]=="MSIE"){
                 window.setInterval(
                 function(){
 		        $('#ajaxDiv').load('server_total.php');  // jquery ajax load into div
-		        $('#ajaxDiv2').load('server_details.php');  // jquery ajax load into div
+		        $('#ajaxDiv2').load('server_details.php<?if (isset($_GET[debug]))echo "?debug=".$_GET[debug];?>');  // jquery ajax load into div
                 }
                 ,5000);
         });

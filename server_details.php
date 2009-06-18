@@ -21,6 +21,18 @@ mysql_select_db("SineDialer", $link) or die("Unable to connect: ".mysql_error())
 
 ?>
 <?/* start of shadow */?>
+<script>
+	    dojo.addOnLoad(function(){
+		    // get each element with class="para"
+		    dojo.query(".chans")
+			.addClass("testClass")
+			.fadeOut({ duration: 5500 }).play();
+		    // get each element with class="para"
+//		    dojo.query(".chans")
+//			.addClass("testClass2")
+//			.animateProperty({duration:5000, properties:{color: {start: "#000", end:"#00ff00"}}}).play();
+	    });
+</script>
 <table align="center"><tr><td><div class="example" id="v6"><div id="main"><div class="wrap1"><div class="wrap2"><div class="wrap3" align="center">
 
 <table class="" align="center" border="0" cellpadding="2" cellspacing="0">
@@ -58,7 +70,9 @@ $class=" class=\"tborderx\"  onmouseover=\"style.backgroundColor='#84DFC1';\" on
 ?>
 <TR <?echo $class;?>>
 <TD>
+
 <?
+
 if (strlen($row[name])<25){
 echo "<A HREF=\"editserver.php?id=".$row[id]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".$row[name]."</A>";
 } else {
@@ -75,22 +89,28 @@ echo "<A HREF=\"editserver.php?id=".$row[id]."\"><img src=\"/images/pencil.png\"
 </TD>
 <TD>
 <?
+/*
+*/
+
+
+
+
 if ($row[status] == 0){
     echo "<img src=\"/images/cross.png\">";
-    echo "<a href=\"resetserver.php?id=$row[id]\"><img src=\"/images/control_play_blue.png\" border=\"0\"></a>";
+    echo "<span id=\"play_".$row[id]."\"><a href=\"resetserver.php?id=$row[id]\" onclick=\"dojo.query('#play_".$row[id]."').fadeOut().play();\"><img src=\"/images/control_play_blue.png\" border=\"0\"></a></span>";
 } else if ($row[status] == 1){
     echo "<img src=\"/images/tick.png\">";
-    echo "<a href=\"resetserver2.php?id=$row[id]\"><img src=\"/images/control_stop_blue.png\" border=\"0\"></a>";
+    echo "<span id=\"play_".$row[id]."\"><a href=\"resetserver2.php?id=$row[id]\" onclick=\"dojo.query('#play_".$row[id]."').fadeOut().play();\"><img src=\"/images/control_stop_blue.png\" border=\"0\"></a></span>";
 } else {
     echo "<img src=\"/images/clock.png\">";
-    echo "<a href=\"resetserver.php?id=$row[id]\"><img src=\"/images/control_play_blue.png\" border=\"0\"></a>";
+    echo "<span id=\"play_".$row[id]."\"><a href=\"resetserver.php?id=$row[id]\" onclick=\"dojo.query('#play_".$row[id]."').fadeOut().play();\"><img src=\"/images/control_play_blue.png\" border=\"0\"></a></span>";
 }
 ?>
 </TD>
 <TD>
 <a href="#" onclick="displaySmallMessage('includes/confirmDeleteServer.php?id=<?echo $row[id];?>');return false"><IMG SRC="/images/delete.png" BORDER="0"></a><br>
 </TD>
-<td>
+<td class="chans">
 <?
 //$resultx = mysql_query("SELECT value FROM SineDialer.config WHERE parameter = 's_".$row[name]."_connected"'");
 $sql = "SELECT value FROM SineDialer.config WHERE parameter = 's_".$row[name]."_connected'";
