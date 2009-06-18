@@ -199,7 +199,8 @@ if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","config")){
   include "admin/db_config.php";
 $sql = "CREATE TABLE `config` (
   `parameter` varchar(255) NOT NULL default '0',
-  `value` varchar(255) NOT NULL
+  `value` varchar(255) NOT NULL,
+  PRIMARY KEY  (`parameter`)
 ) ";
 
     $result = mysql_query($sql,$link);
@@ -222,6 +223,14 @@ if ($param_length != 255) {
     $sql = "ALTER TABLE config MODIFY value VARCHAR(255)";
     $result=mysql_query($sql, $link);
 }
+
+/* Check if there is a primary key on the config table - if not create it */
+$result = mysql_query("SHOW INDEXES FROM config");
+if (mysql_num_rows($result) == 0) {
+    $sql = "ALTER TABLE config ADD PRIMARY KEY (parameter)";
+    $result=mysql_query($sql, $link);
+}
+
 /*======================================================================
                             rates Table
   ======================================================================*/
