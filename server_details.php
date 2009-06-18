@@ -74,9 +74,9 @@ $class=" class=\"tborderx\"  onmouseover=\"style.backgroundColor='#84DFC1';\" on
 <?
 
 if (strlen($row[name])<25){
-echo "<A HREF=\"editserver.php?id=".$row[id]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".$row[name]."</A>";
+echo "<A HREF=\"editserver.php?id=".$row[id]."\">".$row[name]."&nbsp;<img src=\"/images/pencil.png\" border=\"0\" title=\"Edit\"></A>";
 } else {
-echo "<A HREF=\"editserver.php?id=".$row[id]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".trim(substr($row[name],0,15))."...</A>";
+echo "<A HREF=\"editserver.php?id=".$row[id]."\">".trim(substr($row[name],0,15))."...&nbsp;<img src=\"/images/pencil.png\" border=\"0\" title=\"Edit\"></A>";
 }
 ?>
 </TD>
