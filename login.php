@@ -148,14 +148,11 @@ $sql = "CREATE TABLE `campaignmessage` (
   $result=mysql_query($sql, $link);
   $sql = "insert  into campaignmessage values
 (27, 'fax-33e5c3b94674a138bc5b390c06e2dba2e7488cb6.tiff', 'New Test Fax', 'A fax broadcasting test', 1, ''),
-(20, 'fax-454d812f68762413e83903248236096ec83c492c.tiff', 'Do_Not_Use', 'A fax file', 1, null),
 (14, 'x-afa871459b4fff189d78420ad7f3158918ca8333.sln', 'Ringin', 'The windows ring in sound', 1, '0.905500'),
 (13, 'x-aba93245ef688df351b4c1765307c1e00a7d3b2e.sln', 'Chord', 'The windows chord sound', 1, '1.099000'),
 (19, 'x-02c4778bdf0e525aa5bbfc5190a9ff7b184136b2.sln', 'Popcorn', 'Popcorn song', 1, '28.585125'),
-(23, 'x-3534874a26eccf76813a3d47549959a0175abcc7.sln', 'UMR Introduction', 'Calling on behalf of... press 1 to take a short poll.', 26, '8.981750'),
 (21, 'x-df6efd23c65b97ae1920ceb5ad7b2ee2a2732431.sln', 'Tada', 'The windows tada sound', 26, '1.939000'),
 (24, 'x-d91f8f58dd14d004a31780540d34bba034f3bb1c.sln', 'Transfer 1 -Great', 'Great -here we go', 26, '1.656625'),
-(26, 'fax-46d26b1fe019de1a711c021a01e426ce65fe4de0.tiff', 'Fax_Lara', 'Picture of lara as a test', 1, null),
 (28, 'x-f9036629b654fffe0bdee6db47521dcd2ceb84b1.sln', 'Ding', 'The windows ding alert sound', 85, '0.915750')";
 $result = mysql_query($sql,$link);
 }
@@ -399,14 +396,33 @@ $sql = "CREATE TABLE `number` (
   `status` varchar(50) NOT NULL default '',
   `type` int(5) NOT NULL default '0',
   `datetime` timestamp NULL default NULL on update CURRENT_TIMESTAMP,
+  `random_sort` int(8) NOT NULL default '0',
   PRIMARY KEY  (`campaignid`,`phonenumber`),
   KEY `status` (`campaignid`,`status`),
+  KEY `randomize` (`random_sort`,`campaignid`, `status`),
   KEY `status2` (`status`)
 )";
 
     $result = mysql_query($sql,$link);
   $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created number Table')";
   $result=mysql_query($sql, $link);
+
+
+  $fields = mysql_list_fields('SineDialer', 'number');
+  $columns = mysql_num_fields($fields);
+  for ($i = 0; $i < $columns; $i++) {
+      $field_array[] = mysql_field_name($fields, $i);
+  }
+
+  if (!in_array('random_sort', $field_array))
+  {
+      $result = mysql_query('ALTER TABLE servers ADD randomize int(10)');
+      $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added number randomize field')";
+      $result=mysql_query($sql, $link);
+      $result = mysql_query('UPDATE numbers SET randomize = ROUND(RAND() * 999999999)');
+      $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'randomized existing number field')";
+  }
+
 }
 
 /*======================================================================

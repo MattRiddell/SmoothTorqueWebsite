@@ -33,7 +33,7 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
         $campaignid = $data["id"];
         //$sql2 = "LOCK TABLES number WRITE";
         //mysql_query($sql2, $link) or die (mysql_error());;
-        $sql = "INSERT IGNORE INTO number (campaignid,phonenumber,status,type) VALUES";
+        $sql = "INSERT IGNORE INTO number (campaignid,phonenumber,status,type, random_sort) VALUES";
         $isfirst=true;
         while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
             //echo "Inside Loop: ".$data[0]."<br />";
@@ -43,7 +43,7 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
             $data[0] = str_replace(" ","",$data[0]);
             $data[0] = str_replace("\r","",$data[0]);
             if ($isfirst) {
-                $sql.="(".$campaignid.",'".$data[0]."','new',0)";
+                $sql.="(".$campaignid.",'".$data[0]."','new',0, ROUND(RAND() * 999999999))";
 
 //                $sql2 = "SET AUTOCOMMIT=0;";//BEGIN";
 //                mysql_query($sql2, $link) or die(mysql_error());
