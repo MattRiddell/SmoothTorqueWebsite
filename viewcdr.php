@@ -216,6 +216,9 @@ while ($row = mysql_fetch_assoc($result)) {
 
                 */
                 //echo "Billsec: $billsec[$i] Increment: $increment[$accountcode[$i]]";
+		if ($increment[$accountcode[$i]] < 1) {
+			$increment[$accountcode[$i]] = 1;
+		} 
                 $blocks = ceil($billsec[$i]/$increment[$accountcode[$i]]);
                 //echo "Blocks: $blocks";
                 $newsecs = $blocks * $increment[$accountcode[$i]];
