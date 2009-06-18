@@ -36,18 +36,21 @@ while ($accounts = mysql_fetch_assoc($result_accounts)) {
 $accountcode_in = $accounts['accountcode'];
 $cdrlink = mysql_connect($db_host, $db_user, $db_pass) OR die("Error connecting to CDR database using $db_user:$db_pass@$db_host because: \n".mysql_error());
 mysql_select_db($config_values['CDR_DB'], $cdrlink);
-$sql = "SELECT count(*) from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation'
-	and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode_in' and userfield2!='1'";
-$result = mysql_query($sql,$cdrlink);
-$count = mysql_result($result,0,0);
-echo $count." Total Records for $accountcode_in\n";
+//$sql = "SELECT count(*) from ".$config_values['CDR_TABLE']." WHERE accountcode='$accountcode_in' and userfield2!='1' and dcontext!='default' and dcontext!='load-simulation'
+//	and dcontext!='staff' and dcontext!='ls3' and userfield!=''";
+//$result = mysql_query($sql,$cdrlink);
+//$count = mysql_result($result,0,0);
+//echo $count." Total Records for $accountcode_in\n";
 
 //$sql = "SELECT * from ".$config_values['CDR_TABLE']." order by calldate DESC LIMIT $start,100";
-$sql = "SELECT        * from ".$config_values['CDR_TABLE']." WHERE dcontext!='default' and dcontext!='load-simulation'
-        and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode_in' and userfield2!='1'
+$sql = "SELECT        * from ".$config_values['CDR_TABLE']." WHERE userfield2 != '1' and accountcode='$accountcode_in' and dcontext!='default' and dcontext!='load-simulation'
+        and dcontext!='staff' and dcontext!='ls3' and userfield!=''
         order by calldate DESC limit 5000";
 //echo $sql;
 $result = mysql_query($sql,$cdrlink);
+$count = mysql_num_rows($result);
+echo $count." Total Records for $accountcode_in\n";
+
 $i = 0;
 $titletd = "<td bgcolor=\"#000000\"><font color=\"#CCCCFF\"><b>&nbsp;&nbsp;";
 $titletdc = "&nbsp;&nbsp;</td>";
