@@ -36,7 +36,7 @@ From here you can chose a campaign that you would like to export the numbers fro
     <TD>Select Campaign:</TD><TD>
         <SELECT NAME="campaignid">
         <?
-        $sql = 'SELECT id,name FROM campaign WHERE groupid='.$campaigngroupid;
+        $sql = 'SELECT id,name FROM campaign WHERE groupid='.$campaigngroupid.' order by name';
         $result=mysql_query($sql, $link) or die (mysql_error());;
         //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
         while ($row = mysql_fetch_assoc($result)) {
