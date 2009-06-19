@@ -413,7 +413,7 @@ $sql = "CREATE TABLE `number` (
   $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created number Table')";
   $result=mysql_query($sql, $link);
 
-
+}
   $fields = mysql_list_fields('SineDialer', 'number');
   $columns = mysql_num_fields($fields);
   for ($i = 0; $i < $columns; $i++) {
@@ -422,14 +422,15 @@ $sql = "CREATE TABLE `number` (
 
   if (!in_array('random_sort', $field_array))
   {
-      $result = mysql_query('ALTER TABLE servers ADD randomize int(10)');
-      $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added number randomize field')";
+//      echo "Please wait, updating system...";
+      $result = mysql_query('ALTER TABLE number ADD random_sort int(10)') or die(mysql_error());
+      $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added number random_sort field')";
       $result=mysql_query($sql, $link);
-      $result = mysql_query('UPDATE numbers SET randomize = ROUND(RAND() * 999999999)');
+      $result = mysql_query('UPDATE numbers SET random_sort = ROUND(RAND() * 999999999)') or die(myqsl_error());
       $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'randomized existing number field')";
   }
 
-}
+
 
 /*======================================================================
                             number_done Table
