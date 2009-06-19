@@ -82,7 +82,7 @@ if (mysql_num_rows($result) > 0) {
     if ($count > 0) {
         echo "<br /><b>Long Running MySQL Threads:</b><br />";
         echo $output;
+        echo "</table>";
     }
 }
-echo "</table>";
 ?>
