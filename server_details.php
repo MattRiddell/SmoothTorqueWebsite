@@ -102,32 +102,36 @@ mysql_select_db("SineDialer", $link) or die("Unable to connect: ".mysql_error())
             </TD>
             <td class="chans">
                 <?
-                //$resultx = mysql_query("SELECT value FROM SineDialer.config WHERE parameter = 's_".$row[name]."_connected"'");
-                $sql = "SELECT value FROM SineDialer.config WHERE parameter = 's_".$row[name]."_connected'";
-                $resultx = mysql_query($sql) or die(mysql_error());
-                if (mysql_num_rows($resultx) > 0) {
-                    switch( mysql_result($resultx,0,0)) {
-                        case 1:
-                            break;
-                        default:
-                            echo "Status: ".mysql_result($resultx,0,0);
-                            break;
-                    }
-                } else {
-                    //echo "<font color=\"blue\"><img src=\"/images/sq_progress.gif\"></font>";
-                }
-                $sql = "SELECT value FROM SineDialer.config WHERE parameter = 's_".$row[name]."_calls'";
-                $resultx = mysql_query($sql) or die(mysql_error());
-                if (mysql_num_rows($resultx) > 0) {
-                    $num_chans =  mysql_result($resultx,0,0);
-                    $total_chans += $num_chans;
-                    if ($num_chans > 0) {
-                        echo " (<b>".round($num_chans)." channels</b>)";
+                if ($row[status] != 0){
+                    //$resultx = mysql_query("SELECT value FROM SineDialer.config WHERE parameter = 's_".$row[name]."_connected"'");
+                    $sql = "SELECT value FROM SineDialer.config WHERE parameter = 's_".$row[name]."_connected'";
+                    $resultx = mysql_query($sql) or die(mysql_error());
+                    if (mysql_num_rows($resultx) > 0) {
+                        switch( mysql_result($resultx,0,0)) {
+                            case 1:
+                                break;
+                            default:
+                                echo "Status: ".mysql_result($resultx,0,0);
+                                break;
+                        }
                     } else {
-                        echo " <font color=\"black\">(".round($num_chans)." channels)</font>";
+                        //echo "<font color=\"blue\"><img src=\"/images/sq_progress.gif\"></font>";
+                    }
+                    $sql = "SELECT value FROM SineDialer.config WHERE parameter = 's_".$row[name]."_calls'";
+                    $resultx = mysql_query($sql) or die(mysql_error());
+                    if (mysql_num_rows($resultx) > 0) {
+                        $num_chans =  mysql_result($resultx,0,0);
+                        $total_chans += $num_chans;
+                        if ($num_chans > 0) {
+                            echo " (<b>".round($num_chans)." channels</b>)";
+                        } else {
+                            echo " <font color=\"black\">(".round($num_chans)." channels)</font>";
+                        }
+                    } else {
+                        echo " <font color=\"red\">Unknown</font>";
                     }
                 } else {
-                    echo " <font color=\"red\">Unknown</font>";
+                    echo "Not enabled";
                 }
                 ?>
             </td>
