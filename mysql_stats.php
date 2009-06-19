@@ -9,6 +9,14 @@ if (isset($_GET[convert_table])) {
     ?><META HTTP-EQUIV=REFRESH CONTENT="0; URL=/mysql_stats.php"><?
     exit(0);
 }
+if (isset($_GET[convert_back])) {
+    echo "Please wait - converting to MyISAM - this may take a while<br />";
+    flush();
+    $result = mysql_query("ALTER TABLE SineDialer.".sanitize($_GET[convert_back],false)." ENGINE = MyISAM") or die (mysql_error());
+    echo "<br /><b>Conversion completed</b><br />";
+    ?><META HTTP-EQUIV=REFRESH CONTENT="0; URL=/mysql_stats.php"><?
+    exit(0);
+}
 if (isset($_GET[kill])) {
 	$result = mysql_query("KILL $_GET[kill]") or die (mysql_error());
 }
@@ -135,7 +143,7 @@ while ($row = mysql_fetch_assoc($result)) {
 			echo "<td".$tdstyle."><b>".number_format($size,$digits)." $size_text</b></td>";
 			echo "<td".$tdstyle." colspan=\"2\">$row[Comment]</td>";
 			echo "<td".$tdstyle.">";
-			echo "<b>".$row[Engine]."</b>";
+			echo "<b>".$row[Engine]."</b> <a href=\"mysql_stats.php?convert_back=$row[Name]\">Convert</a>";
 		} else {
 			echo "<td".$tdstyle.">$row[Name]</td>";
 			echo "<td".$tdstyle.">".number_format($rows)."</td>";
