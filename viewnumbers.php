@@ -173,9 +173,13 @@ $class=" class=\"tborderx\"";
 </TD>
 <TD>
 <?
-$newdate = date('l dS \of F Y h:i:s A', $row["newdate"]);
-
-echo $newdate;?>
+if (isset($row["newdate"])) {
+    $newdate = date('l dS \of F Y h:i:s A', $row["newdate"]);
+    echo $newdate;
+} else {
+    echo "Not updated";
+}
+?>
 </TD>
 <TD>
 <?echo $row[status];?>

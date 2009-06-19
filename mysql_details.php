@@ -42,7 +42,7 @@ $result = mysql_query("SELECT value FROM SineDialer.config WHERE parameter = 'my
 if (mysql_num_rows($result) > 0) {
         $pending = "Queued Writes: ".mysql_result($result,0,0)." ";
 }
-$result = mysql_query("select count(*) from SineDialer.number where random_sort = 0") or die(mysql_error());
+$result = mysql_query("select count(*) from SineDialer.number where random_sort = 0 or random_sort = NULL") or die(mysql_error());
 $unrandomized = mysql_result($result,0,0);
 
 echo "Queries: ".number_format($questions)." (".number_format($questions/$uptime_s,3)."/sec) ".$pending."Uptime: $uptime Unrandomized Numbers: $unrandomized<br /><br />";
