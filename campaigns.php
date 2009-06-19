@@ -20,6 +20,8 @@ if (!isset($_GET[campaigngroupid])) {
     $campaigngroupid = $_GET[campaigngroupid];
 }
 require "header_campaign.php";
+
+
 /*================= Log Access ======================================*/
 $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Viewed Campaign Page')";
 $result=mysql_query($sql, $link);

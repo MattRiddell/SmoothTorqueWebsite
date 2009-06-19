@@ -45,6 +45,7 @@ while ($accounts = mysql_fetch_assoc($result_accounts)) {
     mysql_select_db($config_values['CDR_DB'], $cdrlink);
     $sql = "SELECT * from ".$config_values['CDR_TABLE']." WHERE userfield2 != '1' and accountcode='$accountcode_in' and dcontext!='default' and dcontext!='load-simulation'
         and dcontext!='staff' and dcontext!='ls3' and userfield!='' order by calldate DESC limit 100000";
+    //echo "Running: $sql\n";
     $result = mysql_query($sql,$cdrlink);
     $start = time();
     $count = mysql_num_rows($result);
@@ -141,10 +142,12 @@ while ($accounts = mysql_fetch_assoc($result_accounts)) {
     	            $campaign_cost = 0;
     	        }
     	        $sql = "UPDATE SineDialer.campaign set cost = '".($campaign_cost+$cost[$i])."' WHERE id = ".$campaignid;
+		echo $sql."\n";
     	        mysql_query($sql,$link);
     	    }
-    	    $sql = "update cdr set userfield2 = '1' where calldate = '$calldate[$i]' and duration = '$duration[$i]' and accountcode = '$accountcode[$i]' and userfield = '$userfield[$i]'";
-//	    echo $sql."\n";
+	    mysql_select_db($config_values['CDR_DB'], $cdrlink);
+    	    $sql = "update ".$config_values['CDR_TABLE']." set userfield2 = '1' where calldate = '$calldate[$i]' and duration = '$duration[$i]' and accountcode = '$accountcode[$i]' and userfield = '$userfield[$i]'";
+	    echo $sql."\n";
 	    if (time() - $start > 0 && $count > 0) {
     	    	echo $i."/$count (".round(($i/$count)*100,2).")% (".round($i/(time() - $start))." per sec)             \r";
 	    } else {

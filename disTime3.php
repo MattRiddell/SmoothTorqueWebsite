@@ -1,4 +1,5 @@
 <?
+include "admin/db_config.php";
 /* Find out what the base directory name is for two reasons:
     1. So we can include files
     2. So we can explain how to set up things that are missing */
@@ -14,8 +15,30 @@ $self=$_SERVER['PHP_SELF'];
    functions subdirectory */
 require "/".$current_directory."/functions/functions.php";
 
-$url = "default";
-include "admin/db_config.php";
+/* If we have no language set, let's use English - this is mainly because
+ * header.php is also called from index.php where we couldn't possibly
+ * know the language.
+ */
+if ((!(isset($_COOKIE[language])))||$_COOKIE[language] == "--") {
+    $_COOKIE[language] = "en";
+}
+/* Same goes for the server name */
+if ($_COOKIE[url] == "--") {
+    $_COOKIE[url] = $_SERVER[SERVER_NAME];
+}
+
+/* Set a variable so we don't need to keep reading the cookies */
+$url = $_COOKIE[url];
+
+/* We now have a language and a server name */
+$result_config = mysql_query("SELECT * FROM web_config WHERE LANG = ".sanitize($_COOKIE[language])." AND url = ".sanitize($url)) or die(mysql_error());
+if (mysql_num_rows($result_config) == 0) {
+    /* No entry found for this url - use the default */
+    $sql = "SELECT * FROM web_config WHERE LANG = ".sanitize($_COOKIE[language])." AND url = 'default'";
+    $result_config = mysql_query($sql) or die("Unable to load config information from mysql: ".mysql_error());
+}
+
+
 mysql_select_db("SineDialer", $link) or die("Unable to connect: ".mysql_error());
 $totalcost = array();
 //echo "Loading config information...\n";
@@ -296,7 +319,8 @@ echo "<A title=\"Delete this campaign\" HREF=\"#\"><IMG SRC=\"/images/delete.png
 }
 ?>
 </TD>
-<?if ( $config_values['USE_BILLING'] == "YES") {?>
+<?
+if ( $config_values['USE_BILLING'] == "YES") {?>
 <TD>
 <?
 if ($row[cost]>0) {
