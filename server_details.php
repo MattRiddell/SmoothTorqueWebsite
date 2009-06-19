@@ -110,6 +110,9 @@ mysql_select_db("SineDialer", $link) or die("Unable to connect: ".mysql_error())
                         switch( mysql_result($resultx,0,0)) {
                             case 1:
                                 break;
+                            case 0:
+                                echo "Connecting...";
+                                break;
                             default:
                                 echo "Status: ".mysql_result($resultx,0,0);
                                 break;
