@@ -48,8 +48,8 @@ $unrandomized = mysql_result($result,0,0);
 echo "Queries: ".number_format($questions)." (".number_format($questions/$uptime_s,3)."/sec) ".$pending."Uptime: $uptime Unrandomized Numbers: $unrandomized<br />";
 
 $result = mysql_query("SHOW FULL PROCESSLIST") or die(mysql_error());
+$output = "";
 if (mysql_num_rows($result) > 0) {
-    $output = "<br /><center><table border=\"0\" class=\"tborder\">";
     $count = 0;
     while ($row = mysql_fetch_assoc($result)) {
     	if ($row[Command] != 'Sleep' && $row[Time] > 2) {
@@ -76,11 +76,11 @@ if (mysql_num_rows($result) > 0) {
     			}
     		}
     		$output.= "</tr>";
-    		$output.= "<tr><td><br /></td></tr>";
     	}
     }
     if ($count > 0) {
         echo "<br /><b>Long Running MySQL Threads:</b><br />";
+	echo "<br /><center><table border=\"0\" class=\"tborder\">";
         echo $output;
         echo "</table>";
     }
