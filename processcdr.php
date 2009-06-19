@@ -36,16 +36,18 @@ $db_pass=$config_values['CDR_PASS'];
 $sql = "Select accountcode from billing";
 $result_accounts = mysql_query($sql, $link);
 /* Loop through the account codes which are defined in billing */
+$total_count = 0;
+$start_total = time();
 while ($accounts = mysql_fetch_assoc($result_accounts)) {
     $accountcode_in = $accounts['accountcode'];
     echo "Checking $accountcode_in\n";
     $cdrlink = mysql_connect($db_host, $db_user, $db_pass) OR die("Error connecting to CDR database using $db_user:$db_pass@$db_host because: \n".mysql_error());
     mysql_select_db($config_values['CDR_DB'], $cdrlink);
     $sql = "SELECT * from ".$config_values['CDR_TABLE']." WHERE userfield2 != '1' and accountcode='$accountcode_in' and dcontext!='default' and dcontext!='load-simulation'
-        and dcontext!='staff' and dcontext!='ls3' and userfield!='' order by calldate DESC limit 15000";
+        and dcontext!='staff' and dcontext!='ls3' and userfield!='' order by calldate DESC limit 100000";
     $result = mysql_query($sql,$cdrlink);
+    $start = time();
     $count = mysql_num_rows($result);
-    echo $count." Total Records for $accountcode_in\n";
     $i = 0;
     echo mysql_num_rows($result)." Records this run for $accountcode_in\n";
     while ($row = mysql_fetch_assoc($result)) {
@@ -142,10 +144,16 @@ while ($accounts = mysql_fetch_assoc($result_accounts)) {
     	        mysql_query($sql,$link);
     	    }
     	    $sql = "update cdr set userfield2 = '1' where calldate = '$calldate[$i]' and duration = '$duration[$i]' and accountcode = '$accountcode[$i]' and userfield = '$userfield[$i]'";
-    	    echo $i."/5000\r";
+//	    echo $sql."\n";
+	    if (time() - $start > 0 && $count > 0) {
+    	    	echo $i."/$count (".round(($i/$count)*100,2).")% (".round($i/(time() - $start))." per sec)             \r";
+	    } else {
+		echo "Starting up\r";
+	    }
     	    $result_update = mysql_query($sql,$cdrlink) or die(mysql_error());
     	}
     	$i++;
+	$total_count++;
     } /* end of while on records */
 
     $sqlx = "select credit,creditlimit from billing where accountcode = '$accountcode_in'";
@@ -181,4 +189,10 @@ while ($accounts = mysql_fetch_assoc($result_accounts)) {
         }
     }
 } /* End of while on customers */
+if ($total_count > 0) {
+	echo "\n\nSpeed across all(".round($total_count/(time() - $start_total))." per sec)             \n";
+} else {
+	echo "\n\nNo records updated\n";
+}
+
 ?>
