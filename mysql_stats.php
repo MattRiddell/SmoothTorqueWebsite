@@ -63,11 +63,13 @@ if ($out[browser]=="MSIE"){
 box_start(700);
 echo "<center>";
 ?>
+
 <div id = "ajaxDiv">
 <?
 include "mysql_details.php";
 ?>
 </div>
+
 <?
 box_end();
 $result = mysql_query("SHOW TABLE STATUS");

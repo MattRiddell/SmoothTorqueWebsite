@@ -17,6 +17,9 @@ require "/".$current_directory."/functions/functions.php";
 
 $url = "default";
 include "admin/db_config.php";
+?>
+<meta http-equiv="Pragma" content="no-cache" />
+<?
 mysql_select_db("SineDialer", $link) or die("Unable to connect: ".mysql_error());
 echo "<b>MySQL Statistics:<br /></b>";
 $result = mysql_query("SHOW STATUS");
@@ -45,7 +48,7 @@ $unrandomized = mysql_result($result,0,0);
 echo "Queries: ".number_format($questions)." (".number_format($questions/$uptime_s,3)."/sec) ".$pending."Uptime: $uptime Unrandomized Numbers: $unrandomized<br /><br />";
 
 echo "<b>Long Running MySQL Threads:</b><br />";
-$result = mysql_query("SHOW FULL PROCESSLIST");
+$result = mysql_query("SHOW FULL PROCESSLIST") or die(mysql_error());
 echo "<br /><center><table border=\"0\" class=\"tborder\">";
 while ($row = mysql_fetch_assoc($result)) {
 	if ($row[Command] != 'Sleep' && $row[Time] > 2) {
