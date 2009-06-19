@@ -25,7 +25,7 @@ From here you can chose a campaign that<br />you would like to see the numbers f
         <?
         $sql = 'SELECT id,name,groupid FROM campaign WHERE groupid='.$campaigngroupid;
 	if($security >= 100)
-        	$sql = 'SELECT id,name,groupid FROM campaign';
+        	$sql = 'SELECT id,name,groupid FROM campaign order by name';
         $result=mysql_query($sql, $link) or die (mysql_error());;
         //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
         while ($row = mysql_fetch_assoc($result)) {
@@ -101,7 +101,7 @@ if (isset($_GET[type])){
     }
 }
 
-$sql = 'SELECT *, UNIX_TIMESTAMP(datetime) as newdate FROM number WHERE campaignid='.$campaignid.' '.$type.' order by status asc, phonenumber LIMIT '.$start.','.$config_values['PER_PAGE'];
+$sql = 'SELECT *, UNIX_TIMESTAMP(datetime) as newdate FROM number WHERE campaignid='.$campaignid.' '.$type.' order by status asc, random_sort LIMIT '.$start.','.$config_values['PER_PAGE'];
 $result=mysql_query($sql, $link) or die (mysql_error());;
 //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
 if ($_GET[type]!="all") {
