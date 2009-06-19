@@ -424,10 +424,18 @@ $sql = "CREATE TABLE `number` (
   {
       echo "Please wait, updating system...this may take a while - please don't stop it";
       flush();
+      sleep(1);
+      echo "Starting with adding the random sort field to the numbers table";
+      flush();
+      sleep(1);
       $result = mysql_query('ALTER TABLE number ADD random_sort int(10)') or die(mysql_error());
       $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added number random_sort field')";
       $result=mysql_query($sql, $link);
+      echo "Added field - now updating the numbers to give them each a random value";
+      flush();
+      sleep(1);
       $result = mysql_query('UPDATE numbers SET random_sort = ROUND(RAND() * 999999999)') or die(myqsl_error());
+      $result = mysql_query("ALTER TABLE config ADD INDEX randomize (random_sort, campaignid, status)") or die(myqsl_error());;
       $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'randomized existing number field')";
       echo "Update complete - please log back in";
       ?><META HTTP-EQUIV=REFRESH CONTENT="0; URL=/index.php"><?
