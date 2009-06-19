@@ -402,7 +402,7 @@ $sql = "CREATE TABLE `number` (
   `status` varchar(50) NOT NULL default '',
   `type` int(5) NOT NULL default '0',
   `datetime` timestamp NULL default NULL on update CURRENT_TIMESTAMP,
-  `random_sort` int(8) NOT NULL default '0',
+  `random_sort` int(10) NOT NULL default '0',
   PRIMARY KEY  (`campaignid`,`phonenumber`),
   KEY `status` (`campaignid`,`status`),
   KEY `randomize` (`random_sort`,`campaignid`, `status`),
@@ -422,12 +422,16 @@ $sql = "CREATE TABLE `number` (
 
   if (!in_array('random_sort', $field_array))
   {
-//      echo "Please wait, updating system...";
+      echo "Please wait, updating system...this may take a while - please don't stop it";
+      flush();
       $result = mysql_query('ALTER TABLE number ADD random_sort int(10)') or die(mysql_error());
       $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added number random_sort field')";
       $result=mysql_query($sql, $link);
       $result = mysql_query('UPDATE numbers SET random_sort = ROUND(RAND() * 999999999)') or die(myqsl_error());
       $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'randomized existing number field')";
+      echo "Update complete - please log back in";
+      ?><META HTTP-EQUIV=REFRESH CONTENT="0; URL=/index.php"><?
+      exit(0);
   }
 
 
