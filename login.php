@@ -434,7 +434,7 @@ $sql = "CREATE TABLE `number` (
       echo "Added field - now updating the numbers to give them each a random value";
       flush();
       sleep(1);
-      $result = mysql_query('UPDATE numbers SET random_sort = ROUND(RAND() * 999999999)') or die(mysql_error());
+      $result = mysql_query('UPDATE number SET random_sort = ROUND(RAND() * 999999999)') or die(mysql_error());
       $result = mysql_query("ALTER TABLE config ADD INDEX randomize (random_sort, campaignid, status)") or die(mysql_error());;
       $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'randomized existing number field')";
       echo "Update complete - please log back in";
