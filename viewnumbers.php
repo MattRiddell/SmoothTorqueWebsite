@@ -177,7 +177,7 @@ if (isset($row["newdate"])) {
     $newdate = date('l dS \of F Y h:i:s A', $row["newdate"]);
     echo $newdate;
 } else {
-    echo "Not updated";
+    echo '<font color = "#cccccc">Never</font>';
 }
 ?>
 </TD>
