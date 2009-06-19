@@ -45,37 +45,44 @@ if (mysql_num_rows($result) > 0) {
 $result = mysql_query("select count(*) from SineDialer.number where random_sort = 0 or random_sort = NULL") or die(mysql_error());
 $unrandomized = mysql_result($result,0,0);
 
-echo "Queries: ".number_format($questions)." (".number_format($questions/$uptime_s,3)."/sec) ".$pending."Uptime: $uptime Unrandomized Numbers: $unrandomized<br /><br />";
+echo "Queries: ".number_format($questions)." (".number_format($questions/$uptime_s,3)."/sec) ".$pending."Uptime: $uptime Unrandomized Numbers: $unrandomized<br />";
 
-echo "<b>Long Running MySQL Threads:</b><br />";
 $result = mysql_query("SHOW FULL PROCESSLIST") or die(mysql_error());
-echo "<br /><center><table border=\"0\" class=\"tborder\">";
-while ($row = mysql_fetch_assoc($result)) {
-	if ($row[Command] != 'Sleep' && $row[Time] > 2) {
-		echo "<tr>";
-		$link = '<td><a href="mysql_stats.php?kill='.$row['Id'].'"><img src="images/delete.png" border="0">&nbsp;Kill this process</a></td>';
-		if ($row[State] == 'Locked') {
-			echo "<td><p align=\"left\" style=\"color:#ff0000\"><b>Locked:</b></font> $row[Info]<br /><b>Time:</b> ".sec2hms($row[Time])." <b>Host:</b> ".$row[User]."@".$row[Host]."$link</td>";
-		} else if ($row[State] == 'copy to tmp table') {
-			echo "<td><p align=\"left\" style=\"color:#880088\"><b>Copying to temp table:</b></font> $row[Info]<br /><b>Time:</b> ".sec2hms($row[Time])." <b>Host:</b> ".$row[User]."@".$row[Host]."$link</td>";
-		} else if ($row[State] == 'updating' ||$row[State] == 'Updating' ||$row[State] == 'update') {
-			echo "<td><p align=\"left\" style=\"color:#000000\"><b>Updating:</b> $row[Info]<br /><b>Time:</b> ".sec2hms($row[Time])." <b>Host:</b> ".$row[User]."@".$row[Host]."$link</td>";
-		} else if ($row[State] == 'Sorting result') {
-			echo "<td><p align=\"left\" style=\"color:#000000\"><b>Sorting result:</b> $row[Info]<br /> <b>Time:</b> ".sec2hms($row[Time])." <b>Host:</b> ".$row[User]."@".$row[Host]."$link</td>";
-		} else if ($row[State] == 'Sending data') {
-			echo "<td><p align=\"left\" style=\"color:#008800\"><b>Sending data:</b> $row[Info]<br /> <b>Time:</b> ".sec2hms($row[Time])." <b>Host:</b> ".$row[User]."@".$row[Host]."$link</td>";
-		} else {
-			if ($row[Info] != "SHOW PROCESSLIST") {
-				echo "<td><p align=\"left\">";
-				foreach ($row as $key=>$value) {
-					echo "<b>Key:</b> $key <b>Value:</b> $value<br />";
-				}
-				echo "</p>$link</td>";
-			}
-		}
-		echo "</tr>";
-		echo "<tr><td><br /></td></tr>";
-	}
+if (mysql_num_rows($result) > 0) {
+    $output = "<br /><center><table border=\"0\" class=\"tborder\">";
+    $count = 0;
+    while ($row = mysql_fetch_assoc($result)) {
+    	if ($row[Command] != 'Sleep' && $row[Time] > 2) {
+            $count++;
+    		$output.= "<tr>";
+    		$link = '<td><a href="mysql_stats.php?kill='.$row['Id'].'"><img src="images/delete.png" border="0">&nbsp;Kill this process</a></td>';
+    		if ($row[State] == 'Locked') {
+    			$output.= "<td><p align=\"left\" style=\"color:#ff0000\"><b>Locked:</b></font> $row[Info]<br /><b>Time:</b> ".sec2hms($row[Time])." <b>Host:</b> ".$row[User]."@".$row[Host]."$link</td>";
+    		} else if ($row[State] == 'copy to tmp table') {
+    			$output.= "<td><p align=\"left\" style=\"color:#880088\"><b>Copying to temp table:</b></font> $row[Info]<br /><b>Time:</b> ".sec2hms($row[Time])." <b>Host:</b> ".$row[User]."@".$row[Host]."$link</td>";
+    		} else if ($row[State] == 'updating' ||$row[State] == 'Updating' ||$row[State] == 'update') {
+    			$output.= "<td><p align=\"left\" style=\"color:#000000\"><b>Updating:</b> $row[Info]<br /><b>Time:</b> ".sec2hms($row[Time])." <b>Host:</b> ".$row[User]."@".$row[Host]."$link</td>";
+    		} else if ($row[State] == 'Sorting result') {
+    			$output.= "<td><p align=\"left\" style=\"color:#000000\"><b>Sorting result:</b> $row[Info]<br /> <b>Time:</b> ".sec2hms($row[Time])." <b>Host:</b> ".$row[User]."@".$row[Host]."$link</td>";
+    		} else if ($row[State] == 'Sending data') {
+    			echo "<td><p align=\"left\" style=\"color:#008800\"><b>Sending data:</b> $row[Info]<br /> <b>Time:</b> ".sec2hms($row[Time])." <b>Host:</b> ".$row[User]."@".$row[Host]."$link</td>";
+    		} else {
+    			if ($row[Info] != "SHOW PROCESSLIST") {
+    				$output.= "<td><p align=\"left\">";
+    				foreach ($row as $key=>$value) {
+    					$output.= "<b>Key:</b> $key <b>Value:</b> $value<br />";
+    				}
+    				$output.= "</p>$link</td>";
+    			}
+    		}
+    		$output.= "</tr>";
+    		$output.= "<tr><td><br /></td></tr>";
+    	}
+    }
+    if ($count > 0) {
+        echo "<br /><b>Long Running MySQL Threads:</b><br />";
+        echo $output;
+    }
 }
 echo "</table>";
 ?>
