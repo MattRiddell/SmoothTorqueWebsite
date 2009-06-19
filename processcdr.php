@@ -189,9 +189,9 @@ while ($accounts = mysql_fetch_assoc($result_accounts)) {
         }
     }
 } /* End of while on customers */
-if ($total_count > 0) {
+if ($total_count > 0 && (time() - $start_total) > 0) {
 	echo "\n\nSpeed across all(".round($total_count/(time() - $start_total))." per sec)             \n";
-} else {
+} else if ((time() - $start_total) > 0) {
 	echo "\n\nNo records updated\n";
 }
 
