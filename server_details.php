@@ -131,7 +131,7 @@ mysql_select_db("SineDialer", $link) or die("Unable to connect: ".mysql_error())
                         echo " <font color=\"red\">Unknown</font>";
                     }
                 } else {
-                    echo "Not enabled";
+                    echo "<font color=\"#cccccc\">Disabled</font>";
                 }
                 ?>
             </td>

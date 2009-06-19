@@ -23,13 +23,19 @@ $_POST = array_map(mysql_real_escape_string,$_POST);
 $_GET = array_map(mysql_real_escape_string,$_GET);
 
 $tot =0;
-$sql = 'SELECT value FROM SineDialer.config WHERE parameter like \'s_%_calls\'';
-$resultx = mysql_query($sql) or die(mysql_error());
-if (mysql_num_rows($resultx) > 0) {
-	while ($row_x = mysql_fetch_assoc($resultx)) {
-		$tot+=$row_x[value];
-	}
+$result = mysql_query("SELECT name FROM SineDialer.servers WHERE status = 1");
+if (mysql_num_rows($result) > 0) {
+    while ($row = mysql_fetch_assoc($result)) {
+        $sql = 'SELECT value FROM SineDialer.config WHERE parameter = \'s_'.$row[name].'_calls\'';
+        $resultx = mysql_query($sql) or die(mysql_error());
+        if (mysql_num_rows($resultx) > 0) {
+        	while ($row_x = mysql_fetch_assoc($resultx)) {
+        		$tot+=$row_x[value];
+        	}
+        }
+    }
 }
+
 $resulty = mysql_query("SELECT * from config where parameter = 'read_1'") or die(mysql_error());
 if (mysql_num_rows($resulty) == 0) {
 box_start();
