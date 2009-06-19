@@ -21,7 +21,7 @@ include "admin/db_config.php";
 <meta http-equiv="Pragma" content="no-cache" />
 <?
 mysql_select_db("SineDialer", $link) or die("Unable to connect: ".mysql_error());
-echo "<b>MySQL Statistics:<br /></b>";
+echo "<b>Database Statistics:<br /></b>";
 $result = mysql_query("SHOW STATUS");
 while ($row = mysql_fetch_assoc($result)){
         if ($row[Variable_name] == 'Slow_queries') {
@@ -39,8 +39,8 @@ while ($row = mysql_fetch_assoc($result)){
         }
 }
 $result = mysql_query("SELECT value FROM SineDialer.config WHERE parameter = 'mysql_queue'") or die(mysql_error());
-if (mysql_num_rows($result) > 0) {
-        $pending = "Queued Writes: ".mysql_result($result,0,0)." ";
+if (mysql_num_rows($result) > 0 && mysql_result($result,0,0) > 0) {
+        $pending = "<font color=\"red\"><b>Queued Writes: ".mysql_result($result,0,0)."</b></font> ";
 }
 $result = mysql_query("select count(*) from SineDialer.number where random_sort = 0 or random_sort = NULL") or die(mysql_error());
 if (mysql_result($result,0,0)>0) {
