@@ -65,7 +65,7 @@ if (mysql_num_rows($result) > 0) {
     		} else if ($row[State] == 'Sorting result') {
     			$output.= "<td><p align=\"left\" style=\"color:#000000\"><b>Sorting result:</b> $row[Info]<br /> <b>Time:</b> ".sec2hms($row[Time])." <b>Host:</b> ".$row[User]."@".$row[Host]."$link</td>";
     		} else if ($row[State] == 'Sending data') {
-    			echo "<td><p align=\"left\" style=\"color:#008800\"><b>Sending data:</b> $row[Info]<br /> <b>Time:</b> ".sec2hms($row[Time])." <b>Host:</b> ".$row[User]."@".$row[Host]."$link</td>";
+    			$output .= "<td><p align=\"left\" style=\"color:#008800\"><b>Sending data:</b> $row[Info]<br /> <b>Time:</b> ".sec2hms($row[Time])." <b>Host:</b> ".$row[User]."@".$row[Host]."$link</td>";
     		} else {
     			if ($row[Info] != "SHOW PROCESSLIST") {
     				$output.= "<td><p align=\"left\">";
