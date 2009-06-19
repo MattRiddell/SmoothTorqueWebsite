@@ -1,6 +1,14 @@
 <?
 require "header.php";
 require "header_server.php";
+if (isset($_GET[convert_table])) {
+    echo "Please wait - converting to InnoDB - this may take a while<br />";
+    flush();
+    $result = mysql_query("ALTER TABLE SineDialer.".sanitize($_GET[convert_table],false)." ENGINE = InnoDB") or die (mysql_error());
+    echo "<br /><b>Conversion completed</b><br />";
+    ?><META HTTP-EQUIV=REFRESH CONTENT="0; URL=/mysql_stats.php"><?
+    exit(0);
+}
 if (isset($_GET[kill])) {
 	$result = mysql_query("KILL $_GET[kill]") or die (mysql_error());
 }
@@ -137,7 +145,7 @@ while ($row = mysql_fetch_assoc($result)) {
 			echo "<td".$tdstyle.">".date("D M j G:i:s Y", $update_time)."</td>";
 			echo "<td".$tdstyle.">".date("D M j G:i:s Y", $check_time)."</td>";
 			echo "<td".$tdstyle.">";
-			echo $row[Engine];
+			echo "$row[Engine] <a href=\"mysql_stats.php?convert_table=$row[Name]\">Convert</a>";
 		}
 		echo "</td>";
 		echo "</tr>";
