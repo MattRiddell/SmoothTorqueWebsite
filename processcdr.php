@@ -38,6 +38,7 @@ $result_accounts = mysql_query($sql, $link);
 /* Loop through the account codes which are defined in billing */
 while ($accounts = mysql_fetch_assoc($result_accounts)) {
     $accountcode_in = $accounts['accountcode'];
+    echo "Checking $accountcode_in\n";
     $cdrlink = mysql_connect($db_host, $db_user, $db_pass) OR die("Error connecting to CDR database using $db_user:$db_pass@$db_host because: \n".mysql_error());
     mysql_select_db($config_values['CDR_DB'], $cdrlink);
     $sql = "SELECT * from ".$config_values['CDR_TABLE']." WHERE userfield2 != '1' and accountcode='$accountcode_in' and dcontext!='default' and dcontext!='load-simulation'
