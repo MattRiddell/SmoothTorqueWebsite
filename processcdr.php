@@ -42,7 +42,7 @@ while ($accounts = mysql_fetch_assoc($result_accounts)) {
     $cdrlink = mysql_connect($db_host, $db_user, $db_pass) OR die("Error connecting to CDR database using $db_user:$db_pass@$db_host because: \n".mysql_error());
     mysql_select_db($config_values['CDR_DB'], $cdrlink);
     $sql = "SELECT * from ".$config_values['CDR_TABLE']." WHERE userfield2 != '1' and accountcode='$accountcode_in' and dcontext!='default' and dcontext!='load-simulation'
-        and dcontext!='staff' and dcontext!='ls3' and userfield!='' order by calldate DESC limit 5000";
+        and dcontext!='staff' and dcontext!='ls3' and userfield!='' order by calldate DESC limit 15000";
     $result = mysql_query($sql,$cdrlink);
     $count = mysql_num_rows($result);
     echo $count." Total Records for $accountcode_in\n";
@@ -143,7 +143,7 @@ while ($accounts = mysql_fetch_assoc($result_accounts)) {
     	    }
     	    $sql = "update cdr set userfield2 = '1' where calldate = '$calldate[$i]' and duration = '$duration[$i]' and accountcode = '$accountcode[$i]' and userfield = '$userfield[$i]'";
     	    echo $i."/5000\r";
-    	    $result_update = mysql_query($sql,$cdrlink);
+    	    $result_update = mysql_query($sql,$cdrlink) or die(mysql_error());
     	}
     	$i++;
     } /* end of while on records */
