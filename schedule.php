@@ -1,10 +1,12 @@
 <?
-include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(mysql_error());
+/* Connect to the database */
+include "admin/db_config.php";
 mysql_select_db("SineDialer", $link);
 
-
+/* Escape the inputs */
 $_POST = array_map(mysql_real_escape_string,$_POST);
 $_GET = array_map(mysql_real_escape_string,$_GET);
+
 if (isset($_GET[queueID])){
     $sql = 'update queue set status='.$_GET[status].' where queueID='.$_GET[queueID];
     $result=mysql_query($sql, $link) or die (mysql_error());;
@@ -19,7 +21,13 @@ require "header_schedule.php";
 $sql = 'SELECT * FROM campaign JOIN schedule ON schedule.campaignid = campaign.id WHERE campaign.groupid='.$campaigngroupid.'';
 //echo $sql."<br />";
 $result=mysql_query($sql, $link) or die (mysql_error());;
-if (mysql_num_rows($result) > 0) {
+if (mysql_num_rows($result) == 0) {
+    /* There are no schedule entries */
+    box_start(320);
+    echo "<center><img src=\"/images/icons/gtk-dialog-info.png\" border=\"0\" width=\"64\" height=\"64\"><br /><br /><b>You haven't created any schedules</b><br /><br />You can create one by clicking the add schedule button above";
+    box_end();
+} else {
+    /* There are schedule entries */
     ?><table align="center" border="0" cellpadding="2" cellspacing="0">
     <TR>
     <TD CLASS="thead">
@@ -98,10 +106,6 @@ if (mysql_num_rows($result) > 0) {
         echo "</td>";
         echo "</tr>";
     }
-} else {  // No MySQL Rows Returned
-    box_start(320);
-    echo "<center><img src=\"/images/icons/gtk-dialog-info.png\" border=\"0\" width=\"64\" height=\"64\"><br /><b>You haven't created any schedules</b><br /><br />You can create one by clicking the add schedule button above";
-    box_end();
 }
 require "footer.php";
 ?>
