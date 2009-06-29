@@ -6,7 +6,7 @@ mysql_select_db("SineDialer", $link);
 $MAX_ENTRIES = 720;
 
 /* The campaign ID */
-$id=$_GET[id];
+$id=$_GET['id'];
 if ($id<1){
         exit(0);
 }
@@ -24,20 +24,20 @@ if (mysql_num_rows($result) > 0) {
         exit(0);
     }
     $row = mysql_fetch_assoc($result);
-    $min = $row[min_agents];
-    $busy = $row[busy_agents];
-    $max = $row[total_agents];
-    $dialed = $row[dialed];
-    $multiplyer = $row[speed_multiplyer];
-    $mrs = $row[max_running_speed];
-    $adjuster = $row[adjuster];
-    $weighted = $row[weighted];
-    $cad = $row[cummulative_area_diff];
-    $ms = $row[ms_sleep];
-    $m2 = $row[max_delay_calc];
-    $o1 = $row[overs_1];
-    $o2 = $row[overs_2];
-    $timespent = $row[time_spent];
+    $min = $row['min_agents'];
+    $busy = $row['busy_agents'];
+    $max = $row['total_agents'];
+    $dialed = $row['dialed'];
+    $multiplyer = $row['speed_multiplyer'];
+    $mrs = $row['max_running_speed'];
+    $adjuster = $row['adjuster'];
+    $weighted = $row['weighted'];
+    $cad = $row['cummulative_area_diff'];
+    $ms = $row['ms_sleep'];
+    $m2 = $row['max_delay_calc'];
+    $o1 = $row['overs_1'];
+    $o2 = $row['overs_2'];
+    $timespent = $row['time_spent'];
     $timespentM = floor($timespent/60);
     $timespentS = $timespent%60;
     if ($timespentS < 10) {
@@ -160,12 +160,12 @@ if (!$mysql_campaign_stats) {
         while ($row = mysql_fetch_assoc($result)) {
             $total_count_x++;
                 $count++;
-                $avgPerc+=$row[value];
-                if($row[value]>$highest){
-                    $highest = $row[value];
+                $avgPerc+=$row['value'];
+                if($row['value']>$highest){
+                    $highest = $row['value'];
                 }
-                $array1[ $count ] =$row[value];
-                $lastPerc=$row[value];
+                $array1[ $count ] =$row['value'];
+                $lastPerc=$row['value'];
         }
     }
 
@@ -199,7 +199,7 @@ if (!$mysql_campaign_stats) {
     }
 } else {
     /* Using MySQL Stats */
-    if ($_GET[debug]!=1000){
+    if ($_GET['debug']!=1000){
     $result = mysql_query("SELECT * FROM SineDialer.rates WHERE campaignid = $id order by idx desc");
     $highest_rate = 0;
     $lowest_rate = 2000;
@@ -207,11 +207,11 @@ if (!$mysql_campaign_stats) {
         while ($row = mysql_fetch_assoc($result)) {
             $total_count_x++;
             if ($count<720){
-                if ($row[value]>$highest_rate && $row[value] > 0){
-			$highest_rate = $row[value];
+                if ($row['value']>$highest_rate && $row['value'] > 0){
+			$highest_rate = $row['value'];
                 }
-                if ($row[value]<$lowest_rate && $row[value] > 0){
-			$lowest_rate = $row[value];
+                if ($row['value']<$lowest_rate && $row['value'] > 0){
+			$lowest_rate = $row['value'];
                 }
             }
         }
@@ -221,20 +221,20 @@ if (!$mysql_campaign_stats) {
         while ($row = mysql_fetch_assoc($result)) {
             $total_count_x++;
             if ($count<720){
-                if ($row[value]>0){
+                if ($row['value']>0){
                     $count++;
 			if ($highest_rate-$lowest_rate == 0) {
 				$range_rate = 1000;
 			} else {
 				$range_rate = $highest_rate-$lowest_rate;
 			}
-                    $array3[ $count ] = 100* (($row[value]-$lowest_rate)/($range_rate));
+                    $array3[ $count ] = 100* (($row['value']-$lowest_rate)/($range_rate));
 	            if ($array3[$count] > 0.5) {
                 	$array4[ $count+1 ] = $array3[ $count ]-0.5;
 		    } else {
 			$array4[ $count+1 ] = 0;
 		    }
-                    $lastSpeed=$row[value];
+                    $lastSpeed=$row['value'];
                     $xdata[$count] = $count;
                 }
             }
@@ -249,15 +249,15 @@ if (!$mysql_campaign_stats) {
         while ($row = mysql_fetch_assoc($result)) {
             $total_count_x++;
             if ($count<720){
-                if ($row[value]>0){
+                if ($row['value']>0){
                     $count++;
-                    $array3[ $count ] = $row[value];
+                    $array3[ $count ] = $row['value'];
 	            if ($array3[$count] > 0.5) {
                 	$array4[ $count+1 ] = $array3[ $count ]-0.5;
 		    } else {
 			$array4[ $count+1 ] = 0;
 		    }
-                    $lastSpeed=$row[value];
+                    $lastSpeed=$row['value'];
                     $xdata[$count] = $count;
                 }
             }
@@ -271,7 +271,7 @@ if (!$mysql_campaign_stats) {
 /* ======================== */
 
 $highest_ms = 1;
-if ($_GET[debug]>0){
+if ($_GET['debug']>0){
     $count = 0;
     if (!$mysql_campaign_stats) {
         /* Using File Based Stats */
@@ -310,13 +310,13 @@ if ($_GET[debug]>0){
         if (mysql_num_rows($result) > 0) {
             while ($row = mysql_fetch_assoc($result)) {
                 if ($count<720){
-                    if (strlen($row[value])>0){
+                    if (strlen($row['value'])>0){
                         $count++;
-                        if ($row[value] > $highest_ms) {
-                            $highest_ms = $row[value];
+                        if ($row['value'] > $highest_ms) {
+                            $highest_ms = $row['value'];
                         }
-                        if ($row[value] < $lowest_ms) {
-                            $lowest_ms = $row[value];
+                        if ($row['value'] < $lowest_ms) {
+                            $lowest_ms = $row['value'];
                         }
                     }
                 }
@@ -327,9 +327,9 @@ if ($_GET[debug]>0){
         if (mysql_num_rows($result) > 0) {
             while ($row = mysql_fetch_assoc($result)) {
                 if ($count<720){
-                    if (strlen($row[value])>0){
+                    if (strlen($row['value'])>0){
                         $count++;
-                        if ($row[value] > 0) {
+                        if ($row['value'] > 0) {
                            if (!($highest_ms > 0)) {
                                    $highest_ms = 1;
                            }
@@ -338,11 +338,11 @@ if ($_GET[debug]>0){
 				} else {
 					$range_ms = $highest_ms - $lowest_ms;
 				}
-                            $array_ms[ $count ] = 101-(($row[value]-$lowest_ms)/($range_ms)* 100);
+                            $array_ms[ $count ] = 101-(($row['value']-$lowest_ms)/($range_ms)* 100);
                         } else {
                             $array_ms[ $count ] = 0;
                         }
-                        $lastSpeed_ms=$row[value];
+                        $lastSpeed_ms=$row['value'];
                     }
                 }
             }
@@ -464,7 +464,7 @@ $graph2->Add($runningSpeedPlot2[0]);
 $graph2->Add($runningSpeedPlot[0]);
 //$graph2->Add($speedAtractorPlot2[0]);
 //$graph2->Add($speedAtractorPlot[0]);
-if ($_GET[debug]>0){
+if ($_GET['debug']>0){
     $msPlot[] = new LinePLot($array_ms);
     $msPlot[0]->SetWeight(3);
     $msPlot[0]->SetColor("#ffff00");
@@ -479,7 +479,7 @@ $graph2->img->SetAntiAliasing(true);
 $sql = 'SELECT status from queue where campaignid='.$id;
 $resultx=mysql_query($sql, $link) or die (mysql_error());;
 $rowx = mysql_fetch_assoc($resultx);
-$status=$rowx[status];
+$status=$rowx['status'];
 
 if ($dialed>0){
     $progress=$dialed;
@@ -520,7 +520,7 @@ if (mysql_num_rows($result) > 0) {
     $txt->SetBox('#bbbbff','navy@0.1','#cccccc');
 }
 $graph2->AddText( $txt);
-if ($_GET[debug]>0){
+if ($_GET['debug']>0){
     if ($mysql_campaign_stats) {
         $m_c_s = "MySQL Stats";
     }
