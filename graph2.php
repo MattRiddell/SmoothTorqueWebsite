@@ -22,7 +22,7 @@ if ($type_of_campaign == 8) {
 
 
 $found = 0;
-$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status!="no-credit" and status!="new" and status!="dialing" and status!="dialed" and status!="answered" '.$timedate;
+$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status!="no-credit" and status!="new" and status!="unknown" and status!="dialing" and status!="dialed" '.$timedate;
 $result2=mysql_query($sql, $link) or die (mysql_error());;
 $total=mysql_result($result2,0,'count(*)');
 if ($total<1) {
@@ -35,7 +35,7 @@ if ($total2<1) {
     $total2 = 0;
 }
 
-$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="dialing"'.$timedate;
+$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="unknown"'.$timedate;
 $result2=mysql_query($sql, $link) or die (mysql_error());;
 $dialing=mysql_result($result2,0,'count(*)');
 if ($dialing<1) {
@@ -265,7 +265,7 @@ $graph->Stroke();
 
 
 $found = 0;
-$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status!="no-credit" and status!="new" and status!="dialing" and status!="dialed"  '.$timedate;
+$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status!="no-credit" and status!="new" and status!="dialing" and status != "unknown" and status!="dialed"  '.$timedate;
 //echo $sql;
 $result2=mysql_query($sql, $link) or die (mysql_error());;
 $total=mysql_result($result2,0,'count(*)');
@@ -279,7 +279,7 @@ if ($total2<1) {
     $total2 = 0;
 }
 
-$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="dialing"'.$timedate;
+$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="unknown"'.$timedate;
 $result2=mysql_query($sql, $link) or die (mysql_error());;
 $dialing=mysql_result($result2,0,'count(*)');
 if ($dialing<1) {
