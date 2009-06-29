@@ -10,7 +10,7 @@ $_POST = array_map(mysql_real_escape_string,$_POST);
 $_GET = array_map(mysql_real_escape_string,$_GET);
 
 $sql = 'SELECT * FROM queue_table';
-$result=mysql_query($sql, $link) or die (mysql_error());;
+$result=mysql_query($sql, $link) or die ("Error from $sql: ".mysql_error());
 if (mysql_num_rows($result) == 0) {
     /* There are no queues in this system */
     box_start(320);
@@ -41,51 +41,51 @@ if (mysql_num_rows($result) == 0) {
     <?
     //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
     while ($row = mysql_fetch_assoc($result)) {
+        $name = str_replace('\\', '', $row[name]);
+        $sql2 = 'SELECT count(*) FROM queue_member_table where queue_name = "'.$name.'"';
+        $result2=mysql_query($sql2, $link) or die ("Error getting queue members using $sql2: ".mysql_error());;
+        $count=mysql_result($result2,0,'count(*)');
 
-    $sql2 = 'SELECT count(*) FROM queue_member_table where queue_name = "'.$row[name].'"';
-    $result2=mysql_query($sql2, $link) or die (mysql_error());;
-    $count=mysql_result($result2,0,'count(*)');
+        if ($toggle){
+            $toggle=false;
+            $class=" class=\"tborder2\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f8f8f8'\"   ";
+        } else {
+            $toggle=true;
+            $class=" class=\"tborderx\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f0f0f0'\" ";
+        }
 
-    if ($toggle){
-    $toggle=false;
-    $class=" class=\"tborder2\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f8f8f8'\"   ";
-    } else {
-    $toggle=true;
-    $class=" class=\"tborderx\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f0f0f0'\" ";
-    }
+        ?>
+        <TR <?echo $class;?>>
+        <TD>
+        <?
+        if (strlen($name)<15){
+            echo "<A HREF=\"editqueue.php?name=".$name."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".$name."</A>";
+        } else {
+            echo "<A HREF=\"editqueue.php?name=".$name."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".trim(substr($name,0,15))."...</A>";
+        }
+        ?>
+        </TD>
+        <TD>
+        <a href="addagent.php?name=<?echo $name;?>">
+        <img src="/images/group_add.png" align="left" border="0" title="Add a SIP account for an agent to connect to">
+        </a>
+        <a href="agents.php?name=<?echo $name;?>">
+        <img src="/images/group.png" align="left" border="0" title="Show the agents for this queue">
+        </a>
+        <?echo $row[strategy];?>
+        </TD>
+        <TD>
+        <?echo $row[timeout];?>
+        </TD>
+        <TD>
+        <?echo $count;?>
+        </TD>
+        <TD>
+        <a href="#" onclick="displaySmallMessage('includes/confirmDeleteQueue.php?name=<?echo $name;?>');return false"><IMG SRC="/images/delete.png" BORDER="0"></a><br>
+        </TD>
+        </TR>
 
-    ?>
-    <TR <?echo $class;?>>
-    <TD>
-    <?
-    if (strlen($row[name])<15){
-    echo "<A HREF=\"editqueue.php?name=".$row[name]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".$row[name]."</A>";
-    } else {
-    echo "<A HREF=\"editqueue.php?name=".$row[name]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".trim(substr($row[name],0,15))."...</A>";
-    }
-    ?>
-    </TD>
-    <TD>
-    <a href="addagent.php?name=<?echo $row[name];?>">
-    <img src="/images/group_add.png" align="left" border="0" title="Add a SIP account for an agent to connect to">
-    </a>
-    <a href="agents.php?name=<?echo $row[name];?>">
-    <img src="/images/group.png" align="left" border="0" title="Show the agents for this queue">
-    </a>
-    <?echo $row[strategy];?>
-    </TD>
-    <TD>
-    <?echo $row[timeout];?>
-    </TD>
-    <TD>
-    <?echo $count;?>
-    </TD>
-    <TD>
-    <a href="#" onclick="displaySmallMessage('includes/confirmDeleteQueue.php?name=<?echo $row[name];?>');return false"><IMG SRC="/images/delete.png" BORDER="0"></a><br>
-    </TD>
-    </TR>
-
-    <?
+        <?
     }
     ?>
 
