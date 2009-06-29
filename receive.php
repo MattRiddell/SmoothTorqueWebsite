@@ -66,7 +66,7 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
                 echo "".$row." numbers imported<br />\n";
                 ob_flush();flush();
                 //echo "saving $sql";
-                //mysql_query($sql, $link) or die (mysql_error());;
+                mysql_query($sql, $link) or die (mysql_error());;
                 //$sql2="COMMIT";
                 //mysql_query($sql2, $link) or die (mysql_error());;
                 //$sql2="UNLOCK TABLES";
