@@ -351,7 +351,11 @@ if ($timeout<1) {
     $found = 1;
 }
 
-$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status like "unknown-%"'.$timedate;
+$sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status like "unknow%"'.$timedate;
+if ($_GET['debug'] == 1) {
+       echo $sql;
+       exit(0);
+}
 $result2=mysql_query($sql, $link) or die (mysql_error());;
 $unknown=mysql_result($result2,0,'count(*)');
 if ($unknown<1) {
@@ -444,12 +448,12 @@ $pressed1,
 
 
 
-
+$total = $total2;
 $browserx=array(
  " Pressed 1 ($pressed1 ".round((($pressed1/$total)*100),2)."%%)",
- " Answer Machine ($amd ".round((($amd/$total)*100),2)."%%)",
+ " Answer Machine ($amd ".round((($amd/$total2)*100),2)."%%)",
 /* "dialed ($dialed ".round((($dialed/$total)*100),2)."%%)",*/
- " Busy ($busy ".round((($busy/$total)*100),2)."%%)",
+ " Busy ($busy ".round((($busy/$total2)*100),2)."%%)",
  " Answered ($answered ".round((($answered/$total)*100),2)."%%)",
  " Hungup ($hungup ".round((($hungup/$total)*100),2)."%%)",
  " Congested ($congested ".round((($congested/$total)*100),2)."%%)",
