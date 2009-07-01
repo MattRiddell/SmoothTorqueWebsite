@@ -79,7 +79,7 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
                 $sql = "INSERT IGNORE INTO number (campaignid,phonenumber,status,type,random_sort)  VALUES";
                 $sql.="(".$campaignid.",'".$data[0]."','new',0,ROUND(RAND() * 999999999))";
             } else {
-				$sql.=",(".$campaignid.",'".$data[0]."','new',0)";
+				$sql.=",(".$campaignid.",'".$data[0]."','new',0, ROUND(RAND() * 999999999))";
 			}
         }
         //echo "Saving Records to the Database <br />";
