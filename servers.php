@@ -49,8 +49,8 @@ if ($level!=sha1("level100")) {
         <script type="text/javascript">
             $(function(){ // jquery onload
                     window.setInterval(function(){
-    		        $('#ajaxDiv').loadIfModified('server_total.php');  // jquery ajax load into div
-    		        $('#ajaxDiv2').loadIfModified('server_details.php<?if (isset($_GET[debug]))echo "?debug=".$_GET[debug];?>');  // jquery ajax load into div
+    		        $('#ajaxDiv').loadIfModified('server_total.php?ajax=1');  // jquery ajax load into div
+    		        $('#ajaxDiv2').loadIfModified('server_details.php?ajax=1<?if (isset($_GET[debug]))echo "&debug=".$_GET[debug];?>');  // jquery ajax load into div
                     },5000);
             });
 
@@ -60,8 +60,8 @@ if ($level!=sha1("level100")) {
         <script type="text/javascript">
             $(function(){ // jquery onload
                     window.setInterval(function(){
-    		        $('#ajaxDiv').load('server_total.php');  // jquery ajax load into div
-    		        $('#ajaxDiv2').load('server_details.php<?if (isset($_GET[debug]))echo "?debug=".$_GET[debug];?>');  // jquery ajax load into div
+    		        $('#ajaxDiv').load('server_total.php?ajax=1');  // jquery ajax load into div
+    		        $('#ajaxDiv2').load('server_details.php?ajax=1<?if (isset($_GET[debug]))echo "&debug=".$_GET[debug];?>');  // jquery ajax load into div
                     },5000);
             });
     </script>
