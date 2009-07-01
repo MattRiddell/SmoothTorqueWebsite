@@ -323,7 +323,7 @@ if ($type_of_campaign == 8) {
         $found = 1;
     }
 
-    $sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status like "unknow%"'.$timedate;
+    $sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status like "unknow%"';
     if ($_GET['debug'] == 1) {
            echo $sql;
            exit(0);
