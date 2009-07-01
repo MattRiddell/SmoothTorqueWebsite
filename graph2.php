@@ -251,7 +251,7 @@ if ($type_of_campaign == 8) {
         $total2 = 0;
     }
 
-    $sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="unknown"'.$timedate;
+    $sql = 'SELECT count(*) from number where campaignid='.$_GET[id].' and status="unknown"';
     $result2=mysql_query($sql, $link) or die (mysql_error());;
     $dialing=mysql_result($result2,0,'count(*)');
     if ($dialing<1) {
