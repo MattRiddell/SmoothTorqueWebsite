@@ -58,7 +58,7 @@ if ($out[browser]=="MSIE"){
 <script type="text/javascript">
         $(function(){ // jquery onload
                 window.setInterval(function(){
-                        $('#ajaxDiv').loadIfModified('mysql_details.php');  // jquery ajax load into div
+                        $('#ajaxDiv').loadIfModified('mysql_details.php?ajax=1');  // jquery ajax load into div
                 },2000);
         });
 
@@ -70,7 +70,7 @@ if ($out[browser]=="MSIE"){
         $(function(){ // jquery onload
                 window.setInterval(
                 function(){
-                        $('#ajaxDiv').load('mysql_details.php');  // jquery ajax load into div
+                        $('#ajaxDiv').load('mysql_details.php?ajax=1');  // jquery ajax load into div
                 }
                 ,2000);
         });
