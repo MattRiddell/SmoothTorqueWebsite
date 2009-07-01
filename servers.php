@@ -28,6 +28,7 @@ if ($level!=sha1("level100")) {
     /*================= Log Access ======================================*/
     exit(0);
 } else {
+
     require "header.php";
     require "header_server.php";
     ?>

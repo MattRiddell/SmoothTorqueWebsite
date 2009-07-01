@@ -22,8 +22,14 @@ mysql_select_db("SineDialer", $link) or die("Unable to connect: ".mysql_error())
 $_POST = array_map(mysql_real_escape_string,$_POST);
 $_GET = array_map(mysql_real_escape_string,$_GET);
 
-//header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
-//header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
+header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
+?>
+
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="1" />
+<meta http-equiv="pragma" content="must-revalidate" />
+<?
 $tot =0;
 $result = mysql_query("SELECT name FROM SineDialer.servers WHERE status = 1");
 if (mysql_num_rows($result) > 0) {
