@@ -9,9 +9,11 @@ $max = 0;
 $count = 0;
 $colors = array('#FF0000','#006600','#0000FF','#FF8888','#004444', '#224466', '#000000','22FF66') ;
 $size = sizeof($colors);
+$total = 0;
 while ($row = mysql_fetch_assoc($result)) {
 	if ($row['count(*)'] > 0) {
 		$status_name = $row['status'];
+        $total+= $row['count(*)'];
 		switch ($status_name) {
 			case "amd":
 				$status_name = "A. Machine";
@@ -51,5 +53,9 @@ $y->set_range(0,$max+1);
 //$y->set_steps(round($max/10));
 $chart->set_y_axis( $y );
 $chart->set_bg_colour( '#FFFFFF' );
+
+$title = new title("Dialed:".$total." ". date("D M d Y") );
+
+$chart->set_title( $title );
 echo $chart->toPrettyString();
 ?>
