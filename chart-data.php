@@ -48,7 +48,7 @@ $x->set_labels_from_array( $x_labels );
 $chart->set_x_axis( $x );
 $y = new y_axis();
 $y->set_range(0,$max+1);
-$y->set_steps(round($max/10));
+//$y->set_steps(round($max/10));
 $chart->set_y_axis( $y );
 $chart->set_bg_colour( '#FFFFFF' );
 echo $chart->toPrettyString();
