@@ -56,7 +56,7 @@ $y->set_range(0,$max+1);
 $chart->set_y_axis( $y );
 $chart->set_bg_colour( '#FFFFFF' );
 
-$title = new title("Dialed:".$total." Remaining: ".($absolute_total-$total) date("D M d Y") );
+$title = new title("Dialed:".$total." Remaining: ".($absolute_total-$total));
 
 $chart->set_title( $title );
 echo $chart->toPrettyString();
