@@ -9,6 +9,8 @@ require_once "admin/db_config.php";
 
 $result = mysql_query("SELECT count(*) FROM SineDialer.number where campaignid = $_GET[campaignid]") or die(mysql_error());
 $absolute_total = mysql_result($result,0,0);
+$result = mysql_query("SELECT count(*) FROM SineDialer.number where campaignid = $_GET[campaignid] and status != 'new' and status != 'unknown'") or die(mysql_error());
+$total_done = mysql_result($result,0,0);
 $result = mysql_query("SELECT distinct(status), count(*) FROM SineDialer.number where campaignid = $_GET[campaignid] and status != 'new' and status != 'unknown' group by status order by status") or die(mysql_error());
 $max = 0;
 $count = 0;
@@ -30,7 +32,8 @@ while ($row = mysql_fetch_assoc($result)) {
                                 $status_name = ucfirst($status_name);
                                 break;
                 }
-                $bar = new pie_value(intval($row['count(*)']), $status_name);
+                $perc = round((intval($row['count(*)'])/$total_done) *100,2);
+                $bar = new pie_value(intval($row['count(*)']), $status_name." (".$perc."%)");
                 if ($count > $size) {
                         $count = 0;
                 }
