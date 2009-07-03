@@ -1,6 +1,9 @@
 <?
 include 'ofc-library/open-flash-chart.php';
 require_once "admin/db_config.php";
+	header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+	header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
+
 $result = mysql_query("SELECT distinct(status), count(*) FROM SineDialer.number where campaignid = $_GET[campaignid] and status != 'new' and status != 'unknown' group by status order by status") or die(mysql_error());
 $max = 0;
 $count = 0;
