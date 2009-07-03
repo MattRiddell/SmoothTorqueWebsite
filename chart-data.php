@@ -57,7 +57,7 @@ $chart->set_y_axis( $y );
 $chart->set_bg_colour( '#FFFFFF' );
 $remaining = ($absolute_total-$total);
 if ($absolute_total > 0) {
-    $rem_perc = round((($remaining/$absolute_total) * 100),2);
+    $rem_perc = round((($remaining/$absolute_total) * 100),3);
 } else {
     $rem_perc = "100";
 }
