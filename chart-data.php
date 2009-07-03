@@ -55,8 +55,8 @@ $y->set_range(0,$max+1);
 //$y->set_steps(round($max/10));
 $chart->set_y_axis( $y );
 $chart->set_bg_colour( '#FFFFFF' );
-
-$title = new title("Dialed:".$total." Remaining: ".($absolute_total-$total));
+$remaining = ($absolute_total-$total);
+$title = new title("Dialed: $total Remaining: $remaining");
 
 $chart->set_title( $title );
 echo $chart->toPrettyString();
