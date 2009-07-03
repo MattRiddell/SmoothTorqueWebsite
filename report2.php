@@ -39,7 +39,7 @@ if ($_GET[type]!="yesterday") {
 <script type="text/javascript" src="js/swfobject.js"></script>
 <script type="text/javascript">
 swfobject.embedSWF(
-  "open-flash-chart.swf", "my_chart", "700", "500",
+  "open-flash-chart.swf", "my_chart", "700", "450",
   "9.0.0", "expressInstall.swf",
   {"data-file":"chart-data.php?campaignid=<?=$_GET[id]?>"}
   );
