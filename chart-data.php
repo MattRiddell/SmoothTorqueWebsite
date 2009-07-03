@@ -14,13 +14,23 @@ $total_done = mysql_result($result,0,0);
 $result = mysql_query("SELECT distinct(status), count(*) FROM SineDialer.number where campaignid = $_GET[campaignid] and status != 'new' and status != 'unknown' group by status order by status") or die(mysql_error());
 $max = 0;
 $count = 0;
-$colors = array('#FF0000','#006600','#0000FF','#FF8888','#004444', '#224466', '#000000','22FF66') ;
+/*
+amd
+answered
+engaged
+congested
+hungup
+indnc
+pressed1
+noanswer
+*/
+$colors = array('#0000FF','#888888','#00FF00','#FF0000','#004444', '#FF0000', '#000000','#666600') ;
 $size = sizeof($colors);
 $total = 0;
 while ($row = mysql_fetch_assoc($result)) {
         if ($row['count(*)'] > 0) {
                 $status_name = $row['status'];
-        $total+= $row['count(*)'];
+                $total+= $row['count(*)'];
                 switch ($status_name) {
                         case "amd":
                                 $status_name = "Answer Machine";
