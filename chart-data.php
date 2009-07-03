@@ -61,7 +61,7 @@ if ($absolute_total > 0) {
 } else {
     $rem_perc = "100";
 }
-$title = new title("Dialed: $total Remaining: $remaining ($rem_perc %)");
+$title = new title("Dialed: ".number_format($total)." Remaining: ".number_format($remaining)." (".$rem_perc."%)");
 
 $chart->set_title( $title );
 echo $chart->toPrettyString();
