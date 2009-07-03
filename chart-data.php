@@ -56,7 +56,12 @@ $y->set_range(0,$max+1);
 $chart->set_y_axis( $y );
 $chart->set_bg_colour( '#FFFFFF' );
 $remaining = ($absolute_total-$total);
-$title = new title("Dialed: $total Remaining: $remaining");
+if ($absolute_total > 0) {
+    $rem_perc = round((($remaining/$absolute_total) * 100),2);
+} else {
+    $rem_perc = "100";
+}
+$title = new title("Dialed: $total Remaining: $remaining ($rem_perc %)");
 
 $chart->set_title( $title );
 echo $chart->toPrettyString();
