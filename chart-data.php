@@ -1,5 +1,5 @@
 <?
-
+/* select distinct(status), count(*), date(datetime), campaignid from number where campaignid=74 group by date(datetime), status; */
 error_reporting(0);
 
 include 'ofc-library/open-flash-chart.php';
