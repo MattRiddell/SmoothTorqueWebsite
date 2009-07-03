@@ -28,6 +28,18 @@ while ($row = mysql_fetch_assoc($result)) {
                         case "indnc":
                                 $status_name = "Do Not Call";
                                 break;
+                        case "hungup":
+                                $status_name = "Hung Up";
+                                break;
+                        case "pressed1":
+                                $status_name = "Transferred";
+                                break;
+                        case "busy":
+                                $status_name = "Engaged";
+                                break;
+                        case "timeout":
+                                $status_name = "No Answer";
+                                break;
                         default:
                                 $status_name = ucfirst($status_name);
                                 break;
