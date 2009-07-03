@@ -1,0 +1,52 @@
+<?
+include 'ofc-library/open-flash-chart.php';
+require_once "admin/db_config.php";
+$result = mysql_query("SELECT distinct(status), count(*) FROM SineDialer.number where campaignid = $_GET[campaignid] and status != 'new' and status != 'unknown' group by status order by status") or die(mysql_error());
+$max = 0;
+$count = 0;
+$colors = array('#FF0000','#006600','#0000FF','#FF8888','#004444', '#224466', '#000000','22FF66') ;
+$size = sizeof($colors);
+while ($row = mysql_fetch_assoc($result)) {
+	if ($row['count(*)'] > 0) {
+		$status_name = $row['status'];
+		switch ($status_name) {
+			case "amd":
+				$status_name = "A. Machine";
+				break;
+			case "indnc":
+				$status_name = "Do Not Call";
+				break;
+			default:
+				$status_name = ucfirst($status_name);
+				break;
+		}
+		$bar = new bar_value(intval($row['count(*)']));
+		if ($count > $size) {
+			$count = 0;
+		}
+		$bar->set_colour( $colors[$count] );
+		$bar->set_tooltip ($status_name." (".$row['count(*)'].")");
+		$x_labels[] = $status_name;
+		$status[] = $bar;
+		$count++;
+	}
+	if ($row['count(*)'] > $max) {
+		$max = $row['count(*)'];
+	}
+}
+$bar = new bar_glass();
+$bar->set_values($status);
+$chart = new open_flash_chart();
+$chart->set_title( null );
+$chart->add_element( $bar );
+$x = new x_axis();
+$x->set_offset( true );
+$x->set_labels_from_array( $x_labels );
+$chart->set_x_axis( $x );
+$y = new y_axis();
+$y->set_range(0,$max+1);
+$y->set_steps(round($max/10));
+$chart->set_y_axis( $y );
+$chart->set_bg_colour( '#FFFFFF' );
+echo $chart->toPrettyString();
+?>
