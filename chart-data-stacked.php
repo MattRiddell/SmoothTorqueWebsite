@@ -4,8 +4,8 @@ error_reporting(0);
 
 include 'ofc-library/open-flash-chart.php';
 require_once "admin/db_config.php";
-        header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
-        header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
+header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 
 $title = new title( 'Stuff I\'m thinking about, '.date("D M d Y") );
 $title->set_style( "{font-size: 20px; color: #F24062; text-align: center;}" );
