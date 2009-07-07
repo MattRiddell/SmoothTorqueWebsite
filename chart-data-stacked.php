@@ -1,51 +1,69 @@
 <?
 /* select distinct(status), count(*), date(datetime), campaignid from number where campaignid=74 group by date(datetime), status; */
 error_reporting(0);
-
+//echo "<pre>";
 include 'ofc-library/open-flash-chart.php';
 require_once "admin/db_config.php";
 header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
-
+$id = $_GET[campaignid];
+//$result = mysql_query("select distinct(status), count(*), date(datetime), campaignid from SineDialer.number where date(datetime) = date(NOW())and  status !='new' and status != 'unknown' group by date(datetime), status");
+$result = mysql_query("select distinct(status), count(*), date(datetime), campaignid from SineDialer.number where campaignid=$_GET[campaignid] and status !='new' and status != 'unknown' group by date(datetime), status");
+while ($row = mysql_fetch_assoc($result)) {
+    $bar[$row['date(datetime)']][$row['status']] = $row['count(*)'];
+}
 $title = new title( 'Call Responses' );
 $title->set_style( "{font-size: 20px; color: #F24062; text-align: center;}" );
 
 $bar_stack = new bar_stack();
 
 // set a cycle of 3 colours:
-$bar_stack->set_colours( array( '#C4D318', '#50284A', '#7D7B6A' ) );
+$colors = array('#0000FF','#888888','#00FF00','#FF0000','#004444', '#FF0000', '#000000','#666600') ;
+//$bar_stack->set_colours( $colors );
+$max = 0;
+foreach ($bar as $key=>$value) {
+//    echo "Key: $key Value:";
+//    print_r($value);
+    unset($counts);
+    unset($count_total);
+    $labels[] = $key;
+    $i = 0;
+    foreach ($value as $status=>$count) {
+        if (!in_array($status,$status_names)) {
+            $statuses[] = new bar_stack_key($colors[$i], $status, 13);
+            $status_names[] = $status;
+        }
+//        $counts[] = intval($count);
 
-// add 3 bars:
-$bar_stack->append_stack( array( 2.5, 5, 2.5 ) );
+	$stack_val = new bar_stack_value(intval($count), $colors[$i]);
+	    $i++;
+	$stack_val->text = $status;
+	$stack_val->tip = $status." ($count)";
+//	$stack_val->text = $key.":".$status." ($count)";
+	$counts[] = $stack_val;
+        $count_total+= $count;
+    }
+    if ($count_total > $max) {
+        $max = $count_total;
+    }
+    $bar_stack->append_stack( $counts );
+}
+//$bar_stack->set_keys($statuses);
 
-// add 4 bars, the fourth will be the same colour as the first:
-$bar_stack->append_stack( array( 2.5, 5, 1.25, 1.25 ) );
-
-
-$bar_stack->append_stack( array( 5, new bar_stack_value(5, '#ff0000') ) );
-$bar_stack->append_stack( array( 2, 2, 2, 2, new bar_stack_value(2, '#ff00ff') ) );
-
-$bar_stack->set_keys(
-    array(
-        new bar_stack_key( '#C4D318', 'Kiting', 13 ),
-        new bar_stack_key( '#50284A', 'Work', 13 ),
-        new bar_stack_key( '#7D7B6A', 'Drinking', 13 ),
-        new bar_stack_key( '#ff0000', 'XXX', 13 ),
-        new bar_stack_key( '#ff00ff', 'What rhymes with purple? Nurple?', 13 ),
-        )
-    );
-$bar_stack->set_tooltip( 'X label [#x_label#], Value [#val#]<br>Total [#total#]' );
 
 
 
 $y = new y_axis();
-$y->set_range( 0, 14, 2 );
+$y->set_range( 0, $max, 2 );
 
 $x = new x_axis();
-$x->set_labels_from_array( array( 'Winter', 'Spring', 'Summer', 'Autmn' ) );
+$x->set_labels_from_array( $labels );
+//$x->set_labels_from_array( array( 'Winter', 'Spring', 'Summer', 'Autmn' ) );
 
 $tooltip = new tooltip();
 $tooltip->set_hover();
+$tooltip->text = '#key#: #val#<br>Total: #total#' ;
+//$bar_stack->set_tooltip( '#key#: #val#<br>Total: #total#' );
 
 $chart = new open_flash_chart();
 $chart->set_title( $title );
@@ -56,3 +74,4 @@ $chart->set_tooltip( $tooltip );
 
 echo $chart->toPrettyString();
 ?>
+
