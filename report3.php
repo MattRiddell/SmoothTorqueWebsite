@@ -41,7 +41,7 @@ if ($_GET[type]!="yesterday") {
 swfobject.embedSWF(
   "open-flash-chart.swf", "my_chart", "700", "450",
   "9.0.0", "expressInstall.swf",
-  {"data-file":"chart-data-stacked.php?campaignid=<?=$_GET[id]?>"}
+  {"data-file":"chart-data-stacked.php?campaignid=<?=$_GET[id]?>&x=<?echo rand()*1000;?>"}
   );
 </script>
 <script>
