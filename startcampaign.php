@@ -224,13 +224,21 @@ if (strlen($_GET[astqueuename])> 0) {
 } else {
     $mode = 0;
 }
+$sql = 'SELECT value FROM config WHERE parameter=\'expected_rate\'';
+$result=mysql_query($sql, $link) or die (mysql_error());
+if (mysql_num_rows($result) > 0) {
+    $expected_rate = mysql_result($result,0,'value');
+} else {
+    $expected_rate = 100;
+}
+
 $sql2="INSERT INTO queue (campaignid,queuename,status,details,flags,transferclid,
     starttime,endtime,startdate,enddate,did,clid,context,maxcalls,maxchans,maxretries
     ,retrytime,waittime,trunk,astqueuename, accountcode, trunkid, customerID, maxcps, mode, expectedRate) VALUES
     ('$_GET[id]','autostart-$_GET[id]','1','No details','0','$_GET[trclid]',
     '00:00','23:59','2005-01-01','2020-01-01','$did','$_GET[clid]',
     '$_GET[context]','$_GET[agents]','$maxchans','0'
-    ,'0','30','".$dialstring."','$_GET[astqueuename]','stl-".$username."','$trunkid','$campaigngroupid','$maxcps','$mode', '100') ";
+    ,'0','30','".$dialstring."','$_GET[astqueuename]','stl-".$username."','$trunkid','$campaigngroupid','$maxcps','$mode', '$expected_rate') ";
 //    echo $sql2;
 //exit(0);
 //echo $sql2;
