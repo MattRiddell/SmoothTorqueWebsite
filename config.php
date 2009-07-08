@@ -247,7 +247,7 @@ Sox Path:
 
 <tr  class="tborder2">
 <td>
-Expected Press 1 Rate (0-100):
+Expected Percent of Press 1 Calls (0.01-100):
 </td>
 <td>
 <input type="Text" name="expected_rate" value="<?
