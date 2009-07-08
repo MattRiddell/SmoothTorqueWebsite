@@ -247,7 +247,7 @@ Sox Path:
 
 <tr  class="tborder2">
 <td>
-Expected Answer Rate (0-100):
+Expected Press 1 Rate (0-100):
 </td>
 <td>
 <input type="Text" name="expected_rate" value="<?
