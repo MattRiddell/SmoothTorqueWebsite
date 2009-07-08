@@ -59,7 +59,6 @@ while ($row = mysql_fetch_assoc($result)) {
                 if ($count > $size) {
                         $count = 0;
                 }
-                $bar->set_colour( $colors[$count] );
                 $bar->set_tooltip ($status_name." (".$row['count(*)'].")");
                 $x_labels[] = $status_name;
                 $status[] = $bar;
@@ -71,6 +70,8 @@ while ($row = mysql_fetch_assoc($result)) {
 }
 $bar = new pie();
 $bar->set_values($status);
+$bar->set_colour( $colors );
+                
 $chart = new open_flash_chart();
 $chart->set_title( null );
 $chart->add_element( $bar );

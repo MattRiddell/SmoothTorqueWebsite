@@ -10,6 +10,8 @@ if ($id<1){
 ?>
 
 <a href="test.php?id=<?echo $id;?>"><img src="/images/chart_curve.png"  border="0"> View Engine Status</a>&nbsp;
+<a href="report2.php?id=<?echo $id;?>"><img src="/images/chart_pie.png"  border="0"> View Number Stats</a>&nbsp;
+<a href="report3.php?id=<?echo $id;?>"><img src="/images/chart_line.png"  border="0"> View Number Stats by day</a>&nbsp;
 <br /><br />
 <?/*
 if ($_GET[type]!="today") {
