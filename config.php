@@ -122,6 +122,8 @@ if (isset($_POST[colour])){
     mysql_query("UPDATE web_config SET smtp_from=".sanitize($_POST[SMTP_FROM])." WHERE url = ".sanitize($url));
     mysql_query("UPDATE web_config SET use_separate_dnc=".sanitize($_POST[USE_SEPARATE_DNC])." WHERE url = ".sanitize($url));
     mysql_query("UPDATE web_config SET allow_numbers_manual=".sanitize($_POST[ALLOW_NUMBERS_MANUAL])." WHERE url = ".sanitize($url));
+    $sql = "REPLACE INTO config (parameter, value) VALUES ('expected_rate',".sanitize($_POST['expected_rate']).")";
+    mysql_query($sql) or die(mysql_error());
 
 
     /*$add = @fopen("./admin/db_config.php",'w');
@@ -167,6 +169,16 @@ $userid = mysql_result($result,0,'value');
 $sql = 'SELECT value FROM config WHERE parameter=\'licencekey\'';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $licencekey = mysql_result($result,0,'value');
+
+$sql = 'SELECT value FROM config WHERE parameter=\'expected_rate\'';
+$result=mysql_query($sql, $link) or die (mysql_error());
+if (mysql_num_rows($result) > 0) {
+    $expected_rate = mysql_result($result,0,'value');
+} else {
+    $expected_rate = 100;
+}
+
+
 ?>
 <form action="config.php" name="config" method="post">
 <center>
@@ -232,6 +244,23 @@ Sox Path:
 <input type="Text" name="sox" value="<?echo $config_values['SOX'];?>">
 </td>
 </tr>
+
+<tr  class="tborder2">
+<td>
+Expected Answer Rate (0-100):
+</td>
+<td>
+<input type="Text" name="expected_rate" value="<?
+if ($expected_rate > 0) {
+    echo $expected_rate;
+} else {
+    echo 100;
+}
+?>">
+</td>
+</tr>
+
+
 
 <tr  class="tborder2">
 <td colspan="2">
