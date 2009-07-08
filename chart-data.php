@@ -70,7 +70,7 @@ while ($row = mysql_fetch_assoc($result)) {
 }
 $bar = new pie();
 $bar->set_values($status);
-$bar->set_colour( $colors );
+$bar->set_colours( $colors );
                 
 $chart = new open_flash_chart();
 $chart->set_title( null );
