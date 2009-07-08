@@ -108,8 +108,8 @@ if (mysql_num_rows($result) > 0) {
 ?>
 <br />
 <a href="stopcampaign.php?id=<?echo $id;?>"><img src="/images/control_stop_blue.png"  border="0"> Stop This Campaign</a>&nbsp;
-<a href="report2.php?id=<?echo $id;?>"><img src="/images/chart_pie.png"  border="0"> View Number Stats</a>
-<a href="report3.php?id=<?echo $id;?>"><img src="/images/chart_line.png"  border="0"> View Number Stats by day</a>&nbsp;
+<a href="report2.php?id=<?echo $id;?>"><img src="/images/chart_pie.png"  border="0"> Number Stats</a>&nbsp;
+<a href="report3.php?id=<?echo $id;?>"><img src="/images/chart_line.png"  border="0"> Daily Number Stats</a>&nbsp;
 <br />
 <div id="div_waiting" style="height:20px">
 <img src="/images/ajax-loader.gif">
