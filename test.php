@@ -94,7 +94,7 @@ function hide_image()
 }
 window.onload = init;
 </script>
-<?box_start();
+<?box_start(600);
 
 //echo $_GET[id];
 echo "<center>";
