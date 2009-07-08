@@ -108,7 +108,7 @@ if (mysql_num_rows($result) > 0) {
 ?>
 <br />
 <a href="stopcampaign.php?id=<?echo $id;?>"><img src="/images/control_stop_blue.png"  border="0"> Stop This Campaign</a>&nbsp;
-<a href="report.php?type=today&id=<?echo $id;?>"><img src="/images/chart_pie.png"  border="0"> View Number Stats</a><br />
+<a href="report2.php?id=<?echo $id;?>"><img src="/images/chart_pie.png"  border="0"> View Number Stats</a><br />
 <div id="div_waiting" style="height:20px">
 <img src="/images/ajax-loader.gif">
 </div>

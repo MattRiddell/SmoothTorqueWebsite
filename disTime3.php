@@ -219,7 +219,7 @@ $total_numbers=mysql_result($result2,0,'count(*)');
 ?>
 <TD>
 <?if ($backend == 0) {?>
-<a title="View the report for this campaign" href="report.php?type=today&id=<?echo $row[id];?>" class="abcd"><img width="16" height="16" src="/images/chart_pie.png" border="0"></a>
+<a title="View the report for this campaign" href="report2.php?id=<?echo $row[id];?>" class="abcd"><img width="16" height="16" src="/images/chart_pie.png" border="0"></a>
 <?}?>
 <?/*
 if ($progress>0){
