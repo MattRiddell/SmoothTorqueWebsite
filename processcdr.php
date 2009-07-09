@@ -53,6 +53,7 @@ while ($accounts = mysql_fetch_assoc($result_accounts)) {
     $count = mysql_num_rows($result);
     $i = 0;
     echo mysql_num_rows($result)." Records this run for $accountcode_in\n";
+    $printed = 0;
     while ($row = mysql_fetch_assoc($result)) {
         $calldate[$i] = $row[calldate];
         $dcontext[$i] = $row[dcontext];
@@ -98,7 +99,6 @@ while ($accounts = mysql_fetch_assoc($result_accounts)) {
         $costpercall[$i] = 0;
         $costperminute[$i] = 0;
         $costperconnect[$i] = 0;
-        $printed = 0;
 
         if ($pricepercall[$accountcode[$i]] > 0) {
             if ($display) {
