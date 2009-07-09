@@ -144,16 +144,16 @@ while ($accounts = mysql_fetch_assoc($result_accounts)) {
     	            $campaign_cost = 0;
     	        }
     	        $sql = "UPDATE SineDialer.campaign set cost = '".($campaign_cost+$cost[$i])."' WHERE id = ".$campaignid;
-		echo $sql."\n";
+				//echo $sql."\n";
     	        mysql_query($sql,$link);
     	    }
-	    mysql_select_db($config_values['CDR_DB'], $cdrlink);
+	    	mysql_select_db($config_values['CDR_DB'], $cdrlink);
     	    $sql = "update ".$config_values['CDR_TABLE']." set userfield2 = '1' where calldate = '$calldate[$i]' and duration = '$duration[$i]' and accountcode = '$accountcode[$i]' and userfield = '$userfield[$i]'";
-	    //echo $sql."\n";
+	    	//echo $sql."\n";
 	    if (time() - $start > 0 && $count > 0) {
-    	    	echo $i."/$count (".round(($i/$count)*100,2).")% (".round($i/(time() - $start))." per sec)             \r";
+    	    echo $i."/$count (".round(($i/$count)*100,2).")% (".round($i/(time() - $start))." per sec (".$campaign_cost+$cost[$i]."))             \r";
 	    } else {
-		echo "Starting up\r";
+			echo "Starting up\r";
 	    }
     	    $result_update = mysql_query($sql,$cdrlink) or die(mysql_error());
     	}
