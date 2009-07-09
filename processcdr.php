@@ -4,6 +4,8 @@
  * I.E. call.venturevoip.com
  */
 $url = "default";
+
+/* Get the database connection values */
 include "admin/db_config.php";
 mysql_select_db("SineDialer", $link) or die("Unable to connect: ".mysql_error());
 $totalcost = array();
@@ -106,23 +108,23 @@ while ($accounts = mysql_fetch_assoc($result_accounts)) {
         if ($disposition[$i] == "ANSWERED") {
             if ($billsec[$i] > $firstperiod[$accountcode[$i]]) {
                 if ($increment[$accountcode[$i]] == 1) {
-                    $costperminute[$i] = round(($priceperminute[$accountcode[$i]]/60) * $billsec[$i],2);
+                    $costperminute[$i] = (($priceperminute[$accountcode[$i]]/60) * $billsec[$i]);
                 } else {
                     /* if the increment is 30 seconds and the call is 73 seconds they should be
                      * charged for 73/30 = 2.4 blocks - round up to 3 = 3*30 = 90*/
                     $blocks = ceil($billsec[$i]/$increment[$accountcode[$i]]);
                     $newsecs = $blocks * $increment[$accountcode[$i]];
-                    $costperminute[$i] = round(($priceperminute[$accountcode[$i]]/60) * $newsecs,2);
+                    $costperminute[$i] = (($priceperminute[$accountcode[$i]]/60) * $newsecs);
                 }
                 $cost[$i]+=$costperminute[$i];
             } else {
-                $costperminute[$i] = round(($priceperminute[$accountcode[$i]]/60) * $firstperiod[$accountcode[$i]],2);
+                $costperminute[$i] = (($priceperminute[$accountcode[$i]]/60) * $firstperiod[$accountcode[$i]]);
                 $cost[$i]+=$costperminute[$i];
             }
-            $costperconnect[$i] = round($priceperconnectedcall[$accountcode[$i]],2);
+            $costperconnect[$i] = ($priceperconnectedcall[$accountcode[$i]]);
             $cost[$i]+=$costperconnect[$i];
             if ($dst[$i] == "1") {
-                $costperpress1[$i] = round($priceperpress1[$accountcode[$i]],2);
+                $costperpress1[$i] = ($priceperpress1[$accountcode[$i]]);
                 $cost[$i] += $costperpress1[$i];
             }
         }
