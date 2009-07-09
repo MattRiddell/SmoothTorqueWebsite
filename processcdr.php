@@ -46,7 +46,7 @@ while ($accounts = mysql_fetch_assoc($result_accounts)) {
     $cdrlink = mysql_connect($db_host, $db_user, $db_pass) OR die("Error connecting to CDR database using $db_user:$db_pass@$db_host because: \n".mysql_error());
     mysql_select_db($config_values['CDR_DB'], $cdrlink);
     $sql = "SELECT * from ".$config_values['CDR_TABLE']." WHERE userfield2 IS NULL and accountcode='$accountcode_in' and dcontext!='load-simulation'
-        and dcontext!='staff' and dcontext!='ls3' and userfield!='' order by calldate DESC limit 100000";
+        and dcontext!='staff' and dcontext!='ls3' and userfield!='' order by calldate DESC limit 1000000";
     //echo "Running: $sql\n";
     $result = mysql_query($sql,$cdrlink);
     $start = time();
@@ -106,8 +106,9 @@ while ($accounts = mysql_fetch_assoc($result_accounts)) {
             }
         }
         if ($disposition[$i] == "ANSWERED") {
-            if ($billsec[$i] > $firstperiod[$accountcode[$i]]) {
+            if ($billsec[$i] >= $firstperiod[$accountcode[$i]]) {
                 if ($increment[$accountcode[$i]] == 1) {
+                	/* If the increment is 1 second then we can just bill based on pricepermin/60 */ 
                     $costperminute[$i] = (($priceperminute[$accountcode[$i]]/60) * $billsec[$i]);
                 } else {
                     /* if the increment is 30 seconds and the call is 73 seconds they should be
