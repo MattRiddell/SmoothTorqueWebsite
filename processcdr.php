@@ -151,7 +151,7 @@ while ($accounts = mysql_fetch_assoc($result_accounts)) {
     	    $sql = "update ".$config_values['CDR_TABLE']." set userfield2 = '1' where calldate = '$calldate[$i]' and duration = '$duration[$i]' and accountcode = '$accountcode[$i]' and userfield = '$userfield[$i]'";
 	    	//echo $sql."\n";
 	    if (time() - $start > 0 && $count > 0) {
-    	    echo $i."/$count (".round(($i/$count)*100,2).")% (".round($i/(time() - $start))." per sec (".$campaign_cost+$cost[$i]."))             \r";
+    	    echo $i."/$count (".round(($i/$count)*100,2).")% (".round($i/(time() - $start))." per sec (".$campaign_cost+$cost[$i]."))             \n";
 	    } else {
 			echo "Starting up\r";
 	    }
