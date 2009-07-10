@@ -139,6 +139,8 @@ while ($accounts = mysql_fetch_assoc($result_accounts)) {
             } else {
                 mysql_select_db("SineDialer", $link);
                 $campaignid = substr($userfield[$i], $pos + 1);
+                
+                /* Get the current cost */
                 $sql = "SELECT cost FROM SineDialer.campaign WHERE id = ".$campaignid;
                 $result_campaign_cost = mysql_query($sql,$link);
                 if (mysql_num_rows($result_campaign_cost) > 0) {
@@ -146,18 +148,22 @@ while ($accounts = mysql_fetch_assoc($result_accounts)) {
                 } else {
     	            $campaign_cost = 0;
     	        }
+    	        
+    	        /* Update it with the new cost - i.e. cost of call + existing info */
     	        $sql = "UPDATE SineDialer.campaign set cost = '".($campaign_cost+$cost[$i])."' WHERE id = ".$campaignid;
 				//echo $sql."\n";
     	        mysql_query($sql,$link);
     	    }
+
 	    	mysql_select_db($config_values['CDR_DB'], $cdrlink);
     	    $sql = "update ".$config_values['CDR_TABLE']." set userfield2 = '1' where calldate = '$calldate[$i]' and duration = '$duration[$i]' and accountcode = '$accountcode[$i]' and userfield = '$userfield[$i]'";
 	    	//echo $sql."\n";
+
 	    	if (time() - $start > 0 && $count > 0) {
 	    		$printed++;
 	    		if ($printed > 100) {
 	    			$printed = 0;
-    	    		echo $i."/$count (".round(($i/$count)*100,2).")% (".round($i/(time() - $start))." per sec) (Cost: ".($campaign_cost+$cost[$i]).") (totalcost: ".($totalcost[$accountcode[$i]]).") (total seconds: $total_billsec)\n";
+    	    		echo $i."/$count (".round(($i/$count)*100,2).")% (".round($i/(time() - $start))." per sec) (Cost: ".($campaign_cost+$cost[$i]).") (totalcost: ".($totalcost[$accountcode[$i]]).") (total seconds: $total_billsec) (Cost for call: $cost[$i]) (billsec: $billsec[$i])\n";
     	    	}
 	    	} else {
 				echo "Starting up\r";
@@ -167,7 +173,7 @@ while ($accounts = mysql_fetch_assoc($result_accounts)) {
     	$i++;
 		$total_count++;
     } /* end of while on records */
-    echo $i."/$count (".round(($i/$count)*100,2).")% (".round($i/(time() - $start))." per sec) (Cost: ".($campaign_cost+$cost[$i]).") (totalcost: ".($totalcost[$accountcode[$i]]).") (total seconds: $total_billsec)\n";
+    echo $i."/$count (".round(($i/$count)*100,2).")% (".round($i/(time() - $start))." per sec) (Cost: ".($campaign_cost+$cost[$i-1]).") (totalcost: ".($totalcost[$accountcode[$i-1]]).") (total seconds: $total_billsec)\n";
 
     $sqlx = "select credit,creditlimit from billing where accountcode = '$accountcode_in'";
 
