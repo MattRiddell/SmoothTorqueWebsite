@@ -107,22 +107,26 @@ while ($accounts = mysql_fetch_assoc($result_accounts)) {
             }
         }
         if ($disposition[$i] == "ANSWERED") {
-            if ($billsec[$i] >= $firstperiod[$accountcode[$i]]) {
-                if ($increment[$accountcode[$i]] == 1) {
-                	/* If the increment is 1 second then we can just bill based on pricepermin/60 */ 
-                    $costperminute[$i] = (($priceperminute[$accountcode[$i]]/60) * $billsec[$i]);
-                    $total_billsec += $billsec[$i];
-                } else {
-                    /* if the increment is 30 seconds and the call is 73 seconds they should be
-                     * charged for 73/30 = 2.4 blocks - round up to 3 = 3*30 = 90*/
-                    $blocks = ceil($billsec[$i]/$increment[$accountcode[$i]]);
-                    $newsecs = $blocks * $increment[$accountcode[$i]];
-                    $costperminute[$i] = (($priceperminute[$accountcode[$i]]/60) * $newsecs);
-                }
-                $cost[$i]+=$costperminute[$i];
+        	if ($billsec[$i] > 0) {
+				if ($billsec[$i] >= $firstperiod[$accountcode[$i]]) {
+					if ($increment[$accountcode[$i]] == 1) {
+						/* If the increment is 1 second then we can just bill based on pricepermin/60 */ 
+						$costperminute[$i] = (($priceperminute[$accountcode[$i]]/60) * $billsec[$i]);
+						$total_billsec += $billsec[$i];
+					} else {
+						/* if the increment is 30 seconds and the call is 73 seconds they should be
+						 * charged for 73/30 = 2.4 blocks - round up to 3 = 3*30 = 90*/
+						$blocks = ceil($billsec[$i]/$increment[$accountcode[$i]]);
+						$newsecs = $blocks * $increment[$accountcode[$i]];
+						$costperminute[$i] = (($priceperminute[$accountcode[$i]]/60) * $newsecs);
+					}
+					$cost[$i]+=$costperminute[$i];
+				} else {
+					$costperminute[$i] = (($priceperminute[$accountcode[$i]]/60) * $firstperiod[$accountcode[$i]]);
+					$cost[$i]+=$costperminute[$i];
+				}
             } else {
-                $costperminute[$i] = (($priceperminute[$accountcode[$i]]/60) * $firstperiod[$accountcode[$i]]);
-                $cost[$i]+=$costperminute[$i];
+            	/* 0 length call */
             }
             $costperconnect[$i] = ($priceperconnectedcall[$accountcode[$i]]);
             $cost[$i]+=$costperconnect[$i];
