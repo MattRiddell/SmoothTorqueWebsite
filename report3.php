@@ -10,7 +10,7 @@ if ($id<1){
 ?>
 
 <a href="test.php?id=<?echo $id;?>"><img src="/images/chart_curve.png"  border="0"> View Engine Status</a>&nbsp;
-<a href="report2.php?id=<?echo $id;?>"><img src="/images/chart_pie.png"  border="0"> Number Stats</a>&nbsp;
+<a href="report<?if ($use_new_pie == 1) {echo "2";}?>.php?id=<?echo $id;?>"><img src="/images/chart_pie.png"  border="0"> Number Stats</a>&nbsp;
 <br /><br />
 <?/*
 if ($_GET[type]!="today") {

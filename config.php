@@ -122,7 +122,11 @@ if (isset($_POST[colour])){
     mysql_query("UPDATE web_config SET smtp_from=".sanitize($_POST[SMTP_FROM])." WHERE url = ".sanitize($url));
     mysql_query("UPDATE web_config SET use_separate_dnc=".sanitize($_POST[USE_SEPARATE_DNC])." WHERE url = ".sanitize($url));
     mysql_query("UPDATE web_config SET allow_numbers_manual=".sanitize($_POST[ALLOW_NUMBERS_MANUAL])." WHERE url = ".sanitize($url));
+    
     $sql = "REPLACE INTO config (parameter, value) VALUES ('expected_rate',".sanitize($_POST['expected_rate']).")";
+    mysql_query($sql) or die(mysql_error());
+
+	$sql = "REPLACE INTO config (parameter, value) VALUES ('use_new_pie',".sanitize($_POST['use_new_pie']).")";
     mysql_query($sql) or die(mysql_error());
 
 
@@ -177,6 +181,13 @@ if (mysql_num_rows($result) > 0) {
 } else {
     $expected_rate = 100;
 }
+
+$sql = 'SELECT value FROM config WHERE parameter=\'use_new_pie\'';
+$result=mysql_query($sql, $link) or die (mysql_error());
+$use_new_pie = 0;
+if (mysql_num_rows($result) > 0) {
+    $use_new_pie = mysql_result($result,0,'value');
+} 
 
 
 ?>
@@ -615,6 +626,21 @@ Opening Text:
 <input type="Text" name="text" value="<?echo $config_values['TEXT'];?>">
 </td>
 </tr>
+
+<tr  class="tborder2">
+<td>
+Use Flash-based Pie Chart:
+</td>
+<td>
+<select name="use_new_pie">
+<option value="1" <?if ($use_new_pie == 1) echo "selected";?>>Yes</option>
+<option value="0" <?if ($use_new_pie != 1) echo "selected";?>>No</option>
+</select>
+</td>
+</tr>
+
+
+
 <tr  class="tborder2">
 <td colspan="2">
 <input type="submit" value="Save Config Information">

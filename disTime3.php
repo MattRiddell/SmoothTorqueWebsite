@@ -58,6 +58,14 @@ while ($header_row = mysql_fetch_assoc($result_config) ) {
     }
 }
 
+$sql = 'SELECT value FROM config WHERE parameter=\'use_new_pie\'';
+$result=mysql_query($sql, $link) or die (mysql_error());
+$use_new_pie = 0;
+if (mysql_num_rows($result) > 0) {
+    $use_new_pie = mysql_result($result,0,'value');
+} 
+
+
 if (isset($_GET[campaigngroupid])){
     $campaigngroupid = ($_GET[campaigngroupid]);
 }
@@ -219,7 +227,7 @@ $total_numbers=mysql_result($result2,0,'count(*)');
 ?>
 <TD>
 <?if ($backend == 0) {?>
-<a title="View the report for this campaign" href="report2.php?id=<?echo $row[id];?>" class="abcd"><img width="16" height="16" src="/images/chart_pie.png" border="0"></a>
+<a title="View the report for this campaign" href="report<?if ($use_new_pie == 1) {echo "2";}?>.php?id=<?echo $row[id];?>" class="abcd"><img width="16" height="16" src="/images/chart_pie.png" border="0"></a>
 <?}?>
 <?/*
 if ($progress>0){
