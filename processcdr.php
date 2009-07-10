@@ -46,7 +46,7 @@ while ($accounts = mysql_fetch_assoc($result_accounts)) {
     $cdrlink = mysql_connect($db_host, $db_user, $db_pass) OR die("Error connecting to CDR database using $db_user:$db_pass@$db_host because: \n".mysql_error());
     mysql_select_db($config_values['CDR_DB'], $cdrlink);
     $sql = "SELECT * from ".$config_values['CDR_TABLE']." WHERE userfield2 IS NULL and accountcode='$accountcode_in' and dcontext!='load-simulation'
-        and dcontext!='staff' and dcontext!='ls3' and userfield!='' order by calldate DESC limit 1000000";
+        and dcontext!='staff' and dcontext!='ls3' and userfield!='' order by calldate DESC limit 1000";
     //echo "Running: $sql\n";
     $result = mysql_query($sql,$cdrlink);
     $start = time();
