@@ -161,10 +161,10 @@ while ($accounts = mysql_fetch_assoc($result_accounts)) {
 
 	    	if (time() - $start > 0 && $count > 0) {
 	    		$printed++;
-	    		if ($printed > 100) {
+	    		//if ($printed > 100) {
 	    			$printed = 0;
     	    		echo $i."/$count (".round(($i/$count)*100,2).")% (".round($i/(time() - $start))." per sec) (Cost: ".($campaign_cost+$cost[$i]).") (totalcost: ".($totalcost[$accountcode[$i]]).") (total seconds: $total_billsec) (Cost for call: $cost[$i]) (billsec: $billsec[$i])\n";
-    	    	}
+    	    	//}
 	    	} else {
 				echo "Starting up\r";
 	    	}
