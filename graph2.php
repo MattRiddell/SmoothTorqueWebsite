@@ -375,7 +375,7 @@ if ($type_of_campaign == 8) {
 
     $graph = new PieGraph(730, 450,  "auto");
     $graph -> SetScale("textlin");
-    if ($found == 0) {
+    if ($found == 0 || $total == 0) {
         $unknown = 1;
         $total = 1;
         $txt=new Text( "\n\n  There is no data for this time period \n\n");
