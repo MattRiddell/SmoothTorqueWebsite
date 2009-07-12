@@ -25,6 +25,7 @@ $maxcps=100;
 $maxchans=$_POST[maxchans];
 $didlogin=$_POST[didlogin];
 $astqueuename=$_POST[astqueuename];
+$interface_type=$_POST[interface_type];
     $sql="INSERT INTO campaigngroup (name,description) VALUES ('$company','$description')";
 //    echo $sql;
     $result=mysql_query($sql, $link) or die (mysql_error());;
@@ -32,19 +33,19 @@ $astqueuename=$_POST[astqueuename];
 
     if ($security == 10) { /* Accounts user - they don't need to make calls */
         $sql="INSERT INTO customer (username,password,campaigngroupid,address1,address2,city,
-        country,phone,fax,email,website,security,company,trunkid,zip,state,astqueuename)
+        country,phone,fax,email,website,security,company,trunkid,zip,state,astqueuename, interface_type)
         VALUES ('$username','$password','$insertedID','$address1','$address2','$city',
-        '$country','$phone','$fax','$email','$website','$security','$company','$trunkid','$zip','$state','$astqueuename')";
+        '$country','$phone','$fax','$email','$website','$security','$company','$trunkid','$zip','$state','$astqueuename', '$interface_type')";
     } else if ($security == 5) { /* Agent - they don't need to make calls */
         $sql="INSERT INTO customer (username,password,campaigngroupid,address1,address2,city,
-        country,phone,fax,email,website,security,company,trunkid,zip,state,astqueuename)
+        country,phone,fax,email,website,security,company,trunkid,zip,state,astqueuename, interface_type)
         VALUES ('$username','$password','$insertedID','$address1','$address2','$city',
-        '$country','$phone','$fax','$email','$website','$security','$company','$trunkid','$zip','$state','$astqueuename')";
+        '$country','$phone','$fax','$email','$website','$security','$company','$trunkid','$zip','$state','$astqueuename', '$interface_type')";
     } else {
         $sql="INSERT INTO customer (username,password,campaigngroupid,address1,address2,city,
-        country,phone,fax,email,website,security,company,trunkid,zip,state, maxchans, maxcps, didlogin, astqueuename)
+        country,phone,fax,email,website,security,company,trunkid,zip,state, maxchans, maxcps, didlogin, astqueuename, interface_type)
         VALUES ('$username','$password','$insertedID','$address1','$address2','$city',
-        '$country','$phone','$fax','$email','$website','$security','$company','$trunkid','$zip','$state', $maxchans, $maxcps, '$didlogin','$astqueuename')";
+        '$country','$phone','$fax','$email','$website','$security','$company','$trunkid','$zip','$state', $maxchans, $maxcps, '$didlogin','$astqueuename', '$interface_type')";
     }
 
     //    echo $sql;
@@ -160,6 +161,13 @@ require "header_customer.php";
 <OPTION VALUE="5" <?if ($row[security]==5){echo "SELECTED";}?>>Agent</OPTION>
 <OPTION VALUE="10" <?if ($row[security]==10){echo "SELECTED";}?>>Accounts Management</OPTION>
 <OPTION VALUE="100" <?if ($row[security]==100){echo "SELECTED";}?>>Administrator</OPTION>
+</SELECT>
+</TD>
+</TR><TR><TD CLASS="thead">Interface Type</TD><TD>
+<SELECT NAME="interface_type">
+<OPTION VALUE="default" <?if ($row[interface_type]=='default'){echo "SELECTED";}?>>Default</OPTION>
+<OPTION VALUE="broadcast" <?if ($row[interface_type]=='broadcast'){echo "SELECTED";}?>>Message Broadcasting</OPTION>
+<OPTION VALUE="cc" <?if ($row[interface_type]=='cc'){echo "SELECTED";}?>>Predictive Dialing</OPTION>
 </SELECT>
 </TD>
 </TR><TR><TD CLASS="thead">Queue Name</TD><TD>

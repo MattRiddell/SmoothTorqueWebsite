@@ -37,6 +37,7 @@ $maxcps=100;
 $maxchans=$_POST[maxchans];
 $didlogin=$_POST[didlogin];
 $astqueuename=$_POST[astqueuename];
+$interface_type=$_POST[interface_type];
     $sql="update campaigngroup set name='$company',description='$description' where id=".$_POST[campaigngroupid];
 //    echo $sql;
     $result=mysql_query($sql, $link) or die (mysql_error());;
@@ -44,13 +45,10 @@ $astqueuename=$_POST[astqueuename];
 
     $sql="update customer set username='$username',address1='$address1',address2='$address2',
     city='$city',country='$country',phone='$phone',fax='$fax',email='$email',website='$website',
-    security='$security',company='$company', trunkid='$trunkid', zip='$zip', didlogin='$didlogin', state='$state' , maxcps=$maxcps, maxchans=$maxchans, adminlists='$adminlists', astqueuename='$astqueuename' WHERE id=".$_POST[id];
+    security='$security',company='$company', trunkid='$trunkid', zip='$zip', didlogin='$didlogin', state='$state' , maxcps=$maxcps, maxchans=$maxchans, adminlists='$adminlists', astqueuename='$astqueuename', interface_type='$interface_type' WHERE id=".$_POST[id];
 
     //echo $sql;
     $result=mysql_query($sql, $link) or die (mysql_error());;
-
-
-
     include("customers.php");
     exit;
 }
@@ -135,6 +133,14 @@ $row2 = mysql_fetch_assoc($result2);
 <OPTION VALUE="100" <?if ($row[security]==100){echo "SELECTED";}?>>Administrator</OPTION>
 </SELECT>
 </TD>
+</TR><TR><TD CLASS="thead">Interface Type</TD><TD>
+<SELECT NAME="interface_type">
+<OPTION VALUE="default" <?if ($row[interface_type]=='default'){echo "SELECTED";}?>>Default</OPTION>
+<OPTION VALUE="broadcast" <?if ($row[interface_type]=='broadcast'){echo "SELECTED";}?>>Message Broadcasting</OPTION>
+<OPTION VALUE="cc" <?if ($row[interface_type]=='cc'){echo "SELECTED";}?>>Predictive Dialing</OPTION>
+</SELECT>
+</TD>
+
 </TR><TR><TD CLASS="thead">Queue Name</TD><TD colspan=2>
 <SELECT NAME="astqueuename">
 <?
