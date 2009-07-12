@@ -50,7 +50,7 @@ check_for_upload_directory($whoami);
 $version = get_backend_version();
 
 /* Load in the database connection values and chose the database name */
-include "admin/db_config.php";
+include "/".$current_directory."/admin/db_config.php";
 
 /* We have to do this early because if it's missing we're going to need */
 /* to recreate the information from the files inside the database.      */
@@ -246,10 +246,26 @@ if ($self == "/test.php" || $self == "/report.php" || $self == "/servers.php" ||
 <META HTTP-EQUIV="Expires" CONTENT="-1">
 <?}?>
 <script type="text/javascript" src="/tabber.js"></script>
-<link rel="stylesheet" type="text/css" href="/css/style.css">
-<link rel="stylesheet" href="/example.css" TYPE="text/css" MEDIA="screen">
-<link rel="stylesheet" href="/example-print.css" TYPE="text/css" MEDIA="print">
-<link rel="stylesheet" type="text/css" href="/css/default.css">
+<?
+if ($loggedin) {
+	$result_if = mysql_query("SELECT interface_type FROM customer where username = '$_COOKIE[user]'");
+	if (mysql_num_rows($result_if) > 0) {
+		$interface_type = mysql_result($result_if,0,0);
+	}
+}
+if ($interface_type == "broadcast") {
+?>
+<?
+} else if ($interface_type == "cc") {
+?>
+<?
+} else {
+?>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<link rel="stylesheet" href="/example.css" TYPE="text/css" MEDIA="screen">
+	<link rel="stylesheet" href="/example-print.css" TYPE="text/css" MEDIA="print">
+	<link rel="stylesheet" type="text/css" href="/css/default.css">
+<?}?>
 <link rel="shortcut icon" href="/favicon.ico">
 <!-- Javascript includes -->
 <script type="text/javascript" src="/ajax/picker.js"></script>
@@ -280,54 +296,67 @@ if ($logo_width > 0) {
 }
 ?>>
 <?
-echo $menu;
-flush();
-unset($menu);
-}?>
-
-<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" class="tborder3">
-<tr valign="TOP" >
-<td bgcolor="#ffffff">
-<?
 if ($loggedin) {
-    if (!($config_values['USE_BILLING'] == "YES")) {
-        /* The billing system is not enabled so don't bother printing links
-           related to credit etc */
-        echo "<center>";
-        echo "<font color=\"".$config_values['DATE_COLOUR']."\">";
-        echo "<a href=\"/help/index.php\">";
-        echo "<img width=\"16\" height=\"16\"  src=\"/images/help.png\" border=\"0\">";
-        echo "<b> Help</b>";
-        echo "</a>";
-        echo "&nbsp;".ucwords(strftime('%A %d %B %Y %H:%M:%S'));
-        echo "</font>";
-        echo "</center>";
-        echo "<br />";
-    } else {
-        /* Find out how much credit and what the credit limit is for this
-           customer */
-        $sql = "SELECT credit, creditlimit from billing where accountcode = 'stl-$_COOKIE[user]'";
-        $result_credit = mysql_query($sql,$link);
-        if (mysql_num_rows($result_credit)==0){
-            /* They have no billing account - set to defaults */
-            $credit = $config_values['CURRENCY_SYMBOL']." 0.00";
-            $creditlimit = 0;
-            $postpay = 0;
-        } else {
-            /* They have a billing account - set up the variables */
-            $credit = $config_values['CURRENCY_SYMBOL']." ".number_format(mysql_result($result_credit,0,'credit'),2);
-            $creditlimit = $config_values['CURRENCY_SYMBOL']." ".number_format(mysql_result($result_credit,0,'creditlimit'),2);
-            $postpay = 1;
-        }
-        if ($postpay == 1) {
-            echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img width=\"16\" height=\"16\"  src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(strftime('%A %d %B %Y %H:%M:%S'))." Credit: $credit Credit Limit: $creditlimit <a href=\"/viewcdr.php\"><img width=\"16\" height=\"16\" src=\"/images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"/billinglog_account.php\"><img width=\"16\" height=\"16\" src=\"/images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
-        } else {
-            echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img width=\"16\" height=\"16\"  src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(strftime('%A %d %B %Y %H:%M:%S'))." Credit: $credit <a href=\"/viewcdr.php\"><img width=\"16\" height=\"16\"  src=\"/images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"/billinglog_account.php\"><img width=\"16\" height=\"16\"  src=\"/images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
-        }
-        unset($result_credit);
-        unset($postpay);
-        unset($credit);
-        unset($creditlimit);
-    }
+	$result_if = mysql_query("SELECT interface_type FROM customer where username = '$_COOKIE[user]'");
+	if (mysql_num_rows($result_if) > 0) {
+		$interface_type = mysql_result($result_if,0,0);
+	}
+}
+if ($interface_type == "broadcast") {
+	echo "<br /></center>";
+} else if ($interface_type == "cc") {
+	echo "<br /></center>";
+} else {
+	echo $menu;
+	flush();
+	unset($menu);
+	?>
+	
+	<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" class="tborder3">
+	<tr valign="TOP" >
+	<td bgcolor="#ffffff">
+	<?
+	if ($loggedin) {
+		if (!($config_values['USE_BILLING'] == "YES")) {
+			/* The billing system is not enabled so don't bother printing links
+			   related to credit etc */
+			echo "<center>";
+			echo "<font color=\"".$config_values['DATE_COLOUR']."\">";
+			echo "<a href=\"/help/index.php\">";
+			echo "<img width=\"16\" height=\"16\"  src=\"/images/help.png\" border=\"0\">";
+			echo "<b> Help</b>";
+			echo "</a>";
+			echo "&nbsp;".ucwords(strftime('%A %d %B %Y %H:%M:%S'));
+			echo "</font>";
+			echo "</center>";
+			echo "<br />";
+		} else {
+			/* Find out how much credit and what the credit limit is for this
+			   customer */
+			$sql = "SELECT credit, creditlimit from billing where accountcode = 'stl-$_COOKIE[user]'";
+			$result_credit = mysql_query($sql,$link);
+			if (mysql_num_rows($result_credit)==0){
+				/* They have no billing account - set to defaults */
+				$credit = $config_values['CURRENCY_SYMBOL']." 0.00";
+				$creditlimit = 0;
+				$postpay = 0;
+			} else {
+				/* They have a billing account - set up the variables */
+				$credit = $config_values['CURRENCY_SYMBOL']." ".number_format(mysql_result($result_credit,0,'credit'),2);
+				$creditlimit = $config_values['CURRENCY_SYMBOL']." ".number_format(mysql_result($result_credit,0,'creditlimit'),2);
+				$postpay = 1;
+			}
+			if ($postpay == 1) {
+				echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img width=\"16\" height=\"16\"  src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(strftime('%A %d %B %Y %H:%M:%S'))." Credit: $credit Credit Limit: $creditlimit <a href=\"/viewcdr.php\"><img width=\"16\" height=\"16\" src=\"/images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"/billinglog_account.php\"><img width=\"16\" height=\"16\" src=\"/images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
+			} else {
+				echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img width=\"16\" height=\"16\"  src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(strftime('%A %d %B %Y %H:%M:%S'))." Credit: $credit <a href=\"/viewcdr.php\"><img width=\"16\" height=\"16\"  src=\"/images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"/billinglog_account.php\"><img width=\"16\" height=\"16\"  src=\"/images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
+			}
+			unset($result_credit);
+			unset($postpay);
+			unset($credit);
+			unset($creditlimit);
+		}
+	}
+ }
 }
 ?>
