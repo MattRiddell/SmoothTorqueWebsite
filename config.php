@@ -136,6 +136,13 @@ if (isset($_POST[colour])){
     mysql_query($sql) or die(mysql_error());
 
 
+	$sql = "REPLACE INTO config (parameter, value) VALUES ('logo_width',".sanitize($_POST['logo_width']).")";
+    mysql_query($sql) or die(mysql_error());
+
+
+	$sql = "REPLACE INTO config (parameter, value) VALUES ('logo_height',".sanitize($_POST['logo_height']).")";
+    mysql_query($sql) or die(mysql_error());
+
     /*$add = @fopen("./admin/db_config.php",'w');
     $script = '\<\?
 $db_host="localhost";
@@ -207,6 +214,18 @@ $result=mysql_query($sql, $link) or die (mysql_error());
 $show_front_page_text = 1;
 if (mysql_num_rows($result) > 0) {
     $show_front_page_text = mysql_result($result,0,'value');
+} 
+
+$sql = 'SELECT value FROM config WHERE parameter=\'logo_width\'';
+$result=mysql_query($sql, $link) or die (mysql_error());
+if (mysql_num_rows($result) > 0) {
+    $logo_width = mysql_result($result,0,'value');
+} 
+
+$sql = 'SELECT value FROM config WHERE parameter=\'logo_height\'';
+$result=mysql_query($sql, $link) or die (mysql_error());
+if (mysql_num_rows($result) > 0) {
+    $logo_height = mysql_result($result,0,'value');
 } 
 
 
@@ -636,6 +655,28 @@ Logo Filename:
 </td>
 <td>
 <input type="Text" name="logo" value="<?echo $config_values['LOGO'];?>">
+</td>
+</tr>
+
+</td>
+</tr>
+<tr  class="tborder2">
+<td>
+Logo Width:
+</td>
+<td>
+<input type="Text" name="logo_width" value="<?echo $logo_width;?>">
+</td>
+</tr>
+
+</td>
+</tr>
+<tr  class="tborder2">
+<td>
+Logo Height:
+</td>
+<td>
+<input type="Text" name="logo_height" value="<?echo $logo_height;?>">
 </td>
 </tr>
 

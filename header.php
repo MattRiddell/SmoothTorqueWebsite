@@ -258,8 +258,27 @@ if ($self == "/test.php" || $self == "/report.php" || $self == "/servers.php" ||
 
 <body bgcolor="<?echo $config_values['COLOUR'];?>" >
 
-<?if (isset($menu) && $loggedin == true){?>
-<center><img src="<?echo $config_values['LOGO'];?>">
+<?if (isset($menu) && $loggedin == true){
+$sql = 'SELECT value FROM config WHERE parameter=\'logo_width\'';
+$result=mysql_query($sql, $link) or die (mysql_error());
+if (mysql_num_rows($result) > 0) {
+    $logo_width = mysql_result($result,0,'value');
+} 
+
+$sql = 'SELECT value FROM config WHERE parameter=\'logo_height\'';
+$result=mysql_query($sql, $link) or die (mysql_error());
+if (mysql_num_rows($result) > 0) {
+    $logo_height = mysql_result($result,0,'value');
+}
+?>
+<center><img src="<?echo $config_values['LOGO'];?>"<?
+if ($logo_height > 0) {
+	echo ' height="'.$logo_height.'"';
+}
+if ($logo_width > 0) {
+	echo ' width="'.$logo_width.'"';
+}
+?>>
 <?
 echo $menu;
 flush();
