@@ -105,10 +105,10 @@ if (trim($dbpass)!=trim($passwordHash)){
     	/* centre interface.                                                                 */
         if ($interface_type == "broadcast") {
         	/* Redirect to the broadcast interface */
-        	header("Location: /broadcast/main.php");
+        	header("Location: /modules/broadcast/main.php");
         } else if ($interface_type == "cc") {
         	/* Redirect to the call centre interface */
-        	header("Location: /cc/main.php");
+        	header("Location: /modules/cc/main.php");
         } else {
         	/* Redirect to the default interface */
         	header("Location: /main.php");
