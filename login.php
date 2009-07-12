@@ -30,12 +30,13 @@ $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[u
 $result=mysql_query($sql, $link) or die(mysql_error());
 
 /* Try to load the password information from the database for that user */
-$sql = 'SELECT password, security FROM customer WHERE username=\''.$_POST[user].'\'';
+$sql = 'SELECT password, security, interface_type FROM customer WHERE username=\''.$_POST[user].'\'';
 $result=mysql_query($sql, $link);
 if (mysql_num_rows($result) > 0) {
     $dbpass=mysql_result($result,0,'password');
+    $interface_type = mysql_result($result,0,'interface_type');
 } else {
-    $dbpass = "";
+    $interface_type = "default";
 }
 
 /* Compare the password from the database with the SHA hash of what they entered */
@@ -99,7 +100,19 @@ if (trim($dbpass)!=trim($passwordHash)){
     	/* actually be sent to badsite.com.                                                  */
     	header("Location: ".$_GET[redirect]);
     } else {
-        header("Location: /main.php");
+    	/* Now we need to decide where to redirect. Our choices are currently the standard   */
+    	/* interface, the message broadcasting interface, and the predictive dialing or call */
+    	/* centre interface.                                                                 */
+        if ($interface_type == "broadcast") {
+        	/* Redirect to the broadcast interface */
+        	header("Location: /broadcast/main.php");
+        } else if ($interface_type == "cc") {
+        	/* Redirect to the call centre interface */
+        	header("Location: /cc/main.php");
+        } else {
+        	/* Redirect to the default interface */
+        	header("Location: /main.php");
+        }
     }
     exit;
 } 
