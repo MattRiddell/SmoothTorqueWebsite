@@ -129,6 +129,12 @@ if (isset($_POST[colour])){
 	$sql = "REPLACE INTO config (parameter, value) VALUES ('use_new_pie',".sanitize($_POST['use_new_pie']).")";
     mysql_query($sql) or die(mysql_error());
 
+	$sql = "REPLACE INTO config (parameter, value) VALUES ('show_front_page_title',".sanitize($_POST['show_front_page_title']).")";
+    mysql_query($sql) or die(mysql_error());
+
+	$sql = "REPLACE INTO config (parameter, value) VALUES ('show_front_page_text',".sanitize($_POST['show_front_page_text']).")";
+    mysql_query($sql) or die(mysql_error());
+
 
     /*$add = @fopen("./admin/db_config.php",'w');
     $script = '\<\?
@@ -188,6 +194,21 @@ $use_new_pie = 0;
 if (mysql_num_rows($result) > 0) {
     $use_new_pie = mysql_result($result,0,'value');
 } 
+
+$sql = 'SELECT value FROM config WHERE parameter=\'show_front_page_title\'';
+$result=mysql_query($sql, $link) or die (mysql_error());
+$show_front_page_title = 1;
+if (mysql_num_rows($result) > 0) {
+    $show_front_page_title = mysql_result($result,0,'value');
+} 
+
+$sql = 'SELECT value FROM config WHERE parameter=\'show_front_page_text\'';
+$result=mysql_query($sql, $link) or die (mysql_error());
+$show_front_page_text = 1;
+if (mysql_num_rows($result) > 0) {
+    $show_front_page_text = mysql_result($result,0,'value');
+} 
+
 
 
 ?>
@@ -635,6 +656,30 @@ Use Flash-based Pie Chart:
 <select name="use_new_pie">
 <option value="1" <?if ($use_new_pie == 1) echo "selected";?>>Yes</option>
 <option value="0" <?if ($use_new_pie != 1) echo "selected";?>>No</option>
+</select>
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+Show the title on the front page:
+</td>
+<td>
+<select name="show_front_page_title">
+<option value="1" <?if ($show_front_page_title == 1) echo "selected";?>>Yes</option>
+<option value="0" <?if ($show_front_page_title != 1) echo "selected";?>>No</option>
+</select>
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+Show the text on the front page:
+</td>
+<td>
+<select name="show_front_page_text">
+<option value="1" <?if ($show_front_page_text == 1) echo "selected";?>>Yes</option>
+<option value="0" <?if ($show_front_page_text != 1) echo "selected";?>>No</option>
 </select>
 </td>
 </tr>

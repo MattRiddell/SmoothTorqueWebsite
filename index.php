@@ -29,6 +29,20 @@ setcookie("url",$url,time()+6000);
 $_COOKIE[url] = $url;
 require "header.php";
 
+$sql = 'SELECT value FROM config WHERE parameter=\'show_front_page_title\'';
+$result=mysql_query($sql, $link) or die (mysql_error());
+$show_front_page_title = 1;
+if (mysql_num_rows($result) > 0) {
+    $show_front_page_title = mysql_result($result,0,'value');
+} 
+
+$sql = 'SELECT value FROM config WHERE parameter=\'show_front_page_text\'';
+$result=mysql_query($sql, $link) or die (mysql_error());
+$show_front_page_text = 1;
+if (mysql_num_rows($result) > 0) {
+    $show_front_page_text = mysql_result($result,0,'value');
+} 
+
 echo "<FONT FACE=\"ARIAL\">";
 ?>
 
@@ -40,9 +54,16 @@ echo "<FONT FACE=\"ARIAL\">";
             <TR><TD COLSPAN=2><CENTER> <img src="<?echo $config_values['LOGO'];?>">       </TD></TR>
         </table>
 <br />
-<?echo $config_values['TITLE'];?><br />
-<br />
-<?echo $config_values['TEXT'];?>        <br /><br />
+<font color="#888888">
+<?
+if ($show_front_page_title == "1") {
+	echo $config_values['TITLE'];
+	?><br /><br /><?
+}
+if ($show_front_page_text == "1") {
+echo $config_values['TEXT'];?>        <br /><br />
+<?}?>
+</font>
 <?box_start();?>
             <table align="center" width="300" height="200" cellpadding="0" cellspacing="0">
             <tr><td>
