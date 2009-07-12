@@ -1,11 +1,13 @@
 <?
     require "header.php";
-/*================= Log Access ======================================*/
-$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Viewed the system logs')";
-$result=mysql_query($sql, $link);
-/*================= Log Access ======================================*/
-    $sql = "select * from log order by timestamp desc";
-    $result=mysql_query($sql, $link);
+	/*================= Log Access ======================================*/
+	$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Viewed the system logs')";
+	$result=mysql_query($sql, $link);
+	/*================= Log Access ======================================*/
+    
+    $sql = "select * from log order by timestamp desc limit 100";
+    $result=mysql_query($sql, $link) or die (mysql_error());
+    
     echo "<br /><center><table border=\"0\">";
     echo "<tr><td>TimeStamp</td><td>Activity</td><td>User Name</td></tr>";
     while ($row = mysql_fetch_assoc($result)) {
