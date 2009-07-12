@@ -1,6 +1,6 @@
 <?
-
-require "header.php";
+$override_directory = dirname(__FILE__)."/../../";
+require $override_directory."header.php";
 ?>
 
 <br /><br /><br /><br />
@@ -137,5 +137,5 @@ $highest = $highest + ($highest/10);
 
 
 <?
-require "footer.php";
+require $override_directory."footer.php";
 ?>

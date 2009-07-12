@@ -115,8 +115,8 @@ if (!function_exists('check_for_gd_library') ) {
 
 if (!function_exists('check_for_upload_settings') ) {
     function check_for_upload_settings() {
-        if (!file_exists("../upload_settings.inc")) {
-            if (!file_exists("../../upload_settings.inc")) {
+        if (!file_exists($current_directory."/../upload_settings.inc")) {
+            if (!file_exists($current_directory."/../../upload_settings.inc")) {
                 echo "The file ../upload_settings.inc does not exist.  You will need to ";
                 echo "copy it from the $current_directory/cron subdirectory by typing ";
                 echo "the following commands<br /><br />";

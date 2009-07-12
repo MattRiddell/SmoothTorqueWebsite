@@ -6,10 +6,14 @@
 /* or not.                                                                */
 
 /* Include database configuration */
-include "admin/db_config.php";
+if (isset($override_directory)) {
+	$current_directory = $override_directory;
+} else {
+	$current_directory = dirname(__FILE__);
+}
+include "/".$current_directory."/admin/db_config.php";
 
 /* Include the common functions   */
-$current_directory = dirname(__FILE__);
 require "/".$current_directory."/functions/functions.php";
 
 /* Check all connections are ok */
