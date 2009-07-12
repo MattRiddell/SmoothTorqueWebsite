@@ -1239,13 +1239,14 @@ Description of spare5 context (optional)
 
 <div class="tabbertab" title="Credits">
 <br />
-<img src="/images/venturevoip.png" border="0"><br /><br />
+<img src="/images/00_logo.jpg" border="0"><br /><br />
 SmoothTorque was written by the following staff from <a href="http://www.venturevoip.com/about.php">VentureVoIP</a>:<br />
 <br />
 <b>Matt Riddell</b>: Development Lead<br />
 <b>Forbes Williams</b>: Backend Algorithms<br />
 <b>Paul Crane</b>: Documentation<br />
 <b>Chris MacGregor</b>: Translations<br />
+<b>Chris Latta</b>: Backend Optimizations<br />
 <br />
 This SmoothTorque website uses the following components:<br />
 <br />
