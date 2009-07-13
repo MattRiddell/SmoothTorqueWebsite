@@ -107,10 +107,10 @@ if (trim($dbpass)!=trim($passwordHash)){
     	/* Now we need to decide where to redirect. Our choices are currently the standard   */
     	/* interface, the message broadcasting interface, and the predictive dialing or call */
     	/* centre interface.                                                                 */
-        if (0 && $interface_type == "broadcast") {
+        if ($interface_type == "broadcast") {
         	/* Redirect to the broadcast interface */
         	header("Location: /modules/broadcast/main.php");
-        } else if (0 && $interface_type == "cc") {
+        } else if ($interface_type == "cc") {
         	/* Redirect to the call centre interface */
         	header("Location: /modules/cc/main.php");
         } else {
