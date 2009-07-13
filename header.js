@@ -894,11 +894,7 @@ function beginUpload(sid) {
         pb3.style.display='none';
         pb.parentNode.parentNode.style.display='block';
         new ProgressTracker(sid,{
-                progressBar: pb,
-                onFailure: function(msg) {
-                        Element.hide(pb.parentNode);
-                        alert(msg);
-                }
+                progressBar: pb
         });
     }
 
@@ -1289,18 +1285,20 @@ function PeriodicalAjax(url, parameters, frequency, decay, onSuccess, onFailure)
 	this.onComplete = function() {
 		if(this.stopped) return false;
 		if ( xhr.readyState == 4) {
-			if(xhr.status == 200) {
+			if(xhr.status == 200||xhr.status == 0) {
 				if(xhr.responseText == lastResponse) {
 					decay = decay * originalDecay;
 				} else {
 					decay = 1;
 				}
 				lastResponse = xhr.responseText;
+				//
 				if(onSuccess instanceof Function) {
 					onSuccess(xhr);
 				}
 				this.timer = setTimeout(function() { self.onTimerEvent(); }, decay * frequency * 1000);
 			} else {
+				alert(xhr.status);
 				if(onFailure instanceof Function) {
 					onFailure(xhr);
 				}
@@ -1340,6 +1338,7 @@ function ProgressTracker(sid, options) {
 				options.onProgressChange(xhr.responseText);
 			}
 			if(options.progressBar && options.progressBar.style) {
+				//alert(xhr.responseText);
 				options.progressBar.style.width = parseInt(xhr.responseText) + "%";
 			}
 		}
