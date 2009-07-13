@@ -248,11 +248,11 @@ if (!($_COOKIE["loggedin"]==sha1("LoggedIn".$user))){
 
 if ($loggedin) {
     /* Set all the cookies again to extend login time - they're not inactive */
-    setcookie("loggedin",sha1("LoggedIn".$user),time()+60000);
-    setcookie("user",$user,time()+60000);
-    setcookie("level",$level,time()+60000);
-    setcookie("language",$language,time()+60000);
-    setcookie("url",$_COOKIE[url],time()+60000);
+    setcookie("loggedin",sha1("LoggedIn".$user),time()+60000,"/");
+    setcookie("user",$user,time()+60000,"/");
+    setcookie("level",$level,time()+60000,"/");
+    setcookie("language",$language,time()+60000,"/");
+    setcookie("url",$_COOKIE[url],time()+60000,"/");
 
     /* Get the menu structure based on the config values, the current
        page, and the security level of the person viewing the page */
