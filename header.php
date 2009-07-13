@@ -201,10 +201,10 @@ mysql_select_db("SineDialer", $link);
 
 /* Check if the user is logged in */
 $loggedin=true;
+$myPage=$_SERVER[PHP_SELF];
 if (!($_COOKIE["loggedin"]==sha1("LoggedIn".$user))){
     /* The user is not logged in */
     $loggedin=false;
-    $myPage=$_SERVER[PHP_SELF];
     if (!($myPage=="/index.php"|$myPage=="/login.php")){
         /* Because header is included in login and the main page we don't
            want to redirect them constantly while they are trying to log
@@ -216,6 +216,33 @@ if (!($_COOKIE["loggedin"]==sha1("LoggedIn".$user))){
     } else {
         $loggedin=false;
     }
+} else {
+	//echo $myPage;
+	if ($myPage=="/index.php") {
+		/* If they are already logged in, but are viewing the index.php page then we  */
+		/* need to redirect them to the first page - i.e. main.php depending on their */
+		/* interface type.                                                            */
+		/* Try to load the password information from the database for that user */
+		$sql = 'SELECT interface_type FROM customer WHERE username=\''.$user.'\'';
+		$result=mysql_query($sql, $link);
+		if (mysql_num_rows($result) > 0) {
+    		$interface_type = mysql_result($result,0,'interface_type');
+		} else {
+    		$interface_type = "default";
+		}
+		if ( $interface_type == "broadcast") {
+        	/* Redirect to the broadcast interface */
+        	$destination = "/modules/broadcast/main.php";
+        } else if (0 && $interface_type == "cc") {
+        	/* Redirect to the call centre interface */
+        	$destination = "/modules/cc/main.php";
+        } else {
+        	/* Redirect to the default interface */
+        	$destination = "/main.php";
+        }
+        ?><META HTTP-EQUIV=REFRESH CONTENT="0; URL=<?=$destination?>"><?
+		exit(0);
+	}
 }
 
 
@@ -255,6 +282,64 @@ if ($loggedin) {
 }
 if ($interface_type == "broadcast") {
 ?>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" type="text/css" href="/modules/broadcast/css/default.css">
+</head>
+<!-- Javascript includes -->
+
+
+<body bgcolor="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<script type="text/javascript" src="/ajax/picker.js"></script>
+<script type="text/javascript" src="/prototype.js"></script>
+<script type="text/javascript" src="/header.js"></script>
+<!-- Save for Web Slices (broadcast_new.psd) -->
+<table id="Table_01" width="1401" height="876" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td rowspan="2">
+			<img src="/modules/broadcast/images/broadcast_01.png" width="215" height="104" alt=""></td>
+		<td colspan="5" rowspan="2">
+			<a href="/modules/broadcast/main.php">
+				<img src="/modules/broadcast/images/Logo.png" width="287" height="104" border="0" alt="Logo"></a></td>
+		<td colspan="2" rowspan="2">
+			<img src="/modules/broadcast/images/broadcast_03.png" width="69" height="104" alt=""></td>
+		<td>
+			<a href="/modules/broadcast/main.php">
+				<img src="/modules/broadcast/images/Home.png" width="114" height="103" border="0" alt="Home"></a></td>
+		<td>
+			<a href="/modules/broadcast/lists.php">
+				<img src="/modules/broadcast/images/Lists.png" width="95" height="103" border="0" alt="Lists"></a></td>
+		<td>
+			<a href="/modules/broadcast/campaigns.php">
+				<img src="/modules/broadcast/images/Campaigns.png" width="152" height="103" border="0" alt="Campaigns"></a></td>
+		<td>
+			<a href="/modules/broadcast/reports.php">
+				<img src="/modules/broadcast/images/Reports.png" width="117" height="103" border="0" alt="Reports"></a></td>
+		<td colspan="2">
+			<a href="../../logout.php">
+				<img src="/modules/broadcast/images/Logout.png" width="121" height="103" border="0" alt="Logout"></a></td>
+		<td rowspan="2">
+			<img src="/modules/broadcast/images/broadcast_09.png" width="230" height="104" alt=""></td>
+		<td>
+			<img src="/modules/broadcast/images/spacer.gif" width="1" height="103" alt=""></td>
+	</tr>
+	<tr>
+		<td colspan="6">
+			<img src="/modules/broadcast/images/broadcast_10.png" width="599" height="1" alt=""></td>
+		<td>
+			<img src="/modules/broadcast/images/spacer.gif" width="1" height="1" alt=""></td>
+	</tr>
+	<tr>
+		<td colspan="15">
+			<img src="/modules/broadcast/images/broadcast_11.png" width="1400" height="167" alt=""></td>
+		<td>
+			<img src="/modules/broadcast/images/spacer.gif" width="1" height="167" alt=""></td>
+	</tr>
+	<tr>
+		<td colspan="7">
+			<img src="/modules/broadcast/images/broadcast_12.png" width="508" height="10" alt=""></td>
+		<td width="658" height="478" colspan="6" rowspan="12" valign="top" style="padding: 20px">
+		<font face="arial" color="#666666" size="2">
 <?
 } else if ($interface_type == "cc") {
 ?>
@@ -265,7 +350,6 @@ if ($interface_type == "broadcast") {
 	<link rel="stylesheet" href="/example.css" TYPE="text/css" MEDIA="screen">
 	<link rel="stylesheet" href="/example-print.css" TYPE="text/css" MEDIA="print">
 	<link rel="stylesheet" type="text/css" href="/css/default.css">
-<?}?>
 <link rel="shortcut icon" href="/favicon.ico">
 <!-- Javascript includes -->
 <script type="text/javascript" src="/ajax/picker.js"></script>
@@ -360,3 +444,4 @@ if ($interface_type == "broadcast") {
  }
 }
 ?>
+<?}?>
