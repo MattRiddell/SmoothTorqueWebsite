@@ -1240,7 +1240,7 @@ if (!function_exists('create_missing_tables') ) {
 		{
 			$result = mysql_query('ALTER TABLE customer ADD interface_type VARCHAR(255) default \'default\'');
 			$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added customer.interface_type field')";
-			$result=mysql_query($sql, $link);
+			$result=mysql_query($sql, $link) or die(mysql_error());
 		}
 
 	}

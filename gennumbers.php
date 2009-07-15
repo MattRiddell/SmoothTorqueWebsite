@@ -89,8 +89,8 @@ if (substr($_POST[start],0,3) == "000") {
     $starter = "0";
 }
  for ($i=$_POST[start];$i<=$_POST[end];$i++){
-    $count++;
     $myarray[$count]=$starter.($i+0);
+    $count++;
 //    echo "$count is ".$myarray[$count]."<br />";
  }
 

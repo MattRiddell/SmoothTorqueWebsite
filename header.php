@@ -5,7 +5,9 @@
  *  2. So we can explain how to set up things that are missing
  */
 $current_directory = dirname(__FILE__);
-
+if (isset($override_directory)) {
+	$current_directory = $override_directory;
+}
 /* What page we are currently on - this is used to highlight the menu
  * system as well as to not cache certain pages like the graphs
  */
@@ -35,7 +37,7 @@ $level=$_COOKIE[level];
  * functions are mainly for the installer
  */
 check_for_gd_library();
-check_for_upload_settings();
+check_for_upload_settings($current_directory);
 check_for_upload_directory($whoami);
 
 /* This was temporarily used to check for the running of the backend.
@@ -276,6 +278,10 @@ if ($self == "/test.php" || $self == "/report.php" || $self == "/servers.php" ||
 <?
 if ($loggedin) {
 	$result_if = mysql_query("SELECT interface_type FROM customer where username = '$_COOKIE[user]'");
+	if (!$result_if) {?>
+		<META HTTP-EQUIV=REFRESH CONTENT="0; URL=logout.php"><?
+		exit(0);
+	}	
 	if (mysql_num_rows($result_if) > 0) {
 		$interface_type = mysql_result($result_if,0,0);
 	}
