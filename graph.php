@@ -544,7 +544,7 @@ if (mysql_num_rows($result) > 0) {
 if ($timespent == 0) {
 	$timespent = 1;
 }
-    $txt2=new Text( $pending."Weight: $weighted CAD: $cad Overs: ".round(($o1/$timespent)*100,3)."% Scale: ".$lowest_ms."ms-".$highest_ms."ms Funnel: $funnel_queue_size Target: ".number_format($target_percentage*100,2)."% Elasticity: $elasticity");
+    $txt2=new Text( $pending."MRS: $mrs Weight: $weighted CAD: $cad Overs: ".round(($o1/$timespent)*100,3)."% Scale: ".$lowest_ms."ms-".$highest_ms."ms Funnel: $funnel_queue_size Target: ".number_format($target_percentage*100,2)."% Elasticity: $elasticity");
 //    $txt2=new Text( "Weight: $weighted CAD: $cad Overs: $o1/$timespent (".round(($o1/$timespent)*100,3)."%) Scale: ".$lowest_ms."ms-".$highest_ms."ms Funnel: $funnel_queue_size Target: ".number_format($target_percentage*100,2)."% Elasticity: $elasticity");
     $txt2->Pos( 500,375);
     $txt2->SetAlign("center","","");

@@ -14,7 +14,7 @@ if (!mysql_num_rows($result) > 0) {
 <script type="text/javascript" src="/js/swfobject.js"></script>
 <script type="text/javascript">
 swfobject.embedSWF(
-  "/open-flash-chart.swf", "my_chart", "580", "400",
+  "/open-flash-chart.swf", "my_chart", "580", "350",
   "9.0.0", "expressInstall.swf",
   {"data-file":"/modules/broadcast/chart-data-overview.php?user=<?=$_COOKIE[user]?>&x=<?echo rand()*1000;?>"}
   );

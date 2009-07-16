@@ -9,106 +9,121 @@ ob_implicit_flush(FALSE);
 $_POST = array_map(mysql_real_escape_string,$_POST);
 $_GET = array_map(mysql_real_escape_string,$_GET);
 
-?>
-<?php if(!empty($data)){?>
-<?php if(isset($data['title'])){
-?>
-<div class="inputhead">Title</div>
-<div class="data"><?php echo $data['title']; ?></div>
-<?}?>
-	<?php if(isset($data['body'])){?>
-	<div class="inputhead">Body</div>
-	<div class="data"><?php echo $data['body']; ?></div>
-  <?}?>
-  <?}?>
-  <?if(!empty($files)){?>
-	<div class="data">
-	  <?foreach($files as $file) {
-	  require $override_directory."footer.php";
-
-	  exit(0);
-        //print_r($file);
-        $filename = $file[path];
+if(!empty($files)){
+	foreach($files as $file) {
+        $filename = trim($file[path]);
         $row = 0;
         $display2 = 0;
-        $handle = fopen($filename, "r");
-        echo "<br />Importing numbers, please wait<br /><br />";
-        //print_r($_POST);
-        $campaignid = $data["id"];
-        //$sql2 = "LOCK TABLES number WRITE";
-        //mysql_query($sql2, $link) or die (mysql_error());;
-        $sql = "INSERT IGNORE INTO number (campaignid,phonenumber,status,type, random_sort) VALUES";
-        $isfirst=true;
-        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-            //echo "Inside Loop: ".$data[0]."<br />";
-            $data[0] = str_replace("(","",$data[0]);
-            $data[0] = str_replace(")","",$data[0]);
-            $data[0] = str_replace("-","",$data[0]);
-            $data[0] = str_replace(" ","",$data[0]);
-            $data[0] = str_replace("\r","",$data[0]);
-            if ($isfirst) {
-                $sql.="(".$campaignid.",'".$data[0]."','new',0, ROUND(RAND() * 999999999))";
-
-//                $sql2 = "SET AUTOCOMMIT=0;";//BEGIN";
-//                mysql_query($sql2, $link) or die(mysql_error());
-//                echo mysql_error();
-
-                $isfirst=false;
-            }
-            $row++;
-            $display++;
-            $display2++;
-            /*if ($display2>500){
-                //echo "<!-- -->";
-                //ob_flush();flush();
-
-                $display2=0;
-            }*/
-            if ($display > 17347) { /* Just so the chances of doing nothing  */
-                                   /* in the last write is low.  It doesn't */
-                                   /* really matter but makes it cleaner */
-                echo "".$row." numbers imported<br />\n";
-                ob_flush();flush();
-                //echo "saving $sql";
-                mysql_query($sql, $link) or die (mysql_error());;
-                //$sql2="COMMIT";
-                //mysql_query($sql2, $link) or die (mysql_error());;
-                //$sql2="UNLOCK TABLES";
-                //mysql_query($sql2, $link) or die (mysql_error());;
-
-
-				$display = 0;
-                //$sq2 = "LOCK TABLES number WRITE";
-                //mysql_query($sql2, $link) or die (mysql_error());;
-                $sql = "INSERT IGNORE INTO number (campaignid,phonenumber,status,type,random_sort)  VALUES";
-                $sql.="(".$campaignid.",'".$data[0]."','new',0,ROUND(RAND() * 999999999))";
-            } else {
-				$sql.=",(".$campaignid.",'".$data[0]."','new',0, ROUND(RAND() * 999999999))";
+        $filetype = strtolower(substr($filename,strlen($filename)-3));
+		if ($filetype == "csv") {
+			$handle = fopen($filename, "r");
+			$row = 0;
+			while (($data = fgetcsv($handle, 10000, ",")) !== FALSE) {
+				$col = 0;
+				foreach ($data as $column) {
+//					echo "X: $row Y: $col Value: $column<br />";
+					$results[$row][$col] = $column;
+					$col ++;
+				}
+				$row ++;
 			}
-        }
-        //echo "Saving Records to the Database <br />";
-        echo "[".$row." numbers inserted]<br />\n";
-        ob_flush();flush();
-        mysql_query($sql, $link) or die (mysql_error());;
-                //$sql2="COMMIT";
-                //mysql_query($sql2, $link) or die (mysql_error());;
-                //$sql2="UNLOCK TABLES";
-                //mysql_query($sql2, $link) or die (mysql_error());;
+			fclose($handle);
+			$numrows = sizeof($results);
+			$numcols = sizeof($results[0]);
+//			print_pre($results);
+			echo "Please select the column with the phone number in it by clicking on the header<br />";
+			echo "<br />";
+			?><div id="tableContainer" class="tableContainer"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="scrollTable"><?
+			for ($row = 0; $row <= ($numrows<100?$numrows:100); $row++) {
+				if ($row == 0) {
+					echo '<thead class="fixedHeader"><tr>';
+				} else {
+					echo '<tr>';
+				}
+				for ($column = 0; $column <= ($numcols<5?$numcols:5); $column++) {
+					$contents = trim($results[$row][$column]);
+					if ($row == 0) {
+						echo "<th>";
+						if (strlen($contents) > 0) {
+							$contents = substr($contents,0,10);
+							echo "<a href=\"csv_import?filename=".$file['name']."&column=$column\"><b>Column $column:</b><br />".$contents."</a>";
+						} else {
+							echo "<a href=\"csv_import?filename=".$file['name']."&column=$column\"><b>Column $column</b><br />(No title)</a>";
+						}
+						echo "</th>";
+					} else {
+						echo "<td>".$contents."</td>";
+					}
+				}
+				if ($row == 0) {
+					?><th style="width:16px"></th></tr>
+					</thead>
+					<tbody class="scrollContent"><?
+				} else {
+					echo '</tr>';
+				}	
+			}
+			echo '</tbody></table></div>';
+		} else if ($filetype == "xls") {
+			require_once 'Excel/reader.php';
+			$data = new Spreadsheet_Excel_Reader();
+			$data->setOutputEncoding('CP1251');		
+			/* if you want you can change 'iconv' to mb_convert_encoding:
+			* $data->setUTFEncoder('mb');*/
+			
+			/***
+			*  Some function for formatting output.
+			* $data->setDefaultFormat('%.2f');
+			* setDefaultFormat - set format for columns with unknown formatting
+			*
+			* $data->setColumnFormat(4, '%.3f');
+			* setColumnFormat - set format for column (apply only to number fields)
+			*
+			**/
+			$data->read($filename);
 
-			/*$sql2 = "SET AUTOCOMMIT=1;";
-		mysql_query($sql2, $link) or die (mysql_error());;*/
-//$row--;
-echo "<br />";
-echo "<br />";
-fclose($handle);
-echo "<b>A total of $row numbers were inserted into the database</b><br /><br /><br />";
-/*echo "A total of $row numbers was read.  Inserting into database<br />";
-    for ($i = 1;$i<$row;$i++){
-        echo $i.":".$number[$i]."<br />";
-    }*/
-}?>
-
-	</div>
-<?}?>
-</body>
-</html>
+			error_reporting(E_ALL ^ E_NOTICE);
+			$numrows = $data->sheets[0]['numRows'];
+			$numcols = $data->sheets[0]['numCols'];
+			
+			//echo "<b>Filename: </b>".$file['name']."<br />";
+			//echo "<br />";
+			echo "Please select the column with the phone number in it by clicking on the header<br />";
+			echo "<br />";
+			//if ($data->sheets[0]['numCols'] < 10) {
+			?><div id="tableContainer" class="tableContainer"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="scrollTable"><?
+			for ($row = 1; $row <= ($numrows<100?$numrows:100); $row++) {
+				if ($row == 1) {
+					echo '<thead class="fixedHeader"><tr>';
+				} else {
+					echo '<tr>';
+				}
+				for ($column = 1; $column <= ($numcols<6?$numcols:6); $column++) {
+					$contents = trim($data->sheets[0]['cells'][$row][$column]);
+					if ($row == 1) {
+						echo "<th>";
+						if (strlen($contents) > 0) {
+							$contents = substr($contents,0,10);
+							echo "<a href=\"xls_import?filename=".$file['name']."&column=$column\"><b>Column $column:</b> ".$contents."</a>";
+						} else {
+							echo "<a href=\"xls_import?filename=".$file['name']."&column=$column\"><b>Column $column</b> (No title)</a>";
+						}
+						echo "</th>";
+					} else {
+						echo "<td>".$contents."</td>";
+					}
+				}
+				if ($row == 1) {
+					?></tr>
+					</thead>
+					<tbody class="scrollContent"><?
+				} else {
+					echo '</tr>';
+				}	
+			}
+			echo '</tbody></table></div>';
+		}
+	}
+}
+require $override_directory."footer.php";
+?>

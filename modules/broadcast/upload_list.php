@@ -54,6 +54,7 @@ $sid = md5(uniqid(rand()));
 ?>
 
 <div id="matt2">
+<h2>Upload List</h2>
 <p>
 Please choose a phone number list from your computer by clicking the button below:<br />
 <br />
@@ -62,10 +63,9 @@ Please choose a phone number list from your computer by clicking the button belo
         <form enctype="multipart/form-data" name="postform" action="/cgi-bin/upload.cgi?sid=<?php echo $sid; ?>&target=<?echo normal_target('receive.php');?>" method="post">
 			<input type="file" name="file_1" />
     	</form>
-        <br />
-        <br />
-        <br />
-        <input type="button" onclick="beginUpload('<?php echo $sid ?>');" value="Upload">
+    	<br />
+    	<br />
+    	<input type="button" onclick="beginUpload('<?php echo $sid ?>');" value="Upload">
     </div>
 </div>
 <center>
