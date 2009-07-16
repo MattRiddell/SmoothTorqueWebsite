@@ -38,6 +38,7 @@ $maxchans=$_POST[maxchans];
 $didlogin=$_POST[didlogin];
 $astqueuename=$_POST[astqueuename];
 $interface_type=$_POST[interface_type];
+$interface_type = "default";
     $sql="update campaigngroup set name='$company',description='$description' where id=".$_POST[campaigngroupid];
 //    echo $sql;
     $result=mysql_query($sql, $link) or die (mysql_error());;
@@ -133,15 +134,18 @@ $row2 = mysql_fetch_assoc($result2);
 <OPTION VALUE="100" <?if ($row[security]==100){echo "SELECTED";}?>>Administrator</OPTION>
 </SELECT>
 </TD>
-</TR><TR><TD CLASS="thead">Interface Type</TD><TD>
+</TR>
+<?/*
+<TR><TD CLASS="thead">Interface Type</TD><TD>
 <SELECT NAME="interface_type">
 <OPTION VALUE="default" <?if ($row[interface_type]=='default'){echo "SELECTED";}?>>Default</OPTION>
 <OPTION VALUE="broadcast" <?if ($row[interface_type]=='broadcast'){echo "SELECTED";}?>>Message Broadcasting</OPTION>
 <OPTION VALUE="cc" <?if ($row[interface_type]=='cc'){echo "SELECTED";}?>>Predictive Dialing</OPTION>
 </SELECT>
 </TD>
-
-</TR><TR><TD CLASS="thead">Queue Name</TD><TD colspan=2>
+</TR>
+*/?>
+<TR><TD CLASS="thead">Queue Name</TD><TD colspan=2>
 <SELECT NAME="astqueuename">
 <?
 $resultss=mysql_query("SELECT name from queue_table",$link);
