@@ -10,7 +10,7 @@ if (!mysql_num_rows($result) > 0) {
 	/* This customer has no campaigns */
 	echo "No campaigns for $campaigngroupid ($_COOKIE[user])";
 } else {
-echo $level;
+//echo $level;
 if (1||$level==sha1("level100")) {
 	$datafile = "chart-data-system.php";
 } else {

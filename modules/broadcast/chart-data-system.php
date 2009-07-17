@@ -15,11 +15,11 @@ if (!mysql_num_rows($result) > 0) {
 } else {
 	/* This customer has campaigns - iterate through them */
 	while ($row = mysql_fetch_assoc($result)) {
-		$result_campaign = mysql_query("select distinct(status), count(*), month(datetime), year(datetime) from SineDialer.number where status !='new' and status != 'unknown' group by month(datetime), year(datetime), status order by month(datetime), year(datetime) desc");
+		$result_campaign = mysql_query("select distinct(status), count(*), week(datetime), year(datetime) from SineDialer.number where status !='new' and status != 'unknown' group by week(datetime), year(datetime), status order by week(datetime), year(datetime) desc");
 		while ($row_campaign = mysql_fetch_assoc($result_campaign)) {
-			$month = $month_names[($row_campaign['month(datetime)']-1)];
+			$week = $row_campaign['week(datetime)'];;
 			
-			$bar2[$month."-".$row_campaign['year(datetime)']][$row_campaign['status']] += $row_campaign['count(*)'];
+			$bar2[$week."-".$row_campaign['year(datetime)']][$row_campaign['status']] += $row_campaign['count(*)'];
 		}
 	}
 	//print_pre($results);
