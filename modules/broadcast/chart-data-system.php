@@ -7,15 +7,19 @@ header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
  
 $result = mysql_query("select * from campaign") or die (mysql_error());
+$month_names = array("January","February","March","April","May","June","July","August","September","October","November","December");
+
 if (!mysql_num_rows($result) > 0) {
 	/* This customer has no campaigns */
 	echo "No campaigns for $campaigngroupid ($_COOKIE[user])";
 } else {
 	/* This customer has campaigns - iterate through them */
 	while ($row = mysql_fetch_assoc($result)) {
-		$result_campaign = mysql_query("select distinct(status), count(*), date(datetime) from SineDialer.number where status !='new' and status != 'unknown' group by date(datetime), status order by date(datetime) desc");
+		$result_campaign = mysql_query("select distinct(status), count(*), month(datetime), year(datetime) from SineDialer.number where status !='new' and status != 'unknown' group by month(datetime), year(datetime), status order by month(datetime), year(datetime) desc");
 		while ($row_campaign = mysql_fetch_assoc($result_campaign)) {
-			$bar2[$row_campaign['date(datetime)']][$row_campaign['status']] += $row_campaign['count(*)'];
+			$month = $month_names[($row_campaign['month(datetime)']-1)];
+			
+			$bar2[$month."-".$row_campaign['year(datetime)']][$row_campaign['status']] += $row_campaign['count(*)'];
 		}
 	}
 	//print_pre($results);
@@ -50,6 +54,7 @@ foreach ($bar as $key=>$value) {
     unset($counts);
     unset($count_total);
     $labels[] = $key;
+//    $labels[] = date("M Y",strtotime($key));
     $i = 0;
     foreach ($value as $status=>$count) {
         if (!in_array($status,$status_names)) {
