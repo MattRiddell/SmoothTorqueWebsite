@@ -10,13 +10,19 @@ if (!mysql_num_rows($result) > 0) {
 	/* This customer has no campaigns */
 	echo "No campaigns for $campaigngroupid ($_COOKIE[user])";
 } else {
+echo $level;
+if (1||$level==sha1("level100")) {
+	$datafile = "chart-data-system.php";
+} else {
+	$datafile = "chart-data-overview.php";
+}
 ?>
 <script type="text/javascript" src="/js/swfobject.js"></script>
 <script type="text/javascript">
 swfobject.embedSWF(
   "/open-flash-chart.swf", "my_chart", "580", "350",
   "9.0.0", "expressInstall.swf",
-  {"data-file":"/modules/broadcast/chart-data-overview.php?user=<?=$_COOKIE[user]?>&x=<?echo rand()*1000;?>"}
+  {"data-file":"/modules/broadcast/<?=$datafile?>?user=<?=$_COOKIE[user]?>&x=<?echo rand()*1000;?>"}
   );
 </script>
 <script>
@@ -26,7 +32,7 @@ function findSWF(movieName) {
 
 function count()
 {
- findSWF('my_chart').reload('/modules/broadcast/chart-data-overview.php?user=<?=$_COOKIE[user]?>&x=<?echo rand()*1000;?>');
+ findSWF('my_chart').reload('/modules/broadcast/<?=$datafile?>?user=<?=$_COOKIE[user]?>&x=<?echo rand()*1000;?>');
 }
 function init()
 {
@@ -34,12 +40,12 @@ function init()
 }
 window.onload = init;
 </script>
-
 </head>
 <body>
 
 
 
+<center>
 <div id="my_chart"></div>
 
 

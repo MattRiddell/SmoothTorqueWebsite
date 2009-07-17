@@ -299,52 +299,74 @@ if ($interface_type == "broadcast") {
 <script type="text/javascript" src="/ajax/picker.js"></script>
 <script type="text/javascript" src="/prototype.js"></script>
 <script type="text/javascript" src="/header.js"></script>
+
 <!-- Save for Web Slices (broadcast_new.psd) -->
-<table id="Table_01" width="1401" height="876" border="0" cellpadding="0" cellspacing="0">
+<center>
+<table id="Table_01" width="1145" height="876" border="0" cellpadding="0" cellspacing="0">
 	<tr>
-		<td rowspan="2">
-			<img src="/modules/broadcast/images/broadcast_01.png" width="215" height="104" alt=""></td>
+		<td rowspan="19" style="width:1px;height:875px;">
+			</td>
+		<td rowspan="19" style="width:40px;height:875px;">
+			</td>
+		<td rowspan="17">
+			<img src="/modules/broadcast/images/broadcast_03.png" width="43" height="753" alt=""></td>
 		<td colspan="5" rowspan="2">
-			<a href="/modules/broadcast/main.php">
+			<a href="main.php">
 				<img src="/modules/broadcast/images/Logo.png" width="287" height="104" border="0" alt="Logo"></a></td>
 		<td colspan="2" rowspan="2">
-			<img src="/modules/broadcast/images/broadcast_03.png" width="69" height="104" alt=""></td>
+			<img src="/modules/broadcast/images/broadcast_05.png" width="69" height="104" alt=""></td>
 		<td>
-			<a href="/modules/broadcast/main.php">
+			<a href="main.php">
 				<img src="/modules/broadcast/images/Home.png" width="114" height="103" border="0" alt="Home"></a></td>
 		<td>
-			<a href="/modules/broadcast/lists.php">
+			<a href="lists.php">
 				<img src="/modules/broadcast/images/Lists.png" width="95" height="103" border="0" alt="Lists"></a></td>
 		<td>
-			<a href="/modules/broadcast/campaigns.php">
+			<a href="campaigns.php">
 				<img src="/modules/broadcast/images/Campaigns.png" width="152" height="103" border="0" alt="Campaigns"></a></td>
 		<td>
-			<a href="/modules/broadcast/reports.php">
+			<a href="reports.php">
 				<img src="/modules/broadcast/images/Reports.png" width="117" height="103" border="0" alt="Reports"></a></td>
 		<td colspan="2">
 			<a href="../../logout.php">
 				<img src="/modules/broadcast/images/Logout.png" width="121" height="103" border="0" alt="Logout"></a></td>
 		<td rowspan="2">
-			<img src="/modules/broadcast/images/broadcast_09.png" width="230" height="104" alt=""></td>
+			<img src="/modules/broadcast/images/broadcast_11.png" width="103" height="104" alt=""></td>
+		<td rowspan="19">
+			<img src="/modules/broadcast/images/rightbg.png" width="1" height="875" alt=""></td>
+		<td rowspan="19">
+			<img src="/modules/broadcast/images/broadcast_13.png" width="1" height="875" alt=""></td>
 		<td>
 			<img src="/modules/broadcast/images/spacer.gif" width="1" height="103" alt=""></td>
 	</tr>
 	<tr>
 		<td colspan="6">
-			<img src="/modules/broadcast/images/broadcast_10.png" width="599" height="1" alt=""></td>
+			<img src="/modules/broadcast/images/broadcast_14.png" width="599" height="1" alt=""></td>
 		<td>
 			<img src="/modules/broadcast/images/spacer.gif" width="1" height="1" alt=""></td>
 	</tr>
 	<tr>
-		<td colspan="15">
-			<img src="/modules/broadcast/images/broadcast_11.png" width="1400" height="167" alt=""></td>
+		<td colspan="14">
+			<img src="/modules/broadcast/images/broadcast_15.png" width="1058" height="162" alt=""></td>
 		<td>
-			<img src="/modules/broadcast/images/spacer.gif" width="1" height="167" alt=""></td>
+			<img src="/modules/broadcast/images/spacer.gif" width="1" height="162" alt=""></td>
 	</tr>
 	<tr>
-		<td colspan="7">
-			<img src="/modules/broadcast/images/broadcast_12.png" width="508" height="10" alt=""></td>
-		<td width="658" height="478" colspan="6" rowspan="12" valign="top" style="padding: 20px">
+		<td rowspan="14">
+			<img src="/modules/broadcast/images/broadcast_16.png" width="35" height="487" alt=""></td>
+		<td colspan="3" rowspan="2">
+			<img src="/modules/broadcast/images/broadcast_17.png" width="215" height="15" alt=""></td>
+		<td rowspan="14">
+			<img src="/modules/broadcast/images/broadcast_18.png" width="37" height="487" alt=""></td>
+		<td colspan="9">
+			<img src="/modules/broadcast/images/broadcast_19.png" width="771" height="5" alt=""></td>
+		<td>
+			<img src="/modules/broadcast/images/spacer.gif" width="1" height="5" alt=""></td>
+	</tr>
+	<tr>
+		<td rowspan="13">
+			<img src="/modules/broadcast/images/broadcast_20.png" width="6" height="482" alt=""></td>
+		<td width="658" height="478" colspan="6" rowspan="12" valign="top" style="padding: 20px; background: #ffffff;">
 		<font face="arial" color="#666666" size="2">
 <?
 } else if ($interface_type == "cc") {

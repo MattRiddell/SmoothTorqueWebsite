@@ -46,9 +46,9 @@ if(!empty($files)){
 						echo "<th>";
 						if (strlen($contents) > 0) {
 							$contents = substr($contents,0,10);
-							echo "<a href=\"csv_import?filename=".$file['name']."&column=$column\"><b>Column $column:</b><br />".$contents."</a>";
+							echo "<a href=\"/modules/broadcast/csv_import.php?filename=".$file['name']."&column=$column\"><b>Column $column:</b><br />".$contents."</a>";
 						} else {
-							echo "<a href=\"csv_import?filename=".$file['name']."&column=$column\"><b>Column $column</b><br />(No title)</a>";
+							echo "<a href=\"/modules/broadcast/csv_import.php?filename=".$file['name']."&column=$column\"><b>Column $column</b><br />(No title)</a>";
 						}
 						echo "</th>";
 					} else {
@@ -104,9 +104,9 @@ if(!empty($files)){
 						echo "<th>";
 						if (strlen($contents) > 0) {
 							$contents = substr($contents,0,10);
-							echo "<a href=\"xls_import?filename=".$file['name']."&column=$column\"><b>Column $column:</b> ".$contents."</a>";
+							echo "<a href=\"/modules/broadcast/xls_import.php?filename=".$file['name']."&column=$column\"><b>Column $column:</b> ".$contents."</a>";
 						} else {
-							echo "<a href=\"xls_import?filename=".$file['name']."&column=$column\"><b>Column $column</b> (No title)</a>";
+							echo "<a href=\"/modules/broadcast/xls_import.php?filename=".$file['name']."&column=$column\"><b>Column $column</b> (No title)</a>";
 						}
 						echo "</th>";
 					} else {

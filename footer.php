@@ -2,28 +2,26 @@
 if ($interface_type == "broadcast") {
 ?>
 </font>
-
-		
-		</td>
+</td>
 		<td colspan="2" rowspan="13">
-			<img src="/modules/broadcast/images/broadcast_14.png" width="234" height="482" alt=""></td>
+			<img src="/modules/broadcast/images/broadcast_22.png" width="107" height="482" alt=""></td>
 		<td>
 			<img src="/modules/broadcast/images/spacer.gif" width="1" height="10" alt=""></td>
 	</tr>
 	<tr>
-		<td colspan="3" rowspan="10">
-			<img src="/modules/broadcast/images/broadcast_15.png" width="261" height="337" alt=""></td>
+		<td rowspan="10">
+			<img src="/modules/broadcast/images/broadcast_23.png" width="11" height="337" alt=""></td>
 		<td>
 			<a href="/modules/broadcast/upload_list.php">
 				<img src="/modules/broadcast/images/Upload-List.gif" width="192" height="43" border="0" alt="Upload List"></a></td>
-		<td colspan="3" rowspan="10">
-			<img src="/modules/broadcast/images/broadcast_17.png" width="55" height="337" alt=""></td>
+		<td rowspan="10">
+			<img src="/modules/broadcast/images/broadcast_25.png" width="12" height="337" alt=""></td>
 		<td>
 			<img src="/modules/broadcast/images/spacer.gif" width="1" height="43" alt=""></td>
 	</tr>
 	<tr>
 		<td>
-			<img src="/modules/broadcast/images/broadcast_18.png" width="192" height="16" alt=""></td>
+			<img src="/modules/broadcast/images/broadcast_26.png" width="192" height="16" alt=""></td>
 		<td>
 			<img src="/modules/broadcast/images/spacer.gif" width="1" height="16" alt=""></td>
 	</tr>
@@ -36,7 +34,7 @@ if ($interface_type == "broadcast") {
 	</tr>
 	<tr>
 		<td>
-			<img src="/modules/broadcast/images/broadcast_20.png" width="192" height="23" alt=""></td>
+			<img src="/modules/broadcast/images/broadcast_28.png" width="192" height="23" alt=""></td>
 		<td>
 			<img src="/modules/broadcast/images/spacer.gif" width="1" height="23" alt=""></td>
 	</tr>
@@ -49,7 +47,7 @@ if ($interface_type == "broadcast") {
 	</tr>
 	<tr>
 		<td>
-			<img src="/modules/broadcast/images/broadcast_22.png" width="192" height="18" alt=""></td>
+			<img src="/modules/broadcast/images/broadcast_30.png" width="192" height="18" alt=""></td>
 		<td>
 			<img src="/modules/broadcast/images/spacer.gif" width="1" height="18" alt=""></td>
 	</tr>
@@ -62,7 +60,7 @@ if ($interface_type == "broadcast") {
 	</tr>
 	<tr>
 		<td>
-			<img src="/modules/broadcast/images/broadcast_24.png" width="192" height="19" alt=""></td>
+			<img src="/modules/broadcast/images/broadcast_32.png" width="192" height="19" alt=""></td>
 		<td>
 			<img src="/modules/broadcast/images/spacer.gif" width="1" height="19" alt=""></td>
 	</tr>
@@ -75,41 +73,41 @@ if ($interface_type == "broadcast") {
 	</tr>
 	<tr>
 		<td>
-			<img src="/modules/broadcast/images/broadcast_26.png" width="192" height="47" alt=""></td>
+			<img src="/modules/broadcast/images/broadcast_34.png" width="192" height="47" alt=""></td>
 		<td>
 			<img src="/modules/broadcast/images/spacer.gif" width="1" height="47" alt=""></td>
 	</tr>
 	<tr>
-		<td colspan="2" rowspan="2">
-			<img src="/modules/broadcast/images/broadcast_27.png" width="250" height="135" alt=""></td>
 		<td colspan="3" rowspan="2">
-			<img src="/modules/broadcast/images/broadcast_28.png" width="215" height="135" alt=""></td>
-		<td colspan="2" rowspan="2">
-			<img src="/modules/broadcast/images/broadcast_29.png" width="43" height="135" alt=""></td>
+			<img src="/modules/broadcast/images/broadcast_35.png" width="215" height="135" alt=""></td>
 		<td>
 			<img src="/modules/broadcast/images/spacer.gif" width="1" height="131" alt=""></td>
 	</tr>
 	<tr>
 		<td colspan="6">
-			<img src="/modules/broadcast/images/broadcast_30.png" width="658" height="4" alt=""></td>
+			<img src="/modules/broadcast/images/broadcast_36.png" width="658" height="4" alt=""></td>
 		<td>
 			<img src="/modules/broadcast/images/spacer.gif" width="1" height="4" alt=""></td>
 	</tr>
 	<tr>
 		<td colspan="15">
-			<img src="/modules/broadcast/images/broadcast_31.png" width="1400" height="20" alt=""></td>
+			<img src="/modules/broadcast/images/broadcast_37.png" width="1101" height="20" alt=""></td>
 		<td>
 			<img src="/modules/broadcast/images/spacer.gif" width="1" height="20" alt=""></td>
 	</tr>
 	<tr>
 		<td colspan="15">
-			<img src="/modules/broadcast/images/broadcast_32.jpg" width="1400" height="102" alt=""></td>
+			<img src="/modules/broadcast/images/broadcast_38.jpg" width="1101" height="102" alt=""></td>
 		<td>
 			<img src="/modules/broadcast/images/spacer.gif" width="1" height="102" alt=""></td>
 	</tr>
 	<tr>
 		<td>
-			<img src="/modules/broadcast/images/spacer.gif" width="215" height="1" alt=""></td>
+			<img src="/modules/broadcast/images/spacer.gif" width="1" height="1" alt=""></td>
+		<td>
+			<img src="/modules/broadcast/images/spacer.gif" width="40" height="1" alt=""></td>
+		<td>
+			<img src="/modules/broadcast/images/spacer.gif" width="43" height="1" alt=""></td>
 		<td>
 			<img src="/modules/broadcast/images/spacer.gif" width="35" height="1" alt=""></td>
 		<td>
@@ -137,14 +135,18 @@ if ($interface_type == "broadcast") {
 		<td>
 			<img src="/modules/broadcast/images/spacer.gif" width="4" height="1" alt=""></td>
 		<td>
-			<img src="/modules/broadcast/images/spacer.gif" width="230" height="1" alt=""></td>
+			<img src="/modules/broadcast/images/spacer.gif" width="103" height="1" alt=""></td>
+		<td>
+			<img src="/modules/broadcast/images/spacer.gif" width="1" height="1" alt=""></td>
+		<td>
+			<img src="/modules/broadcast/images/spacer.gif" width="1" height="1" alt=""></td>
 		<td></td>
 	</tr>
 </table>
+</center>
 <!-- End Save for Web Slices -->
 </body>
-</html>
-<?
+</html><?
 } else {
 ?>
 <BR><BR></TD></TR></TABLE>
