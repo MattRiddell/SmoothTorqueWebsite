@@ -38,8 +38,8 @@ foreach ($keys as $key) {
 while ($row = mysql_fetch_assoc($result)) {
     $bar[$row['date(datetime)']][$row['status']] = $row['count(*)'];
 }*/
-$title = new title( 'Campaign Overview' );
-$title->set_style( "{font-size: 20px; color: #444444; text-align: center;}" );
+//$title = new title( 'System Overview' );
+//$title->set_style( "{font-size: 20px; color: #444444; text-align: center;}" );
 
 $bar_stack = new bar_stack();
 
@@ -84,7 +84,7 @@ foreach ($bar as $key=>$value) {
 
 
 $y = new y_axis();
-$y->set_range( 0, $max, round($max/10) );
+$y->set_range( 0, $max );
 
 $x = new x_axis();
 //$x->set_labels_from_array( $labels );
@@ -102,7 +102,7 @@ $tooltip->text = '#key#: #val#<br>Total: #total#' ;
 //$bar_stack->set_tooltip( '#key#: #val#<br>Total: #total#' );
 
 $chart = new open_flash_chart();
-$chart->set_title( $title );
+//$chart->set_title( $title );
 $chart->add_element( $bar_stack );
 $chart->set_x_axis( $x );
 $chart->add_y_axis( $y );

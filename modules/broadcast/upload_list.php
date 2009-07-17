@@ -53,6 +53,75 @@ function normal_target($phpfile) {
 $sid = md5(uniqid(rand()));
 ?>
 
+<!-- Save for Web Slices (upload_lists.psd) -->
+<table id="Table_01" width="608" height="157" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td colspan="5">
+			<img src="images/upload_lists_01.png" width="607" height="27" alt=""></td>
+		<td>
+			<img src="images/spacer.gif" width="1" height="27" alt=""></td>
+	</tr>
+	<tr>
+		<td rowspan="4">
+			<img src="images/upload_lists_02.png" width="163" height="130" alt=""></td>
+		<td rowspan="3" style="background-image: url(images/upload_lists_03.png); width:268px; height:100;" valign="center">
+<div id="matt2">
+	<div id="matt">
+        <form enctype="multipart/form-data" name="postform" action="/cgi-bin/upload.cgi?sid=<?php echo $sid; ?>&target=<?echo normal_target('receive.php');?>" method="post">
+			<input type="file" name="file_1" />
+    	</form>
+    </div>
+</div>
+<center>
+<table>
+<tr>
+<td>
+<div id="progressbox" style="display: none">
+	Please wait while your list is uploaded.<br />
+    <div class="progresscontainer">
+    	<div class="progressbar" id="progress">
+        </div>
+    </div>
+</div>
+</td></tr></table>
+</center>
+
+
+</td>
+		<td colspan="3">
+			<img src="images/upload_lists_04.png" width="176" height="66" alt=""></td>
+		<td>
+			<img src="images/spacer.gif" width="1" height="66" alt=""></td>
+	</tr>
+	<tr>
+		<td rowspan="3">
+			<img src="images/upload_lists_05.png" width="9" height="64" alt=""></td>
+		<td>
+			<a href="#" onclick="beginUpload('<?php echo $sid ?>');">
+				<img src="images/upload_lists_03-07.png" width="113" height="28" border="0" alt=""></a></td>
+		<td rowspan="3">
+			<img src="images/upload_lists_07.png" width="54" height="64" alt=""></td>
+		<td>
+			<img src="images/spacer.gif" width="1" height="28" alt=""></td>
+	</tr>
+	<tr>
+		<td rowspan="2">
+			<img src="images/upload_lists_08.png" width="113" height="36" alt=""></td>
+		<td>
+			<img src="images/spacer.gif" width="1" height="6" alt=""></td>
+	</tr>
+	<tr>
+		<td>
+			<img src="images/upload_lists_09.png" width="268" height="30" alt=""></td>
+		<td>
+			<img src="images/spacer.gif" width="1" height="30" alt=""></td>
+	</tr>
+</table>
+
+<!-- End Save for Web Slices -->
+
+
+<?/*
 <div id="matt2">
 <h2>Upload List</h2>
 <p>
@@ -81,7 +150,7 @@ Please choose a phone number list from your computer by clicking the button belo
 </div>
 </td></tr></table>
 </center>
-
+*/?>
 
 <?
 require $override_directory."footer.php";
