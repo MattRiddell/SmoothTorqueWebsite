@@ -15,11 +15,11 @@ if (!mysql_num_rows($result) > 0) {
 } else {
 	/* This customer has campaigns - iterate through them */
 	while ($row = mysql_fetch_assoc($result)) {
-		$result_campaign = mysql_query("select distinct(status), count(*), week(datetime), year(datetime) from SineDialer.number where status !='new' and status != 'unknown' group by week(datetime), year(datetime), status order by week(datetime), year(datetime) desc");
+		$result_campaign = mysql_query("select distinct(status), count(*), date(datetime) from SineDialer.number where status !='new' and status != 'unknown' group by date(datetime), status order by date(datetime) desc");
 		while ($row_campaign = mysql_fetch_assoc($result_campaign)) {
-			$week = $row_campaign['week(datetime)'];;
+			$date = $row_campaign['date(datetime)'];;
 			
-			$bar2[$week."-".$row_campaign['year(datetime)']][$row_campaign['status']] += $row_campaign['count(*)'];
+			$bar2[$date][$row_campaign['status']] += $row_campaign['count(*)'];
 		}
 	}
 	//print_pre($results);
@@ -49,6 +49,8 @@ $colors = array('#0000FF','#888888','#00FF00','#FF0000','#004444', '#FF0000', '#
 $max = 0;
 $status_names = array();
 foreach ($bar as $key=>$value) {
+//	echo "<pre>";
+//	print_r($bar);
 //    echo "Key: $key Value:";
 //    print_r($value);
     unset($counts);
@@ -85,7 +87,13 @@ $y = new y_axis();
 $y->set_range( 0, $max, round($max/10) );
 
 $x = new x_axis();
-$x->set_labels_from_array( $labels );
+//$x->set_labels_from_array( $labels );
+
+$x_lab = new x_axis_labels();
+$x_lab->set_labels($labels);
+$x_lab->rotate("90");
+$x->set_labels($x_lab);
+
 //$x->set_labels_from_array( array( 'Winter', 'Spring', 'Summer', 'Autmn' ) );
 
 $tooltip = new tooltip();
