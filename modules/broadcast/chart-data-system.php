@@ -55,19 +55,19 @@ foreach ($bar as $key=>$value) {
 //    print_r($value);
     unset($counts);
     unset($count_total);
-    $labels[] = $key;
+//    $labels[] = $key;
 //    $labels[] = date("M Y",strtotime($key));
     $i = 0;
     foreach ($value as $status=>$count) {
         if (!in_array($status,$status_names)) {
-            $statuses[] = new bar_stack_key($colors[$i], $status, 13);
-            $status_names[] = $status;
+//            $statuses[] = new bar_stack_key($colors[$i], $status, 13);
+//            $status_names[] = $status;
         }
 //        $counts[] = intval($count);
 
 	$stack_val = new bar_stack_value(intval($count), $colors[$i]);
 	    $i++;
-	$stack_val->text = $status;
+//	$stack_val->text = $status;
 	$stack_val->tip = $status." ($count)";
 //	$stack_val->text = $key.":".$status." ($count)";
 	$counts[] = $stack_val;
