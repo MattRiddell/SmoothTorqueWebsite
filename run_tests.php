@@ -69,7 +69,7 @@ if (isset($_POST['length'])) {
 		echo "<p>Adding ".($length * $parameters['speed'])." numbers</p><br />";
 		flush();
 		for ($i = 0;$i < ($length * $parameters['speed']);$i++) {
-			$number_sql = "INSERT INTO number (campaignid, phonenumber, status) VALUES ('$campaignid','$i','new')";
+			$number_sql = "INSERT INTO number (campaignid, phonenumber, status, random_sort) VALUES ('$campaignid','$i','new', RAND()*99999999)";
 			$result = mysql_query($number_sql) or die(mysql_error());
 			//echo "Number: $number_sql<br />";
 			//flush();
