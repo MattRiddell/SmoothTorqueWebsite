@@ -64,11 +64,11 @@ $sid = md5(uniqid(rand()));
 	<tr>
 		<td rowspan="4">
 			<img src="images/upload_lists_02.png" width="163" height="130" alt=""></td>
-		<td rowspan="3" style="background-image: url(images/upload_lists_03.png); width:268px; height:100;" valign="center">
+		<td rowspan="3" style="background-image: url(images/upload_audio_03.png); width:268px; height:100;" valign="center">
 <div id="matt2">
 	<div id="matt">
         <form enctype="multipart/form-data" name="postform" action="/cgi-bin/upload.cgi?sid=<?php echo $sid; ?>&target=<?echo normal_target('receive.php');?>" method="post">
-			<input type="file" name="file_1" />
+			<br /><input type="file" name="file_1" />
     	</form>
     </div>
 </div>

@@ -418,6 +418,7 @@ if ($interface_type == "broadcast") {
 	echo "<br /></center>";
 } else if ($interface_type == "cc") {
 	echo "<br /></center>";
+} else if ($self == "/run_tests.php"||$self == "/test_results.php") {
 } else {
 	echo $menu;
 	flush();
