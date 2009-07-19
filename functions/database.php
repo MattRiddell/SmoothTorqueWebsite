@@ -43,6 +43,31 @@ if (!function_exists('create_missing_tables') ) {
 		}
 		
 		/*======================================================================
+                            test_results Table
+		  ======================================================================*/
+		if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","test_results")){
+		
+		
+		
+		$sql = "CREATE TABLE `test_results` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `camaignid` int(11) unsigned NOT NULL,
+  `description` varchar(255) default NULL,
+  `channels` int(10) unsigned default NULL,
+  `avg_busy` varchar(255) default NULL,
+  `timespent` varchar(255) default NULL,
+  `dialed` varchar(255) default NULL,
+  `avg_cps` varchar(255) default NULL,
+  `tot_cps` varchar(255) default NULL,
+  `overs` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
+)";
+		$result=mysql_query($sql, $link) or die (mysql_error());
+		  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created Scedule Table')";
+		  $result=mysql_query($sql, $link);
+		} 
+		
+		/*======================================================================
 									Log Table
 		  ======================================================================*/
 		if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","log")){
