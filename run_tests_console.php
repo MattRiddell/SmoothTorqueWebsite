@@ -1,6 +1,6 @@
 <?
 /* Length of time for each campaign */
-$length = 800;
+$length = 1800;
 
 /* Minimum number of agents to test with */
 $agents_low = 5;
@@ -12,10 +12,10 @@ $agents_high = 15;
 $cps_high = 25;
 
 /* Minimum number of channels available to the campaign */
-$chans_low = 100;
+$chans_low = 3000;
 
 /* Maximum number of channels available to the campaign */
-$chans_high = 1500;
+$chans_high = 3000;
 
 /* Expected answer rate for the campaign (0-100 */
 $expected_rate = 1;
@@ -24,20 +24,20 @@ $expected_rate = 1;
 $runs = 1 ;
 
 /* How many channel number variations to create */
-$runs_chans = 3;
+$runs_chans = 1;
 
 /* How many agent number variations to create */
-$runs_agents = 5;
+$runs_agents = 20;
 
 /* How long between campaigns - seconds */
-$delay = 60;
+$delay = 120;
 
 /* How many campaigns to run at the same time */
-$simul = 5;
+$simul = 4;
 
 /* How long to offset the initial start to                   */
 /* (should be longer than it takes to create the db entries) */
-$initial_delay = 300;
+$initial_delay = 900;
 
 /* Offset */
 $runs-=1;
