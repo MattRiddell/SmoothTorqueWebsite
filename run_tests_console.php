@@ -65,17 +65,6 @@ $self=$_SERVER['PHP_SELF'];
  */
 require "/".$current_directory."/functions/functions.php";
 
-//if (isset($_POST['length'])) {
-	//print_pre($_POST);
-//	echo "
-";
-
-    $initial_delay = 30;
-    foreach ($_POST as $key=>$value) {
-    	if (substr($key,0,6) == "server") {
-    		$server_ids[] = substr($key,7);
-    	}
-    }
     $z = 0;
 	
 		/* If there are more than two, use the start and end in the array */
@@ -174,7 +163,7 @@ require "/".$current_directory."/functions/functions.php";
 	
 	//print_pre($run_array);
 	
-	require "footer.php";
+	//require "footer.php";
 	exit(0);
-}
+
 ?>
