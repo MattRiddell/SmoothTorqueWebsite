@@ -1,4 +1,45 @@
 <?
+/* Length of time for each campaign */
+$length = $_POST['length'];
+
+/* Minimum number of agents to test with */
+$agents_low = $_POST['agents_low'];
+
+/* Maximum number of agents to test with */
+$agents_high = $_POST['agents_high'];
+
+/* Calls per second to use as max for trunks */
+$cps_high = $_POST['cps_high'];
+
+/* Minimum number of channels available to the campaign */
+$chans_low = $_POST['chans_low'];
+
+/* Maximum number of channels available to the campaign */
+$chans_high = $_POST['chans_high'];
+
+/* Expected answer rate for the campaign (0-100 */
+$expected_rate = $_POST['expected_rate'];
+
+/* How many speed runs to do - not currently used */
+$runs = $_POST['runs_speed'] -1;
+
+/* How many channel number variations to create */
+$runs_chans = $_POST['runs_chans'] -1;
+
+/* How many agent number variations to create */
+$runs_agents = $_POST['runs_agent']-1;
+
+/* How long between campaigns */
+$delay = $_POST['delay'];
+
+/* How many campaigns to run at the same time */
+$simul = $_POST['simul'];
+
+/* How long to offset the initial start to                   */
+/* (should be longer than it takes to create the db entries) */
+$initial_delay = 300;
+
+
 require "admin/db_config.php";
 /* Find out what the base directory name is for two reasons:
  *  1. So we can include files
