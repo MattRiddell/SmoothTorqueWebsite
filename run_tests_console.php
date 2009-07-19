@@ -97,30 +97,24 @@ require "/".$current_directory."/functions/functions.php";
 	$result = mysql_query("DELETE from trunk where name like 'load-sim-%'");
 	//exit(0);
 	$trunk_sql = 'INSERT INTO trunk (name, dialstring, maxchans, maxcps) VALUES (\'load-sim-0\', \'Local/s@staff/${EXTEN}\', '.$chans_high.', \''.$cps_high.'\')';
-	echo $trunk_sql."
-";
+	echo $trunk_sql."\n";
 	$result = mysql_query($trunk_sql) or die(mysql_error());
 	$trunkid = mysql_insert_id();
 		
 	foreach ($run_array as $run_num=>$parameters) {
-		echo "Run number ".($run_num+1)." starting at ".sec2hms($time_start)." - Max Chans: ".$parameters['chans']." Max CPS: ".$parameters['speed']." Agents: ".round($parameters['agents'])."
-";
-		//echo "Creating trunk with max chans of ".$parameters['chans']." and max cps of ".$parameters['speed']."
-";
+		echo "Run number ".($run_num+1)." starting at ".sec2hms($time_start)." - Max Chans: ".$parameters['chans']." Max CPS: ".$parameters['speed']." Agents: ".round($parameters['agents'])."\n";
+		//echo "Creating trunk with max chans of ".$parameters['chans']." and max cps of ".$parameters['speed']."\n";
 		$campaign_sql = 'INSERT INTO campaign (campaignconfigid, name, description, clid, maxagents, did, context) VALUES ('.round($parameters['chans']).',\'load-sim-'.$z.'\', \'Test with '.round($parameters['agents']).' agents\', \'ls'.($x+3).'\', '.round($parameters['agents']).', \'ls'.($x+3).'\', \'0\')';
-		echo $campaign_sql."
-";
+		echo $campaign_sql."\n";
 		$result = mysql_query($campaign_sql) or die(mysql_error());
 		$campaignid = mysql_insert_id();
 		
-		echo "Adding ".($length * $parameters['speed'])." numbers
-";
+		echo "Adding ".($length * $parameters['speed'])." numbers\n";
 		flush();
 		for ($i = 0;$i < ($length * $parameters['speed']);$i++) {
 			$number_sql = "INSERT INTO number (campaignid, phonenumber, status, random_sort) VALUES ('$campaignid','$i','new', RAND()*99999999)";
 			$result = mysql_query($number_sql) or die(mysql_error());
-			//echo "Number: $number_sql
-";
+			//echo "Number: $number_sql\n";
 			//flush();
 		}
 		
@@ -131,18 +125,14 @@ require "/".$current_directory."/functions/functions.php";
 		$enddate = 'DATE(NOW())';
 		$queue_start_sql = 'INSERT INTO queue (queuename, status, campaignID, starttime, endtime, startdate, enddate, did, clid, context, maxcalls, maxchans, expectedRate, trunk, trunkid, maxcps, customerID) VALUES ';
 		$queue_start_sql .= '(\'load-sim-start-'.$z.'\', 1, '.$campaignid.', '.$starttime.', \'23:59:59\', '.$startdate.', '.$enddate.', \'ls'.($x+3).'\', \'ls'.($x+3).'\', 0, '.$parameters['agents'].', \''.round($parameters['chans']).'\', \''.$expectedrate.'\', \'Local/s@staff/${EXTEN}\', '.$trunkid.', \''.$parameters['speed'].'\', '.$x.')';
-		echo $queue_start_sql."
-";
+		echo $queue_start_sql."\n";
 		$result = mysql_query($queue_start_sql) or die(mysql_error());
 		$queue_stop_sql = 'INSERT INTO queue (queuename, status, campaignID, starttime, endtime, startdate, enddate, did, clid, context, maxcalls, maxchans, expectedRate, trunk, trunkid, maxcps, customerID) VALUES ';
 		$queue_stop_sql .= '(\'load-sim-stop-'.$z.'\', 2, '.$campaignid.', '.$stoptime.', \'23:59:59\', '.$startdate.', '.$enddate.', \'ls'.($x+3).'\', \'ls'.($x+3).'\', 0, '.$parameters['agents'].', \''.round($parameters['chans']).'\', \''.$expectedrate.'\', \'Local/s@staff/${EXTEN}\', '.$trunkid.', \''.$parameters['speed'].'\', '.$x.')';
-		echo $queue_stop_sql."
-";
+		echo $queue_stop_sql."\n";
 		$result = mysql_query($queue_stop_sql) or die(mysql_error());
-		//echo "Creating campaign with max agents of ".round($parameters['agents'])."
-";
-		//echo "Creating schedule to start at zero hour + ".sec2hms($time_start)." seconds and stop of ".sec2hms($time_start+$length)." 
-";
+		//echo "Creating campaign with max agents of ".round($parameters['agents'])."\n";
+		//echo "Creating schedule to start at zero hour + ".sec2hms($time_start)." seconds and stop of ".sec2hms($time_start+$length)." \n";
 		$x ++;
 		if ($x == $simul) {
 			$x = 0;
@@ -152,14 +142,10 @@ require "/".$current_directory."/functions/functions.php";
 		echo "<hr />";
 		flush();
 	}
-	echo "End to end length: ".sec2hms($time_start+$length+$delay)."
-";
-    echo "Running for $length each run seconds
-";
-    echo "Expected Rate: $expected_rate
-";
-	echo "$z Total Runs
-";
+	echo "End to end length: ".sec2hms($time_start+$length+$delay)."\n";
+    echo "Running for $length each run seconds\n";
+    echo "Expected Rate: $expected_rate\n";
+	echo "$z Total Runs\n";
 	
 	//print_pre($run_array);
 	
