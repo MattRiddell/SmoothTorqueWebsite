@@ -81,7 +81,7 @@ $z = 0;
 	}
 
 /* ==================== */
-$time_start = 0;
+$time_start = $initial_delay;
 $x = 0;
 $z = 0;
 echo "<hr />";
