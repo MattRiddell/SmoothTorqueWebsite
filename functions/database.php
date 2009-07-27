@@ -38,7 +38,7 @@ if (!function_exists('create_missing_tables') ) {
 		  PRIMARY KEY  (`id`)
 		  )";
 		  $result=mysql_query($sql, $link) or die (mysql_error());
-		  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created Scedule Table')";
+		  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created Schedule Table')";
 		  $result=mysql_query($sql, $link);
 		}
 		
@@ -63,7 +63,7 @@ if (!function_exists('create_missing_tables') ) {
   PRIMARY KEY  (`id`)
 )";
 		$result=mysql_query($sql, $link) or die (mysql_error());
-		  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created Scedule Table')";
+		  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created test_results Table')";
 		  $result=mysql_query($sql, $link);
 		} 
 		
