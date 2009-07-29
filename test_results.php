@@ -29,10 +29,15 @@ if (mysql_num_rows($result) > 0) {
 				$min = "N/A";
 			}
 		}
-		$avg_result = mysql_query("SELECT sum(value), count(idx) FROM SineDialer.profracs WHERE campaignid = ".$row['id']);
+		$avg_result = mysql_query("SELECT value FROM SineDialer.profracs WHERE campaignid = ".$row['id']);
+		$count = 0;
+//		$avg_result = mysql_query("SELECT sum(value), count(idx) FROM SineDialer.profracs WHERE campaignid = ".$row['id']);
 		if (mysql_num_rows($avg_result) > 0) {
-			$row_avg = mysql_fetch_assoc($avg_result);
-			if ($row_avg['count(idx)'] > 0) {
+			while ($row_avg = mysql_fetch_assoc($avg_result)) {
+				$avg+=$row_avg['value'];
+				$count++;
+			}
+			/*if ($row_avg['count(idx)'] > 0) {
 				$avg = $row_avg['sum(value)'];
 				$count = $row_avg['count(idx)'];
 				//$avg = number_format($row_avg['sum(value)']/$row_avg['count(idx)'], 2)."%";
@@ -40,7 +45,7 @@ if (mysql_num_rows($result) > 0) {
 			} else {
 				$avg = "N/A";
 				$bold = false;
-			}
+			}*/
 		} else {
 			$avg = "N/A";
 			$bold = false;
@@ -94,7 +99,8 @@ if (mysql_num_rows($result) > 0) {
 		} else {
 			$avg_cps = 0;
 		}
-		if ($count < $timespent) {
+//		echo "Average: $avg Timespent: $timespent Count: $count<br />";
+		if ($count > $timespent) {
 			$avg = $avg/$timespent;
 		} else if ($count > 0) {
 			$avg = $avg/$count;
@@ -123,7 +129,6 @@ if (mysql_num_rows($result) > 0) {
 }
 ?>
 </table>
-<meta http-equiv="refresh" content="5;url=test_results.php">
 <?
 require "footer.php";
 ?>
