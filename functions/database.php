@@ -41,6 +41,89 @@ if (!function_exists('create_missing_tables') ) {
 		  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created Schedule Table')";
 		  $result=mysql_query($sql, $link);
 		}
+		/*======================================================================
+                            Web_config Table
+		  ======================================================================*/
+		if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","web_config")){
+		
+		  $sql = "
+CREATE TABLE `web_config` (
+  `url` varchar(250) default NULL,
+  `LANG` varchar(250) default NULL,
+  `language` varchar(250) default NULL,
+  `colour` varchar(250) default NULL,
+  `title` varchar(250) default NULL,
+  `logo` varchar(250) default NULL,
+  `contact_text` text,
+  `sox` varchar(250) default NULL,
+  `userid` varchar(250) default NULL,
+  `licence` varchar(250) default NULL,
+  `cdr_host` varchar(250) default NULL,
+  `cdr_user` varchar(250) default NULL,
+  `cdr_pass` varchar(250) default NULL,
+  `cdr_db` varchar(250) default NULL,
+  `cdr_table` varchar(250) default NULL,
+  `menu_home` varchar(250) default NULL,
+  `menu_campaigns` varchar(250) default NULL,
+  `menu_numbers` varchar(250) default NULL,
+  `menu_dnc` varchar(250) default NULL,
+  `menu_messages` varchar(250) default NULL,
+  `menu_schedules` varchar(250) default NULL,
+  `menu_customers` varchar(250) default NULL,
+  `menu_queues` varchar(250) default NULL,
+  `menu_servers` varchar(250) default NULL,
+  `menu_trunks` varchar(250) default NULL,
+  `menu_admin` varchar(250) default NULL,
+  `menu_logout` varchar(250) default NULL,
+  `date_colour` varchar(250) default NULL,
+  `main_page_text` text,
+  `main_page_username` varchar(250) default NULL,
+  `main_page_password` varchar(250) default NULL,
+  `main_page_login` varchar(250) default NULL,
+  `currency_symbol` varchar(250) default NULL,
+  `per_minute` varchar(250) default NULL,
+  `use_billing` varchar(250) default NULL,
+  `front_page_billing` varchar(250) default NULL,
+  `spare1` varchar(250) default NULL,
+  `spare2` varchar(250) default NULL,
+  `spare3` varchar(250) default NULL,
+  `spare4` varchar(250) default NULL,
+  `spare5` varchar(250) default NULL,
+  `st_mysql_host` varchar(250) default NULL,
+  `st_mysql_user` varchar(250) default NULL,
+  `st_mysql_pass` varchar(250) default NULL,
+  `add_campaign` varchar(250) default NULL,
+  `view_campaign` varchar(250) default NULL,
+  `per_page` varchar(250) default NULL,
+  `numbers_view` varchar(250) default NULL,
+  `numbers_system` varchar(250) default NULL,
+  `numbers_generate` varchar(250) default NULL,
+  `numbers_manual` varchar(250) default NULL,
+  `numbers_upload` varchar(250) default NULL,
+  `numbers_export` varchar(250) default NULL,
+  `numbers_search` varchar(250) default NULL,
+  `numbers_title` varchar(250) default NULL,
+  `billing_text` varchar(250) default NULL,
+  `cdr_text` varchar(250) default NULL,
+  `use_generate` varchar(250) default NULL,
+  `dnc_numbers_title` varchar(250) default NULL,
+  `dnc_view` varchar(250) default NULL,
+  `dnc_search` varchar(250) default NULL,
+  `dnc_upload` varchar(250) default NULL,
+  `dnc_add` varchar(250) default NULL,
+  `per_lead` varchar(250) default NULL,
+  `smtp_host` varchar(250) default NULL,
+  `smtp_user` varchar(250) default NULL,
+  `smtp_pass` varchar(250) default NULL,
+  `smtp_from` varchar(250) default NULL,
+  `use_separate_dnc` varchar(250) default NULL,
+  `allow_numbers_manual` varchar(250) default NULL
+)		  ";
+		  $result=mysql_query($sql, $link) or die (mysql_error());
+		  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created Web_config Table')";
+		  $result=mysql_query($sql, $link);
+		}
+
 		
 		/*======================================================================
                             test_results Table
