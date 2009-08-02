@@ -75,6 +75,7 @@ require "header_campaign.php";
 		</tr>
         <TR><TD CLASS="thead">Type of Campaign
         <a href="#" onclick="displayLargeMessage('includes/help.php?section=<b>Load Simulation</b><br />Simple test campaign.  Does not actually make any phone calls<br /><br /><b>Answer Machine Only</b><br />Human: Hang Up. Answer Machine: Leave Message<br /><br /><b>Immediate Live Only</b><br />Human: Connect immediately to the call center. Answer Machine: hang up.<br /><br /><b>Press 1 Live Only</b><br />Human: Play the person message and then if they press 1, transfer to the call center.  Answer Machine: Hang Up.<br /><br /><b>Immediate Live and Answer Machine</b><br />Human: Connect immediately to the call center. Answer Machine: Leave the answer machine message.<br /><br /><b>Press 1 Live and Answer Machine</b><br />Human: Play the person message and then if they press 1, transfer to the call center.  Answer Machine: Leave the answer machine message.<br /><br /><b>Direct Transfer</b><br />Transfer the call without checking to see if it is a machine or a human.');return false"><img src="/images/help.png" border="0" title="Type Of Campaign"></a>
+        <a href="#" onclick="displayLargeMessage('includes/campaign_types.php');return false"><img src="/images/help.png" border="0" title="Type Of Campaign"></a>
         </TD><TD>
 <SELECT NAME="context" id="context" onchange="whatPaySelected(this.value)">
 <OPTION VALUE="-1" SELECTED>Please chose a type of campaign...</OPTION>
@@ -161,7 +162,7 @@ $selected="";
 if ($row[messageid]==$row2_fax[$i][id]){
     $selected=" SELECTED";
 }
-echo "<OPTION VALUE=\"".$row2_fax[$i][id]."\"$selected>".$row2_fax[$i][description]."</OPTION>";
+echo "<OPTION VALUE=\"".$row2_fax[$i][id]."\"$selected>".$row2_fax[$i][name]."</OPTION>";
 }
 ?>
 </SELECT>
@@ -184,7 +185,7 @@ $selected="";
 if ($row[messageid]==$row2[$count2][id]){
     $selected=" SELECTED";
 }
-echo "<OPTION VALUE=\"".$row2[$count2][id]."\"$selected>".$row2[$count2][description]."</OPTION>";
+echo "<OPTION VALUE=\"".$row2[$count2][id]."\"$selected>".$row2[$count2][name]."</OPTION>";
 }
 ?>
 </SELECT>
@@ -207,7 +208,7 @@ $selected="";
 if ($row[messageid2]==$row2[$count2][id]){
     $selected=" SELECTED";
 }
-echo "<OPTION VALUE=\"".$row2[$count2][id]."\"$selected>".$row2[$count2][description]."</OPTION>";
+echo "<OPTION VALUE=\"".$row2[$count2][id]."\"$selected>".$row2[$count2][name]."</OPTION>";
 }
 ?>
 </SELECT>
@@ -231,7 +232,7 @@ $selected="";
 if ($row[messageid3]==$row2[$count2][id]){
     $selected=" SELECTED";
 }
-echo "<OPTION VALUE=\"".$row2[$count2][id]."\"$selected>".$row2[$count2][description]."</OPTION>";
+echo "<OPTION VALUE=\"".$row2[$count2][id]."\"$selected>".$row2[$count2][name]."</OPTION>";
 }
 ?>
 </SELECT>
