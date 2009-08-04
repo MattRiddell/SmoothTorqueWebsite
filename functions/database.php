@@ -478,7 +478,8 @@ CREATE TABLE `web_config` (
 			$result = mysql_query($sql,$link);
 		  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created customer Table')";
 		  $result=mysql_query($sql, $link);
-		  $sql = "insert  into customer values (2, 'matt', '532b536b7b208d1f81c43c1494b55887dee3328c', 1, '156 Maitland Street', 'Kensington', 'Dunedin', 'New Zealand', '+6434742112', 'matt@venturevoip.com', '+6434742116', 'http://www.venturevoip.com/st.php', 100, 'VentureVoIP', 1, '', '', 1000, 1001, '111,102,101', '1234')";
+		  $sql = "insert  into customer (id, username, password, campaigngroupid, maxcps, maxchans)
+		  values (2, 'admin', '".sha1("adminpass")."', 1, 1000, 1001)";
 		  $result=mysql_query($sql, $link);
 		}
 		
