@@ -144,6 +144,7 @@ if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","web_config")){
           $sql = substr($sql1,0,strlen($sql1)-1).substr($sql2,0,strlen($sql2)-1).")";
           mysql_query($sql) or die(mysql_error());
       } else {
+	  echo "Creating default configs for $current_language<br />";
           mysql_query($sql_defaults[$current_language]) or die(mysql_error());
       }
   }
