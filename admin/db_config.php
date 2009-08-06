@@ -2,7 +2,7 @@
 $config_file = "/stweb.conf";
 $comment = "#";
 
-if (file_exists($config_file) {
+if (file_exists($config_file)) {
 $fp = fopen($config_file, "r");
 while (!feof($fp)) {
   $line = trim(fgets($fp));
