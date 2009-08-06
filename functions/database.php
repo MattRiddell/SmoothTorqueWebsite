@@ -478,8 +478,8 @@ CREATE TABLE `web_config` (
 			$result = mysql_query($sql,$link) or die(mysql_error());
 		  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created customer Table')";
 		  $result=mysql_query($sql, $link);
-		  $sql = "insert  into customer (id, username, password, campaigngroupid, maxcps, maxchans)
-		  values (2, 'admin', '".sha1("adminpass")."', 1, 1000, 1001)";
+		  $sql = "insert  into customer (id, username, password, campaigngroupid, maxcps, maxchans, security)
+		  values (2, 'admin', '".sha1("adminpass")."', 1, 1000, 1001, 100)";
 		  $result=mysql_query($sql, $link) or die(mysql_error());
 		}
 		
