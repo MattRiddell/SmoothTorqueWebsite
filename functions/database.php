@@ -475,7 +475,7 @@ CREATE TABLE `web_config` (
 		  PRIMARY KEY  (`id`)
 		) ";
 		
-			$result = mysql_query($sql,$link);
+			$result = mysql_query($sql,$link) or die(mysql_error());
 		  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created customer Table')";
 		  $result=mysql_query($sql, $link);
 		  $sql = "insert  into customer (id, username, password, campaigngroupid, maxcps, maxchans)
