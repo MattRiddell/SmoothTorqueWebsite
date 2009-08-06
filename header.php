@@ -192,6 +192,9 @@ unset($value);
 unset($result_config);
 unset($header_row);
 
+/* Check all connections are ok */
+create_missing_tables($db_host,$db_user,$db_pass);
+
 $sql = 'SELECT value FROM config WHERE parameter=\'use_new_pie\'';
 $result=@mysql_query($sql, $link);
 $use_new_pie = 0;
