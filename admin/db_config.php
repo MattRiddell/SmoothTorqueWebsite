@@ -2,6 +2,7 @@
 $config_file = "/stweb.conf";
 $comment = "#";
 
+if (file_exists($config_file) {
 $fp = fopen($config_file, "r");
 while (!feof($fp)) {
   $line = trim(fgets($fp));
@@ -13,7 +14,7 @@ while (!feof($fp)) {
   }
 }
 fclose($fp);
-
+}
 if ($config_values_temp['ST_MYSQL_HOST'] == "") {
     $db_host="localhost";
     $db_user="root";
