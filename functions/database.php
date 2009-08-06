@@ -471,7 +471,7 @@ CREATE TABLE `web_config` (
 		  `maxchans` int(11) default '100',
 		  `adminlists` varchar(2555) default NULL,
 		  `didlogin` varchar(255) default NULL,
-		  `interface_type` VARCHAR(255) default 'default`,
+		  `interface_type` VARCHAR(255) default 'default',
 		  PRIMARY KEY  (`id`)
 		) ";
 		
