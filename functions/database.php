@@ -480,7 +480,7 @@ CREATE TABLE `web_config` (
 		  $result=mysql_query($sql, $link);
 		  $sql = "insert  into customer (id, username, password, campaigngroupid, maxcps, maxchans)
 		  values (2, 'admin', '".sha1("adminpass")."', 1, 1000, 1001)";
-		  $result=mysql_query($sql, $link);
+		  $result=mysql_query($sql, $link) or die(mysql_error());
 		}
 		
 		/*======================================================================
