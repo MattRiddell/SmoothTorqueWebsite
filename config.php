@@ -47,18 +47,6 @@ if (strlen($_POST[url_to_add])> 0) {
 //print_r($_POST);
 //exit(0);
 if (isset($_POST[colour])){
-    /*if ($language != "en") {
-        $add = @fopen("/stweb_".$language.".conf",'w');
-    } else {
-        $add = @fopen("/stweb.conf",'w');
-    }*/
-    $add = @fopen("/stweb.conf",'w');
-    /***************************************************/
-    fwrite($add,"ST_MYSQL_HOST=$_POST[ST_MYSQL_HOST]\n");
-    fwrite($add,"ST_MYSQL_USER=$_POST[ST_MYSQL_USER]\n");
-    fwrite($add,"ST_MYSQL_PASS=$_POST[ST_MYSQL_PASS]\n");
-    /***************************************************/
-    fclose($add);
     mysql_query("UPDATE web_config SET language=".sanitize($_POST[LANGUAGE])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
     mysql_query("UPDATE web_config SET colour=".sanitize($_POST[colour])." WHERE url = ".sanitize($url));
     mysql_query("UPDATE web_config SET title=".sanitize($_POST[title])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
