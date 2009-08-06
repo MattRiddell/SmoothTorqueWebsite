@@ -130,7 +130,7 @@ if (!function_exists('check_for_upload_settings') ) {
 if (!function_exists('check_for_upload_directory') ) {
     function check_for_upload_directory($whoami) {
         if (!file_exists("/var/tmp/uploads")) {
-	    $current_directory = dirname(__FILE__);
+	    $current_directory = dirname(__FILE__)."/../";
             echo "The directory /var/tmp/uploads does not exist.  You will need to create ";
             echo "it by typing the following commands<br /><br />";
             echo "<code>mkdir /var/tmp/uploads<br />";
