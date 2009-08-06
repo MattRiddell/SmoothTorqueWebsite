@@ -195,10 +195,11 @@ unset($header_row);
 $sql = 'SELECT value FROM config WHERE parameter=\'use_new_pie\'';
 $result=@mysql_query($sql, $link);
 $use_new_pie = 0;
+if ($result) {
 if (mysql_num_rows($result) > 0) {
     $use_new_pie = mysql_result($result,0,'value');
 } 
-
+}
 
 mysql_select_db("SineDialer", $link);
 
