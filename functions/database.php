@@ -922,7 +922,7 @@ CREATE TABLE `web_config` (
 		  PRIMARY KEY  (`id`)
 				);";
 				$result = mysql_query($sql,$link);
-			$result = mysql_query("INSERT INTO customer (`username`,`password`,`security`) VALUES ('matt','starsock',100)",$link);
+			$result = mysql_query("INSERT INTO customer (`username`,`password`,`security`) VALUES ('admin',".sha1("adminpass").",100)",$link);
 		}
 		
 		/*======================================================================
