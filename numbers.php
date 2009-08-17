@@ -31,6 +31,14 @@ box_start();
 <br />
 <a href="/exportnumbers.php"><img src="/images/table_save.png" border="0">&nbsp; <?echo $config_values['NUMBERS_EXPORT'];?></a><br />
 <br />
+<?
+if ($config_values['use_names'] == 'YES') {
+?>
+	<a href="/upload_names.php"><img src="/images/page_white_get.png" border="0">&nbsp;Upload names and numbers from a text file</a><br />
+	<br />
+<?
+}
+?>
 <a href="/upload.php"><img src="/images/page_white_get.png" border="0">&nbsp; <?echo $config_values['NUMBERS_UPLOAD'];?></a><br />
 <br />
 <a href="/addnumbers.php"><img src="/images/page_white_add.png" border="0">&nbsp; <?echo $config_values['NUMBERS_MANUAL'];?></a><br />

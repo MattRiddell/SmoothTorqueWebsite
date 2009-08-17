@@ -131,6 +131,9 @@ if (isset($_POST[colour])){
 	$sql = "REPLACE INTO config (parameter, value) VALUES ('logo_height',".sanitize($_POST['logo_height']).")";
     mysql_query($sql) or die(mysql_error());
 
+	$sql = "REPLACE INTO config (parameter, value) VALUES ('use_names',".sanitize($_POST['use_names']).")";
+    mysql_query($sql) or die(mysql_error());
+
     /*$add = @fopen("./admin/db_config.php",'w');
     $script = '\<\?
 $db_host="localhost";
@@ -151,18 +154,18 @@ $result=mysql_query($sql, $link);
 /*================= Log Access ======================================*/
 
 if (isset($_POST[userid])){
-/*================= Log Access ======================================*/
-$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Config Updated')";
-$result=mysql_query($sql, $link);
-/*================= Log Access ======================================*/
-
-$sql = "UPDATE config SET value='$_POST[userid]' WHERE parameter='userid'";
-$result=mysql_query($sql, $link) or die (mysql_error());
-
-$sql = "UPDATE config SET value='$_POST[licencekey]' WHERE parameter='licencekey'";
-$result=mysql_query($sql, $link) or die (mysql_error());
-
+	/*================= Log Access ======================================*/
+	$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Config Updated')";
+	$result=mysql_query($sql, $link);
+	/*================= Log Access ======================================*/
+	
+	$sql = "UPDATE config SET value='$_POST[userid]' WHERE parameter='userid'";
+	$result=mysql_query($sql, $link) or die (mysql_error());
+	
+	$sql = "UPDATE config SET value='$_POST[licencekey]' WHERE parameter='licencekey'";
+	$result=mysql_query($sql, $link) or die (mysql_error());
 }
+
 $sql = 'SELECT value FROM config WHERE parameter=\'backend\'';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $backend = mysql_result($result,0,'value');
@@ -214,6 +217,12 @@ $sql = 'SELECT value FROM config WHERE parameter=\'logo_height\'';
 $result=mysql_query($sql, $link) or die (mysql_error());
 if (mysql_num_rows($result) > 0) {
     $logo_height = mysql_result($result,0,'value');
+} 
+
+$sql = 'SELECT value FROM config WHERE parameter=\'use_names\'';
+$result=mysql_query($sql, $link) or die (mysql_error());
+if (mysql_num_rows($result) > 0) {
+    $use_names = mysql_result($result,0,'value');
 } 
 
 
@@ -1104,6 +1113,17 @@ Use the Generate numbers automatically option
 <input type="radio" name="USE_GENERATE" value="NO" <?if ( $config_values['USE_GENERATE'] != "YES") {echo "checked";}?>> No
 </td>
 </tr>
+
+<tr  class="tborder2">
+<td>
+Allow importing of names to use with numbers:
+</td>
+<td>
+<input type="radio" name="use_names" value="YES" <?if ( $config_values['use_names'] == "YES") {echo "checked";}?>> Yes
+<input type="radio" name="use_names" value="NO" <?if ( $config_values['use_names'] != "YES") {echo "checked";}?>> No
+</td>
+</tr>
+
 
 <tr  class="tborder2">
 <td colspan="2">

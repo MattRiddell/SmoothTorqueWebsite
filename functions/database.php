@@ -20,6 +20,28 @@ if (!function_exists('create_missing_tables') ) {
 		$link = mysql_connect($db_host, $db_user, $db_pass) or die(mysql_error());
 		
 		/*======================================================================
+									names Table
+		  ======================================================================*/
+		if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","names")){
+		  include "admin/db_config.php";
+		$sql = "CREATE TABLE `names` (
+		  `campaignid` int(200) NOT NULL default '0',
+		  `phonenumber` varchar(50) NOT NULL default '',
+		  `name` varchar(50) NOT NULL default '',
+		  `datetime` timestamp NULL default NULL on update CURRENT_TIMESTAMP,
+		  PRIMARY KEY  (`campaignid`,`phonenumber`)
+		)";
+		
+			$result = mysql_query($sql,$link) or die(mysql_error());
+		  $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created names Table')";
+		  $result=mysql_query($sql, $link);
+		
+		}
+
+
+
+
+		/*======================================================================
                             Schedule Table
 		  ======================================================================*/
 		if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","schedule")){

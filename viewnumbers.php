@@ -68,6 +68,15 @@ Number
 <TD CLASS="thead">
 Last Updated
 </TD>
+<?
+if ($config_values['use_names'] == 'YES') {
+	?>
+	<TD CLASS="thead">
+	Name
+	</TD>
+	<?
+}
+?>
 <TD CLASS="thead">
 Status
 </TD>
@@ -181,6 +190,20 @@ if (isset($row["newdate"])) {
 }
 ?>
 </TD>
+<?
+if ($config_values['use_names'] == 'YES') {
+	?>
+	<TD>
+<?
+$result_name = mysql_query("SELECT name FROM names WHERE campaignid = $_POST[campaignid] AND phonenumber = $row[phonenumber]") or die(mysql_error());
+if (mysql_num_rows($result_name) > 0) {
+	echo mysql_result($result_name,0,0);
+}
+?>
+	</TD>
+	<?
+}
+?>
 <TD>
 <?echo $row[status];?>
 </TD>

@@ -11,13 +11,9 @@ if (!isset($_POST[campaignid])){
     ?>
 
     <br /><br /><br /><br />
-<center>
-<table background="/images/sdbox.png" width="300" height="200" class="dragme22">
-<tr>
-<td>
-</td>
-<td width="260">
-Please select a campaign to add numbers to<br /><br />
+<?
+box_start(360);
+?><center><br /><br />Please select a campaign to add numbers to<br /><br />
 <FORM ACTION="upload.php" METHOD="POST">
     <table class="tborderx2xx" align="center" border="0" cellpadding="0" cellspacing="2"><TR>
     <TD>
@@ -48,12 +44,9 @@ Please select a campaign to add numbers to<br /><br />
     </TD>
     </TR></table>
     </FORM>
-</td>
-<td>
-</td></tr>
-</table>
-</center>
-
+<?
+box_end();
+?>
 
 
 
@@ -119,12 +112,9 @@ $sid = md5(uniqid(rand()));
 
  ?>
         <br /><br /><br /><br />
-<center>
-<table background="/images/sdbox.png" width="300" height="200" class="dragme22">
-<tr>
-<td>
-</td>
-<td width="260">
+<?
+box_start(360);
+?>
 <div id="matt2">
 <b>Upload Numbers</b><br /><br />
 Please select a text file with one number per line that you would
@@ -146,12 +136,8 @@ like to upload the numbers from and then click Upload.<br /><br />
 
         </td></tr>
         </table></center>
-        </td>
-<td>
-</td></tr>
-</table>
-</center>
 
+<?box_end();?>
 
 
 
@@ -169,12 +155,9 @@ $sid = md5(uniqid(rand()));
 ?>
 
         <br /><br /><br /><br />
-<center>
-<table background="/images/sdbox.png" width="300" height="200" class="dragme22">
-<tr>
-<td>
-</td>
-<td width="260">
+<?
+box_start(360);
+?>
 <div id="matt2">
 <b>Upload Numbers</b><br /><br />
 Please select a text file with one number per line that you would
@@ -196,12 +179,7 @@ like to upload the numbers from and then click Upload.<br /><br />
 
         </td></tr>
         </table></center>
-        </td>
-<td>
-</td></tr>
-</table>
-</center>
-
+<?box_end();?>
 
 
 

@@ -391,7 +391,8 @@ if ($interface_type == "broadcast") {
 
 <body bgcolor="<?echo $config_values['COLOUR'];?>" >
 
-<?if (isset($menu) && $loggedin == true){
+<?
+if (isset($menu) && $loggedin == true){
 $sql = 'SELECT value FROM config WHERE parameter=\'logo_width\'';
 $result=mysql_query($sql, $link) or die (mysql_error());
 if (mysql_num_rows($result) > 0) {
@@ -403,6 +404,13 @@ $result=mysql_query($sql, $link) or die (mysql_error());
 if (mysql_num_rows($result) > 0) {
     $logo_height = mysql_result($result,0,'value');
 }
+
+$sql = 'SELECT value FROM config WHERE parameter=\'use_names\'';
+$result=mysql_query($sql, $link) or die (mysql_error());
+if (mysql_num_rows($result) > 0) {
+    $config_values['use_names'] = mysql_result($result,0,'value');
+}
+
 ?>
 <center><img src="<?echo $config_values['LOGO'];?>"<?
 if ($logo_height > 0) {
