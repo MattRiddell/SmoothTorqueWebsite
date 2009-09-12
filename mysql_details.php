@@ -13,14 +13,14 @@ $self=$_SERVER['PHP_SELF'];
    custom functions - for more information, read the comments in the
    functions.php file - most functions are in their own file in the
    functions subdirectory */
-if ($_GET['ajax'] != 1) {
-	$url = "default";
-	require "/".$current_directory."/functions/functions.php";
-	include "admin/db_config.php";
-} else {
+if ($_GET['ajax'] == 1) {
 	header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
 	header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
+        /* Functions will not have been included if there is no header*/
+	$url = "default";
+	require "/".$current_directory."/functions/functions.php";
 }
+include "admin/db_config.php";
 ?>
 <meta http-equiv="Pragma" content="no-cache" />
 <?
