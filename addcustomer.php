@@ -27,7 +27,9 @@ $didlogin=$_POST[didlogin];
 $astqueuename=$_POST[astqueuename];
 $interface_type=$_POST[interface_type];
 $interface_type = "default";
-
+if ($maxchans+1 == 1) {
+	$maxchans = 1000;
+}
     $sql="INSERT INTO campaigngroup (name,description) VALUES ('$company','$description')";
 //    echo $sql;
     $result=mysql_query($sql, $link) or die (mysql_error());;
