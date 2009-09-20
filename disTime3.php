@@ -116,7 +116,8 @@ exit(0);
 <?    if ($config_values['ALLOW_NUMBERS_MANUAL'] == "YES") {?>
     <img width="16" height="16" src="/images/database_lightning.png" border="0"> Initialise Manual Dialing
     <?}?>
-    <img width="16" height="16" src="/images/chart_curve.png" border="0"> Realtime Campaign Monitor
+    <img width="16" height="16" src="/images/arrow_refresh.png" border="0"> Recycle Numbers
+    <img width="16" height="16" src="/images/chart_curve.png" border="0"> Realtime Campaign Monitor<br />
     <img width="16" height="16" src="/images/table.png" border="0"> View Numbers
     <img width="16" height="16" src="/images/delete.png" border="0"> Delete Campaign
     </center>
