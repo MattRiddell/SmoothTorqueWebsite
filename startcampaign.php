@@ -119,45 +119,44 @@ if ( $config_values['USE_BILLING'] == "YES") {
         $real_credit = $credit + $credit_limit;
         //echo "Real Credit: ".$real_credit."<br />";
 	if ($onecall > 0) {
-        $call = $real_credit/$onecall;
+            $call = $real_credit/$onecall;
 	} else {
-		$call = 999999999;
+            $call = 999999999;
 	}
         //echo "Max Calls: ".floor($call)."<br />";
         $maxcalls = floor($call);
         if ($maxcalls < 1) {
             $allowed_to_start = false;
         }
-/*================= Log Access ======================================*/
-$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', ' is only allowed to make $maxcalls calls because their credit is ".($credit + $credit_limit)." and the total cost per call is $onecall based on an audio length of ".$length.", a per minute cost of $priceperminute and a lead cost of $pricepercall')";
-$result=mysql_query($sql, $link);
-/*================= Log Access ======================================*/
-        //exit(0);
+        /*================= Log Access ======================================*/
+        $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', ' is only allowed to make $maxcalls calls because their credit is ".($credit + $credit_limit)." and the total cost per call is $onecall based on an audio length of ".$length.", a per minute cost of $priceperminute and a lead cost of $pricepercall')";
+        $result=mysql_query($sql, $link);
+        /*================= Log Access ======================================*/
     }
     if (!$allowed_to_start) {
-/*================= Log Access ======================================*/
-$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Does not have credit to start campaign')";
-$result=mysql_query($sql, $link);
-/*================= Log Access ======================================*/
+        /*================= Log Access ======================================*/
+        $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Does not have credit to start campaign')";
+        $result=mysql_query($sql, $link);
+        /*================= Log Access ======================================*/
 
         /* Not enough credit - error and return */
         ?>
         <b>Sorry, you do not have enough credit to start a campaign. Please add some
         credit to your account and try again. <?echo "Credit: $credit Credit Limit: $credit_limit";?></b>
         </td>
-<td>
-</td></tr>
-</table>
-</center>
+        <td>
+        </td></tr>
+        </table>
+        </center>
 
         <META HTTP-EQUIV=REFRESH CONTENT="10; URL=/campaigns.php">
         <?
         exit(0);
     } else {
-/*================= Log Access ======================================*/
-$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Does have credit to start campaign (Credit: $credit Credit Limit: $credit_limit)')";
-$result=mysql_query($sql, $link);
-/*================= Log Access ======================================*/
+        /*================= Log Access ======================================*/
+        $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Does have credit to start campaign (Credit: $credit Credit Limit: $credit_limit)')";
+        $result=mysql_query($sql, $link);
+        /*================= Log Access ======================================*/
 
     }
 }
@@ -188,19 +187,19 @@ while ($row = mysql_fetch_assoc($resultdnc)) {
 }
 
 if ( $config_values['USE_BILLING'] == "YES") {
-if ($_GET[context] != 0) {
-$credit_limit_sql = "UPDATE number SET status='no-credit' WHERE status='new' and campaignid='$_GET[id]'";
-$result_credit_limit_sql=mysql_query($credit_limit_sql, $link) or die ("g:".mysql_error());;
+    if ($config_values['strict_credit_limit'] == "YES") {
+        if ($_GET[context] != 0) {
+            $credit_limit_sql = "UPDATE number SET status='no-credit' WHERE status='new' and campaignid='$_GET[id]'";
+            $result_credit_limit_sql=mysql_query($credit_limit_sql, $link) or die ("g:".mysql_error());;
 
-$credit_limit_sql2 = "UPDATE number SET status='new' WHERE status='no-credit' and campaignid='$_GET[id]' limit $maxcalls";
-$result_credit_limit_sql2=mysql_query($credit_limit_sql2, $link) or die (mysql_error()." from ".$credit_limit_sql2);;
-} else {
-$credit_limit_sql2 = "UPDATE number SET status='new' WHERE status='no-credit' and campaignid='$_GET[id]'";
-$result_credit_limit_sql2=mysql_query($credit_limit_sql2, $link) or die ("i:".mysql_error());;
+            $credit_limit_sql2 = "UPDATE number SET status='new' WHERE status='no-credit' and campaignid='$_GET[id]' limit $maxcalls";
+            $result_credit_limit_sql2=mysql_query($credit_limit_sql2, $link) or die (mysql_error()." from ".$credit_limit_sql2);;
+        } else {
+            $credit_limit_sql2 = "UPDATE number SET status='new' WHERE status='no-credit' and campaignid='$_GET[id]'";
+            $result_credit_limit_sql2=mysql_query($credit_limit_sql2, $link) or die ("i:".mysql_error());;
 
-}
-
-//exit(0);
+        }
+    }
 }
 $sql1="delete from queue where campaignid=".$_GET[id];
 $did = str_replace("-","",$_GET[did]);

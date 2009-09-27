@@ -131,10 +131,15 @@ if (isset($_POST[colour])){
 	$sql = "REPLACE INTO config (parameter, value) VALUES ('logo_height',".sanitize($_POST['logo_height']).")";
     mysql_query($sql) or die(mysql_error());
 
-	$sql = "REPLACE INTO config (parameter, value) VALUES ('use_names',".sanitize($_POST['use_names']).")";
+	$sql = "REPLACE INTO config (parameter, value) VALUES ('strict_credit_limit',".sanitize($_POST['strict_credit_limit']).")";
     mysql_query($sql) or die(mysql_error());
 
-    /*$add = @fopen("./admin/db_config.php",'w');
+
+
+
+    /*
+
+       *  *  * $add = @fopen("./admin/db_config.php",'w');
     $script = '\<\?
 $db_host="localhost";
 $db_user="root";
@@ -1203,6 +1208,16 @@ Use the SmoothTorque Billing System
 <td>
 <input type="radio" name="USE_BILLING" value="YES" <?if ( $config_values['USE_BILLING'] == "YES") {echo "checked";}?>> Yes
 <input type="radio" name="USE_BILLING" value="NO" <?if ( $config_values['USE_BILLING'] != "YES") {echo "checked";}?>> No
+</td>
+</tr>
+
+<tr  class="tborder2">
+<td>
+Use predictive strict billing (extra MySQL load)
+</td>
+<td>
+<input type="radio" name="strict_credit_limit" value="YES" <?if ( $config_values['strict_credit_limit'] == "YES") {echo "checked";}?>> Yes
+<input type="radio" name="strict_credit_limit" value="NO" <?if ( $config_values['strict_credit_limit'] != "YES") {echo "checked";}?>> No
 </td>
 </tr>
 
