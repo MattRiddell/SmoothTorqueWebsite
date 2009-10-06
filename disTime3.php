@@ -58,6 +58,15 @@ while ($header_row = mysql_fetch_assoc($result_config) ) {
     }
 }
 
+$sql = 'SELECT value FROM config WHERE parameter=\'SHOW_NUMBERS_LEFT\'';
+$result=@mysql_query($sql, $link);
+if ($result) {
+        if (mysql_num_rows($result) > 0) {
+            $config_values['SHOW_NUMBERS_LEFT'] = mysql_result($result,0,'value');
+        }
+}
+
+
 $sql = 'SELECT value FROM config WHERE parameter=\'use_new_pie\'';
 $result=mysql_query($sql, $link) or die (mysql_error());
 $use_new_pie = 0;
@@ -232,7 +241,6 @@ if ($config_values['SHOW_NUMBERS_LEFT'] == 'YES') {
 <?}?>
 <?
 if ($config_values['SHOW_NUMBERS_LEFT'] == 'YES') {
-
     if ($progress>0){
         ?>
         <img src="/images/percentImage.png" width="123" height="12" title="<?
