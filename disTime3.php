@@ -231,7 +231,7 @@ if ($config_values['show_numbers_left'] == 'YES') {
     <a title="View the report for this campaign" href="report<?if ($use_new_pie == 1) {echo "2";}?>.php?id=<?echo $row[id];?>" class="abcd"><img width="16" height="16" src="/images/chart_pie.png" border="0"></a>
 <?}?>
 <?
-if ($config_values['show_numbers_left'] == 'YES') {
+if ($config_values['SHOW_NUMBERS_LEFT'] == 'YES') {
 
     if ($progress>0){
         ?>
