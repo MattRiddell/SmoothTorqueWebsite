@@ -210,7 +210,7 @@ echo trim(substr($row[description],0,$max_str_len))."...";
 ?>
 </TD>
 <?
-if ($config_values['show_numbers_left'] == 'YES') {
+if ($config_values['SHOW_NUMBERS_LEFT'] == 'YES') {
     $sql = 'SELECT count(*) from number where campaignid='.$row[id].' and (status="manual_dial" or status="new" or status="no-credit")';
     $result2=mysql_query($sql, $link) or die (mysql_error());;
     $new_numbers=mysql_result($result2,0,'count(*)');
