@@ -134,6 +134,8 @@ if (isset($_POST[colour])){
 	$sql = "REPLACE INTO config (parameter, value) VALUES ('strict_credit_limit',".sanitize($_POST['strict_credit_limit']).")";
     mysql_query($sql) or die(mysql_error());
 
+    $sql = "REPLACE INTO config (parameter, value) VALUES ('show_numbers_left',".sanitize($_POST['show_numbers_left']).")";
+    mysql_query($sql) or die(mysql_error());
 
 
 
@@ -230,6 +232,11 @@ if (mysql_num_rows($result) > 0) {
     $use_names = mysql_result($result,0,'value');
 } 
 
+$sql = 'SELECT value FROM config WHERE parameter=\'show_numbers_left\'';
+$result=mysql_query($sql, $link) or die (mysql_error());
+if (mysql_num_rows($result) > 0) {
+    $show_numbers_left = mysql_result($result,0,'value');
+}
 
 
 ?>
@@ -1016,6 +1023,17 @@ Use separate DNC entries for separate customers
 <? /*******************************************************************/ ?>
 
 <tr><td CLASS="thead" colspan="2">Numbers Section</td>
+
+
+<tr  class="tborder2">
+<td>
+Show Number of Numbers remaining:
+</td>
+<td>
+<input type="radio" name="show_numbers_left" value="YES" <?if ( $config_values['show_numbers_left'] == "YES") {echo "checked";}?>> Yes
+<input type="radio" name="show_numbers_left" value="NO" <?if ( $config_values['show_numbers_left'] != "YES") {echo "checked";}?>> No
+</td>
+</tr>
 
 <tr  class="tborder2">
 <td>

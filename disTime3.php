@@ -86,23 +86,23 @@ if ($level==sha1("level100") && $_GET[type]=="all") {
 $result=mysql_query($sql, $link) or die (mysql_error());;
 if (mysql_num_rows($result)==0){
 ?>
-<br /><br />
-<?box_start();
-echo "<br /><center><img src=\"/images/icons/gtk-dialog-info.png\" border=\"0\" width=\"64\" height=\"64\"><br /><br />";
-?>
+    <br /><br />
+    <?box_start();
+    echo "<br /><center><img src=\"/images/icons/gtk-dialog-info.png\" border=\"0\" width=\"64\" height=\"64\"><br /><br />";
+    ?>
 
-<b>You don't have any campaigns created.</b><br />
-<br />
-A campaign is a collection of phone <br />numbers you would like to call.<br />
-<br />
-<a href="addcampaign.php">
-<img src="images/icons/gtk-add.png" border="0" width="64" height="64"><br />
-Click here to create your first campaign</a><br /> or click the Add Campaign button above.
-<br />
-<br />
-<?
-box_end();
-exit(0);
+    <b>You don't have any campaigns created.</b><br />
+    <br />
+    A campaign is a collection of phone <br />numbers you would like to call.<br />
+    <br />
+    <a href="addcampaign.php">
+    <img src="images/icons/gtk-add.png" border="0" width="64" height="64"><br />
+    Click here to create your first campaign</a><br /> or click the Add Campaign button above.
+    <br />
+    <br />
+    <?
+    box_end();
+    exit(0);
 }
 ?>
     <?box_start(580);?>
@@ -113,8 +113,8 @@ exit(0);
     <img width="16" height="16" src="/images/control_stop_blue.png" border="0"> Stop Campaign
     <img width="16" height="16" src="/images/control_play_blue.png" border="0"> Start Campaign
     <br />
-<?    if ($config_values['ALLOW_NUMBERS_MANUAL'] == "YES") {?>
-    <img width="16" height="16" src="/images/database_lightning.png" border="0"> Initialise Manual Dialing
+    <?if ($config_values['ALLOW_NUMBERS_MANUAL'] == "YES") {?>
+        <img width="16" height="16" src="/images/database_lightning.png" border="0"> Initialise Manual Dialing
     <?}?>
     <img width="16" height="16" src="/images/arrow_refresh.png" border="0"> Recycle Numbers
     <img width="16" height="16" src="/images/chart_curve.png" border="0"> Realtime Campaign Monitor<br />
@@ -210,59 +210,62 @@ echo trim(substr($row[description],0,$max_str_len))."...";
 ?>
 </TD>
 <?
-/*
-$sql = 'SELECT count(*) from number where campaignid='.$row[id].' and (status="manual_dial" or status="new" or status="no-credit")';
-$result2=mysql_query($sql, $link) or die (mysql_error());;
-$new_numbers=mysql_result($result2,0,'count(*)');
+if ($config_values['show_numbers_left'] == 'YES') {
+    $sql = 'SELECT count(*) from number where campaignid='.$row[id].' and (status="manual_dial" or status="new" or status="no-credit")';
+    $result2=mysql_query($sql, $link) or die (mysql_error());;
+    $new_numbers=mysql_result($result2,0,'count(*)');
 
-$sql = 'SELECT count(*) from number where campaignid='.$row[id].' and (status="manual_dial" or status="no-credit")';
-$result2=mysql_query($sql, $link) or die (mysql_error());;
-$manual_numbers=mysql_result($result2,0,'count(*)');
+    $sql = 'SELECT count(*) from number where campaignid='.$row[id].' and (status="manual_dial" or status="no-credit")';
+    $result2=mysql_query($sql, $link) or die (mysql_error());;
+    $manual_numbers=mysql_result($result2,0,'count(*)');
 
-$sql = 'SELECT count(*) from number where campaignid='.$row[id];
-$result2=mysql_query($sql, $link) or die (mysql_error());;
-$total_numbers=mysql_result($result2,0,'count(*)');
-*/
+    $sql = 'SELECT count(*) from number where campaignid='.$row[id];
+    $result2=mysql_query($sql, $link) or die (mysql_error());;
+    $total_numbers=mysql_result($result2,0,'count(*)');
+}
 
 
 ?>
 <TD>
 <?if ($backend == 0) {?>
-<a title="View the report for this campaign" href="report<?if ($use_new_pie == 1) {echo "2";}?>.php?id=<?echo $row[id];?>" class="abcd"><img width="16" height="16" src="/images/chart_pie.png" border="0"></a>
+    <a title="View the report for this campaign" href="report<?if ($use_new_pie == 1) {echo "2";}?>.php?id=<?echo $row[id];?>" class="abcd"><img width="16" height="16" src="/images/chart_pie.png" border="0"></a>
 <?}?>
-<?/*
-if ($progress>0){
-            ?>
-            <img src="/images/percentImage.png" width="123" height="12" title="<?
-            echo "Remaining: $new_numbers/$total_numbers\"";?>"
-            class="percentImage"
-            style="background-position: -<?echo ((100-(($new_numbers/$total_numbers)*100))*1.2)-1; ?>px 0pt;" border="0" />
 <?
-}else if ($manual_numbers > 0){
-            ?>
-            <img src="/images/percentImage.png" width="123" height="12" title="<?
-            echo "Remaining: $new_numbers/$total_numbers\"";?>"
-            class="percentImage3"
-            style="background-position: -<?echo ((100-(($new_numbers/$total_numbers)*100))*1.2)-1; ?>px 0pt;" border="0" />
-<?
-}else {
-            if ($total_numbers > 0) {
+if ($config_values['show_numbers_left'] == 'YES') {
+
+    if ($progress>0){
+        ?>
+        <img src="/images/percentImage.png" width="123" height="12" title="<?
+        echo "Remaining: $new_numbers/$total_numbers\"";?>"
+        class="percentImage"
+        style="background-position: -<?echo ((100-(($new_numbers/$total_numbers)*100))*1.2)-1; ?>px 0pt;" border="0" />
+        <?
+    } else if ($manual_numbers > 0){
+        ?>
+        <img src="/images/percentImage.png" width="123" height="12" title="<?
+        echo "Remaining: $new_numbers/$total_numbers\"";?>"
+        class="percentImage3"
+        style="background-position: -<?echo ((100-(($new_numbers/$total_numbers)*100))*1.2)-1; ?>px 0pt;" border="0" />
+        <?
+    }else {
+        if ($total_numbers > 0) {
             ?>
             <img src="/images/percentImage.png" width="123" height="12" title="<?
             echo "Remaining: $new_numbers/$total_numbers\"";?>"
             class="percentImage2"
             style="background-position: -<?echo ((100-(($new_numbers/$total_numbers)*100))*1.2)-1; ?>px 0pt;" border="0" />
-<?
-            } else {
+            <?
+        } else {
             ?>
             <img src="/images/percentImage.png" width="123" height="12" title="<?
             echo "Remaining: $new_numbers/$total_numbers\"";?>"
             class="percentImage2"
             style="background-position: -<?echo ((100-((0)*100))*1.2)-1; ?>px 0pt;" border="0" />
-<?
-            }
+            <?
+        }
+    }
 }
-*/?>
+?>
 </TD>
 
 
