@@ -9,7 +9,19 @@ if (isset($_GET[type])){
     } else if ($_GET[type]=="all") {
         $sql = 'UPDATE number SET status="new" where campaignid='.$_GET[id];
     } else if ($_GET['type'] == "deleteall") {
-        $sql = 'DELETE FROM number WHERE campaignid='.$_GET[id];
+        if (isset($_GET['sure'])) {
+            $sql = 'DELETE FROM number WHERE campaignid='.$_GET[id];
+        } else {
+            require "header.php";
+            ?>
+            Are you sure you would like to delete all numbers from this campaign?<br />
+            <br />
+            <a href="recycle.php?type=deleteall&id=<?=$_GET['id']?>&sure=yes">Yes, Delete all numbers</a><br />
+            <a href="campaigns.php">No, don't delete all numbers</a>
+            <?
+            require "footer.php";
+            exit(0);
+        }
     } else {
         $sql = 'UPDATE number SET status="new" where status="'.$_GET[type].'" and campaignid='.$_GET[id];
     }
