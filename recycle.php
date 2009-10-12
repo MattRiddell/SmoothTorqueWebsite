@@ -8,6 +8,8 @@ if (isset($_GET[type])){
         $sql = 'UPDATE number SET status="new" where status like "unknown%" and campaignid='.$_GET[id];
     } else if ($_GET[type]=="all") {
         $sql = 'UPDATE number SET status="new" where campaignid='.$_GET[id];
+    } else if ($_GET['type'] == "deleteall") {
+        $sql = 'DELETE FROM number WHERE campaignid='.$_GET[id];
     } else {
         $sql = 'UPDATE number SET status="new" where status="'.$_GET[type].'" and campaignid='.$_GET[id];
     }

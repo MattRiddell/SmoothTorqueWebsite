@@ -66,6 +66,14 @@ if ($result) {
         }
 }
 
+$sql = 'SELECT value FROM config WHERE parameter=\'DELETE_ALL\'';
+$result=@mysql_query($sql, $link);
+if ($result) {
+        if (mysql_num_rows($result) > 0) {
+            $config_values['DELETE_ALL'] = mysql_result($result,0,'value');
+        }
+}
+
 
 $sql = 'SELECT value FROM config WHERE parameter=\'use_new_pie\'';
 $result=mysql_query($sql, $link) or die (mysql_error());
@@ -129,6 +137,9 @@ if (mysql_num_rows($result)==0){
     <img width="16" height="16" src="/images/chart_curve.png" border="0"> Realtime Campaign Monitor<br />
     <img width="16" height="16" src="/images/table.png" border="0"> View Numbers
     <img width="16" height="16" src="/images/delete.png" border="0"> Delete Campaign
+    <?if ($config_values['DELETE_ALL'] == "YES") {?>
+        <img width="16" height="16" src="/images/page_white_delete.png" border="0"> Delete All Numbers
+    <?}?>
     </center>
     <?box_end();?><br />
 
@@ -322,7 +333,11 @@ if ($config_values['ALLOW_NUMBERS_MANUAL'] == "YES") {
 </a>
 <?
 }
-
+if ($config_values['DELETE_ALL'] == "YES") {?>
+    <a href="recycle.php?type=deleteall&id=<?=$row['id']?>">
+        <img width="16" height="16" src="/images/page_white_delete.png" border="0" title="Delete all numbers">
+        </a>
+    <?}
 ?>
 </td>
 <TD>

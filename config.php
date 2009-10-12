@@ -137,6 +137,9 @@ if (isset($_POST[colour])){
     $sql = "REPLACE INTO config (parameter, value) VALUES ('SHOW_NUMBERS_LEFT',".sanitize($_POST['SHOW_NUMBERS_LEFT']).")";
     mysql_query($sql) or die(mysql_error());
 
+    $sql = "REPLACE INTO config (parameter, value) VALUES ('DELETE_ALL',".sanitize($_POST['DELETE_ALL']).")";
+    mysql_query($sql) or die(mysql_error());
+
 
 
     /*
@@ -1034,6 +1037,18 @@ Show Number of Numbers remaining:
 <input type="radio" name="SHOW_NUMBERS_LEFT" value="NO" <?if ( $config_values['SHOW_NUMBERS_LEFT'] != "YES") {echo "checked";}?>> No
 </td>
 </tr>
+
+<tr  class="tborder2">
+<td>
+Provide Delete All Option:
+</td>
+<td>
+<input type="radio" name="DELETE_ALL" value="YES" <?if ( $config_values['DELETE_ALL'] == "YES") {echo "checked";}?>> Yes
+<input type="radio" name="DELETE_ALL" value="NO" <?if ( $config_values['DELETE_ALL'] != "YES") {echo "checked";}?>> No
+</td>
+</tr>
+
+
 
 <tr  class="tborder2">
 <td>
