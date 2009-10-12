@@ -28,9 +28,15 @@ require "/".$current_directory."/functions/functions.php";
 $whoami = exec('whoami');
 
 /* Get the required Cookies */
-$language=$_COOKIE[language];
-$user=$_COOKIE[user];
-$level=$_COOKIE[level];
+if (isset($_COOKIE['language'])) {
+	$language=$_COOKIE['language'];
+}
+if (isset($_COOKIE['user'])) {
+	$user=$_COOKIE['user'];
+}
+if (isset($_COOKIE['level'])) {
+	$level=$_COOKIE['level'];
+}
 
 /* Make sure we have the environment set up correctly - if not give the
  * user some information about how to remedy the situation - these
@@ -153,22 +159,22 @@ if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","web_config")){
  * header.php is also called from index.php where we couldn't possibly
  * know the language.
  */
-if ((!(isset($_COOKIE[language])))||$_COOKIE[language] == "--") {
-    $_COOKIE[language] = "en";
+if ((!(isset($_COOKIE['language'])))||$_COOKIE['language'] == "--") {
+    $_COOKIE['language'] = "en";
 }
 /* Same goes for the server name */
-if ($_COOKIE[url] == "--") {
-    $_COOKIE[url] = $_SERVER[SERVER_NAME];
+if (!isset($_COOKIE['url']) ||$_COOKIE['url'] == "--") {
+    $_COOKIE['url'] = $_SERVER['SERVER_NAME'];
 }
 
 /* Set a variable so we don't need to keep reading the cookies */
-$url = $_COOKIE[url];
+$url = $_COOKIE['url'];
 
 /* We now have a language and a server name */
-$result_config = mysql_query("SELECT * FROM web_config WHERE LANG = ".sanitize($_COOKIE[language])." AND url = ".sanitize($url)) or die(mysql_error());
+$result_config = mysql_query("SELECT * FROM web_config WHERE LANG = ".sanitize($_COOKIE['language'])." AND url = ".sanitize($url)) or die(mysql_error());
 if (mysql_num_rows($result_config) == 0) {
     /* No entry found for this url - use the default */
-    $sql = "SELECT * FROM web_config WHERE LANG = ".sanitize($_COOKIE[language])." AND url = 'default'";
+    $sql = "SELECT * FROM web_config WHERE LANG = ".sanitize($_COOKIE['language'])." AND url = 'default'";
     $result_config = mysql_query($sql) or die("Unable to load config information from mysql: ".mysql_error());
 }
 
@@ -215,8 +221,8 @@ mysql_select_db("SineDialer", $link);
 
 /* Check if the user is logged in */
 $loggedin=true;
-$myPage=$_SERVER[PHP_SELF];
-if (!($_COOKIE["loggedin"]==sha1("LoggedIn".$user))){
+$myPage=$_SERVER['PHP_SELF'];
+if (!isset($_COOKIE['loggedin']) || !($_COOKIE["loggedin"]==sha1("LoggedIn".$user))){
     /* The user is not logged in */
     $loggedin=false;
     if (!($myPage=="/index.php"|$myPage=="/login.php")){
@@ -297,6 +303,9 @@ if ($loggedin) {
 	if (mysql_num_rows($result_if) > 0) {
 		$interface_type = mysql_result($result_if,0,0);
 	}
+}
+if (!isset($interface_type)) {
+	$interface_type = 'default';
 }
 if ($interface_type == "broadcast") {
 ?>
