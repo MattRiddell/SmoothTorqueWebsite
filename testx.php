@@ -1,6 +1,27 @@
 <?php
 require "header.php";
 require "phpsvnclient.php";
+echo "included";
+$svn  = new phpsvnclient;
+$svn->setRepository("svn://data.venturevoip.com");
+$files_now = $svn->getDirectoryFiles("/trunk/SmoothTorqueWebsite");
+
+print_pre($files_now);
+//$phpajax_now = $svn->getFile("/trunk/phpajax/phpajax.php");
+/**
+ *  Get all logs of /trunk/phpajax/phpajax.org from  between 2 version until the last
+ */
+$logs = $svn->getRepositoryLogs(2000);
+
+/**
+ *  Get all logs of /trunk/phpajax/phpajax.org from  between 2 version until 5 version.
+ */
+$logs = $svn->getRepositoryLogs(2,5);
+
+
+=======
+require "header.php";
+require "phpsvnclient.php";
 echo "included<div align=\"left\">";
 $svn  = new phpsvnclient;
 $svn->setAuth("web","");
