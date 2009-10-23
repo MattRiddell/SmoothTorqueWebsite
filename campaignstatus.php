@@ -22,7 +22,7 @@ if (mysql_num_rows($resultx)==0) {
     </script>
     <?
     }
-    if ($status==101||$status==2||$status==102){
+    if ($status==101||$status==2||$status==102||$status == -1){
         echo "<b>Campaign Started <img src=\"/images/tick.gif\" border=\"0\" onLoad=\"window.location = 'test.php?id=".$id."';\"></b><br /><br />";
         ?>
     <script type="javascript">
