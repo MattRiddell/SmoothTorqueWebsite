@@ -486,7 +486,7 @@ if ($dialed>0){
 } else {
     $progress=$dialed;
 }
-if ($timespent == 0) {
+if ($timespent == 0 && $status >=0) {
     $txt=new Text( "\n\n     Please Wait. Campaign is being started    \n\n");
     $txt->Pos( 500,122);
     $txt->SetAlign("center","","");
