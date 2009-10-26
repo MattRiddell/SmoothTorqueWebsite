@@ -17,7 +17,7 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
 <td width="260">
 <?
 $sql = "SELECT count(*) FROM number WHERE status='new' and campaignid='$_GET[id]'";
-//echo $sql;
+echo $sql;
 $result = mysql_query($sql);
 $num_numbers = mysql_result($result,0,0);
 //echo $num_numbers;
