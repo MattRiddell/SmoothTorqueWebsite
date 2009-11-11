@@ -139,8 +139,11 @@ if (isset($_POST[colour])){
 
     $sql = "REPLACE INTO config (parameter, value) VALUES ('DELETE_ALL',".sanitize($_POST['DELETE_ALL']).")";
     mysql_query($sql) or die(mysql_error());
-
-
+    
+    $sql = "REPLACE INTO config (parameter, value) VALUES ('use_names',".sanitize($_POST['use_names']).")";
+    mysql_query($sql) or die(mysql_error());
+    
+    
 
     /*
 
