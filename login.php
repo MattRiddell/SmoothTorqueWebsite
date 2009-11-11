@@ -49,8 +49,8 @@ if (trim($dbpass)!=trim($passwordHash)){
 	/* INCORRECT PASSWORD                              */
 	/***************************************************/
 	/* If the password does not match clear the cookie */
-    setcookie("loggedin","--",time()+6000,"/");
-    setcookie("user",$_POST[user],time()+6000,"/");
+    setcookie("loggedin","--",0,"/");
+    setcookie("user",$_POST[user],0,"/");
     
     /* Log to the database that someone had an unsuccessful login attempt */
     $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Unuccessful login')";
@@ -64,9 +64,9 @@ if (trim($dbpass)!=trim($passwordHash)){
 	/* CORRECT PASSWORD                                */
 	/***************************************************/
 	/* If the passwords do match set some cookies*/
-    setcookie("loggedin",sha1("LoggedIn".$_POST[user]),time()+6000,"/");
-    setcookie("user",$_POST[user],time()+6000,"/");
-    setcookie("language",$_POST[language],time()+6000,"/");
+    setcookie("loggedin",sha1("LoggedIn".$_POST[user]),0,"/");
+    setcookie("user",$_POST[user],0,"/");
+    setcookie("language",$_POST[language],0,"/");
 
     /* Check if the url and the language has settings available */
     $url = $_SERVER[SERVER_NAME];
@@ -77,7 +77,7 @@ if (trim($dbpass)!=trim($passwordHash)){
     if (mysql_num_rows($result_url) == 0) {
         $url = "default";
     }
-    setcookie("url",$url,time()+6000,"/");
+    setcookie("url",$url,0,"/");
 
 	/* Set their level based on what security level is stored for them in the database */
     if (mysql_result($result,0,'security')==100){
@@ -89,7 +89,7 @@ if (trim($dbpass)!=trim($passwordHash)){
     } else {
         $level=sha1("level10");
     }
-    setcookie("level",$level,time()+6000,"/");
+    setcookie("level",$level,0,"/");
     
     /* Log that we had a successful login */
     $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Successful login')";
