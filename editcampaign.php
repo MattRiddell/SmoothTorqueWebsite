@@ -37,7 +37,7 @@ if (isset($_POST[name])){
     
     $sql = "UPDATE campaign SET name=$name, description=$description, messageid=$messageid, messageid2=$messageid2, messageid3=$messageid3,
             mode=$mode, astqueuename=$astqueuename, did=$did, maxagents=$maxagents, clid=$clid, trclid=$trclid, context=$context WHERE id=$id";
-    if (isset($_GET['debug']) {
+    if (isset($_GET['debug'])) {
         echo $sql;
         exit(0);
     }
