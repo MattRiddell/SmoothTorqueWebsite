@@ -128,7 +128,7 @@ if (mysql_num_rows($result) > 0) {
             <td width=*>
                 <input type="radio" name="mode" value="didmode" rel="didmode" id="mode_did" <?=$row['mode']==0?"checked":""?> onclick="document.getElementById('queue_field').style.visibility = 'hidden';"/>
                 <label for="mode_did" title="Which number to receive the calls at">DID Mode</label>
-                <input type="radio" name="mode" value="mode_queue" id="mode_queue" <?=$row['mode']==0?"checked":""?> onclick="document.getElementById('queue_field').style.visibility = 'visible';"/>
+                <input type="radio" name="mode" value="mode_queue" id="mode_queue" <?=$row['mode']==1?"checked":""?> onclick="document.getElementById('queue_field').style.visibility = 'visible';"/>
                 <label for="mode_queue" title="Use this is the agents are connected to the machine doing the calling">Queue Mode</label>
             </td>
         </tr>
