@@ -124,12 +124,12 @@ if (mysql_num_rows($result) > 0) {
                     <img src="/images/help.png" border="0">
                 </a>
             </td>
+
             <td width=*>
-                <input type="radio" name="mode" value="didmode" rel="didmode" id="mode_did" <? echo ($row['mode']==0?"CHECKED":"");?> />
-                <label for="mode_did" title="Used when you receive calls at a particular number">DID Mode</label>
-                
-                <input type="radio" name="mode" value="mode_queue" rel="queue" id="mode_queue"  <? echo ($row['mode']==1?"CHECKED":"");?> />
-                <label for="mode_queue" title="used when you are connected to the machine doing the dialing">Queue Mode</label>
+                <input type="radio" name="mode" value="didmode" rel="didmode" id="mode_did" checked onclick="document.getElementById('queue_field').style.visibility = 'hidden';"/>
+                <label for="mode_did" title="Which number to receive the calls at">DID Mode</label>
+                <input type="radio" name="mode" value="mode_queue" id="mode_queue" onclick="document.getElementById('queue_field').style.visibility = 'visible';"/>
+                <label for="mode_queue" title="Use this is the agents are connected to the machine doing the calling">Queue Mode</label>
             </td>
         </tr>
 
