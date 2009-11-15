@@ -260,7 +260,8 @@ if (mysql_num_rows($result) > 0) {
         </tr>
 
         <?/* ===================== Queue Name Field ======================= */?>
-        <tr rel="queue" title="The name of the queue">
+        <tr id = "queue_field" title="The name of the queue used for agents" style="visibility: <?=$row['mode']==1?"visbile":"hidden"?>">
+
             <td class="thead" width=200>
                 <label for="agents">
                     Queue Name
