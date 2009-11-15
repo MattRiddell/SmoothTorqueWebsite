@@ -67,9 +67,9 @@ require "header_campaign.php";
 			            <a href="#" onclick="displaySmallMessage('includes/help.php?section=What type of campaign you would like to run. <br /><br />If you are connected to the machine doing the calling then chose Queue Mode.  If you would like to receive any connected calls at a particular phone number, chose DID Mode.  Normally you will use DID Mode unless you have been told to use Queue Mode.');return false"><img src="/images/help.png" border="0"></a>
 			</td>
             <td width=*>
-			<input type="radio" name="mode" value="didmode" rel="didmode" id="mode_did" checked />
+			<input type="radio" name="mode" value="didmode" rel="didmode" id="mode_did" checked onclick="document.getElementById('queue_field').style.visibility = 'hidden';"/>
 			<label for="mode_did" title="Which number to receive the calls at">DID Mode</label>
-			<input type="radio" name="mode" value="mode_queue" rel="queue" id="mode_queue" />
+			<input type="radio" name="mode" value="mode_queue" id="mode_queue" onclick="document.getElementById('queue_field').style.visibility = 'visible';"/>
 			<label for="mode_queue" title="Use this is the agents are connected to the machine doing the calling">Queue Mode</label>
 		</td>
 		</tr>
@@ -241,7 +241,7 @@ echo "<OPTION VALUE=\"".$row2[$count2][id]."\"$selected>".$row2[$count2][name]."
 
 
 
-        <tr rel="queue" title="The name of the queue used for agents">
+        <tr id = "queue_field" title="The name of the queue used for agents" style="visibility: hidden">
 			<td class="thead" width=200><label for="agents">Queue Name
             <a href="#" onclick="displaySmallMessage('includes/help.php?section=This is the name of a Queue on the telephone system of the provider of this system. Normally this will be assigned to you when you set up an account.');return false"><img src="/images/help.png" border="0"></a>
             </label></td>
