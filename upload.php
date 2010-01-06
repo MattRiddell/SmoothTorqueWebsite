@@ -1,4 +1,12 @@
-<?require "header.php";
+<?
+
+// Uncomment the next line to use flash uploading
+//$action = "uploadify/index.php";
+
+$action="upload.php";
+
+
+require "header.php";
 require "header_numbers.php";
 $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
 $result=mysql_query($sql, $link) or die (mysql_error());;
@@ -14,7 +22,7 @@ if (!isset($_POST[campaignid])){
 <?
 box_start(360);
 ?><center><br /><br />Please select a campaign to add numbers to<br /><br />
-<FORM ACTION="upload.php" METHOD="POST">
+<FORM ACTION="<?=$action?>" METHOD="POST">
     <table class="tborderx2xx" align="center" border="0" cellpadding="0" cellspacing="2"><TR>
     <TD>
         <SELECT NAME="campaignid">
@@ -150,6 +158,8 @@ like to upload the numbers from and then click Upload.<br /><br />
 
  ?>                                          <?
  } else {
+//exit(0);
+//redirect('bla');
 require "upload_helper.php";
 $sid = md5(uniqid(rand()));
 ?>
