@@ -23,24 +23,87 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
+//echo "xx";exit(0);
+//require "../header.php";
+require "../header_numbers.php";
+require "../admin/db_config.php";
+
 if (!empty($_FILES)) {
-	$tempFile = $_FILES['Filedata']['tmp_name'];
-	$targetPath = $_SERVER['DOCUMENT_ROOT'] . $_REQUEST['folder'] . '/';
-	$targetFile =  str_replace('//','/',$targetPath) . $_FILES['Filedata']['name'];
-	
-	// $fileTypes  = str_replace('*.','',$_REQUEST['fileext']);
-	// $fileTypes  = str_replace(';','|',$fileTypes);
-	// $typesArray = split('\|',$fileTypes);
-	// $fileParts  = pathinfo($_FILES['Filedata']['name']);
-	
-	// if (in_array($fileParts['extension'],$typesArray)) {
-		// Uncomment the following line if you want to make the directory if it doesn't exist
-		// mkdir(str_replace('//','/',$targetPath), 0755, true);
-		
-//		move_uploaded_file($tempFile,$targetFile);
-		echo "nla1111";
-	// } else {
-	// 	echo 'Invalid file type.';
-	// }
+
+	$filename = $_FILES['Filedata']['tmp_name'];
+	$row = 0;
+        $display2 = 0;
+        $handle = fopen($filename, "r");
+        echo "<br />Importing numbers, please wait<br /><br />";
+        //print_r($_POST);
+        $campaignid = $_GET['campaignid'];
+        //$sql2 = "LOCK TABLES number WRITE";
+        //mysql_query($sql2, $link) or die (mysql_error());;
+        $sql = "INSERT IGNORE INTO number (campaignid,phonenumber,status,type, random_sort) VALUES";
+        $isfirst=true;
+        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            //echo "Inside Loop: ".$data[0]."<br />";
+            $data[0] = str_replace("(","",$data[0]);
+            $data[0] = str_replace(")","",$data[0]);
+            $data[0] = str_replace("-","",$data[0]);
+            $data[0] = str_replace(" ","",$data[0]);
+            $data[0] = str_replace("\r","",$data[0]);
+            if ($isfirst) {
+                $sql.="(".$campaignid.",'".$data[0]."','new',0, ROUND(RAND() * 999999999))";
+
+//                $sql2 = "SET AUTOCOMMIT=0;";//BEGIN";
+//                mysql_query($sql2, $link) or die(mysql_error());
+//                echo mysql_error();
+
+                $isfirst=false;
+            }
+            $row++;
+            $display++;
+            $display2++;
+            /*if ($display2>500){
+                //echo "<!-- -->";
+                //ob_flush();flush();
+
+                $display2=0;
+            }*/
+            if ($display > 17347) { /* Just so the chances of doing nothing  */
+                                   /* in the last write is low.  It doesn't */
+                                   /* really matter but makes it cleaner */
+                echo "".$row." numbers imported<br />\n";
+                ob_flush();flush();
+                //echo "saving $sql";
+                mysql_query($sql, $link) or die (mysql_error());;
+                //$sql2="COMMIT";
+                //mysql_query($sql2, $link) or die (mysql_error());;
+                //$sql2="UNLOCK TABLES";
+                //mysql_query($sql2, $link) or die (mysql_error());;
+
+
+				$display = 0;
+                //$sq2 = "LOCK TABLES number WRITE";
+                //mysql_query($sql2, $link) or die (mysql_error());;
+                $sql = "INSERT IGNORE INTO number (campaignid,phonenumber,status,type,random_sort)  VALUES";
+                $sql.="(".$campaignid.",'".$data[0]."','new',0,ROUND(RAND() * 999999999))";
+            } else {
+				$sql.=",(".$campaignid.",'".$data[0]."','new',0, ROUND(RAND() * 999999999))";
+			}
+        }
+        //echo "Saving Records to the Database <br />";
+        echo "[".$row." numbers inserted]<br />\n";
+        ob_flush();flush();
+        mysql_query($sql, $link) or die (mysql_error());;
+                //$sql2="COMMIT";
+                //mysql_query($sql2, $link) or die (mysql_error());;
+                //$sql2="UNLOCK TABLES";
+                //mysql_query($sql2, $link) or die (mysql_error());;
+
+			/*$sql2 = "SET AUTOCOMMIT=1;";
+		mysql_query($sql2, $link) or die (mysql_error());;*/
+//$row--;
+echo "<br />";
+echo "<br />";
+fclose($handle);
+echo "<b>A total of $row numbers were inserted into the database</b><br /><br /><br />";
+
 }
 ?>
