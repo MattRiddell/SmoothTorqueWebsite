@@ -21,10 +21,11 @@ if (isset($_POST[name])){
         $modein=($_POST[mode]);
         if ($modein == "mode_queue"){
             $mode = 1;
+            $astqueuename=($_POST[astqueuename]);
         } else {
             $mode = 0;
+            $astqueuename=NULL;
         }
-        $astqueuename=($_POST[astqueuename]);
         $maxagents=($_POST[agents]);
         $did=($_POST[did]);
         $clid=($_POST[clid]);

@@ -26,10 +26,11 @@ if (isset($_POST[name])){
     $modein = $_POST['mode'];
     if ($modein == "mode_queue"){
         $mode = 1;
+        $astqueuename = sanitize($_POST['astqueuename']);
     } else {
         $mode = 0;
+        $astqueuename = sanitize(NULL);
     }
-    $astqueuename = sanitize($_POST['astqueuename']);
     $maxagents = sanitize($_POST['agents']);
     $did = sanitize($_POST['did']);
     $clid = sanitize($_POST['clid']);
