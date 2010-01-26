@@ -56,9 +56,9 @@ $class=" class=\"tborderx\"  onmouseover=\"style.backgroundColor='#84DFC1';\" on
 <TD>
 <?/*
 if (strlen($row[membername])<15){
-echo "<A HREF=\"editagent.php?name=".$row[membername]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".$row[membername]."</A>";
+echo "<A HREF=\"editagent.php?name=".$row[membername]."\"><img src=\"images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".$row[membername]."</A>";
 } else {
-echo "<A HREF=\"editagent.php?name=".$row[membername]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".trim(substr($row[membername],0,15))."...</A>";
+echo "<A HREF=\"editagent.php?name=".$row[membername]."\"><img src=\"images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".trim(substr($row[membername],0,15))."...</A>";
 }*/
 echo $row[membername];
 ?>
@@ -70,7 +70,7 @@ echo $row[membername];
 <?echo $ipaddr;?>
 </td>
 <TD>
-<a href="#" onclick="displaySmallMessage('includes/confirmDeleteAgent.php?name=<?echo $row[membername];?>&queue_name=<?echo $row[queue_name];?>');return false"><IMG SRC="/images/delete.png" BORDER="0"></a><br>
+<a href="#" onclick="displaySmallMessage('includes/confirmDeleteAgent.php?name=<?echo $row[membername];?>&queue_name=<?echo $row[queue_name];?>');return false"><IMG SRC="images/delete.png" BORDER="0"></a><br>
 </TD>
 </TR>
 

@@ -79,9 +79,9 @@ if ($_GET['ajax'] == 1) {
             <TD>
                 <?
                 if (strlen($row[name])<25){
-                    echo "<A HREF=\"editserver.php?id=".$row[id]."\">".$row[name]."&nbsp;<img src=\"/images/pencil.png\" border=\"0\" title=\"Edit\"></A>";
+                    echo "<A HREF=\"editserver.php?id=".$row[id]."\">".$row[name]."&nbsp;<img src=\"images/pencil.png\" border=\"0\" title=\"Edit\"></A>";
                 } else {
-                    echo "<A HREF=\"editserver.php?id=".$row[id]."\">".trim(substr($row[name],0,15))."...&nbsp;<img src=\"/images/pencil.png\" border=\"0\" title=\"Edit\"></A>";
+                    echo "<A HREF=\"editserver.php?id=".$row[id]."\">".trim(substr($row[name],0,15))."...&nbsp;<img src=\"images/pencil.png\" border=\"0\" title=\"Edit\"></A>";
                 }
                 ?>
             </TD>
@@ -94,19 +94,19 @@ if ($_GET['ajax'] == 1) {
             <TD>
                 <?
                 if ($row[status] == 0){
-                    echo "<img src=\"/images/cross.png\">";
-                    echo "<span id=\"play_".$row[id]."\"><a href=\"resetserver.php?id=$row[id]\" onclick=\"dojo.query('#play_".$row[id]."').fadeOut().play();\"><img src=\"/images/control_play_blue.png\" border=\"0\"></a></span>";
+                    echo "<img src=\"images/cross.png\">";
+                    echo "<span id=\"play_".$row[id]."\"><a href=\"resetserver.php?id=$row[id]\" onclick=\"dojo.query('#play_".$row[id]."').fadeOut().play();\"><img src=\"images/control_play_blue.png\" border=\"0\"></a></span>";
                 } else if ($row[status] == 1){
-                    echo "<img src=\"/images/tick.png\">";
-                    echo "<span id=\"play_".$row[id]."\"><a href=\"resetserver2.php?id=$row[id]\" onclick=\"dojo.query('#play_".$row[id]."').fadeOut().play();\"><img src=\"/images/control_stop_blue.png\" border=\"0\"></a></span>";
+                    echo "<img src=\"images/tick.png\">";
+                    echo "<span id=\"play_".$row[id]."\"><a href=\"resetserver2.php?id=$row[id]\" onclick=\"dojo.query('#play_".$row[id]."').fadeOut().play();\"><img src=\"images/control_stop_blue.png\" border=\"0\"></a></span>";
                 } else {
-                    echo "<img src=\"/images/clock.png\">";
-                    echo "<span id=\"play_".$row[id]."\"><a href=\"resetserver.php?id=$row[id]\" onclick=\"dojo.query('#play_".$row[id]."').fadeOut().play();\"><img src=\"/images/control_play_blue.png\" border=\"0\"></a></span>";
+                    echo "<img src=\"images/clock.png\">";
+                    echo "<span id=\"play_".$row[id]."\"><a href=\"resetserver.php?id=$row[id]\" onclick=\"dojo.query('#play_".$row[id]."').fadeOut().play();\"><img src=\"images/control_play_blue.png\" border=\"0\"></a></span>";
                 }
                 ?>
             </TD>
             <TD>
-                <a href="#" onclick="displaySmallMessage('includes/confirmDeleteServer.php?id=<?echo $row[id];?>');return false"><IMG SRC="/images/delete.png" BORDER="0"></a><br>
+                <a href="#" onclick="displaySmallMessage('includes/confirmDeleteServer.php?id=<?echo $row[id];?>');return false"><IMG SRC="images/delete.png" BORDER="0"></a><br>
             </TD>
             <td class="chans">
                 <?
@@ -126,7 +126,7 @@ if ($_GET['ajax'] == 1) {
                                 break;
                         }
                     } else {
-                        //echo "<font color=\"blue\"><img src=\"/images/sq_progress.gif\"></font>";
+                        //echo "<font color=\"blue\"><img src=\"images/sq_progress.gif\"></font>";
                     }
                     $sql = "SELECT value FROM SineDialer.config WHERE parameter = 's_".$row[name]."_calls'";
                     $resultx = mysql_query($sql) or die(mysql_error());
