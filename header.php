@@ -225,6 +225,13 @@ if ($result) {
 	}
 }
 
+$sql = 'SELECT value FROM config WHERE parameter=\'EVERGREEN\'';
+$result=mysql_query($sql, $link) or die (mysql_error());
+if (mysql_num_rows($result) > 0) {
+    $config_values['EVERGREEN'] = mysql_result($result,0,'value');
+} else {
+    $config_values['EVERGREEN'] = "NO";
+}
 
 
 mysql_select_db("SineDialer", $link);

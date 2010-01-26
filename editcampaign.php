@@ -35,9 +35,9 @@ if (isset($_POST[name])){
     $did = sanitize($_POST['did']);
     $clid = sanitize($_POST['clid']);
     $trclid = sanitize($_POST['trclid']);
-    
+    $evergreen = sanitize($_POST['evergreen']);
     $sql = "UPDATE campaign SET name=$name, description=$description, messageid=$messageid, messageid2=$messageid2, messageid3=$messageid3,
-            mode=$mode, astqueuename=$astqueuename, did=$did, maxagents=$maxagents, clid=$clid, trclid=$trclid, context=$context WHERE id=$id";
+            mode=$mode, astqueuename=$astqueuename, did=$did, maxagents=$maxagents, clid=$clid, trclid=$trclid, context=$context, evergreen=$evergreen WHERE id=$id";
     if (isset($_GET['debug'])) {
         echo $sql;
         exit(0);
@@ -116,6 +116,25 @@ if (mysql_num_rows($result) > 0) {
                 <input type="TEXT" name="description" value="<?echo $row['description'];?>" size="60">
             </td>
         </tr>
+
+<?
+    if ($config_values['EVERGREEN'] == "YES") {
+        ?>
+<!-- Evergreen -->
+
+<TR title="Evergreen Mode"><TD CLASS="thead">Allow Campaigns To Run Indefinitely
+
+<a href="#" onclick="displaySmallMessage('includes/help.php?section=If you would like this campaign to continuously redial all numbers whether answered or not');return false"><img src="images/help.png" border="0"></a>
+</TD><TD>
+<INPUT TYPE="radio" NAME="evergreen" VALUE="1" <?if ($row['evergreen'] == 1) {echo "checked";}?> onclick="displaySmallMessage('includes/help.php?section=Warning: this will redial all numbers whether they are answered or not');return true;"> Yes&nbsp;
+<INPUT TYPE="radio" NAME="evergreen" VALUE="0" <?if ($row['evergreen'] == 0) {echo "checked";}?>> No<br />
+</TD>
+</TR>
+
+<?
+    }
+    ?>
+
 
         <?/* =================== Queue/DID Mode Field ===================== */?>
         <tr id="mode">

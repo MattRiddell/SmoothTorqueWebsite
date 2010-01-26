@@ -12,6 +12,6 @@
     $result=mysql_query($sql, $link);
     /*================= Log Access ======================================*/
 
-    header("Location: /index.php");
+    header("Location: index.php");
     exit;
 ?>
