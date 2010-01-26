@@ -8,7 +8,7 @@ $config_files[es] = "/stweb_es.conf";
 $default_config[it] = "LANGUAGE=Italiano
 COLOUR=#000000
 TITLE=The SmoothTorque Enterprise Predictive Dialing Platform
-LOGO=/images/logo2.png
+LOGO=images/logo2.png
 TEXT=For further information please email sales@venturevoip.com
 SOX=/usr/bin/sox
 USERID=VentureVoIP
@@ -79,7 +79,7 @@ ALLOW_NUMBERS_MANUAL=YES
 $default_config[es]="LANGUAGE=Español
 COLOUR=#000000
 TITLE=The SmoothTorque Enterprise Predictive Dialing Platform
-LOGO=/images/logo2.png
+LOGO=images/logo2.png
 TEXT=For further information please email sales@venturevoip.com
 SOX=/usr/bin/sox
 USERID=VentureVoIP
@@ -149,7 +149,7 @@ ALLOW_NUMBERS_MANUAL=YES
 /* Default English Configuration */
 $default_config[en] = "COLOUR=#323232
 TITLE=The SmoothTorque Enterprise Predictive Dialing Platform
-LOGO=/images/logo2.png
+LOGO=images/logo2.png
 TEXT=For further information please email sales@venturevoip.com
 SOX=/usr/bin/sox
 USERID=VentureVoIP
