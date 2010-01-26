@@ -142,7 +142,7 @@ $result=mysql_query($sql, $link);
 </table>
 </center>
 
-        <META HTTP-EQUIV=REFRESH CONTENT="10; URL=/campaigns.php">
+        <META HTTP-EQUIV=REFRESH CONTENT="10; URL=campaigns.php">
         <?
         exit(0);
     } else {
@@ -235,7 +235,7 @@ $resultx=mysql_query($sql2, $link) or die (mysql_error());;
 <table border="0" cellpadding="20">
 <tr><td bgcolor = "#ffffff">
 <div id="ajaxDiv">
-<img src="/images/progress.gif" border="0">
+<img src="images/progress.gif" border="0">
 </div>
 </td></tr></table>
 <br />

@@ -14,7 +14,7 @@ $result=mysql_query($sql, $link) or die ("Error from $sql: ".mysql_error());
 if (mysql_num_rows($result) == 0) {
     /* There are no queues in this system */
     box_start(320);
-    echo "<center><img src=\"/images/icons/gtk-dialog-info.png\" border=\"0\" width=\"64\" height=\"64\"><br /><br /><b>You haven't created any queues</b><br /><br />You can create one by clicking the \"Add Queue Wizard\" button above";
+    echo "<center><img src=\"images/icons/gtk-dialog-info.png\" border=\"0\" width=\"64\" height=\"64\"><br /><br /><b>You haven't created any queues</b><br /><br />You can create one by clicking the \"Add Queue Wizard\" button above";
     box_end();
 } else {
     /* start of shadow */?>
@@ -59,18 +59,18 @@ if (mysql_num_rows($result) == 0) {
         <TD>
         <?
         if (strlen($name)<15){
-            echo "<A HREF=\"editqueue.php?name=".$name."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".$name."</A>";
+            echo "<A HREF=\"editqueue.php?name=".$name."\"><img src=\"images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".$name."</A>";
         } else {
-            echo "<A HREF=\"editqueue.php?name=".$name."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".trim(substr($name,0,15))."...</A>";
+            echo "<A HREF=\"editqueue.php?name=".$name."\"><img src=\"images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".trim(substr($name,0,15))."...</A>";
         }
         ?>
         </TD>
         <TD>
         <a href="addagent.php?name=<?echo $name;?>">
-        <img src="/images/group_add.png" align="left" border="0" title="Add a SIP account for an agent to connect to">
+        <img src="images/group_add.png" align="left" border="0" title="Add a SIP account for an agent to connect to">
         </a>
         <a href="agents.php?name=<?echo $name;?>">
-        <img src="/images/group.png" align="left" border="0" title="Show the agents for this queue">
+        <img src="images/group.png" align="left" border="0" title="Show the agents for this queue">
         </a>
         <?echo $row[strategy];?>
         </TD>
@@ -81,7 +81,7 @@ if (mysql_num_rows($result) == 0) {
         <?echo $count;?>
         </TD>
         <TD>
-        <a href="#" onclick="displaySmallMessage('includes/confirmDeleteQueue.php?name=<?echo $name;?>');return false"><IMG SRC="/images/delete.png" BORDER="0"></a><br>
+        <a href="#" onclick="displaySmallMessage('includes/confirmDeleteQueue.php?name=<?echo $name;?>');return false"><IMG SRC="images/delete.png" BORDER="0"></a><br>
         </TD>
         </TR>
 

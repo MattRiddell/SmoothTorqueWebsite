@@ -45,7 +45,7 @@ if ($level!=sha1("level100")) {
     $out=_get_browser();
     if ($out[browser]=="MSIE"){
     ?>
-        <script type="text/javascript" src="/ajax/jquery.js"></script>
+        <script type="text/javascript" src="ajax/jquery.js"></script>
         <script type="text/javascript">
             $(function(){ // jquery onload
                     window.setInterval(function(){
@@ -56,7 +56,7 @@ if ($level!=sha1("level100")) {
 
         </script>
     <?} else {?>
-        <script type="text/javascript" src="/ajax/jquery.js"></script>
+        <script type="text/javascript" src="ajax/jquery.js"></script>
         <script type="text/javascript">
             $(function(){ // jquery onload
                     window.setInterval(function(){

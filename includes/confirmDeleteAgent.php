@@ -12,8 +12,8 @@ $sql = 'SELECT * FROM queue_member_table WHERE membername=\''.$_GET[name].'\' an
 $result=mysql_query($sql, $link) or die (mysql_error());
 while ($row = mysql_fetch_assoc($result)) {
     echo "<B>".$row[membername]." from ".$row[queue_name]."</B><BR><BR>";
-    echo '<A HREF="deleteagent.php?name='.$row[membername].'&queue_name='.$row[queue_name].'" onclick="closeMessage()"><img src="/images/tick.png" border="0">Yes, Remove Them</A><BR><br />';
-    echo '<A HREF="agents.php?name='.$row[queue_name].'" onclick="closeMessage()"><img src="/images/cancel.png" border="0">No, Don\'t Remove Them</A></CENTER>';
+    echo '<A HREF="deleteagent.php?name='.$row[membername].'&queue_name='.$row[queue_name].'" onclick="closeMessage()"><img src="images/tick.png" border="0">Yes, Remove Them</A><BR><br />';
+    echo '<A HREF="agents.php?name='.$row[queue_name].'" onclick="closeMessage()"><img src="images/cancel.png" border="0">No, Don\'t Remove Them</A></CENTER>';
 }
 ?>
 </FORM>

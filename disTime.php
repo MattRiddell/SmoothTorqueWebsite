@@ -174,10 +174,10 @@ case 2:
     echo "Stop - Not Run";
     break;
 case 101:
-    echo "Processed <A HREF=\"schedule.php?status=1&campaignid=".$_POST[campaignid]."&queueID=".$row[queueID]."\"><IMG SRC=\"/images/reset.gif\" BORDER=\"0\" ALT=\"RESET\"></A>";
+    echo "Processed <A HREF=\"schedule.php?status=1&campaignid=".$_POST[campaignid]."&queueID=".$row[queueID]."\"><IMG SRC=\"images/reset.gif\" BORDER=\"0\" ALT=\"RESET\"></A>";
     break;
 case 102:
-    echo "Processed <A HREF=\"schedule.php?status=2&campaignid=".$_POST[campaignid]."&queueID=".$row[queueID]."\"><IMG SRC=\"/images/reset.gif\" BORDER=\"0\" ALT=\"RESET\"></A>";
+    echo "Processed <A HREF=\"schedule.php?status=2&campaignid=".$_POST[campaignid]."&queueID=".$row[queueID]."\"><IMG SRC=\"images/reset.gif\" BORDER=\"0\" ALT=\"RESET\"></A>";
     break;
 default:
     echo "Not Running";
@@ -187,7 +187,7 @@ default:
 </TD>
 
 <TD>
-<A HREF="deleteschedule.php?id=<?echo $row[queueID]?>"><IMG SRC="/images/cross.gif" BORDER="0" ALT="DELETE"></A>
+<A HREF="deleteschedule.php?id=<?echo $row[queueID]?>"><IMG SRC="images/cross.gif" BORDER="0" ALT="DELETE"></A>
 </TD>
 </TR>
 <?}?>

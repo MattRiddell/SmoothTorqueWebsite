@@ -74,26 +74,26 @@
 		<th bgcolor="#000044"><font color="#ffffff"><b>Description</b></font></th>
 	</tr>
    	<tr>
-		<td  bgcolor="#eeeeee"><img src="/images/pencil.png" align="left"></td>
+		<td  bgcolor="#eeeeee"><img src="images/pencil.png" align="left"></td>
 		<td  bgcolor="#eeeeee">Edit the information for this customer</td>
 	</tr>
    	<tr>
-		<td  bgcolor="#eeeeee"><img src="/images/lock_edit.png" align="left"></td>
+		<td  bgcolor="#eeeeee"><img src="images/lock_edit.png" align="left"></td>
 		<td  bgcolor="#eeeeee">Change the customer's password</td>
 	</tr>
 
    	<tr>
-		<td  bgcolor="#eeeeee"><img src="/images/table.png" align="left"></td>
+		<td  bgcolor="#eeeeee"><img src="images/table.png" align="left"></td>
 		<td  bgcolor="#eeeeee">View the Call Detail Records (CDR) for this customer</td>
 	</tr>
 <?if ( $config_values['USE_BILLING'] == "YES") {?>
    	<tr>
-		<td  bgcolor="#eeeeee"><img src="/images/cart_edit.png" align="left"></td>
+		<td  bgcolor="#eeeeee"><img src="images/cart_edit.png" align="left"></td>
 		<td  bgcolor="#eeeeee">View or change the billing information for this customer</td>
 	</tr>
 <?}?>
    	<tr>
-		<td  bgcolor="#eeeeee"><img src="/images/delete.png" align="left"></td>
+		<td  bgcolor="#eeeeee"><img src="images/delete.png" align="left"></td>
 		<td  bgcolor="#eeeeee">Delete this customer</td>
 	</tr>
 

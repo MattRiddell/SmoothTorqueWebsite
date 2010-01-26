@@ -77,9 +77,9 @@ $class=" class=\"tborderx\"  onmouseover=\"style.backgroundColor='#84DFC1';\" on
 <TD>
 <?
 if (strlen($row[name])<15){
-echo "<A HREF=\"editmessage.php?id=".$row[id]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit $row[name]\">".$row[name]."</A>";
+echo "<A HREF=\"editmessage.php?id=".$row[id]."\"><img src=\"images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit $row[name]\">".$row[name]."</A>";
 } else {
-echo "<A HREF=\"editmessage.php?id=".$row[id]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit $row[name]\">".trim(substr($row[name],0,15))."...</A>";
+echo "<A HREF=\"editmessage.php?id=".$row[id]."\"><img src=\"images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit $row[name]\">".trim(substr($row[name],0,15))."...</A>";
 }
 ?>
 </TD>
@@ -104,9 +104,9 @@ autostart=false width=0 height=0 id="sound<?echo $row[id];?>"
 enablejavascript="true">
 
 <a href="#" onClick="EvalSound('sound<?echo $row[id];?>')" title="Play <?echo $row[name];?> sound">
-<img src="/images/control_play_blue.png" border="0"></a>
+<img src="images/control_play_blue.png" border="0"></a>
 <a href="#" onClick="EvalSound2('sound<?echo $row[id];?>')" title="Pause <?echo $row[name];?> sound">
-<img src="/images/control_pause_blue.png" border="0"></a>
+<img src="images/control_pause_blue.png" border="0"></a>
 
 <?
 
@@ -116,7 +116,7 @@ enablejavascript="true">
 
 
 <a href="<?echo "/uploads/".str_replace(".sln",".wav",$row[filename]);?>" title="Open <?echo $row[name];?> fax">
-<img src="/images/page.png" border="0"></a>
+<img src="images/page.png" border="0"></a>
 
 <?
 
@@ -129,7 +129,7 @@ enablejavascript="true">
 
 
 <TD>
-<?echo "<A title=\"Delete the ".$row[name]." Message\" HREF=\"deleteMessage.php?id=".$row[id]."\"><IMG SRC=\"/images/delete.png\" BORDER=\"0\"></A>";?>
+<?echo "<A title=\"Delete the ".$row[name]." Message\" HREF=\"deleteMessage.php?id=".$row[id]."\"><IMG SRC=\"images/delete.png\" BORDER=\"0\"></A>";?>
 </TD>
 </TR>
 

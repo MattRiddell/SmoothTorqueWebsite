@@ -26,9 +26,9 @@ Owner of DHTMLgoodies.com
 
 
 // Path to arrow images
-var arrowImage = '/images/select_arrow.gif';	// Regular arrow
-var arrowImageOver = '/images/select_arrow_over.gif';	// Mouse over
-var arrowImageDown = '/images/select_arrow_down.gif';	// Mouse down
+var arrowImage = 'images/select_arrow.gif';	// Regular arrow
+var arrowImageOver = 'images/select_arrow_over.gif';	// Mouse over
+var arrowImageDown = 'images/select_arrow_down.gif';	// Mouse down
 
 
 var selectBoxIds = 0;

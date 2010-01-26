@@ -190,7 +190,7 @@ while ($rowx = mysql_fetch_assoc($resultss)) {
 }
 ?>
 </SELECT>
-<a href="queues.php"><IMG SRC="/images/pencil.png" border="0"></a>
+<a href="queues.php"><IMG SRC="images/pencil.png" border="0"></a>
 </TD>
 </TR><TR><TD CLASS="thead">Trunk</TD><TD>
 <SELECT NAME="trunkid">
@@ -207,7 +207,7 @@ while ($rowx = mysql_fetch_assoc($resultss)) {
 }
 ?>
 </SELECT>
-<a href="trunks.php"><IMG SRC="/images/pencil.png" border="0"></a>
+<a href="trunks.php"><IMG SRC="images/pencil.png" border="0"></a>
 </TD>
 </TR>
 

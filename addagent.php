@@ -37,13 +37,13 @@ require "header_queue.php";
 <form action = "addagent.php?queue_name=<?echo $_GET[name];?>" method="post">
 <table class="" align="center" border="0" cellpadding="2" cellspacing="0">
 <TR>
-<td style="background-image: url(/images/clb.gif);" width=2></td>
+<td style="background-image: url(images/clb.gif);" width=2></td>
 
 <TD CLASS="thead" colspan="2">
 
 Name
 </TD>
-<td style="background-image: url(/images/crb.gif);" width=2></td>
+<td style="background-image: url(images/crb.gif);" width=2></td>
 </TR>
 
 <TR  class="tborderx">

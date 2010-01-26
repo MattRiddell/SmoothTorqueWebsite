@@ -9,7 +9,7 @@ if (!isset($_POST[campaignid])&&!isset($_GET[campaignid])){
 
     <br /><br /><br /><br />
 <center>
-<table background="/images/sdbox.png" width="300" height="200" class="dragme22">
+<table background="images/sdbox.png" width="300" height="200" class="dragme22">
 <tr>
 <td>
 </td>
@@ -66,7 +66,7 @@ if ($out[browser]=="MSIE"){
  <?
 flush();
 ?>
-<script type="text/javascript" src="/ajax/jquery.js"></script>
+<script type="text/javascript" src="ajax/jquery.js"></script>
 <script type="text/javascript">
         $(function(){ // jquery onload
                 window.setInterval(function(){
@@ -76,7 +76,7 @@ flush();
 
 </script>
 <?} else {?>
-<script type="text/javascript" src="/ajax/jquery.js"></script>
+<script type="text/javascript" src="ajax/jquery.js"></script>
 <script type="text/javascript">
 
         $(function(){ // jquery onload
@@ -117,7 +117,7 @@ $row = mysql_fetch_assoc($result);
 <div id="ajaxDiv">
 <table border="0" cellpadding="20">
 <tr><td bgcolor = "#ffffff">
-<img src="/images/progress.gif" border="0">
+<img src="images/progress.gif" border="0">
 </td></tr></table>
 </div>
 

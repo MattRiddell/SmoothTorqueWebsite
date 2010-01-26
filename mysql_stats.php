@@ -6,7 +6,7 @@ if (isset($_GET[convert_table])) {
     flush();
     $result = mysql_query("ALTER TABLE SineDialer.".sanitize($_GET[convert_table],false)." ENGINE = InnoDB") or die (mysql_error());
     echo "<br /><b>Conversion completed</b><br />";
-    ?><META HTTP-EQUIV=REFRESH CONTENT="0; URL=/mysql_stats.php"><?
+    ?><META HTTP-EQUIV=REFRESH CONTENT="0; URL=mysql_stats.php"><?
     exit(0);
 }
 if (isset($_GET[convert_back])) {
@@ -14,7 +14,7 @@ if (isset($_GET[convert_back])) {
     flush();
     $result = mysql_query("ALTER TABLE SineDialer.".sanitize($_GET[convert_back],false)." ENGINE = MyISAM") or die (mysql_error());
     echo "<br /><b>Conversion completed</b><br />";
-    ?><META HTTP-EQUIV=REFRESH CONTENT="0; URL=/mysql_stats.php"><?
+    ?><META HTTP-EQUIV=REFRESH CONTENT="0; URL=mysql_stats.php"><?
     exit(0);
 }
 if (isset($_GET[kill])) {
@@ -54,7 +54,7 @@ $level=$_COOKIE[level];
 $out=_get_browser();
 if ($out[browser]=="MSIE"){
 ?>
-<script type="text/javascript" src="/ajax/jquery.js"></script>
+<script type="text/javascript" src="ajax/jquery.js"></script>
 <script type="text/javascript">
         $(function(){ // jquery onload
                 window.setInterval(function(){
@@ -64,7 +64,7 @@ if ($out[browser]=="MSIE"){
 
 </script>
 <?} else {?>
-<script type="text/javascript" src="/ajax/jquery.js"></script>
+<script type="text/javascript" src="ajax/jquery.js"></script>
 <script type="text/javascript">
 
         $(function(){ // jquery onload

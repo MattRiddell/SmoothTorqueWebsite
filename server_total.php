@@ -49,7 +49,7 @@ if (mysql_num_rows($result) > 0) {
 $resulty = mysql_query("SELECT * from config where parameter = 'read_1'") or die(mysql_error());
 if (mysql_num_rows($resulty) == 0) {
 box_start();
-echo "<br /><center><img src=\"/images/icons/gtk-dialog-info.png\" border=\"0\" width=\"64\" height=\"64\">";
+echo "<br /><center><img src=\"images/icons/gtk-dialog-info.png\" border=\"0\" width=\"64\" height=\"64\">";
 echo "<br /><br />I've added real time server control - you can now start and stop severs (even during a campaign) without restarting SmoothTorque";
 echo "<br />";
 echo "<br />";

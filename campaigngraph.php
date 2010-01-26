@@ -23,7 +23,7 @@ if ($out[browser]=="MSIE"){
  <?
 flush();
 ?>
-<script type="text/javascript" src="/ajax/jquery.js"></script>
+<script type="text/javascript" src="ajax/jquery.js"></script>
 <script type="text/javascript">
         $(function(){ // jquery onload
                 window.setInterval(function(){
@@ -33,7 +33,7 @@ flush();
 
 </script>
 <?} else {?>
-<script type="text/javascript" src="/ajax/jquery.js"></script>
+<script type="text/javascript" src="ajax/jquery.js"></script>
 <script type="text/javascript">
 
         $(function(){ // jquery onload

@@ -65,7 +65,7 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
         exec($config_values['SOX']." ".str_replace(" ","\ ",$file[path]).' -r 8000 '.$sox_options.' /var/tmp/uploads/x-'.$hash.'.wav');
         exec($config_values['SOX']." ".str_replace(" ","\ ",$file[path]).' -r 8000 '.$sox_options.' ./uploads/x-'.$hash.'.wav');
         ?>
-<img src="/images/tick.png" onLoad="window.location = '/addmessage.php?filename=<?echo "x-".$hash.".sln";?>';">
+<img src="images/tick.png" onLoad="window.location = '/addmessage.php?filename=<?echo "x-".$hash.".sln";?>';">
         <?
         exit(0);
         $filename = $file[path];

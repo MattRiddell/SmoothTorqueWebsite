@@ -24,7 +24,7 @@ if (!function_exists('box_button') ) {
 ?><div style="width:50%;height:80px;display:inline-table">
         <div class="boxbutton" id="<?=$name?>" >
             <a  href="<?=$url;?>" onclick="this.blur();new Effect.Pulsate('<?=$name?>',{ pulses: 1, duration: 0.5 });setTimeout('this.location=\'/<?=$url?>\'',1000);return false;">
-                <img src="/images/64x64/<?=$image?>.png" align="left" />
+                <img src="images/64x64/<?=$image?>.png" align="left" />
                 <b><?=$name?></b><br /><?=$description?>
             </a>
         </font>

@@ -24,6 +24,6 @@
 	</tr>
 </table>
 
-<p align="left">Once this has been completed you will need to make the server active. To do this, click on the play button <img src="/images/control_play_blue.png"> and the status of the server will change to active (the red cross will change to a gree tick). To deactivate a server, click on the stop button <img src="/images/control_stop_blue.png">, the green tick will change to a red cross.</p>
+<p align="left">Once this has been completed you will need to make the server active. To do this, click on the play button <img src="images/control_play_blue.png"> and the status of the server will change to active (the red cross will change to a gree tick). To deactivate a server, click on the stop button <img src="images/control_stop_blue.png">, the green tick will change to a red cross.</p>
 
-<p align="left">If you wish to edit the server information, click on the pencil icon <img src="/images/pencil.png">.</p>
+<p align="left">If you wish to edit the server information, click on the pencil icon <img src="images/pencil.png">.</p>

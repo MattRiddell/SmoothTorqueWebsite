@@ -350,14 +350,14 @@
 	background-color: #eeeeff;
     border-style: solid;
     border-width: 1px;
-    background-image: url('../images/ch.gif');
+    background-image: url('..../images/ch.gif');
     background-position: -8px -8px;
 }
 
 .progressbar {
 	width: 0px;
 	height: 16px;
-    background-image: url('../images/chb.gif');
+    background-image: url('..../images/chb.gif');
     background-position: -8px -8px;
 	background-color: #00ff00;
 }
@@ -412,7 +412,7 @@ div.inputhead {
 	opacity:0.1;	/* Transparency */
 }
 BODY {
-	background-image: url('/modules/broadcast/images/leftbg.png');
+	background-image: url('/modules/broadcast../images/leftbg.png');
 	PADDING-RIGHT: 0px; PADDING-LEFT: 0px;
 	PADDING-BOTTOM: 0px; MARGIN: 0px; FONT: 9pt verdana,
 geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; COLOR: #000000; PADDING-TOP: 0px
@@ -505,19 +505,19 @@ outset; COLOR: #000000; BORDER-BOTTOM: #245e83 0px outset
 }
 
 .thead2 {
-	background: url(/images/ch.gif);
+	background: url(../images/ch.gif);
 	COLOR: #FFFFFF;
 	text-decoration: none;
     FONT: 10pt verdana,geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
 }
 .theadl2 {
-    background: url(/images/cl.gif);
+    background: url(../images/cl.gif);
     COLOR: #000000;
 	text-decoration: none;
     FONT: 10pt verdana,geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
 }
 .theadr2 {
-background: url(/images/cr.gif);
+background: url(../images/cr.gif);
 COLOR: #000000;
 	text-decoration: none;
     FONT: 10pt verdana,geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
@@ -528,18 +528,18 @@ COLOR: #000000;
     FONT: 10pt verdana,geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
 }
 .thead {
-    background: url(/images/chb.gif);
+    background: url(../images/chb.gif);
     COLOR: #ffffff;
 	text-decoration: none;
     FONT: 10pt verdana,geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
 }.theadl {
-background: url(/images/clb.gif);
+background: url(../images/clb.gif);
 COLOR: #000000;
 	text-decoration: none;
     FONT: 10pt verdana,geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
 }
 .theadr {
-background: url(/images/crb.gif);
+background: url(../images/crb.gif);
 COLOR: #000000;
 	text-decoration: none;
     FONT: 10pt verdana,geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
@@ -766,13 +766,13 @@ OPTGROUP {
 	BORDER-RIGHT: 2px inset; PADDING-RIGHT: 10px; BORDER-TOP: 2px inset; PADDING-LEFT: 10px; BACKGROUND: #e4e7f5 repeat-x left top; PADDING-BOTTOM: 10px; BORDER-LEFT: 2px inset; COLOR: #000000; PADDING-TOP: 10px; BORDER-BOTTOM: 2px inset
 }
 .panelsurround {
-	BACKGROUND: url(../../images/gradients/gradient_panelsurround.gif) #d5d8e5 repeat-x left top; COLOR: #000000
+	BACKGROUND: url(../..../images/gradients/gradient_panelsurround.gif) #d5d8e5 repeat-x left top; COLOR: #000000
 }
 LEGEND {
 	FONT: 11px tahoma, verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; COLOR: #22229c
 }
 .vbmenu_control {
-	PADDING-RIGHT: 6px; PADDING-LEFT: 6px; BACKGROUND: url(../../images/gradients/newcat.gif) #245e83 repeat-x left top; PADDING-BOTTOM: 3px; FONT: bold 11px tahoma, verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; COLOR: #ffffff; PADDING-TOP: 3px; WHITE-SPACE: nowrap
+	PADDING-RIGHT: 6px; PADDING-LEFT: 6px; BACKGROUND: url(../..../images/gradients/newcat.gif) #245e83 repeat-x left top; PADDING-BOTTOM: 3px; FONT: bold 11px tahoma, verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; COLOR: #ffffff; PADDING-TOP: 3px; WHITE-SPACE: nowrap
 }
 .vbmenu_control A:link {
 	COLOR: #ffffff; TEXT-DECORATION: none
@@ -893,21 +893,21 @@ body2 {
 	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: #ffffff; PADDING-BOTTOM: 0px; MARGIN: 0px; FONT: 10pt verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; COLOR: #000000; PADDING-TOP: 0px
 }
 img.percentImage {
- background: white url(/images/percentImage_back.png) top left no-repeat;
+ background: white url(../images/percentImage_back.png) top left no-repeat;
  padding: 0;
  margin: 5px 0 0 0;
  background-position: 1px 0;
 }
 
 img.percentImage2 {
- background: white url(/images/percentImage_back_grey.png) top left no-repeat;
+ background: white url(../images/percentImage_back_grey.png) top left no-repeat;
  padding: 0;
  margin: 5px 0 0 0;
  background-position: 1px 0;
 }
 
 img.percentImage3 {
- background: white url(/images/percentImage_orange.png) top left no-repeat;
+ background: white url(../images/percentImage_orange.png) top left no-repeat;
  padding: 0;
  margin: 5px 0 0 0;
  background-position: 1px 0;
@@ -921,7 +921,7 @@ TD.subheader {
 }
 
 TD.subheader:hover {
-   background: url(/images/chb.gif);
+   background: url(../images/chb.gif);
    background-position: 0 -6;
    border: 0px;
 }

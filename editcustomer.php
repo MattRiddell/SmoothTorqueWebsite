@@ -185,7 +185,7 @@ if (isset($_POST[name])){
 	}
 	?>
 	</SELECT>
-	<a href="queues.php"><IMG SRC="/images/pencil.png" border="0"></a>
+	<a href="queues.php"><IMG SRC="images/pencil.png" border="0"></a>
 	</TD>
 	</TR><TR><TD CLASS="thead">Trunk</TD><TD colspan=2>
 	<SELECT NAME="trunkid">
@@ -202,7 +202,7 @@ if (isset($_POST[name])){
 	}
 	?>
 	</SELECT>
-	<a href="trunks.php"><IMG SRC="/images/pencil.png" border="0"></a>
+	<a href="trunks.php"><IMG SRC="images/pencil.png" border="0"></a>
 	</TD>
 	</TR>
 	<tr><TD CLASS="thead" colspan="3">Assigned Lead Lists</TD>

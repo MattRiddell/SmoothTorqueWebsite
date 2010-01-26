@@ -13,7 +13,7 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
 <br /><br /><br /><br />
 <?
 /*<center>
-<table background="/images/sdbox.png" width="300" height="200" class="dragme22">
+<table background="images/sdbox.png" width="300" height="200" class="dragme22">
 <tr>
 <td>
 </td>
@@ -23,30 +23,30 @@ box_start();
 ?>
 <center>
 <h3><?echo $config_values['NUMBERS_TITLE'];?></h3>
-<a href="/serverlist.php"><img src="/images/report.png" border="0">&nbsp; <?echo $config_values['NUMBERS_SYSTEM'];?></a><br />
+<a href="serverlist.php"><img src="images/report.png" border="0">&nbsp; <?echo $config_values['NUMBERS_SYSTEM'];?></a><br />
 <br />
-<a href="/viewnumbers.php"><img src="/images/page_white_stack.png" border="0">&nbsp; <?echo $config_values['NUMBERS_VIEW'];?></a><br />
+<a href="viewnumbers.php"><img src="images/page_white_stack.png" border="0">&nbsp; <?echo $config_values['NUMBERS_VIEW'];?></a><br />
 <br />
-<a href="/searchnumbers.php"><img src="/images/magnifier.png" border="0">&nbsp; <?echo $config_values['NUMBERS_SEARCH'];?></a><br />
+<a href="searchnumbers.php"><img src="images/magnifier.png" border="0">&nbsp; <?echo $config_values['NUMBERS_SEARCH'];?></a><br />
 <br />
-<a href="/exportnumbers.php"><img src="/images/table_save.png" border="0">&nbsp; <?echo $config_values['NUMBERS_EXPORT'];?></a><br />
+<a href="exportnumbers.php"><img src="images/table_save.png" border="0">&nbsp; <?echo $config_values['NUMBERS_EXPORT'];?></a><br />
 <br />
 <?
 if ($config_values['use_names'] == 'YES') {
 ?>
-	<a href="/upload_names.php"><img src="/images/page_white_get.png" border="0">&nbsp;Upload names and numbers from a text file</a><br />
+	<a href="upload_names.php"><img src="images/page_white_get.png" border="0">&nbsp;Upload names and numbers from a text file</a><br />
 	<br />
 <?
 }
 ?>
-<a href="/upload.php"><img src="/images/page_white_get.png" border="0">&nbsp; <?echo $config_values['NUMBERS_UPLOAD'];?></a><br />
+<a href="upload.php"><img src="images/page_white_get.png" border="0">&nbsp; <?echo $config_values['NUMBERS_UPLOAD'];?></a><br />
 <br />
-<a href="/addnumbers.php"><img src="/images/page_white_add.png" border="0">&nbsp; <?echo $config_values['NUMBERS_MANUAL'];?></a><br />
+<a href="addnumbers.php"><img src="images/page_white_add.png" border="0">&nbsp; <?echo $config_values['NUMBERS_MANUAL'];?></a><br />
 <?
 if ($config_values['USE_GENERATE'] == "YES") {
 ?>
 <br />
-<a href="/gennumbers.php"><img src="/images/page_white_lightning.png" border="0">&nbsp; <?echo $config_values['NUMBERS_GENERATE'];?></a><br />
+<a href="gennumbers.php"><img src="images/page_white_lightning.png" border="0">&nbsp; <?echo $config_values['NUMBERS_GENERATE'];?></a><br />
 <?
 }
 ?>

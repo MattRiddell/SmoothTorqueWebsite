@@ -50,9 +50,9 @@ if ($_GET[page]>0) {
 } else {
     $start = 0;
 }
-    echo '<a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page=0&accountcode='.$accountcode_in.'"><img src="/images/resultset_first.png" border="0"></a> ';
+    echo '<a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page=0&accountcode='.$accountcode_in.'"><img src="images/resultset_first.png" border="0"></a> ';
 if ($page > 0) {
-    echo '<a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page='.($page-1).'&accountcode='.$accountcode_in.'"><img src="/images/resultset_previous.png" border="0"></a> ';
+    echo '<a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page='.($page-1).'&accountcode='.$accountcode_in.'"><img src="images/resultset_previous.png" border="0"></a> ';
 }
 if ($page > 5) {
     $pagex= $page-4;
@@ -69,8 +69,8 @@ for ($i = $pagex;$i<($count/100);$i++) {
     }
 }
 
-echo '<a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page='.($page+1).'&accountcode='.$accountcode_in.'"><img src="/images/resultset_next.png" border="0"></a> ';
-echo '<a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page='.round($count/100).'&accountcode='.$accountcode_in.'"><img src="/images/resultset_last.png" border="0"></a> ';
+echo '<a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page='.($page+1).'&accountcode='.$accountcode_in.'"><img src="images/resultset_next.png" border="0"></a> ';
+echo '<a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page='.round($count/100).'&accountcode='.$accountcode_in.'"><img src="images/resultset_last.png" border="0"></a> ';
 //$sql = "SELECT * from ".$config_values['CDR_TABLE']." order by calldate DESC LIMIT $start,100";
 $sql = "SELECT * from ".$config_values['CDR_TABLE']." WHERE calldate between '".$_GET['startdate']." 00:00:00' and '".$_GET['enddate']." 23:59:59' and dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode_in' order by calldate DESC LIMIT $start,100";
 
@@ -118,9 +118,9 @@ while ($row = mysql_fetch_assoc($result)) {
     $userfield2[$i] = $row[userfield2];
     if ($userfield2[$i] != 1) {
         $userfield2[$i] = 0;
-        $paid[$i] = '<td bgcolor="#FFEEEE"><img src="/images/cross.png" border="0" align="center">';
+        $paid[$i] = '<td bgcolor="#FFEEEE"><img src="images/cross.png" border="0" align="center">';
     } else {
-        $paid[$i] = '<td bgcolor="#EEFFEE"><img src="/images/tick.png" border="0" align="center">';
+        $paid[$i] = '<td bgcolor="#EEFFEE"><img src="images/tick.png" border="0" align="center">';
     }
     $display = true;
     if ($disposition[$i] == "ANSWERED") {

@@ -76,7 +76,7 @@ case 2:
     echo "Campaign Stop - Not Yet Run";
     break;
 case 101:
-    echo "Campaign Start - Processed <A HREF=\"schedule.php?status=1&campaignid=".$_POST[campaignid]."&queueID=".$row[queueID]."\"><IMG SRC=\"/images/reset.gif\" BORDER=\"0\"></A>";
+    echo "Campaign Start - Processed <A HREF=\"schedule.php?status=1&campaignid=".$_POST[campaignid]."&queueID=".$row[queueID]."\"><IMG SRC=\"images/reset.gif\" BORDER=\"0\"></A>";
     break;
 case 102:
     echo "Campaign Stop - Processed";
@@ -114,7 +114,7 @@ case 102:
 </TD>
 <?*/?>
 <TD>
-<A HREF="deleteschedule.php?id=<?echo $row[queueID]?>"><IMG SRC="/images/cross.gif" BORDER="0"></A>
+<A HREF="deleteschedule.php?id=<?echo $row[queueID]?>"><IMG SRC="images/cross.gif" BORDER="0"></A>
 </TD>
 </TR>
 

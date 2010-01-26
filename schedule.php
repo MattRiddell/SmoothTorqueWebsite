@@ -24,7 +24,7 @@ $result=mysql_query($sql, $link) or die (mysql_error());;
 if (mysql_num_rows($result) == 0) {
     /* There are no schedule entries */
     box_start(320);
-    echo "<center><img src=\"/images/icons/gtk-dialog-info.png\" border=\"0\" width=\"64\" height=\"64\"><br /><br /><b>You haven't created any schedules</b><br /><br />You can create one by clicking the add schedule button above";
+    echo "<center><img src=\"images/icons/gtk-dialog-info.png\" border=\"0\" width=\"64\" height=\"64\"><br /><br /><b>You haven't created any schedules</b><br /><br />You can create one by clicking the add schedule button above";
     box_end();
 } else {
     /* There are schedule entries */
@@ -65,7 +65,7 @@ if (mysql_num_rows($result) == 0) {
         } else {
             echo $row[name];
         }
-        echo "<img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit the schedule\"></a>";
+        echo "<img src=\"images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit the schedule\"></a>";
         echo "</td>";
         echo "<td>";
         if (strlen($row[description])>34){
@@ -84,7 +84,7 @@ if (mysql_num_rows($result) == 0) {
         } else {
             echo $name;
         }
-        echo "<img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit the campaign\"></a>";
+        echo "<img src=\"images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit the campaign\"></a>";
         echo "</td>";
         echo "<td>$row[start_hour]:$row[start_minute]-$row[end_hour]:$row[end_minute]</td>";
         echo "<td>";
@@ -102,7 +102,7 @@ if (mysql_num_rows($result) == 0) {
         }
         echo "</td>";
         echo "<td>";
-        echo "<a href=\"deleteschedule.php?id=$row[id]\"><IMG SRC=\"/images/cross.gif\" BORDER=\"0\" ALT=\"Delete Schedule\"></a>";
+        echo "<a href=\"deleteschedule.php?id=$row[id]\"><IMG SRC=\"images/cross.gif\" BORDER=\"0\" ALT=\"Delete Schedule\"></a>";
         echo "</td>";
         echo "</tr>";
     }

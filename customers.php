@@ -84,16 +84,16 @@ $class=" class=\"tborderx\"  onmouseover=\"style.backgroundColor='#84DFC1';\" on
 <TD >
 <?
 if (strlen($row[company])<15){
-echo "<A HREF=\"editcustomer.php?id=".$row[id]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".$row[company]."</A>&nbsp;";
+echo "<A HREF=\"editcustomer.php?id=".$row[id]."\"><img src=\"images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".$row[company]."</A>&nbsp;";
 } else {
-echo "<A HREF=\"editcustomer.php?id=".$row[id]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".trim(substr($row[company],0,15))."...</A>";
+echo "<A HREF=\"editcustomer.php?id=".$row[id]."\"><img src=\"images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".trim(substr($row[company],0,15))."...</A>";
 }
 ?>
 </TD>
 <TD>
 <?
 ?>
-<?echo "<A HREF=\"changepassword.php?id=".$row[id]."\" title=\"Change Password\"><img src=\"/images/lock_edit.png\" border=\"0\" align=\"right\" title=\"Change Password\"></A>";?>
+<?echo "<A HREF=\"changepassword.php?id=".$row[id]."\" title=\"Change Password\"><img src=\"images/lock_edit.png\" border=\"0\" align=\"right\" title=\"Change Password\"></A>";?>
 <?
 if (strlen($row[username])<15){
     echo $row[username];
@@ -103,7 +103,7 @@ if (strlen($row[username])<15){
 ?>
 </TD>
 <TD>
-<?echo "<A HREF=\"viewcdr.php?accountcode=stl-".$row[username]."\" title=\"View CDR Information\"><img src=\"/images/table.png\" border=\"0\" align=\"left\" title=\"View CDR Information\">View CDR</A>";?>
+<?echo "<A HREF=\"viewcdr.php?accountcode=stl-".$row[username]."\" title=\"View CDR Information\"><img src=\"images/table.png\" border=\"0\" align=\"left\" title=\"View CDR Information\">View CDR</A>";?>
 </TD>
 <TD>
 <?echo $row[city];?>
@@ -123,7 +123,7 @@ if (strlen($row[phone])<15){
 <?if ( $config_values['USE_BILLING'] == "YES") {?>
 <TD>
 <?
-echo "<A HREF=\"billing.php?id=".$row[id]."\" title=\"View Billing Information\"><img src=\"/images/cart_edit.png\" border=\"0\" align=\"right\" title=\"View Billing Information\">";
+echo "<A HREF=\"billing.php?id=".$row[id]."\" title=\"View Billing Information\"><img src=\"images/cart_edit.png\" border=\"0\" align=\"right\" title=\"View Billing Information\">";
 if (isset($row[credit])){
 echo $config_values['CURRENCY_SYMBOL']." ".number_format($row[credit],2)."</A>";
 } else {
@@ -133,7 +133,7 @@ echo "Add Billing</A>";
 </TD>
 <TD>
 <?
-echo "<A HREF=\"billing.php?id=".$row[id]."\" title=\"View Billing Information\"><img src=\"/images/cart_edit.png\" border=\"0\" align=\"right\" title=\"View Billing Information\">";
+echo "<A HREF=\"billing.php?id=".$row[id]."\" title=\"View Billing Information\"><img src=\"images/cart_edit.png\" border=\"0\" align=\"right\" title=\"View Billing Information\">";
 if (isset($row[credit])){
 echo $config_values['CURRENCY_SYMBOL']." ".number_format($row[creditlimit],2)."</A>";
 } else {
@@ -177,7 +177,7 @@ echo "today: $today <br />";
 
 </TD>  */?>
 <TD>
-<a href="#" onclick="displaySmallMessage('includes/confirmDeleteCustomer.php?id=<?echo $row[id];?>');return false"><IMG SRC="/images/delete.png" BORDER="0"></a><br>
+<a href="#" onclick="displaySmallMessage('includes/confirmDeleteCustomer.php?id=<?echo $row[id];?>');return false"><IMG SRC="images/delete.png" BORDER="0"></a><br>
 </TD>
 </TR>
 

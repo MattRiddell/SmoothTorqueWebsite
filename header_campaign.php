@@ -15,8 +15,8 @@ box_start(295);
 }
 ?>
 <table  align="center" width="100%" border="0" cellpadding="0" cellspacing="3"><TR>
-    <TD class="subheader"><A HREF="addcampaign.php"><img src="/images/folder_add.png" border="0" align="left"><?echo $config_values['ADD_CAMPAIGN'];?></A>&nbsp;&nbsp;</TD>
-    <TD class="subheader"><A HREF="campaigns.php"><img src="/images/folder_explore.png" border="0" align="left"><?echo $config_values['VIEW_CAMPAIGN'];?></A>&nbsp;&nbsp;</TD>
+    <TD class="subheader"><A HREF="addcampaign.php"><img src="images/folder_add.png" border="0" align="left"><?echo $config_values['ADD_CAMPAIGN'];?></A>&nbsp;&nbsp;</TD>
+    <TD class="subheader"><A HREF="campaigns.php"><img src="images/folder_explore.png" border="0" align="left"><?echo $config_values['VIEW_CAMPAIGN'];?></A>&nbsp;&nbsp;</TD>
 
 
     <?

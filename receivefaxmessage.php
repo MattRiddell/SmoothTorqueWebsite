@@ -30,7 +30,7 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
         exec("cp ".str_replace(" ","\ ",$file[path]).' /var/tmp/uploads/fax-'.$hash.'.tiff');
         exec("cp ".str_replace(" ","\ ",$file[path]).' ./uploads/fax-'.$hash.'.tiff');
         ?>
-<img src="/images/tick.png" onLoad="window.location = '/addmessage.php?filename=<?echo "fax-".$hash.".tiff";?>';">
+<img src="images/tick.png" onLoad="window.location = '/addmessage.php?filename=<?echo "fax-".$hash.".tiff";?>';">
         <?
         exit(0);
         $filename = $file[path];

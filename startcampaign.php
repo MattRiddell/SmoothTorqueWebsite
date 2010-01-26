@@ -10,7 +10,7 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
 ?>
 <br /><br /><br /><br />
 <center>
-<table background="/images/sdbox.png" width="300" height="200" class="dragme22">
+<table background="images/sdbox.png" width="300" height="200" class="dragme22">
 <tr>
 <td>
 </td>
@@ -33,7 +33,7 @@ if ($num_numbers <1) {
 </table>
 </center>
 
-        <META HTTP-EQUIV=REFRESH CONTENT="10; URL=/campaigns.php">
+        <META HTTP-EQUIV=REFRESH CONTENT="10; URL=campaigns.php">
         <?
         exit(0);
 
@@ -149,7 +149,7 @@ if ( $config_values['USE_BILLING'] == "YES") {
         </table>
         </center>
 
-        <META HTTP-EQUIV=REFRESH CONTENT="10; URL=/campaigns.php">
+        <META HTTP-EQUIV=REFRESH CONTENT="10; URL=campaigns.php">
         <?
         exit(0);
     } else {
@@ -252,7 +252,7 @@ $resultx=mysql_query($sql2, $link) or die ("k:".mysql_error());;
 <?
 if ($out[browser]=="MSIE"){
 ?>
-<script type="text/javascript" src="/ajax/jquery.js"></script>
+<script type="text/javascript" src="ajax/jquery.js"></script>
         <script type="text/javascript">
         $(function(){ // jquery onload
                 window.setInterval(function(){ // setInterval code
@@ -262,7 +262,7 @@ if ($out[browser]=="MSIE"){
 
         </script>
  <?} else {?>
-<script type="text/javascript" src="/ajax/jquery.js"></script>
+<script type="text/javascript" src="ajax/jquery.js"></script>
         <script type="text/javascript">
         $(function(){ // jquery onload
                 window.setInterval(function(){ // setInterval code

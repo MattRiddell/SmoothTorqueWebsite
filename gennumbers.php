@@ -20,7 +20,7 @@ if (!isset($_POST[campaignid])){
     ?>
     <br /><br /><br /><br />
 <center>
-<table background="/images/sdbox.png" width="300" height="200" class="dragme22">
+<table background="images/sdbox.png" width="300" height="200" class="dragme22">
 <TR>
 <td>
 </td>
@@ -61,7 +61,7 @@ Please select a campaign to add numbers to<br /><br />
  $count=0;
  $count2=0;
  ?><br /><br /><br /><br /><br />
- <table background="/images/sdbox.png" align="center" width="300" height="200" cellpadding="0" cellspacing="0" class="dragme22">
+ <table background="images/sdbox.png" align="center" width="300" height="200" cellpadding="0" cellspacing="0" class="dragme22">
  <tr><td width=250><center>
  <table><tr><td>
 <div id="hideShow" >
@@ -129,7 +129,7 @@ if (substr($_POST[start],0,3) == "000") {
         $count2=0;
     }
  }
- echo "Phone Numbers Saved<img src=\"/images/tick.gif\">";
+ echo "Phone Numbers Saved<img src=\"images/tick.gif\">";
       ?>
     <script language="javascript">
     function delayer(){
@@ -156,7 +156,7 @@ if (substr($_POST[start],0,3) == "000") {
     ?>
         <br /><br /><br /><br />
 <center>
-<table background="/images/sdbox.png" width="300" height="200" class="dragme22">
+<table background="images/sdbox.png" width="300" height="200" class="dragme22">
     <TR>
         <td>
         </td>
@@ -200,7 +200,7 @@ $sql = "INSERT INTO campaign (name, description, groupid, messageid, messageid2,
  ?>
  <br /><br /><br /><br />
 <center>
-<table background="/images/sdbox.png" width="300" height="200" class="dragme22">
+<table background="images/sdbox.png" width="300" height="200" class="dragme22">
     <TR>
         <td>
         </td>
@@ -244,7 +244,7 @@ $sql = "INSERT INTO campaign (name, description, groupid, messageid, messageid2,
 ?>
     <br /><br /><br /><br />
 <center>
-<table background="/images/sdbox.png" width="300" height="200" class="dragme22">
+<table background="images/sdbox.png" width="300" height="200" class="dragme22">
     <TR>
         <td>
         </td>

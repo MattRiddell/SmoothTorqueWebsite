@@ -190,20 +190,21 @@ if (!function_exists('_get_browser') ) {
 
 if (!function_exists('get_menu_html') ) {
 function get_menu_html($config_values, $self, $level) {
+    global $http_dir_name;
     $menu='<CENTER>
     <table border="0" cellpadding="3" cellspacing="0"><TR HEIGHT="10">';
     //=======================================================================================================
     // Home
     //=======================================================================================================
     if ($self=="/main.php"){
-        $menu.='<td style="background-image: url(/images/clb.gif);"></td>';
+        $menu.='<td style="background-image: url(images/clb.gif);"></td>';
         $thead="thead";
     } else {
         $menu.='<TD CLASS="theadl2" WIDTH=0></TD>';
         $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
     }
 
-    $menu.='<TD class="'.$thead.'" height=27><A HREF="/main.php"><img width="16" height="16" src="/images/house.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_HOME']).'</A>&nbsp;</TD>';
+    $menu.='<TD class="'.$thead.'" height=27><A HREF="'.$http_dir_name.'main.php"><img width="16" height="16" src="'.$http_dir_name.'images/house.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_HOME']).'</A>&nbsp;</TD>';
 
     if ($level==sha1("level100")||$level==sha1("level0")){
     //=======================================================================================================
@@ -215,7 +216,7 @@ function get_menu_html($config_values, $self, $level) {
     } else {
         $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
     }
-    $menu.='<TD class="'.$thead.'"><A HREF="/campaigns.php"><img width="16" height="16"  src="/images/folder.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_CAMPAIGNS']).'</A>&nbsp;</TD>';
+    $menu.='<TD class="'.$thead.'"><A HREF="'.$http_dir_name.'campaigns.php"><img width="16" height="16"  src="'.$http_dir_name.'images/folder.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_CAMPAIGNS']).'</A>&nbsp;</TD>';
 
     //=======================================================================================================
     // Numbers
@@ -225,7 +226,7 @@ function get_menu_html($config_values, $self, $level) {
     } else {
         $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
     }
-    $menu.='<TD class="'.$thead.'"><A HREF="/numbers.php"><img width="16" height="16"  src="/images/telephone.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_NUMBERS']).'</A>&nbsp;</TD>';
+    $menu.='<TD class="'.$thead.'"><A HREF="'.$http_dir_name.'numbers.php"><img width="16" height="16"  src="'.$http_dir_name.'images/telephone.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_NUMBERS']).'</A>&nbsp;</TD>';
 
     //=======================================================================================================
     // DNC Numbers
@@ -235,7 +236,7 @@ function get_menu_html($config_values, $self, $level) {
     } else {
         $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
     }
-    $menu.='<TD class="'.$thead.'"><A HREF="/dncnumbers.php"><img width="16" height="16"  src="/images/telephone_error.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_DNC']).'</A>&nbsp;</TD>';
+    $menu.='<TD class="'.$thead.'"><A HREF="'.$http_dir_name.'dncnumbers.php"><img width="16" height="16"  src="'.$http_dir_name.'images/telephone_error.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_DNC']).'</A>&nbsp;</TD>';
 
     //=======================================================================================================
     // Messages
@@ -245,7 +246,7 @@ function get_menu_html($config_values, $self, $level) {
     } else {
         $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
     }
-    $menu.='<TD class="'.$thead.'"><A HREF="/messages.php"><img width="16" height="16"  src="/images/sound.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_MESSAGES']).'</A>&nbsp;</TD>';
+    $menu.='<TD class="'.$thead.'"><A HREF="'.$http_dir_name.'messages.php"><img width="16" height="16"  src="'.$http_dir_name.'images/sound.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_MESSAGES']).'</A>&nbsp;</TD>';
     //=======================================================================================================
     // Schedules
     //=======================================================================================================
@@ -254,7 +255,7 @@ function get_menu_html($config_values, $self, $level) {
     } else {
         $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
     }
-    $menu.='<TD class="'.$thead.'"><A HREF="/schedule.php"><img width="16" height="16"  src="/images/clock.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_SCHEDULES']).'</A>&nbsp;</TD>';
+    $menu.='<TD class="'.$thead.'"><A HREF="'.$http_dir_name.'schedule.php"><img width="16" height="16"  src="'.$http_dir_name.'images/clock.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_SCHEDULES']).'</A>&nbsp;</TD>';
     if ($level==sha1("level100")){
 
         //=======================================================================================================
@@ -265,7 +266,7 @@ function get_menu_html($config_values, $self, $level) {
         } else {
             $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
         }
-        $menu.='<TD class="'.$thead.'"><A HREF="/customers.php"><img width="16" height="16"  src="/images/group.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_CUSTOMERS']).'</A>&nbsp;</TD>';
+        $menu.='<TD class="'.$thead.'"><A HREF="'.$http_dir_name.'customers.php"><img width="16" height="16"  src="'.$http_dir_name.'images/group.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_CUSTOMERS']).'</A>&nbsp;</TD>';
         //=======================================================================================================
 
         //=======================================================================================================
@@ -276,7 +277,7 @@ function get_menu_html($config_values, $self, $level) {
         } else {
             $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
         }
-        $menu.='<TD class="'.$thead.'"><A HREF="/queues.php"><img width="16" height="16"  src="/images/database.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_QUEUES']).'</A>&nbsp;</TD>';
+        $menu.='<TD class="'.$thead.'"><A HREF="'.$http_dir_name.'queues.php"><img width="16" height="16"  src="'.$http_dir_name.'images/database.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_QUEUES']).'</A>&nbsp;</TD>';
         //=======================================================================================================
 
         //=======================================================================================================
@@ -288,7 +289,7 @@ function get_menu_html($config_values, $self, $level) {
             $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
         }
 
-        $menu.='<TD class="'.$thead.'"><A HREF="/servers.php"><img width="16" height="16"  src="/images/server.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_SERVERS']).'</A>&nbsp;</TD>';
+        $menu.='<TD class="'.$thead.'"><A HREF="'.$http_dir_name.'servers.php"><img width="16" height="16"  src="'.$http_dir_name.'images/server.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_SERVERS']).'</A>&nbsp;</TD>';
         //=======================================================================================================
 
 
@@ -300,7 +301,7 @@ function get_menu_html($config_values, $self, $level) {
         } else {
             $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
         }
-        $menu.='<TD class="'.$thead.'"><A HREF="/trunks.php"><img width="16" height="16"  src="/images/telephone_link.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_TRUNKS']).'</A>&nbsp;</TD>';
+        $menu.='<TD class="'.$thead.'"><A HREF="'.$http_dir_name.'trunks.php"><img width="16" height="16"  src="'.$http_dir_name.'images/telephone_link.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_TRUNKS']).'</A>&nbsp;</TD>';
         //=======================================================================================================
 
         //=======================================================================================================
@@ -311,7 +312,7 @@ function get_menu_html($config_values, $self, $level) {
         } else {
             $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
         }
-        $menu.='<TD class="'.$thead.'"><A HREF="/config.php"><img width="16" height="16"  src="/images/cog.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_ADMIN']).'</A>&nbsp;</TD>';
+        $menu.='<TD class="'.$thead.'"><A HREF="'.$http_dir_name.'config.php"><img width="16" height="16"  src="'.$http_dir_name.'images/cog.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_ADMIN']).'</A>&nbsp;</TD>';
         //=======================================================================================================
 
     }
@@ -325,7 +326,7 @@ function get_menu_html($config_values, $self, $level) {
         } else {
             $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
         }
-        $menu.='<TD class="'.$thead.'"><A HREF="/customers.php"><img width="16" height="16"  src="/images/group.png" border="0" align="left">'.$config_values['MENU_CUSTOMERS'].'</A>&nbsp;</TD>';
+        $menu.='<TD class="'.$thead.'"><A HREF="/customers.php"><img width="16" height="16"  src="images/group.png" border="0" align="left">'.$config_values['MENU_CUSTOMERS'].'</A>&nbsp;</TD>';
         //=======================================================================================================
         */
 
@@ -339,13 +340,13 @@ function get_menu_html($config_values, $self, $level) {
         } else {
             $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
         }
-        $menu.='<TD class="'.$thead.'"><A HREF="/addfunds.php"><img width="16" height="16"  src="/images/group.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_ADDFUNDS']).'</A>&nbsp;</TD>';
+        $menu.='<TD class="'.$thead.'"><A HREF="'.$http_dir_name.'addfunds.php"><img width="16" height="16"  src="'.$http_dir_name.'images/group.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_ADDFUNDS']).'</A>&nbsp;</TD>';
         //=======================================================================================================
 
     }
     $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
 
-    $menu.='<TD height="1" class="'.$thead.'"><A HREF="/logout.php"><img width="16" height="16"  src="/images/door_in.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_LOGOUT']).'</A>&nbsp;</TD><TD CLASS="theadr2" WIDTH=0></TD></TR></table>
+    $menu.='<TD height="1" class="'.$thead.'"><A HREF="'.$http_dir_name.'logout.php"><img width="16" height="16"  src="'.$http_dir_name.'images/door_in.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_LOGOUT']).'</A>&nbsp;</TD><TD CLASS="theadr2" WIDTH=0></TD></TR></table>
 
     ';
     return $menu;

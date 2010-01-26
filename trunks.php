@@ -82,11 +82,11 @@ $class=" class=\"tborderxxx\"  onmouseover=\"style.backgroundColor='#84DFC1';\" 
 <?
 if ($row["current"]==1){
 ?>
-<IMG SRC="/images/tick.png" BORDER="1" WIDTH="16" HEIGHT="16" class="abcd">
+<IMG SRC="images/tick.png" BORDER="1" WIDTH="16" HEIGHT="16" class="abcd">
 <?
 } else {
 ?>
-<a href="setdefault.php?id=<?echo $row[id];?>"><IMG SRC="/images/ch.gif" BORDER="1" WIDTH="16" HEIGHT="16"></A>
+<a href="setdefault.php?id=<?echo $row[id];?>"><IMG SRC="images/ch.gif" BORDER="1" WIDTH="16" HEIGHT="16"></A>
 <?
 }
 
@@ -96,9 +96,9 @@ if ($row["current"]==1){
 <TD>
 <?
 if (strlen($row[name])<15){
-echo "<A HREF=\"edittrunk.php?id=".$row[id]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".$row[name]."</A>";
+echo "<A HREF=\"edittrunk.php?id=".$row[id]."\"><img src=\"images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".$row[name]."</A>";
 } else {
-echo "<A HREF=\"edittrunk.php?id=".$row[id]."\"><img src=\"/images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".trim(substr($row[name],0,15))."...</A>";
+echo "<A HREF=\"edittrunk.php?id=".$row[id]."\"><img src=\"images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit\">".trim(substr($row[name],0,15))."...</A>";
 }
 ?>
 </TD>
@@ -119,7 +119,7 @@ echo trim(substr($row[dialstring],0,25))."...";
 </TD>
 
 <TD>
-<a href="#" onclick="displaySmallMessage('includes/confirmDeleteTrunk.php?id=<?echo $row[id];?>');return false"><IMG SRC="/images/delete.png" BORDER="0"></a><br>
+<a href="#" onclick="displaySmallMessage('includes/confirmDeleteTrunk.php?id=<?echo $row[id];?>');return false"><IMG SRC="images/delete.png" BORDER="0"></a><br>
 </TD>
 </TR>
 

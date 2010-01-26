@@ -155,14 +155,14 @@ if ($_GET[type]!="congested") {
 }
 echo "<br />";
 
-echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&type='.$_GET[type].'&start=0"><img src="/images/resultset_first.png" border="0"></a> ';
-echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&type='.$_GET[type].'&start='.($start-$config_values['PER_PAGE']).'"><img src="/images/resultset_previous.png" border="0"></a> ';
+echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&type='.$_GET[type].'&start=0"><img src="images/resultset_first.png" border="0"></a> ';
+echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&type='.$_GET[type].'&start='.($start-$config_values['PER_PAGE']).'"><img src="images/resultset_previous.png" border="0"></a> ';
 
 for ($x=$start;$x<$start+($config_values['PER_PAGE']*10);$x+=$config_values['PER_PAGE']){
 echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&type='.$_GET[type].'&start='.$x.'">'.($x/$config_values['PER_PAGE']).'</a> ';
 }
-echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&type='.$_GET[type].'&start='.($x+$config_values['PER_PAGE']).'"><img src="/images/resultset_next.png" border="0"></a> ';
-echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&type='.$_GET[type].'&start='.(($max-$config_values['PER_PAGE'])+$max%$config_values['PER_PAGE']).'"><img src="/images/resultset_last.png" border="0"></a> ';
+echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&type='.$_GET[type].'&start='.($x+$config_values['PER_PAGE']).'"><img src="images/resultset_next.png" border="0"></a> ';
+echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&type='.$_GET[type].'&start='.(($max-$config_values['PER_PAGE'])+$max%$config_values['PER_PAGE']).'"><img src="images/resultset_last.png" border="0"></a> ';
 echo '<br />';
 echo '<br />';
 
@@ -208,11 +208,11 @@ if (mysql_num_rows($result_name) > 0) {
 <?echo $row[status];?>
 </TD>
 <TD>
-<A TITLE="Delete this Number" HREF="deletenumber.php?campaignid=<?echo $_POST[campaignid];?>&number=<?echo $row[phonenumber];?>"><img src="/images/delete.png" border="0" alt="Delete Number"></A>
+<A TITLE="Delete this Number" HREF="deletenumber.php?campaignid=<?echo $_POST[campaignid];?>&number=<?echo $row[phonenumber];?>"><img src="images/delete.png" border="0" alt="Delete Number"></A>
 <?
 if ($row[status] != "new") {
 ?>
-<A TITLE="Reset the status of this Number" HREF="resetnumber.php?campaignid=<?echo $_POST[campaignid];?>&number=<?echo $row[phonenumber];?>"><img src="/images/control_repeat_blue.png" border="0" alt="Reset Number"></A>
+<A TITLE="Reset the status of this Number" HREF="resetnumber.php?campaignid=<?echo $_POST[campaignid];?>&number=<?echo $row[phonenumber];?>"><img src="images/control_repeat_blue.png" border="0" alt="Reset Number"></A>
 <?
 }
 ?>

@@ -43,11 +43,11 @@ var webcamimage;
 if (file_exists("images/live/campaign_".$id.".png")) {
 if ($debug > 0) {
   ?>
-  var imgBase="/images/live/debug_<?echo $id;?>.png?x="
+  var imgBase="images/live/debug_<?echo $id;?>.png?x="
   <?
 } else {
   ?>
-  var imgBase="/images/live/campaign_<?echo $id;?>.png?x="
+  var imgBase="images/live/campaign_<?echo $id;?>.png?x="
   <?
 }
 } else {
@@ -64,7 +64,7 @@ function count()
  x = 0;
  waiting = document.getElementById("div_waiting");
  done_image = 0;
- waiting.innerHTML = '<img src="/images/ajax-loader.gif">';
+ waiting.innerHTML = '<img src="images/ajax-loader.gif">';
  webcamimage.src=imgBase + (++c) + '&rand='+Math.random();
 }
 function init()
@@ -82,7 +82,7 @@ function incr() {
  if (done_image ==1) {
   waiting.innerHTML = '<font color="#008800"><b>Next update in '+(10-x)+' seconds';
  } else {
-  waiting.innerHTML = '<img src="/images/ajax-loader.gif">';
+  waiting.innerHTML = '<img src="images/ajax-loader.gif">';
  }
  x++;
 }
@@ -107,12 +107,12 @@ if (mysql_num_rows($result) > 0) {
 }
 ?>
 <br />
-<a href="stopcampaign.php?id=<?echo $id;?>"><img src="/images/control_stop_blue.png"  border="0"> Stop This Campaign</a>&nbsp;
-<a href="report<?if ($use_new_pie == 1) {echo "2";}?>.php?id=<?echo $id;?>"><img src="/images/chart_pie.png"  border="0"> Number Stats</a>&nbsp;
-<a href="report3.php?id=<?echo $id;?>"><img src="/images/chart_line.png"  border="0"> Daily Number Stats</a>&nbsp;
+<a href="stopcampaign.php?id=<?echo $id;?>"><img src="images/control_stop_blue.png"  border="0"> Stop This Campaign</a>&nbsp;
+<a href="report<?if ($use_new_pie == 1) {echo "2";}?>.php?id=<?echo $id;?>"><img src="images/chart_pie.png"  border="0"> Number Stats</a>&nbsp;
+<a href="report3.php?id=<?echo $id;?>"><img src="images/chart_line.png"  border="0"> Daily Number Stats</a>&nbsp;
 <br />
 <div id="div_waiting" style="height:20px">
-<img src="/images/ajax-loader.gif">
+<img src="images/ajax-loader.gif">
 </div>
 <?box_end();?>
 <img src="graph.php?id=<?echo $id;?>&debug=<?echo $debug;?>" name="image" id="image_webcamimage" border="0" onload="hide_image();"><br />

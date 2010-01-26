@@ -12,7 +12,7 @@ if (!isset($_POST[campaignid])){
     ?>
 
     <br /><br /><br /><br /> <center> <table
-background="/images/sdbox.png" width="300" height="200"> <tr> <td> </td>
+background="images/sdbox.png" width="300" height="200"> <tr> <td> </td>
 <td width="260"> Which campaign would you like to add numbers to?<br
 /><br /> <FORM ACTION="addnumbers.php" METHOD="POST">
     <table class="tborderxxx" align="center" border="0" cellpadding="0"

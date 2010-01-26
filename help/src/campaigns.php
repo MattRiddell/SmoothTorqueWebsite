@@ -62,31 +62,31 @@
 		<th bgcolor="#000044"><font color="#ffffff"><b>Description</b></font></th>
 	</tr>
    	<tr>
-		<td  bgcolor="#eeeeee"><img src="/images/pencil.png" align="left"></td>
+		<td  bgcolor="#eeeeee"><img src="images/pencil.png" align="left"></td>
 		<td  bgcolor="#eeeeee">Edit the information for this campaign</td>
 	</tr>
    	<tr>
-		<td  bgcolor="#eeeeee"><img src="/images/control_play_blue.png" align="left"></td>
+		<td  bgcolor="#eeeeee"><img src="images/control_play_blue.png" align="left"></td>
 		<td  bgcolor="#eeeeee">Start this campaign</td>
 	</tr>
    	<tr>
-		<td  bgcolor="#eeeeee"><img src="/images/control_stop_blue.png" align="left"></td>
+		<td  bgcolor="#eeeeee"><img src="images/control_stop_blue.png" align="left"></td>
 		<td  bgcolor="#eeeeee">Stop this campaign</td>
 	</tr>
    	<tr>
-		<td  bgcolor="#eeeeee"><img src="/images/chart_curve.png" align="left"></td>
+		<td  bgcolor="#eeeeee"><img src="images/chart_curve.png" align="left"></td>
 		<td  bgcolor="#eeeeee">Show the engine status (while running)</td>
 	</tr>
        	<tr>
-		<td  bgcolor="#eeeeee"><img src="/images/chart_pie.png" align="left"></td>
+		<td  bgcolor="#eeeeee"><img src="images/chart_pie.png" align="left"></td>
 		<td  bgcolor="#eeeeee">Show the status of the dialed numbers</td>
 	</tr>
        	<tr>
-		<td  bgcolor="#eeeeee"><img src="/images/arrow_refresh.png" align="left"></td>
+		<td  bgcolor="#eeeeee"><img src="images/arrow_refresh.png" align="left"></td>
 		<td  bgcolor="#eeeeee">Recycles numbers (i.e. allows you to reset their status back to new)</td>
 	</tr>
        	<tr>
-		<td  bgcolor="#eeeeee"><img src="/images/delete.png" align="left"></td>
+		<td  bgcolor="#eeeeee"><img src="images/delete.png" align="left"></td>
 		<td  bgcolor="#eeeeee">Delete this campaign</td>
 	</tr>
 

@@ -19,14 +19,14 @@
 require "admin/db_config.php";
 $current_directory = dirname(__FILE__);
 require "/".$current_directory."/functions/functions.php";
-$url = $_SERVER[SERVER_NAME];
+$url = $_SERVER['SERVER_NAME'];
 $sql = "SELECT * FROM web_config WHERE LANG=\"en\" AND url = ".sanitize($url);
 $result_url = mysql_query($sql);
 if (@mysql_num_rows($result_url) == 0) {
     $url = "default";
 }
 setcookie("url",$url,time()+6000);
-$_COOKIE[url] = $url;
+$_COOKIE['url'] = $url;
 require "header.php";
 
 $sql = 'SELECT value FROM config WHERE parameter=\'show_front_page_title\'';
@@ -47,7 +47,7 @@ echo "<FONT FACE=\"ARIAL\">";
 ?>
 
 
-<FORM ACTION="login.php?redirect=<?echo $_GET[redirect];?>" METHOD="POST">
+<FORM ACTION="login.php<?if(isset($_GET['redirect'])) {echo '?redirect='.$_GET['redirect'];}?>" METHOD="POST">
     <CENTER>
        <?/* <table class="tborder" align="center" width="270" border="0" cellpadding="0" cellspacing="2">*/?>
        <br /><table align="center" cellpadding="0" cellspacing="0">
@@ -68,7 +68,7 @@ echo $config_values['TEXT'];?>        <br /><br />
             <table align="center" width="300" height="200" cellpadding="0" cellspacing="0">
             <tr><td>
 <?
-if (isset($_GET[error])){
+if (isset($_GET['error'])){
     echo "<CENTER><B><FONT COLOR=\"RED\">".$_GET[error]."</FONT></B></CENTER>";
 }
 

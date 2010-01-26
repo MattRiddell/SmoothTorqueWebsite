@@ -109,13 +109,13 @@ if (trim($dbpass)!=trim($passwordHash)){
     	/* centre interface.                                                                 */
         if ($interface_type == "broadcast") {
         	/* Redirect to the broadcast interface */
-        	header("Location: /modules/broadcast/main.php");
+        	header("Location: ".$http_dir_name."modules/broadcast/main.php");
         } else if ($interface_type == "cc") {
         	/* Redirect to the call centre interface */
-        	header("Location: /modules/cc/main.php");
+        	header("Location: ".$http_dir_name."modules/cc/main.php");
         } else {
         	/* Redirect to the default interface */
-        	header("Location: /main.php");
+        	header("Location: ".$http_dir_name."main.php");
         }
     }
     exit;

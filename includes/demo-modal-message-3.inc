@@ -1,7 +1,7 @@
 <form name="myForm">
 	<table border="0">
 		<tr>
-			<td colspan="2"><img src="/images/logo2.png"></td>
+			<td colspan="2"><img src="images/logo2.png"></td>
 		</tr>
 		<tr>
 			<td>Are you sure you want to delete this entry?</td>

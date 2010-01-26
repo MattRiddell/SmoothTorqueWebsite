@@ -259,19 +259,19 @@ if (mysql_num_rows($result) > 0) {
 <table cellpadding="20">
 <tr>
 <td>
-<a href="check_version.php"><img src="/images/browser.png" border="0" width="32"><br /><br />Check for updates</a>
+<a href="check_version.php"><img src="<?=$http_dir_name?>images/browser.png" border="0" width="32"><br /><br />Check for updates</a>
 </td><td>
-<a href="mailto:smoothtorque@venturevoip.com"><img src="/images/ftp.png" border="0" width="32"><br /><br />Submit Support Request</a>
+<a href="mailto:smoothtorque@venturevoip.com"><img src="<?=$http_dir_name?>images/ftp.png" border="0" width="32"><br /><br />Submit Support Request</a>
 </td><td>
-<a href="log.php"><img src="/images/document.png" border="0" width="32"><br /><br />View System Logs</a>
+<a href="log.php"><img src="<?=$http_dir_name?>images/document.png" border="0" width="32"><br /><br />View System Logs</a>
 </td>
 </tr>
 <tr>
 <td>
-<a href="billinglog.php"><img src="/images/kcalc.png" border="0" width="32"><br /><br />View <?echo $config_values['BILLING_TEXT'];?></a>
+<a href="billinglog.php"><img src="<?=$http_dir_name?>images/kcalc.png" border="0" width="32"><br /><br />View <?echo $config_values['BILLING_TEXT'];?></a>
 </td>
 <td>
-<a href="view_system_bill.php"><img src="/images/log.png" border="0" width="32"><br /><br />View Billing Graphs</a>
+<a href="view_system_bill.php"><img src="<?=$http_dir_name?>images/log.png" border="0" width="32"><br /><br />View Billing Graphs</a>
 </td>
 </tr></table>
 </div>
@@ -288,17 +288,17 @@ if (mysql_num_rows($result) > 0) {
 </tr>
 <tr  class="tborder2"><td>
 <?if ($backend == 0) {?>
-    <IMG SRC="/images/tick.png" BORDER="1" WIDTH="16" HEIGHT="16" class="abcd">
+    <IMG SRC="<?=$http_dir_name?>images/tick.png" BORDER="1" WIDTH="16" HEIGHT="16" class="abcd">
 <?} else {?>
-    <a href="setparameter.php?parameter=backend&value=0"><IMG SRC="/images/ch.gif" BORDER="1" WIDTH="16" HEIGHT="16"></a>
+    <a href="setparameter.php?parameter=backend&value=0"><IMG SRC="<?=$http_dir_name?>images/ch.gif" BORDER="1" WIDTH="16" HEIGHT="16"></a>
 <?}?>
 </td>
 <td>Linux Backend (<b>Version <?echo $version;?></b>)</td>
 </tr>
 <tr  class="tborder2"><td><?if ($backend == 1) {?>
-    <IMG SRC="/images/tick.png" BORDER="1" WIDTH="16" HEIGHT="16" class="abcd">
+    <IMG SRC="<?=$http_dir_name?>images/tick.png" BORDER="1" WIDTH="16" HEIGHT="16" class="abcd">
 <?} else {?>
-    <a href="setparameter.php?parameter=backend&value=1"><IMG SRC="/images/ch.gif" BORDER="1" WIDTH="16" HEIGHT="16"></a>
+    <a href="setparameter.php?parameter=backend&value=1"><IMG SRC="<?=$http_dir_name?>images/ch.gif" BORDER="1" WIDTH="16" HEIGHT="16"></a>
 <?}?>
 </td>
 <td>Windows Backend</td></tr>
@@ -1339,7 +1339,7 @@ Description of spare5 context (optional)
 
 <div class="tabbertab" title="Credits">
 <br />
-<img src="/images/00_logo.jpg" border="0"><br /><br />
+<img src="images/00_logo.jpg" border="0"><br /><br />
 SmoothTorque was written by the following staff from <a href="http://www.venturevoip.com/about.php">VentureVoIP</a>:<br />
 <br />
 <b>Matt Riddell</b>: Development Lead<br />

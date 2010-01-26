@@ -12,12 +12,12 @@ $campaigngroupid=mysql_result($result,0,'campaigngroupid');
 if (1) {
  if (isset($_POST[start])){?>
     <br /><br /><br /><br /><br />
- <table background="/images/sdbox.png" align="center" width="300" height="200" cellpadding="0" cellspacing="0" class="dragme22">
+ <table background="images/sdbox.png" align="center" width="300" height="200" cellpadding="0" cellspacing="0" class="dragme22">
             <tr><td>
 <div id="hideShow">
     Please Wait, saving Phone Numbers<br />
     <br />
-    <img src="/images/ajax-loader.gif"><br />
+    <img src="images/ajax-loader.gif"><br />
     <br />
     This may take some time...
 </div>                  <?/*for ($i=$_POST[start];$i<=$_POST[end];$i++){       */
@@ -37,7 +37,7 @@ if (1) {
         flush();
         }
     }
-     echo "</div><img src=\"/images/tick.gif\">Completed Saving";
+     echo "</div><img src=\"images/tick.gif\">Completed Saving";
      ?>
     <script language="javascript">
     function delayer(){

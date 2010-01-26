@@ -9,30 +9,30 @@ if ($id<1){
 }
 ?>
 
-<a href="test.php?id=<?echo $id;?>"><img src="/images/chart_curve.png"  border="0"> View Engine Status</a>&nbsp;
-<a href="report3.php?id=<?echo $id;?>"><img src="/images/chart_line.png"  border="0"> Daily Number Stats</a>&nbsp;
+<a href="test.php?id=<?echo $id;?>"><img src="images/chart_curve.png"  border="0"> View Engine Status</a>&nbsp;
+<a href="report3.php?id=<?echo $id;?>"><img src="images/chart_line.png"  border="0"> Daily Number Stats</a>&nbsp;
 <br /><br />
 <?/*
 if ($_GET[type]!="today") {
     ?>
-    <a href="report.php?type=today&id=<?echo $id;?>"><img src="/images/chart_pie.png"  border="0"> Today</a>&nbsp;
+    <a href="report.php?type=today&id=<?echo $id;?>"><img src="images/chart_pie.png"  border="0"> Today</a>&nbsp;
     <?
 } else {
-    echo '<b><img src="/images/chart_pie.png"  border="0"> Today</b>&nbsp;';
+    echo '<b><img src="images/chart_pie.png"  border="0"> Today</b>&nbsp;';
 }
 if ($_GET[type]!="") {
     ?>
-    <a href="report.php?id=<?echo $id;?>"><img src="/images/chart_pie.png"  border="0"> All Time</a>&nbsp;
+    <a href="report.php?id=<?echo $id;?>"><img src="images/chart_pie.png"  border="0"> All Time</a>&nbsp;
     <?
 } else {
-    echo '<b><img src="/images/chart_pie.png"  border="0"> All Time</b>&nbsp;';
+    echo '<b><img src="images/chart_pie.png"  border="0"> All Time</b>&nbsp;';
 }
 if ($_GET[type]!="yesterday") {
     ?>
-    <a href="report.php?type=yesterday&id=<?echo $id;?>"><img src="/images/chart_pie.png"  border="0"> Yesteday</a><br />
+    <a href="report.php?type=yesterday&id=<?echo $id;?>"><img src="images/chart_pie.png"  border="0"> Yesteday</a><br />
     <?
 } else {
-    echo '<b><img src="/images/chart_pie.png"  border="0"> Yesterday</b>&nbsp;<br />';
+    echo '<b><img src="images/chart_pie.png"  border="0"> Yesterday</b>&nbsp;<br />';
 }*/
 ?>
 

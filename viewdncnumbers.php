@@ -36,14 +36,14 @@ if ($config_values['USE_SEPARATE_DNC'] == "YES") {
 
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $max=mysql_result($result,0,'count(*)');
-echo '<a href="viewdncnumbers.php?start=0"><img src="/images/resultset_first.png" border="0"></a> ';
-echo '<a href="viewdncnumbers.php?start='.($start-$config_values['PER_PAGE']).'"><img src="/images/resultset_previous.png" border="0"></a> ';
+echo '<a href="viewdncnumbers.php?start=0"><img src="images/resultset_first.png" border="0"></a> ';
+echo '<a href="viewdncnumbers.php?start='.($start-$config_values['PER_PAGE']).'"><img src="images/resultset_previous.png" border="0"></a> ';
 
 for ($x=$start;$x<$start+($config_values['PER_PAGE']*10);$x+=$config_values['PER_PAGE']){
 echo '<a href="viewdncnumbers.php?start='.$x.'">'.($x/$config_values['PER_PAGE']).'</a> ';
 }
-echo '<a href="viewdncnumbers.php?start='.($x+$config_values['PER_PAGE']).'"><img src="/images/resultset_next.png" border="0"></a> ';
-echo '<a href="viewdncnumbers.php?start='.(($max-$config_values['PER_PAGE'])+$max%$config_values['PER_PAGE']).'"><img src="/images/resultset_last.png" border="0"></a> ';
+echo '<a href="viewdncnumbers.php?start='.($x+$config_values['PER_PAGE']).'"><img src="images/resultset_next.png" border="0"></a> ';
+echo '<a href="viewdncnumbers.php?start='.(($max-$config_values['PER_PAGE'])+$max%$config_values['PER_PAGE']).'"><img src="images/resultset_last.png" border="0"></a> ';
 echo '<br />';
 echo '<br />';
 
@@ -72,7 +72,7 @@ $class=" class=\"tborderx\"";
 <?echo $row[phonenumber];?>
 </TD>
 <TD>
-<A HREF="deletedncnumber.php?number=<?echo $row[phonenumber];?>"><img src="/images/delete.png" border="0"></A>
+<A HREF="deletedncnumber.php?number=<?echo $row[phonenumber];?>"><img src="images/delete.png" border="0"></A>
 </TD>
 </TR>
 

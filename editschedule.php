@@ -40,7 +40,7 @@ if (isset($_POST[queuename])){
     box_start(330);
     ?>
     Saved your schedule<br />
-    <img src="/images/tick.png" onLoad="window.location = 'schedule.php'">
+    <img src="images/tick.png" onLoad="window.location = 'schedule.php'">
     <?
     box_end();
     exit;

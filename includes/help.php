@@ -5,7 +5,7 @@
 <td width=99%>
 <?echo $_GET[section];?>
 <BR>
-<A HREF="#" onclick="closeMessage()"><img src="/images/cancel.png" border="0"> Close</A></CENTER>
+<A HREF="#" onclick="closeMessage()"><img src="images/cancel.png" border="0"> Close</A></CENTER>
 </td>
 </tr>
 </table>

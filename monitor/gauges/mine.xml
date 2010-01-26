@@ -33,7 +33,7 @@
     </Gauge2RectangularBorder>
 
     <!-- Label -->
-    <Gauge2Label id="label" text="95" font="55 Arial Black" foreColor="#A2A2DD" x="500" y="318" anchorHorizontal="center" anchorVertical="center"/>
+    <Gauge2Label id="label" text="0" font="55 Arial Black" foreColor="#A2A2DD" x="500" y="318" anchorHorizontal="center" anchorVertical="center"/>
                                                                      
     <!-- Range -->
     <Gauge2RadialRange centerX="500" centerY="470" width="1000" height="800" startAngle="-80" endAngle="80">
@@ -53,7 +53,7 @@
 
             
             <!-- Needle -->
-            <Gauge2RadialNeedle id="needle" value="95" stroke="#000000" strokeWidth="0"
+            <Gauge2RadialNeedle id="needle" value="0" stroke="#000000" strokeWidth="0"
                                 innerRadius="0" innerWidth="30"
                                 outerRadius="330" outerWidth="5">
                 <Gauge2RadialNeedle.Filler>

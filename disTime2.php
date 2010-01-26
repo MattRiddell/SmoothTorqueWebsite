@@ -26,7 +26,7 @@ if (mysql_num_rows($result)==0){
 ?>
 <br /><br />
 <center>
-<table background="/images/sdbox.png" width="300" height="200" class="dragme22">
+<table background="images/sdbox.png" width="300" height="200" class="dragme22">
 <tr>
 <td>
 </td>
@@ -147,7 +147,7 @@ echo "".$count."/".$count2;
 
 
 <TD>
-<?echo "<A HREF=\"deletecampaign.php?id=".$row[id]."\"><IMG SRC=\"/images/cross.gif\" BORDER=\"0\"></A>";?>
+<?echo "<A HREF=\"deletecampaign.php?id=".$row[id]."\"><IMG SRC=\"images/cross.gif\" BORDER=\"0\"></A>";?>
 </TD>
 <TD>
 
@@ -167,23 +167,23 @@ if ($perc>100){
 */
 if ($status==101){
 ?>
-<img src="/images/nothing.gif" border="0">
+<img src="images/nothing.gif" border="0">
 </TD>
 <td>
-<a href="stopcampaign.php?id=<?echo $row[id];?>"><img src="/images/stop.gif" border="0"></a>
+<a href="stopcampaign.php?id=<?echo $row[id];?>"><img src="images/stop.gif" border="0"></a>
 <?
 } else {
 ?>
-<a href="#" onclick="displayMessage('includes/livestart.php?id=<?echo $row[id];?>');return false"><IMG SRC="/images/play.gif" BORDER="0"></a><br>
+<a href="#" onclick="displayMessage('includes/livestart.php?id=<?echo $row[id];?>');return false"><IMG SRC="images/play.gif" BORDER="0"></a><br>
 </TD>
 <td>
-<img src="/images/nothing.gif" border="0">
+<img src="images/nothing.gif" border="0">
 <?
 }
 ?>
 </td>
 <td>
-<img src="/images/percentImage.png" alt="<?echo $perc;?>%" class="percentImage" style="background-position: -<?echo 119-($perc*1.2); ?>px 0pt;" />
+<img src="images/percentImage.png" alt="<?echo $perc;?>%" class="percentImage" style="background-position: -<?echo 119-($perc*1.2); ?>px 0pt;" />
 
 </td>
 </TR>

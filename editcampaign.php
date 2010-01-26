@@ -95,7 +95,7 @@ if (mysql_num_rows($result) > 0) {
             <td class="thead">
                 Campaign Name
                 <a href="#" onclick="displaySmallMessage('includes/help.php?section=A short name you would like to give to the campaign - preferrably one word');return false">
-                    <img src="/images/help.png" border="0" onload="whatPaySelected(<?echo $row[context];?>)">
+                    <img src="images/help.png" border="0" onload="whatPaySelected(<?echo $row[context];?>)">
                 </a>
             </td>
             <td>
@@ -109,7 +109,7 @@ if (mysql_num_rows($result) > 0) {
             <td class="thead">
                 Campaign Description
                 <a href="#" onclick="displaySmallMessage('includes/help.php?section=A short description of the campaign in case you are not able to tell from the Campaign Name');return false">
-                    <img src="/images/help.png" border="0">
+                    <img src="images/help.png" border="0">
                 </a>
             </td>
             <td>
@@ -122,7 +122,7 @@ if (mysql_num_rows($result) > 0) {
             <td class="thead" width=200>
                 Mode
                 <a href="#" onclick="displaySmallMessage('includes/help.php?section=What type of campaign you would like to run. <br /><br />If you are connected to the machine doing the calling then chose Queue Mode.  If you would like to receive any connected calls at a particular phone number, chose DID Mode.  Normally you will use DID Mode unless you have been told to use Queue Mode.');return false">
-                    <img src="/images/help.png" border="0">
+                    <img src="images/help.png" border="0">
                 </a>
             </td>
 
@@ -139,7 +139,7 @@ if (mysql_num_rows($result) > 0) {
             <td class="thead">
                 Type of Campaign
                 <a href="#" onclick="displayLargeMessage('includes/campaign_types.php');return false">
-                    <img src="/images/help.png" border="0" title="Type Of Campaign">
+                    <img src="images/help.png" border="0" title="Type Of Campaign">
                 </a>
             </td>
             <td>
@@ -169,7 +169,7 @@ if (mysql_num_rows($result) > 0) {
             <td class="thead">
                 Fax Message
                 <a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are running a campaign which sends a fax to the user then this is the fax that will be used.');return false">
-                    <img src="/images/help.png" border="0">
+                    <img src="images/help.png" border="0">
                 </a>
             </td>
             <td>
@@ -193,7 +193,7 @@ if (mysql_num_rows($result) > 0) {
             <td class="thead">
                 Live Message
                 <a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are running a campaign which plays a message to the user while waiting for them to press 1 then this is the message that will be used.');return false">
-                    <img src="/images/help.png" border="0">
+                    <img src="images/help.png" border="0">
                 </a>
             </td>
             <td>
@@ -217,7 +217,7 @@ if (mysql_num_rows($result) > 0) {
             <td class="thead">
                 Answer Machine Message
                 <a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are leaving automated messages on answer machines then you can set this to a particular message you would like to have played when an answer machine is detected.  Usage of this will depend on your settings in the Type of Campaign section.');return false">
-                    <img src="/images/help.png" border="0">
+                    <img src="images/help.png" border="0">
                 </a>
             </td>
             <td>
@@ -241,7 +241,7 @@ if (mysql_num_rows($result) > 0) {
             <td class="thead">
                 DNC Confirmation Message
                 <a href="#" onclick="displaySmallMessage('includes/help.php?section=This message is played to a customer who presses 2 to be added to DNC.');return false">
-                    <img src="/images/help.png" border="0">
+                    <img src="images/help.png" border="0">
                 </a>
             </td>
             <td>
@@ -267,7 +267,7 @@ if (mysql_num_rows($result) > 0) {
                 <label for="agents">
                     Queue Name
                     <a href="#" onclick="displaySmallMessage('includes/help.php?section=This is the name of a Queue on the telephone system of the provider of this system. Normally this will be assigned to you when you set up an account.');return false">
-                        <img src="/images/help.png" border="0">
+                        <img src="images/help.png" border="0">
                     </a>
                 </label>
             </td>
@@ -293,7 +293,7 @@ if (mysql_num_rows($result) > 0) {
                 <label for="agents">
                     Maximum Connected Calls:
                     <a href="#" onclick="displaySmallMessage('includes/help.php?section=This is the number of concurrent calls you would like to receive on the call center number specified.  <br /><br />Normally this will be the number of staff you have.');return false">
-                        <img src="/images/help.png" border="0">
+                        <img src="images/help.png" border="0">
                     </a>
                 </label>
             </td>
@@ -308,7 +308,7 @@ if (mysql_num_rows($result) > 0) {
                 <label for="did">
                     Caller ID:
                     <a href="#" onclick="displaySmallMessage('includes/help.php?section=The CallerID you would like to send on calls to your customers');return false">
-                        <img src="/images/help.png" border="0">
+                        <img src="images/help.png" border="0">
                     </a>
                 </label>
             </td>
@@ -323,7 +323,7 @@ if (mysql_num_rows($result) > 0) {
                 <label for="did">
                     Call Center Phone Number:
                     <a href="#" onclick="displaySmallMessage('includes/help.php?section=The phone number you would like to have connected calls sent to. Eg: (123) 555-1234. ');return false">
-                        <img src="/images/help.png" border="0">
+                        <img src="images/help.png" border="0">
                     </a>
                 </label>
             </td>

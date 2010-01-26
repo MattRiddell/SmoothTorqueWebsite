@@ -203,7 +203,7 @@ $currentsection=$section[1+($_GET[section]-1)];
 
 <br /><br /><br /><br />
 <center>
-<table background="/images/sdbox.png" width="300" height="200">
+<table background="images/sdbox.png" width="300" height="200">
 <tr>
 <td>
 </td>
@@ -249,7 +249,7 @@ if (isset($_GET[reportholdtime])){
 }
 ?>
 <a href="addqueue.php?<?echo $url;?>">
-<img src="/images/resultset_previous.png" border = "0">Back</a>
+<img src="images/resultset_previous.png" border = "0">Back</a>
 </div>
 <?
 }
@@ -259,7 +259,7 @@ if (isset($_GET[reportholdtime])){
 <div align="right">
 
 <a href="#" onclick="document.myform.submit();return false;"><? echo ($_GET[section] == 15? "Submit": "Next") ?>
-<img src="/images/resultset_next.png" border = "0"></a>
+<img src="images/resultset_next.png" border = "0"></a>
 </form>
 <?
 } else {
@@ -274,7 +274,7 @@ if (isset($_GET[reportholdtime])){
 ?>
 <div align="right">
 <a href="addqueue.php?<?echo $url;?>"><? echo ($_GET[section] == 15? "Submit": "Next") ?>
-<img src="/images/resultset_next.png" border = "0"></a>
+<img src="images/resultset_next.png" border = "0"></a>
 <?
 }
 ?>

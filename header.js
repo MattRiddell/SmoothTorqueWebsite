@@ -1,6 +1,6 @@
 function hideshow(name){
-	var opened = "./images/open.png";
-	var closed = "./images/closed.png";
+	var opened = ".images/open.png";
+	var closed = ".images/closed.png";
 
 	var element = document.getElementById(name);
 	var img = document.getElementsByName("img_"+name);
@@ -1362,7 +1362,7 @@ function ProgressTracker(sid, options) {
 	var periodicalAjax = new PeriodicalAjax(url, 'sid=' + sid, frequency, decay, function(request){self.onSuccess(request);},function(request){self.onFailure(request);});
 }
 /* Simple AJAX Code-Kit (SACK) v1.6.1 */
-/* ©2005 Gregory Wild-Smith */
+/* ï¿½2005 Gregory Wild-Smith */
 /* www.twilightuniverse.com */
 /* Software licenced under a modified X11 licence,
    see documentation or authors website for more details */

@@ -14,7 +14,7 @@ if (!isset($_POST[campaignid])){
 
     <br /><br /><br /><br />
 <center>
-<table background="/images/sdbox.png" width="300" height="200" class="dragme22">
+<table background="images/sdbox.png" width="300" height="200" class="dragme22">
 <tr>
 <td>
 </td>
@@ -56,12 +56,12 @@ Which campaign would you like to add numbers to?<br /><br />
 } else {
  if (isset($_POST[start])){?>
     <br /><br /><br /><br /><br />
- <table background="/images/sdbox.png" align="center" width="300" height="200" cellpadding="0" cellspacing="0" class="dragme22">
+ <table background="images/sdbox.png" align="center" width="300" height="200" cellpadding="0" cellspacing="0" class="dragme22">
             <tr><td>
 <div id="hideShow">
     Please Wait, saving Phone Numbers<br />
     <br />
-    <img src="/images/ajax-loader.gif"><br />
+    <img src="images/ajax-loader.gif"><br />
     <br />
     This may take some time...
 </div>                  <?/*for ($i=$_POST[start];$i<=$_POST[end];$i++){       */
@@ -87,7 +87,7 @@ Which campaign would you like to add numbers to?<br /><br />
         flush();
         }
     }
-     echo "</div><img src=\"/images/tick.gif\">Completed Saving";
+     echo "</div><img src=\"images/tick.gif\">Completed Saving";
      ?>
     <script language="javascript">
     function delayer(){

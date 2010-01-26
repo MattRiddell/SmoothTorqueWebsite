@@ -10,7 +10,7 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
 ?>
 <br /><br /><br /><br />
 <center>
-<table background="/images/sdbox.png" width="300" height="200" class="dragme22">
+<table background="images/sdbox.png" width="300" height="200" class="dragme22">
 <tr>
 <td>
 </td>
@@ -39,7 +39,7 @@ $resultx=mysql_query($sql2, $link) or die (mysql_error());;
 <?
 if ($out[browser]=="MSIE"){
 ?>
-<script type="text/javascript" src="/ajax/jquery.js"></script>
+<script type="text/javascript" src="ajax/jquery.js"></script>
         <script type="text/javascript">
         $(function(){ // jquery onload
                 window.setInterval(function(){ // setInterval code
@@ -49,7 +49,7 @@ if ($out[browser]=="MSIE"){
 
         </script>
  <?} else {?>
-<script type="text/javascript" src="/ajax/jquery.js"></script>
+<script type="text/javascript" src="ajax/jquery.js"></script>
         <script type="text/javascript">
         $(function(){ // jquery onload
                 window.setInterval(function(){ // setInterval code

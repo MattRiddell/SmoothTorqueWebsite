@@ -1,6 +1,6 @@
 <form name="myForm" action="startcampaign.php" method="post">
     <input type="hidden" value="<?echo $_GET[id];?>" name="id">
-	<table border="0" background="/images/bg.gif" width=100% height=100%>
+	<table border="0" background="images/bg.gif" width=100% height=100%>
 		<tr>
 			<td colspan="2">
 			<b>Start running a SmoothTorque Predictive Dialing Campaign</b>

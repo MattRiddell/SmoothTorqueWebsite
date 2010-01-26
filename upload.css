@@ -4,14 +4,14 @@
 	background-color: #eeeeff;
     border-style: solid;
     border-width: 1px;
-    background-image: url(/images/ch.gif);
+    background-image: url(../images/ch.gif);
     background-position: -8px -8px;
 }
 
 .progressbar {
 	width: 0px;
 	height: 16px;
-    background-image: url(/images/chb.gif);
+    background-image: url(../images/chb.gif);
     background-position: -8px -8px;
 	background-color: #00ff00;
 }

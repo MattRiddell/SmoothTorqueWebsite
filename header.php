@@ -116,11 +116,11 @@ if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","web_config")){
   $config_files[it] = "/stweb_it.conf";
   $config_files[es] = "/stweb_es.conf";
   $sql_defaults[en] = "INSERT INTO web_config (url, LANG, language,colour,title,logo,contact_text,sox,userid,licence,cdr_host,cdr_user,cdr_pass,cdr_db,cdr_table,menu_home,menu_campaigns,menu_numbers,menu_dnc,menu_messages,menu_schedules,menu_customers,menu_queues,menu_servers,menu_trunks,menu_admin,menu_logout,date_colour,main_page_text,main_page_username,main_page_password,main_page_login,currency_symbol,per_minute,use_billing,front_page_billing,spare1,spare2,spare3,spare4,spare5,st_mysql_host,st_mysql_user,st_mysql_pass,add_campaign,view_campaign,per_page,numbers_view,numbers_system,numbers_generate,numbers_manual,numbers_upload,numbers_export,numbers_search,numbers_title,billing_text,cdr_text,use_generate,dnc_numbers_title,dnc_view,dnc_search,dnc_upload,dnc_add,per_lead,smtp_host,smtp_user,smtp_pass,smtp_from,use_separate_dnc,allow_numbers_manual) VALUES
-                                     ('default', 'en', 'English', '#ffffff', 'The SmoothTorque Enterprise Predictive Dialing Platform', '/images/00_logo.jpg', 'For further information please email sales@venturevoip.com', '/usr/bin/sox', 'VentureVoIP', 'DRFHUJWQIWU', 'localhost', 'admin', 'adminpass', 'phoneDB', 'cdr', 'Home', 'Campaigns', 'Numbers', 'DNC Numbers', 'Messages', 'Schedules', 'Customers', 'Queues', 'Servers', 'Trunks', 'Admin', 'Logout', '#3333FF', 'To get started, go into your list of campaigns by clicking on the Campaigns tab at the top of this page.', 'Username', 'Password', 'Login', '$', 'Per Minute', 'NO', 'NO', 'Spare 1 (unused)', 'Spare 2 (unused)', 'Spare 3 (unused)', 'Spare 4 (unused)', 'Spare 5 (unused)', 'localhost', 'root', '', 'Add Campaign', 'View Campaigns', '200', 'View phone numbers', 'Use System Lists', 'Generate numbers automatically', 'Add number(s) manually', 'Upload numbers from a text file', 'Export Phone Numbers', 'Search for a phone number', 'Number List Management', 'Billing Logs', 'Call Details', 'YES', 'Do Not Call List', 'View existing DNC numbers', 'Search DNC numbers', 'Upload DNC numbers from a text file', 'Add DNC number(s) manually', 'Price Per Lead', 'localhost', '', '', 'matt@venturevoip.com', 'NO', 'NO')";
+                                     ('default', 'en', 'English', '#ffffff', 'The SmoothTorque Enterprise Predictive Dialing Platform', 'images/00_logo.jpg', 'For further information please email sales@venturevoip.com', '/usr/bin/sox', 'VentureVoIP', 'DRFHUJWQIWU', 'localhost', 'admin', 'adminpass', 'phoneDB', 'cdr', 'Home', 'Campaigns', 'Numbers', 'DNC Numbers', 'Messages', 'Schedules', 'Customers', 'Queues', 'Servers', 'Trunks', 'Admin', 'Logout', '#3333FF', 'To get started, go into your list of campaigns by clicking on the Campaigns tab at the top of this page.', 'Username', 'Password', 'Login', '$', 'Per Minute', 'NO', 'NO', 'Spare 1 (unused)', 'Spare 2 (unused)', 'Spare 3 (unused)', 'Spare 4 (unused)', 'Spare 5 (unused)', 'localhost', 'root', '', 'Add Campaign', 'View Campaigns', '200', 'View phone numbers', 'Use System Lists', 'Generate numbers automatically', 'Add number(s) manually', 'Upload numbers from a text file', 'Export Phone Numbers', 'Search for a phone number', 'Number List Management', 'Billing Logs', 'Call Details', 'YES', 'Do Not Call List', 'View existing DNC numbers', 'Search DNC numbers', 'Upload DNC numbers from a text file', 'Add DNC number(s) manually', 'Price Per Lead', 'localhost', '', '', 'matt@venturevoip.com', 'NO', 'NO')";
   $sql_defaults[it] = "INSERT INTO web_config (url, LANG, language,colour,title,logo,contact_text,sox,userid,licence,cdr_host,cdr_user,cdr_pass,cdr_db,cdr_table,menu_home,menu_campaigns,menu_numbers,menu_dnc,menu_messages,menu_schedules,menu_customers,menu_queues,menu_servers,menu_trunks,menu_admin,menu_logout,date_colour,main_page_text,main_page_username,main_page_password,main_page_login,currency_symbol,per_minute,use_billing,front_page_billing,spare1,spare2,spare3,spare4,spare5,st_mysql_host,st_mysql_user,st_mysql_pass,add_campaign,view_campaign,per_page,numbers_view,numbers_system,numbers_generate,numbers_manual,numbers_upload,numbers_export,numbers_search,numbers_title,billing_text,cdr_text,use_generate,dnc_numbers_title,dnc_view,dnc_search,dnc_upload,dnc_add,per_lead,smtp_host,smtp_user,smtp_pass,smtp_from,use_separate_dnc,allow_numbers_manual) VALUES
-                                     ('default', 'it', 'Italiano', '#ffffff', 'The SmoothTorque Enterprise Predictive Dialing Platform', '/images/00_logo.jpg', 'For further information please email sales@venturevoip.com', '/usr/bin/sox', 'VentureVoIP', 'DRFHUJWQIWU', 'localhost', 'root', '', 'phoneDB', 'cdr', 'Home', 'Campagne', 'Numeri', 'DNC Numeri', 'Messaggi', 'Orari', 'Clienti', 'Code', 'Servers', 'Linee telefoniche', 'Amministrazione', 'Logout', '#9999FF', 'Per iniziare, vai nel tuo elenco di campagne facendo clic sulla scheda Campagne nella parte superiore di questa pagina.', 'Nome utente', 'Password', 'Accesso', '�', 'Al minuto', 'NO', null, 'Spare 1 (inutilizzati)', 'Spare 2 (inutilizzati)', 'Spare 3 (inutilizzati)', 'Spare 4 (inutilizzati)', 'Spare 5 (inutilizzati)', 'localhost', 'root', '', 'Aggiungi campagna', 'Visualizza campagne', '200', 'Visualizza i numeri di telefono', 'Utilizzare System elenchi', 'Generare automaticamente il numero', 'Aggiungere manualmente i numeri', 'Carica numeri da un file di testo', 'Esporta i numeri di telefono', 'Ricerca di un numero di telefono', 'Numero della lista di gestione', 'Log di fatturazione', 'Chiama Dettagli', 'YES', 'DNC Numeri', 'Vedere numeri esistenti DNC', 'Cerca DNC numeri', 'Carica DNC numeri da un file di testo', 'Aggiungi DNC numeri manualmente', 'Prezzo per portare', 'localhost', '', '', 'matt@venturevoip.com', 'NO', 'YES')";
+                                     ('default', 'it', 'Italiano', '#ffffff', 'The SmoothTorque Enterprise Predictive Dialing Platform', 'images/00_logo.jpg', 'For further information please email sales@venturevoip.com', '/usr/bin/sox', 'VentureVoIP', 'DRFHUJWQIWU', 'localhost', 'root', '', 'phoneDB', 'cdr', 'Home', 'Campagne', 'Numeri', 'DNC Numeri', 'Messaggi', 'Orari', 'Clienti', 'Code', 'Servers', 'Linee telefoniche', 'Amministrazione', 'Logout', '#9999FF', 'Per iniziare, vai nel tuo elenco di campagne facendo clic sulla scheda Campagne nella parte superiore di questa pagina.', 'Nome utente', 'Password', 'Accesso', '�', 'Al minuto', 'NO', null, 'Spare 1 (inutilizzati)', 'Spare 2 (inutilizzati)', 'Spare 3 (inutilizzati)', 'Spare 4 (inutilizzati)', 'Spare 5 (inutilizzati)', 'localhost', 'root', '', 'Aggiungi campagna', 'Visualizza campagne', '200', 'Visualizza i numeri di telefono', 'Utilizzare System elenchi', 'Generare automaticamente il numero', 'Aggiungere manualmente i numeri', 'Carica numeri da un file di testo', 'Esporta i numeri di telefono', 'Ricerca di un numero di telefono', 'Numero della lista di gestione', 'Log di fatturazione', 'Chiama Dettagli', 'YES', 'DNC Numeri', 'Vedere numeri esistenti DNC', 'Cerca DNC numeri', 'Carica DNC numeri da un file di testo', 'Aggiungi DNC numeri manualmente', 'Prezzo per portare', 'localhost', '', '', 'matt@venturevoip.com', 'NO', 'YES')";
   $sql_defaults[es] = "INSERT INTO web_config (url, LANG, language,colour,title,logo,contact_text,sox,userid,licence,cdr_host,cdr_user,cdr_pass,cdr_db,cdr_table,menu_home,menu_campaigns,menu_numbers,menu_dnc,menu_messages,menu_schedules,menu_customers,menu_queues,menu_servers,menu_trunks,menu_admin,menu_logout,date_colour,main_page_text,main_page_username,main_page_password,main_page_login,currency_symbol,per_minute,use_billing,front_page_billing,spare1,spare2,spare3,spare4,spare5,st_mysql_host,st_mysql_user,st_mysql_pass,add_campaign,view_campaign,per_page,numbers_view,numbers_system,numbers_generate,numbers_manual,numbers_upload,numbers_export,numbers_search,numbers_title,billing_text,cdr_text,use_generate,dnc_numbers_title,dnc_view,dnc_search,dnc_upload,dnc_add,per_lead,smtp_host,smtp_user,smtp_pass,smtp_from,use_separate_dnc,allow_numbers_manual) VALUES
-                                     ('default', 'es', 'Espa�ol', '#ffffff', 'The SmoothTorque Enterprise Predictive Dialing Platform', '/images/00_logo.jpg', 'For further information please email sales@venturevoip.com', '/usr/bin/sox', 'VentureVoIP', 'DRFHUJWQIWU', 'localhost', 'root', '', 'phoneDB', 'cdr', 'P�gina principal', 'Campa�as', 'N�meros', 'DNC N�meros', 'Mensajes', 'Listas', 'Clientes', 'Colas', 'Servidores', 'L�neas telef�nicas', 'Administraci�n', 'Logout', '#9999FF', 'Para empezar, vaya en su lista de campa�as, haga clic en la pesta�a Campa�as en la parte superior de esta p�gina.', 'Nombre de usuario', 'Contrase�a', 'Inicio de sesi�n', '�', 'Por minuto', 'NO', null, 'Spare 1 (no utilizados)', 'Spare 2 (no utilizados)', 'Spare 3 (no utilizados)', 'Spare 4 (no utilizados)', 'Spare 5 (no utilizados)', 'localhost', 'root', '', 'A�adir Campa�a', 'Ver Campa�as', '200', 'Ver los n�meros de tel�fono', 'Utilice sistema de listas', 'Generar autom�ticamente los n�meros', 'A�adir manualmente los n�meros de', 'Cargar los n�meros de un archivo de texto', 'Exportaci�n n�meros de tel�fono', 'B�squeda de un n�mero de tel�fono', 'N�mero de la gerencia de la lista', 'Registros de facturaci�n', 'Detalles de las llamadas', 'YES', 'Lista de No Llamar', 'Ver los n�meros de DNC', 'Buscar n�meros DNC', 'Subir DNC n�meros de un archivo de texto', 'A�adir manualmente los n�meros de DNC', 'Precio por plomo', 'localhost', '', '', 'matt@venturevoip.com', 'NO', 'YES')";
+                                     ('default', 'es', 'Espa�ol', '#ffffff', 'The SmoothTorque Enterprise Predictive Dialing Platform', 'images/00_logo.jpg', 'For further information please email sales@venturevoip.com', '/usr/bin/sox', 'VentureVoIP', 'DRFHUJWQIWU', 'localhost', 'root', '', 'phoneDB', 'cdr', 'P�gina principal', 'Campa�as', 'N�meros', 'DNC N�meros', 'Mensajes', 'Listas', 'Clientes', 'Colas', 'Servidores', 'L�neas telef�nicas', 'Administraci�n', 'Logout', '#9999FF', 'Para empezar, vaya en su lista de campa�as, haga clic en la pesta�a Campa�as en la parte superior de esta p�gina.', 'Nombre de usuario', 'Contrase�a', 'Inicio de sesi�n', '�', 'Por minuto', 'NO', null, 'Spare 1 (no utilizados)', 'Spare 2 (no utilizados)', 'Spare 3 (no utilizados)', 'Spare 4 (no utilizados)', 'Spare 5 (no utilizados)', 'localhost', 'root', '', 'A�adir Campa�a', 'Ver Campa�as', '200', 'Ver los n�meros de tel�fono', 'Utilice sistema de listas', 'Generar autom�ticamente los n�meros', 'A�adir manualmente los n�meros de', 'Cargar los n�meros de un archivo de texto', 'Exportaci�n n�meros de tel�fono', 'B�squeda de un n�mero de tel�fono', 'N�mero de la gerencia de la lista', 'Registros de facturaci�n', 'Detalles de las llamadas', 'YES', 'Lista de No Llamar', 'Ver los n�meros de DNC', 'Buscar n�meros DNC', 'Subir DNC n�meros de un archivo de texto', 'A�adir manualmente los n�meros de DNC', 'Precio por plomo', 'localhost', '', '', 'matt@venturevoip.com', 'NO', 'YES')";
   foreach ($config_files as $current_language=>$filename) {
       if (file_exists($filename) && filesize($filename) > 0) {
           $fp = fopen($filename, "r");
@@ -232,16 +232,29 @@ mysql_select_db("SineDialer", $link);
 /* Check if the user is logged in */
 $loggedin=true;
 $myPage=$_SERVER['PHP_SELF'];
+//echo $myPage;
+$url_split = split("/",$myPage);
+//echo sizeof($url_split);
+$myPage = "/".$url_split[sizeof($url_split)-1];
+if ($myPage != $_SERVER['PHP_SELF']) {
+    // This website is being served from a subdirectory
+    $http_dir_name = substr($_SERVER['PHP_SELF'],0,strlen($_SERVER['PHP_SELF'])-strlen($myPage))."/";
+    $self = $myPage;
+} else {
+    $http_dir_name = "/";
+}
+//print_pre($page);
+//exit(0);
 if (!isset($_COOKIE['loggedin']) || !($_COOKIE["loggedin"]==sha1("LoggedIn".$user))){
     /* The user is not logged in */
     $loggedin=false;
-    if (!($myPage=="/index.php"|$myPage=="/login.php")){
+    if (!($myPage=="/index.php"||$myPage=="index.php"||$myPage=="login.php"||$myPage=="/login.php")){
         /* Because header is included in login and the main page we don't
            want to redirect them constantly while they are trying to log
            in.  If they are not on these pages and they are not logged in
            they should be sent to the main page - but we remember via the
            redirect variable the page they were trying to get to. */
-        ?><META HTTP-EQUIV=REFRESH CONTENT="0; URL=/index.php?redirect=<?echo $myPage;?>"><?
+        ?><META HTTP-EQUIV=REFRESH CONTENT="0; URL=<?=$http_dir_name?>index.php?redirect=<?echo $myPage;?>"><?
         exit(0);
     } else {
         $loggedin=false;
@@ -262,13 +275,13 @@ if (!isset($_COOKIE['loggedin']) || !($_COOKIE["loggedin"]==sha1("LoggedIn".$use
 		}
 		if ( $interface_type == "broadcast") {
         	/* Redirect to the broadcast interface */
-        	$destination = "/modules/broadcast/main.php";
+        	$destination = "".$http_dir_name."modules/broadcast/main.php";
         } else if (0 && $interface_type == "cc") {
         	/* Redirect to the call centre interface */
-        	$destination = "/modules/cc/main.php";
+        	$destination = "".$http_dir_name."modules/cc/main.php";
         } else {
         	/* Redirect to the default interface */
-        	$destination = "/main.php";
+        	$destination = $http_dir_name."main.php";
         }
         ?><META HTTP-EQUIV=REFRESH CONTENT="0; URL=<?=$destination?>"><?
 		exit(0);
@@ -302,7 +315,7 @@ if ($self == "/test.php" || $self == "/report.php" || $self == "/servers.php" ||
 <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
 <META HTTP-EQUIV="Expires" CONTENT="-1">
 <?}?>
-<script type="text/javascript" src="/tabber.js"></script>
+<script type="text/javascript" src="<?=$http_dir_name?>tabber.js"></script>
 <?
 if ($loggedin) {
 	$result_if = mysql_query("SELECT interface_type FROM customer where username = '$_COOKIE[user]'");
@@ -320,16 +333,16 @@ if (!isset($interface_type)) {
 if ($interface_type == "broadcast") {
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<link rel="shortcut icon" href="/favicon.ico">
-<link rel="stylesheet" type="text/css" href="/modules/broadcast/css/default.css">
+<link rel="shortcut icon" href="<?=$http_dir_name?>favicon.ico">
+<link rel="stylesheet" type="text/css" href="<?=$http_dir_name?>modules/broadcast/css/default.css">
 </head>
 <!-- Javascript includes -->
 
 
 <body bgcolor="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
-<script type="text/javascript" src="/ajax/picker.js"></script>
-<script type="text/javascript" src="/prototype.js"></script>
-<script type="text/javascript" src="/header.js"></script>
+<script type="text/javascript" src="<?=$http_dir_name?>ajax/picker.js"></script>
+<script type="text/javascript" src="<?=$http_dir_name?>prototype.js"></script>
+<script type="text/javascript" src="<?=$http_dir_name?>header.js"></script>
 
 <!-- Save for Web Slices (broadcast_new.psd) -->
 <center>
@@ -340,63 +353,63 @@ if ($interface_type == "broadcast") {
 		<td rowspan="19" style="width:40px;height:875px;">
 			</td>
 		<td rowspan="17">
-			<img src="/modules/broadcast/images/broadcast_03.png" width="43" height="753" alt=""></td>
+			<img src="<?=$http_dir_name?>modules/broadcastimages/broadcast_03.png" width="43" height="753" alt=""></td>
 		<td colspan="5" rowspan="2">
 			<a href="main.php">
-				<img src="/modules/broadcast/images/Logo.png" width="287" height="104" border="0" alt="Logo"></a></td>
+				<img src="<?=$http_dir_name?>modules/broadcastimages/Logo.png" width="287" height="104" border="0" alt="Logo"></a></td>
 		<td colspan="2" rowspan="2">
-			<img src="/modules/broadcast/images/broadcast_05.png" width="69" height="104" alt=""></td>
+			<img src="<?=$http_dir_name?>modules/broadcastimages/broadcast_05.png" width="69" height="104" alt=""></td>
 		<td>
 			<a href="main.php">
-				<img src="/modules/broadcast/images/Home.png" width="114" height="103" border="0" alt="Home"></a></td>
+				<img src="<?=$http_dir_name?>modules/broadcastimages/Home.png" width="114" height="103" border="0" alt="Home"></a></td>
 		<td>
 			<a href="lists.php">
-				<img src="/modules/broadcast/images/Lists.png" width="95" height="103" border="0" alt="Lists"></a></td>
+				<img src="<?=$http_dir_name?>modules/broadcastimages/Lists.png" width="95" height="103" border="0" alt="Lists"></a></td>
 		<td>
 			<a href="campaigns.php">
-				<img src="/modules/broadcast/images/Campaigns.png" width="152" height="103" border="0" alt="Campaigns"></a></td>
+				<img src="<?=$http_dir_name?>modules/broadcastimages/Campaigns.png" width="152" height="103" border="0" alt="Campaigns"></a></td>
 		<td>
 			<a href="reports.php">
-				<img src="/modules/broadcast/images/Reports.png" width="117" height="103" border="0" alt="Reports"></a></td>
+				<img src="<?=$http_dir_name?>modules/broadcastimages/Reports.png" width="117" height="103" border="0" alt="Reports"></a></td>
 		<td colspan="2">
-			<a href="../../logout.php">
-				<img src="/modules/broadcast/images/Logout.png" width="121" height="103" border="0" alt="Logout"></a></td>
+			<a href="<?=$http_dir_name?>logout.php">
+				<img src="<?=$http_dir_name?>modules/broadcastimages/Logout.png" width="121" height="103" border="0" alt="Logout"></a></td>
 		<td rowspan="2">
-			<img src="/modules/broadcast/images/broadcast_11.png" width="103" height="104" alt=""></td>
+			<img src="<?=$http_dir_name?>modules/broadcastimages/broadcast_11.png" width="103" height="104" alt=""></td>
 		<td rowspan="19">
-			<img src="/modules/broadcast/images/rightbg.png" width="1" height="875" alt=""></td>
+			<img src="<?=$http_dir_name?>modules/broadcastimages/rightbg.png" width="1" height="875" alt=""></td>
 		<td rowspan="19">
-			<img src="/modules/broadcast/images/broadcast_13.png" width="1" height="875" alt=""></td>
+			<img src="<?=$http_dir_name?>modules/broadcastimages/broadcast_13.png" width="1" height="875" alt=""></td>
 		<td>
-			<img src="/modules/broadcast/images/spacer.gif" width="1" height="103" alt=""></td>
+			<img src="<?=$http_dir_name?>modules/broadcastimages/spacer.gif" width="1" height="103" alt=""></td>
 	</tr>
 	<tr>
 		<td colspan="6">
-			<img src="/modules/broadcast/images/broadcast_14.png" width="599" height="1" alt=""></td>
+			<img src="<?=$http_dir_name?>modules/broadcastimages/broadcast_14.png" width="599" height="1" alt=""></td>
 		<td>
-			<img src="/modules/broadcast/images/spacer.gif" width="1" height="1" alt=""></td>
+			<img src="<?=$http_dir_name?>modules/broadcastimages/spacer.gif" width="1" height="1" alt=""></td>
 	</tr>
 	<tr>
 		<td colspan="14">
-			<img src="/modules/broadcast/images/broadcast_15.png" width="1058" height="162" alt=""></td>
+			<img src="<?=$http_dir_name?>modules/broadcastimages/broadcast_15.png" width="1058" height="162" alt=""></td>
 		<td>
-			<img src="/modules/broadcast/images/spacer.gif" width="1" height="162" alt=""></td>
+			<img src="<?=$http_dir_name?>modules/broadcastimages/spacer.gif" width="1" height="162" alt=""></td>
 	</tr>
 	<tr>
 		<td rowspan="14">
-			<img src="/modules/broadcast/images/broadcast_16.png" width="35" height="487" alt=""></td>
+			<img src="<?=$http_dir_name?>modules/broadcastimages/broadcast_16.png" width="35" height="487" alt=""></td>
 		<td colspan="3" rowspan="2">
-			<img src="/modules/broadcast/images/broadcast_17.png" width="215" height="15" alt=""></td>
+			<img src="<?=$http_dir_name?>modules/broadcastimages/broadcast_17.png" width="215" height="15" alt=""></td>
 		<td rowspan="14">
-			<img src="/modules/broadcast/images/broadcast_18.png" width="37" height="487" alt=""></td>
+			<img src="<?=$http_dir_name?>modules/broadcastimages/broadcast_18.png" width="37" height="487" alt=""></td>
 		<td colspan="9">
-			<img src="/modules/broadcast/images/broadcast_19.png" width="771" height="5" alt=""></td>
+			<img src="<?=$http_dir_name?>modules/broadcastimages/broadcast_19.png" width="771" height="5" alt=""></td>
 		<td>
-			<img src="/modules/broadcast/images/spacer.gif" width="1" height="5" alt=""></td>
+			<img src="<?=$http_dir_name?>modules/broadcastimages/spacer.gif" width="1" height="5" alt=""></td>
 	</tr>
 	<tr>
 		<td rowspan="13">
-			<img src="/modules/broadcast/images/broadcast_20.png" width="6" height="482" alt=""></td>
+			<img src="<?=$http_dir_name?>modules/broadcastimages/broadcast_20.png" width="6" height="482" alt=""></td>
 		<td width="658" height="478" colspan="6" rowspan="12" valign="top" style="padding: 20px; background: #ffffff;">
 		<font face="arial" color="#666666" size="2">
 <?
@@ -405,14 +418,14 @@ if ($interface_type == "broadcast") {
 <?
 } else {
 ?>
-	<link rel="stylesheet" type="text/css" href="/css/style.css">
-	<link rel="stylesheet" href="/example.css" TYPE="text/css" MEDIA="screen">
-	<link rel="stylesheet" href="/example-print.css" TYPE="text/css" MEDIA="print">
-	<link rel="stylesheet" type="text/css" href="/css/default.css">
-<link rel="shortcut icon" href="/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="<?=$http_dir_name?>css/style.css">
+	<link rel="stylesheet" href="<?=$http_dir_name?>example.css" TYPE="text/css" MEDIA="screen">
+	<link rel="stylesheet" href="<?=$http_dir_name?>example-print.css" TYPE="text/css" MEDIA="print">
+	<link rel="stylesheet" type="text/css" href="<?=$http_dir_name?>css/default.css">
+<link rel="shortcut icon" href="<?=$http_dir_name?>favicon.ico">
 <!-- Javascript includes -->
-<script type="text/javascript" src="/ajax/picker.js"></script>
-<script type="text/javascript" src="/header.js"></script>
+<script type="text/javascript" src="<?=$http_dir_name?>ajax/picker.js"></script>
+<script type="text/javascript" src="<?=$http_dir_name?>header.js"></script>
 </head>
 
 <body bgcolor="<?echo $config_values['COLOUR'];?>" >
@@ -474,8 +487,8 @@ if ($interface_type == "broadcast") {
 			   related to credit etc */
 			echo "<center>";
 			echo "<font color=\"".$config_values['DATE_COLOUR']."\">";
-			echo "<a href=\"/help/index.php\">";
-			echo "<img width=\"16\" height=\"16\"  src=\"/images/help.png\" border=\"0\">";
+			echo "<a href=\"".$http_dir_name."help/index.php\">";
+			echo "<img width=\"16\" height=\"16\"  src=\"".$http_dir_name."images/help.png\" border=\"0\">";
 			echo "<b> Help</b>";
 			echo "</a>";
 			echo "&nbsp;".ucwords(strftime('%A %d %B %Y %H:%M:%S'));
@@ -499,9 +512,9 @@ if ($interface_type == "broadcast") {
 				$postpay = 1;
 			}
 			if ($postpay == 1) {
-				echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img width=\"16\" height=\"16\"  src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(strftime('%A %d %B %Y %H:%M:%S'))." Credit: $credit Credit Limit: $creditlimit <a href=\"/viewcdr.php\"><img width=\"16\" height=\"16\" src=\"/images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"/billinglog_account.php\"><img width=\"16\" height=\"16\" src=\"/images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
+				echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"".$http_dir_name."help/index.php\"><img width=\"16\" height=\"16\"  src=\"".$http_dir_name."images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(strftime('%A %d %B %Y %H:%M:%S'))." Credit: $credit Credit Limit: $creditlimit <a href=\"".$http_dir_name."viewcdr.php\"><img width=\"16\" height=\"16\" src=\"".$http_dir_name."images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"".$http_dir_name."billinglog_account.php\"><img width=\"16\" height=\"16\" src=\"".$http_dir_name."images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
 			} else {
-				echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"/help/index.php\"><img width=\"16\" height=\"16\"  src=\"/images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(strftime('%A %d %B %Y %H:%M:%S'))." Credit: $credit <a href=\"/viewcdr.php\"><img width=\"16\" height=\"16\"  src=\"/images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"/billinglog_account.php\"><img width=\"16\" height=\"16\"  src=\"/images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
+				echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"".$http_dir_name."help/index.php\"><img width=\"16\" height=\"16\"  src=\"".$http_dir_name."images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(strftime('%A %d %B %Y %H:%M:%S'))." Credit: $credit <a href=\"".$http_dir_name."viewcdr.php\"><img width=\"16\" height=\"16\"  src=\"".$http_dir_name."images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"".$http_dir_name."billinglog_account.php\"><img width=\"16\" height=\"16\"  src=\"".$http_dir_name."images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
 			}
 			unset($result_credit);
 			unset($postpay);

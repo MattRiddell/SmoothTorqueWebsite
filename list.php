@@ -14,7 +14,7 @@ if (!isset($_POST[campaignid])&&!isset($_GET[campaignid])){
 
     <br /><br /><br /><br />
 <center>
-<table background="/images/sdbox.png" width="300" height="200" class="dragme22">
+<table background="images/sdbox.png" width="300" height="200" class="dragme22">
 <tr>
 <td>
 </td>
@@ -92,14 +92,14 @@ $sql = 'SELECT * FROM number WHERE campaignid='.$campaignid.' and status=\''.$_G
 $result=mysql_query($sql, $link) or die (mysql_error());;
 //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
 
-echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&status='.$_GET[type].'&start=0"><img src="/images/resultset_first.png" border="0"></a> ';
-echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&status='.$_GET[type].'&start='.($start-20).'"><img src="/images/resultset_previous.png" border="0"></a> ';
+echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&status='.$_GET[type].'&start=0"><img src="images/resultset_first.png" border="0"></a> ';
+echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&status='.$_GET[type].'&start='.($start-20).'"><img src="images/resultset_previous.png" border="0"></a> ';
 
 for ($x=$start;$x<$start+200;$x+=20){
 echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&status='.$_GET[type].'&start='.$x.'">'.($x/20).'</a> ';
 }
-echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&status='.$_GET[type].'&start='.($x+20).'"><img src="/images/resultset_next.png" border="0"></a> ';
-echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&status='.$_GET[type].'&start='.(($max-20)+$max%20).'"><img src="/images/resultset_last.png" border="0"></a> ';
+echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&status='.$_GET[type].'&start='.($x+20).'"><img src="images/resultset_next.png" border="0"></a> ';
+echo '<a href="viewnumbers.php?campaignid='.$campaignid.'&status='.$_GET[type].'&start='.(($max-20)+$max%20).'"><img src="images/resultset_last.png" border="0"></a> ';
 echo '<br />';
 echo '<br />';
 while ($row = mysql_fetch_assoc($result)) {
@@ -119,11 +119,11 @@ $class=" class=\"tborderx\"";
 <?echo $row[status];?>
 </TD>
 <TD>
-<A TITLE="Delete this Number" HREF="deletenumber.php?campaignid=<?echo $_POST[campaignid];?>&number=<?echo $row[phonenumber];?>"><img src="/images/delete.png" border="0" alt="Delete Number"></A>
+<A TITLE="Delete this Number" HREF="deletenumber.php?campaignid=<?echo $_POST[campaignid];?>&number=<?echo $row[phonenumber];?>"><img src="images/delete.png" border="0" alt="Delete Number"></A>
 <?
 if ($row[status] != "new") {
 ?>
-<A TITLE="Reset the status of this Number" HREF="resetlist.php?campaignid=<?echo $_POST[campaignid];?>&type=<?echo $_GET[type];?>&number=<?echo $row[phonenumber];?>"><img src="/images/control_repeat_blue.png" border="0" alt="Reset Number"></A>
+<A TITLE="Reset the status of this Number" HREF="resetlist.php?campaignid=<?echo $_POST[campaignid];?>&type=<?echo $_GET[type];?>&number=<?echo $row[phonenumber];?>"><img src="images/control_repeat_blue.png" border="0" alt="Reset Number"></A>
 <?
 }
 ?>

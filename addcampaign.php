@@ -52,20 +52,20 @@ require "header_campaign.php";
 <?
 ?>
 <TR title="The name for the campaign"><TD CLASS="thead">Campaign Name
-<a href="#" onclick="displaySmallMessage('includes/help.php?section=A short name you would like to give to the campaign - preferrably one word');return false"><img src="/images/help.png" border="0"></a>
+<a href="#" onclick="displaySmallMessage('includes/help.php?section=A short name you would like to give to the campaign - preferrably one word');return false"><img src="images/help.png" border="0"></a>
 </TD><TD>
 <INPUT TYPE="HIDDEN" NAME="id" VALUE="<?echo $_GET[id];?>">
 <INPUT TYPE="TEXT" NAME="name" VALUE="<?echo $row[name];?>" size="60">
 </TD>
 </TR><TR title="A short description of the campaign"><TD CLASS="thead">Campaign Description
-<a href="#" onclick="displaySmallMessage('includes/help.php?section=A short description of the campaign in case you are not able to tell from the Campaign Name');return false"><img src="/images/help.png" border="0"></a>
+<a href="#" onclick="displaySmallMessage('includes/help.php?section=A short description of the campaign in case you are not able to tell from the Campaign Name');return false"><img src="images/help.png" border="0"></a>
 </TD><TD>
 <INPUT TYPE="TEXT" NAME="description" VALUE="<?echo $row[description];?>" size="60">
 </TD>
 </TR>
 		<tr id="mode" style="display:none">
 			<td class="thead" width=200>Mode
-			            <a href="#" onclick="displaySmallMessage('includes/help.php?section=What type of campaign you would like to run. <br /><br />If you are connected to the machine doing the calling then chose Queue Mode.  If you would like to receive any connected calls at a particular phone number, chose DID Mode.  Normally you will use DID Mode unless you have been told to use Queue Mode.');return false"><img src="/images/help.png" border="0"></a>
+			            <a href="#" onclick="displaySmallMessage('includes/help.php?section=What type of campaign you would like to run. <br /><br />If you are connected to the machine doing the calling then chose Queue Mode.  If you would like to receive any connected calls at a particular phone number, chose DID Mode.  Normally you will use DID Mode unless you have been told to use Queue Mode.');return false"><img src="images/help.png" border="0"></a>
 			</td>
             <td width=*>
 			<input type="radio" name="mode" value="didmode" rel="didmode" id="mode_did" checked onclick="document.getElementById('queue_field').style.visibility = 'hidden';"/>
@@ -75,7 +75,7 @@ require "header_campaign.php";
 		</td>
 		</tr>
         <TR><TD CLASS="thead">Type of Campaign
-        <a href="#" onclick="displayLargeMessage('includes/campaign_types.php');return false"><img src="/images/help.png" border="0" title="Type Of Campaign"></a>
+        <a href="#" onclick="displayLargeMessage('includes/campaign_types.php');return false"><img src="images/help.png" border="0" title="Type Of Campaign"></a>
         </TD><TD>
 <SELECT NAME="context" id="context" onchange="whatPaySelected(this.value)">
 <OPTION VALUE="-1" SELECTED>Please chose a type of campaign...</OPTION>
@@ -105,7 +105,7 @@ require "header_campaign.php";
 </TR>
 		<tr rel="didmode" id="xx6" style="display:none" >
 			<td class="thead" width=200><label for="agents">Maximum Connected Calls:
-            <a href="#" onclick="displaySmallMessage('includes/help.php?section=This is the number of concurrent calls you would like to receive on the call center number specified.  <br /><br />Normally this will be the number of staff you have.');return false" title="The number of concurrent calls to be put through to the call center"><img src="/images/help.png" border="0"></a>
+            <a href="#" onclick="displaySmallMessage('includes/help.php?section=This is the number of concurrent calls you would like to receive on the call center number specified.  <br /><br />Normally this will be the number of staff you have.');return false" title="The number of concurrent calls to be put through to the call center"><img src="images/help.png" border="0"></a>
             </label></td>
 			<td width=*><input type="text" name="agents" id="agents" size="28" value="30"></td>
 		</tr>
@@ -153,7 +153,7 @@ if (mysql_num_rows($result) > 0) {
 
 
 <TR id="fax" style="display:none" title="The fax you would like to send"><TD CLASS="thead">Fax Message
-<a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are running a campaign which sends a fax to the user then this is the fax that will be used.');return false"><img src="/images/help.png" border="0"></a>
+<a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are running a campaign which sends a fax to the user then this is the fax that will be used.');return false"><img src="images/help.png" border="0"></a>
 </TD><TD>
 <SELECT name="faxid">
 <?
@@ -176,7 +176,7 @@ echo "<OPTION VALUE=\"".$row2_fax[$i][id]."\"$selected>".$row2_fax[$i][name]."</
 */?>
 
 <TR id="xx2" style="display:none" title="The message to play to the person who answers the phone"><TD CLASS="thead">Live Message
-<a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are running a campaign which plays a message to the user while waiting for them to press 1 then this is the message that will be used.');return false"><img src="/images/help.png" border="0"></a>
+<a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are running a campaign which plays a message to the user while waiting for them to press 1 then this is the message that will be used.');return false"><img src="images/help.png" border="0"></a>
 </TD><TD>
 <SELECT name="messageid">
 <?
@@ -199,7 +199,7 @@ echo "<OPTION VALUE=\"".$row2[$count2][id]."\"$selected>".$row2[$count2][name]."
 */?>
 
 
-<TR id="xx3"  style="display:none" title="The message to leave to the answer machine"><TD CLASS="thead">Answer Machine Message<a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are leaving automated messages on answer machines then you can set this to a particular message you would like to have played when an answer machine is detected.  Usage of this will depend on your settings in the Type of Campaign section.');return false"><img src="/images/help.png" border="0"></a>
+<TR id="xx3"  style="display:none" title="The message to leave to the answer machine"><TD CLASS="thead">Answer Machine Message<a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are leaving automated messages on answer machines then you can set this to a particular message you would like to have played when an answer machine is detected.  Usage of this will depend on your settings in the Type of Campaign section.');return false"><img src="images/help.png" border="0"></a>
 </TD><TD>
 <SELECT name="messageid2">
 <?
@@ -223,7 +223,7 @@ echo "<OPTION VALUE=\"".$row2[$count2][id]."\"$selected>".$row2[$count2][name]."
 
 
 <TR  id="xx4" style="display:none" title="The message played to someone who wants to be put on the DNC list"><TD CLASS="thead">DNC Confirmation Message
-<a href="#" onclick="displaySmallMessage('includes/help.php?section=This message is played to a customer who presses 2 to be added to DNC.');return false"><img src="/images/help.png" border="0"></a>
+<a href="#" onclick="displaySmallMessage('includes/help.php?section=This message is played to a customer who presses 2 to be added to DNC.');return false"><img src="images/help.png" border="0"></a>
 </TD><TD>
 <SELECT name="messageid3">
 <?
@@ -244,7 +244,7 @@ echo "<OPTION VALUE=\"".$row2[$count2][id]."\"$selected>".$row2[$count2][name]."
 
         <tr id = "queue_field" title="The name of the queue used for agents" style="visibility: hidden">
 			<td class="thead" width=200><label for="agents">Queue Name
-            <a href="#" onclick="displaySmallMessage('includes/help.php?section=This is the name of a Queue on the telephone system of the provider of this system. Normally this will be assigned to you when you set up an account.');return false"><img src="/images/help.png" border="0"></a>
+            <a href="#" onclick="displaySmallMessage('includes/help.php?section=This is the name of a Queue on the telephone system of the provider of this system. Normally this will be assigned to you when you set up an account.');return false"><img src="images/help.png" border="0"></a>
             </label></td>
 			<td width=*>
 
@@ -264,13 +264,13 @@ echo "<OPTION VALUE=\"".$row_queue[$count2][name]."\"$selected>".$row_queue[$cou
 		</tr>
         		<tr id="xx5" style="display:none" title="The caller id you would like to send out">
 			<td class="thead"><label for="did">Caller ID:
-			<a href="#" onclick="displaySmallMessage('includes/help.php?section=The CallerID you would like to send on calls to your customers');return false"><img src="/images/help.png" border="0"></a>
+			<a href="#" onclick="displaySmallMessage('includes/help.php?section=The CallerID you would like to send on calls to your customers');return false"><img src="images/help.png" border="0"></a>
 			</label></td>
 			<td><input type="text" name="clid" id="did" size=28 value="ls3"></td>
 		</tr>
         <tr rel="didmode" id="xx1" style="display:none" title="The number for the call center">
 			<td class="thead"><label for="did">Call Center Phone Number:
-			<a href="#" onclick="displaySmallMessage('includes/help.php?section=The phone number you would like to have connected calls sent to. Eg: (123) 555-1234. ');return false"><img src="/images/help.png" border="0" id="x"  ></a>
+			<a href="#" onclick="displaySmallMessage('includes/help.php?section=The phone number you would like to have connected calls sent to. Eg: (123) 555-1234. ');return false"><img src="images/help.png" border="0" id="x"  ></a>
 			</label></td>
 			<td><input type="text" name="did" id="did" size=28 value="ls3"></td>
 		</tr>
