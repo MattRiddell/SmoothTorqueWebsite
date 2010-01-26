@@ -1353,6 +1353,25 @@
                         $result=mysql_query($sql, $link);
                     }
                     
+                    
+                    /*****************************************************************
+                     *           ALTER CAMPAIGN TABLE TO ADD evergreen FIELD     *
+                     ******************************************************************/
+                    unset($field_array);
+                    $result = mysql_query("SHOW COLUMNS FROM SineDialer.campaign");
+                    $columns = mysql_num_rows($result) or die(mysql_error());
+                    for ($i = 0; $i < $columns; $i++) {
+                        $field_array[] = mysql_result($result, $i, "Field");
+                    }		
+                    if (!in_array('evergreen', $field_array))
+                    {
+                        $result = mysql_query('ALTER TABLE campaign ADD evergreen VARCHAR(255) default \'0\'');
+                        $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added campaign.evergreen field')";
+                        $result=mysql_query($sql, $link) or die(mysql_error());
+                    }
+                    
+                    
+                    
                     /*****************************************************************
                      *           ALTER CUSTOMER TABLE TO ADD interface_type FIELD     *
                      ******************************************************************/
