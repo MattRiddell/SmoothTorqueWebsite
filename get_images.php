@@ -28,7 +28,7 @@ while (1) {
 			}
 			if ($stream = fopen('http://italk.venturevoip.com/graph.php?id='.$row[campaignid].'&debug=1', 'rb')) {
 				$contents = stream_get_contents($stream);
-				$output = fopen('.images/live/debug_'.$row[campaignid].'.png', 'wb');
+				$output = fopen('images/live/debug_'.$row[campaignid].'.png', 'wb');
 				fwrite($output, $contents);
 				fclose($stream);
 				fclose($output);

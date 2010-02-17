@@ -1,6 +1,6 @@
 function hideshow(name){
-	var opened = ".images/open.png";
-	var closed = ".images/closed.png";
+	var opened = "images/open.png";
+	var closed = "images/closed.png";
 
 	var element = document.getElementById(name);
 	var img = document.getElementsByName("img_"+name);
