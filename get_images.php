@@ -20,7 +20,7 @@ while (1) {
 			echo "Found campaign $row[campaignid]...\n";
 			if ($stream = fopen('http://italk.venturevoip.com/graph.php?id='.$row[campaignid], 'rb')) {
 				$contents = stream_get_contents($stream);
-				$output = fopen('.images/live/campaign_'.$row[campaignid].'.png', 'wb');
+				$output = fopen('images/live/campaign_'.$row[campaignid].'.png', 'wb');
 				fwrite($output, $contents);
 				fclose($stream);
 				fclose($output);
