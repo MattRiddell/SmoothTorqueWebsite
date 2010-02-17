@@ -120,7 +120,7 @@ $row = mysql_fetch_assoc($result);
 <input type="hidden" name="_submit_check" value="1">
 <p>Basic Configuration Options</p>
 <table class="" align="center" border="0" cellpadding="2" cellspacing="0">
-<tr class="tborder2" title="The name of the queue"><td class="thead">Name<a href="#" onClick="displaySmallMessage('/includes/help.php?section=The name of the queue');return false;"><img src=".images/help.png" border="0"></a></td><td><input type="text" value="<?echo $row[name];?>" name="name" maxlength="<?echo $is_int[name][1]?>"></td></tr>
+<tr class="tborder2" title="The name of the queue"><td class="thead">Name<a href="#" onClick="displaySmallMessage('/includes/help.php?section=The name of the queue');return false;"><img src="images/help.png" border="0"></a></td><td><input type="text" value="<?echo $row[name];?>" name="name" maxlength="<?echo $is_int[name][1]?>"></td></tr>
 <tr class="tborderx" title="Determines how the calls are distributed to members"><td class="thead">Strategy<a href="#" onClick="displaySmallMessage('/includes/help.php?section=Calls are distributed among members handling a queue with one of several strategies');return false;"><img src=".images/help.png" border="0"></a></td><td><?echo make_strategy_selector($row[strategy],"strategy")?></td></tr>
 <tr class="tborder2" title="How long to wait before trying the next agent"><td class="thead">Timeout<a href="#" onClick="displaySmallMessage('/includes/help.php?section=Time out, in seconds, when calling an agent, e.g. 15');return false;"><img src=".images/help.png" border="0"></a></td><td><input type="text" value="<?echo $row[timeout]?>" name="timeout" maxlength="<?echo $is_int[timeout][1]?>"></td></tr>
 </table>
