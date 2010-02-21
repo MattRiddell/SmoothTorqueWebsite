@@ -12,8 +12,15 @@ while ($row = mysql_fetch_assoc($result)) {
 	}
 }
 ?>{"servers": [<?
+
 for ($i = 0;$i<count($server_names);$i++) {
 //	echo "Name: ".$server_names[$i]." Chans: ".$server_chans[$i]."\n";
 	echo '{"name":"'.$server_names[$i].'", "chans":"'.$server_chans[$i].'"}';
 }
-?>]}<??>
+?>],<?
+
+$result = mysql_query("SELECT value FROM SineDialer.engine_stats WHERE stat = 'funnel_usage'");
+echo '"funnel":"'.mysql_result($result,0,0).'"';
+
+?>
+}
