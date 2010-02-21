@@ -31,4 +31,11 @@ $result = mysql_query("SELECT count(*) FROM SineDialer.queue WHERE status = 101"
 echo '"campaigns":"'.mysql_result($result,0,0).'"';
 
 ?>
+,
+<?
+
+$result = mysql_query("SELECT value FROM SineDialer.config WHERE parameter='mysql_queue'");
+echo '"mysql":"'.mysql_result($result,0,0).'"';
+
+?>
 }
