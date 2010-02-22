@@ -62,12 +62,40 @@ if (isset($_GET['verify_connection'])) {
     //echo "Connecting to: $db_host User: $db_user Pass:$db_pass<br />";
     $link = mysql_connect($db_host, $db_user, $db_pass);
     mysql_select_db($config_values['SUGAR_DB'], $link);
-
+    
     $result = mysql_query("SELECT count(*) FROM leads");
     echo number_format(mysql_result($result,0,0));
     ?>
-    <br /><br />
+    <br />
     
+    
+    <b>Leads (Last 24 Hours): </b><?
+    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 1 DAY) <= date_entered");
+    echo number_format(mysql_result($result,0,0));
+    ?>
+    <br />
+    
+    
+    
+    
+    <b>Leads (Last Week): </b><?
+    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 7 DAY) <= date_entered");
+    echo number_format(mysql_result($result,0,0));
+    ?>
+    <br />
+    
+    
+    
+    
+    <b>Leads (Last Month): </b><?
+    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 1 MONTH) <= date_entered");
+    echo number_format(mysql_result($result,0,0));
+    ?>
+    <br />
+    
+    
+    <br />
+
     <?
 }
 echo "</center>";
