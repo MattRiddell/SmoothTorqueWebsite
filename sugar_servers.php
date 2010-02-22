@@ -64,7 +64,7 @@ if (isset($_GET['verify_connection'])) {
     mysql_select_db($config_values['SUGAR_DB'], $link);
 
     $result = mysql_query("SELECT count(*) FROM leads");
-    echo mysql_result($result,0,0);
+    echo number_format(mysql_result($result,0,0));
     ?>
     <br /><br />
     
