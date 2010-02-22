@@ -41,7 +41,7 @@ if (isset($_GET['verify_connection'])) {
             while ($row = mysql_fetch_assoc($result)) {
                 ?>
                 <script language="javascript">
-                window.open='http://<?=$config_values['SUGAR_HOST']?>/sugarcrm/index.php?module=Leads&offset=5&action=DetailView&record=<?=$row['id']?>';
+                window.open('http://<?=$config_values['SUGAR_HOST']?>/sugarcrm/index.php?module=Leads&offset=5&action=DetailView&record=<?=$row['id']?>');
                 </script>
                 <?
             }
