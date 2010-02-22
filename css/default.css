@@ -914,12 +914,33 @@ img.percentImage3 {
 
 
 TD.subheader {
+margin: 0px;
+padding:0px;
    background: #eeeeee;
+   background-position: 0 -6;
+   border: 0px;
+   text-align: left;
+}
+
+TD.subheader:hover {
+
+   background: url(../images/chb.gif);
    background-position: 0 -6;
    border: 0px;
 }
 
-TD.subheader:hover {
+
+TD.subheader2 {
+margin: 0px;
+padding:0px;
+   background: #eeeeee;
+   background-position: 0 -6;
+   border: 0px;
+   text-align: center;
+}
+
+TD.subheader2:hover {
+
    background: url(../images/chb.gif);
    background-position: 0 -6;
    border: 0px;
