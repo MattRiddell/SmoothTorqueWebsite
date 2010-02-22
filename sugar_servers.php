@@ -28,7 +28,7 @@ if (isset($_GET['verify_connection'])) {
         $db_host = $config_values['SUGAR_HOST'];
         $db_user = $config_values['SUGAR_USER'];
         $db_pass = $config_values['SUGAR_PASS'];
-        echo "Connecting to: $db_host User: $db_user Pass:$db_pass<br />";
+        //echo "Connecting to: $db_host User: $db_user Pass:$db_pass<br />";
         $link = mysql_connect($db_host, $db_user, $db_pass);
         if (!$link) {
             die('Could not connect ' . mysql_error());
@@ -40,6 +40,7 @@ if (isset($_GET['verify_connection'])) {
         if (mysql_num_rows($result) > 0) {
             while ($row = mysql_fetch_assoc($result)) {
                 ?>
+                Screen Pop Executed to: 'http://<?=$config_values['SUGAR_HOST']?>/sugarcrm/index.php?module=Leads&offset=5&action=DetailView&record=<?=$row['id']?>'<br />
                 <script language="javascript">
                 window.open('http://<?=$config_values['SUGAR_HOST']?>/sugarcrm/index.php?module=Leads&offset=5&action=DetailView&record=<?=$row['id']?>');
                 </script>
@@ -50,8 +51,21 @@ if (isset($_GET['verify_connection'])) {
 } else {
     ?>
     <a href="sugar_servers.php?verify_connection=1">
-    Verify SugarCRM Connection Details
+    Screen Pop a Sugar CRM record
     </a>
+    <br /><br />
+    
+    <b>Leads: </b><?
+    $db_host = $config_values['SUGAR_HOST'];
+    $db_user = $config_values['SUGAR_USER'];
+    $db_pass = $config_values['SUGAR_PASS'];
+    //echo "Connecting to: $db_host User: $db_user Pass:$db_pass<br />";
+    $link = mysql_connect($db_host, $db_user, $db_pass);
+    mysql_select_db($config_values['SUGAR_DB'], $link);
+
+    $result = mysql_query("SELECT count(*) FROM leads");
+    echo mysql_result($result,0,0);
+    ?>
     <br /><br />
     
     <?
