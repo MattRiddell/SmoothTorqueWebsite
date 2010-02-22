@@ -63,6 +63,29 @@ while ($header_row = mysql_fetch_assoc($result_config) ) {
     }
 }
 
+$sql = 'SELECT value FROM config WHERE parameter=\'sugar_user\'';
+$result=mysql_query($sql, $link) or die (mysql_error());
+if (mysql_num_rows($result) > 0) {
+    $config_values['SUGAR_USER'] = mysql_result($result,0,'value');
+}
+
+$sql = 'SELECT value FROM config WHERE parameter=\'sugar_host\'';
+$result=mysql_query($sql, $link) or die (mysql_error());
+if (mysql_num_rows($result) > 0) {
+    $config_values['SUGAR_HOST'] = mysql_result($result,0,'value');
+}
+
+$sql = 'SELECT value FROM config WHERE parameter=\'sugar_pass\'';
+$result=mysql_query($sql, $link) or die (mysql_error());
+if (mysql_num_rows($result) > 0) {
+    $config_values['SUGAR_PASS'] = mysql_result($result,0,'value');
+}
+
+$sql = 'SELECT value FROM config WHERE parameter=\'sugar_db\'';
+$result=mysql_query($sql, $link) or die (mysql_error());
+if (mysql_num_rows($result) > 0) {
+    $config_values['SUGAR_DB'] = mysql_result($result,0,'value');
+}
 
 
 
