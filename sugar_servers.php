@@ -28,8 +28,15 @@ if (isset($_GET['verify_connection'])) {
         $db_host = $config_values['SUGAR_HOST'];
         $db_user = $config_values['SUGAR_USER'];
         $db_pass = $config_values['SUGAR_PASS'];
-        $link = mysql_connect($db_host, $db_user, $db_pass) OR die(mysql_error());
-        $result = mysql_query("SELECT id FROM ".$config_values['SUGAR_DB'].".leads WHERE phone_home = '$_GET[number]' or phone_mobile='$_GET[number]' order by date_modified DESC limit 1");
+        echo "Connecting to: $db_host User: $db_user Pass:$db_pass<br />";
+        $link = mysql_connect($db_host, $db_user, $db_pass);
+        if (!$link) {
+            die('Could not connect ' . mysql_error());
+        }//OR die(mysql_error());
+        mysql_select_db($config_values['SUGAR_DB'], $link);
+        echo "1";
+//        print_pre($link);
+        $result = mysql_query("SELECT id FROM ".$config_values['SUGAR_DB'].".leads WHERE phone_home = '$_POST[number]' or phone_mobile='$_POST[number]' order by date_modified DESC limit 1");
         if (mysql_num_rows($result) > 0) {
             while ($row = mysql_fetch_assoc($result)) {
                 ?>
