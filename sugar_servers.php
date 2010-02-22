@@ -70,7 +70,7 @@ if (isset($_GET['verify_connection'])) {
     <br />
     
     
-    <b>Leads (Entered Last 24 Hours): </b><?
+    <b>Leads</b> (Entered Last 24 Hours): <?
     $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 1 DAY) <= date_entered");
     echo number_format(mysql_result($result,0,0));
     ?>
@@ -79,7 +79,7 @@ if (isset($_GET['verify_connection'])) {
     
     
     
-    <b>Leads (Entered Last Week): </b><?
+    <b>Leads</b> (Entered Last Week): <?
     $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 7 DAY) <= date_entered");
     echo number_format(mysql_result($result,0,0));
     ?>
@@ -88,7 +88,7 @@ if (isset($_GET['verify_connection'])) {
     
     
     
-    <b>Leads (Entered Last Month): </b><?
+    <b>Leads</b> (Entered Last Month): <?
     $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 1 MONTH) <= date_entered");
     echo number_format(mysql_result($result,0,0));
     ?>
@@ -105,7 +105,7 @@ if (isset($_GET['verify_connection'])) {
     
     
     
-    <b>Leads (Modified Last 24 Hours): </b><?
+    <b>Leads</b> (Modified Last 24 Hours): <?
     $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 1 DAY) <= date_modified");
     echo number_format(mysql_result($result,0,0));
     ?>
@@ -114,7 +114,7 @@ if (isset($_GET['verify_connection'])) {
     
     
     
-    <b>Leads (Modified Last Week): </b><?
+    <b>Leads</b> (Modified Last Week): <?
     $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 7 DAY) <= date_modified");
     echo number_format(mysql_result($result,0,0));
     ?>
@@ -123,7 +123,7 @@ if (isset($_GET['verify_connection'])) {
     
     
     
-    <b>Leads (Modified Last Month): </b><?
+    <b>Leads</b> (Modified Last Month): <?
     $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 1 MONTH) <= date_modified");
     echo number_format(mysql_result($result,0,0));
     ?>
