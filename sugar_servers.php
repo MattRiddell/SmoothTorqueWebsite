@@ -55,7 +55,7 @@ if (isset($_GET['verify_connection'])) {
     </a>
     <br /><br />
     
-    <b>Leads: </b><?
+    <b>Total Leads: </b><?
     $db_host = $config_values['SUGAR_HOST'];
     $db_user = $config_values['SUGAR_USER'];
     $db_pass = $config_values['SUGAR_PASS'];
@@ -66,6 +66,7 @@ if (isset($_GET['verify_connection'])) {
     $result = mysql_query("SELECT count(*) FROM leads");
     echo number_format(mysql_result($result,0,0));
     ?>
+    <br />
     <br />
     
     
