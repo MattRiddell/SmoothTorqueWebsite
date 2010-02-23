@@ -63,7 +63,7 @@ if (isset($_GET['verify_connection'])) {
     $link = mysql_connect($db_host, $db_user, $db_pass);
     mysql_select_db($config_values['SUGAR_DB'], $link);
     
-    $result = mysql_query("SELECT count(*) FROM leads");
+    $result = mysql_query("SELECT count(*) FROM leads where  deleted = 0 ");
     echo number_format(mysql_result($result,0,0));
     ?>
     <br />
