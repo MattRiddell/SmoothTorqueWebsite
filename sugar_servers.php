@@ -71,7 +71,7 @@ if (isset($_GET['verify_connection'])) {
     
     
     <b>Leads</b> (Entered Last 24 Hours): <?
-    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 1 DAY) <= date_entered");
+    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 1 DAY) <= date_entered and leads.deleted = 0 ");
     echo number_format(mysql_result($result,0,0));
     ?>
     <br />
@@ -80,7 +80,7 @@ if (isset($_GET['verify_connection'])) {
     
     
     <b>Leads</b> (Entered Last Week): <?
-    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 7 DAY) <= date_entered");
+    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 7 DAY) <= date_entered and leads.deleted = 0 ");
     echo number_format(mysql_result($result,0,0));
     ?>
     <br />
@@ -89,7 +89,7 @@ if (isset($_GET['verify_connection'])) {
     
     
     <b>Leads</b> (Entered Last Month): <?
-    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 1 MONTH) <= date_entered");
+    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 1 MONTH) <= date_entered and leads.deleted = 0 ");
     echo number_format(mysql_result($result,0,0));
     ?>
     <br />
@@ -108,7 +108,7 @@ if (isset($_GET['verify_connection'])) {
     
     
     <b>Leads</b> (Modified Last 24 Hours): <?
-    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 1 DAY) <= date_modified");
+    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 1 DAY) <= date_modified and leads.deleted = 0 ");
     echo number_format(mysql_result($result,0,0));
     ?>
     <br />
@@ -117,7 +117,7 @@ if (isset($_GET['verify_connection'])) {
     
     
     <b>Leads</b> (Modified Last Week): <?
-    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 7 DAY) <= date_modified");
+    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 7 DAY) <= date_modified and leads.deleted = 0 ");
     echo number_format(mysql_result($result,0,0));
     ?>
     <br />
@@ -126,7 +126,7 @@ if (isset($_GET['verify_connection'])) {
     
     
     <b>Leads</b> (Modified Last Month): <?
-    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 1 MONTH) <= date_modified");
+    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 1 MONTH) <= date_modified and leads.deleted = 0 ");
     echo number_format(mysql_result($result,0,0));
     ?>
     <br />
@@ -139,7 +139,7 @@ if (isset($_GET['verify_connection'])) {
     
     
     <b>Timezones:</b> <br /><?
-    $result = mysql_query("select count(*), time_zone_c from leads, leads_cstm where leads.id = leads_cstm.id_c group by time_zone_c");
+    $result = mysql_query("select count(*), time_zone_c from leads, leads_cstm where leads.id = leads_cstm.id_c and leads.deleted = 0 group by time_zone_c");
     while ($row = mysql_fetch_assoc($result)) {
         if (strlen($row['time_zone_c']) == 0) {
             $row['time_zone_c'] = "Not Set";
