@@ -94,17 +94,6 @@ if (isset($_GET['verify_connection'])) {
     ?>
     <br />
     
-
-    <b>Timezones:</b>: <br /><?
-    $result = mysql_query("select count(*), time_zone_c from leads, leads_cstm where leads.id = leads_cstm.id_c group by time_zone_c");
-    while ($row = mysql_fetch_assoc($result)) {
-        if (strlen($row['time_zone_c']) == 0) {
-            $row['time_zone_c'] = "Not Set";
-        }
-        echo $row['time_zone_c']." ".$row['count(*)']."<br />";
-    }
-    ?>
-    <br />
     
     
     
@@ -145,6 +134,20 @@ if (isset($_GET['verify_connection'])) {
     
     
     
+    <br />
+    
+    
+    
+    <b>Timezones:</b> <br /><?
+    $result = mysql_query("select count(*), time_zone_c from leads, leads_cstm where leads.id = leads_cstm.id_c group by time_zone_c");
+    while ($row = mysql_fetch_assoc($result)) {
+        if (strlen($row['time_zone_c']) == 0) {
+            $row['time_zone_c'] = "Not Set";
+        }
+        echo $row['time_zone_c'].": ".$row['count(*)']."<br />";
+    }
+    ?>
+    <br />
     
     
     
