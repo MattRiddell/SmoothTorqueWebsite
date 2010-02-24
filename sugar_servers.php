@@ -60,7 +60,7 @@ if (isset($_GET['verify_connection'])) {
     $db_user = $config_values['SUGAR_USER'];
     $db_pass = $config_values['SUGAR_PASS'];
     //echo "Connecting to: $db_host User: $db_user Pass:$db_pass<br />";
-    $link = mysql_connect($db_host, $db_user, $db_pass);
+    $link = mysql_connect($db_host, $db_user, $db_pass) or die(mysql_error());
     mysql_select_db($config_values['SUGAR_DB'], $link);
     
     $result = mysql_query("SELECT count(*) FROM leads where  deleted = 0 ");
@@ -150,8 +150,16 @@ if (isset($_GET['verify_connection'])) {
     <br />
     
     
+    <br />
     
     
+    <b>Statuses:</b> <br /><?
+    $result = mysql_query("select count(*), lc_customstatus.name as name from leads, lc_customstatus where leads.status = lc_customstatus.id group by leads.status order by count(*) desc");
+    while ($row = mysql_fetch_assoc($result)) {
+        echo $row['name'].": ".$row['count(*)']."<br />";
+    }
+    ?>
+    <br />
     
     
     
