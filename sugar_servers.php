@@ -70,8 +70,8 @@ if (isset($_GET['verify_connection'])) {
     <br />
     
     
-    <b>Leads</b> (Entered Last 24 Hours): <?
-    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 1 DAY) <= date_entered and leads.deleted = 0 ");
+    <b>Stage 1</b> (Entered Last 5 Days): <?
+    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered and leads.deleted = 0 ");
     echo number_format(mysql_result($result,0,0));
     ?>
     <br />
@@ -79,21 +79,39 @@ if (isset($_GET['verify_connection'])) {
     
     
     
-    <b>Leads</b> (Entered Last Week): <?
-    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 7 DAY) <= date_entered and leads.deleted = 0 ");
+    <b>Stage 2</b> (Entered 6-10 days ago): <?
+    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) > date_entered and DATE_SUB(CURDATE(),INTERVAL 10 DAY) <= date_entered and leads.deleted = 0 ");
     echo number_format(mysql_result($result,0,0));
     ?>
     <br />
     
-    
-    
-    
-    <b>Leads</b> (Entered Last Month): <?
-    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 1 MONTH) <= date_entered and leads.deleted = 0 ");
+
+    <b>Stage 3</b> (Entered 11-20 days ago): <?
+    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 10 DAY) > date_entered and DATE_SUB(CURDATE(),INTERVAL 20 DAY) <= date_entered and leads.deleted = 0 ");
     echo number_format(mysql_result($result,0,0));
     ?>
     <br />
     
+
+    <b>Stage 4</b> (Entered 21-30 days ago): <?
+    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 20 DAY) > date_entered and DATE_SUB(CURDATE(),INTERVAL 30 DAY) <= date_entered and leads.deleted = 0 ");
+    echo number_format(mysql_result($result,0,0));
+    ?>
+    <br />
+    
+
+    <b>Stage 5</b> (Entered 31-60 days ago): <?
+    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 30 DAY) > date_entered and DATE_SUB(CURDATE(),INTERVAL 60 DAY) <= date_entered and leads.deleted = 0 ");
+    echo number_format(mysql_result($result,0,0));
+    ?>
+    <br />
+    <br />
+    
+    <b>Old</b> (Entered >60 days ago): <?
+    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 60 DAY) > date_entered and leads.deleted = 0 ");
+    echo number_format(mysql_result($result,0,0));
+    ?>
+    <br />
     
     
     
@@ -154,12 +172,57 @@ if (isset($_GET['verify_connection'])) {
     
     
     <b>Statuses:</b> <br /><?
-    $result = mysql_query("select count(*), lc_customstatus.name as name from leads, lc_customstatus where leads.status = lc_customstatus.id group by leads.status order by count(*) desc");
+    $result = mysql_query("select count(*), lc_customstatus.name as name from leads, lc_customstatus where leads.status = lc_customstatus.id and leads.deleted = 0 group by leads.status order by count(*) desc");
     while ($row = mysql_fetch_assoc($result)) {
         echo $row['name'].": ".$row['count(*)']."<br />";
     }
     ?>
     <br />
+    
+    
+    <br />    
+    
+
+    
+    <b>Lead Sources:</b> <br /><?
+    $result = mysql_query("select count(*), lead_source from leads where deleted = 0 group by lead_source order by count(*) desc");
+    while ($row = mysql_fetch_assoc($result)) {
+        echo $row['lead_source'].": ".$row['count(*)']."<br />";
+    }
+    ?>
+    <br />
+    <br />
+    
+
+    
+    
+    
+    <b>Below 10k:</b> <?
+    $result = mysql_query("select count(*) from leads, leads_cstm where leads.id = leads_cstm.id_c and debt_amt_c < 10000 and leads.deleted = 0");
+    while ($row = mysql_fetch_assoc($result)) {
+        echo $row['count(*)']."<br />";
+    }
+    ?>
+    <br />
+    
+    <b>Above 10k:</b> <?
+    $result = mysql_query("select count(*) from leads, leads_cstm where leads.id = leads_cstm.id_c and debt_amt_c > 10000 and leads.deleted = 0");
+    while ($row = mysql_fetch_assoc($result)) {
+        echo $row['count(*)']."<br />";
+    }
+    ?>
+    <br />
+    
+    <b>Above 100k:</b> <?
+    $result = mysql_query("select count(*) from leads, leads_cstm where leads.id = leads_cstm.id_c and debt_amt_c > 100000 and leads.deleted = 0");
+    while ($row = mysql_fetch_assoc($result)) {
+        echo $row['count(*)']."<br />";
+    }
+    ?>
+    <br />
+    
+    
+    
     
     
     
