@@ -43,7 +43,7 @@ if (isset($_POST['reason'])||(isset($_GET['type']) && $_GET['type'] == "in")) {
     }
     ?>
     <html>
-    <body onload="self.close();">
+    <body onload="alert(hello);">
     </body>
     </html>
     <?
