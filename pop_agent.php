@@ -43,7 +43,9 @@ if (isset($_POST['reason'])||(isset($_GET['type']) && $_GET['type'] == "in")) {
     }
     ?>
     <script type="text/javascript">
-    self.close();
+    Alert("Closing");
+    window.opener='x';
+    window.close();
     </script>
     <?
     
