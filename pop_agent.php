@@ -39,11 +39,11 @@ if (isset($_POST['reason'])||(isset($_GET['type']) && $_GET['type'] == "in")) {
         // Logged Out
         $reason = sanitize($_POST['reason']);
         $agent = sanitize($_POST['agent']);
-        $result = mysql_query("INSERT INTO agents (agent, type, reason) VALUES ($agent, 'out', $reason')");
+        $result = mysql_query("INSERT INTO agents (agent, type, reason) VALUES ($agent, 'out', $reason)");
     }
     ?>
     <script type="text/javascript">
-    window.close();
+    self.close();
     </script>
     <?
     
