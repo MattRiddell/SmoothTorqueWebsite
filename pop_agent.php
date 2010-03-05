@@ -8,7 +8,29 @@
  *
  */
 
-require "header.php";
+/* Find out what the base directory name is for two reasons:
+ *  1. So we can include files
+ *  2. So we can explain how to set up things that are missing
+ */
+$current_directory = dirname(__FILE__);
+if (isset($override_directory)) {
+	$current_directory = $override_directory;
+}
+/* What page we are currently on - this is used to highlight the menu
+ * system as well as to not cache certain pages like the graphs
+ */
+$self=$_SERVER['PHP_SELF'];
+
+/* Load in the functions we may need - these are the list of available
+ * custom functions - for more information, read the comments in the
+ * functions.php file - most functions are in their own file in the
+ * functions subdirectory
+ */
+require "/".$current_directory."/functions/functions.php";
+/* Load in the database connection values and chose the database name */
+include "/".$current_directory."/admin/db_config.php";
+
+
 if (isset($_POST['reason'])||(isset($_GET['type']) && $_GET['type'] == "in")) {
     if (isset($_GET['type'])) {
         // Logged In
@@ -20,7 +42,7 @@ if (isset($_POST['reason'])||(isset($_GET['type']) && $_GET['type'] == "in")) {
         $result = mysql_query("INSERT INTO agents (agent, type, reason) VALUES ($agent, 'out', $reason')");
     }
     ?>
-    <script language="text/javascript">
+    <script type="text/javascript">
     window.close();
     </script>
     <?
