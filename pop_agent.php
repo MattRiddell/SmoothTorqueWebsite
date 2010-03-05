@@ -34,17 +34,20 @@ include "/".$current_directory."/admin/db_config.php";
 if (isset($_POST['reason'])||(isset($_GET['type']) && $_GET['type'] == "in")) {
     if (isset($_GET['type'])) {
         // Logged In
-        $result = mysql_query("INSERT INTO agents (agent, type) VALUES ($_GET[agent], 'in')");
+        $agent = sanitize($_GET['agent']);
+        $type = "in";
+        $result = mysql_query("INSERT INTO agents (agent, type) VALUES ($agent, '$type')");
     } else {
         // Logged Out
         $reason = sanitize($_POST['reason']);
         $agent = sanitize($_POST['agent']);
-        $result = mysql_query("INSERT INTO agents (agent, type, reason) VALUES ($agent, 'out', $reason)");
+        $type = "out";
+        $result = mysql_query("INSERT INTO agents (agent, type, reason) VALUES ($agent, '$type', $reason)");
     }
     ?>
     <html>
     <body>
-    Agent <?=$agent?> Logged <?=$_GET['type']?> - you can close this window now
+    Agent <?=$agent?> <b>Logged <?=$type?></b> - you can close this window now
     </body>
     </html>
     <?
