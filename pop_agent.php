@@ -43,7 +43,7 @@ if (isset($_POST['reason'])||(isset($_GET['type']) && $_GET['type'] == "in")) {
     }
     ?>
     <html>
-    <body onload="alert(hello);">
+    <body onload='setTimeout(\'self.close()\',5000)'>
     </body>
     </html>
     <?
