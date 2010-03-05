@@ -42,11 +42,10 @@ if (isset($_POST['reason'])||(isset($_GET['type']) && $_GET['type'] == "in")) {
         $result = mysql_query("INSERT INTO agents (agent, type, reason) VALUES ($agent, 'out', $reason)");
     }
     ?>
-    <script type="text/javascript">
-    Alert("Closing");
-    window.opener='x';
-    window.close();
-    </script>
+    <html>
+    <body onload="window.opener='x';window.close();">
+    </body>
+    </html>
     <?
     
 } else {
