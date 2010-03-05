@@ -1125,6 +1125,21 @@
                         $result = mysql_query($sql,$link);
                     }
                     
+            /*======================================================================
+             Agents Table
+             ======================================================================*/
+            if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","agents")){
+                include "admin/db_config.php";
+                $sql = "Create table `agents` (
+                `agent` varchar(40) default NULL,
+                `event_time` timestamp not NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+                `reason` varchar(1024) default NULL,
+                `type` varchar(1024) default NULL)";
+                $result = mysql_query($sql,$link) or die(mysql_error());
+                $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created Agents Table')";
+                $result=mysql_query($sql, $link);
+
+            }
                     
                     /*======================================================================
                      Queue_Table
