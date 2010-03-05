@@ -59,5 +59,4 @@ if (isset($_POST['reason'])||(isset($_GET['type']) && $_GET['type'] == "in")) {
     </form>
 <?
 }
-require "footer.php";
 ?>
