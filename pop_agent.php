@@ -9,7 +9,7 @@
  */
 
 require "header.php";
-if (isset($_POST['reason'])||(isset($_GET['type']) || $_GET['type'] == "in")) {
+if (isset($_POST['reason'])||(isset($_GET['type']) && $_GET['type'] == "in")) {
     if (isset($_GET['type'])) {
         // Logged In
         $result = mysql_query("INSERT INTO agents (agent, type) VALUES ($_GET[agent], 'in')");
@@ -20,7 +20,7 @@ if (isset($_POST['reason'])||(isset($_GET['type']) || $_GET['type'] == "in")) {
         $result = mysql_query("INSERT INTO agents (agent, type, reason) VALUES ($agent, 'out', $reason')");
     }
     ?>
-    <script language="javascript">
+    <script language="text/javascript">
     window.close();
     </script>
     <?
