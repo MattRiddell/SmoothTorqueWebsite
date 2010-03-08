@@ -35,7 +35,7 @@ if (isset($_GET['verify_connection'])) {
         }//OR die(mysql_error());
         mysql_select_db($config_values['SUGAR_DB'], $link);
         echo "1";
-//        print_pre($link);
+        //        print_pre($link);
         $result = mysql_query("SELECT id FROM ".$config_values['SUGAR_DB'].".leads WHERE phone_home = '$_POST[number]' or phone_mobile='$_POST[number]' order by date_modified DESC limit 1");
         if (mysql_num_rows($result) > 0) {
             while ($row = mysql_fetch_assoc($result)) {
@@ -48,11 +48,8 @@ if (isset($_GET['verify_connection'])) {
             }
         }
     }
-} else {
+} else if (isset($_GET['stats'])) {
     ?>
-    <a href="sugar_servers.php?verify_connection=1">
-    Screen Pop a Sugar CRM record
-    </a>
     <br /><br />
     
     <b>Total Leads: </b><?
@@ -85,21 +82,21 @@ if (isset($_GET['verify_connection'])) {
     ?>
     <br />
     
-
+    
     <b>Stage 3</b> (Entered 11-20 days ago): <?
     $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 10 DAY) > date_entered and DATE_SUB(CURDATE(),INTERVAL 20 DAY) <= date_entered and leads.deleted = 0 ");
     echo number_format(mysql_result($result,0,0));
     ?>
     <br />
     
-
+    
     <b>Stage 4</b> (Entered 21-30 days ago): <?
     $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 20 DAY) > date_entered and DATE_SUB(CURDATE(),INTERVAL 30 DAY) <= date_entered and leads.deleted = 0 ");
     echo number_format(mysql_result($result,0,0));
     ?>
     <br />
     
-
+    
     <b>Stage 5</b> (Entered 31-60 days ago): <?
     $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 30 DAY) > date_entered and DATE_SUB(CURDATE(),INTERVAL 60 DAY) <= date_entered and leads.deleted = 0 ");
     echo number_format(mysql_result($result,0,0));
@@ -182,7 +179,7 @@ if (isset($_GET['verify_connection'])) {
     
     <br />    
     
-
+    
     
     <b>Lead Sources:</b> <br /><?
     $result = mysql_query("select count(*), lead_source from leads where deleted = 0 group by lead_source order by count(*) desc");
@@ -193,7 +190,7 @@ if (isset($_GET['verify_connection'])) {
     <br />
     <br />
     
-
+    
     
     
     
@@ -225,9 +222,128 @@ if (isset($_GET['verify_connection'])) {
     
     
     
+    <?    
+} else if (isset($_GET['vm'])) {
+    //1, 2, 3, 4, 5, 6, 10, 14, 19, 31, 36, 41, 46, 51, 56
+    if (isset($_GET['save'])) {
+//        print_pre($_POST);
+        $vm_0_5=$config_values['vm_0_5'];
+        $vm_6_10=$config_values['vm_6_10'];
+        $vm_11_20=$config_values['vm_11_20'];
+        $vm_21_30=$config_values['vm_21_30'];
+        $vm_31_60=$config_values['vm_31_60'];
+        $sql = "INSERT IGNORE INTO config (parameter, value) VALUES ('vm_0_5', ".sanitize($_POST['vm_0_5']).")";
+        $result = mysql_query($sql);
+        $sql = "INSERT IGNORE INTO config (parameter, value) VALUES ('vm_6_10', ".sanitize($_POST['vm_6_10']).")";
+        $result = mysql_query($sql);
+        $sql = "INSERT IGNORE INTO config (parameter, value) VALUES ('vm_11_20', ".sanitize($_POST['vm_11_20']).")";
+        $result = mysql_query($sql);
+        $sql = "INSERT IGNORE INTO config (parameter, value) VALUES ('vm_21_30', ".sanitize($_POST['vm_21_30']).")";
+        $result = mysql_query($sql);
+        $sql = "INSERT IGNORE INTO config (parameter, value) VALUES ('vm_31_60', ".sanitize($_POST['vm_31_60']).")";
+        $result = mysql_query($sql) or die(mysql_error());
+        echo "Saved";
+        
+        
+    } else {
+//        print_pre($config_values);
+        $vm_0_5=$config_values['vm_0_5'];
+        $vm_6_10=$config_values['vm_6_10'];
+        $vm_11_20=$config_values['vm_11_20'];
+        $vm_21_30=$config_values['vm_21_30'];
+        $vm_31_60=$config_values['vm_31_60'];
+//        $vm_0_5 = "3";
+        ?>
+        <form action="sugar_servers.php?vm=1&save=1" method="post">
+        <h3>VoiceMail Logic</h3>
+        0-5 days old: 
+        <select name="vm_0_5">
+        <option value="0" <?=$vm_0_5=="0"?"selected":""?>>No VoiceMail</option>
+        <option value="1" <?=$vm_0_5=="1"?"selected":""?>>Every Day</option>
+        <option value="2" <?=$vm_0_5=="2"?"selected":""?>>Every Second Day</option>
+        <option value="3" <?=$vm_0_5=="3"?"selected":""?>>Every Week</option>
+        </select><br />
+        
+        6-10 days old: 
+        <select name="vm_6_10">
+        <option value="0" <?=$vm_6_10=="0"?"selected":""?>>No VoiceMail</option>
+        <option value="1" <?=$vm_6_10=="0"?"selected":""?>>Every Day</option>
+        <option value="2" <?=$vm_6_10=="0"?"selected":""?>>Every Second Day</option>
+        <option value="3" <?=$vm_6_10=="0"?"selected":""?>>Every Week</option>
+        </select><br />
+        
+        11-20 days old: 
+        <select name="vm_11_20">
+        <option value="0" <?=$vm_11_20=="0"?"selected":""?>>No VoiceMail</option>
+        <option value="1" <?=$vm_11_20=="1"?"selected":""?>>Every Day</option>
+        <option value="2" <?=$vm_11_20=="2"?"selected":""?>>Every Second Day</option>
+        <option value="3" <?=$vm_11_20=="3"?"selected":""?>>Every Week</option>
+        </select><br />
+        
+        21-30 days old: 
+        <select name="vm_21_30">
+        <option value="0" <?=$vm_21_30=="0"?"selected":""?>>No VoiceMail</option>
+        <option value="1" <?=$vm_21_30=="1"?"selected":""?>>Every Day</option>
+        <option value="2" <?=$vm_21_30=="2"?"selected":""?>>Every Second Day</option>
+        <option value="3" <?=$vm_21_30=="3"?"selected":""?>>Every Week</option>
+        </select><br />
+        
+        31-60 days old: 
+        <select name="vm_31_60">
+        <option value="0" <?=$vm_31_60=="0"?"selected":""?>>No VoiceMail</option>
+        <option value="1" <?=$vm_31_60=="1"?"selected":""?>>Every Day</option>
+        <option value="2" <?=$vm_31_60=="2"?"selected":""?>>Every Second Day</option>
+        <option value="3" <?=$vm_31_60=="3"?"selected":""?>>Every Week</option>
+        </select><br />
+        <br />
+        
+        <input type="submit" value="Save Changes">
+        <br />
+        <br />
+        </form>
+        <?
+    }
+} else if (isset($_GET['call'])) {
+    ?>
+    <form action="sugar_servers.php?call=1&save=1" method="post">
+    0-5 days old: 
+    <select name="call_0_5">
+    <option value="3">3 times per day</option> 
+    <option value="2">2 times per day</option> 
+    <option value="1">1 times per day</option> 
+    <option value="0">Don't Call</option> 
+    <option value="0.5">Every Second Day</option> 
+    </select>
+    </form>
+    <?
+} else {
+    ?>
     
     <br />
-
+    <a href="sugar_servers.php?verify_connection=1">
+    Screen Pop a Sugar CRM record
+    </a>
+    <br />
+    
+    <a href="sugar_servers.php?stats=1">
+    Database Statistics
+    </a>
+    <br />
+    
+    <a href="sugar_servers.php?vm=1">
+    VoiceMail leaving logic
+    </a>
+    <br />
+    
+    <a href="sugar_servers.php?call=1">
+    Call logic
+    </a>
+    <br />
+    
+    
+    
+    <br />
+    
     <?
 }
 echo "</center>";

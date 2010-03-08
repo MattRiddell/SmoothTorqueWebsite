@@ -46,7 +46,7 @@ if (mysql_num_rows($result) > 0) {
     }
 }
 
-$resulty = mysql_query("SELECT * from config where parameter = 'read_1'") or die(mysql_error());
+/*$resulty = mysql_query("SELECT * from config where parameter = 'read_1'") or die(mysql_error());
 if (mysql_num_rows($resulty) == 0) {
 box_start();
 echo "<br /><center><img src=\"images/icons/gtk-dialog-info.png\" border=\"0\" width=\"64\" height=\"64\">";
@@ -57,7 +57,7 @@ echo '<a href="read.php">Click here once you have read the above notice</a>';
 echo "<br />";
 echo "<br />";
 box_end();
-}
+}*/
 
 box_start();
 echo "<center>Total channels across all servers: <b>$tot</b></center>";;

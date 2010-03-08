@@ -257,6 +257,36 @@ if (mysql_num_rows($result) > 0) {
         $config_values['SUGAR_DB'] = mysql_result($result,0,'value');
     }
     
+    $sql = 'SELECT value FROM config WHERE parameter=\'vm_0_5\'';
+    $result=mysql_query($sql, $link) or die (mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        $config_values['vm_0_5'] = mysql_result($result,0,'value');
+    }
+    
+    $sql = 'SELECT value FROM config WHERE parameter=\'vm_6_10\'';
+    $result=mysql_query($sql, $link) or die (mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        $config_values['vm_6_10'] = mysql_result($result,0,'value');
+    }
+    
+    $sql = 'SELECT value FROM config WHERE parameter=\'vm_11_20\'';
+    $result=mysql_query($sql, $link) or die (mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        $config_values['vm_11_20'] = mysql_result($result,0,'value');
+    }
+    
+    $sql = 'SELECT value FROM config WHERE parameter=\'vm_21_30\'';
+    $result=mysql_query($sql, $link) or die (mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        $config_values['vm_21_30'] = mysql_result($result,0,'value');
+    }
+    
+    $sql = 'SELECT value FROM config WHERE parameter=\'vm_31_60\'';
+    $result=mysql_query($sql, $link) or die (mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        $config_values['vm_31_60'] = mysql_result($result,0,'value');
+    }
+    
     
 
 mysql_select_db("SineDialer", $link);
