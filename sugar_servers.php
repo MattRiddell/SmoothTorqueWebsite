@@ -269,7 +269,7 @@ echo "Home Phone: ".$row['phone_home']." Source: ".$row['lead_source']."<br />";
          */
     //    $key = -1;
 //        if (in_array($row['time_zone_c'], $tz_db_name) {
-        $key = array_search(trim($row['time_zone_c']), trim($tz_db_name));
+        $key = array_search(trim($row['time_zone_c']), $tz_db_name);
         if (!$key) {
             echo '<a href="sugar_servers.php?tz=1&add=1&name='.trim($row['time_zone_c']).'">TIME ZONE NOT FOUND!</a> - ';
             $key = array_search('UNSET', $tz_db_name);
