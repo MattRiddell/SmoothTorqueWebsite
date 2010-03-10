@@ -49,6 +49,19 @@ if (isset($_GET['verify_connection'])) {
         }
     }
 } else if (isset($_GET['stats'])) {
+    
+    $result = mysql_query("SELECT * FROM urgent_lead_sources");        
+    $db_u_l_s = Array();
+    if (mysql_num_rows($result) > 0) {
+    $urgent_sources = "(";
+    while ($row = mysql_fetch_assoc($result)) {
+        $urgent_sources .= sanitize($row['name']).",";
+    }
+    $urgent_sources = substr($urgent_sources,0,strlen($urgent_sources)-1).")";
+    } else {
+        $urgent_sources = "('')";
+    }
+        
     ?>
     <br /><br />
     
@@ -76,6 +89,35 @@ if (isset($_GET['verify_connection'])) {
     ?>
     <br />
     <br />
+
+    
+    
+    
+    <b>NEW not left message Stage 1 (Urgent)</b> (Entered Last 5 Days): <?
+    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered and leads.deleted = 0 and status='$new_status' and lead_source in $urgent_sources");
+    echo number_format(mysql_result($result,0,0));
+    ?>
+    <br />
+    <hr>
+    <b>Numbers:</b><br />
+    <?
+    $result = mysql_query("SELECT phone_home, phone_mobile, lead_source FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered and leads.deleted = 0 and status='$new_status'  and lead_source in $urgent_sources");
+    while ($row = mysql_fetch_assoc($result)) {
+        if (isset($row['phone_mobile']) && $row['phone_mobile'] != $row['phone_home']) {
+            echo "Home Phone: ".$row['phone_home'].",  Mobile Phone: ".$row['phone_mobile']." Source: ".$row['lead_source']."<br />";
+        } else {
+            echo "Home Phone: ".$row['phone_home']." Source: ".$row['lead_source']."<br />";
+        }
+    }
+    ?>
+    
+    <hr />
+    <br />
+    
+    
+    
+    
+    
     
     <b>NEW not left message Stage 1</b> (Entered Last 5 Days): <?
     $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered and leads.deleted = 0 and status='$new_status'");
@@ -85,12 +127,12 @@ if (isset($_GET['verify_connection'])) {
 <hr>
 <b>Numbers:</b><br />
 <?
-    $result = mysql_query("SELECT phone_home, phone_mobile FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered and leads.deleted = 0 and status='$new_status'");
+    $result = mysql_query("SELECT phone_home, phone_mobile, lead_source FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered and leads.deleted = 0 and status='$new_status'");
 while ($row = mysql_fetch_assoc($result)) {
 if (isset($row['phone_mobile']) && $row['phone_mobile'] != $row['phone_home']) {
-echo "Home Phone: ".$row['phone_home'].",  Mobile Phone: ".$row['phone_mobile']."<br />";
+echo "Home Phone: ".$row['phone_home'].",  Mobile Phone: ".$row['phone_mobile']." Source: ".$row['lead_source']."<br />";
 } else {
-echo "Home Phone: ".$row['phone_home']."<br />";
+echo "Home Phone: ".$row['phone_home']." Source: ".$row['lead_source']."<br />";
 }
 }
 ?>
