@@ -62,50 +62,68 @@ if (isset($_GET['verify_connection'])) {
     
     $result = mysql_query("SELECT count(*) FROM leads where  deleted = 0 ");
     echo number_format(mysql_result($result,0,0));
+
+    $result = mysql_query("SELECT id FROM lc_customstatus WHERE name = 'new'");
+    $new_status = mysql_result($result,0,0);
+
+    $result = mysql_query("SELECT id FROM lc_customstatus WHERE name like 'CA - Left Message%'");
+    $status_left_messages = "(";
+    while ($row = mysql_fetch_assoc($result)) {
+	$status_left_messages .= sanitize($row['id']).",";
+    }
+    $status_left_messages = substr($status_left_messages,0,strlen($status_left_messages)-1).")";
+
     ?>
     <br />
     <br />
     
-    
-    <b>Stage 1</b> (Entered Last 5 Days): <?
-    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered and leads.deleted = 0 ");
+    <b>NEW Stage 1</b> (Entered Last 5 Days): <?
+    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered and leads.deleted = 0 and status='$new_status'");
     echo number_format(mysql_result($result,0,0));
     ?>
+    <br />
+    
+    <b>New or left message Stage 1</b> (Entered Last 5 Days): <?
+    $sql = "SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered and leads.deleted = 0 and (status='$new_status' or status in $status_left_messages)";
+    $result = mysql_query($sql) or die(mysql_error());
+    echo number_format(mysql_result($result,0,0));
+    ?>
+    <br />
     <br />
     
     
     
     
     <b>Stage 2</b> (Entered 6-10 days ago): <?
-    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) > date_entered and DATE_SUB(CURDATE(),INTERVAL 10 DAY) <= date_entered and leads.deleted = 0 ");
+    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) > date_entered and DATE_SUB(CURDATE(),INTERVAL 10 DAY) <= date_entered and leads.deleted = 0  and (status='$new_status' or status in $status_left_messages)");
     echo number_format(mysql_result($result,0,0));
     ?>
     <br />
     
     
     <b>Stage 3</b> (Entered 11-20 days ago): <?
-    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 10 DAY) > date_entered and DATE_SUB(CURDATE(),INTERVAL 20 DAY) <= date_entered and leads.deleted = 0 ");
+    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 10 DAY) > date_entered and DATE_SUB(CURDATE(),INTERVAL 20 DAY) <= date_entered and leads.deleted = 0  and (status='$new_status' or status in $status_left_messages)");
     echo number_format(mysql_result($result,0,0));
     ?>
     <br />
     
     
     <b>Stage 4</b> (Entered 21-30 days ago): <?
-    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 20 DAY) > date_entered and DATE_SUB(CURDATE(),INTERVAL 30 DAY) <= date_entered and leads.deleted = 0 ");
+    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 20 DAY) > date_entered and DATE_SUB(CURDATE(),INTERVAL 30 DAY) <= date_entered and leads.deleted = 0  and (status='$new_status' or status in $status_left_messages)");
     echo number_format(mysql_result($result,0,0));
     ?>
     <br />
     
     
     <b>Stage 5</b> (Entered 31-60 days ago): <?
-    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 30 DAY) > date_entered and DATE_SUB(CURDATE(),INTERVAL 60 DAY) <= date_entered and leads.deleted = 0 ");
+    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 30 DAY) > date_entered and DATE_SUB(CURDATE(),INTERVAL 60 DAY) <= date_entered and leads.deleted = 0  and (status='$new_status' or status in $status_left_messages)");
     echo number_format(mysql_result($result,0,0));
     ?>
     <br />
     <br />
     
     <b>Old</b> (Entered >60 days ago): <?
-    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 60 DAY) > date_entered and leads.deleted = 0 ");
+    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 60 DAY) > date_entered and leads.deleted = 0  and (status='$new_status' or status in $status_left_messages)");
     echo number_format(mysql_result($result,0,0));
     ?>
     <br />
