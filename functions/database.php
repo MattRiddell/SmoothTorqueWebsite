@@ -1138,10 +1138,23 @@
                 $result = mysql_query($sql,$link) or die(mysql_error());
                 $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created Agents Table')";
                 $result=mysql_query($sql, $link);
-
+                
             }
-                    
-                    /*======================================================================
+            
+            /*======================================================================
+             urgent_lead_sources Table
+             ======================================================================*/
+            if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","urgent_lead_sources")){
+                include "admin/db_config.php";
+                $sql = "Create table `urgent_lead_sources` (
+                `name` varchar(1024) default NULL)";
+                $result = mysql_query($sql,$link) or die(mysql_error());
+                $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created Urgent_Lead_Sources Table')";
+                $result=mysql_query($sql, $link);
+                
+            }
+            
+            /*======================================================================
                      Queue_Table
                      ======================================================================*/
                     if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","queue_table")){

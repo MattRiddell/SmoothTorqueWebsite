@@ -343,11 +343,104 @@ echo "Home Phone: ".$row['phone_home']."<br />";
     <option value="3">3 times per day</option> 
     <option value="2">2 times per day</option> 
     <option value="1">1 times per day</option> 
-    <option value="0">Don't Call</option> 
+    <option value="0">Dont Call</option> 
     <option value="0.5">Every Second Day</option> 
     </select>
     </form>
     <?
+} else if (isset($_GET['urgent'])) {
+    $result = mysql_query("SELECT * FROM urgent_lead_sources");        
+    $db_u_l_s = Array();
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_assoc($result)) {
+            $db_u_l_s[] = $row['name'];
+        }
+    }
+    if (isset($_GET['save'])) {
+        $post_db_u_l_s = $_POST['sources'];
+        
+        $in_both = array_intersect($db_u_l_s, $post_db_u_l_s);
+        
+        $in_db_not_post = array_diff($db_u_l_s, $post_db_u_l_s);
+        
+        $in_post_not_db = array_diff($post_db_u_l_s, $db_u_l_s);
+        
+//        echo "IN BOTH: ";
+  //      print_pre($in_both);
+        
+        /*echo "DB: ";
+        print_pre($db_u_l_s);
+        
+        echo "POST: ";
+        print_pre($post_db_u_l_s);*/
+        
+//        echo "In DB, Not Post: ";
+    //    print_pre($in_db_not_post);
+        
+        foreach ($in_db_not_post as $remove) {
+            $result = mysql_query("DELETE FROM urgent_lead_sources WHERE name = ".sanitize($remove));
+        }
+        
+        
+//        echo "In post not db: ";
+      //  print_pre($in_post_not_db);
+        
+        foreach ($in_post_not_db as $add) {
+            $result = mysql_query("INSERT INTO urgent_lead_sources (name) VALUES (".sanitize($add).")");
+        }
+        
+        
+    }
+    
+    $result = mysql_query("SELECT * FROM urgent_lead_sources");        
+    $db_u_l_s = Array();
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_assoc($result)) {
+            $db_u_l_s[] = $row['name'];
+        }
+    }
+    
+    
+    
+    $db_host = $config_values['SUGAR_HOST'];
+    $db_user = $config_values['SUGAR_USER'];
+    $db_pass = $config_values['SUGAR_PASS'];
+    //echo "Connecting to: $db_host User: $db_user Pass:$db_pass<br />";
+    $link = mysql_connect($db_host, $db_user, $db_pass);
+    if (!$link) {
+        die('Could not connect ' . mysql_error());
+    }//OR die(mysql_error());
+    mysql_select_db($config_values['SUGAR_DB'], $link);
+    
+    $result = mysql_query("SELECT distinct lead_source FROM leads");
+    while ($row = mysql_fetch_assoc($result)) {
+        //print_pre($row);
+        if (strlen($row['lead_source']) > 0) {
+            $lead_sources[] = $row['lead_source'];
+        }
+    }
+    ?>
+    <form action="sugar_servers.php?urgent=1&save=1" method="post">
+    <b>Urgent Lead Sources: </b><br /><br />
+    <table><tr><td style="text-align: left">
+    <?
+    foreach ($lead_sources as $source) {
+        if (in_array($source, $db_u_l_s)) {
+            $checked = " checked";
+        } else {
+            $checked = "";
+        }
+        echo '<input type="checkbox" value="'.$source.'" name="sources[]"'.$checked.'> ';
+        echo $source."<br />";
+        
+    }
+    ?>
+    <br />
+    <input type="submit" value="Save Changes">
+    </td></tr></table>
+    </form>
+    <?
+
 } else {
     ?>
     
@@ -361,6 +454,14 @@ echo "Home Phone: ".$row['phone_home']."<br />";
     Database Statistics
     </a>
     <br />
+    
+    
+    <a href="sugar_servers.php?urgent=1">
+    Urgent Lead Sources
+    </a>
+    <br />
+    
+    
     
     <a href="sugar_servers.php?vm=1">
     VoiceMail leaving logic
