@@ -77,10 +77,25 @@ if (isset($_GET['verify_connection'])) {
     <br />
     <br />
     
-    <b>NEW Stage 1</b> (Entered Last 5 Days): <?
+    <b>NEW not left message Stage 1</b> (Entered Last 5 Days): <?
     $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered and leads.deleted = 0 and status='$new_status'");
     echo number_format(mysql_result($result,0,0));
     ?>
+    <br />
+<hr>
+<b>Numbers:</b><br />
+<?
+    $result = mysql_query("SELECT phone_home, phone_mobile FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered and leads.deleted = 0 and status='$new_status'");
+while ($row = mysql_fetch_assoc($result)) {
+if (isset($row['phone_mobile']) && $row['phone_mobile'] != $row['phone_home']) {
+echo "Home Phone: ".$row['phone_home'].",  Mobile Phone: ".$row['phone_mobile']."<br />";
+} else {
+echo "Home Phone: ".$row['phone_home']."<br />";
+}
+}
+?>
+
+<hr />
     <br />
     
     <b>New or left message Stage 1</b> (Entered Last 5 Days): <?
@@ -88,7 +103,6 @@ if (isset($_GET['verify_connection'])) {
     $result = mysql_query($sql) or die(mysql_error());
     echo number_format(mysql_result($result,0,0));
     ?>
-    <br />
     <br />
     
     
