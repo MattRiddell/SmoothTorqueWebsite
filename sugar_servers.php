@@ -12,6 +12,18 @@ require "header.php";
 require "header_server.php";
 box_start(400);
 
+
+$tz_db = array();
+$result = mysql_query("SELECT * FROM time_zones");
+if (mysql_num_rows($result) > 0) {
+    while ($row = mysql_fetch_assoc($result)) {
+        $tz_db_name[] = $row['name'];
+        $tz_db_start[] = $row['start'];
+        $tz_db_end[] = $row['end'];
+    }
+}
+
+
 /*$timezones['unset']['start'] = '08:00';
 $timezones['unset']['end'] = '18:00';
 
@@ -247,9 +259,24 @@ echo "Home Phone: ".$row['phone_home']." Source: ".$row['lead_source']."<br />";
     $result = mysql_query("select count(*), time_zone_c from leads, leads_cstm where leads.id = leads_cstm.id_c and leads.deleted = 0 group by time_zone_c");
     while ($row = mysql_fetch_assoc($result)) {
         if (strlen($row['time_zone_c']) == 0) {
-            $row['time_zone_c'] = "Not Set";
+            $row['time_zone_c'] = "UNSET";
         }
-        echo $row['time_zone_c'].": ".$row['count(*)']."<br />";
+        /*
+         $tz_db_name[] = $row['name'];
+         $tz_db_start[] = $row['start'];
+         $tz_db_end[] = $row['end'];
+         
+         */
+    //    $key = -1;
+//        if (in_array($row['time_zone_c'], $tz_db_name) {
+        $key = array_search($row['time_zone_c'], $tz_db_name);
+        if (!$key) {
+            echo '<a href="sugar_servers.php?tz=1&add=1&name='.$row['time_zone_c'].'">TIME ZONE NOT FOUND!</a> - ';
+            $key = array_search('UNSET', $tz_db_name);
+
+        }
+  //      }
+        echo $row['time_zone_c'].": ".$row['count(*)']." (".$tz_db_start[$key]."-".$tz_db_end[$key].")<br />";
     }
     ?>
     <br />
@@ -526,7 +553,7 @@ echo "Home Phone: ".$row['phone_home']." Source: ".$row['lead_source']."<br />";
         ?>
         Add New TimeZone<br /><br />
         <form action="sugar_servers.php?tz=1&save_new=1" method="post">
-        Name: <input type="text" name="name"><br />
+        Name: <input type="text" name="name" value="<?=$_GET['name']?>"><br />
         Start: <input type="text" name="start"><br />
         End: <input type="text" name="end"><br />
         <br />
