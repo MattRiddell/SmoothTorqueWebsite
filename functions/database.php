@@ -1155,6 +1155,24 @@
             }
             
             /*======================================================================
+             timezones Table
+             ======================================================================*/
+            if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","time_zones")){
+                include "admin/db_config.php";
+                $sql = "Create table `time_zones` (
+                `id` int(10) unsigned NOT NULL auto_increment,
+                `name` varchar(1024) default NULL,
+                `start` varchar(1024) default NULL,
+                `end` varchar(1024) default NULL,
+                PRIMARY KEY  (`id`)
+                )";
+                $result = mysql_query($sql,$link) or die(mysql_error());
+                $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created TimeZone Table')";
+                $result=mysql_query($sql, $link);
+                
+            }
+            
+            /*======================================================================
                      Queue_Table
                      ======================================================================*/
                     if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","queue_table")){

@@ -11,6 +11,22 @@
 require "header.php";
 require "header_server.php";
 box_start(400);
+
+/*$timezones['unset']['start'] = '08:00';
+$timezones['unset']['end'] = '18:00';
+
+$timezones['AKST']['start'] = '07:00';
+$timezones['AKST']['end'] = '';
+
+AKST: 89
+ATC: 169
+CST: 8761
+EST: 30425
+HST: 263
+MST: 2680
+PST: 6710
+*/
+
 echo "<center>";
 if (isset($_GET['verify_connection'])) {
     if (!isset($_POST['number'])) {
@@ -482,7 +498,65 @@ echo "Home Phone: ".$row['phone_home']." Source: ".$row['lead_source']."<br />";
     </td></tr></table>
     </form>
     <?
+} else if (isset($_GET['tz'])) {
+    if (isset($_GET['save'])) {
+//        print_pre($_POST);
+        $result = mysql_query("UPDATE time_zones set name = ".sanitize($_POST['name']).", start = ".sanitize($_POST['start']).", end = ".sanitize($_POST['end'])." WHERE id = ".sanitize($_POST['id'])."");
+    }
+    if (isset($_GET['save_new'])) {
+        //        print_pre($_POST);
+        $result = mysql_query("INSERT INTO time_zones (name, start, end) VALUES (".sanitize($_POST['name']).", ".sanitize($_POST['start']).", ".sanitize($_POST['end']).")");
+    }
+    if (isset($_GET['delete_sure'])) {
+        $result = mysql_query("DELETE FROM time_zones WHERE id = ".sanitize($_GET['delete_sure']));
 
+    }
+    
+    if (isset($_GET['delete'])) {
+        //        print_pre($_POST);
+        ?>
+        Are you sure you want to delete this timezone?<br />
+        <br />
+        <a href="sugar_servers.php?tz=1&delete_sure=<?=$_GET['delete']?>">Yes, I am sure</a><br />
+        <br />
+        <a href="sugar_servers.php?tz=1">No, leave it</a><br />
+        
+        <?
+    } else     if (isset($_GET['add'])) {   
+        ?>
+        Add New TimeZone<br /><br />
+        <form action="sugar_servers.php?tz=1&save_new=1" method="post">
+        Name: <input type="text" name="name"><br />
+        Start: <input type="text" name="start"><br />
+        End: <input type="text" name="end"><br />
+        <br />
+        <input type="submit" value="Add Timezone">
+        </form>
+        <?
+    }else if (isset($_GET['edit'])) {
+        $result = mysql_query("SELECT * FROM time_zones WHERE id = ".sanitize($_GET['edit']));
+        $row = mysql_fetch_assoc($result);
+        ?>
+        <form action="sugar_servers.php?tz=1&save=1" method="post">
+        <input type="hidden" name="id" value="<?=$row['id']?>">
+        Name: <input type="text" name="name" value="<?=$row['name']?>"><br />
+        Start: <input type="text" name="start" value="<?=$row['start']?>"><br />
+        End: <input type="text" name="end" value="<?=$row['end']?>"><br />
+        <input type="submit" value="Save Changes">
+        </form>
+        <?
+    } else {
+        echo '<a href="sugar_servers.php?tz=1&add=1">Add New TimeZone</a><br /><br />';
+        $result = mysql_query("SELECT * FROM time_zones");
+        if (mysql_num_rows($result) > 0) {
+            while ($row = mysql_fetch_assoc($result)) {
+                echo $row['name']." Start: ".$row['start']." End: ".$row['end'].' <a href="sugar_servers.php?tz=&edit='.$row['id'].'">Edit</a>  <a href="sugar_servers.php?tz=&delete='.$row['id'].'">Delete</a><br />';
+            }
+        }
+    }
+    ?>
+    <br />
+    <?
 } else {
     ?>
     
@@ -503,7 +577,10 @@ echo "Home Phone: ".$row['phone_home']." Source: ".$row['lead_source']."<br />";
     </a>
     <br />
     
-    
+    <a href="sugar_servers.php?tz=1">
+    Timezones
+    </a>
+    <br />
     
     <a href="sugar_servers.php?vm=1">
     VoiceMail leaving logic
