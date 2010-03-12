@@ -318,17 +318,17 @@ if ($tz_count == 0) {
                     //echo "Sending across $number to tier $tier<br />";
                     $numbers[$tier][] = $number;
                     
-                    $sql = "select count( *) from st_vm where id = ".sanitize($row['id'])." and date(event_datetime) = CURDATE()";
+                    $sql = "select count(*) from st_vm where id = ".sanitize($row['id'])." and date(event_datetime) = CURDATE()";
                     
-                    $result = mysql_query($sql) or die(mysql_error());
-                    $count_today = mysql_result($result,0,0);
+                    $result_z = mysql_query($sql) or die(mysql_error());
+                    $count_today = mysql_result($result_z,0,0);
                     
                     //echo "/";
                     
                     $sql = "select st_vm_c from leads_cstm where id_c = ".sanitize($row['id']);
                     
-                    $result = mysql_query($sql) or die(mysql_error());
-                    $required_today = mysql_result($result,0,0);
+                    $result_z = mysql_query($sql) or die(mysql_error());
+                    $required_today = mysql_result($result_z,0,0);
                     
                     
                     //exit(0);
@@ -340,7 +340,7 @@ if ($tz_count == 0) {
                         $leave_vm[$number] = false;
                     }
                     
-                    
+                    echo "Leave_vm: $leave_vm[$number]";
                     
                 }
             }
@@ -382,7 +382,7 @@ foreach ($numbers as $tier=>$values) {
             }
             
             // INSERT THE NUMBER
-            
+            /*
             $campaignid = 8;
             if ($leave_vm[$number]) {
                 switch ($tier) {
@@ -408,7 +408,7 @@ foreach ($numbers as $tier=>$values) {
                     $campaignid = 10;
                     break;
                 }
-            }
+            }*/
             
         } else {
             echo "Number <b>$number</b> is already in SmoothTorque (with a status of new)<br />";
