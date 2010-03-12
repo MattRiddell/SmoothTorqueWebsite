@@ -332,7 +332,7 @@ if ($tz_count == 0) {
                     
                     
                     //exit(0);
-                    $msg = "&msg=";
+                    //$msg = "&msg=";
                     
                     if ($count_today < $required_today) {
                         $leave_vm[$number] = 1;
@@ -340,7 +340,7 @@ if ($tz_count == 0) {
                         $leave_vm[$number] = 0;
                     }
                     
-                    echo "Leave_vm: $leave_vm[$number]";
+                    //echo "Leave_vm: $leave_vm[$number]";
                     
                 }
             }
@@ -376,7 +376,7 @@ foreach ($numbers as $tier=>$values) {
             $sqlx = "SELECT count(*) FROM SineDialer.number WHERE phonenumber = '$number' and status = 'new'";
             
             $result = mysql_query($sqlx) or die(mysql_error());
-            echo "Sending Tier $tier Number $number Leave_VM: ".$leave_vm[$number]."<br />";
+//            echo "Sending Tier $tier Number $number Leave_VM: ".$leave_vm[$number]."<br />";
             if (mysql_result($result,0,0) > 0) {
                 $result = mysql_query("DELETE FROM SineDialer.number WHERE phonenumber = '$number'");
             }
@@ -409,7 +409,8 @@ foreach ($numbers as $tier=>$values) {
                     break;
                 }
             }
-            
+            $sql = "INSERT INTO SineDialer.number (campaignid, phonenumber, random_sort) VALUES ('$campaignid','$number','1000')";
+            echo $sql."<br />";
         } else {
             echo "Number <b>$number</b> is already in SmoothTorque (with a status of new)<br />";
         }
