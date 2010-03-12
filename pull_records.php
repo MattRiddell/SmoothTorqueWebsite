@@ -409,7 +409,7 @@ foreach ($numbers as $tier=>$values) {
                     break;
                 }
             }
-            $number = pregreplace('[\D]', '', $number);
+            $number = ereg_replace("[^0-9]", "", $number );
             $sql = "INSERT INTO SineDialer.number (campaignid, phonenumber, random_sort) VALUES ('$campaignid','$number','1000')";
             echo $sql."<br />";
         } else {
