@@ -152,7 +152,7 @@ while ($row = mysql_fetch_assoc($result)) {
     }
 }
 */
-
+/*
 $result = mysql_query("select count(*), st_tier_c from leads, leads_cstm where leads.id = leads_cstm.id_c and leads.deleted = 0 group by st_tier_c");
 while ($row = mysql_fetch_assoc($result)) {
     print_pre($row);
@@ -172,25 +172,80 @@ while ($row = mysql_fetch_assoc($result)) {
 }
 
 echo "<hr />";
-
+*/
 //echo "VoiceMails<br />";
 /*$result = mysql_query("select leads.phone_home, leads.phone_mobile, leads_cstm.st_vm_c from leads, leads_cstm where leads.id = leads_cstm.id_c and leads.deleted = 0 and leads_cstm.st_vm_c > 0") or die(mysql_error());
 while ($row = mysql_fetch_assoc($result)) {
     print_pre($row);
 }
 */
+/*$result = mysql_query("select count(*), leads_cstm.st_calls_c from leads, leads_cstm where leads.id = leads_cstm.id_c and leads.deleted = 0 and leads_cstm.st_calls_c > 0 group by leads_cstm.st_calls_c") or die(mysql_error());
+while ($row = mysql_fetch_assoc($result)) {
+    print_pre($row);
+}
+*/
+
+/*
+
 $result = mysql_query("select count(*), leads_cstm.st_calls_c from leads, leads_cstm where leads.id = leads_cstm.id_c and leads.deleted = 0 and leads_cstm.st_calls_c > 0 group by leads_cstm.st_calls_c") or die(mysql_error());
 while ($row = mysql_fetch_assoc($result)) {
     print_pre($row);
 }
+*/
+
+/*
+ 
+ 
+ */
 
 
 
+/*
+ 
+ 9am - what happens.
+ 
+ 1. We look at the timezones and figure out which ones should be dialling now.
+ $tz_db_name[] = $row['name'];
+ $tz_db_start[] = $row['start'];
+ $tz_db_end[] = $row['end'];
+ 
+ 
+ */
 
+$time_now = strtotime(date("H:i:s")); 
 
+echo "Time Now: ".$time_now." (".date("H:i:s").")<br /><br />";
 
+for ($i = 0;$i < count($tz_db_start);$i++) {
+    
+    $tz_start = strtotime($tz_db_start[$i]);
+    $tz_end = strtotime($tz_db_end[$i]);
+    $tz_name = $tz_db_name[$i];
+    
+    echo "$tz_name Start: $tz_start ($tz_db_start[$i]) End: $tz_end ($tz_db_end[$i])";
+    if ($tz_start <= $time_now) {
+        echo " Start time right";
+        if ($tz_end >= $time_now) {
+            echo " End time right ";
+        } else {
+            echo " End time <b>not</b> right ";
+        }
+    } else {
+        echo " <b>Too early to start</b> ";
+        if ($tz_end >= $time_now) {
+            echo " End time right ";
+        } else {
+            echo " End time <b>not</b> right ";
+        }
+    }
+    echo "<br>";
+}
 
-
+/*
+ 2. We look at the records which have these timezones, and have had less calls than there are in the st_calls_c column and have not had a call in the past 3 hours
+ 3. Copy these numbers across
+ 
+ */
 
 
 
