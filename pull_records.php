@@ -313,7 +313,7 @@ if (mysql_num_rows($result) == 0) {
         }
         
         if ($call) {
-            $result_tier = mysql_query("SELECT st_tier FROM lc_cstm WHERE id_c = ".sanitize($row['id']));
+            $result_tier = mysql_query("SELECT st_tier FROM leads_cstm WHERE id_c = ".sanitize($row['id']));
             $tier = mysql_result($result_tier,0,0);
             echo "Sending across $number to tier $tier<br />";
         }
