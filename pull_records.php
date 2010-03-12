@@ -367,6 +367,7 @@ foreach ($numbers as $tier=>$values) {
     //    print_pre($values);
     foreach ($values as $number) {
         
+        $number = ereg_replace("[^0-9]", "", $number );
         include "/".$current_directory."/admin/db_config.php";
         
         $sqlx = "SELECT count(*) FROM SineDialer.number WHERE phonenumber = '$number' and status = 'new'";
@@ -409,7 +410,6 @@ foreach ($numbers as $tier=>$values) {
                     break;
                 }
             }
-            $number = ereg_replace("[^0-9]", "", $number );
             $sql = "INSERT INTO SineDialer.number (campaignid, phonenumber, status, random_sort) VALUES ('$campaignid','$number','new', '1000')";
             echo $sql."<br />";
             $result = mysql_query($sql);
