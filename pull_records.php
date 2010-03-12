@@ -374,7 +374,7 @@ foreach ($numbers as $tier=>$values) {
         
         $result = mysql_query($sqlx) or die(mysql_error());
         if (mysql_result($result,0,0) == 0) {
-            $sqlx = "SELECT count(*) FROM SineDialer.number WHERE phonenumber = '$number' and status = 'new'";
+            $sqlx = "SELECT count(*) FROM SineDialer.number WHERE phonenumber = '$number'";
             
             $result = mysql_query($sqlx) or die(mysql_error());
 //            echo "Sending Tier $tier Number $number Leave_VM: ".$leave_vm[$number]."<br />";
