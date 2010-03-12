@@ -267,9 +267,9 @@ if (mysql_num_rows($result) == 0) {
         $result2 = mysql_query("SELECT count(*) from st_calls where id = ".sanitize($row['id'])." and CURDATE() = date(event_datetime)") or die(mysql_error());
         $done = mysql_result($result2,0,0);
         if (!($done < $row['st_calls_c'])) {
-            echo "Done ".$done."/".$row['st_calls_c']." for the day<br />";
+            //echo "Done ".$done."/".$row['st_calls_c']." for the day<br />";
         } else {
-            echo "Done ".$done."/".$row['st_calls_c']." for the day - ";
+            //echo "Done ".$done."/".$row['st_calls_c']." for the day - ";
             $phone_home = trim($row['phone_home']);
             $phone_mobile = trim($row['phone_home']);
             
@@ -299,21 +299,21 @@ if (mysql_num_rows($result) == 0) {
                 $hours_ago = round((($time_now - $last_time)/60/60),2);
                 //echo "Last Call: $last_time vs $time_now (".$last_call.") for $number ($hours_ago hours ago)<br />";                
                 if ($hours_ago > 3) {
-                    echo "Last call was $hours_ago hours ago (i.e. more than 3 hours) - ";
+                    //echo "Last call was $hours_ago hours ago (i.e. more than 3 hours) - ";
                     $call = true;
                 } else {
-                    echo "Last call was too recent<br />";
+                    //echo "Last call was too recent<br />";
                     $call = false;
                 }
             } else {
-                echo "No last call for $number - ";
+                //echo "No last call for $number - ";
                 $call = true;
             }
             // Do call this number
             if ($call) {
                 $result_tier = mysql_query("SELECT st_tier_c FROM leads_cstm WHERE id_c = ".sanitize($row['id'])) or die (mysql_error());
                 $tier = mysql_result($result_tier,0,0);
-                echo "Sending across $number to tier $tier<br />";
+                //echo "Sending across $number to tier $tier<br />";
                 $numbers[$tier][] = $number;
             }
         }
@@ -346,9 +346,9 @@ foreach ($numbers as $tier=>$values) {
         
         $result = mysql_query($sqlx) or die(mysql_error());
         if (mysql_result($result,0,0) == 0) {
-            echo "Tier $tier Number $number<br />";
+            echo "Sending Tier $tier Number $number<br />";
         } else {
-            echo "Number $number is already in SmoothTorque (with a status of new)<br />";
+            echo "Number <b>$number</b> is already in SmoothTorque (with a status of new)<br />";
         }
     }
 }
