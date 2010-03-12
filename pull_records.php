@@ -335,7 +335,7 @@ if (mysql_num_rows($result) == 0) {
 
 //print_pre($numbers);
 
-foreach ($numbers as $tiers=>$values) {
+foreach ($numbers as $tier=>$values) {
 //    echo "Tier $tiers: ";
 //    print_pre($values);
     foreach ($values as $number) {
