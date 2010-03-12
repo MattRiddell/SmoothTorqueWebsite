@@ -333,11 +333,14 @@ if (mysql_num_rows($result) == 0) {
  
  */
 
-print_pre($numbers);
+//print_pre($numbers);
 
 foreach ($numbers as $tiers=>$values) {
-    echo "Tier $tiers: ";
-    print_pre($values);
+//    echo "Tier $tiers: ";
+//    print_pre($values);
+    foreach ($values as $number) {
+        echo "Tier $tier Number $number<br />";
+    }
 }
 
 
