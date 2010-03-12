@@ -295,7 +295,9 @@ if (mysql_num_rows($result) == 0) {
             if (mysql_num_rows($result_x) > 0) {
                 // Have a previous call
                 $last_call = mysql_result($result_x,0,0);
-                echo "Last Call: ".$last_call." for $number<br />";                
+                $last_time = strtotime($last_call);
+                
+                echo "Last Call: $last_time vs $time_now (".$last_call.") for $number<br />";                
                 
             } else {
                 echo "No last call for $number<br />";
