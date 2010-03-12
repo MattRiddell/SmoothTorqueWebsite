@@ -217,7 +217,7 @@ $time_now = strtotime(date("H:i:s"));
 echo "Time Now: ".$time_now." (".date("H:i:s").")<br /><br />";
 
 $tz = "(";
-
+$tz_count = 0;
 for ($i = 0;$i < count($tz_db_start);$i++) {
     
     $tz_start = strtotime($tz_db_start[$i]);
@@ -230,6 +230,7 @@ for ($i = 0;$i < count($tz_db_start);$i++) {
         if ($tz_end >= $time_now) {
             echo " End time right ";
             $tz.=sanitize($tz_name).",";
+            $tz_count++;
         } else {
             echo " End time <b>not</b> right ";
         }
@@ -243,7 +244,7 @@ for ($i = 0;$i < count($tz_db_start);$i++) {
     }
     echo "<br>";
 }
-
+if ($tz_count > 0) {
 $tz = substr($tz,0,strlen($tz)-1).")";
 
 echo "Calls with time zones in ".$tz."<br />";
@@ -310,6 +311,7 @@ if (mysql_num_rows($result) == 0) {
         flush();
         //exit(0);
     }
+}
 }
 /*
  3. Copy these numbers across
