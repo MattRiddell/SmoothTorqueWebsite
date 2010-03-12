@@ -335,9 +335,9 @@ if ($tz_count == 0) {
                     $msg = "&msg=";
                     
                     if ($count_today < $required_today) {
-                        $leave_vm[$number] = true;
+                        $leave_vm[$number] = 1;
                     } else {
-                        $leave_vm[$number] = false;
+                        $leave_vm[$number] = 0;
                     }
                     
                     echo "Leave_vm: $leave_vm[$number]";
@@ -381,10 +381,10 @@ foreach ($numbers as $tier=>$values) {
                 $result = mysql_query("DELETE FROM SineDialer.number WHERE phonenumber = '$number'");
             }
             
-            // INSERT THE NUMBER
-            /*
+            //INSERT THE NUMBER
+            
             $campaignid = 8;
-            if ($leave_vm[$number]) {
+            if ($leave_vm[$number] == 1) {
                 switch ($tier) {
                     case 1:
                     $campaignid = 8;
@@ -408,7 +408,7 @@ foreach ($numbers as $tier=>$values) {
                     $campaignid = 10;
                     break;
                 }
-            }*/
+            }
             
         } else {
             echo "Number <b>$number</b> is already in SmoothTorque (with a status of new)<br />";
