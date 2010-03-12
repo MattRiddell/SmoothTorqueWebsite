@@ -19,22 +19,22 @@ require "/".$current_directory."/functions/functions.php";
  * header.php is also called from index.php where we couldn't possibly
  * know the language.
  */
-if ((!(isset($_COOKIE[language])))||$_COOKIE[language] == "--") {
-    $_COOKIE[language] = "en";
+if ((!(isset($_COOKIE['language'])))||$_COOKIE['language'] == "--") {
+    $_COOKIE['language'] = "en";
 }
 /* Same goes for the server name */
-if ($_COOKIE[url] == "--") {
-    $_COOKIE[url] = $_SERVER[SERVER_NAME];
+if ($_COOKIE['url'] == "--") {
+    $_COOKIE['url'] = $_SERVER['SERVER_NAME'];
 }
 
 /* Set a variable so we don't need to keep reading the cookies */
-$url = $_COOKIE[url];
+$url = $_COOKIE['url'];
 
 /* We now have a language and a server name */
-$result_config = mysql_query("SELECT * FROM web_config WHERE LANG = ".sanitize($_COOKIE[language])." AND url = ".sanitize($url)) or die(mysql_error());
+$result_config = mysql_query("SELECT * FROM web_config WHERE LANG = ".sanitize($_COOKIE['language'])." AND url = ".sanitize($url)) or die(mysql_error());
 if (mysql_num_rows($result_config) == 0) {
     /* No entry found for this url - use the default */
-    $sql = "SELECT * FROM web_config WHERE LANG = ".sanitize($_COOKIE[language])." AND url = 'default'";
+    $sql = "SELECT * FROM web_config WHERE LANG = ".sanitize($_COOKIE['language'])." AND url = 'default'";
     $result_config = mysql_query($sql) or die("Unable to load config information from mysql: ".mysql_error());
 }
 
@@ -83,19 +83,19 @@ if (mysql_num_rows($result) > 0) {
 } 
 
 
-if (isset($_GET[campaigngroupid])){
-    $campaigngroupid = ($_GET[campaigngroupid]);
+if (isset($_GET['campaigngroupid'])){
+    $campaigngroupid = ($_GET['campaigngroupid']);
 }
-if (isset($_POST[id])){
-    $id = $_POST[id];
+if (isset($_POST['id'])){
+    $id = $_POST['id'];
 }
 mysql_select_db("SineDialer", $link);
 $sql = 'SELECT value FROM config WHERE parameter=\'backend\'';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $row = mysql_fetch_assoc($result);
-$backend=$row[value];
-$level=$_COOKIE[level];
-if ($level==sha1("level100") && $_GET[type]=="all") {
+$backend=$row['value'];
+$level=$_COOKIE['level'];
+if ($level==sha1("level100") && $_GET['type']=="all") {
     $sql = 'SELECT * FROM campaign order by name';
 } else {
     $sql = 'SELECT * FROM campaign WHERE groupid='.$campaigngroupid.' order by name';
@@ -118,6 +118,7 @@ if (mysql_num_rows($result)==0){
     <br />
     <br />
     <?
+    //'
     box_end();
     exit(0);
 }
@@ -144,7 +145,7 @@ if (mysql_num_rows($result)==0){
     <?box_end();?><br />
 
 <?
-$user = $_COOKIE[user];
+$user = $_COOKIE['user'];
 ?>
 <table class="" align="center" border="0" cellpadding="2" cellspacing="0">
 <TR>
@@ -181,21 +182,22 @@ Percentage Busy
 <td style="background-image: url(images/crb.gif);" width=2></td>
 </TR>
 <?
+$toggle=false;
 while ($row = mysql_fetch_assoc($result)) {
 
-$sql = 'SELECT status, flags, maxcalls, progress from queue where campaignid='.$row[id];
+$sql = 'SELECT status, flags, maxcalls, progress from queue where campaignid='.$row['id'];
 $resultx=mysql_query($sql, $link) or die (mysql_error());;
 $rowx = mysql_fetch_assoc($resultx);
 
-$status=$rowx[status];
-$flags=$rowx[flags];
-$maxcalls=$rowx[maxcalls];
-$progress=$rowx[progress];
+    $status=$rowx['status'];
+$flags=$rowx['flags'];
+$maxcalls=$rowx['maxcalls'];
+$progress=$rowx['progress'];
 
 
 
     flush();
-    $row = array_map(stripslashes,$row);
+    $row = @array_map(stripslashes,$row);
     if ($status == 101) {
         $class=" class=\"tborder_active\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#88f888'\"   ";
     } else if ($toggle){
@@ -211,10 +213,10 @@ $progress=$rowx[progress];
 <td></td>
 <TD>
 <?
-if (strlen($row[name])<35){
-echo "<A title=\"Edit this campaign\" HREF=\"editcampaign.php?id=".$row[id]."\"><img width=\"16\" height=\"16\" src=\"images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit This Campaign\">".$row[name]."</A>";
+if (strlen($row['name'])<35){
+echo "<A title=\"Edit this campaign\" HREF=\"editcampaign.php?id=".$row['id']."\"><img width=\"16\" height=\"16\" src=\"images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit This Campaign\">".$row['name']."</A>";
 } else {
-echo "<A title=\"Edit this campaign\" HREF=\"editcampaign.php?id=".$row[id]."\"><img width=\"16\" height=\"16\" src=\"images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit This Campaign\">".trim(substr($row[name],0,35))."...</A>";
+echo "<A title=\"Edit this campaign\" HREF=\"editcampaign.php?id=".$row['id']."\"><img width=\"16\" height=\"16\" src=\"images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit This Campaign\">".trim(substr($row['name'],0,35))."...</A>";
 }
 ?>
 </TD>
@@ -222,24 +224,24 @@ echo "<A title=\"Edit this campaign\" HREF=\"editcampaign.php?id=".$row[id]."\">
 <?
 $max_str_len = 45;
 
-if (strlen($row[description])<$max_str_len){
-echo $row[description];
+if (strlen($row['description'])<$max_str_len){
+echo $row['description'];
 } else {
-echo trim(substr($row[description],0,$max_str_len))."...";
+echo trim(substr($row['description'],0,$max_str_len))."...";
 }
 ?>
 </TD>
 <?
 if ($config_values['SHOW_NUMBERS_LEFT'] == 'YES') {
-    $sql = 'SELECT count(*) from number where campaignid='.$row[id].' and (status="manual_dial" or status="new" or status="no-credit")';
+    $sql = 'SELECT count(*) from number where campaignid='.$row['id'].' and (status="manual_dial" or status="new" or status="no-credit")';
     $result2=mysql_query($sql, $link) or die (mysql_error());;
     $new_numbers=mysql_result($result2,0,'count(*)');
 
-    $sql = 'SELECT count(*) from number where campaignid='.$row[id].' and (status="manual_dial" or status="no-credit")';
+    $sql = 'SELECT count(*) from number where campaignid='.$row['id'].' and (status="manual_dial" or status="no-credit")';
     $result2=mysql_query($sql, $link) or die (mysql_error());;
     $manual_numbers=mysql_result($result2,0,'count(*)');
 
-    $sql = 'SELECT count(*) from number where campaignid='.$row[id];
+    $sql = 'SELECT count(*) from number where campaignid='.$row['id'];
     $result2=mysql_query($sql, $link) or die (mysql_error());;
     $total_numbers=mysql_result($result2,0,'count(*)');
 }
@@ -248,7 +250,7 @@ if ($config_values['SHOW_NUMBERS_LEFT'] == 'YES') {
 ?>
 <TD>
 <?if ($backend == 0) {?>
-    <a title="View the report for this campaign" href="report<?if ($use_new_pie == 1) {echo "2";}?>.php?id=<?echo $row[id];?>" class="abcd"><img width="16" height="16" src="images/chart_pie.png" border="0"></a>
+    <a title="View the report for this campaign" href="report<?if ($use_new_pie == 1) {echo "2";}?>.php?id=<?echo $row['id'];?>" class="abcd"><img width="16" height="16" src="images/chart_pie.png" border="0"></a>
 <?}?>
 <?
 if ($config_values['SHOW_NUMBERS_LEFT'] == 'YES') {
@@ -305,7 +307,7 @@ if ($status==101){
 </TD>
 <td>
 <?if ($user!="demo"){?>
-<a title="Stop running this campaign" href="stopcampaign.php?id=<?echo $row[id];?>"><img width="16" height="16" src="images/control_stop_blue.png" border="0"></a>
+<a title="Stop running this campaign" href="stopcampaign.php?id=<?echo $row['id'];?>"><img width="16" height="16" src="images/control_stop_blue.png" border="0"></a>
 <?} else {?>
 <a href="#" title="Stop campaign (Not running)"><img width="16" height="16" src="images/control_stop_blue.png" border="0"></a>
 <?
@@ -314,7 +316,7 @@ if ($status==101){
 
 ?>
 <?if ($user!="demo"){?>
-<a title="Start running this campaign" href="startcampaign.php?id=<?echo $row[id];?>&astqueuename=<?echo $row[astqueuename];?>&clid=<?echo $row[clid];?>&trclid=<?echo $row[trclid];?>&agents=<?echo $row[maxagents];?>&did=<?echo $row[did];?>&context=<?echo $row[context];?>">
+<a title="Start running this campaign" href="startcampaign.php?id=<?echo $row['id'];?>&astqueuename=<?echo $row['astqueuename'];?>&clid=<?echo $row['clid'];?>&trclid=<?echo $row['trclid'];?>&agents=<?echo $row['maxagents'];?>&did=<?echo $row['did'];?>&context=<?echo $row['context'];?>">
 <IMG width="16" height="16" SRC="images/control_play_blue.png" BORDER="0"></a><br>
 <?} else {?>
 <a href="#" title="Start campaign (Already started)"><IMG width="16" height="16" SRC="images/control_play_blue.png" BORDER="0"></a><br>
@@ -328,7 +330,7 @@ if ($status==101){
 
 if ($config_values['ALLOW_NUMBERS_MANUAL'] == "YES") {
 ?>
-<a href="manual_init.php?campaignid=<?=$row[id]?>">
+<a href="manual_init.php?campaignid=<?=$row['id']?>">
 <img width="16" height="16" src="images/database_lightning.png" border="0" title="Initialise campaign for manual dialing">
 </a>
 <?
@@ -342,13 +344,13 @@ if ($config_values['DELETE_ALL'] == "YES") {?>
 </td>
 <TD>
 <?if ($backend == 0) {?>
-<a title="View the graph for this campaign" href="test.php?id=<?echo $row[id];?>" class="abcd"><img width="16" height="16" src="images/chart_curve.png" border="0"></a>&nbsp;
+<a title="View the graph for this campaign" href="test.php?id=<?echo $row['id'];?>" class="abcd"><img width="16" height="16" src="images/chart_curve.png" border="0"></a>&nbsp;
 <?}?>
-<a title="Recycle Numbers" href="recycle.php?id=<?echo $row[id];?>&type_input=<?echo $_GET[type];?>" class="abcd"><img width="16" height="16" src="images/arrow_refresh.png" border="0"></a>&nbsp;
-<a title="List Numbers" href="viewnumbers.php?campaignid=<?echo $row[id];?>" class="abcd"><img width="16" height="16" src="images/table.png" border="0"></a>&nbsp;
+<a title="Recycle Numbers" href="recycle.php?id=<?echo $row['id'];?>&type_input=<?echo $_GET['type'];?>" class="abcd"><img width="16" height="16" src="images/arrow_refresh.png" border="0"></a>&nbsp;
+<a title="List Numbers" href="viewnumbers.php?campaignid=<?echo $row['id'];?>" class="abcd"><img width="16" height="16" src="images/table.png" border="0"></a>&nbsp;
 <?
 if ($user!="demo"){
-echo "<A title=\"Delete this campaign\" HREF=\"deletecampaign.php?id=".$row[id]."\"><IMG width=\"16\" height=\"16\" SRC=\"images/delete.png\" BORDER=\"0\"></A>";
+echo "<A title=\"Delete this campaign\" HREF=\"deletecampaign.php?id=".$row['id']."\"><IMG width=\"16\" height=\"16\" SRC=\"images/delete.png\" BORDER=\"0\"></A>";
 } else {
 echo "<A title=\"Delete this campaign\" HREF=\"#\"><IMG SRC=\"images/delete.png\" BORDER=\"0\" width=\"16\" height=\"16\" ></A>";
 }
@@ -358,9 +360,9 @@ echo "<A title=\"Delete this campaign\" HREF=\"#\"><IMG SRC=\"images/delete.png\
 if ( $config_values['USE_BILLING'] == "YES") {?>
 <TD>
 <?
-if ($row[cost]>0) {
-    echo '<A HREF="viewcdr_campaign.php?campaignid='.$row[id].'">';
-    echo $config_values['CURRENCY_SYMBOL']." ".number_format($row[cost],2)."</a>";
+if ($row['cost']>0) {
+    echo '<A HREF="viewcdr_campaign.php?campaignid='.$row['id'].'">';
+    echo $config_values['CURRENCY_SYMBOL']." ".number_format($row['cost'],2)."</a>";
 } else {
     echo "-";
 }
