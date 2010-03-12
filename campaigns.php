@@ -30,6 +30,14 @@ $result=mysql_query($sql, $link);
 if (isset($_GET['campaignid'])){
     $_GET = array_map(mysql_real_escape_string,$_GET);
     $_POST['campaignid']=($_GET['campaignid']);
+} else {
+    $_GET['campaignid'] = "";
+    if (!isset($_POST['campaignid'])) {
+        $_POST['campaignid']="";
+    }
+}
+if (!isset($_GET['type'])) {
+    $_GET['type'] = "";
 }
 $out=_get_browser();
 if ($out['browser']=="MSIE"){
@@ -42,7 +50,7 @@ if ($out['browser']=="MSIE"){
     <script type="text/javascript">
     $(function(){ // jquery onload
       window.setInterval(function(){
-                         $('#ajaxDiv').loadIfModified('disTime3.php?campaigngroupid=<?echo $campaigngroupid;?>&id=<?echo $_POST[campaignid];?>&type=<?echo $_GET[type];?>');  // jquery ajax load into div
+                         $('#ajaxDiv').loadIfModified('disTime3.php?campaigngroupid=<?echo $campaigngroupid;?>&id=<?echo $_POST['campaignid'];?>&type=<?echo $_GET['type'];?>');  // jquery ajax load into div
                          },10000);
       });
     
@@ -54,7 +62,7 @@ if ($out['browser']=="MSIE"){
         $(function(){ // jquery onload
           window.setInterval(
                              function(){
-                             $('#ajaxDiv').load('disTime3.php?campaigngroupid=<?echo $campaigngroupid;?>&id=<?echo $_POST[campaignid];?>&type=<?echo $_GET[type];?>');  // jquery ajax load into div
+                             $('#ajaxDiv').load('disTime3.php?campaigngroupid=<?echo $campaigngroupid;?>&id=<?echo $_POST['campaignid'];?>&type=<?echo $_GET['type'];?>');  // jquery ajax load into div
                              }
                              ,10000);
           });
