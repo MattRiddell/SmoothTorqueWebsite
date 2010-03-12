@@ -296,7 +296,7 @@ if (mysql_num_rows($result) == 0) {
                 // Have a previous call
                 $last_call = mysql_result($result_x,0,0);
                 $last_time = strtotime($last_call);
-                $hours_ago = ($time_now - $last_time)/60/60;
+                $hours_ago = round((($time_now - $last_time)/60/60),2);
                 echo "Last Call: $last_time vs $time_now (".$last_call.") for $number ($hours_ago hours ago)<br />";                
                 
             } else {
