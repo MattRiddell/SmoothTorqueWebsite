@@ -100,13 +100,6 @@ if (mysql_num_rows($result) > 0) {
     $urgent_sources = "('')";
 }
 
-
-$db_host = $config_values['SUGAR_HOST'];
-$db_user = $config_values['SUGAR_USER'];
-$db_pass = $config_values['SUGAR_PASS'];
-$link = mysql_connect($db_host, $db_user, $db_pass) OR die(mysql_error());
-mysql_select_db($config_values['SUGAR_DB'], $link);
-
 $tz_db = array();
 $result = mysql_query("SELECT * FROM time_zones");
 if (mysql_num_rows($result) > 0) {
@@ -116,6 +109,14 @@ if (mysql_num_rows($result) > 0) {
         $tz_db_end[] = $row['end'];
     }
 }
+
+
+$db_host = $config_values['SUGAR_HOST'];
+$db_user = $config_values['SUGAR_USER'];
+$db_pass = $config_values['SUGAR_PASS'];
+$link = mysql_connect($db_host, $db_user, $db_pass) OR die(mysql_error());
+mysql_select_db($config_values['SUGAR_DB'], $link);
+
 
 $result = mysql_query("SELECT id FROM lc_customstatus WHERE name like 'CA - Left Message%'");
 $status_left_messages = "(";
