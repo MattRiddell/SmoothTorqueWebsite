@@ -120,7 +120,7 @@ mysql_select_db($config_values['SUGAR_DB'], $link);
 
 $result = mysql_query("SELECT id, name FROM lc_customstatus WHERE name like 'CA - Left Message%'");
 $status_left_messages = "(";
-$statuse_names = array[];
+$statuse_names = array();
 while ($row = mysql_fetch_assoc($result)) {
 	$status_left_messages .= sanitize($row['id']).",";
     $status_names[$row['id']] = $row['name'];
