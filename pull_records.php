@@ -249,86 +249,111 @@ for ($i = 0;$i < count($tz_db_start);$i++) {
 if ($tz_count == 0) {
     echo "There are no timezones which should receive calls at the moment<br />";
 } else {
-$tz = substr($tz,0,strlen($tz)-1).")";
-
-echo "Calls with time zones in ".$tz."<br />";
-
-/*
- 2. We look at the records which have these timezones, and have had less calls than there are in the st_calls_c column and have not had a call in the past 3 hours
- */
-$sql = "select leads.id, phone_home, phone_mobile, st_calls_c, status from leads, leads_cstm where leads.id = leads_cstm.id_c and leads_cstm.st_calls_c > 0 and leads.deleted = 0 and leads_cstm.time_zone_c in $tz and (leads.status = '$new_status' or leads.status in $status_left_messages)";
-//echo $sql;
-
-$result = mysql_query($sql) or die(mysql_error());
-
-//echo mysql_num_rows($result);
-if (mysql_num_rows($result) == 0) {
-    echo "No numbers for now";
-} else {
-    while ($row = mysql_fetch_assoc($result)) {
-        $result2 = mysql_query("SELECT count(*) from st_calls where id = ".sanitize($row['id'])." and CURDATE() = date(event_datetime)") or die(mysql_error());
-        $done = mysql_result($result2,0,0);
-        if (!($done < $row['st_calls_c'])) {
-            //echo "Done ".$done."/".$row['st_calls_c']." for the day<br />";
-        } else {
-            //echo "Done ".$done."/".$row['st_calls_c']." for the day - ";
-            $phone_home = trim($row['phone_home']);
-            $phone_mobile = trim($row['phone_home']);
-            
-            if (strlen($phone_home) > 0 && strlen($phone_mobile) > 0) {
-                // Both set
-                $rand = rand(0,1);
-                //echo "Rand: ".$rand;
-                if ($rand == 0) {
+    $tz = substr($tz,0,strlen($tz)-1).")";
+    
+    echo "Calls with time zones in ".$tz."<br />";
+    
+    /*
+     2. We look at the records which have these timezones, and have had less calls than there are in the st_calls_c column and have not had a call in the past 3 hours
+     */
+    $sql = "select leads.id, phone_home, phone_mobile, st_calls_c, status from leads, leads_cstm where leads.id = leads_cstm.id_c and leads_cstm.st_calls_c > 0 and leads.deleted = 0 and leads_cstm.time_zone_c in $tz and (leads.status = '$new_status' or leads.status in $status_left_messages)";
+    //echo $sql;
+    
+    $result = mysql_query($sql) or die(mysql_error());
+    
+    //echo mysql_num_rows($result);
+    if (mysql_num_rows($result) == 0) {
+        echo "No numbers for now";
+    } else {
+        while ($row = mysql_fetch_assoc($result)) {
+            $result2 = mysql_query("SELECT count(*) from st_calls where id = ".sanitize($row['id'])." and CURDATE() = date(event_datetime)") or die(mysql_error());
+            $done = mysql_result($result2,0,0);
+            if (!($done < $row['st_calls_c'])) {
+                //echo "Done ".$done."/".$row['st_calls_c']." for the day<br />";
+            } else {
+                //echo "Done ".$done."/".$row['st_calls_c']." for the day - ";
+                $phone_home = trim($row['phone_home']);
+                $phone_mobile = trim($row['phone_home']);
+                
+                if (strlen($phone_home) > 0 && strlen($phone_mobile) > 0) {
+                    // Both set
+                    $rand = rand(0,1);
+                    //echo "Rand: ".$rand;
+                    if ($rand == 0) {
+                        $number = $phone_home;
+                    } else {
+                        $number = $phone_mobile;
+                    }
+                } else if (strlen($phone_home) > 0) {
+                    // Home set
                     $number = $phone_home;
-                } else {
+                } else if (strlen($phone_mobile) > 0) {
+                    // Mobile set
                     $number = $phone_mobile;
                 }
-            } else if (strlen($phone_home) > 0) {
-                // Home set
-                $number = $phone_home;
-            } else if (strlen($phone_mobile) > 0) {
-                // Mobile set
-                $number = $phone_mobile;
-            }
-            $call = false;
-            
-            $result_x = mysql_query("SELECT event_datetime from st_calls WHERE id = ".sanitize($row['id'])." order by event_datetime desc limit 1");
-            if (mysql_num_rows($result_x) > 0) {
-                // Have a previous call
-                $last_call = mysql_result($result_x,0,0);
-                $last_time = strtotime($last_call);
-                $hours_ago = round((($time_now - $last_time)/60/60),2);
-                //echo "Last Call: $last_time vs $time_now (".$last_call.") for $number ($hours_ago hours ago)<br />";                
-                if ($hours_ago > 3) {
-                    //echo "Last call was $hours_ago hours ago (i.e. more than 3 hours) - ";
-                    $call = true;
+                $call = false;
+                
+                $result_x = mysql_query("SELECT event_datetime from st_calls WHERE id = ".sanitize($row['id'])." order by event_datetime desc limit 1");
+                if (mysql_num_rows($result_x) > 0) {
+                    // Have a previous call
+                    $last_call = mysql_result($result_x,0,0);
+                    $last_time = strtotime($last_call);
+                    $hours_ago = round((($time_now - $last_time)/60/60),2);
+                    //echo "Last Call: $last_time vs $time_now (".$last_call.") for $number ($hours_ago hours ago)<br />";                
+                    if ($hours_ago > 3) {
+                        //echo "Last call was $hours_ago hours ago (i.e. more than 3 hours) - ";
+                        $call = true;
+                    } else {
+                        //echo "Last call was too recent<br />";
+                        $call = false;
+                    }
                 } else {
-                    //echo "Last call was too recent<br />";
-                    $call = false;
+                    //echo "No last call for $number - ";
+                    $call = true;
                 }
-            } else {
-                //echo "No last call for $number - ";
-                $call = true;
+                // Do call this number
+                if ($call) {
+                    $result_tier = mysql_query("SELECT st_tier_c FROM leads_cstm WHERE id_c = ".sanitize($row['id'])) or die (mysql_error());
+                    $tier = mysql_result($result_tier,0,0);
+                    //echo "Sending across $number to tier $tier<br />";
+                    $numbers[$tier][] = $number;
+                    
+                    $sql = "select count( *) from st_vm where id = ".sanitize($row['id'])." and date(event_datetime) = CURDATE()";
+                    
+                    $result = mysql_query($sql) or die(mysql_error());
+                    $count_today = mysql_result($result,0,0);
+                    
+                    //echo "/";
+                    
+                    $sql = "select st_vm_c from leads_cstm where id_c = ".sanitize($row['id']);
+                    
+                    $result = mysql_query($sql) or die(mysql_error());
+                    $required_today = mysql_result($result,0,0);
+                    
+                    
+                    //exit(0);
+                    $msg = "&msg=";
+                    
+                    if ($count_today < $required_today) {
+                        $leave_vm[$number] = true;
+                    } else {
+                        $leave_vm[$number] = false;
+                    }
+                    
+                    
+                    
+                }
             }
-            // Do call this number
-            if ($call) {
-                $result_tier = mysql_query("SELECT st_tier_c FROM leads_cstm WHERE id_c = ".sanitize($row['id'])) or die (mysql_error());
-                $tier = mysql_result($result_tier,0,0);
-                //echo "Sending across $number to tier $tier<br />";
-                $numbers[$tier][] = $number;
-            }
+            
+            // Find last call for this id
+            
+            
+            echo $status_names[$row['status']]."<br />";
+            //                print_pre($row);
+            flush();
+            //exit(0);
         }
-        
-        // Find last call for this id
-        
-        
-        echo $status_names[$row['status']]."<br />";
-//                print_pre($row);
-        flush();
-        //exit(0);
     }
-}
 }
 /*
  3. Copy these numbers across
@@ -338,17 +363,53 @@ if (mysql_num_rows($result) == 0) {
 //print_pre($numbers);
 
 foreach ($numbers as $tier=>$values) {
-//    echo "Tier $tiers: ";
-//    print_pre($values);
+    //    echo "Tier $tiers: ";
+    //    print_pre($values);
     foreach ($values as $number) {
         
         include "/".$current_directory."/admin/db_config.php";
-
+        
         $sqlx = "SELECT count(*) FROM SineDialer.number WHERE phonenumber = '$number' and status = 'new'";
         
         $result = mysql_query($sqlx) or die(mysql_error());
         if (mysql_result($result,0,0) == 0) {
-            echo "Sending Tier $tier Number $number <br />";
+            $sqlx = "SELECT count(*) FROM SineDialer.number WHERE phonenumber = '$number' and status = 'new'";
+            
+            $result = mysql_query($sqlx) or die(mysql_error());
+            echo "Sending Tier $tier Number $number Leave_VM: ".$leave_vm[$number]."<br />";
+            if (mysql_result($result,0,0) > 0) {
+                $result = mysql_query("DELETE FROM SineDialer.number WHERE phonenumber = '$number'");
+            }
+            
+            // INSERT THE NUMBER
+            
+            $campaignid = 8;
+            if ($leave_vm[$number]) {
+                switch ($tier) {
+                    case 1:
+                    $campaignid = 8;
+                    break;
+                    case 2:
+                    $campaignid = 9;
+                    break;
+                    case 3:
+                    $campaignid = 11;
+                    break;
+                }
+            } else {
+                switch ($tier) {
+                    case 1:
+                    $campaignid = 6;
+                    break;
+                    case 2:
+                    $campaignid = 7;
+                    break;
+                    case 3:
+                    $campaignid = 10;
+                    break;
+                }
+            }
+            
         } else {
             echo "Number <b>$number</b> is already in SmoothTorque (with a status of new)<br />";
         }
