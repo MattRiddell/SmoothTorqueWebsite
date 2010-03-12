@@ -412,6 +412,7 @@ foreach ($numbers as $tier=>$values) {
             $number = ereg_replace("[^0-9]", "", $number );
             $sql = "INSERT INTO SineDialer.number (campaignid, phonenumber, random_sort) VALUES ('$campaignid','$number','1000')";
             echo $sql."<br />";
+            $result = mysql_query($sql);
         } else {
             echo "Number <b>$number</b> is already in SmoothTorque (with a status of new)<br />";
         }
