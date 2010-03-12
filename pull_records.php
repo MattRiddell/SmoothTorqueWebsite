@@ -118,10 +118,12 @@ $link = mysql_connect($db_host, $db_user, $db_pass) OR die(mysql_error());
 mysql_select_db($config_values['SUGAR_DB'], $link);
 
 
-$result = mysql_query("SELECT id FROM lc_customstatus WHERE name like 'CA - Left Message%'");
+$result = mysql_query("SELECT id, name FROM lc_customstatus WHERE name like 'CA - Left Message%'");
 $status_left_messages = "(";
+$statuse_names = array[];
 while ($row = mysql_fetch_assoc($result)) {
 	$status_left_messages .= sanitize($row['id']).",";
+    $status_names[$row['id']] = $row['name'];
 }
 $status_left_messages = substr($status_left_messages,0,strlen($status_left_messages)-1).")";
 
@@ -321,8 +323,8 @@ if (mysql_num_rows($result) == 0) {
         // Find last call for this id
         
         
-        
-                print_pre($row);
+        echo $status_names[$row['status']."<br />";
+//                print_pre($row);
         flush();
         //exit(0);
     }
