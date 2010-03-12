@@ -342,7 +342,7 @@ foreach ($numbers as $tier=>$values) {
         
         include "/".$current_directory."/admin/db_config.php";
 
-        $sqlx = "SELECT count(*) FROM SineDialer.number WHERE number = '$number' and status = 'new'";
+        $sqlx = "SELECT count(*) FROM SineDialer.number WHERE phonenumber = '$number' and status = 'new'";
         
         $result = mysql_query($sqlx) or die(mysql_error());
         if (mysql_result($result,0,0) == 0) {
