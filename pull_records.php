@@ -348,7 +348,7 @@ foreach ($numbers as $tier=>$values) {
         if (mysql_result($result,0,0) == 0) {
             echo "Tier $tier Number $number<br />";
         } else {
-            echo "Number is already in SmoothTorque<br />";
+            echo "Number $number is already in SmoothTorque (with a status of new)<br />";
         }
     }
 }
