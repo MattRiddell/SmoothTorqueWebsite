@@ -348,9 +348,9 @@ if ($tz_count == 0) {
             // Find last call for this id
             
             
-            echo $status_names[$row['status']]."<br />";
+            //echo $status_names[$row['status']]."<br />";
             //                print_pre($row);
-            flush();
+            //flush();
             //exit(0);
         }
     }
