@@ -323,7 +323,7 @@ if (mysql_num_rows($result) == 0) {
         // Find last call for this id
         
         
-        echo $status_names[$row['status']."<br />";
+        echo $status_names[$row['status']]."<br />";
 //                print_pre($row);
         flush();
         //exit(0);
