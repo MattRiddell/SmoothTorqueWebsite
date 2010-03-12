@@ -339,7 +339,17 @@ foreach ($numbers as $tier=>$values) {
 //    echo "Tier $tiers: ";
 //    print_pre($values);
     foreach ($values as $number) {
-        echo "Tier $tier Number $number<br />";
+        
+        include "/".$current_directory."/admin/db_config.php";
+
+        $sqlx = "SELECT count(*) FROM SineDialer.number WHERE number = '$number' and status = 'new'";
+        
+        $result = mysql_query($sqlx);
+        if (mysql_result($result,0,0) == 0) {
+            echo "Tier $tier Number $number<br />";
+        } else {
+            echo "Number is already in SmoothTorque<br />";
+        }
     }
 }
 
