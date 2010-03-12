@@ -410,7 +410,7 @@ foreach ($numbers as $tier=>$values) {
                 }
             }
             $number = ereg_replace("[^0-9]", "", $number );
-            $sql = "INSERT INTO SineDialer.number (campaignid, phonenumber, random_sort) VALUES ('$campaignid','$number','1000')";
+            $sql = "INSERT INTO SineDialer.number (campaignid, phonenumber, status, random_sort) VALUES ('$campaignid','$number','new', '1000')";
             echo $sql."<br />";
             $result = mysql_query($sql);
         } else {
