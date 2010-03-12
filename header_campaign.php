@@ -8,7 +8,7 @@ if ($config_values['VIEW_CAMPAIGN'] == "") {
 } else {
     //echo $config_values['VIEW_CAMPAIGN'];
 }
-if ($_COOKIE[level] == sha1("level100")) {
+if ($_COOKIE['level'] == sha1("level100")) {
 box_start(700);
 } else {
 box_start(295);
@@ -20,9 +20,9 @@ box_start(295);
 
 
     <?
-    if ($_COOKIE[level] == sha1("level100")) {
+    if ($_COOKIE['level'] == sha1("level100")) {
 
-        if ($_GET[type]=="all") {
+        if (isset($_GET['type']) && $_GET['type']=="all") {
             echo "<TD class=\"subheader\"><A HREF=\"campaigns.php?type=admin\"><img src=\"images/cog.png\" border=\"0\">&nbsp;Admin Campaigns</A></TD>";
             echo "<TD class=\"subheader\"><A HREF=\"selectcustomer.php\"><img src=\"images/user.png\" border=\"0\">&nbsp;Select Customer</A></TD>";
             echo "<TD class=\"subheader\"><b><img src=\"images/folder.png\" border=\"0\">&nbsp;All Campaigns</b></TD>";
