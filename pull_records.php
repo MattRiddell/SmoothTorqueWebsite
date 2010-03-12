@@ -322,7 +322,7 @@ if (mysql_num_rows($result) == 0) {
         
         
         
-        //        print_pre($row);
+                print_pre($row);
         flush();
         //exit(0);
     }
@@ -346,9 +346,9 @@ foreach ($numbers as $tier=>$values) {
         
         $result = mysql_query($sqlx) or die(mysql_error());
         if (mysql_result($result,0,0) == 0) {
-            echo "Sending Tier $tier Number $number because status is ".$row['status']."<br />";
+            echo "Sending Tier $tier Number $number <br />";
         } else {
-            echo "Number <b>$number</b> with status ".$row['status']." is already in SmoothTorque (with a status of new)<br />";
+            echo "Number <b>$number</b> is already in SmoothTorque (with a status of new)<br />";
         }
     }
 }
