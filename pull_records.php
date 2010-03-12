@@ -297,8 +297,14 @@ if (mysql_num_rows($result) == 0) {
                 $last_call = mysql_result($result_x,0,0);
                 $last_time = strtotime($last_call);
                 $hours_ago = round((($time_now - $last_time)/60/60),2);
-                echo "Last Call: $last_time vs $time_now (".$last_call.") for $number ($hours_ago hours ago)<br />";                
-                
+                //echo "Last Call: $last_time vs $time_now (".$last_call.") for $number ($hours_ago hours ago)<br />";                
+                if ($hours_ago > 3) {
+                    echo "Last call was $hours_ago hours ago (i.e. more than 3 hours)<br />";
+                    $call = true;
+                } else {
+                    echo "Last call was too recent<br />";
+                    $call = false;
+                }
             } else {
                 echo "No last call for $number<br />";
                 $call = true;
@@ -306,7 +312,11 @@ if (mysql_num_rows($result) == 0) {
             // Do call this number
         }
         
-        
+        if ($call) {
+            $result_tier = mysql_query("SELECT st_tier FROM lc_cstm WHERE id_c = ".sanitize($row['id']));
+            $tier = mysql_result($result_tier,0,0);
+            echo "Sending across $number to tier $tier<br />";
+        }
         // Find last call for this id
         
         
