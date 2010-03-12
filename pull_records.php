@@ -130,68 +130,68 @@ $new_status = mysql_result($result,0,0);
 
 
 /*$sql = "SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered and leads.deleted = 0 and status='$new_status' and lead_source in $urgent_sources";
-//echo $sql;
-$result = mysql_query($sql) or die(mysql_error());
-echo number_format(mysql_result($result,0,0));*/
+ //echo $sql;
+ $result = mysql_query($sql) or die(mysql_error());
+ echo number_format(mysql_result($result,0,0));*/
 
 /*
-?>
-<br />
-<hr>
-<b>Urgent Numbers:</b><br />
-<?
-
-/////////////////// CHECK IF NUMBERS HAVE BEEN SENT TO SMOOTHTORQUE ALREADY
-
-$result = mysql_query("SELECT phone_home, phone_mobile, lead_source FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered and leads.deleted = 0 and status='$new_status'  and lead_source in $urgent_sources");
-while ($row = mysql_fetch_assoc($result)) {
-    if (isset($row['phone_mobile']) && $row['phone_mobile'] != $row['phone_home']) {
-        echo "Home Phone: ".$row['phone_home'].",  Mobile Phone: ".$row['phone_mobile']." Source: ".$row['lead_source']."<br />";
-    } else {
-        echo "Home Phone: ".$row['phone_home']." Source: ".$row['lead_source']."<br />";
-    }
-}
-*/
+ ?>
+ <br />
+ <hr>
+ <b>Urgent Numbers:</b><br />
+ <?
+ 
+ /////////////////// CHECK IF NUMBERS HAVE BEEN SENT TO SMOOTHTORQUE ALREADY
+ 
+ $result = mysql_query("SELECT phone_home, phone_mobile, lead_source FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered and leads.deleted = 0 and status='$new_status'  and lead_source in $urgent_sources");
+ while ($row = mysql_fetch_assoc($result)) {
+ if (isset($row['phone_mobile']) && $row['phone_mobile'] != $row['phone_home']) {
+ echo "Home Phone: ".$row['phone_home'].",  Mobile Phone: ".$row['phone_mobile']." Source: ".$row['lead_source']."<br />";
+ } else {
+ echo "Home Phone: ".$row['phone_home']." Source: ".$row['lead_source']."<br />";
+ }
+ }
+ */
 /*
-$result = mysql_query("select count(*), st_tier_c from leads, leads_cstm where leads.id = leads_cstm.id_c and leads.deleted = 0 group by st_tier_c");
-while ($row = mysql_fetch_assoc($result)) {
-    print_pre($row);
-}
-
-echo "<hr />";
-
-$result = mysql_query("select count(*), st_calls_c from leads, leads_cstm where leads.id = leads_cstm.id_c and leads.deleted = 0 group by st_calls_c");
-while ($row = mysql_fetch_assoc($result)) {
-    print_pre($row);
-}
-echo "<hr />";
-
-$result = mysql_query("select count(*), st_vm_c from leads, leads_cstm where leads.id = leads_cstm.id_c and leads.deleted = 0 group by st_vm_c");
-while ($row = mysql_fetch_assoc($result)) {
-    print_pre($row);
-}
-
-echo "<hr />";
-*/
+ $result = mysql_query("select count(*), st_tier_c from leads, leads_cstm where leads.id = leads_cstm.id_c and leads.deleted = 0 group by st_tier_c");
+ while ($row = mysql_fetch_assoc($result)) {
+ print_pre($row);
+ }
+ 
+ echo "<hr />";
+ 
+ $result = mysql_query("select count(*), st_calls_c from leads, leads_cstm where leads.id = leads_cstm.id_c and leads.deleted = 0 group by st_calls_c");
+ while ($row = mysql_fetch_assoc($result)) {
+ print_pre($row);
+ }
+ echo "<hr />";
+ 
+ $result = mysql_query("select count(*), st_vm_c from leads, leads_cstm where leads.id = leads_cstm.id_c and leads.deleted = 0 group by st_vm_c");
+ while ($row = mysql_fetch_assoc($result)) {
+ print_pre($row);
+ }
+ 
+ echo "<hr />";
+ */
 //echo "VoiceMails<br />";
 /*$result = mysql_query("select leads.phone_home, leads.phone_mobile, leads_cstm.st_vm_c from leads, leads_cstm where leads.id = leads_cstm.id_c and leads.deleted = 0 and leads_cstm.st_vm_c > 0") or die(mysql_error());
-while ($row = mysql_fetch_assoc($result)) {
-    print_pre($row);
-}
-*/
+ while ($row = mysql_fetch_assoc($result)) {
+ print_pre($row);
+ }
+ */
 /*$result = mysql_query("select count(*), leads_cstm.st_calls_c from leads, leads_cstm where leads.id = leads_cstm.id_c and leads.deleted = 0 and leads_cstm.st_calls_c > 0 group by leads_cstm.st_calls_c") or die(mysql_error());
-while ($row = mysql_fetch_assoc($result)) {
-    print_pre($row);
-}
-*/
+ while ($row = mysql_fetch_assoc($result)) {
+ print_pre($row);
+ }
+ */
 
 /*
-
-$result = mysql_query("select count(*), leads_cstm.st_calls_c from leads, leads_cstm where leads.id = leads_cstm.id_c and leads.deleted = 0 and leads_cstm.st_calls_c > 0 group by leads_cstm.st_calls_c") or die(mysql_error());
-while ($row = mysql_fetch_assoc($result)) {
-    print_pre($row);
-}
-*/
+ 
+ $result = mysql_query("select count(*), leads_cstm.st_calls_c from leads, leads_cstm where leads.id = leads_cstm.id_c and leads.deleted = 0 and leads_cstm.st_calls_c > 0 group by leads_cstm.st_calls_c") or die(mysql_error());
+ while ($row = mysql_fetch_assoc($result)) {
+ print_pre($row);
+ }
+ */
 
 /*
  
@@ -216,6 +216,8 @@ $time_now = strtotime(date("H:i:s"));
 
 echo "Time Now: ".$time_now." (".date("H:i:s").")<br /><br />";
 
+$tz = "(";
+
 for ($i = 0;$i < count($tz_db_start);$i++) {
     
     $tz_start = strtotime($tz_db_start[$i]);
@@ -227,6 +229,7 @@ for ($i = 0;$i < count($tz_db_start);$i++) {
         echo " Start time right";
         if ($tz_end >= $time_now) {
             echo " End time right ";
+            $tz.=sanitize($tz_name).",";
         } else {
             echo " End time <b>not</b> right ";
         }
@@ -241,8 +244,74 @@ for ($i = 0;$i < count($tz_db_start);$i++) {
     echo "<br>";
 }
 
+$tz = substr($tz,0,strlen($tz)-1).")";
+
+echo "Calls with time zones in ".$tz."<br />";
+
 /*
  2. We look at the records which have these timezones, and have had less calls than there are in the st_calls_c column and have not had a call in the past 3 hours
+ */
+$sql = "select leads.id, phone_home, phone_mobile, st_calls_c from leads, leads_cstm where leads.id = leads_cstm.id_c and leads_cstm.st_calls_c > 0 and leads.deleted = 0 and leads_cstm.time_zone_c in $tz";
+//echo $sql;
+
+$result = mysql_query($sql) or die(mysql_error());
+
+//echo mysql_num_rows($result);
+if (mysql_num_rows($result) == 0) {
+    echo "No numbers for now";
+} else {
+    while ($row = mysql_fetch_assoc($result)) {
+        $result2 = mysql_query("SELECT count(*) from st_calls where id = ".sanitize($row['id'])." and CURDATE() = date(event_datetime)") or die(mysql_error());
+        $done = mysql_result($result2,0,0);
+        if (!($done < $row['st_calls_c'])) {
+            echo "Done ".$done."/".$row['st_calls_c']." for the day<br />";
+        } else {
+            echo "Done ".$done."/".$row['st_calls_c']." for the day - ";
+            $phone_home = trim($row['phone_home']);
+            $phone_mobile = trim($row['phone_home']);
+            
+            if (strlen($phone_home) > 0 && strlen($phone_mobile) > 0) {
+                // Both set
+                $rand = rand(0,1);
+                //echo "Rand: ".$rand;
+                if ($rand == 0) {
+                    $number = $phone_home;
+                } else {
+                    $number = $phone_mobile;
+                }
+            } else if (strlen($phone_home) > 0) {
+                // Home set
+                $number = $phone_home;
+            } else if (strlen($phone_mobile) > 0) {
+                // Mobile set
+                $number = $phone_mobile;
+            }
+            $call = false;
+            
+            $result_x = mysql_query("SELECT event_datetime from st_calls WHERE id = ".sanitize($row['id'])." order by event_datetime desc limit 1");
+            if (mysql_num_rows($result_x) > 0) {
+                // Have a previous call
+                $last_call = mysql_result($result_x,0,0);
+                echo "Last Call: ".$last_call." for $number<br />";                
+                
+            } else {
+                echo "No last call for $number<br />";
+                $call = true;
+            }
+            // Do call this number
+        }
+        
+        
+        // Find last call for this id
+        
+        
+        
+        //        print_pre($row);
+        flush();
+        //exit(0);
+    }
+}
+/*
  3. Copy these numbers across
  
  */
