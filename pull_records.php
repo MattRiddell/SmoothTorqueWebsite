@@ -254,7 +254,7 @@ echo "Calls with time zones in ".$tz."<br />";
 /*
  2. We look at the records which have these timezones, and have had less calls than there are in the st_calls_c column and have not had a call in the past 3 hours
  */
-$sql = "select leads.id, phone_home, phone_mobile, st_calls_c from leads, leads_cstm where leads.id = leads_cstm.id_c and leads_cstm.st_calls_c > 0 and leads.deleted = 0 and leads_cstm.time_zone_c in $tz and (leads.status = '$new_status' or leads.status in $status_left_messages)";
+$sql = "select leads.id, phone_home, phone_mobile, st_calls_c, status from leads, leads_cstm where leads.id = leads_cstm.id_c and leads_cstm.st_calls_c > 0 and leads.deleted = 0 and leads_cstm.time_zone_c in $tz and (leads.status = '$new_status' or leads.status in $status_left_messages)";
 //echo $sql;
 
 $result = mysql_query($sql) or die(mysql_error());
@@ -346,9 +346,9 @@ foreach ($numbers as $tier=>$values) {
         
         $result = mysql_query($sqlx) or die(mysql_error());
         if (mysql_result($result,0,0) == 0) {
-            echo "Sending Tier $tier Number $number<br />";
+            echo "Sending Tier $tier Number $number because status is ".$row['status']."<br />";
         } else {
-            echo "Number <b>$number</b> is already in SmoothTorque (with a status of new)<br />";
+            echo "Number <b>$number</b> with status ".$row['status']." is already in SmoothTorque (with a status of new)<br />";
         }
     }
 }
