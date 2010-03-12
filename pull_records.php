@@ -244,7 +244,9 @@ for ($i = 0;$i < count($tz_db_start);$i++) {
     }
     echo "<br>";
 }
-if ($tz_count > 0) {
+if ($tz_count == 0) {
+    echo "There are no timezones which should receive calls at the moment<br />";
+} else {
 $tz = substr($tz,0,strlen($tz)-1).")";
 
 echo "Calls with time zones in ".$tz."<br />";
