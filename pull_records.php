@@ -158,18 +158,20 @@ while ($row = mysql_fetch_assoc($result)) {
     print_pre($row);
 }
 
-
+echo "<hr />";
 
 $result = mysql_query("select count(*), st_calls_c from leads, leads_cstm where leads.id = leads_cstm.id_c and leads.deleted = 0 group by st_calls_c");
 while ($row = mysql_fetch_assoc($result)) {
     print_pre($row);
 }
+echo "<hr />";
 
 $result = mysql_query("select count(*), st_vm_c from leads, leads_cstm where leads.id = leads_cstm.id_c and leads.deleted = 0 group by st_vm_c");
 while ($row = mysql_fetch_assoc($result)) {
     print_pre($row);
 }
 
+echo "<hr />";
 
 //echo "VoiceMails<br />";
 /*$result = mysql_query("select leads.phone_home, leads.phone_mobile, leads_cstm.st_vm_c from leads, leads_cstm where leads.id = leads_cstm.id_c and leads.deleted = 0 and leads_cstm.st_vm_c > 0") or die(mysql_error());
