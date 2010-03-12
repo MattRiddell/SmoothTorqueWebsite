@@ -299,24 +299,24 @@ if (mysql_num_rows($result) == 0) {
                 $hours_ago = round((($time_now - $last_time)/60/60),2);
                 //echo "Last Call: $last_time vs $time_now (".$last_call.") for $number ($hours_ago hours ago)<br />";                
                 if ($hours_ago > 3) {
-                    echo "Last call was $hours_ago hours ago (i.e. more than 3 hours)<br />";
+                    echo "Last call was $hours_ago hours ago (i.e. more than 3 hours) - ";
                     $call = true;
                 } else {
                     echo "Last call was too recent<br />";
                     $call = false;
                 }
             } else {
-                echo "No last call for $number<br />";
+                echo "No last call for $number - ";
                 $call = true;
             }
             // Do call this number
+            if ($call) {
+                $result_tier = mysql_query("SELECT st_tier_c FROM leads_cstm WHERE id_c = ".sanitize($row['id'])) or die (mysql_error());
+                $tier = mysql_result($result_tier,0,0);
+                echo "Sending across $number to tier $tier<br />";
+            }
         }
         
-        if ($call) {
-            $result_tier = mysql_query("SELECT st_tier_c FROM leads_cstm WHERE id_c = ".sanitize($row['id'])) or die (mysql_error());
-            $tier = mysql_result($result_tier,0,0);
-            echo "Sending across $number to tier $tier<br />";
-        }
         // Find last call for this id
         
         
