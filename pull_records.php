@@ -314,6 +314,7 @@ if (mysql_num_rows($result) == 0) {
                 $result_tier = mysql_query("SELECT st_tier_c FROM leads_cstm WHERE id_c = ".sanitize($row['id'])) or die (mysql_error());
                 $tier = mysql_result($result_tier,0,0);
                 echo "Sending across $number to tier $tier<br />";
+                $numbers[$tier][] = $number;
             }
         }
         
@@ -332,7 +333,7 @@ if (mysql_num_rows($result) == 0) {
  
  */
 
-
+print_pre($numbers);
 
 
 
