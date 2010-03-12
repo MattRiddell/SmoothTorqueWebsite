@@ -344,7 +344,7 @@ foreach ($numbers as $tier=>$values) {
 
         $sqlx = "SELECT count(*) FROM SineDialer.number WHERE number = '$number' and status = 'new'";
         
-        $result = mysql_query($sqlx);
+        $result = mysql_query($sqlx) or die(mysql_error());
         if (mysql_result($result,0,0) == 0) {
             echo "Tier $tier Number $number<br />";
         } else {
