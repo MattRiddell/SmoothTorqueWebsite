@@ -1,6 +1,18 @@
 <?
 
-
+function flush_now() {
+    
+    @apache_setenv('no-gzip', 1);
+    @ini_set('output_buffering', 0);
+    @ini_set('zlib.output_compression', 0);
+    @ini_set('implicit_flush', 1);
+    for ($i = 0; $i < ob_get_level(); $i++) { ob_end_flush(); }
+    ob_implicit_flush(1);
+    return true;
+    
+}
+$tz = date_default_timezone_get();
+date_default_timezone_set($tz);
 /* Find out what the base directory name is for two reasons:
  *  1. So we can include files
  *  2. So we can explain how to set up things that are missing
@@ -89,15 +101,11 @@ if (mysql_num_rows($result) > 0) {
 
 
 $result = mysql_query("SELECT * FROM urgent_lead_sources") or die(mysql_error());        
-$db_u_l_s = Array();
+$urgent_sources = Array();
 if (mysql_num_rows($result) > 0) {
-    $urgent_sources = "(";
     while ($row = mysql_fetch_assoc($result)) {
-        $urgent_sources .= sanitize($row['name']).",";
+        $urgent_sources[] = $row['name'];
     }
-    $urgent_sources = substr($urgent_sources,0,strlen($urgent_sources)-1).")";
-} else {
-    $urgent_sources = "('')";
 }
 
 $tz_db = array();
@@ -246,6 +254,7 @@ for ($i = 0;$i < count($tz_db_start);$i++) {
     }
     echo "<br>";
 }
+flush_now();
 if ($tz_count == 0) {
     echo "There are no timezones which should receive calls at the moment<br />";
 } else {
@@ -256,7 +265,7 @@ if ($tz_count == 0) {
     /*
      2. We look at the records which have these timezones, and have had less calls than there are in the st_calls_c column and have not had a call in the past 3 hours
      */
-    $sql = "select leads.id, phone_home, phone_mobile, st_calls_c, status from leads, leads_cstm where leads.id = leads_cstm.id_c and leads_cstm.st_calls_c > 0 and leads.deleted = 0 and leads_cstm.time_zone_c in $tz and (leads.status = '$new_status' or leads.status in $status_left_messages)";
+    $sql = "select leads.id, phone_home, phone_mobile, st_calls_c, status, lead_source, date_entered from leads, leads_cstm where leads.id = leads_cstm.id_c and leads_cstm.st_calls_c > 0 and leads.deleted = 0 and leads_cstm.time_zone_c in $tz and (leads.status = '$new_status' or leads.status in $status_left_messages)";
     //echo $sql;
     
     $result = mysql_query($sql) or die(mysql_error());
@@ -321,9 +330,23 @@ if ($tz_count == 0) {
                     $sql = "select count(*) from st_vm where id = ".sanitize($row['id'])." and date(event_datetime) = CURDATE()";
                     
                     $result_z = mysql_query($sql) or die(mysql_error());
-                    $count_today = mysql_result($result_z,0,0);
+                    $count_today = mysql_result($result_z,0,0);                    
                     
-                    //echo "/";
+                    
+                    
+                    if (in_array($row['lead_source'],$urgent_sources)) {
+                        // Urgent Source
+                    } else {
+                        // Not urgent Source
+                    }
+                    
+                    $entered = strtotime($row['date_entered']);
+                    $now = time();
+                    //echo "Now: $now Enterred: $entered Seconds ago: ".($now-$entered)."<br />";
+                    
+                    $random_sort[$number] = $now - $entered;
+                    
+                    //exit(0);
                     
                     $sql = "select st_vm_c from leads_cstm where id_c = ".sanitize($row['id']);
                     
@@ -355,6 +378,7 @@ if ($tz_count == 0) {
         }
     }
 }
+flush_now();
 /*
  3. Copy these numbers across
  
@@ -410,8 +434,9 @@ foreach ($numbers as $tier=>$values) {
                     break;
                 }
             }
-            $sql = "INSERT INTO SineDialer.number (campaignid, phonenumber, status, random_sort) VALUES ('$campaignid','$number','new', '1000')";
+            $sql = "INSERT INTO SineDialer.number (campaignid, phonenumber, status, random_sort) VALUES ('$campaignid','$number','new', '".$random_sort[$number]."')";
             echo $sql."<br />";
+            //flush_now();exit(0);
             $result = mysql_query($sql);
         } else {
             echo "Number <b>$number</b> is already in SmoothTorque (with a status of new)<br />";
