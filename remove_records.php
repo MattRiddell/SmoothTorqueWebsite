@@ -210,7 +210,8 @@ if ($tz_count == 0) {
             echo ".";
             $x++;
             if ($x > 80) {
-                echo "<br />";
+                $x = 0;
+                echo "<br />";                
                 flush();
             }
             mysql_query($sql_entry);
