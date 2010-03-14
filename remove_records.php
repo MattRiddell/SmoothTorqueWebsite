@@ -195,9 +195,14 @@ if ($tz_count == 0) {
 //            print_pre($row);
             $number_1 = ereg_replace("[^0-9]", "", $row['phone_home']);            
             $number_2 = ereg_replace("[^0-9]", "", $row['phone_mobile']);
-            $sql1 = "DELETE FROM SineDialer.number WHERE phonenumber = '$number_1' AND status = 'new'";
-            $sql2 = "DELETE FROM SineDialer.number WHERE phonenumber = '$number_2' AND status = 'new'";
-            echo $sql1."<br />".$sql2."<br />";
+            if (strlen($number_1) > 0) {
+                $sql = "DELETE FROM SineDialer.number WHERE phonenumber = '$number_1' AND status = 'new'";
+                echo $sql."<br />";
+            }
+            if (strlen($number_2) > 0) {
+                $sql = "DELETE FROM SineDialer.number WHERE phonenumber = '$number_2' AND status = 'new'";
+                echo $sql."<br />";
+            }
         }
     }
 }
