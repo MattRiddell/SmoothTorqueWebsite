@@ -56,14 +56,14 @@ if ($level==sha1("level10")){
 
 box_end();
 
-$level=$_COOKIE[level];
+$level=$_COOKIE['level'];
 
 /* If we are an administrator and billing is enabled */
 if ($level==sha1("level100") && $config_values['USE_BILLING'] == "YES" && $config_values['FRONT_PAGE_BILLING'] == "YES") {
-    if (!isset($_GET[size])) {
+    if (!isset($_GET['size'])) {
         $size=144;
     } else {
-        $size = $_GET[size];
+        $size = $_GET['size'];
     }
     mysql_select_db("SineDialer", $link);
     $resultx = mysql_query("select distinct system_billing.groupid, customer.* from system_billing left join customer on system_billing.groupid=customer.campaigngroupid");
@@ -103,7 +103,7 @@ box_end();
 //echo "<br /><br />";
 //$size_x= $size;
 while ($rowx = mysql_fetch_assoc($resultx)) {
-    $result = mysql_query("select max(totalcost) from system_billing where groupid = ".$rowx[groupid]);
+    $result = mysql_query("select max(totalcost) from system_billing where groupid = ".$rowx['groupid']);
     $totalcost[$x] = mysql_result($result,0,0);
     if ($totalcost[$x] > $highest) {
         $highest_array[$x] = $totalcost[$x];
