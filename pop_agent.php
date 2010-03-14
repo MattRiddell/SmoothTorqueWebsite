@@ -55,12 +55,28 @@ if (isset($_POST['reason'])||(isset($_GET['type']) && $_GET['type'] == "in")) {
 } else {
     // Just been popped
 ?>
+    
 <form action="pop_agent.php" method="post">
     <input type="hidden" name="agent" value="<?=$_GET['agent']?>">
     <input type="hidden" name="type" value="<?=$_GET['type']?>">
-    Reason For Signing Out: <input type="text" name="reason">
+    Reason For Signing Out: <input type="text" id="reason" name="reason">
     <input type="submit" value="Sign Out">
     </form>
+    <script language="javascript">
+    
+    function autoLogout ( )
+    {
+        document.getElementById("reason").value = "Unknown";
+        document.forms[0].submit();
+    }
+    <?
+    if ($_GET['type'] == "out") {
+    ?>
+    setTimeout ( "autoLogout()", 30000 );
+    <?
+    }
+    ?>
+    </script>
 <?
 }
 ?>
