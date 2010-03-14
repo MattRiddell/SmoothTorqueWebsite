@@ -182,7 +182,7 @@ if ($tz_count == 0) {
     
     echo "Remove calls with time zones not in ".$tz."<br />";
     
-    $sql = "select phone_home, phone_mobile, from leads, leads_cstm where leads.id = leads_cstm.id_c and leads.deleted = 0 and leads_cstm.time_zone_c not in $tz and (leads.status = '$new_status' or leads.status in $status_left_messages)";
+    $sql = "select phone_home, phone_mobile from leads, leads_cstm where leads.id = leads_cstm.id_c and leads.deleted = 0 and leads_cstm.time_zone_c not in $tz and (leads.status = '$new_status' or leads.status in $status_left_messages)";
     //echo $sql;
     
     $result = mysql_query($sql) or die(mysql_error());
