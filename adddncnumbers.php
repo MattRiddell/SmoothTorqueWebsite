@@ -21,7 +21,7 @@ if (1) {
     <br />
     This may take some time...
 </div>                  <?/*for ($i=$_POST[start];$i<=$_POST[end];$i++){       */
-    $split= split("\n",$_POST[start]);
+    $split= explode("\n",$_POST[start]);
     foreach ($split as $number){
         //$myarray[$count]=$i;
         if (strlen($number>0)){

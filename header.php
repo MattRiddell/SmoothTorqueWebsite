@@ -295,7 +295,7 @@ mysql_select_db("SineDialer", $link);
 $loggedin=true;
 $myPage=$_SERVER['PHP_SELF'];
 //echo $myPage;
-$url_split = split("/",$myPage);
+$url_split = explode("/",$myPage);
 //echo sizeof($url_split);
 $myPage = "/".$url_split[sizeof($url_split)-1];
 if ($myPage != $_SERVER['PHP_SELF']) {
