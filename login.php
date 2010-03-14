@@ -34,7 +34,7 @@ $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[u
 $result=mysql_query($sql, $link) or die(mysql_error());
 
 /* Try to load the password information from the database for that user */
-$sql = 'SELECT password, security, interface_type FROM customer WHERE username=\''.$_POST[user].'\'';
+$sql = 'SELECT password, security, interface_type FROM customer WHERE username=\''.$_POST['user'].'\'';
 $result=mysql_query($sql, $link);
 if (mysql_num_rows($result) > 0) {
     $dbpass=mysql_result($result,0,'password');
@@ -50,7 +50,7 @@ if (trim($dbpass)!=trim($passwordHash)){
 	/***************************************************/
 	/* If the password does not match clear the cookie */
     setcookie("loggedin","--",0,"/");
-    setcookie("user",$_POST[user],0,"/");
+    setcookie("user",$_POST['user'],0,"/");
     
     /* Log to the database that someone had an unsuccessful login attempt */
     $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Unuccessful login')";
@@ -64,13 +64,13 @@ if (trim($dbpass)!=trim($passwordHash)){
 	/* CORRECT PASSWORD                                */
 	/***************************************************/
 	/* If the passwords do match set some cookies*/
-    setcookie("loggedin",sha1("LoggedIn".$_POST[user]),0,"/");
-    setcookie("user",$_POST[user],0,"/");
-    setcookie("language",$_POST[language],0,"/");
+    setcookie("loggedin",sha1("LoggedIn".$_POST['user']),0,"/");
+    setcookie("user",$_POST['user'],0,"/");
+    setcookie("language",$_POST['language'],0,"/");
 
     /* Check if the url and the language has settings available */
-    $url = $_SERVER[SERVER_NAME];
-    $sql = "SELECT * FROM web_config WHERE LANG=".sanitize($_POST[language])." AND url = ".sanitize($url);
+    $url = $_SERVER['SERVER_NAME'];
+    $sql = "SELECT * FROM web_config WHERE LANG=".sanitize($_POST['language'])." AND url = ".sanitize($url);
     $result_url = mysql_query($sql);
     
     /* If there are no settings for this url and language, just use the default settings */
@@ -96,13 +96,13 @@ if (trim($dbpass)!=trim($passwordHash)){
     $result=mysql_query($sql, $link);
     
     /* Either redirect to where we were sent to, or we redirect to main.php */
-    if (strlen($_GET[redirect]) > 0) {
+    if (strlen($_GET['redirect']) > 0) {
     	/* TODO: this needs to be sanitized so that someone can't be fooled int a cross site */
     	/* attack.  At the moment, if someone sent you to a url like:                        */
     	/* http://call.venturevoip.com/login.php?redirect=http://badsite.com                 */
     	/* Then you could be tricked into thinking you were at call.venturevoip.com but      */
     	/* actually be sent to badsite.com.                                                  */
-    	header("Location: ".$_GET[redirect]);
+    	header("Location: ".$_GET['redirect']);
     } else {
     	/* Now we need to decide where to redirect. Our choices are currently the standard   */
     	/* interface, the message broadcasting interface, and the predictive dialing or call */
