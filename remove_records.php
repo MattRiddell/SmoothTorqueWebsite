@@ -182,7 +182,7 @@ if ($tz_count == 0) {
     
     echo "Remove calls with time zones not in ".$tz."<br />";
     
-    $sql = "select leads.id, phone_home, phone_mobile, st_calls_c, status, lead_source, date_entered from leads, leads_cstm where leads.id = leads_cstm.id_c and leads_cstm.st_calls_c > 0 and leads.deleted = 0 and leads_cstm.time_zone_c not in $tz and (leads.status = '$new_status' or leads.status in $status_left_messages)";
+    $sql = "select phone_home, phone_mobile, from leads, leads_cstm where leads.id = leads_cstm.id_c and leads.deleted = 0 and leads_cstm.time_zone_c not in $tz and (leads.status = '$new_status' or leads.status in $status_left_messages)";
     //echo $sql;
     
     $result = mysql_query($sql) or die(mysql_error());
@@ -192,7 +192,12 @@ if ($tz_count == 0) {
         echo "No numbers for now";
     } else {
         while ($row = mysql_fetch_assoc($result)) {
-            print_pre($row);
+//            print_pre($row);
+            $number_1 = ereg_replace("[^0-9]", "", $row['phone_home']);            
+            $number_2 = ereg_replace("[^0-9]", "", $row['phone_mobile']);
+            $sql1 = "DELETE FROM SineDialer.number WHERE phonenumber = '$number_1' AND status = 'new'";
+            $sql2 = "DELETE FROM SineDialer.number WHERE phonenumber = '$number_2' AND status = 'new'";
+            echo $sql1."<br />".$sql2."<br />";
         }
     }
 }
