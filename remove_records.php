@@ -191,18 +191,21 @@ if ($tz_count == 0) {
     if (mysql_num_rows($result) == 0) {
         echo "No numbers for now";
     } else {
+        $sql = array();
         while ($row = mysql_fetch_assoc($result)) {
 //            print_pre($row);
             $number_1 = ereg_replace("[^0-9]", "", $row['phone_home']);            
             $number_2 = ereg_replace("[^0-9]", "", $row['phone_mobile']);
             if (strlen($number_1) > 0) {
-                $sql = "DELETE FROM SineDialer.number WHERE phonenumber = '$number_1' AND status = 'new'";
-                echo $sql."<br />";
+                $sql[] = "DELETE FROM SineDialer.number WHERE phonenumber = '$number_1' AND status = 'new'";
             }
             if (strlen($number_2) > 0) {
-                $sql = "DELETE FROM SineDialer.number WHERE phonenumber = '$number_2' AND status = 'new'";
-                echo $sql."<br />";
+                $sql[] = "DELETE FROM SineDialer.number WHERE phonenumber = '$number_2' AND status = 'new'";
             }
+        }
+        include "/".$current_directory."/admin/db_config.php";
+        foreach ($sql as $sql_entry) {
+            mysql_query($sql_entry);
         }
     }
 }
