@@ -197,10 +197,10 @@ if ($tz_count == 0) {
             $number_1 = ereg_replace("[^0-9]", "", $row['phone_home']);            
             $number_2 = ereg_replace("[^0-9]", "", $row['phone_mobile']);
             if (strlen($number_1) > 0) {
-                $sql[] = "DELETE FROM SineDialer.number WHERE phonenumber = '$number_1' AND status = 'new'";
+                $sql[] = "DELETE FROM SineDialer.number WHERE phonenumber = '$number_1' AND status != 'unknown' and status !='dialing'";
             }
             if (strlen($number_2) > 0) {
-                $sql[] = "DELETE FROM SineDialer.number WHERE phonenumber = '$number_2' AND status = 'new'";
+                $sql[] = "DELETE FROM SineDialer.number WHERE phonenumber = '$number_2' AND status != 'unknown' and status !='dialing'";
             }
         }
         include "/".$current_directory."/admin/db_config.php";
