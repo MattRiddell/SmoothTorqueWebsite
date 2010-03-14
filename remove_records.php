@@ -204,9 +204,18 @@ if ($tz_count == 0) {
             }
         }
         include "/".$current_directory."/admin/db_config.php";
+        echo "Removing ".count($sql)." records<br />";
+        $x = 0;    
         foreach ($sql as $sql_entry) {
+            echo ".";
+            $x++;
+            if ($x > 80) {
+                echo "<br />";
+                flush();
+            }
             mysql_query($sql_entry);
         }
+        echo "<br />Done";
     }
 }
 
