@@ -346,7 +346,7 @@ if ($tz_count == 0) {
                         
                         $entered = strtotime($row['date_entered']);
                         $now = time();
-                        date_default_timezone_set("US/PACIFIC");
+                        date_default_timezone_set("System/Local");
                         //echo "Now: $now Enterred: $entered Seconds ago: ".($now-$entered)."<br />";
                         
                         $random_sort[$number] = $now - $entered;
