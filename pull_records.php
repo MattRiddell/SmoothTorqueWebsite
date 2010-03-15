@@ -342,8 +342,11 @@ if ($tz_count == 0) {
                             // Not urgent Source
                         }
                         
+                        date_default_timezone_set("UTC");
+                        
                         $entered = strtotime($row['date_entered']);
                         $now = time();
+                        date_default_timezone_set("US/Pacific");
                         //echo "Now: $now Enterred: $entered Seconds ago: ".($now-$entered)."<br />";
                         
                         $random_sort[$number] = $now - $entered;
