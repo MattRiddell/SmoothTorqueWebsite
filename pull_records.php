@@ -315,7 +315,7 @@ if ($tz_count == 0) {
                             //echo "Last call was $hours_ago hours ago (i.e. more than 3 hours) - ";
                             $call = true;
                         } else {
-                            echo "Last call was too recent ($hours_ago hours ago)<br />";
+                            echo "Last call to $number was too recent ($hours_ago hours ago)<br />";
                             $my_sqls[] = "DELETE FROM SineDialer.number WHERE phonenumber = '$number' and status = 'new'";
                             $call = false;
                         }
