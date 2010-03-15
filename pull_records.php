@@ -300,6 +300,7 @@ if ($tz_count == 0) {
                     // Mobile set
                     $number = $phone_mobile;
                 }
+                $number = ereg_replace("[^0-9]", "", $number );
                 $call = false;
                 
                 $result_x = mysql_query("SELECT event_datetime from st_calls WHERE id = ".sanitize($row['id'])." order by event_datetime desc limit 1");
