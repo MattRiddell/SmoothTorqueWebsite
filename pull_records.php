@@ -283,7 +283,7 @@ if ($tz_count == 0) {
                 //echo "Done ".$done."/".$row['st_calls_c']." for the day - ";
                 $phone_home = trim($row['phone_home']);
                 $phone_mobile = trim($row['phone_home']);
-                
+                unset($number);
                 if (strlen($phone_home) > 0 && strlen($phone_mobile) > 0) {
                     // Both set
                     $rand = rand(0,1);
@@ -300,75 +300,76 @@ if ($tz_count == 0) {
                     // Mobile set
                     $number = $phone_mobile;
                 }
-                $number = ereg_replace("[^0-9]", "", $number );
-                $call = false;
-                
-                $result_x = mysql_query("SELECT event_datetime from st_calls WHERE id = ".sanitize($row['id'])." order by event_datetime desc limit 1");
-                if (mysql_num_rows($result_x) > 0) {
-                    // Have a previous call
-                    $last_call = mysql_result($result_x,0,0);
-                    $last_time = strtotime($last_call);
-                    $hours_ago = round((($time_now - $last_time)/60/60),2);
-                    //echo "Last Call: $last_time vs $time_now (".$last_call.") for $number ($hours_ago hours ago)<br />";                
-                    if ($hours_ago > 3) {
-                        //echo "Last call was $hours_ago hours ago (i.e. more than 3 hours) - ";
+                if (isset($number)) {
+                    $number = ereg_replace("[^0-9]", "", $number );
+                    $call = false;
+                    
+                    $result_x = mysql_query("SELECT event_datetime from st_calls WHERE id = ".sanitize($row['id'])." order by event_datetime desc limit 1");
+                    if (mysql_num_rows($result_x) > 0) {
+                        // Have a previous call
+                        $last_call = mysql_result($result_x,0,0);
+                        $last_time = strtotime($last_call);
+                        $hours_ago = round((($time_now - $last_time)/60/60),2);
+                        echo "Last Call: $last_time vs $time_now (".$last_call.") for $number ($hours_ago hours ago)<br />";                
+                        if ($hours_ago > 3) {
+                            //echo "Last call was $hours_ago hours ago (i.e. more than 3 hours) - ";
+                            $call = true;
+                        } else {
+                            //echo "Last call was too recent<br />";
+                            $call = false;
+                        }
+                    } else {
+                        //echo "No last call for $number - ";
                         $call = true;
-                    } else {
-                        //echo "Last call was too recent<br />";
-                        $call = false;
                     }
-                } else {
-                    //echo "No last call for $number - ";
-                    $call = true;
-                }
-                // Do call this number
-                if ($call) {
-                    $result_tier = mysql_query("SELECT st_tier_c FROM leads_cstm WHERE id_c = ".sanitize($row['id'])) or die (mysql_error());
-                    $tier = mysql_result($result_tier,0,0);
-                    //echo "Sending across $number to tier $tier<br />";
-                    $numbers[$tier][] = $number;
-                    
-                    $sql = "select count(*) from st_vm where id = ".sanitize($row['id'])." and date(event_datetime) = CURDATE()";
-                    
-                    $result_z = mysql_query($sql) or die(mysql_error());
-                    $count_today = mysql_result($result_z,0,0);                    
-                    
-                    
-                    
-                    if (in_array($row['lead_source'],$urgent_sources)) {
-                        // Urgent Source
-                    } else {
-                        // Not urgent Source
+                    // Do call this number
+                    if ($call) {
+                        $result_tier = mysql_query("SELECT st_tier_c FROM leads_cstm WHERE id_c = ".sanitize($row['id'])) or die (mysql_error());
+                        $tier = mysql_result($result_tier,0,0);
+                        //echo "Sending across $number to tier $tier<br />";
+                        $numbers[$tier][] = $number;
+                        
+                        $sql = "select count(*) from st_vm where id = ".sanitize($row['id'])." and date(event_datetime) = CURDATE()";
+                        
+                        $result_z = mysql_query($sql) or die(mysql_error());
+                        $count_today = mysql_result($result_z,0,0);                    
+                        
+                        
+                        
+                        if (in_array($row['lead_source'],$urgent_sources)) {
+                            // Urgent Source
+                        } else {
+                            // Not urgent Source
+                        }
+                        
+                        $entered = strtotime($row['date_entered']);
+                        $now = time();
+                        //echo "Now: $now Enterred: $entered Seconds ago: ".($now-$entered)."<br />";
+                        
+                        $random_sort[$number] = $now - $entered;
+                        
+                        //exit(0);
+                        
+                        $sql = "select st_vm_c from leads_cstm where id_c = ".sanitize($row['id']);
+                        
+                        $result_z = mysql_query($sql) or die(mysql_error());
+                        $required_today = mysql_result($result_z,0,0);
+                        
+                        
+                        //exit(0);
+                        //$msg = "&msg=";
+                        
+                        if ($count_today < $required_today) {
+                            $leave_vm[$number] = 1;
+                        } else {
+                            $leave_vm[$number] = 0;
+                        }
+                        
+                        //echo "Leave_vm: $leave_vm[$number]";
+                        
                     }
-                    
-                    $entered = strtotime($row['date_entered']);
-                    $now = time();
-                    //echo "Now: $now Enterred: $entered Seconds ago: ".($now-$entered)."<br />";
-                    
-                    $random_sort[$number] = $now - $entered;
-                    
-                    //exit(0);
-                    
-                    $sql = "select st_vm_c from leads_cstm where id_c = ".sanitize($row['id']);
-                    
-                    $result_z = mysql_query($sql) or die(mysql_error());
-                    $required_today = mysql_result($result_z,0,0);
-                    
-                    
-                    //exit(0);
-                    //$msg = "&msg=";
-                    
-                    if ($count_today < $required_today) {
-                        $leave_vm[$number] = 1;
-                    } else {
-                        $leave_vm[$number] = 0;
-                    }
-                    
-                    //echo "Leave_vm: $leave_vm[$number]";
-                    
                 }
             }
-            
             // Find last call for this id
             
             
@@ -402,7 +403,7 @@ foreach ($numbers as $tier=>$values) {
             $sqlx = "SELECT count(*) FROM SineDialer.number WHERE phonenumber = '$number'";
             
             $result = mysql_query($sqlx) or die(mysql_error());
-//            echo "Sending Tier $tier Number $number Leave_VM: ".$leave_vm[$number]."<br />";
+            //            echo "Sending Tier $tier Number $number Leave_VM: ".$leave_vm[$number]."<br />";
             if (mysql_result($result,0,0) > 0) {
                 $result = mysql_query("DELETE FROM SineDialer.number WHERE phonenumber = '$number'");
             }
