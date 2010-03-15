@@ -316,6 +316,7 @@ if ($tz_count == 0) {
                             $call = true;
                         } else {
                             echo "Last call was too recent ($hours_ago hours ago)<br />";
+                            $my_sqls[] = "DELETE FROM SineDialer.number WHERE phonenumber = '$number' and status = 'new'";
                             $call = false;
                         }
                     } else {
@@ -390,14 +391,17 @@ flush_now();
  */
 
 //print_pre($numbers);
-
+include "/".$current_directory."/admin/db_config.php";
+foreach ($my_sqls as $sql) {
+    mysql_query($sql);
+}
 foreach ($numbers as $tier=>$values) {
     //    echo "Tier $tiers: ";
     //    print_pre($values);
     foreach ($values as $number) {
         
         $number = ereg_replace("[^0-9]", "", $number );
-        include "/".$current_directory."/admin/db_config.php";
+        
         
         $sqlx = "SELECT count(*) FROM SineDialer.number WHERE phonenumber = '$number' and status = 'new'";
         
