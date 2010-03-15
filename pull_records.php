@@ -310,12 +310,12 @@ if ($tz_count == 0) {
                         $last_call = mysql_result($result_x,0,0);
                         $last_time = strtotime($last_call);
                         $hours_ago = round((($time_now - $last_time)/60/60),2);
-                        echo "Last Call: $last_time vs $time_now (".$last_call.") for $number ($hours_ago hours ago)<br />";                
+                        //echo "Last Call: $last_time vs $time_now (".$last_call.") for $number ($hours_ago hours ago)<br />";                
                         if ($hours_ago > 3) {
                             //echo "Last call was $hours_ago hours ago (i.e. more than 3 hours) - ";
                             $call = true;
                         } else {
-                            //echo "Last call was too recent<br />";
+                            echo "Last call was too recent ($hours_ago hours ago)<br />";
                             $call = false;
                         }
                     } else {
@@ -346,7 +346,7 @@ if ($tz_count == 0) {
                         
                         $entered = strtotime($row['date_entered']);
                         $now = time();
-                        date_default_timezone_set("US/Pacific");
+                        date_default_timezone_set("US/PACIFIC");
                         //echo "Now: $now Enterred: $entered Seconds ago: ".($now-$entered)."<br />";
                         
                         $random_sort[$number] = $now - $entered;
