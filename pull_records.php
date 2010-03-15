@@ -239,7 +239,11 @@ for ($i = 0;$i < count($tz_db_start);$i++) {
         echo " Start time right";
         if ($tz_end >= $time_now) {
             echo " End time right ";
-            $tz.=sanitize($tz_name).",";
+            if ($tz_name == "UNSET") {
+                $tz.="NULL,'',";
+            } else {
+                $tz.=sanitize($tz_name).",";
+            }
             $tz_count++;
         } else {
             echo " End time <b>not</b> right ";
