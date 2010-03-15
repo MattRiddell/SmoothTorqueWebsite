@@ -265,7 +265,7 @@ if ($tz_count == 0) {
     /*
      2. We look at the records which have these timezones, and have had less calls than there are in the st_calls_c column and have not had a call in the past 3 hours
      */
-    $sql = "select leads.id, phone_home, phone_mobile, st_calls_c, status, lead_source, date_entered from leads, leads_cstm where leads.id = leads_cstm.id_c and leads_cstm.st_calls_c > 0 and leads.deleted = 0 and leads_cstm.time_zone_c in $tz and (leads.status = '$new_status' or leads.status in $status_left_messages)";
+    $sql = "select leads.id, phone_home, phone_mobile, st_calls_c, status, lead_source, CONVERT_TZ(date_entered, 'GMT', 'US/Pacific') as date_entered from leads, leads_cstm where leads.id = leads_cstm.id_c and leads_cstm.st_calls_c > 0 and leads.deleted = 0 and leads_cstm.time_zone_c in $tz and (leads.status = '$new_status' or leads.status in $status_left_messages)";
     //echo $sql;
     
     $result = mysql_query($sql) or die(mysql_error());
