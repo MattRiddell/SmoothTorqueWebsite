@@ -19,14 +19,15 @@
             }        $messageid2=($_POST['messageid2']);
             $messageid3=($_POST['messageid3']);
             $modein=($_POST['mode']);
+            $maxagents=($_POST['agents']);
             if ($modein == "mode_queue"){
                 $mode = 1;
                 $astqueuename=($_POST['astqueuename']);
+                $maxagents=0;
             } else {
                 $mode = 0;
                 $astqueuename=NULL;
             }
-            $maxagents=($_POST['agents']);
             $evergreen=($_POST['evergreen']);
             $did=($_POST['did']);
             $clid=($_POST['clid']);
@@ -137,7 +138,7 @@
 <td class="thead" width=200><label for="agents">Maximum Connected Calls:
 <a href="#" onclick="displaySmallMessage('includes/help.php?section=This is the number of concurrent calls you would like to receive on the call center number specified.  <br /><br />Normally this will be the number of staff you have.');return false" title="The number of concurrent calls to be put through to the call center"><img src="images/help.png" border="0"></a>
 </label></td>
-<td width=*><input type="text" name="agents" id="agents" size="28" value="30"></td>
+<td width=*><input type="text" name="agents" id="agents" size="28" value="0"></td>
 </tr>
 <?
     if ($_COOKIE[level] == sha1("level100")) {

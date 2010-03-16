@@ -24,14 +24,17 @@ if (isset($_POST[name])){
     $messageid2 = sanitize($_POST['messageid2']);
     $messageid3 = sanitize($_POST['messageid3']);
     $modein = $_POST['mode'];
+    $maxagents = sanitize($_POST['agents']);
     if ($modein == "mode_queue"){
         $mode = 1;
         $astqueuename = sanitize($_POST['astqueuename']);
+        $maxagents=0;
+        
     } else {
         $mode = 0;
         $astqueuename = sanitize(NULL);
+        
     }
-    $maxagents = sanitize($_POST['agents']);
     $did = sanitize($_POST['did']);
     $clid = sanitize($_POST['clid']);
     $trclid = sanitize($_POST['trclid']);
