@@ -64,8 +64,13 @@ if ($show_front_page_text == "1") {
 echo $config_values['TEXT'];?>        <br /><br />
 <?}?>
 </font>
-<?box_start();?>
-            <table align="center" width="300" height="200" cellpadding="0" cellspacing="0">
+
+
+<?//box_start();
+?>
+
+
+            <table align="center" width="390" height="217" cellpadding="0" cellspacing="0" style="background: url('./images/login.png');">
             <tr><td>
 <?
 if (isset($_GET['error'])){
@@ -99,7 +104,11 @@ if (mysql_num_rows($result) > 0) {
         </TABLE>
     </CENTER>
 </FORM>
-<?box_end();?>
+
+
+
+<?//box_end();
+?>
 
 <?
 require "footer.php";
