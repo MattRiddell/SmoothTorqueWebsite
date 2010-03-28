@@ -35,12 +35,19 @@ if (isset($_POST[name])){
         $astqueuename = sanitize(NULL);
         
     }
+    if (isset($_POST['drive_min'])) {
+        $drive_min = sanitize($_POST['drive_min']);
+        $drive_max = sanitize($_POST['drive_max']);
+    } else {
+        $drive_min = sanitize("43.0");
+        $drive_max = sanitize("61.0");
+    }
     $did = sanitize($_POST['did']);
     $clid = sanitize($_POST['clid']);
     $trclid = sanitize($_POST['trclid']);
     $evergreen = sanitize($_POST['evergreen']);
     $sql = "UPDATE campaign SET name=$name, description=$description, messageid=$messageid, messageid2=$messageid2, messageid3=$messageid3,
-            mode=$mode, astqueuename=$astqueuename, did=$did, maxagents=$maxagents, clid=$clid, trclid=$trclid, context=$context, evergreen=$evergreen WHERE id=$id";
+            mode=$mode, astqueuename=$astqueuename, did=$did, maxagents=$maxagents, clid=$clid, trclid=$trclid, context=$context, evergreen=$evergreen, drive_min=$drive_min, drive_max = $drive_max WHERE id=$id";
     if (isset($_GET['debug'])) {
         echo $sql;
         exit(0);
@@ -136,6 +143,21 @@ if (mysql_num_rows($result) > 0) {
 
 <?
     }
+if ($config_values['configurable_drive'] == 1) {
+    ?>
+    
+    <TR title="Configurable Drive"><TD CLASS="thead">Configurable Drive
+    
+    <a href="#" onclick="displaySmallMessage('includes/help.php?section=Provide SmoothTorque with a different value for intensity. Lower values will make campaigns slower, higher values will cause more overs');return false"><img src="images/help.png" border="0"></a>
+    </TD><TD>
+    Minimum Drive (Default 43.0) <input type="text" name="drive_min" value="<?=$row['drive_min']?>"><br />
+    Maximum Drive (Default 61.0) <input type="text" name="drive_max" value="<?=$row['drive_max']?>">
+    
+    
+    </TD>
+    </TR>
+    <?
+}
     ?>
 
 

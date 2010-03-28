@@ -1278,7 +1278,34 @@
                         $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added campaign cost field')";
                         $result=mysql_query($sql, $link);
                     }
-                    
+
+            if (!in_array('drive_min', $field_array))
+            {
+                $result = mysql_query('ALTER TABLE campaign ADD drive_min VARCHAR(10) DEFAULT "43.0"');
+                $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added drive_min field')";
+                $result=mysql_query($sql, $link);
+            }
+            if (!in_array('drive_max', $field_array))
+            {
+                $result = mysql_query('ALTER TABLE campaign ADD drive_max VARCHAR(10) DEFAULT "61.0"');
+                $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added drive_max field')";
+                $result=mysql_query($sql, $link);
+            }
+            unset($field_array);
+            $result = mysql_query("SHOW COLUMNS FROM SineDialer.queue");
+            $columns = mysql_num_rows($result) or die(mysql_error());
+            for ($i = 0; $i < $columns; $i++) {
+                $field_array[] = mysql_result($result, $i, "Field");
+            }		
+            if (!in_array('drive_min', $field_array))
+            {
+                $result = mysql_query('ALTER TABLE queue ADD drive_min VARCHAR(10) DEFAULT "43.0"');
+                $result = mysql_query('ALTER TABLE queue ADD drive_max VARCHAR(10) DEFAULT "61.0"');
+                $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added queue drive fields')";
+                $result=mysql_query($sql, $link);
+            }
+            
+            
                     /*****************************************************************
                      *           ALTER customer TABLE TO ADD astqueuename FIELD       *
                      ******************************************************************/

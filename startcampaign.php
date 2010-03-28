@@ -230,14 +230,21 @@ if (mysql_num_rows($result) > 0) {
 } else {
     $expected_rate = 100;
 }
+if (isset($_GET['drive_min'])) {
+    $drive_min = $_GET['drive_min'];
+    $drive_max = $_GET['drive_max'];
+} else {
+    $drive_min = "43.0";
+    $drive_max = "61.0";
+}
 
 $sql2="INSERT INTO queue (campaignid,queuename,status,details,flags,transferclid,
     starttime,endtime,startdate,enddate,did,clid,context,maxcalls,maxchans,maxretries
-    ,retrytime,waittime,trunk,astqueuename, accountcode, trunkid, customerID, maxcps, mode, expectedRate) VALUES
+    ,retrytime,waittime,trunk,astqueuename, accountcode, trunkid, customerID, maxcps, mode, expectedRate, drive_min, drive_max) VALUES
     ('$_GET[id]','autostart-$_GET[id]','1','No details','0','$_GET[trclid]',
     '00:00','23:59','2005-01-01','2020-01-01','$did','$_GET[clid]',
     '$_GET[context]','$_GET[agents]','$maxchans','0'
-    ,'0','30','".$dialstring."','$_GET[astqueuename]','stl-".$username."','$trunkid','$campaigngroupid','$maxcps','$mode', '$expected_rate') ";
+    ,'0','30','".$dialstring."','$_GET[astqueuename]','stl-".$username."','$trunkid','$campaigngroupid','$maxcps','$mode', '$expected_rate','$drive_min','$drive_max') ";
 //    echo $sql2;
 //exit(0);
 //echo $sql2;

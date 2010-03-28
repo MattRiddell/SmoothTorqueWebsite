@@ -287,7 +287,13 @@ if (mysql_num_rows($result) > 0) {
         $config_values['vm_31_60'] = mysql_result($result,0,'value');
     }
     
-    
+    $sql = 'SELECT value FROM config WHERE parameter=\'configurable_drive\'';
+    $result=mysql_query($sql, $link) or die (mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        $config_values['configurable_drive'] = mysql_result($result,0,'value');
+    } else {
+        $config_values['configurable_drive'] = "NO";
+    }
 
 mysql_select_db("SineDialer", $link);
 

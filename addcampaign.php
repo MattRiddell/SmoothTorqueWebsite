@@ -32,7 +32,14 @@
             $did=($_POST['did']);
             $clid=($_POST['clid']);
             $trclid=($_POST['trclid']);
-            $sql="INSERT INTO campaign (groupid,name,description,messageid,messageid2,messageid3,mode,astqueuename,did,maxagents,clid,trclid,context,evergreen) VALUES ('$campaigngroupid','$name', '$description', '$messageid','$messageid2','$messageid3','$mode','$astqueuename','$did','$maxagents','$clid','$trclid','$context','$evergreen')";
+            if (isset($_POST['drive_min'])) {
+                $drive_min = $_POST['drive_min'];
+                $drive_max = $_POST['drive_max'];
+            } else {
+                $drive_min = "43.0";
+                $drive_max = "61.0";
+            }
+            $sql="INSERT INTO campaign (groupid,name,description,messageid,messageid2,messageid3,mode,astqueuename,did,maxagents,clid,trclid,context,evergreen,drive_min,drive_max) VALUES ('$campaigngroupid','$name', '$description', '$messageid','$messageid2','$messageid3','$mode','$astqueuename','$did','$maxagents','$clid','$trclid','$context','$evergreen','$drive_min','$drive_max')";
             //    echo $sql;
             $result=mysql_query($sql, $link) or die (mysql_error());;
             /*================= Log Access ======================================*/
@@ -52,6 +59,8 @@
 <FORM ACTION="addcampaign.php" METHOD="POST" id="addcampaign">
 <table class="tborder" align="center" border="0" cellpadding="0" cellspacing="2">
 <?
+$row['drive_min'] = "43.0";
+$row['drive_max'] = "61.0";
     ?>
 
 <!-- Campaign Name -->
@@ -90,6 +99,21 @@
 
 <?
     }
+if ($config_values['configurable_drive'] == 1) {
+    ?>
+    
+    <TR title="Configurable Drive"><TD CLASS="thead">Configurable Drive
+    
+    <a href="#" onclick="displaySmallMessage('includes/help.php?section=Provide SmoothTorque with a different value for intensity. Lower values will make campaigns slower, higher values will cause more overs');return false"><img src="images/help.png" border="0"></a>
+    </TD><TD>
+    Minimum Drive (Default 43.0) <input type="text" name="drive_min" value="<?=$row['drive_min']?>"><br />
+    Maximum Drive (Default 61.0) <input type="text" name="drive_max" value="<?=$row['drive_max']?>">
+    
+    
+    </TD>
+    </TR>
+    <?
+}
     ?>
 
 <!-- Campaign Mode -->

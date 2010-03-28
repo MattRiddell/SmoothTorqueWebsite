@@ -161,6 +161,9 @@ if ($level!=sha1("level100")) {
         $sql = "REPLACE INTO config (parameter, value) VALUES ('sugar_db',".sanitize($_POST['sugar_db']).")";
         mysql_query($sql) or die(mysql_error());
         
+        $sql = "REPLACE INTO config (parameter, value) VALUES ('configurable_drive',".sanitize($_POST['configurable_drive']).")";
+        mysql_query($sql) or die(mysql_error());
+        
         
         
         /*
@@ -301,6 +304,9 @@ if ($level!=sha1("level100")) {
     } else {
         $config_values['EVERGREEN'] = "NO";
     }
+    
+    
+    
     
     
     
@@ -1437,9 +1443,18 @@ Language:
     </tr>
     
     
-    
-    
-    
+    <tr  class="tborder2">
+    <td>
+    Provide Configurable Drive:<br />
+    <i>(<font color="red">WARNING:</font> configurable drive is an incredibly<br> powerful feature and should be used carefully)</i>
+    </td>
+    <td>
+    <select name="configurable_drive">
+    <option value="1" <?if ($config_values['configurable_drive'] == 1) echo "selected";?>>Yes</option>
+    <option value="0" <?if ($config_values['configurable_drive'] != 1) echo "selected";?>>No</option>
+    </select>
+    </td>
+    </tr>
     
     
     <tr  class="tborder2">
