@@ -744,7 +744,7 @@ if ($level!=sha1("level100")) {
     Background Colour:
     </td>
     <td>
-    <script language=JavaScript src="/js/picker.js"></script>
+    <script language=JavaScript src="js/picker.js"></script>
     <input type="Text" name="colour" value="<?echo $config_values['COLOUR'];?>">
     <a href="javascript:TCP.popup(document.forms['config'].elements['colour'], 1)"><img width="15" height="13" border="0" alt="Click Here to Pick up the color" src="img/sel.gif"></a>
     
@@ -756,7 +756,6 @@ if ($level!=sha1("level100")) {
     Date/Time Colour:
     </td>
     <td>
-    <script language=JavaScript src="/js/picker.js"></script>
     <input type="Text" name="DATE_COLOUR" value="<?echo $config_values['DATE_COLOUR'];?>">
     <a href="javascript:TCP.popup(document.forms['config'].elements['DATE_COLOUR'], 1)"><img width="15" height="13" border="0" alt="Click Here to Pick the color" src="img/sel.gif"></a>
     
