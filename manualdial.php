@@ -106,9 +106,10 @@ while ($row = mysql_fetch_assoc($result)) {
     $rows[$x] = $row;
     $x++;
 }
+    if (sizeof($numbers) == 0) {
+        echo "There are no numbers available for this campaign - please ask your supervisor to initialise the campaign for manual dialling";
+    } else {
 $random = (rand()%sizeof($numbers));
-//echo $random." entry is ".$numbers[$random]."<br />";
-//$result = mysql_query("INSERT INTO number (campaignid, phonenumber, status) VALUES ($_POST[campaignid],'$numbers[$random]','new')") or die(mysql_error());
 $result = mysql_query("SELECT * FROM campaign WHERE id = $_POST[campaignid]") or die(mysql_error());
 $row = mysql_fetch_assoc($result);
 ?>
@@ -122,6 +123,7 @@ $row = mysql_fetch_assoc($result);
 </div>
 
 <?
+    }
 //print_r($rows[$x]);
 }?>
 
