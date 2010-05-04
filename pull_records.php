@@ -126,7 +126,17 @@ $link = mysql_connect($db_host, $db_user, $db_pass) OR die(mysql_error());
 mysql_select_db($config_values['SUGAR_DB'], $link);
 
 
-$result = mysql_query("SELECT id, name FROM lc_customstatus WHERE name like 'CA - Left Message%'");
+// ============================ STATUSES WHICH SHOULD BE CALLED ============================
+// ============================ STATUSES WHICH SHOULD BE CALLED ============================
+// ============================ STATUSES WHICH SHOULD BE CALLED ============================
+
+$result = mysql_query("SELECT id, name FROM lc_customstatus WHERE name like 'Left Message%' or name like 'Appointment%' or name like 'Callback%' or name like 'Pitched%' or name like 'Quoted%' or name like 'NSF%'");
+
+// ============================ STATUSES WHICH SHOULD BE CALLED ============================
+// ============================ STATUSES WHICH SHOULD BE CALLED ============================
+// ============================ STATUSES WHICH SHOULD BE CALLED ============================
+
+
 $status_left_messages = "(";
 $statuse_names = array();
 while ($row = mysql_fetch_assoc($result)) {
@@ -270,7 +280,7 @@ if ($tz_count == 0) {
      2. We look at the records which have these timezones, and have had less calls than there are in the st_calls_c column and have not had a call in the past 3 hours
      */
     $sql = "select leads.id, phone_home, phone_mobile, st_calls_c, status, lead_source, CONVERT_TZ(date_entered, 'GMT', 'US/Pacific') as date_entered from leads, leads_cstm where leads.id = leads_cstm.id_c and leads_cstm.st_calls_c > 0 and leads.deleted = 0 and leads_cstm.time_zone_c in $tz and (leads.status = '$new_status' or leads.status in $status_left_messages)";
-    //echo $sql;
+    echo $sql;
     
     $result = mysql_query($sql) or die(mysql_error());
     
@@ -314,9 +324,9 @@ if ($tz_count == 0) {
                         $last_call = mysql_result($result_x,0,0);
                         $last_time = strtotime($last_call);
                         $hours_ago = round((($time_now - $last_time)/60/60),2);
-                        //echo "Last Call: $last_time vs $time_now (".$last_call.") for $number ($hours_ago hours ago)<br />";                
+                        echo "Last Call: $last_time vs $time_now (".$last_call.") for $number ($hours_ago hours ago)<br />";                
                         if ($hours_ago > 3) {
-                            //echo "Last call was $hours_ago hours ago (i.e. more than 3 hours) - ";
+                            echo "Last call to $number was $hours_ago hours ago (i.e. more than 3 hours) - <br />";
                             $call = true;
                         } else {
                             echo "Last call to $number was too recent ($hours_ago hours ago)<br />";
@@ -324,11 +334,12 @@ if ($tz_count == 0) {
                             $call = false;
                         }
                     } else {
-                        //echo "No last call for $number - ";
+                        echo "No last call for $number - ($row[id])<br>";
                         $call = true;
                     }
                     // Do call this number
                     if ($call) {
+			$result_attempt = mysql_query("INSERT INTO st_record_moved (id, event_datetime) VALUES ('".$row['id']."', NOW())");
                         $result_tier = mysql_query("SELECT st_tier_c FROM leads_cstm WHERE id_c = ".sanitize($row['id'])) or die (mysql_error());
                         $tier = mysql_result($result_tier,0,0);
                         //echo "Sending across $number to tier $tier<br />";
@@ -354,7 +365,15 @@ if ($tz_count == 0) {
                         //date_default_timezone_set("System/Local");
                         //echo "Now: $now Enterred: $entered Seconds ago: ".($now-$entered)."<br />";
                         
-                        $random_sort[$number] = $now - $entered;
+                        $sql = "select st_priority_c from leads_cstm where id_c = ".sanitize($row['id']);
+                        
+                        $result_zz = mysql_query($sql) or die(mysql_error());
+                        $random_sort_pri = mysql_result($result_zz,0,0);
+                        
+
+
+                        $random_sort[$number] = $random_sort_pri;
+//                        $random_sort[$number] = $now - $entered;
                         
                         //exit(0);
                         
