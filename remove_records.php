@@ -126,7 +126,7 @@ $link = mysql_connect($db_host, $db_user, $db_pass) OR die(mysql_error());
 mysql_select_db($config_values['SUGAR_DB'], $link);
 
 
-$result = mysql_query("SELECT id, name FROM lc_customstatus WHERE name like 'CA - Left Message%'");
+$result = mysql_query("SELECT id, name FROM lc_customstatus WHERE name like 'Left Message%'");
 $status_left_messages = "(";
 $statuse_names = array();
 while ($row = mysql_fetch_assoc($result)) {
@@ -174,7 +174,8 @@ for ($i = 0;$i < count($tz_db_start);$i++) {
 flush_now();
 if ($tz_count == 0) {
     echo "There are no timezones which should receive calls at the moment<br />";
-    
+        include "/".$current_directory."/admin/db_config.php";
+$result = mysql_query("DELETE FROM SineDialer.number");    
     
     
 } else {
@@ -197,10 +198,10 @@ if ($tz_count == 0) {
             $number_1 = ereg_replace("[^0-9]", "", $row['phone_home']);            
             $number_2 = ereg_replace("[^0-9]", "", $row['phone_mobile']);
             if (strlen($number_1) > 0) {
-                $sql[] = "DELETE FROM SineDialer.number WHERE phonenumber = '$number_1' AND status != 'unknown' and status !='dialing'";
+                $sql[] = "DELETE FROM SineDialer.number WHERE phonenumber = '$number_1'";
             }
             if (strlen($number_2) > 0) {
-                $sql[] = "DELETE FROM SineDialer.number WHERE phonenumber = '$number_2' AND status != 'unknown' and status !='dialing'";
+                $sql[] = "DELETE FROM SineDialer.number WHERE phonenumber = '$number_2'";
             }
         }
         include "/".$current_directory."/admin/db_config.php";
@@ -214,7 +215,7 @@ if ($tz_count == 0) {
                 echo "<br />";                
                 flush();
             }
-            mysql_query($sql_entry);
+            mysql_query($sql_entry) or die(mysql_error());
         }
         echo "<br />Done";
     }
