@@ -105,13 +105,17 @@ $link = mysql_connect($db_host, $db_user, $db_pass) OR die(mysql_error());
 mysql_select_db($config_values['SUGAR_DB'], $link);
 
 
-
+if ($_GET['queue'] == "incoming-appointment" || $_GET['queue'] == "incoming-new") {
+	if (strlen(trim($_GET['number'])) == 0) {
+		$_GET['number'] = $_GET['name'];
+	}
+} else {
 if (substr($_GET['queue'],0,8) == "incoming") {
-       if (isset($_GET['name'])) {
-       $msg= "&msg=Incoming Call From ".$_GET['name'];
-       } else {
-       $msg= "&msg=Incoming Call From ".$_GET['queue'];
-       }
+	if (isset($_GET['name'])) {
+	$msg= "&msg=Incoming Call From ".$_GET['name'];
+	} else {
+	$msg= "&msg=Incoming Call From ".$_GET['queue'];
+	}
 ?>
 <script language="javascript">
 window.location='http://192.168.1.17/sugarcrm/index.php?module=Leads&action=EditView&return_module=Leads&return_action=DetailView&record=<?=$row['id']?><?=$msg?>';
@@ -119,16 +123,25 @@ window.location='http://192.168.1.17/sugarcrm/index.php?module=Leads&action=Edit
 
 <?
 }
+}
+
+
+
+$result = mysql_query("SELECT id FROM ".$config_values['SUGAR_DB'].".leads, ".$config_values['SUGAR_DB'].".leads_cstm WHERE (phone_home = '$_GET[number]' or phone_mobile='$_GET[number]') and leads.id = leads_cstm.id_c order by date_modified DESC limit 1") or die(mysql_error());
+//$result = mysql_query("SELECT id FROM ".$config_values['SUGAR_DB'].".leads, ".$config_values['SUGAR_DB'].".leads_cstm WHERE (phone_home = '$_GET[number]' or phone_mobile='$_GET[number]') and leads.id = leads_cstm.id_c and leads_cstm.st_calls_c > 0 order by date_modified DESC limit 1") or die(mysql_error());
+//SELECT id FROM sugarcrm.leads, sugarcrm.leads_cstm WHERE (phone_home = '$num' or phone_mobile = '$num') and deleted = 0 and sugarcrm.leads.id = sugarcrm.leads_cstm.id_c and sugarcrm.leads_cstm.st_calls_c > 0
 
 
 
 
-$result = mysql_query("SELECT id FROM ".$config_values['SUGAR_DB'].".leads WHERE phone_home = '$_GET[number]' or phone_mobile='$_GET[number]' order by date_modified DESC limit 1");
 
 
 
-
-if (mysql_num_rows($result) > 0) {
+if (mysql_num_rows($result) == 0) {
+$result = mysql_query("SELECT id FROM ".$config_values['SUGAR_DB'].".leads, ".$config_values['SUGAR_DB'].".leads_cstm WHERE (phone_home = '$_GET[number]' or phone_mobile='$_GET[number]') and leads.id = leads_cstm.id_c order by date_modified DESC limit 1");
+} 
+if (false) {
+} else {
         while ($row = mysql_fetch_assoc($result)) {
 
 
@@ -144,18 +157,22 @@ $count_today = mysql_result($result,0,0);
 $sql = "select st_vm_c from leads_cstm where id_c = ".sanitize($row['id']);
 
 $result = mysql_query($sql) or die(mysql_error());
-$required_today = mysql_result($result,0,0);
-
-
-//exit(0);
+if (mysql_num_rows($result) == 0) {
+	$required_today = 1;
+} else {
+	$required_today = mysql_result($result,0,0);
+	if (strlen($require_today) < 1) {
+		$required_today = 1;
+	}
+}
 $msg = "&msg=";
 
 if ($count_today < $required_today) {
-       $vm = "&vm=1";
-       $msg.= "Please leave a voicemail ";
+	$vm = "&vm=1";
+	$msg.= "Please leave a voicemail";
 } else {
-       $vm = "";
-       $msg.= "Don\'t leave a voicemail ";
+	$vm = "";
+	$msg.= "Don\'t leave a voicemail";
 }
 
 
@@ -163,8 +180,10 @@ if ($count_today < $required_today) {
 
 
 
-       $msg.= "";
+	$msg.= "";
+echo "Redirecting to: ";
 ?>
+http://192.168.1.17/sugarcrm/index.php?module=Leads&offset=5&action=DetailView&record=<?=$row['id']?><?=$msg.$vm?>
 <script language="javascript">
 window.location='http://192.168.1.17/sugarcrm/index.php?module=Leads&offset=5&action=DetailView&record=<?=$row['id']?><?=$msg.$vm?>';
 </script>
@@ -175,7 +194,8 @@ window.location='http://192.168.1.17/sugarcrm/index.php?module=Leads&offset=5&ac
 ?>
 
 <?
-        }
+}
+
 }
 }
 ?>
