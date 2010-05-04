@@ -22,7 +22,7 @@ $result = mysql_query($sql);
 $num_numbers = mysql_result($result,0,0);
 //echo $num_numbers;
 //exit(0);
-if ($num_numbers <1) {
+if ($num_numbers <1&& !isset($_GET['debug'])) {
         /* Not enough credit - error and return */
         ?>
         <b>There are no available numbers for this campaign to run - please
