@@ -107,7 +107,7 @@ if (isset($_GET['verify_connection'])) {
     $result = mysql_query("SELECT id FROM lc_customstatus WHERE name = 'new'");
     $new_status = mysql_result($result,0,0);
 
-    $result = mysql_query("SELECT id FROM lc_customstatus WHERE name like 'CA - Left Message%'");
+    $result = mysql_query("SELECT id FROM lc_customstatus WHERE name like 'Left Message%'");
     $status_left_messages = "(";
     while ($row = mysql_fetch_assoc($result)) {
 	$status_left_messages .= sanitize($row['id']).",";
@@ -506,7 +506,7 @@ echo "Home Phone: ".$row['phone_home']." Source: ".$row['lead_source']."<br />";
     }
     ?>
     <form action="sugar_servers.php?urgent=1&save=1" method="post">
-    <b>Urgent Lead Sources: </b><br /><br />
+    <b>Realtime Lead Sources: </b><br /><br />
     <table><tr><td style="text-align: left">
     <?
     foreach ($lead_sources as $source) {
@@ -600,7 +600,7 @@ echo "Home Phone: ".$row['phone_home']." Source: ".$row['lead_source']."<br />";
     
     
     <a href="sugar_servers.php?urgent=1">
-    Urgent Lead Sources
+    Realtime Lead Sources
     </a>
     <br />
     
