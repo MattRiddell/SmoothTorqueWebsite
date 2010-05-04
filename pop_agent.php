@@ -39,7 +39,11 @@ if (isset($_POST['reason'])||(isset($_GET['type']) && $_GET['type'] == "in")) {
         $result = mysql_query("INSERT INTO agents (agent, type) VALUES ($agent, '$type')");
     } else {
         // Logged Out
-        $reason = sanitize($_POST['reason']);
+        if($_POST['reason']=='Other'){
+	        $reason = sanitize($_POST['reason_text']);
+        } else {
+	        $reason = sanitize($_POST['reason']);
+        }
         $agent = sanitize($_POST['agent']);
         $type = "out";
         $result = mysql_query("INSERT INTO agents (agent, type, reason) VALUES ($agent, '$type', $reason)");
@@ -59,14 +63,37 @@ if (isset($_POST['reason'])||(isset($_GET['type']) && $_GET['type'] == "in")) {
 <form action="pop_agent.php" method="post">
     <input type="hidden" name="agent" value="<?=$_GET['agent']?>">
     <input type="hidden" name="type" value="<?=$_GET['type']?>">
-    Reason For Signing Out: <input type="text" id="reason" name="reason">
+    <table border="0" cellpadding="0" cellspacing="0" width="300">
+	    <tr>
+	    	<td colspan="3">Reason For Signing Out:</td>
+	    </tr>
+		<tr>
+			<td><input type="radio" name="reason" id="reason" value="15 Minute Break"></td><td>15 Minute Break<td></td>
+		</tr>     
+		<tr>
+			<td><input type="radio" name="reason" id="reason" value="Lunch"></td><td>Lunch<td></td>
+		</tr>     
+		<tr>
+			<td><input type="radio" name="reason" id="reason" value="End Of Day"></td><td>End Of Day<td></td>
+		</tr>     
+		<tr>
+			<td><input type="radio" name="reason" id="reason" value="Restroom"></td><td>Restroom<td></td>
+		</tr>     
+		<tr>
+			<td><input type="radio" name="reason" id="reason" value="Other">
+			</td>
+			<td>
+				Other<input type="text" id="reason_text" name="reason_text">
+			</td>
+		</tr>
+    </table>
     <input type="submit" value="Sign Out">
     </form>
     <script language="javascript">
     
     function autoLogout ( )
     {
-        document.getElementById("reason").value = "Unknown";
+        //document.getElementById("reason").value = "Unknown";
         document.forms[0].submit();
     }
     <?
