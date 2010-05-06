@@ -379,7 +379,7 @@ if ($loggedin) {
 <TITLE><?echo $config_values['TITLE'];?></TITLE>
 <?
 /* If we are on one of the realtime graph pages we don't want it to be cached */
-if ($self == "/test.php" || $self == "/report.php" || $self == "/servers.php" || $self == "/mysql_stats.php") {?>
+if ($self == "/test.php" || $self == "/report.php" || $self == "/servers.php" || $self == "/mysql_stats.php" || $self == "/config.php") {?>
 <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
 <META HTTP-EQUIV="Expires" CONTENT="-1">
 <?}?>
