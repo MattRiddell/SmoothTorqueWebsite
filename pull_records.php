@@ -130,7 +130,7 @@ mysql_select_db($config_values['SUGAR_DB'], $link);
 // ============================ STATUSES WHICH SHOULD BE CALLED ============================
 // ============================ STATUSES WHICH SHOULD BE CALLED ============================
 
-$result = mysql_query("SELECT id, name FROM lc_customstatus WHERE name like 'Left Message%' or name like 'Appointment%' or name like 'Callback%' or name like 'Pitched%' or name like 'Quoted%' or name like 'NSF%'");
+$result = mysql_query("SELECT id, name FROM lc_customstatus WHERE name like 'Left Message%' or name like 'Appointment%' or name like 'Unable%' or name like 'Callback%' or name like 'Pitched%' or name like 'Quoted%' or name like 'NSF%'");
 
 // ============================ STATUSES WHICH SHOULD BE CALLED ============================
 // ============================ STATUSES WHICH SHOULD BE CALLED ============================
