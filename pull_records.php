@@ -296,7 +296,7 @@ if ($tz_count == 0) {
             } else {
                 //echo "Done ".$done."/".$row['st_calls_c']." for the day - ";
                 $phone_home = trim($row['phone_home']);
-                $phone_mobile = trim($row['phone_home']);
+                $phone_mobile = trim($row['phone_mobile']);
                 unset($number);
                 if (strlen($phone_home) > 0 && strlen($phone_mobile) > 0) {
                     // Both set
