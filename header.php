@@ -303,6 +303,12 @@ $myPage=$_SERVER['PHP_SELF'];
 //echo $myPage;
 $url_split = explode("/",$myPage);
 //echo sizeof($url_split);
+$help = false;
+foreach ($url_split as $entry) {
+	if ($entry == "help") {
+		$help = true;
+	}
+}
 $myPage = "/".$url_split[sizeof($url_split)-1];
 if ($myPage != $_SERVER['PHP_SELF']) {
     // This website is being served from a subdirectory
@@ -328,8 +334,8 @@ if (!isset($_COOKIE['loggedin']) || !($_COOKIE["loggedin"]==sha1("LoggedIn".$use
         $loggedin=false;
     }
 } else {
-	//echo $myPage;
-	if ($myPage=="/index.php") {
+	//echo $myPage;exit(0);
+	if (!$help && $myPage=="/index.php") {
 		/* If they are already logged in, but are viewing the index.php page then we  */
 		/* need to redirect them to the first page - i.e. main.php depending on their */
 		/* interface type.                                                            */
@@ -538,7 +544,7 @@ if ($interface_type == "broadcast") {
 	echo "<br /></center>";
 } else if ($interface_type == "cc") {
 	echo "<br /></center>";
-} else if ($self == "/run_tests.php"||$self == "/test_results.php") {
+} else if ($self == "/run_tests.php"||$self == "/test_results.php"||$help == true) {
 } else {
 	echo $menu;
 	flush();
