@@ -11,7 +11,7 @@ if (!$handle = fopen("http://call.venturevoip.com/svn_version.php", 'r')) {
 }
 $local_version = str_replace("M","",$local_version);
 $remote_version = str_replace("M","",$remote_version);
-if (trim($local_version) != trim($remote_version)) {
+if (trim($local_version) != trim($remote_version) && (trim($local_version)+1) != trim($remote_version)) {
     echo "Your website is not the latest version: ";
     echo "Local: $local_version Remote: $remote_version ";
     echo "Please go to the root of your web server and type \"svn up\"<br />";
