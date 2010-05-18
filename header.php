@@ -1,5 +1,5 @@
 <?php
-  
+
 /* Find out what the base directory name is for two reasons:
  *  1. So we can include files
  *  2. So we can explain how to set up things that are missing
