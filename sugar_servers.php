@@ -68,9 +68,9 @@ if (isset($_GET['verify_connection'])) {
         if (mysql_num_rows($result) > 0) {
             while ($row = mysql_fetch_assoc($result)) {
                 ?>
-                Screen Pop Executed to: 'http://<?=$config_values['SUGAR_HOST']?>/sugarcrm/index.php?module=Leads&offset=5&action=DetailView&record=<?=$row['id']?>'<br />
+                Screen Pop Executed to: 'http://<?=$config_values['SUGAR_HOST']?>/ccs/index.php?module=Leads&offset=5&action=DetailView&record=<?=$row['id']?>'<br />
                 <script language="javascript">
-                window.open('http://<?=$config_values['SUGAR_HOST']?>/sugarcrm/index.php?module=Leads&offset=5&action=DetailView&record=<?=$row['id']?>');
+                window.open('http://<?=$config_values['SUGAR_HOST']?>/ccs/index.php?module=Leads&offset=5&action=DetailView&record=<?=$row['id']?>');
                 </script>
                 <?
             }
@@ -509,6 +509,9 @@ echo "Home Phone: ".$row['phone_home']." Source: ".$row['lead_source']."<br />";
     <b>Realtime Lead Sources: </b><br /><br />
     <table><tr><td style="text-align: left">
     <?
+    if (count($lead_sources) == 0) {
+	echo "There are no lead sources in the database";
+    } else {
     foreach ($lead_sources as $source) {
         if (in_array($source, $db_u_l_s)) {
             $checked = " checked";
@@ -524,7 +527,7 @@ echo "Home Phone: ".$row['phone_home']." Source: ".$row['lead_source']."<br />";
     <input type="submit" value="Save Changes">
     </td></tr></table>
     </form>
-    <?
+    <?}
 } else if (isset($_GET['tz'])) {
     if (isset($_GET['save'])) {
 //        print_pre($_POST);
