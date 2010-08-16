@@ -146,6 +146,13 @@
                 $result=mysql_query($sql, $link);
             }
             
+            $result = mysql_query("SELECT count(*) from web_config WHERE LANG = 'cn'");
+            if (mysql_result($result,0,0) == 0) {
+                $sql = "INSERT INTO web_config (url, LANG, language,colour,title,logo,contact_text,sox,userid,licence,cdr_host,cdr_user,cdr_pass,cdr_db,cdr_table,menu_home,menu_campaigns,menu_numbers,menu_dnc,menu_messages,menu_schedules,menu_customers,menu_queues,menu_servers,menu_trunks,menu_admin,menu_logout,date_colour,main_page_text,main_page_username,main_page_password,main_page_login,currency_symbol,per_minute,use_billing,front_page_billing,spare1,spare2,spare3,spare4,spare5,st_mysql_host,st_mysql_user,st_mysql_pass,add_campaign,view_campaign,per_page,numbers_view,numbers_system,numbers_generate,numbers_manual,numbers_upload,numbers_export,numbers_search,numbers_title,billing_text,cdr_text,use_generate,dnc_numbers_title,dnc_view,dnc_search,dnc_upload,dnc_add,per_lead,smtp_host,smtp_user,smtp_pass,smtp_from,use_separate_dnc,allow_numbers_manual) VALUES
+                ('default', 'cn', 'Chinese', '#ffffff', '预测拨号的SmoothTorque企业平台', 'images/00_logo.jpg', '如需进一步资料，请电邮sales@venturevoip.com', '/usr/bin/sox', 'VentureVoIP', 'DRFHUJFWQIWU', 'localhost', 'admin', 'adminpass', 'phoneDB', 'cdr', '首页', '运动', '电话号码', '电话号码', '声音文件', '附表', '客户', '队列', '服务器', '电话线', '设置', '注销', '#3333FF', '要开始，到您的广告系列列表去通过点击广告系列标签在本页面顶部', '用户名', '密码', '注册', '$', '每分钟', 'NO', 'NO', '备用1（未使用）', '备用2（未使用）', '备用3（未使用）', '备用4（未使用）', '备用5（未使用）', 'localhost', 'root', '', '新增广告系列', '查看广告系列', '200', '查看电话号码', '使用系统列表', '自动生成号码', '手动添加号码', '从一个文本文件上传号码', '出口电话号码', '搜寻电话号码', '编号列表管理', '计费日志', '通话详情', 'YES', '不通话清单', '查看现有的电话号码不', '搜索不呼叫号码', '上传不来电号码从文本文件', '不添加人工呼叫号码', '单价铅', 'localhost', '', '', 'matt@venturevoip.com', 'NO', 'NO')";
+                $result = mysql_query($sql) or die(mysql_error());
+            }
+    
             
             /*======================================================================
              test_results Table
