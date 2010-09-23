@@ -6,26 +6,11 @@ PID=`/bin/pidof -sx vg`
 COUNTER="/tmp/${0##*/}"
 
 
-function timeout
-{
-if [ -f ${COUNTER} ];then
-  RETRY="`cat ${COUNTER}`"
-else
-  RETRY=0
-fi
-echo $(( ${RETRY} +1 )) > ${COUNTER}
-if [ "${RETRY}" -ge "$1" ] ; then
-  return 1
-else
-  return 0
-fi
-}
-
 if [ -z "$PID" ]
 then
 #Run the process
 cd /SmoothTorque
-timeout 5 && screen -dmS smoothtorque ./vg || echo "max restarts so giving up"
+screen -dmS smoothtorque ./vg 
 echo "Started Process at `date`" >> $logfile
 else
 echo "Process is already Running with PID=$PID"
