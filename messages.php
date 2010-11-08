@@ -67,7 +67,9 @@ $countx=0;*/
 $result=mysql_query($sql, $link) or die (mysql_error());;
 //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
 while ($row = mysql_fetch_assoc($result)) {
-
+    if ($row['name'] == "SMS") {
+        continue;
+    }
 //while ($countx<sizeof($row1)) {
 //    $row = $row1[$countx];
     if ($toggle){
@@ -111,6 +113,7 @@ echo "N/A";
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 <?if (substr($row[filename],0,2) == "x-") {
+
 /*<embed src="<?echo "/uploads/".str_replace(".sln",".wav",$row[filename]);?>"
 autostart=false width=0 height=0 id="sound<?echo $row[id];?>"
 enablejavascript="true">*/
@@ -127,12 +130,12 @@ enablejavascript="true">*/
 <img src="images/control_pause_blue.png" border="0"></a>
 */
 
-} else {
+} else if ($row['name'] != "SMS") {
 /* FAX FILE */
 ?>
 
 
-<a href="<?echo "/uploads/".str_replace(".sln",".wav",$row[filename]);?>" title="Open <?echo $row[name];?> fax">
+<a href="<?echo "/uploads/".str_replace(".sln",".wav",$row['filename']);?>" title="Open <?echo $row[name];?> fax">
 <img src="images/page.png" border="0"></a>
 
 <?

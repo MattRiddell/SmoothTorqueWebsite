@@ -28,14 +28,14 @@ function whatPaySelected(myval){
     		}
     		if (document.all2) {
         		document.all['xx1'].style.display = "none";
-        		document.all['xx2'].style.display = "none";
+        		document.all['live_message'].style.display = "none";
         		document.all['xx3'].style.display = "none";
         		document.all['xx4'].style.display = "none";
         		document.all['xx5'].style.display = "none";
         		document.all['xx6'].style.display = "visible";
     		} else {
         		document.getElementById('xx1').style.display='none';
-        		document.getElementById('xx2').style.display='none';
+        		document.getElementById('live_message').style.display='none';
         		document.getElementById('xx3').style.display='none';
         		document.getElementById('xx4').style.display='none';
         		document.getElementById('xx5').style.display='none';
@@ -44,14 +44,14 @@ function whatPaySelected(myval){
 	} else if (myval == '10') {
     		if (document.all2) {
         		document.all['xx1'].style.display = "visible";
-        		document.all['xx2'].style.display = "visible";
+        		document.all['live_message'].style.display = "visible";
         		document.all['xx3'].style.display = "visible";
         		document.all['xx4'].style.display = "visible";
         		document.all['xx5'].style.display = "visible";
         		document.all['xx6'].style.display = "visible";
     		} else {
         		document.getElementById('xx1').style.display='';
-        		document.getElementById('xx2').style.display='';
+        		document.getElementById('live_message').style.display='';
         		document.getElementById('xx3').style.display='';
         		document.getElementById('xx4').style.display='';
         		document.getElementById('xx5').style.display='';
@@ -60,14 +60,14 @@ function whatPaySelected(myval){
 	} else if (myval == '11') {
     		if (document.all2) {
         		document.all['xx1'].style.display = "visible";
-        		document.all['xx2'].style.display = "visible";
+        		document.all['live_message'].style.display = "visible";
         		document.all['xx3'].style.display = "visible";
         		document.all['xx4'].style.display = "visible";
         		document.all['xx5'].style.display = "visible";
         		document.all['xx6'].style.display = "visible";
     		} else {
         		document.getElementById('xx1').style.display='';
-        		document.getElementById('xx2').style.display='';
+        		document.getElementById('live_message').style.display='';
         		document.getElementById('xx3').style.display='';
         		document.getElementById('xx4').style.display='';
         		document.getElementById('xx5').style.display='';
@@ -76,14 +76,14 @@ function whatPaySelected(myval){
 	} else if (myval == '12') {
     		if (document.all2) {
         		document.all['xx1'].style.display = "visible";
-        		document.all['xx2'].style.display = "visible";
+        		document.all['live_message'].style.display = "visible";
         		document.all['xx3'].style.display = "visible";
         		document.all['xx4'].style.display = "visible";
         		document.all['xx5'].style.display = "visible";
         		document.all['xx6'].style.display = "visible";
     		} else {
         		document.getElementById('xx1').style.display='';
-        		document.getElementById('xx2').style.display='';
+        		document.getElementById('live_message').style.display='';
         		document.getElementById('xx3').style.display='';
         		document.getElementById('xx4').style.display='';
         		document.getElementById('xx5').style.display='';
@@ -92,14 +92,14 @@ function whatPaySelected(myval){
 	} else if (myval == '13') {
     if (document.all2) {
         document.all['xx1'].style.display = "visible";
-        document.all['xx2'].style.display = "visible";
+        document.all['live_message'].style.display = "visible";
         document.all['xx3'].style.display = "visible";
         document.all['xx4'].style.display = "visible";
         document.all['xx5'].style.display = "visible";
         document.all['xx6'].style.display = "visible";
     } else {
         document.getElementById('xx1').style.display='';
-        document.getElementById('xx2').style.display='';
+        document.getElementById('live_message').style.display='';
         document.getElementById('xx3').style.display='';
         document.getElementById('xx4').style.display='';
         document.getElementById('xx5').style.display='';
@@ -108,14 +108,14 @@ function whatPaySelected(myval){
 } else if (myval == '14') {
     if (document.all2) {
         document.all['xx1'].style.display = "visible";
-        document.all['xx2'].style.display = "visible";
+        document.all['live_message'].style.display = "visible";
         document.all['xx3'].style.display = "visible";
         document.all['xx4'].style.display = "visible";
         document.all['xx5'].style.display = "visible";
         document.all['xx6'].style.display = "visible";
     } else {
         document.getElementById('xx1').style.display='';
-        document.getElementById('xx2').style.display='';
+        document.getElementById('live_message').style.display='';
         document.getElementById('xx3').style.display='';
         document.getElementById('xx4').style.display='';
         document.getElementById('xx5').style.display='';
@@ -124,14 +124,14 @@ function whatPaySelected(myval){
 } else if (myval == '15') {
     if (document.all2) {
         document.all['xx1'].style.display = "visible";
-        document.all['xx2'].style.display = "visible";
+        document.all['live_message'].style.display = "visible";
         document.all['xx3'].style.display = "visible";
         document.all['xx4'].style.display = "visible";
         document.all['xx5'].style.display = "visible";
         document.all['xx6'].style.display = "visible";
     } else {
         document.getElementById('xx1').style.display='';
-        document.getElementById('xx2').style.display='';
+        document.getElementById('live_message').style.display='';
         document.getElementById('xx3').style.display='';
         document.getElementById('xx4').style.display='';
         document.getElementById('xx5').style.display='';
@@ -140,14 +140,14 @@ function whatPaySelected(myval){
 }  else if (myval == '1') {
     if (document.all2) {
         document.all['xx1'].style.display = "none";/*the number for the call center*/
-        document.all['xx2'].style.display = "none";/*press 1 message*/
+        document.all['live_message'].style.display = "none";/*press 1 message*/
         document.all['xx3'].style.display = "visible";/*answer machine message*/
         document.all['xx4'].style.display = "none";/*dnc message*/
         document.all['xx5'].style.display = "visible";/*caller id*/
         document.all['xx6'].style.display = "visible";/*imax connected calls*/
     } else {
         document.getElementById('xx1').style.display='none';
-        document.getElementById('xx2').style.display='none';
+        document.getElementById('live_message').style.display='none';
         document.getElementById('xx3').style.display='';
         document.getElementById('xx4').style.display='none';
         document.getElementById('xx5').style.display='';
@@ -156,14 +156,14 @@ function whatPaySelected(myval){
 } else if (myval == '2') {
     if (document.all2) {
         document.all['xx1'].style.display = "visible";
-        document.all['xx2'].style.display = "none";
+        document.all['live_message'].style.display = "none";
         document.all['xx3'].style.display = "none";
         document.all['xx4'].style.display = "none";
         document.all['xx5'].style.display = "visible";
         document.all['xx6'].style.display = "visible";
     } else {
         document.getElementById('xx1').style.display='';
-        document.getElementById('xx2').style.display='none';
+        document.getElementById('live_message').style.display='none';
         document.getElementById('xx3').style.display='none';
         document.getElementById('xx4').style.display='none';
         document.getElementById('xx5').style.display='';
@@ -172,14 +172,14 @@ function whatPaySelected(myval){
 } else if (myval == '3') {
     if (document.all2) {
         document.all['xx1'].style.display = "visible";
-        document.all['xx2'].style.display = "visible";
+        document.all['live_message'].style.display = "visible";
         document.all['xx3'].style.display = "visible";
         document.all['xx4'].style.display = "visible";
         document.all['xx5'].style.display = "visible";
         document.all['xx6'].style.display = "visible";
     } else {
         document.getElementById('xx1').style.display='';
-        document.getElementById('xx2').style.display='';
+        document.getElementById('live_message').style.display='';
         document.getElementById('xx3').style.display='';
         document.getElementById('xx4').style.display='';
         document.getElementById('xx5').style.display='';
@@ -188,14 +188,14 @@ function whatPaySelected(myval){
 } else if (myval == '4') {
     if (document.all2) {
         document.all['xx1'].style.display = "visible";
-        document.all['xx2'].style.display = "visible";
+        document.all['live_message'].style.display = "visible";
         document.all['xx3'].style.display = "none";
         document.all['xx4'].style.display = "visible";
         document.all['xx5'].style.display = "visible";
         document.all['xx6'].style.display = "visible";
     } else {
         document.getElementById('xx1').style.display='';
-        document.getElementById('xx2').style.display='';
+        document.getElementById('live_message').style.display='';
         document.getElementById('xx3').style.display='none';
         document.getElementById('xx4').style.display='';
         document.getElementById('xx5').style.display='';
@@ -204,14 +204,14 @@ function whatPaySelected(myval){
 } else if (myval == '5') {
     if (document.all2) {
         document.all['xx1'].style.display = "visible";
-        document.all['xx2'].style.display = "none";
+        document.all['live_message'].style.display = "none";
         document.all['xx3'].style.display = "visible";
         document.all['xx4'].style.display = "none";
         document.all['xx5'].style.display = "visible";
         document.all['xx6'].style.display = "visible";
     } else {
         document.getElementById('xx1').style.display='';
-        document.getElementById('xx2').style.display='none';
+        document.getElementById('live_message').style.display='none';
         document.getElementById('xx3').style.display='';
         document.getElementById('xx4').style.display='none';
         document.getElementById('xx5').style.display='';
@@ -220,14 +220,14 @@ function whatPaySelected(myval){
 } else if (myval == '6') {
     if (document.all2) {
         document.all['xx1'].style.display = "visible";
-        document.all['xx2'].style.display = "none";
+        document.all['live_message'].style.display = "none";
         document.all['xx3'].style.display = "none";
         document.all['xx4'].style.display = "none";
         document.all['xx5'].style.display = "visible";
         document.all['xx6'].style.display = "visible";
     } else {
         document.getElementById('xx1').style.display='';
-        document.getElementById('xx2').style.display='none';
+        document.getElementById('live_message').style.display='none';
         document.getElementById('xx3').style.display='none';
         document.getElementById('xx4').style.display='none';
         document.getElementById('xx5').style.display='';
@@ -243,14 +243,14 @@ function whatPaySelected(myval){
    */
     if (document.all2) {
         document.all['xx1'].style.display = "none";
-        document.all['xx2'].style.display = "visible";
+        document.all['live_message'].style.display = "visible";
         document.all['xx3'].style.display = "none";
         document.all['xx4'].style.display = "none";
         document.all['xx5'].style.display = "visible";
         document.all['xx6'].style.display = "visible";
     } else {
         document.getElementById('xx1').style.display='none';
-        document.getElementById('xx2').style.display='';
+        document.getElementById('live_message').style.display='';
         document.getElementById('xx3').style.display='none';
         document.getElementById('xx4').style.display='none';
         document.getElementById('xx5').style.display='';
@@ -271,35 +271,41 @@ function whatPaySelected(myval){
 
     if (document.all2) {
         document.all['xx1'].style.display = "none";
-        document.all['xx2'].style.display = "none";
+        document.all['live_message'].style.display = "none";
         document.all['xx3'].style.display = "none";
         document.all['xx4'].style.display = "none";
         document.all['xx5'].style.display = "visible";
         document.all['xx6'].style.display = "none";
     } else {
         document.getElementById('xx1').style.display='none';
-        document.getElementById('xx2').style.display='none';
+        document.getElementById('live_message').style.display='none';
         document.getElementById('xx3').style.display='none';
         document.getElementById('xx4').style.display='none';
         document.getElementById('xx5').style.display='';
         document.getElementById('xx6').style.display='none';
     }
 } else if (myval == '9') {
+    //alert('9');
     if (document.all2) {
         document.all['mode'].style.display = "none";
     } else {
         document.getElementById('mode').style.display='none';
     }
     if (document.all2) {
+        document.all['sms'].style.display = "visible";
+    } else {
+        document.getElementById('sms').style.display='';
+    }
+    if (document.all2) {
         document.all['xx1'].style.display = "none";
-        document.all['xx2'].style.display = "visible";
+        document.all['live_message'].style.display = "none";
         document.all['xx3'].style.display = "none";
         document.all['xx4'].style.display = "none";
         document.all['xx5'].style.display = "visible";
         document.all['xx6'].style.display = "visible";
     } else {
         document.getElementById('xx1').style.display='none';
-        document.getElementById('xx2').style.display='';
+        document.getElementById('live_message').style.display='none';
         document.getElementById('xx3').style.display='none';
         document.getElementById('xx4').style.display='none';
         document.getElementById('xx5').style.display='';
@@ -308,14 +314,14 @@ function whatPaySelected(myval){
 } else if (myval == '054') {
     if (document.all2) {
         document.all['xx1'].style.display = "visible";
-        document.all['xx2'].style.display = "visible";
+        document.all['live_message'].style.display = "visible";
         document.all['xx3'].style.display = "visible";
         document.all['xx4'].style.display = "visible";
         document.all['xx5'].style.display = "visible";
         document.all['xx6'].style.display = "visible";
     } else {
         document.getElementById('xx1').style.display='';
-        document.getElementById('xx2').style.display='';
+        document.getElementById('live_message').style.display='';
         document.getElementById('xx3').style.display='';
         document.getElementById('xx4').style.display='';
         document.getElementById('xx5').style.display='';
@@ -329,14 +335,14 @@ function whatPaySelected(myval){
     }
     if (document.all2) {
         document.all['xx1'].style.display = "none";
-        document.all['xx2'].style.display = "none";
+        document.all['live_message'].style.display = "none";
         document.all['xx3'].style.display = "none";
         document.all['xx4'].style.display = "none";
         document.all['xx5'].style.display = "none";
         document.all['xx6'].style.display = "none";
     } else {
         document.getElementById('xx1').style.display='none';
-        document.getElementById('xx2').style.display='none';
+        document.getElementById('live_message').style.display='none';
         document.getElementById('xx3').style.display='none';
         document.getElementById('xx4').style.display='none';
         document.getElementById('xx5').style.display='none';

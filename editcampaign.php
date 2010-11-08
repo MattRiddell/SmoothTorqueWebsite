@@ -23,6 +23,17 @@ if (isset($_POST[name])){
     }
     $messageid2 = sanitize($_POST['messageid2']);
     $messageid3 = sanitize($_POST['messageid3']);
+    if ($_POST['context'] == 9) {
+        if (isset($_POST['sms_id']) && $_POST['sms_id'] != 0) {            
+            $filename = str_replace(".","#~#",$_POST['sms_message'].".");
+            $result_sms = mysql_query("UPDATE campaignmessage SET filename = '".$filename."' WHERE id = ".$_POST['sms_id']);
+            $messageid3 = $_POST['sms_id'];
+        } else {
+            $filename = str_replace(".","#~#",$_POST['sms_message'].".");
+            $result = mysql_query("INSERT INTO campaignmessage (filename, name) VALUES ('".$filename."', 'SMS')");
+            $messageid3 = mysql_insert_id();
+        }
+    }
     $modein = $_POST['mode'];
     $maxagents = sanitize($_POST['agents']);
     if ($modein == "mode_queue"){
@@ -64,6 +75,12 @@ $sql = 'SELECT * FROM campaign WHERE id='.sanitize($id).' limit 1';
 $result=mysql_query($sql,$link) or die(mysql_error());
 $row = mysql_fetch_assoc($result);
 $row = array_map(stripslashes,$row);
+//$sms = str_replace("#~#",".",$row['message3']);
+/* SMS Stuff */
+$sql_sms = 'SELECT filename FROM campaignmessage WHERE id = '.$row['messageid3'];
+$result_sms = mysql_query($sql_sms);
+$sms = str_replace("#~#",".",mysql_result($result_sms,0,0));
+$sms = substr($sms,0,strlen($sms)-1);
 
 if ($_COOKIE['level'] == sha1("level100")) {
     $sql = 'SELECT * FROM campaignmessage where filename like "x-%"';
@@ -170,13 +187,13 @@ if ($config_values['configurable_drive'] == 1) {
                 </a>
             </td>
 
-            <td width=*>
-                <input type="radio" name="mode" value="didmode" rel="didmode" id="mode_did" <?=$row['mode']==0?"checked":""?> onclick="document.getElementById('queue_field').style.visibility = 'hidden';"/>
-                <label for="mode_did" title="Which number to receive the calls at">DID Mode</label>
-                <input type="radio" name="mode" value="mode_queue" id="mode_queue" <?=$row['mode']==1?"checked":""?> onclick="document.getElementById('queue_field').style.visibility = 'visible';"/>
-                <label for="mode_queue" title="Use this is the agents are connected to the machine doing the calling">Queue Mode</label>
-            </td>
-        </tr>
+<td width=*>
+<input type="radio" name="mode" value="didmode" rel="didmode" id="mode_did" checked onclick="document.getElementById('queue_field').style.display = 'none';document.all['queue_field'].style.display = 'none';"/>
+<label for="mode_did" title="Which number to receive the calls at">DID Mode</label>
+<input type="radio" name="mode" value="mode_queue" id="mode_queue" onclick="document.getElementById('queue_field').style.display = '';document.all['queue_field'].style.display = 'visible';"/>
+<label for="mode_queue" title="Use this is the agents are connected to the machine doing the calling">Queue Mode</label>
+</td>
+</tr>
 
         <?/* =================== Campaign Type Field ====================== */?>
         <tr>
@@ -198,7 +215,7 @@ if ($config_values['configurable_drive'] == 1) {
                     <option value="6" <?echo $row[context]==6?"SELECTED":""?> title="As soon as a number is connected, transfer it to a staff memeber"> Direct Transfer</option>
                     <option value="7" <?echo $row[context]==7?"SELECTED":""?> title="When a call is answered, play back the message and then hang up"> Immediate Message Playback</option>
                     <option value="8" <?echo $row[context]==8?"SELECTED":""?> title="Ring a number, when it answers start sending a fax" >Fax Broadcast</option>
-                    <option value="9" <?echo $row[context]==9?"SELECTED":""?> title="Coming Soon">SMS Broadcast (coming soon)</option>
+                    <option value="9" <?echo $row[context]==9?"SELECTED":""?> title="Send SMS Messages">SMS Broadcast</option>
                     <option value="10" <?echo $row[context]==10?"SELECTED":""?>><?echo $config_values['SPARE1'];?></option>
                     <option value="11" <?echo $row[context]==11?"SELECTED":""?>><?echo $config_values['SPARE2'];?></option>
                     <option value="12" <?echo $row[context]==12?"SELECTED":""?>><?echo $config_values['SPARE3'];?></option>
@@ -232,8 +249,28 @@ if ($config_values['configurable_drive'] == 1) {
             </td>
         </tr>
 
+
+<?/*
+   ===================================================================================================
+   This is for the SMS message
+   ===================================================================================================
+   */?>
+
+<?
+if ($row['context'] == 9) {
+    echo '<input type="hidden" name="sms_id" value="'.$row['messageid3'].'">';
+}
+?>
+<TR id="sms" style="display:none" title="The SMS you would like to send"><TD CLASS="thead">SMS Message
+<a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are running a campaign which sends an SMS to the user then this is the SMS that will be sent.');return false"><img src="images/help.png" border="0"></a>
+</TD><TD>
+<input type="text" name="sms_message" size="60" value="<?=$sms?>">
+</TD>
+</TR>
+
+
         <?/* ==================== Live Message Field ====================== */?>
-        <tr id="xx2" style="display:none" title="The message to play to the person who answers the phone">
+        <tr id="live_message" style="display:none" title="The message to play to the person who answers the phone">
             <td class="thead">
                 Live Message
                 <a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are running a campaign which plays a message to the user while waiting for them to press 1 then this is the message that will be used.');return false">
@@ -305,7 +342,7 @@ if ($config_values['configurable_drive'] == 1) {
         </tr>
 
         <?/* ===================== Queue Name Field ======================= */?>
-        <tr id = "queue_field" title="The name of the queue used for agents" style="visibility: <?=$row['mode']==1?"visible":"hidden"?>">
+        <tr id = "queue_field" title="The name of the queue used for agents" style="display: <?=$row['mode']==1?"visible":"none"?>">
 
             <td class="thead" width=200>
                 <label for="agents">

@@ -16,8 +16,17 @@
                 $messageid=$_POST['faxid'];
             } else {
                 $messageid=$_POST['messageid'];
-            }        $messageid2=($_POST['messageid2']);
+            }        
+            $messageid2=($_POST['messageid2']);
             $messageid3=($_POST['messageid3']);
+            
+            if ($context == 9) {
+                $filename = str_replace(".","#~#",$_POST['sms_message'].".");
+                $result = mysql_query("INSERT INTO campaignmessage (filename, name) VALUES ('".$filename."', 'SMS')");
+                $messageid3 = mysql_insert_id();
+            }
+            
+            
             $modein=($_POST['mode']);
             $maxagents=($_POST['agents']);
             if ($modein == "mode_queue"){
@@ -123,9 +132,9 @@ if ($config_values['configurable_drive'] == 1) {
 <a href="#" onclick="displaySmallMessage('includes/help.php?section=What type of campaign you would like to run. <br /><br />If you are connected to the machine doing the calling then chose Queue Mode.  If you would like to receive any connected calls at a particular phone number, chose DID Mode.  Normally you will use DID Mode unless you have been told to use Queue Mode.');return false"><img src="images/help.png" border="0"></a>
 </td>
 <td width=*>
-<input type="radio" name="mode" value="didmode" rel="didmode" id="mode_did" checked onclick="document.getElementById('queue_field').style.visibility = 'hidden';"/>
+<input type="radio" name="mode" value="didmode" rel="didmode" id="mode_did" checked onclick="document.getElementById('queue_field').style.display = 'none';document.all['queue_field'].style.display = 'none';"/>
 <label for="mode_did" title="Which number to receive the calls at">DID Mode</label>
-<input type="radio" name="mode" value="mode_queue" id="mode_queue" onclick="document.getElementById('queue_field').style.visibility = 'visible';"/>
+<input type="radio" name="mode" value="mode_queue" id="mode_queue" onclick="document.getElementById('queue_field').style.display = '';document.all['queue_field'].style.display = 'visible';"/>
 <label for="mode_queue" title="Use this is the agents are connected to the machine doing the calling">Queue Mode</label>
 </td>
 </tr>
@@ -143,7 +152,7 @@ if ($config_values['configurable_drive'] == 1) {
 <OPTION VALUE="6" title="As soon as a number is connected, transfer it to a staff memeber"> Direct Transfer</OPTION>
 <OPTION VALUE="7" title="When a call is answered, play back the message and then hang up"> Immediate Message Playback</OPTION>
 <OPTION VALUE="8" title="Ring a number, when it answers start sending a fax">Fax Broadcast</OPTION>
-<OPTION VALUE="9">SMS Broadcast (coming soon)</OPTION>
+<OPTION VALUE="9">SMS Broadcast</OPTION>
 <OPTION VALUE="10"><?echo $config_values['SPARE1'];?></OPTION>
 <OPTION VALUE="11"><?echo $config_values['SPARE2'];?></OPTION>
 <OPTION VALUE="12"><?echo $config_values['SPARE3'];?></OPTION>
@@ -162,7 +171,7 @@ if ($config_values['configurable_drive'] == 1) {
 <td class="thead" width=200><label for="agents">Maximum Connected Calls:
 <a href="#" onclick="displaySmallMessage('includes/help.php?section=This is the number of concurrent calls you would like to receive on the call center number specified.  <br /><br />Normally this will be the number of staff you have.');return false" title="The number of concurrent calls to be put through to the call center"><img src="images/help.png" border="0"></a>
 </label></td>
-<td width=*><input type="text" name="agents" id="agents" size="28" value="0"></td>
+<td width=*><input type="text" name="agents" id="agents" size="60" value="0"></td>
 </tr>
 <?
     if ($_COOKIE[level] == sha1("level100")) {
@@ -224,13 +233,29 @@ if ($config_values['configurable_drive'] == 1) {
 </TD>
 </TR>
 
+
+<?/*
+   ===================================================================================================
+   This is for the SMS message
+   ===================================================================================================
+   */?>
+
+
+<TR id="sms" style="display:none" title="The SMS you would like to send"><TD CLASS="thead">SMS Message
+<a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are running a campaign which sends an SMS to the user then this is the SMS that will be sent.');return false"><img src="images/help.png" border="0"></a>
+</TD><TD>
+<input type="text" name="sms_message" size="60">
+</TD>
+</TR>
+
+
 <?/*
    ===================================================================================================
    This is for the live message
    ===================================================================================================
    */?>
 
-<TR id="xx2" style="display:none" title="The message to play to the person who answers the phone"><TD CLASS="thead">Live Message
+<TR id="live_message" style="display:none" title="The message to play to the person who answers the phone"><TD CLASS="thead">Live Message
 <a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are running a campaign which plays a message to the user while waiting for them to press 1 then this is the message that will be used.');return false"><img src="images/help.png" border="0"></a>
 </TD><TD>
 <SELECT name="messageid">
@@ -297,7 +322,7 @@ if ($config_values['configurable_drive'] == 1) {
 
 
 
-<tr id = "queue_field" title="The name of the queue used for agents" style="visibility: hidden">
+<tr id = "queue_field" title="The name of the queue used for agents" style="display:none">
 <td class="thead" width=200><label for="agents">Queue Name
 <a href="#" onclick="displaySmallMessage('includes/help.php?section=This is the name of a Queue on the telephone system of the provider of this system. Normally this will be assigned to you when you set up an account.');return false"><img src="images/help.png" border="0"></a>
 </label></td>
@@ -321,13 +346,13 @@ if ($config_values['configurable_drive'] == 1) {
 <td class="thead"><label for="did">Caller ID:
 <a href="#" onclick="displaySmallMessage('includes/help.php?section=The CallerID you would like to send on calls to your customers');return false"><img src="images/help.png" border="0"></a>
 </label></td>
-<td><input type="text" name="clid" id="did" size=28 value="ls3"></td>
+<td><input type="text" name="clid" id="did" size=60 value="ls3"></td>
 </tr>
 <tr rel="didmode" id="xx1" style="display:none" title="The number for the call center">
 <td class="thead"><label for="did">Call Center Phone Number:
 <a href="#" onclick="displaySmallMessage('includes/help.php?section=The phone number you would like to have connected calls sent to. Eg: (123) 555-1234. ');return false"><img src="images/help.png" border="0" id="x"  ></a>
 </label></td>
-<td><input type="text" name="did" id="did" size=28 value="ls3"></td>
+<td><input type="text" name="did" id="did" size=60 value="ls3"></td>
 </tr>
 <?/*        <tr class=tborder2>
    <td colspan="2">
