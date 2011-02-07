@@ -188,9 +188,9 @@ if ($config_values['configurable_drive'] == 1) {
             </td>
 
 <td width=*>
-<input type="radio" name="mode" value="didmode" rel="didmode" id="mode_did" checked onclick="document.getElementById('queue_field').style.display = 'none';document.all['queue_field'].style.display = 'none';"/>
+<input type="radio" name="mode" <?if ($row['mode'] == "0") {echo "selected";}?> value="didmode" rel="didmode" id="mode_did" checked onclick="document.getElementById('queue_field').style.display = 'none';document.all['queue_field'].style.display = 'none';"/>
 <label for="mode_did" title="Which number to receive the calls at">DID Mode</label>
-<input type="radio" name="mode" value="mode_queue" id="mode_queue" onclick="document.getElementById('queue_field').style.display = '';document.all['queue_field'].style.display = 'visible';"/>
+<input type="radio" name="mode" value="mode_queue" <?if ($row['mode'] == "1") {echo "checked";}?> id="mode_queue" onclick="document.getElementById('queue_field').style.display = '';document.all['queue_field'].style.display = 'visible';"/>
 <label for="mode_queue" title="Use this is the agents are connected to the machine doing the calling">Queue Mode</label>
 </td>
 </tr>
