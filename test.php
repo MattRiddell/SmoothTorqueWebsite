@@ -52,7 +52,7 @@ if ($debug > 0) {
 }
 } else {
 ?>
-var imgBase="/graph.php?id=<?echo $id;?>&debug=<?echo $debug;?>&x="
+var imgBase="graph.php?id=<?echo $id;?>&debug=<?echo $debug;?>&x="
 <?
 }
 ?>
