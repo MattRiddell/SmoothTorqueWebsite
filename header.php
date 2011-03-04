@@ -534,7 +534,7 @@ if (mysql_num_rows($result) > 0) {
 }
 
 ?>
-<center><img src="<?echo $config_values['LOGO'];?>"<?
+<center><img src="./<?echo $config_values['LOGO'];?>"<?
 if ($logo_height > 0) {
 	echo ' height="'.$logo_height.'"';
 }
