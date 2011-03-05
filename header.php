@@ -397,6 +397,10 @@ if ($loggedin) {
 if ($self == "/test.php" || $self == "/report.php" || $self == "/servers.php" || $self == "/mysql_stats.php" || $self == "/config.php") {?>
 <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
 <META HTTP-EQUIV="Expires" CONTENT="-1">
+    <script type="text/javascript" src="js/range.js"></script>
+    <script type="text/javascript" src="js/timer.js"></script>
+    
+    <script type="text/javascript" src="js/slider.js"></script>
 <?}?>
 <script type="text/javascript" src="<?=$http_dir_name?>tabber.js"></script>
 <?
