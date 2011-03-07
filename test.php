@@ -1,7 +1,16 @@
 <?
 if (isset($_GET['change_target'])) {
-    print_r($_GET);
-    echo $_GET['change_target'];
+    //print_r($_GET);
+    include "admin/db_config.php";
+    mysql_select_db("SineDialer", $link);
+    //echo $_GET['change_target'];
+    $id = $_GET['id'];
+    $target = $_GET['change_target'];
+    $sql="insert into queue (status, campaignID, flags, startdate, enddate, starttime, endtime) VALUES (5, '$id', '$target', '2008-01-01', '2020-01-01', '00:00:00', '23:59:59')";
+    //echo $sql;
+    $result=mysql_query($sql, $link) or die (mysql_error()) or die (mysql_error());
+    echo "Updated target percentage to $target";
+    //print_r($result);
     exit(0);
 }
 require "header.php";
