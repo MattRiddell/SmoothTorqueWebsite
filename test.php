@@ -120,7 +120,7 @@ if (mysql_num_rows($result) > 0) {
 <img src="images/ajax-loader.gif">
 </div>
 
-<?if ($config_values['use_configurable_target'] == 1) {?>
+<?if ($config_values['configurable_target'] == 1) {?>
 
 <link type="text/css" rel="StyleSheet" href="css/bluecurve/bluecurve.css" />
 

@@ -302,6 +302,18 @@ if (mysql_num_rows($result) > 0) {
     } else {
         $config_values['configurable_drive'] = "NO";
     }
+    
+    $sql = 'SELECT value FROM config WHERE parameter=\'configurable_target\'';
+    $result=mysql_query($sql, $link) or die (mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        $config_values['configurable_target'] = mysql_result($result,0,'value');
+    } else {
+        $config_values['configurable_target'] = "0";
+    }
+    
+    
+    
+    
 
 mysql_select_db("SineDialer", $link);
 

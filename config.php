@@ -166,6 +166,9 @@ if ($level!=sha1("level100")) {
         $sql = "REPLACE INTO config (parameter, value) VALUES ('configurable_drive',".sanitize($_POST['configurable_drive']).")";
         mysql_query($sql) or die(mysql_error());
         
+        $sql = "REPLACE INTO config (parameter, value) VALUES ('configurable_target',".sanitize($_POST['configurable_target']).")";
+        mysql_query($sql) or die(mysql_error());
+        
         
         
         /*
@@ -1453,6 +1456,20 @@ Language:
     <select name="configurable_drive">
     <option value="1" <?if ($config_values['configurable_drive'] == 1) echo "selected";?>>Yes</option>
     <option value="0" <?if ($config_values['configurable_drive'] != 1) echo "selected";?>>No</option>
+    </select>
+    </td>
+    </tr>
+    
+    
+    <tr  class="tborder2">
+    <td>
+    Provide Configurable Target Percentage:<br />
+    <i>(<font color="red">WARNING:</font> configurable target percentage can override<br> predictive capabilities and should be used carefully)</i>
+    </td>
+    <td>
+    <select name="configurable_target">
+    <option value="1" <?if ($config_values['configurable_target'] == 1) echo "selected";?>>Yes</option>
+    <option value="0" <?if ($config_values['configurable_target'] != 1) echo "selected";?>>No</option>
     </select>
     </td>
     </tr>
