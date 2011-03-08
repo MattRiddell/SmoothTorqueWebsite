@@ -213,17 +213,19 @@ function sendData() {
     http.send(null);
 }
 
-//s.setValue(0);
+s.setValue(0);
 s.setMaximum(99);
 var tx=setTimeout(timedOut,1000);
 
 
 window.onresize = function () {
 	s.recalculate();
+    isMouseDown = 0;
 };
 
 function timedOut() {
 	s.recalculate();
+    isMouseDown = 0;
 }
 
 </script>
