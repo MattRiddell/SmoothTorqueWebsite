@@ -213,7 +213,7 @@ function sendData() {
     http.send(null);
 }
 
-s.setValue(0);
+//s.setValue(0);
 s.setMaximum(99);
 var tx=setTimeout(timedOut,1000);
 
