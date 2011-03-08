@@ -181,7 +181,7 @@ Target Percentage:
 
 function getHTTPObject() { if (typeof XMLHttpRequest != 'undefined') { return new XMLHttpRequest(); } try { return new ActiveXObject("Msxml2.XMLHTTP"); } catch (e) { try { return new ActiveXObject("Microsoft.XMLHTTP"); } catch (e) {} } return false; }
 var s = new Slider(document.getElementById("slider-1"), document.getElementById("slider-input-1"));
-var isMouseDown = false;
+var isMouseDown = 0;
 document.onmouseup = function () {
     if (isMouseDown == 1) {
         isMouseDown = 0;
