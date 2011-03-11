@@ -5,6 +5,30 @@ require "header.php";
 require "header_numbers.php";
 ob_implicit_flush(FALSE);
 
+if (!function_exists('sanitize') ) {
+    function sanitize($var, $quotes = true) {
+        if (is_array($var)) {   //run each array item through this function (by reference)
+            foreach ($var as &$val) {
+                $val = $this->sanitize($val);
+            }
+        }
+        else if (is_string($var)) { //clean strings
+            $var = mysql_real_escape_string($var);
+            if ($quotes) {
+                $var = "'". $var ."'";
+            }
+        }
+        else if (is_null($var)) {   //convert null variables to SQL NULL
+            $var = "NULL";
+        }
+        else if (is_bool($var)) {   //convert boolean variables to binary boolean
+            $var = ($var) ? 1 : 0;
+        }
+        return $var;
+    }
+}
+
+
 $_POST = array_map(mysql_real_escape_string,$_POST);
 $_GET = array_map(mysql_real_escape_string,$_GET);
 
@@ -41,6 +65,8 @@ if(!empty($files)){?>
             $data[$number_index] = str_replace("-","",$data[$number_index]);
             $data[$number_index] = str_replace(" ","",$data[$number_index]);
             $data[$number_index] = str_replace("\r","",$data[$number_index]);
+            $data[$number_index] = sanitize($data[$number_index]);
+            
             if ($isfirst) {
                 $sql.="(".$campaignid.",'".$data[$number_index]."','new',0, ROUND(RAND() * 999999999))";
                 $sql_names.="(".$campaignid.",'".$data[$number_index]."','".$data[$name_index]."')";
