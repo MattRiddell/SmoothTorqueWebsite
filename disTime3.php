@@ -249,9 +249,6 @@ if ($config_values['SHOW_NUMBERS_LEFT'] == 'YES') {
 
 ?>
 <TD>
-<?if ($backend == 0) {?>
-    <a title="View the report for this campaign" href="report<?if ($use_new_pie == 1) {echo "2";}?>.php?id=<?echo $row['id'];?>" class="abcd"><img width="16" height="16" src="images/chart_pie.png" border="0"></a>
-<?}?>
 <?
 if ($config_values['SHOW_NUMBERS_LEFT'] == 'YES') {
     if ($progress>0){
@@ -344,6 +341,7 @@ if ($config_values['DELETE_ALL'] == "YES") {?>
 </td>
 <TD>
 <?if ($backend == 0) {?>
+<a title="View the report for this campaign" href="report<?if ($use_new_pie == 1) {echo "2";}?>.php?id=<?echo $row['id'];?>" class="abcd"><img width="16" height="16" src="images/chart_pie.png" border="0"></a>
 <a title="View the graph for this campaign" href="test.php?id=<?echo $row['id'];?>" class="abcd"><img width="16" height="16" src="images/chart_curve.png" border="0"></a>&nbsp;
 <?}?>
 <a title="Recycle Numbers" href="recycle.php?id=<?echo $row['id'];?>&type_input=<?echo $_GET['type'];?>" class="abcd"><img width="16" height="16" src="images/arrow_refresh.png" border="0"></a>&nbsp;
