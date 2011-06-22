@@ -122,7 +122,7 @@ if (mysql_num_rows($result) > 0) {
             <td class="thead">
                 Campaign Name
                 <a href="#" onclick="displaySmallMessage('includes/help.php?section=A short name you would like to give to the campaign - preferrably one word');return false">
-                    <img src="images/help.png" border="0" onload="whatPaySelected(<?echo $row[context];?>)">
+                    <img src="images/help.png" border="0">
                 </a>
             </td>
             <td>
@@ -423,6 +423,11 @@ if ($row['context'] == 9) {
         </tr>
     </table>
 </form>
+
+<script>
+whatPaySelected(<?echo $row[context];?>);
+</script>
+
 <?
 require "footer.php";
 ?>
