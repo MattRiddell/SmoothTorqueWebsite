@@ -1187,7 +1187,7 @@
                 $sql = "Create table `timezone_prefixes` (
                 `id` int(10) unsigned NOT NULL auto_increment,
                 `prefix` varchar(20) default NULL,
-                `timezone` int(10) default NULL
+                `timezone` int(10) default NULL,
                 PRIMARY KEY  (`id`)
                 )";
                 $result = mysql_query($sql,$link) or die(mysql_error());
