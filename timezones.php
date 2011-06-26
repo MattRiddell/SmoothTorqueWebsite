@@ -23,6 +23,14 @@
  id: autoincrement integer (record id - auto created)
  prefix: varchar number prefix
  timezone: id of the timezone this prefix is associated with
+ 
+ There is a cron job (cron/cron_timezone.php) that runs every 30 minutes and does the following:
+ 
+ 1. Check whether timezone management is enabled (admin/advanced)
+ 2. If so, changes the status of numbers that have a status of "new" to "new_nodial" 
+    if the number shouldn't be dialled yet
+ 3. Changes the status of numbers that have a status of "new_nodial" to "new" if
+    the timezone now diallable.
 
 */
 
