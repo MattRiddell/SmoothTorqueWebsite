@@ -1180,6 +1180,23 @@
             }
             
             /*======================================================================
+             timezone_prefixes Table
+             ======================================================================*/
+            if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","timezone_prefixes")){
+                include "admin/db_config.php";
+                $sql = "Create table `timezone_prefixes` (
+                `id` int(10) unsigned NOT NULL auto_increment,
+                `prefix` varchar(20) default NULL,
+                `timezone` int(10) default NULL
+                PRIMARY KEY  (`id`)
+                )";
+                $result = mysql_query($sql,$link) or die(mysql_error());
+                $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created timezone_prefixes Table')";
+                $result=mysql_query($sql, $link);
+                
+            }
+            
+            /*======================================================================
                      Queue_Table
                      ======================================================================*/
                     if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","queue_table")){
