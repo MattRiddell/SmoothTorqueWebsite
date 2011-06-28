@@ -142,9 +142,9 @@ if ($level!=sha1("level100")) {
         $sql = "REPLACE INTO config (parameter, value) VALUES ('EVERGREEN',".sanitize($_POST['EVERGREEN']).")";
         mysql_query($sql) or die(mysql_error());
         
-        
-        
-        
+        $sql = "REPLACE INTO config (parameter, value) VALUES ('USE_TIMEZONES',".sanitize($_POST['USE_TIMEZONES']).")";
+        mysql_query($sql) or die(mysql_error());
+                
         $sql = "REPLACE INTO config (parameter, value) VALUES ('DELETE_ALL',".sanitize($_POST['DELETE_ALL']).")";
         mysql_query($sql) or die(mysql_error());
         
@@ -308,6 +308,15 @@ if ($level!=sha1("level100")) {
         $config_values['EVERGREEN'] = mysql_result($result,0,'value');
     } else {
         $config_values['EVERGREEN'] = "NO";
+    }
+    
+    
+    $sql = 'SELECT value FROM config WHERE parameter=\'USE_TIMEZONES\'';
+    $result=mysql_query($sql, $link) or die (mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        $config_values['USE_TIMEZONES'] = mysql_result($result,0,'value');
+    } else {
+        $config_values['USE_TIMEZONES'] = "NO";
     }
     
     
@@ -1166,6 +1175,20 @@ Language:
     <input type="radio" name="EVERGREEN" value="NO" <?if ( $config_values['EVERGREEN'] != "YES") {echo "checked";}?>> No
     </td>
     </tr>
+    
+    <tr  class="tborder2">
+    <td>
+    Use timezone based updating (requires cron job):
+    </td>
+    <td>
+    <input type="radio" name="USE_TIMEZONES" value="YES" <?if ( $config_values['USE_TIMEZONES'] == "YES") {echo "checked";}?>> Yes
+    <input type="radio" name="USE_TIMEZONES" value="NO" <?if ( $config_values['USE_TIMEZONES'] != "YES") {echo "checked";}?>> No
+    </td>
+    </tr>
+    
+    
+    
+    
     
     <tr  class="tborder2">
     <td>
