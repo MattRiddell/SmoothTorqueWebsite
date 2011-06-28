@@ -91,6 +91,28 @@ if (isset($_GET['view_timezones'])) {
     // Get all the timezones
     $result = mysql_query("SELECT * FROM SineDialer.time_zones");
     if (mysql_num_rows($result) > 0) {
+        //box_start(500);
+        echo "<center>";
+        echo '<table border="0" cellpadding="3" cellspacing="0">';
+        echo '<tr height="10"><td class="theadl"></td><td class="thead">Timezone Name</td><td class="thead">UTC Start Dialling Time</td><td class="thead">UTC End Dialling Time</td><td class="thead">Delete</td><td class="theadr"></td></tr>';
+        $toggle = false;
+        while ($row = mysql_fetch_assoc($result)) {
+            if ($toggle){
+                $toggle=false;
+                $class=" class=\"tborder2\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f8f8f8'\"   ";
+            } else {
+                $toggle=true;
+                $class=" class=\"tborderx\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f0f0f0'\" ";
+            }
+            echo "<tr $class><td></td>";
+            echo "<td>".'<a href="timezones.php?edit='.$row['id'].'">'.$row['name'].'&nbsp;<img src="images/pencil.png" border="0" alt="Edit TimeZone">'."</td>";
+            echo "<td>".$row['start']."</td>";
+            echo "<td>".$row['end']."</td>";
+            echo "<td>".'<a href="timezones.php?delete='.$row['id'].'">&nbsp;<img src="images/delete.png" border="0" alt="Delete TimeZone">'."</td>";
+            echo "<td></td></tr>";
+        }
+        echo "</table>";
+        //box_end();
     } else {
         ?>
         <br /><br />
