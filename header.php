@@ -250,6 +250,14 @@
         $config_values['USE_TIMEZONES'] = "NO";
     }
     
+    $sql = 'SELECT value FROM config WHERE parameter=\'MENU_TIMEZONES\'';
+    $result=mysql_query($sql, $link) or die (mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        $config_values['MENU_TIMEZONES'] = mysql_result($result,0,'value');
+    } else {
+        $config_values['MENU_TIMEZONES'] = "Timezones";
+    }
+    
     $sql = 'SELECT value FROM config WHERE parameter=\'sugar_user\'';
     $result=mysql_query($sql, $link) or die (mysql_error());
     if (mysql_num_rows($result) > 0) {
