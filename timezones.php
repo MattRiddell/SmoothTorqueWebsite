@@ -49,12 +49,26 @@ if (isset($_GET['view_timezones'])) {
     $result = mysql_query("SELECT * FROM SineDialer.time_zones");
     if (mysql_num_rows($result) > 0) {
     } else {
-        box_start();
-        echo "<br /><center>There are currently no timezones</center><br /><br />";
         ?>
-            <A HREF="timezones.php?add=1"><img src="images/clock_add.png" border="0" align="left">Add Timezone</A>
+        
+        
+        <br /><br />
+        <?box_start();
+        echo "<br /><center><img src=\"images/icons/gtk-dialog-info.png\" border=\"0\" width=\"64\" height=\"64\"><br /><br />";
+        ?>
+        
+        <b>You don't have any timezones created.</b><br />
+        <br />
+        In order to use timezone based dialling you will need at least one timezone defined.<br />
+        <br />
+        <a href="timezones.php?add=1">
+        <img src="images/icons/gtk-add.png" border="0" width="64" height="64"><br />
+        Click here to create your first timezone</a><br /> or click the Add Timezone button above.
+        <br />
+        <br />
         <?
         box_end();
+        
     }
 }
 require "footer.php";
