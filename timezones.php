@@ -1,6 +1,6 @@
 <?
 /* TimeZone Management - created for VentureVoIP Canada, June 2011 
-
+ 
  TimeZones work in the following way:
  
  There are two tables: 
@@ -28,23 +28,35 @@
  
  1. Check whether timezone management is enabled (admin/advanced)
  2. If so, changes the status of numbers that have a status of "new" to "new_nodial" 
-    if the number shouldn't be dialled yet
+ if the number shouldn't be dialled yet
  3. Changes the status of numbers that have a status of "new_nodial" to "new" if
-    the timezone now diallable.
-    
+ the timezone now diallable.
+ 
  When numbers are imported into the database and they timezone management is enabled,
  number are imported with new_nodial rather than new - in case someone imports
  numbers at a time they shouldn't be dialled.
+ 
+ */
 
-*/
-
+// Include Header
 require "header.php";
+
+// Include Timezone specific header
 require "header_timezones.php";
-$result = mysql_query("SELECT * FROM SineDialer.time_zones");
-if (mysql_num_rows($result) > 0) {
-    
-} else {
-    
+
+if (isset($_GET['view_timezones'])) {
+    // Get all the timezones
+    $result = mysql_query("SELECT * FROM SineDialer.time_zones");
+    if (mysql_num_rows($result) > 0) {
+        
+    } else {
+        box_start();
+        echo "<br /><center>There are currently no timezones</center><br /><br />";
+        ?>
+        
+        <?
+        box_end();
+    }
 }
 require "footer.php";
 ?>
