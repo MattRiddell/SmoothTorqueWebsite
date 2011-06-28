@@ -44,19 +44,59 @@ require "header.php";
 // Include Timezone specific header
 require "header_timezones.php";
 
+if (isset($_GET['save_new'])) {
+    $sql = "INSERT INTO SineDialer.time_zones (";
+    $sql2 = " VALUES (";
+    foreach($_POST as $field=>$value) {
+        $sql.=sanitize($field, false).",";
+        $sql2 .= sanitize($value).",";
+    }
+    $sql = substr($sql,0,strlen($sql)-1).")".substr($sql2,0,strlen($sql2)-1).")";
+    mysql_query($sql) or die(mysql_error());
+    ?><center><img src="images/progress.gif" border="0"><br />Saving your timezone...
+    <META HTTP-EQUIV=REFRESH CONTENT="3; URL=timezones.php?view_timezones=1"><?
+    require "footer.php";
+    exit(0);
+}
+if (isset($_GET['add'])) {
+    box_start(400);
+    ?>
+    <form action="timezones.php?save_new=1" method="post">
+    <table>
+    <tr>
+    <td>Timezone Name:</td>
+    <td><input type="text" name="name"></td>
+    </tr>
+    <tr>
+    <td>UTC Start Dialling Time:</td>
+    <td><input type="text" name="start"></td>
+    </tr>
+    <tr>
+    <td>UTC End Dialling Time:</td>
+    <td><input type="text" name="end"></td>
+    </tr>
+    <tr>
+    <td colspan="2">
+    <input type="submit" value="Add Timezone"></td>
+    </tr>
+    </table>
+    </form>
+    <?
+    box_end();
+    // Don't fall through
+    require "footer.php";
+    exit(0);
+}
 if (isset($_GET['view_timezones'])) {
     // Get all the timezones
     $result = mysql_query("SELECT * FROM SineDialer.time_zones");
     if (mysql_num_rows($result) > 0) {
     } else {
         ?>
-        
-        
         <br /><br />
         <?box_start();
         echo "<br /><center><img src=\"images/icons/gtk-dialog-info.png\" border=\"0\" width=\"64\" height=\"64\"><br /><br />";
         ?>
-        
         <b>You don't have any timezones created.</b><br />
         <br />
         In order to use timezone based dialling you will need at least one timezone defined.<br />
@@ -67,9 +107,13 @@ if (isset($_GET['view_timezones'])) {
         <br />
         <br />
         <?
+        //'
         box_end();
         
     }
+    // Don't fall through
+    require "footer.php";
+    exit(0);
 }
 require "footer.php";
 ?>
