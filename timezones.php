@@ -39,6 +39,12 @@
 */
 
 require "header.php";
-
+require "header_timezones.php";
+$result = mysql_query("SELECT * FROM SineDialer.time_zones");
+if (mysql_num_rows($result) > 0) {
+    
+} else {
+    
+}
 require "footer.php";
 ?>
