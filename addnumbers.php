@@ -5,6 +5,13 @@ require "header_numbers.php";
 include "admin/db_config.php";
 mysql_select_db("SineDialer", $link);
 
+if ($config_values['USE_TIMEZONES'] == "YES") {
+    $new = "new_nodial";
+} else {
+    $new = "new";
+}
+
+
 $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $campaigngroupid=mysql_result($result,0,'campaigngroupid');
@@ -80,7 +87,7 @@ Which campaign would you like to add numbers to?<br /><br />
         $number = str_replace("(","",$number);
         $number = str_replace(")","",$number);
         if (strlen(trim($number)) > 0) {
-            $sql="INSERT IGNORE INTO number (campaignid,phonenumber,status,type, random_sort) VALUES ($_POST[campaignid],'$number','new',0, ROUND(RAND() * 999999999))";
+            $sql="INSERT IGNORE INTO number (campaignid,phonenumber,status,type, random_sort) VALUES ($_POST[campaignid],'$number','".$new."',0, ROUND(RAND() * 999999999))";
             $result=mysql_query($sql, $link) or die (mysql_error());;
         }
         echo "<!-- . -->";
