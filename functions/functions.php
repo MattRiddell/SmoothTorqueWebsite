@@ -307,12 +307,14 @@ function get_menu_html($config_values, $self, $level) {
         //=======================================================================================================
         // Timezones
         //=======================================================================================================
-        if ($self=="/timezones.php"){
-            $thead="thead";
-        } else {
-            $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
+        if ($config_values['USE_TIMEZONES'] == "YES") {
+            if ($self=="/timezones.php"){
+                $thead="thead";
+            } else {
+                $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
+            }
+            $menu.='<TD class="'.$thead.'"><A HREF="'.$http_dir_name.'timezones.php?view_timezones=1"><img width="16" height="16"  src="'.$http_dir_name.'images/world.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_TIMEZONES']).'</A>&nbsp;</TD>';
         }
-        $menu.='<TD class="'.$thead.'"><A HREF="'.$http_dir_name.'timezones.php?view_timezones=1"><img width="16" height="16"  src="'.$http_dir_name.'images/world.png" border="0" align="left">'.str_replace(" ","&nbsp;",$config_values['MENU_TIMEZONES']).'</A>&nbsp;</TD>';
         //=======================================================================================================
 
         //=======================================================================================================
