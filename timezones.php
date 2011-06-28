@@ -48,12 +48,11 @@ if (isset($_GET['view_timezones'])) {
     // Get all the timezones
     $result = mysql_query("SELECT * FROM SineDialer.time_zones");
     if (mysql_num_rows($result) > 0) {
-        
     } else {
         box_start();
         echo "<br /><center>There are currently no timezones</center><br /><br />";
         ?>
-        
+            <A HREF="timezones.php?add=1"><img src="images/clock_add.png" border="0" align="left">Add Timezone</A>
         <?
         box_end();
     }
