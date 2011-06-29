@@ -101,11 +101,12 @@ if (isset($_GET['verify_connection'])) {
     $db_user = $config_values['SUGAR_USER'];
     $db_pass = $config_values['SUGAR_PASS'];
     //echo "Connecting to: $db_host User: $db_user Pass:$db_pass<br />";
-    $link = mysql_connect($db_host, $db_user, $db_pass) or die(mysql_error());
-    mysql_select_db($config_values['SUGAR_DB'], $link);
-    
+    $link = mysql_connect($db_host, $db_user, $db_pass) or die("error:".mysql_error());
+    //echo "Connected";
+    mysql_select_db($config_values['SUGAR_DB'], $link) or die(mysql_error());
+    //echo "Connected";
     $result = mysql_query("SELECT count(*) FROM leads where  deleted = 0 ");
-    echo number_format(mysql_result($result,0,0));
+    echo number_format(mysql_result($result,0,0))."<br />";
     
     if ($custom == true) {
         $result = mysql_query("SELECT id FROM lc_customstatus WHERE name = 'new'");
@@ -117,28 +118,54 @@ if (isset($_GET['verify_connection'])) {
             $status_left_messages .= sanitize($row['id']).",";
         }
         $status_left_messages = substr($status_left_messages,0,strlen($status_left_messages)-1).")";
+        
+        ?>
+        <br />
+        <br />
+        
+        
+        
+        
+        <b>NEW not left message Stage 1 (Urgent)</b> (Entered Last 5 Days): <?
+        $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered and leads.deleted = 0 and status='$new_status' and lead_source in $urgent_sources");
+        echo number_format(mysql_result($result,0,0));
+        ?>
+        <br />
+        <hr>
+        <b>Numbers:</b><br />
+        <?
     }
-    ?>
-    <br />
-    <br />
-    
-    
-    
-    
-    <b>NEW not left message Stage 1 (Urgent)</b> (Entered Last 5 Days): <?
-    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered and leads.deleted = 0 and status='$new_status' and lead_source in $urgent_sources");
-    echo number_format(mysql_result($result,0,0));
-    ?>
-    <br />
-    <hr>
-    <b>Numbers:</b><br />
-    <?
-    $result = mysql_query("SELECT phone_home, phone_mobile, lead_source FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered and leads.deleted = 0 and status='$new_status'  and lead_source in $urgent_sources");
-    while ($row = mysql_fetch_assoc($result)) {
-        if (isset($row['phone_mobile']) && $row['phone_mobile'] != $row['phone_home']) {
-            echo "Home Phone: ".$row['phone_home'].",  Mobile Phone: ".$row['phone_mobile']." Source: ".$row['lead_source']."<br />";
-        } else {
-            echo "Home Phone: ".$row['phone_home']." Source: ".$row['lead_source']."<br />";
+    if ($custom == true) {
+        
+        $result = mysql_query("SELECT phone_home, phone_mobile, lead_source FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered and leads.deleted = 0 and status='$new_status'  and lead_source in $urgent_sources");
+        while ($row = mysql_fetch_assoc($result)) {
+            if (isset($row['phone_mobile']) && $row['phone_mobile'] != $row['phone_home']) {
+                echo "Home Phone: ".$row['phone_home'].",  Mobile Phone: ".$row['phone_mobile']." Source: ".$row['lead_source']."<br />";
+            } else {
+                echo "Home Phone: ".$row['phone_home']." Source: ".$row['lead_source']."<br />";
+            }
+        }
+    } else {
+        $result = mysql_query("SELECT phone_home, phone_mobile, phone_work, lead_source FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered limit 5");
+        while ($row = mysql_fetch_assoc($result)) {
+            //print_pre($row);
+            if (strlen(trim($row['lead_source'])) == 0) {
+                $row['lead_source'] = "No Lead Source";
+            }
+            $found_number = false;
+            if (isset($row['phone_work'])) {
+                echo "Work Phone: ".$row['phone_work']." ";
+                $found_number = true;
+            }
+            if (isset($row['phone_mobile'])) {
+                echo " Mobile Phone: ".$row['phone_mobile']." ";
+                $found_number = true;
+            } 
+            if (isset($row['phone_home'])) {
+                echo " Home Phone: ".$row['phone_home']." ";
+                $found_number = true;
+            }
+            echo "Source: ".$row['lead_source']."<br />";
         }
     }
     ?>
