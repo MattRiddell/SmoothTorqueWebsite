@@ -632,7 +632,7 @@ if (isset($_GET['verify_connection'])) {
     </a>
     <br />
     
-    
+    <?if ($custom == true) {?>
     <a href="sugar_servers.php?urgent=1">
     Realtime Lead Sources
     </a>
@@ -652,7 +652,7 @@ if (isset($_GET['verify_connection'])) {
     Call logic
     </a>
     <br />
-    
+    <?}?>
     
     
     <br />
