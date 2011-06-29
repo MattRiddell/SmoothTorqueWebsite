@@ -12,6 +12,9 @@ require "header.php";
 require "header_server.php";
 box_start(400);
 
+// Set this to true to use a custom SugarCRM install
+$custom = false;
+
 
 $tz_db = array();
 $result = mysql_query("SELECT * FROM time_zones");
@@ -25,19 +28,19 @@ if (mysql_num_rows($result) > 0) {
 
 
 /*$timezones['unset']['start'] = '08:00';
-$timezones['unset']['end'] = '18:00';
-
-$timezones['AKST']['start'] = '07:00';
-$timezones['AKST']['end'] = '';
-
-AKST: 89
-ATC: 169
-CST: 8761
-EST: 30425
-HST: 263
-MST: 2680
-PST: 6710
-*/
+ $timezones['unset']['end'] = '18:00';
+ 
+ $timezones['AKST']['start'] = '07:00';
+ $timezones['AKST']['end'] = '';
+ 
+ AKST: 89
+ ATC: 169
+ CST: 8761
+ EST: 30425
+ HST: 263
+ MST: 2680
+ PST: 6710
+ */
 
 echo "<center>";
 if (isset($_GET['verify_connection'])) {
@@ -81,15 +84,15 @@ if (isset($_GET['verify_connection'])) {
     $result = mysql_query("SELECT * FROM urgent_lead_sources");        
     $db_u_l_s = Array();
     if (mysql_num_rows($result) > 0) {
-    $urgent_sources = "(";
-    while ($row = mysql_fetch_assoc($result)) {
-        $urgent_sources .= sanitize($row['name']).",";
-    }
-    $urgent_sources = substr($urgent_sources,0,strlen($urgent_sources)-1).")";
+        $urgent_sources = "(";
+        while ($row = mysql_fetch_assoc($result)) {
+            $urgent_sources .= sanitize($row['name']).",";
+        }
+        $urgent_sources = substr($urgent_sources,0,strlen($urgent_sources)-1).")";
     } else {
         $urgent_sources = "('')";
     }
-        
+    
     ?>
     <br /><br />
     
@@ -103,21 +106,22 @@ if (isset($_GET['verify_connection'])) {
     
     $result = mysql_query("SELECT count(*) FROM leads where  deleted = 0 ");
     echo number_format(mysql_result($result,0,0));
-
-    $result = mysql_query("SELECT id FROM lc_customstatus WHERE name = 'new'");
-    $new_status = mysql_result($result,0,0);
-
-    $result = mysql_query("SELECT id FROM lc_customstatus WHERE name like 'Left Message%'");
-    $status_left_messages = "(";
-    while ($row = mysql_fetch_assoc($result)) {
-	$status_left_messages .= sanitize($row['id']).",";
+    
+    if ($custom == true) {
+        $result = mysql_query("SELECT id FROM lc_customstatus WHERE name = 'new'");
+        $new_status = mysql_result($result,0,0);
+        
+        $result = mysql_query("SELECT id FROM lc_customstatus WHERE name like 'Left Message%'");
+        $status_left_messages = "(";
+        while ($row = mysql_fetch_assoc($result)) {
+            $status_left_messages .= sanitize($row['id']).",";
+        }
+        $status_left_messages = substr($status_left_messages,0,strlen($status_left_messages)-1).")";
     }
-    $status_left_messages = substr($status_left_messages,0,strlen($status_left_messages)-1).")";
-
     ?>
     <br />
     <br />
-
+    
     
     
     
@@ -152,20 +156,20 @@ if (isset($_GET['verify_connection'])) {
     echo number_format(mysql_result($result,0,0));
     ?>
     <br />
-<hr>
-<b>Numbers:</b><br />
-<?
+    <hr>
+    <b>Numbers:</b><br />
+    <?
     $result = mysql_query("SELECT phone_home, phone_mobile, lead_source FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered and leads.deleted = 0 and status='$new_status'");
-while ($row = mysql_fetch_assoc($result)) {
-if (isset($row['phone_mobile']) && $row['phone_mobile'] != $row['phone_home']) {
-echo "Home Phone: ".$row['phone_home'].",  Mobile Phone: ".$row['phone_mobile']." Source: ".$row['lead_source']."<br />";
-} else {
-echo "Home Phone: ".$row['phone_home']." Source: ".$row['lead_source']."<br />";
-}
-}
-?>
-
-<hr />
+    while ($row = mysql_fetch_assoc($result)) {
+        if (isset($row['phone_mobile']) && $row['phone_mobile'] != $row['phone_home']) {
+            echo "Home Phone: ".$row['phone_home'].",  Mobile Phone: ".$row['phone_mobile']." Source: ".$row['lead_source']."<br />";
+        } else {
+            echo "Home Phone: ".$row['phone_home']." Source: ".$row['lead_source']."<br />";
+        }
+    }
+    ?>
+    
+    <hr />
     <br />
     
     <b>New or left message Stage 1</b> (Entered Last 5 Days): <?
@@ -267,15 +271,15 @@ echo "Home Phone: ".$row['phone_home']." Source: ".$row['lead_source']."<br />";
          $tz_db_end[] = $row['end'];
          
          */
-    //    $key = -1;
-//        if (in_array($row['time_zone_c'], $tz_db_name) {
+        //    $key = -1;
+        //        if (in_array($row['time_zone_c'], $tz_db_name) {
         $key = array_search(trim($row['time_zone_c']), $tz_db_name);
         if ($key === false) {
             echo '<a href="sugar_servers.php?tz=1&add=1&name='.trim($row['time_zone_c']).'">TIME ZONE NOT FOUND!</a> - ';
             $key = array_search('UNSET', $tz_db_name);
-
+            
         }
-  //      }
+        //      }
         echo $row['time_zone_c'].": ".$row['count(*)']." (".$tz_db_start[$key]."-".$tz_db_end[$key].")<br />";
     }
     ?>
@@ -343,7 +347,7 @@ echo "Home Phone: ".$row['phone_home']." Source: ".$row['lead_source']."<br />";
 } else if (isset($_GET['vm'])) {
     //1, 2, 3, 4, 5, 6, 10, 14, 19, 31, 36, 41, 46, 51, 56
     if (isset($_GET['save'])) {
-//        print_pre($_POST);
+        //        print_pre($_POST);
         $vm_0_5=$config_values['vm_0_5'];
         $vm_6_10=$config_values['vm_6_10'];
         $vm_11_20=$config_values['vm_11_20'];
@@ -363,13 +367,13 @@ echo "Home Phone: ".$row['phone_home']." Source: ".$row['lead_source']."<br />";
         
         
     } else {
-//        print_pre($config_values);
+        //        print_pre($config_values);
         $vm_0_5=$config_values['vm_0_5'];
         $vm_6_10=$config_values['vm_6_10'];
         $vm_11_20=$config_values['vm_11_20'];
         $vm_21_30=$config_values['vm_21_30'];
         $vm_31_60=$config_values['vm_31_60'];
-//        $vm_0_5 = "3";
+        //        $vm_0_5 = "3";
         ?>
         <form action="sugar_servers.php?vm=1&save=1" method="post">
         <h3>VoiceMail Logic</h3>
@@ -450,25 +454,25 @@ echo "Home Phone: ".$row['phone_home']." Source: ".$row['lead_source']."<br />";
         
         $in_post_not_db = array_diff($post_db_u_l_s, $db_u_l_s);
         
-//        echo "IN BOTH: ";
-  //      print_pre($in_both);
+        //        echo "IN BOTH: ";
+        //      print_pre($in_both);
         
         /*echo "DB: ";
-        print_pre($db_u_l_s);
+         print_pre($db_u_l_s);
+         
+         echo "POST: ";
+         print_pre($post_db_u_l_s);*/
         
-        echo "POST: ";
-        print_pre($post_db_u_l_s);*/
-        
-//        echo "In DB, Not Post: ";
-    //    print_pre($in_db_not_post);
+        //        echo "In DB, Not Post: ";
+        //    print_pre($in_db_not_post);
         
         foreach ($in_db_not_post as $remove) {
             $result = mysql_query("DELETE FROM urgent_lead_sources WHERE name = ".sanitize($remove));
         }
         
         
-//        echo "In post not db: ";
-      //  print_pre($in_post_not_db);
+        //        echo "In post not db: ";
+        //  print_pre($in_post_not_db);
         
         foreach ($in_post_not_db as $add) {
             $result = mysql_query("INSERT INTO urgent_lead_sources (name) VALUES (".sanitize($add).")");
@@ -510,27 +514,27 @@ echo "Home Phone: ".$row['phone_home']." Source: ".$row['lead_source']."<br />";
     <table><tr><td style="text-align: left">
     <?
     if (count($lead_sources) == 0) {
-	echo "There are no lead sources in the database";
+        echo "There are no lead sources in the database";
     } else {
-    foreach ($lead_sources as $source) {
-        if (in_array($source, $db_u_l_s)) {
-            $checked = " checked";
-        } else {
-            $checked = "";
+        foreach ($lead_sources as $source) {
+            if (in_array($source, $db_u_l_s)) {
+                $checked = " checked";
+            } else {
+                $checked = "";
+            }
+            echo '<input type="checkbox" value="'.$source.'" name="sources[]"'.$checked.'> ';
+            echo $source."<br />";
+            
         }
-        echo '<input type="checkbox" value="'.$source.'" name="sources[]"'.$checked.'> ';
-        echo $source."<br />";
-        
-    }
-    ?>
-    <br />
-    <input type="submit" value="Save Changes">
-    </td></tr></table>
-    </form>
-    <?}
+        ?>
+        <br />
+        <input type="submit" value="Save Changes">
+        </td></tr></table>
+        </form>
+        <?}
 } else if (isset($_GET['tz'])) {
     if (isset($_GET['save'])) {
-//        print_pre($_POST);
+        //        print_pre($_POST);
         $result = mysql_query("UPDATE time_zones set name = ".sanitize($_POST['name']).", start = ".sanitize($_POST['start']).", end = ".sanitize($_POST['end'])." WHERE id = ".sanitize($_POST['id'])."");
     }
     if (isset($_GET['save_new'])) {
@@ -539,7 +543,7 @@ echo "Home Phone: ".$row['phone_home']." Source: ".$row['lead_source']."<br />";
     }
     if (isset($_GET['delete_sure'])) {
         $result = mysql_query("DELETE FROM time_zones WHERE id = ".sanitize($_GET['delete_sure']));
-
+        
     }
     
     if (isset($_GET['delete'])) {
