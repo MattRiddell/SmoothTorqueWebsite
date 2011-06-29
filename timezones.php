@@ -43,7 +43,40 @@ require "header.php";
 
 // Include Timezone specific header
 require "header_timezones.php";
+if (isset($_GET['delete_sure'])) {
+    $result = mysql_query("DELETE FROM SineDialer.time_zones WHERE id = ".sanitize($_GET['delete_sure'])) or die(mysql_error());
+    ?><center><img src="images/progress.gif" border="0"><br />Deleting your timezone...
+    <META HTTP-EQUIV=REFRESH CONTENT="1; URL=timezones.php?view_timezones=1"><?
 
+    require "footer.php";
+    exit(0);    
+}
+if (isset($_GET['delete'])) {
+    $result = mysql_query("SELECT * FROM SineDialer.time_zones WHERE id = ".sanitize($_GET['delete']));
+    if (mysql_num_rows($result) == 0) {
+        // Tried to delete something that didn't exist
+        $ip = $_SERVER['REMOTE_ADDR'];
+        echo "Attempted record deletion from $ip ($_COOKIE[user])";
+        /*================= Log Access ======================================*/
+        $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', ' $ip attempted to delete a timezone that doesn\'t exist')";
+        $result=mysql_query($sql, $link);
+        /*================= Log Access ======================================*/        
+    } else {
+        $row = mysql_fetch_assoc($result);
+        box_start();
+        ?>
+        <center><br />
+        Are you sure you want to delete the timezone <b><?=$row['name']?></b>?<br />
+        <br />
+        <a href="timezones.php?delete_sure=<?=$row['id']?>">Yes, I'm Sure</a><br />
+        <br />
+        <a href="timezones.php?view_timezones=1">No, don't delete <?=$row['name']?></a><br />  <br />      
+        <?
+        box_end();
+    }
+    require "footer.php";
+    exit(0);    
+}
 if (isset($_GET['save_new'])) {
     $sql = "INSERT INTO SineDialer.time_zones (";
     $sql2 = " VALUES (";
@@ -54,7 +87,7 @@ if (isset($_GET['save_new'])) {
     $sql = substr($sql,0,strlen($sql)-1).")".substr($sql2,0,strlen($sql2)-1).")";
     mysql_query($sql) or die(mysql_error());
     ?><center><img src="images/progress.gif" border="0"><br />Saving your timezone...
-    <META HTTP-EQUIV=REFRESH CONTENT="3; URL=timezones.php?view_timezones=1"><?
+    <META HTTP-EQUIV=REFRESH CONTENT="1; URL=timezones.php?view_timezones=1"><?
     require "footer.php";
     exit(0);
 }
