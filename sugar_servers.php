@@ -106,7 +106,7 @@ if (isset($_GET['verify_connection'])) {
     mysql_select_db($config_values['SUGAR_DB'], $link) or die(mysql_error());
     //echo "Connected";
     $result = mysql_query("SELECT count(*) FROM leads where  deleted = 0 ");
-    echo number_format(mysql_result($result,0,0))."<br />";
+    echo number_format(mysql_result($result,0,0))."<br /><br />";
     
     if ($custom == true) {
         $result = mysql_query("SELECT id FROM lc_customstatus WHERE name = 'new'");
@@ -134,8 +134,6 @@ if (isset($_GET['verify_connection'])) {
         <hr>
         <b>Numbers:</b><br />
         <?
-    }
-    if ($custom == true) {
         
         $result = mysql_query("SELECT phone_home, phone_mobile, lead_source FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered and leads.deleted = 0 and status='$new_status'  and lead_source in $urgent_sources");
         while ($row = mysql_fetch_assoc($result)) {
@@ -146,9 +144,11 @@ if (isset($_GET['verify_connection'])) {
             }
         }
     } else {
-        $result = mysql_query("SELECT phone_home, phone_mobile, phone_work, lead_source FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered limit 5");
+        $result = mysql_query("SELECT * FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered limit 5");
         while ($row = mysql_fetch_assoc($result)) {
             //print_pre($row);
+            $name = $row['salutation']." ".$row['first_name']." ".$row['last_name'];
+            echo $name."<br />";;
             if (strlen(trim($row['lead_source'])) == 0) {
                 $row['lead_source'] = "No Lead Source";
             }
@@ -166,6 +166,17 @@ if (isset($_GET['verify_connection'])) {
                 $found_number = true;
             }
             echo "Source: ".$row['lead_source']."<br />";
+            $result2 = mysql_query("SELECT * FROM notes WHERE parent_id = ".sanitize($row['id'])) or die(mysql_error());
+            if (mysql_num_rows($result2) > 0) {
+                while ($row2 = mysql_fetch_assoc($result2)) {
+                    //print_pre($row2);
+                    echo "Note: ".$row2['name']." ";
+                    echo $row2['date_entered']."<br />";
+                }
+            } else {
+                echo "No notes<br />";
+            }
+            echo "<hr /><br />";
         }
     }
     ?>
