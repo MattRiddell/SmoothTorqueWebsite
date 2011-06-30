@@ -103,8 +103,8 @@ if (isset($_GET['verify_connection'])) {
     $description = sanitize($_GET['description']);
     $parent_id = sanitize($_GET['parent_id']);
     $result = mysql_query("INSERT INTO notes 
-    (assigned_user_id, id, date_entered, date_modified, modified_user_id, created_by, name, parent_type, parent_id, description) VALUES
-    (1, $guid, $datetime, $datetime, 1, 1, $name, 'Leads', $parent_id, $description)") or die (mysql_error());
+    (id, date_entered, date_modified, modified_user_id, created_by, name, parent_type, parent_id, description) VALUES
+    ($guid, $datetime, $datetime, 1, 1, $name, 'Leads', $parent_id, $description)") or die (mysql_error());
     ?><META HTTP-EQUIV=REFRESH CONTENT="0; URL=sugar_servers.php?stats=1"><?
 } else if (isset($_GET['stats'])) {
     
