@@ -67,15 +67,24 @@ if (isset($_GET['verify_connection'])) {
         mysql_select_db($config_values['SUGAR_DB'], $link);
         echo "1";
         //        print_pre($link);
-        $result = mysql_query("SELECT id FROM ".$config_values['SUGAR_DB'].".leads WHERE phone_home = '$_POST[number]' or phone_mobile='$_POST[number]' order by date_modified DESC limit 1");
+        $result = mysql_query("SELECT id FROM ".$config_values['SUGAR_DB'].".leads WHERE phone_home = '$_POST[number]' or phone_mobile='$_POST[number]' or phone_work='$_POST[number]' order by date_modified DESC limit 1");
         if (mysql_num_rows($result) > 0) {
             while ($row = mysql_fetch_assoc($result)) {
-                ?>
-                Screen Pop Executed to: 'http://<?=$config_values['SUGAR_HOST']?>/ccs/index.php?module=Leads&offset=5&action=DetailView&record=<?=$row['id']?>'<br />
-                <script language="javascript">
-                window.open('http://<?=$config_values['SUGAR_HOST']?>/ccs/index.php?module=Leads&offset=5&action=DetailView&record=<?=$row['id']?>');
-                </script>
-                <?
+                if ($custom == true) {
+                    ?>
+                    Screen Pop Executed to: 'http://<?=$config_values['SUGAR_HOST']?>/ccs/index.php?module=Leads&offset=5&action=DetailView&record=<?=$row['id']?>'<br />
+                    <script language="javascript">
+                    window.open('http://<?=$config_values['SUGAR_HOST']?>/ccs/index.php?module=Leads&offset=5&action=DetailView&record=<?=$row['id']?>');
+                    </script>
+                    <?
+                } else {
+                    ?>
+                    Screen Pop Executed to: 'http://<?=$config_values['SUGAR_HOST']?>/index.php?module=Leads&offset=1&stamp=1309417637080258700&return_module=Leads&action=DetailView&record=<?=$row['id']?>'<br />
+                    <script language="javascript">
+                    window.open('http://<?=$config_values['SUGAR_HOST']?>/index.php?module=Leads&offset=1&stamp=1309417637080258700&return_module=Leads&action=DetailView&record=<?=$row['id']?>');
+                    </script>
+                    <?
+                }
             }
         }
     }
@@ -644,26 +653,26 @@ if (isset($_GET['verify_connection'])) {
     <br />
     
     <?if ($custom == true) {?>
-    <a href="sugar_servers.php?urgent=1">
-    Realtime Lead Sources
-    </a>
-    <br />
-    
-    <a href="sugar_servers.php?tz=1">
-    Timezones
-    </a>
-    <br />
-    
-    <a href="sugar_servers.php?vm=1">
-    VoiceMail leaving logic
-    </a>
-    <br />
-    
-    <a href="sugar_servers.php?call=1">
-    Call logic
-    </a>
-    <br />
-    <?}?>
+        <a href="sugar_servers.php?urgent=1">
+        Realtime Lead Sources
+        </a>
+        <br />
+        
+        <a href="sugar_servers.php?tz=1">
+        Timezones
+        </a>
+        <br />
+        
+        <a href="sugar_servers.php?vm=1">
+        VoiceMail leaving logic
+        </a>
+        <br />
+        
+        <a href="sugar_servers.php?call=1">
+        Call logic
+        </a>
+        <br />
+        <?}?>
     
     
     <br />
