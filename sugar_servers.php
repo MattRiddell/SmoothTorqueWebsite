@@ -153,6 +153,11 @@ if (isset($_GET['verify_connection'])) {
             }
         }
     } else {
+    
+        /* This section contains the code to display some sample records from 
+         * the Sugar Database to confirm all is working.
+         */    
+    
         $result = mysql_query("SELECT * FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered limit 5");
         while ($row = mysql_fetch_assoc($result)) {
             //print_pre($row);
@@ -187,6 +192,7 @@ if (isset($_GET['verify_connection'])) {
             }
             echo "<hr /><br />";
         }
+        echo "Dummy GUID: ".create_guid()."<br />";
     }
     ?>
     
