@@ -88,6 +88,24 @@ if (isset($_GET['verify_connection'])) {
             }
         }
     }
+} else if (isset($_GET['create_note'])) {
+    $db_host = $config_values['SUGAR_HOST'];
+    $db_user = $config_values['SUGAR_USER'];
+    $db_pass = $config_values['SUGAR_PASS'];
+    //echo "Connecting to: $db_host User: $db_user Pass:$db_pass<br />";
+    $link = mysql_connect($db_host, $db_user, $db_pass) or die("error:".mysql_error());
+    //echo "Connected";
+    mysql_select_db($config_values['SUGAR_DB'], $link) or die(mysql_error());
+    
+    $guid = sanitize(create_guid());
+    $datetime = sanitize(date('Y-m-d H:i:s'));
+    $name = sanitize($_GET['name']);
+    $description = sanitize($_GET['description']);
+    $parent_id = sanitize($_GET['parent_id']);
+    $result = mysql_query("INSERT INTO notes 
+    (assigned_user_id, id, date_entered, date_modified, modified_user_id, created_by, name, parent_type, parent_id, description) VALUES
+    (1, $guid, $datetime, $datetime, 1, 1, $name, 'Leads', $parent_id, $description)") or die (mysql_error());
+    ?><META HTTP-EQUIV=REFRESH CONTENT="0; URL=sugar_servers.php?stats=1"><?
 } else if (isset($_GET['stats'])) {
     
     $result = mysql_query("SELECT * FROM urgent_lead_sources");        
@@ -162,7 +180,9 @@ if (isset($_GET['verify_connection'])) {
         while ($row = mysql_fetch_assoc($result)) {
             //print_pre($row);
             $name = $row['salutation']." ".$row['first_name']." ".$row['last_name'];
-            echo $name."<br />";;
+            ?><a href="http://<?=$config_values['SUGAR_HOST']?>/index.php?module=Leads&offset=1&stamp=1309417637080258700&return_module=Leads&action=DetailView&record=<?=$row['id']?>">
+            <? 
+            echo $name."</a><br />";;
             if (strlen(trim($row['lead_source'])) == 0) {
                 $row['lead_source'] = "No Lead Source";
             }
@@ -190,6 +210,7 @@ if (isset($_GET['verify_connection'])) {
             } else {
                 echo "No notes<br />";
             }
+            echo '<a href="sugar_servers.php?create_note=1&parent_id='.$row['id'].'&name=Phone Call&description=A test entry">Create a dummy note</a>';
             echo "<hr /><br />";
         }
         echo "Dummy GUID: ".create_guid()."<br />";

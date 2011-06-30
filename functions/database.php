@@ -67,7 +67,9 @@ if (!function_exists('microtime_diff')) {
     }
 }
 
+/* End of GUI creation functions for SugarCRM */
 
+/* Start of straight SmoothTorque functions */
 
 if (!function_exists('mysql_is_table') ) {
     function mysql_is_table($host, $user, $pass, $db, $tbl)
