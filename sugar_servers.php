@@ -15,7 +15,7 @@ box_start(400);
 // Set this to true to use a custom SugarCRM install
 $custom = false;
 
-
+// Get a list of timezones
 $tz_db = array();
 $result = mysql_query("SELECT * FROM time_zones");
 if (mysql_num_rows($result) > 0) {
