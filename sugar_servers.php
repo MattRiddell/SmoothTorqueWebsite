@@ -153,11 +153,11 @@ if (isset($_GET['verify_connection'])) {
             }
         }
     } else {
-    
+        
         /* This section contains the code to display some sample records from 
          * the Sugar Database to confirm all is working.
          */    
-    
+        
         $result = mysql_query("SELECT * FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered limit 5");
         while ($row = mysql_fetch_assoc($result)) {
             //print_pre($row);
@@ -203,82 +203,84 @@ if (isset($_GET['verify_connection'])) {
     
     
     
-    
-    <b>NEW not left message Stage 1</b> (Entered Last 5 Days): <?
-    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered and leads.deleted = 0 and status='$new_status'");
-    echo number_format(mysql_result($result,0,0));
-    ?>
-    <br />
-    <hr>
-    <b>Numbers:</b><br />
-    <?
-    $result = mysql_query("SELECT phone_home, phone_mobile, lead_source FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered and leads.deleted = 0 and status='$new_status'");
-    while ($row = mysql_fetch_assoc($result)) {
-        if (isset($row['phone_mobile']) && $row['phone_mobile'] != $row['phone_home']) {
-            echo "Home Phone: ".$row['phone_home'].",  Mobile Phone: ".$row['phone_mobile']." Source: ".$row['lead_source']."<br />";
-        } else {
-            echo "Home Phone: ".$row['phone_home']." Source: ".$row['lead_source']."<br />";
+    <?if ($custom == true) {?>
+        <b>NEW not left message Stage 1</b> (Entered Last 5 Days): <?
+        $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered and leads.deleted = 0 and status='$new_status'");
+        echo number_format(mysql_result($result,0,0));
+        ?>
+        <br />
+        <hr>
+        <b>Numbers:</b><br />
+        <?
+        $result = mysql_query("SELECT phone_home, phone_mobile, lead_source FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered and leads.deleted = 0 and status='$new_status'");
+        while ($row = mysql_fetch_assoc($result)) {
+            if (isset($row['phone_mobile']) && $row['phone_mobile'] != $row['phone_home']) {
+                echo "Home Phone: ".$row['phone_home'].",  Mobile Phone: ".$row['phone_mobile']." Source: ".$row['lead_source']."<br />";
+            } else {
+                echo "Home Phone: ".$row['phone_home']." Source: ".$row['lead_source']."<br />";
+            }
         }
+        ?>
+        
+        <hr />
+        <br />
+        
+        <b>New or left message Stage 1</b> (Entered Last 5 Days): <?
+        $sql = "SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered and leads.deleted = 0 and (status='$new_status' or status in $status_left_messages)";
+        $result = mysql_query($sql) or die(mysql_error());
+        echo number_format(mysql_result($result,0,0));
+        ?>
+        <br />
+        
+        
+        
+        
+        <b>Stage 2</b> (Entered 6-10 days ago): <?
+        $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) > date_entered and DATE_SUB(CURDATE(),INTERVAL 10 DAY) <= date_entered and leads.deleted = 0  and (status='$new_status' or status in $status_left_messages)");
+        echo number_format(mysql_result($result,0,0));
+        ?>
+        <br />
+        
+        
+        <b>Stage 3</b> (Entered 11-20 days ago): <?
+        $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 10 DAY) > date_entered and DATE_SUB(CURDATE(),INTERVAL 20 DAY) <= date_entered and leads.deleted = 0  and (status='$new_status' or status in $status_left_messages)");
+        echo number_format(mysql_result($result,0,0));
+        ?>
+        <br />
+        
+        
+        <b>Stage 4</b> (Entered 21-30 days ago): <?
+        $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 20 DAY) > date_entered and DATE_SUB(CURDATE(),INTERVAL 30 DAY) <= date_entered and leads.deleted = 0  and (status='$new_status' or status in $status_left_messages)");
+        echo number_format(mysql_result($result,0,0));
+        ?>
+        <br />
+        
+        
+        <b>Stage 5</b> (Entered 31-60 days ago): <?
+        $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 30 DAY) > date_entered and DATE_SUB(CURDATE(),INTERVAL 60 DAY) <= date_entered and leads.deleted = 0  and (status='$new_status' or status in $status_left_messages)");
+        echo number_format(mysql_result($result,0,0));
+        ?>
+        <br />
+        <br />
+        
+        <b>Old</b> (Entered >60 days ago): <?
+        $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 60 DAY) > date_entered and leads.deleted = 0  and (status='$new_status' or status in $status_left_messages)");
+        echo number_format(mysql_result($result,0,0));
+        ?>
+        <br />
+        
+        
+        
+        
+        
+        
+        <br />
+        
+        
+        
+        <?
     }
     ?>
-    
-    <hr />
-    <br />
-    
-    <b>New or left message Stage 1</b> (Entered Last 5 Days): <?
-    $sql = "SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered and leads.deleted = 0 and (status='$new_status' or status in $status_left_messages)";
-    $result = mysql_query($sql) or die(mysql_error());
-    echo number_format(mysql_result($result,0,0));
-    ?>
-    <br />
-    
-    
-    
-    
-    <b>Stage 2</b> (Entered 6-10 days ago): <?
-    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) > date_entered and DATE_SUB(CURDATE(),INTERVAL 10 DAY) <= date_entered and leads.deleted = 0  and (status='$new_status' or status in $status_left_messages)");
-    echo number_format(mysql_result($result,0,0));
-    ?>
-    <br />
-    
-    
-    <b>Stage 3</b> (Entered 11-20 days ago): <?
-    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 10 DAY) > date_entered and DATE_SUB(CURDATE(),INTERVAL 20 DAY) <= date_entered and leads.deleted = 0  and (status='$new_status' or status in $status_left_messages)");
-    echo number_format(mysql_result($result,0,0));
-    ?>
-    <br />
-    
-    
-    <b>Stage 4</b> (Entered 21-30 days ago): <?
-    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 20 DAY) > date_entered and DATE_SUB(CURDATE(),INTERVAL 30 DAY) <= date_entered and leads.deleted = 0  and (status='$new_status' or status in $status_left_messages)");
-    echo number_format(mysql_result($result,0,0));
-    ?>
-    <br />
-    
-    
-    <b>Stage 5</b> (Entered 31-60 days ago): <?
-    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 30 DAY) > date_entered and DATE_SUB(CURDATE(),INTERVAL 60 DAY) <= date_entered and leads.deleted = 0  and (status='$new_status' or status in $status_left_messages)");
-    echo number_format(mysql_result($result,0,0));
-    ?>
-    <br />
-    <br />
-    
-    <b>Old</b> (Entered >60 days ago): <?
-    $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 60 DAY) > date_entered and leads.deleted = 0  and (status='$new_status' or status in $status_left_messages)");
-    echo number_format(mysql_result($result,0,0));
-    ?>
-    <br />
-    
-    
-    
-    
-    
-    
-    <br />
-    
-    
-    
-    
     
     
     <b>Leads</b> (Modified Last 24 Hours): <?
@@ -310,89 +312,91 @@ if (isset($_GET['verify_connection'])) {
     
     <br />
     
-    
-    
-    <b>Timezones:</b> <br /><?
-    $result = mysql_query("select count(*), time_zone_c from leads, leads_cstm where leads.id = leads_cstm.id_c and leads.deleted = 0 group by time_zone_c");
-    while ($row = mysql_fetch_assoc($result)) {
-        if (strlen($row['time_zone_c']) == 0) {
-            $row['time_zone_c'] = "UNSET";
+    <?if ($custom == true) {?>
+        
+        <b>Timezones:</b> <br /><?
+        $result = mysql_query("select count(*), time_zone_c from leads, leads_cstm where leads.id = leads_cstm.id_c and leads.deleted = 0 group by time_zone_c");
+        while ($row = mysql_fetch_assoc($result)) {
+            if (strlen($row['time_zone_c']) == 0) {
+                $row['time_zone_c'] = "UNSET";
+            }
+            /*
+             $tz_db_name[] = $row['name'];
+             $tz_db_start[] = $row['start'];
+             $tz_db_end[] = $row['end'];
+             
+             */
+            //    $key = -1;
+            //        if (in_array($row['time_zone_c'], $tz_db_name) {
+            $key = array_search(trim($row['time_zone_c']), $tz_db_name);
+            if ($key === false) {
+                echo '<a href="sugar_servers.php?tz=1&add=1&name='.trim($row['time_zone_c']).'">TIME ZONE NOT FOUND!</a> - ';
+                $key = array_search('UNSET', $tz_db_name);
+                
+            }
+            //      }
+            echo $row['time_zone_c'].": ".$row['count(*)']." (".$tz_db_start[$key]."-".$tz_db_end[$key].")<br />";
         }
-        /*
-         $tz_db_name[] = $row['name'];
-         $tz_db_start[] = $row['start'];
-         $tz_db_end[] = $row['end'];
-         
-         */
-        //    $key = -1;
-        //        if (in_array($row['time_zone_c'], $tz_db_name) {
-        $key = array_search(trim($row['time_zone_c']), $tz_db_name);
-        if ($key === false) {
-            echo '<a href="sugar_servers.php?tz=1&add=1&name='.trim($row['time_zone_c']).'">TIME ZONE NOT FOUND!</a> - ';
-            $key = array_search('UNSET', $tz_db_name);
-            
+        ?>
+        <br />
+        
+        
+        <br />
+        
+        
+        <b>Statuses:</b> <br /><?
+        $result = mysql_query("select count(*), lc_customstatus.name as name from leads, lc_customstatus where leads.status = lc_customstatus.id and leads.deleted = 0 group by leads.status order by count(*) desc");
+        while ($row = mysql_fetch_assoc($result)) {
+            echo $row['name'].": ".$row['count(*)']."<br />";
         }
-        //      }
-        echo $row['time_zone_c'].": ".$row['count(*)']." (".$tz_db_start[$key]."-".$tz_db_end[$key].")<br />";
+        ?>
+        <br />
+        
+        
+        <br />    
+        
+        
+        
+        <b>Lead Sources:</b> <br /><?
+        $result = mysql_query("select count(*), lead_source from leads where deleted = 0 group by lead_source order by count(*) desc");
+        while ($row = mysql_fetch_assoc($result)) {
+            echo $row['lead_source'].": ".$row['count(*)']."<br />";
+        }
+        ?>
+        <br />
+        <br />
+        
+        
+        
+        
+        
+        <b>Below 10k:</b> <?
+        $result = mysql_query("select count(*) from leads, leads_cstm where leads.id = leads_cstm.id_c and debt_amt_c < 10000 and leads.deleted = 0");
+        while ($row = mysql_fetch_assoc($result)) {
+            echo $row['count(*)']."<br />";
+        }
+        ?>
+        <br />
+        
+        <b>Above 10k:</b> <?
+        $result = mysql_query("select count(*) from leads, leads_cstm where leads.id = leads_cstm.id_c and debt_amt_c > 10000 and leads.deleted = 0");
+        while ($row = mysql_fetch_assoc($result)) {
+            echo $row['count(*)']."<br />";
+        }
+        ?>
+        <br />
+        
+        <b>Above 100k:</b> <?
+        $result = mysql_query("select count(*) from leads, leads_cstm where leads.id = leads_cstm.id_c and debt_amt_c > 100000 and leads.deleted = 0");
+        while ($row = mysql_fetch_assoc($result)) {
+            echo $row['count(*)']."<br />";
+        }
+        ?>
+        <br />
+        
+        <?
     }
     ?>
-    <br />
-    
-    
-    <br />
-    
-    
-    <b>Statuses:</b> <br /><?
-    $result = mysql_query("select count(*), lc_customstatus.name as name from leads, lc_customstatus where leads.status = lc_customstatus.id and leads.deleted = 0 group by leads.status order by count(*) desc");
-    while ($row = mysql_fetch_assoc($result)) {
-        echo $row['name'].": ".$row['count(*)']."<br />";
-    }
-    ?>
-    <br />
-    
-    
-    <br />    
-    
-    
-    
-    <b>Lead Sources:</b> <br /><?
-    $result = mysql_query("select count(*), lead_source from leads where deleted = 0 group by lead_source order by count(*) desc");
-    while ($row = mysql_fetch_assoc($result)) {
-        echo $row['lead_source'].": ".$row['count(*)']."<br />";
-    }
-    ?>
-    <br />
-    <br />
-    
-    
-    
-    
-    
-    <b>Below 10k:</b> <?
-    $result = mysql_query("select count(*) from leads, leads_cstm where leads.id = leads_cstm.id_c and debt_amt_c < 10000 and leads.deleted = 0");
-    while ($row = mysql_fetch_assoc($result)) {
-        echo $row['count(*)']."<br />";
-    }
-    ?>
-    <br />
-    
-    <b>Above 10k:</b> <?
-    $result = mysql_query("select count(*) from leads, leads_cstm where leads.id = leads_cstm.id_c and debt_amt_c > 10000 and leads.deleted = 0");
-    while ($row = mysql_fetch_assoc($result)) {
-        echo $row['count(*)']."<br />";
-    }
-    ?>
-    <br />
-    
-    <b>Above 100k:</b> <?
-    $result = mysql_query("select count(*) from leads, leads_cstm where leads.id = leads_cstm.id_c and debt_amt_c > 100000 and leads.deleted = 0");
-    while ($row = mysql_fetch_assoc($result)) {
-        echo $row['count(*)']."<br />";
-    }
-    ?>
-    <br />
-    
-    
     
     
     
