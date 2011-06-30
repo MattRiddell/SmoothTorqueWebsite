@@ -1,9 +1,36 @@
 <?
 
 
+//Create a GUI for SugarCRM
+if (!function_exists('create_guid')) {
+    function create_guid() {
+        
+        $microTime = microtime();
+        list($a_dec, $a_sec) = explode(" ", $microTime);
+        
+        $dec_hex = sprintf("%x", $a_dec* 1000000);
+        $sec_hex = sprintf("%x", $a_sec);
+        
+        ensure_length($dec_hex, 5);
+        ensure_length($sec_hex, 6);
+        
+        $guid = "";
+        $guid .= $dec_hex;
+        $guid .= create_guid_section(3);
+        $guid .= '-';
+        $guid .= create_guid_section(4);
+        $guid .= '-';
+        $guid .= create_guid_section(4);
+        $guid .= '-';
+        $guid .= create_guid_section(4);
+        $guid .= '-';
+        $guid .= $sec_hex;
+        $guid .= create_guid_section(6);
+        return $guid;
+    }
+}
 
-
-#Functions taken straight from SugarCRM to generate the $guid.
+// Functions taken straight from SugarCRM to generate the $guid.
 
 if (!function_exists('create_guid_section')) {
     function create_guid_section($characters)
@@ -17,7 +44,7 @@ if (!function_exists('create_guid_section')) {
     }
 }
 
-if (!function_exists('create_guid_section')) {
+if (!function_exists('ensure_length')) {
     function ensure_length(&$string, $length)
     {
         $strlen = strlen($string);
@@ -32,7 +59,7 @@ if (!function_exists('create_guid_section')) {
     }
 }
 
-if (!function_exists('create_guid_section')) {
+if (!function_exists('microtime_diff')) {
     function microtime_diff($a, $b) {
         list($a_dec, $a_sec) = explode(" ", $a);
         list($b_dec, $b_sec) = explode(" ", $b);
