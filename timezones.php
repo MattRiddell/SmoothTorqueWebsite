@@ -47,7 +47,7 @@ if (isset($_GET['delete_sure'])) {
     $result = mysql_query("DELETE FROM SineDialer.time_zones WHERE id = ".sanitize($_GET['delete_sure'])) or die(mysql_error());
     ?><center><img src="images/progress.gif" border="0"><br />Deleting your timezone...
     <META HTTP-EQUIV=REFRESH CONTENT="1; URL=timezones.php?view_timezones=1"><?
-
+    
     require "footer.php";
     exit(0);    
 }
@@ -170,5 +170,46 @@ if (isset($_GET['view_timezones'])) {
     require "footer.php";
     exit(0);
 }
+if (isset($_GET['add_prefixes'])) {
+    
+    box_start();
+    echo "Adding TimeZone Prefixes";
+    box_end();
+    // Don't fall through
+    require "footer.php";
+    exit(0);
+}
+
+if (isset($_GET['view_prefixes'])) {
+    $result = mysql_query("SELECT count(*) FROM SineDialer.timezone_prefixes") or die(mysql_error());
+    $count = mysql_result($result,0,0);
+    if ($count == 0) {
+        ?>
+        <br /><br />
+        <?box_start();
+        echo "<br /><center><img src=\"images/icons/gtk-dialog-info.png\" border=\"0\" width=\"64\" height=\"64\"><br /><br />";
+        ?>
+        <b>You don't have any timezone prefixes created.</b><br />
+        <br />
+        In order to use timezone based dialling you will need at least one timezone prefix defined.<br />
+        <br />
+        <a href="timezones.php?add_prefixes=1">
+        <img src="images/icons/gtk-add.png" border="0" width="64" height="64"><br />
+        Click here to create your first timezone prefix</a><br /> or click the Add Timezone Prefix button above.
+        <br />
+        <br />
+        <?
+        //'
+        box_end();
+    } else {
+        box_start();
+        echo "Total Prefixes: $count<br />";
+        box_end();
+    }
+    // Don't fall through
+    require "footer.php";
+    exit(0);
+}
+
 require "footer.php";
 ?>
