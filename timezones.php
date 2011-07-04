@@ -171,9 +171,56 @@ if (isset($_GET['view_timezones'])) {
     exit(0);
 }
 if (isset($_GET['add_prefixes'])) {
+    require "footer.php";
+    exit(0);
+}
+if (isset($_GET['add_prefixes'])) {
     
     box_start();
-    echo "Adding TimeZone Prefixes";
+    echo "<center>";
+    ?>
+    <br />Timezone prefixes are basically the area codes for phone numbers and their
+    associated timezones.<br />
+    <br />
+    You can add a timezone area code by filling out the form below or by using
+    the <a href="timezones.php?upload=1">upload area codes</a> link.<br />
+    <br />
+    <form action="timezones.php?save_prefix=1" method="post">
+    <table>
+    <tr>
+    <td>
+    Prefix
+    </td>
+    <td>
+    <input type="text" name="prefix">
+    </td>
+    </tr>
+    <tr>
+    <td>
+    TimeZone
+    </td>
+    <td>
+    <select name="timezone">
+    <?
+    $result_timezones = mysql_query("SELECT * FROM SineDialer.time_zones order by name");
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_assoc($result_timezones)) {
+            echo '<option value="'.$row['id'].'">'.$row['name'].'</option>';
+        }
+    }
+    ?>
+    </select>
+    </td>
+    </tr>
+    <tr>
+    <td colspan="2">
+    <input type="submit" value="Add Area Code">
+    </td>
+    </tr>
+    </table>
+    </form>
+    <br />
+    <?
     box_end();
     // Don't fall through
     require "footer.php";
