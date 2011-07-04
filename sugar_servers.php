@@ -109,6 +109,29 @@ document.getElementById(id).style.display = "none";
         </tr>
         
         
+                
+        <tr>
+        <td>
+        Maximum times to call?
+        </td>
+        <td>
+        <select name="max_calls">
+        <option value="0">Unlimited</option>
+        <option value="1">Once</option>
+        <option value="2">Twice</option>
+        <option value="3">3 Times</option>
+        <option value="4">4 Times</option>
+        <option value="5">5 Times</option>
+        <option value="6">6 Times</option>
+        <option value="7">7 Times</option>
+        <option value="8">8 Times</option>
+        <option value="9">9 Times</option>
+        <option value="10">10 Times</option>
+        </select>
+        </td>
+        </tr>
+        
+        
         </table>
         </form>
         <?
