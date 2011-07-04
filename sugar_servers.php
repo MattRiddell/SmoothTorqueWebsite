@@ -140,7 +140,21 @@ document.getElementById(id).style.display = "none";
         </td>
         </tr>
         
+        <tr>
+        <td>
+        Use City Based Dialling?
+        </td>
+        <td>
+        <select name="use_city" onchange="show_hide('use_city',this.selectedIndex);">
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+        </select>
+        <div id="use_city" style="display:none">
+        City:<input type="text" name="city">
+        </div>
         
+        </td>
+        </tr>
                 
         <tr>
         <td>
