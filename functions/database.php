@@ -1278,6 +1278,7 @@ if (!function_exists('create_missing_tables') ) {
             `campaign_id` int(11) NOT NULL,
             `type` int(11) DEFAULT NULL,
             `last_dialed` int(11) DEFAULT NULL,
+            `include_undialed` int(11) DEFAULT NULL,
             `max_calls` int(11) DEFAULT NULL,
             `use_home` int(11) DEFAULT NULL,
             `use_work` int(11) DEFAULT NULL,
