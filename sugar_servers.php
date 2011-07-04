@@ -108,6 +108,38 @@ document.getElementById(id).style.display = "none";
         </td>
         </tr>
         
+        <tr>
+        <td>
+        Use Lead Source Based Dialling?
+        </td>
+        <td>
+        <select name="use_lead_source" onchange="show_hide('use_lead_source',this.selectedIndex);">
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+        </select>
+        <div id="use_lead_source" style="display:none">
+        <select name="lead_source">
+        <option value="Cold Call">Cold Call</option>
+        <option value="Existing Customer">Existing Customer</option>
+        <option value="Self Generated">Self Generated</option>
+        <option value="Employee">Employee</option>
+        <option value="Partner">Partner</option>
+        <option value="Public Relations">Public Relations</option>
+        <option value="Direct Mail">Direct Mail</option>
+        <option value="Public Relations">Public Relations</option>
+        <option value="Conference">Conference</option>
+        <option value="Trade Show">Trade Show</option>
+        <option value="Web Site">Web Site</option>
+        <option value="Word of mouth">Word of mouth</option>
+        <option value="Email">Email</option>
+        <option value="Campaign">Campaign</option>
+        <option value="Other">Other</option>
+        </select>
+        </div>
+        
+        </td>
+        </tr>
+        
         
                 
         <tr>
