@@ -43,6 +43,28 @@ if (mysql_num_rows($result) > 0) {
  */
 
 echo "<center>";
+
+/* Set up business rules for importing records from SugarCRM */
+if (isset($_GET['rules'])) {
+    $result = mysql_query("SELECT * FROM SineDialer.campaign");//, SineDialer.sugar_pull_rules WHERE sugar_pull_rules.campaign_id = campaign.id") or die(mysql_error());
+    if (mysql_num_rows($result) == 0) {
+        echo "There are no campaigns available to use - please create a campaign first";
+    } else {
+        while ($row = mysql_fetch_assoc($result)) {
+            //print_pre($row);
+            echo $row['name']."";
+            $result_rules = mysql_query("SELECT * FROM SineDialer.sugar_pull_rules WHERE campaign_id = ".$row['id']);
+            if (mysql_num_rows($result_rules) == 0) {
+                echo " No rules <br />";
+            } else {
+                echo " <b>Rules</b><br />";
+            }
+        }
+    }
+    require "footer.php";
+    exit(0);
+}
+
 if (isset($_GET['verify_connection'])) {
     if (!isset($_POST['number'])) {
         ?>
@@ -680,6 +702,11 @@ if (isset($_GET['verify_connection'])) {
     
     <a href="sugar_servers.php?stats=1">
     Database Statistics
+    </a>
+    <br />
+    
+    <a href="sugar_servers.php?rules=1">
+    Record Transfer Rules
     </a>
     <br />
     
