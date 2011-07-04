@@ -253,7 +253,9 @@ if (isset($_GET['verify_connection'])) {
          * the Sugar Database to confirm all is working.
          */    
         
-        $result = mysql_query("SELECT * FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered limit 5");
+        $result = mysql_query("SELECT * FROM leads limit 5");
+        // Doesn't need to be last 5 days
+        //$result = mysql_query("SELECT * FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered limit 5");
         while ($row = mysql_fetch_assoc($result)) {
             //print_pre($row);
             $name = $row['salutation']." ".$row['first_name']." ".$row['last_name'];
