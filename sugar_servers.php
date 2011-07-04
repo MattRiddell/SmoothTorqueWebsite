@@ -41,10 +41,10 @@ if (mysql_num_rows($result) > 0) {
  PST: 6710
  */
 
-echo "<center>";
 
 /* Set up business rules for importing records from SugarCRM */
 if (isset($_GET['rules'])) {
+    echo "<center>";
     echo "<br />";
     $result = mysql_query("SELECT * FROM SineDialer.campaign");//, SineDialer.sugar_pull_rules WHERE sugar_pull_rules.campaign_id = campaign.id") or die(mysql_error());
     if (mysql_num_rows($result) == 0) {
@@ -55,7 +55,7 @@ if (isset($_GET['rules'])) {
         <tr height="10">
         <th class="theadl" ></th>
         <th class="thead">Campaign Name</th>
-        <th class="thead" width="100">Rules</th>
+        <th class="thead" width="100">CRM Rules</th>
         <th class="thead" width="100">Edit/Add Rules</th>
         <th class="thead" width="100">Delete Rules</th>
         <th class="theadr"></th>
@@ -82,13 +82,13 @@ if (isset($_GET['rules'])) {
             echo "</td>";
             echo "<td>";
             if (mysql_num_rows($result_rules) == 0) {
-                echo '<img src="images/add.png" alt="No Rules Defined">';
+                echo '<a href="sugar_servers.php?add_rules='.$row['id'].'"><img src="images/add.png" alt="No Rules Defined"> &nbsp;Add Rules</a>';
             } else {
-                echo '<img src="images/pencil.png" alt="Rules Defined">';
+                echo '<a href="sugar_servers.php?edit_rules='.$row['id'].'"><img src="images/pencil.png" alt="Edit Rules Defined"> &nbsp;Edit Rules</a>';
             }
 
             echo "</td><td>";
-            echo '<img src="images/delete.png" alt="Rules Defined">';
+            echo '<a href="sugar_servers.php?delete_rules='.$row['id'].'"><img src="images/delete.png" alt="Delete Rules">&nbsp;Delete</a>';
             echo "</td><td>";
             echo "</td></tr>";
         }
@@ -98,6 +98,7 @@ if (isset($_GET['rules'])) {
     exit(0);
 }
 box_start(400);
+echo "<center>";
 
 
 if (isset($_GET['verify_connection'])) {
