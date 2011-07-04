@@ -1269,6 +1269,43 @@ if (!function_exists('create_missing_tables') ) {
         }
         
         /*======================================================================
+         sugar_pull_rules Table
+         ======================================================================*/
+        if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","sugar_pull_rules")){
+            include "admin/db_config.php";
+            $sql = "CREATE TABLE `sugar_pull_rules` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `campaign_id` int(11) NOT NULL,
+            `type` int(11) DEFAULT NULL,
+            `last_dialed` int(11) DEFAULT NULL,
+            `max_calls` int(11) DEFAULT NULL,
+            `use_home` int(11) DEFAULT NULL,
+            `use_work` int(11) DEFAULT NULL,
+            `use_mobile` int(11) DEFAULT NULL,
+            `use_lead_source` int(11) DEFAULT NULL,
+            `lead_source` varchar(255) DEFAULT NULL,
+            `use_city` int(11) DEFAULT NULL,
+            `city` varchar(255) DEFAULT NULL,
+            PRIMARY KEY (`id`)
+            )";
+            $result = mysql_query($sql,$link) or die(mysql_error());
+            $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created sugar_pull_rules Table')";
+            $result=mysql_query($sql, $link);
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        /*======================================================================
          Queue_Table
          ======================================================================*/
         if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","queue_table")){
