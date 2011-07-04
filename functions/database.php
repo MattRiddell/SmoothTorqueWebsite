@@ -1285,6 +1285,8 @@ if (!function_exists('create_missing_tables') ) {
             `use_mobile` int(11) DEFAULT NULL,
             `use_lead_source` int(11) DEFAULT NULL,
             `lead_source` varchar(255) DEFAULT NULL,
+            `use_status` int(11) DEFAULT NULL,
+            `status` varchar(255) DEFAULT NULL,
             `use_city` int(11) DEFAULT NULL,
             `city` varchar(255) DEFAULT NULL,
             PRIMARY KEY (`id`)
