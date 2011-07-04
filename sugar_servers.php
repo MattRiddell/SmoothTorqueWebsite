@@ -132,6 +132,46 @@ document.getElementById(id).style.display = "none";
         </tr>
         
         
+        
+        <tr>
+        <td>
+        Use Home Number?
+        </td>
+        <td>
+        <select name="use_home">
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+        </select>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>
+        Use Work Number?
+        </td>
+        <td>
+        <select name="use_work">
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+        </select>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>
+        Use Mobile Number?
+        </td>
+        <td>
+        <select name="use_mobile">
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+        </select>
+        </td>
+        </tr>
+        
+
+        
+        
         </table>
         </form>
         <?
