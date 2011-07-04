@@ -10,7 +10,6 @@
 
 require "header.php";
 require "header_server.php";
-box_start(400);
 
 // Set this to true to use a custom SugarCRM install
 $custom = false;
@@ -46,24 +45,60 @@ echo "<center>";
 
 /* Set up business rules for importing records from SugarCRM */
 if (isset($_GET['rules'])) {
+    echo "<br />";
     $result = mysql_query("SELECT * FROM SineDialer.campaign");//, SineDialer.sugar_pull_rules WHERE sugar_pull_rules.campaign_id = campaign.id") or die(mysql_error());
     if (mysql_num_rows($result) == 0) {
         echo "There are no campaigns available to use - please create a campaign first";
     } else {
+        echo '<table border="0" cellpadding="3" cellspacing="0">';
+        ?>
+        <tr height="10">
+        <th class="theadl" ></th>
+        <th class="thead">Campaign Name</th>
+        <th class="thead" width="100">Rules</th>
+        <th class="thead" width="100">Edit/Add Rules</th>
+        <th class="thead" width="100">Delete Rules</th>
+        <th class="theadr"></th>
+        </tr>
+        <?
         while ($row = mysql_fetch_assoc($result)) {
-            //print_pre($row);
+            if ($toggle){
+                $toggle=false;
+                $class=" class=\"tborder2\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f8f8f8'\"   ";
+            } else {
+                $toggle=true;
+                $class=" class=\"tborderx\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f0f0f0'\" ";
+            }
+            echo "<tr$class><td>";
+            echo "</td><td>";
             echo $row['name']."";
+            echo "</td><td>";
             $result_rules = mysql_query("SELECT * FROM SineDialer.sugar_pull_rules WHERE campaign_id = ".$row['id']);
             if (mysql_num_rows($result_rules) == 0) {
-                echo " No rules <br />";
+                echo '<img src="images/cross.png" alt="No Rules Defined">';
             } else {
-                echo " <b>Rules</b><br />";
+                echo '<img src="images/tick.png" alt="Rules Defined">';
             }
+            echo "</td>";
+            echo "<td>";
+            if (mysql_num_rows($result_rules) == 0) {
+                echo '<img src="images/add.png" alt="No Rules Defined">';
+            } else {
+                echo '<img src="images/pencil.png" alt="Rules Defined">';
+            }
+
+            echo "</td><td>";
+            echo '<img src="images/delete.png" alt="Rules Defined">';
+            echo "</td><td>";
+            echo "</td></tr>";
         }
+        echo "</table>";
     }
     require "footer.php";
     exit(0);
 }
+box_start(400);
+
 
 if (isset($_GET['verify_connection'])) {
     if (!isset($_POST['number'])) {
