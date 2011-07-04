@@ -25,6 +25,19 @@ if (mysql_num_rows($result) > 0) {
     }
 }
 
+if (isset($_GET['save_add_rule'])) {
+    $sql1 = "INSERT INTO SineDialer.sugar_pull_rules (";
+    $sql2 = ") VALUES (";
+    foreach ($_POST as $field=>$value) {
+        $sql1.=sanitize($field, false).",";
+        $sql2.=sanitize($value, true).",";
+    }
+    $sql = substr($sql1,0,strlen($sql1)-1).substr($sql2,0,strlen($sql2)-1).")";
+    $result = mysql_query($sql) or die(mysql_error());
+    ?><META HTTP-EQUIV=REFRESH CONTENT="0; URL=sugar_servers.php?rules=1"><?
+    require "footer.php";
+    exit(0);
+}
 
 /* Add rules for SugarCRM */
 if (isset($_GET['add_rules'])) {
@@ -48,6 +61,7 @@ document.getElementById(id).style.display = "none";
         echo "<h3>".$row['name']."</h3><u>".$row['description']."</u><br /><br />";
         ?>
         <form action="sugar_servers.php?save_add_rule=1" method="post">
+        <input type="hidden" name="campaign_id" value="<?=$_GET['add_rules']?>">
         <table>
         
         
@@ -219,6 +233,7 @@ document.getElementById(id).style.display = "none";
         
         
         </table>
+        <input type="submit" value="Add Rule">
         </form>
         <?
         echo "<br />";
