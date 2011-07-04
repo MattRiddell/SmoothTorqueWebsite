@@ -96,20 +96,12 @@ document.getElementById(id).style.display = "none";
         </select>
         <div id="use_status" style="display:none">
         <select name="status">
-        <?
-        $db_host = $config_values['SUGAR_HOST'];
-        $db_user = $config_values['SUGAR_USER'];
-        $db_pass = $config_values['SUGAR_PASS'];
-        //echo "Connecting to: $db_host User: $db_user Pass:$db_pass<br />";
-        $link = mysql_connect($db_host, $db_user, $db_pass);
-        mysql_select_db($config_values['SUGAR_DB'], $link);        
-        $result_status = mysql_query("SELECT distinct status FROM leads");
-        if (mysql_num_rows($result_status) > 0) {
-            while ($row_status = mysql_fetch_assoc($result_status)) {
-                echo '<option value="'.$row_status['status'].'">'.$row_status['status'].'</option>';
-            }
-        }
-        ?>
+        <option value="New">New</option>
+        <option value="Assigned">Assigned</option>
+        <option value="In Process">In Process</option>
+        <option value="Converted">Converted</option>
+        <option value="Recycled">Recycled</option>
+        <option value="Dead">Dead</option>
         </select>
         </div>
         
