@@ -26,22 +26,41 @@ if (mysql_num_rows($result) > 0) {
 }
 
 
-/*$timezones['unset']['start'] = '08:00';
- $timezones['unset']['end'] = '18:00';
- 
- $timezones['AKST']['start'] = '07:00';
- $timezones['AKST']['end'] = '';
- 
- AKST: 89
- ATC: 169
- CST: 8761
- EST: 30425
- HST: 263
- MST: 2680
- PST: 6710
- */
-
-
+/* Add rules for SugarCRM */
+if (isset($_GET['add_rules'])) {
+    $result = mysql_query("SELECT * FROM SineDialer.campaign WHERE id = ".sanitize($_GET['add_rules']));
+    if (mysql_num_rows($result) == 0) {
+        echo "You have specified an invalid ID";
+    } else {
+        $row = mysql_fetch_assoc($result);
+        box_start();
+        echo "<center>";
+        echo "<h3>".$row['name']."</h3><u>".$row['description']."</u><br /><br />";
+        ?>
+        <form action="sugar_servers.php?save_add_rule=1" method="post">
+        <table>
+        <tr>
+        <td>
+        Last Dialed:
+        </td>
+        <td>
+        <select name="last_dialed">
+        <option value="1">1 Day or More</option>
+        <option value="2">2 Day or More</option>
+        <option value="3">3 Day or More</option>
+        <option value="4">4 Day or More</option>
+        </select>
+        </td>
+        </tr>
+        </table>
+        </form>
+        <?
+        echo "<br />";
+        box_end();
+    }
+    require "footer.php";
+    exit(0);
+}
 /* Set up business rules for importing records from SugarCRM */
 if (isset($_GET['rules'])) {
     echo "<center>";
