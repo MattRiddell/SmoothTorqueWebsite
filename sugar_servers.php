@@ -28,6 +28,16 @@ if (mysql_num_rows($result) > 0) {
 
 /* Add rules for SugarCRM */
 if (isset($_GET['add_rules'])) {
+?>
+<script>
+function show_hide(id, show){
+if(show == 1)
+document.getElementById(id).style.display = "block";
+else
+document.getElementById(id).style.display = "none";
+}
+</script>
+<?
     $result = mysql_query("SELECT * FROM SineDialer.campaign WHERE id = ".sanitize($_GET['add_rules']));
     if (mysql_num_rows($result) == 0) {
         echo "You have specified an invalid ID";
@@ -39,6 +49,9 @@ if (isset($_GET['add_rules'])) {
         ?>
         <form action="sugar_servers.php?save_add_rule=1" method="post">
         <table>
+        
+        
+        
         <tr>
         <td>
         Last Dialed:
@@ -46,12 +59,64 @@ if (isset($_GET['add_rules'])) {
         <td>
         <select name="last_dialed">
         <option value="1">1 Day or More</option>
-        <option value="2">2 Day or More</option>
-        <option value="3">3 Day or More</option>
-        <option value="4">4 Day or More</option>
+        <option value="2">2 Days or More</option>
+        <option value="3">3 Days or More</option>
+        <option value="4">4 Days or More</option>
+        <option value="5">5 Days or More</option>
+        <option value="6">6 Days or More</option>
+        <option value="7">1 Week or More</option>
+        <option value="14">2 Weeks or More</option>
+        <option value="30">30 Days or More</option>
+        <option value="90">90 Days or More</option>
         </select>
         </td>
         </tr>
+        
+        
+        <tr>
+        <td>
+        Dial undialed records?
+        </td>
+        <td>
+        <select name="include_undialed">
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+        </select>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>
+        Use Status Based Dialling?
+        </td>
+        <td>
+        <select name="use_status" onchange="show_hide('use_status',this.selectedIndex);">
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+        </select>
+        <div id="use_status" style="display:none">
+        <select name="status">
+        <?
+        $db_host = $config_values['SUGAR_HOST'];
+        $db_user = $config_values['SUGAR_USER'];
+        $db_pass = $config_values['SUGAR_PASS'];
+        //echo "Connecting to: $db_host User: $db_user Pass:$db_pass<br />";
+        $link = mysql_connect($db_host, $db_user, $db_pass);
+        mysql_select_db($config_values['SUGAR_DB'], $link);        
+        $result_status = mysql_query("SELECT distinct status FROM leads");
+        if (mysql_num_rows($result_status) > 0) {
+            while ($row_status = mysql_fetch_assoc($result_status)) {
+                echo '<option value="'.$row_status['status'].'">'.$row_status['status'].'</option>';
+            }
+        }
+        ?>
+        </select>
+        </div>
+        
+        </td>
+        </tr>
+        
+        
         </table>
         </form>
         <?
