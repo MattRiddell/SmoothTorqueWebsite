@@ -97,12 +97,10 @@ if (trim($dbpass)!=trim($passwordHash)){
     
     /* Either redirect to where we were sent to, or we redirect to main.php */
     if (strlen($_GET['redirect']) > 0) {
-    	/* TODO: this needs to be sanitized so that someone can't be fooled int a cross site */
-    	/* attack.  At the moment, if someone sent you to a url like:                        */
-    	/* http://call.venturevoip.com/login.php?redirect=http://badsite.com                 */
-    	/* Then you could be tricked into thinking you were at call.venturevoip.com but      */
-    	/* actually be sent to badsite.com.                                                  */
-    	header("Location: ".$_GET['redirect']);
+        // Whitelist sanitization of redirection to avoid XSS
+        $redirect = preg_replace('/\W/', '', $_GET['redirect']);
+        $redirect = substr($redirect,0,strlen($redirect)-3).".php";
+        header("Location: ".$redirect);
     } else {
     	/* Now we need to decide where to redirect. Our choices are currently the standard   */
     	/* interface, the message broadcasting interface, and the predictive dialing or call */
