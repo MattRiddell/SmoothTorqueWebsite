@@ -24,6 +24,35 @@ if (mysql_num_rows($result) > 0) {
         $tz_db_end[] = $row['end'];
     }
 }
+if (isset($_GET['delete_rules_sure'])) {
+    $result = mysql_query("DELETE FROM SineDialer.sugar_pull_rules WHERE campaign_id = ".sanitize($_GET['delete_rules_sure'])) or die(mysql_error());
+    ?><META HTTP-EQUIV=REFRESH CONTENT="0; URL=sugar_servers.php?rules=1"><?    
+    require "footer.php";
+    exit(0);
+}
+if (isset($_GET['delete_rules'])) {
+    box_start();
+    ?>
+    <center>
+    <br />Are you sure you want to delete the business rules for the campaign:<br /><br /><b><?
+    $result = mysql_query("SELECT name FROM SineDialer.campaign WHERE id = ".sanitize($_GET['delete_rules']));
+    if (mysql_num_rows($result) == 0) {
+        redirect("index.php");
+    } else {
+        echo mysql_result($result,0,0);
+    }
+    ?></b>
+    <br />
+    <br />
+    <a href="sugar_servers.php?delete_rules_sure=<?=$_GET['delete_rules']?>">Yes, I'm sure, delete them</a><br />
+    <a href="sugar_servers.php?rules=1">No, don't delete them</a><br />
+    <br />
+    </center>
+    <?
+    box_end();
+    require "footer.php";
+    exit(0);
+}
 
 if (isset($_GET['save_add_rule'])) {
     $sql1 = "INSERT INTO SineDialer.sugar_pull_rules (";
