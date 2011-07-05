@@ -38,19 +38,33 @@ if (isset($_GET['save_add_rule'])) {
     require "footer.php";
     exit(0);
 }
+if (isset($_GET['save_edit_rule'])) {
+    $sql1 = "UPDATE SineDialer.sugar_pull_rules SET ";
+    foreach ($_POST as $field=>$value) {
+        if ($field != campaign_id) {
+            $sql1.=sanitize($field, false)."=";
+            $sql1.=sanitize($value, true).",";
+        }
+    }
+    $sql = substr($sql1,0,strlen($sql1)-1)." WHERE campaign_id = ".sanitize($_POST['campaign_id']);
+    $result = mysql_query($sql) or die(mysql_error());
+    ?><META HTTP-EQUIV=REFRESH CONTENT="0; URL=sugar_servers.php?rules=1"><?
+    require "footer.php";
+    exit(0);
+}
 
 /* Add rules for SugarCRM */
 if (isset($_GET['add_rules'])) {
-?>
-<script>
-function show_hide(id, show){
-if(show == 1)
-document.getElementById(id).style.display = "block";
-else
-document.getElementById(id).style.display = "none";
-}
-</script>
-<?
+    ?>
+    <script>
+    function show_hide(id, show){
+        if(show == 1)
+        document.getElementById(id).style.display = "block";
+        else
+        document.getElementById(id).style.display = "none";
+    }
+    </script>
+    <?
     $result = mysql_query("SELECT * FROM SineDialer.campaign WHERE id = ".sanitize($_GET['add_rules']));
     if (mysql_num_rows($result) == 0) {
         echo "You have specified an invalid ID";
@@ -169,7 +183,7 @@ document.getElementById(id).style.display = "none";
         
         </td>
         </tr>
-                
+        
         <tr>
         <td>
         Maximum times to call?
@@ -229,7 +243,7 @@ document.getElementById(id).style.display = "none";
         </td>
         </tr>
         
-
+        
         
         
         </table>
@@ -242,6 +256,222 @@ document.getElementById(id).style.display = "none";
     require "footer.php";
     exit(0);
 }
+
+/* Edit rules for SugarCRM */
+if (isset($_GET['edit_rules'])) {
+    ?>
+    <script>
+    function show_hide(id, show){
+        if(show == 1)
+        document.getElementById(id).style.display = "block";
+        else
+        document.getElementById(id).style.display = "none";
+    }
+    </script>
+    <?
+    $result_current_rules = mysql_query("SELECT * FROM SineDialer.sugar_pull_rules WHERE campaign_id = ".sanitize($_GET['edit_rules']));
+    if (mysql_num_rows($result_current_rules) == 0) {
+        echo "You have specified an invalid ID";
+        require "footer.php";
+        exit(0);
+    } else {
+        $row_current_rules = mysql_fetch_assoc($result_current_rules) or die(mysql_error());
+        //print_pre($row_current_rules);
+        //exit(0);
+    }
+    $result = mysql_query("SELECT * FROM SineDialer.campaign WHERE id = ".sanitize($_GET['edit_rules']));
+    if (mysql_num_rows($result) == 0) {
+        echo "You have specified an invalid ID";
+    } else {
+        $row = mysql_fetch_assoc($result);
+        box_start();
+        echo "<center>";
+        echo "<h3>".$row['name']."</h3><u>".$row['description']."</u><br /><br />";
+        ?>
+        <form action="sugar_servers.php?save_edit_rule=1" method="post">
+        <input type="hidden" name="campaign_id" value="<?=$_GET['edit_rules']?>">
+        <table>
+        
+        
+        
+        <tr>
+        <td>
+        Last Dialed:
+        </td>
+        <td>
+        <select name="last_dialed">
+        <option value="1" <?if ($row_current_rules['last_dialed'] == 1) {echo "selected";}?>>1 Day or More</option>
+        <option value="2" <?if ($row_current_rules['last_dialed'] == 2) {echo "selected";}?>>2 Days or More</option>
+        <option value="3" <?if ($row_current_rules['last_dialed'] == 3) {echo "selected";}?>>3 Days or More</option>
+        <option value="4" <?if ($row_current_rules['last_dialed'] == 4) {echo "selected";}?>>4 Days or More</option>
+        <option value="5" <?if ($row_current_rules['last_dialed'] == 5) {echo "selected";}?>>5 Days or More</option>
+        <option value="6" <?if ($row_current_rules['last_dialed'] == 6) {echo "selected";}?>>6 Days or More</option>
+        <option value="7" <?if ($row_current_rules['last_dialed'] == 7) {echo "selected";}?>>1 Week or More</option>
+        <option value="14" <?if ($row_current_rules['last_dialed'] == 14) {echo "selected";}?>>2 Weeks or More</option>
+        <option value="30" <?if ($row_current_rules['last_dialed'] == 30) {echo "selected";}?>>30 Days or More</option>
+        <option value="90" <?if ($row_current_rules['last_dialed'] == 90) {echo "selected";}?>>90 Days or More</option>
+        </select>
+        </td>
+        </tr>
+        
+        
+        <tr>
+        <td>
+        Dial undialed records?
+        </td>
+        <td>
+        <select name="include_undialed">
+        <option value="1" <?if ($row_current_rules['include_undialed'] == 1) {echo "selected";}?>>Yes</option>
+        <option value="0" <?if ($row_current_rules['include_undialed'] == 0) {echo "selected";}?>>No</option>
+        </select>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>
+        Use Status Based Dialling?
+        </td>
+        <td>
+        <select name="use_status" onchange="show_hide('use_status',this.selectedIndex);">
+        <option value="0" <?if ($row_current_rules['use_status'] == 0) {echo "selected";}?>>No</option>
+        <option value="1" <?if ($row_current_rules['use_status'] == 1) {echo "selected";}?>>Yes</option>
+        </select>
+        <div id="use_status" style="<?if ($row_current_rules['use_status'] == 0) {echo "display:none";}?>">
+        <select name="status">
+        <option value="New">New</option>
+        <option value="Assigned">Assigned</option>
+        <option value="In Process">In Process</option>
+        <option value="Converted">Converted</option>
+        <option value="Recycled">Recycled</option>
+        <option value="Dead">Dead</option>
+        </select>
+        </div>
+        
+        </td>
+        </tr>
+        
+        <tr>
+        <td>
+        Use Lead Source Based Dialling?
+        </td>
+        <td>
+        <select name="use_lead_source" onchange="show_hide('use_lead_source',this.selectedIndex);">
+        <option value="0" <?if ($row_current_rules['use_lead_source'] == 0) {echo "selected";}?>>No</option>
+        <option value="1" <?if ($row_current_rules['use_lead_source'] == 1) {echo "selected";}?>>Yes</option>
+        </select>
+        <div id="use_lead_source" style="<?if ($row_current_rules['use_lead_source'] == 0) {echo "display:none";}?>">
+        <select name="lead_source">
+        <option value="Cold Call" <?if ($row_current_rules['lead_source'] == "Cold Call") {echo "selected";}?>>Cold Call</option>
+        <option value="Existing Customer" <?if ($row_current_rules['lead_source'] == "Existing Customer") {echo "selected";}?>>Existing Customer</option>
+        <option value="Self Generated" <?if ($row_current_rules['lead_source'] == "Self Generated") {echo "selected";}?>>Self Generated</option>
+        <option value="Employee" <?if ($row_current_rules['lead_source'] == "Employee") {echo "selected";}?>>Employee</option>
+        <option value="Partner" <?if ($row_current_rules['lead_source'] == "Partner") {echo "selected";}?>>Partner</option>
+        <option value="Public Relations" <?if ($row_current_rules['lead_source'] == "Public Relations") {echo "selected";}?>>Public Relations</option>
+        <option value="Direct Mail" <?if ($row_current_rules['lead_source'] == "Direct Mail") {echo "selected";}?>>Direct Mail</option>
+        <option value="Public Relations" <?if ($row_current_rules['lead_source'] == "Public Relations") {echo "selected";}?>>Public Relations</option>
+        <option value="Conference" <?if ($row_current_rules['lead_source'] == "Conference") {echo "selected";}?>>Conference</option>
+        <option value="Trade Show" <?if ($row_current_rules['lead_source'] == "Trade Show") {echo "selected";}?>>Trade Show</option>
+        <option value="Web Site" <?if ($row_current_rules['lead_source'] == "Web Site") {echo "selected";}?>>Web Site</option>
+        <option value="Word of mouth" <?if ($row_current_rules['lead_source'] == "Word of mouth") {echo "selected";}?>>Word of mouth</option>
+        <option value="Email" <?if ($row_current_rules['lead_source'] == "Email") {echo "selected";}?>>Email</option>
+        <option value="Campaign" <?if ($row_current_rules['lead_source'] == "Campaign") {echo "selected";}?>>Campaign</option>
+        <option value="Other" <?if ($row_current_rules['lead_source'] == "Other") {echo "selected";}?>>Other</option>
+        </select>
+        </div>
+        
+        </td>
+        </tr>
+        
+        <tr>
+        <td>
+        Use City Based Dialling?
+        </td>
+        <td>
+        <select name="use_city" onchange="show_hide('use_city',this.selectedIndex);">
+        <option value="0" <?if ($row_current_rules['use_city'] == 0) {echo "selected";}?>>No</option>
+        <option value="1" <?if ($row_current_rules['use_city'] == 1) {echo "selected";}?>>Yes</option>
+        </select>
+        <div id="use_city" style="<?if ($row_current_rules['use_city'] == 0) {echo "display:none";}?>">
+        City:<input type="text" name="city" value="<?=$row_current_rules['city']?>">
+        </div>
+        
+        </td>
+        </tr>
+        
+        <tr>
+        <td>
+        Maximum times to call?
+        </td>
+        <td>
+        <select name="max_calls">
+        <option value="0" <?if ($row_current_rules['max_calls'] == 0) {echo "selected";}?>>Unlimited</option>
+        <option value="1" <?if ($row_current_rules['max_calls'] == 1) {echo "selected";}?>>Once</option>
+        <option value="2" <?if ($row_current_rules['max_calls'] == 2) {echo "selected";}?>>Twice</option>
+        <option value="3" <?if ($row_current_rules['max_calls'] == 3) {echo "selected";}?>>3 Times</option>
+        <option value="4" <?if ($row_current_rules['max_calls'] == 4) {echo "selected";}?>>4 Times</option>
+        <option value="5" <?if ($row_current_rules['max_calls'] == 5) {echo "selected";}?>>5 Times</option>
+        <option value="6" <?if ($row_current_rules['max_calls'] == 6) {echo "selected";}?>>6 Times</option>
+        <option value="7" <?if ($row_current_rules['max_calls'] == 7) {echo "selected";}?>>7 Times</option>
+        <option value="8" <?if ($row_current_rules['max_calls'] == 8) {echo "selected";}?>>8 Times</option>
+        <option value="9" <?if ($row_current_rules['max_calls'] == 9) {echo "selected";}?>>9 Times</option>
+        <option value="10" <?if ($row_current_rules['max_calls'] == 10) {echo "selected";}?>>10 Times</option>
+        </select>
+        </td>
+        </tr>
+        
+        
+        
+        <tr>
+        <td>
+        Use Home Number?
+        </td>
+        <td>
+        <select name="use_home">
+        <option value="1" <?if ($row_current_rules['use_home'] == 1) {echo "selected";}?>>Yes</option>
+        <option value="0" <?if ($row_current_rules['use_home'] == 0) {echo "selected";}?>>No</option>
+        </select>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>
+        Use Work Number?
+        </td>
+        <td>
+        <select name="use_work">
+        <option value="1" <?if ($row_current_rules['use_work'] == 1) {echo "selected";}?>>Yes</option>
+        <option value="0" <?if ($row_current_rules['use_work'] == 0) {echo "selected";}?>>No</option>
+        </select>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>
+        Use Mobile Number?
+        </td>
+        <td>
+        <select name="use_mobile">
+        <option value="1" <?if ($row_current_rules['use_mobile'] == 1) {echo "selected";}?>>Yes</option>
+        <option value="0" <?if ($row_current_rules['use_mobile'] == 0) {echo "selected";}?>>No</option>
+        </select>
+        </td>
+        </tr>
+        
+        
+        
+        
+        </table>
+        <input type="submit" value="Save Rule Changes">
+        </form>
+        <?
+        echo "<br />";
+        box_end();
+    }
+    require "footer.php";
+    exit(0);
+}
+
+
 /* Set up business rules for importing records from SugarCRM */
 if (isset($_GET['rules'])) {
     echo "<center>";
@@ -286,7 +516,7 @@ if (isset($_GET['rules'])) {
             } else {
                 echo '<a href="sugar_servers.php?edit_rules='.$row['id'].'"><img src="images/pencil.png" alt="Edit Rules Defined"> &nbsp;Edit Rules</a>';
             }
-
+            
             echo "</td><td>";
             echo '<a href="sugar_servers.php?delete_rules='.$row['id'].'"><img src="images/delete.png" alt="Delete Rules">&nbsp;Delete</a>';
             echo "</td><td>";
