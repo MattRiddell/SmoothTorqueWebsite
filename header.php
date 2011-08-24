@@ -386,7 +386,7 @@ exit(0);
 		}
 		if ( $interface_type == "broadcast") {
         	/* Redirect to the broadcast interface */
-        	$destination = "".$http_dir_name."modules/broadcast/main.php";
+        	$destination = "".$http_dir_name."/main.php";
         } else if (0 && $interface_type == "cc") {
         	/* Redirect to the call centre interface */
         	$destination = "".$http_dir_name."modules/cc/main.php";
@@ -450,7 +450,7 @@ if ($interface_type == "broadcast") {
     ?>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     <link rel="shortcut icon" href="<?=$http_dir_name?>favicon.ico">
-    <link rel="stylesheet" type="text/css" href="<?=$http_dir_name?>modules/broadcast/css/default.css">
+    <link rel="stylesheet" type="text/css" href="<?=$http_dir_name?>/css/default.css">
     </head>
     <!-- Javascript includes -->
     
@@ -469,63 +469,63 @@ if ($interface_type == "broadcast") {
 		<td rowspan="19" style="width:40px;height:875px;">
         </td>
 		<td rowspan="17">
-        <img src="<?=$http_dir_name?>modules/broadcastimages/broadcast_03.png" width="43" height="753" alt=""></td>
+        <img src="<?=$http_dir_name?>/images/broadcast_03.png" width="43" height="753" alt=""></td>
 		<td colspan="5" rowspan="2">
         <a href="main.php">
-        <img src="<?=$http_dir_name?>modules/broadcastimages/Logo.png" width="287" height="104" border="0" alt="Logo"></a></td>
+        <img src="<?=$http_dir_name?>/images/Logo.png" width="287" height="104" border="0" alt="Logo"></a></td>
 		<td colspan="2" rowspan="2">
-        <img src="<?=$http_dir_name?>modules/broadcastimages/broadcast_05.png" width="69" height="104" alt=""></td>
+        <img src="<?=$http_dir_name?>/images/broadcast_05.png" width="69" height="104" alt=""></td>
 		<td>
         <a href="main.php">
-        <img src="<?=$http_dir_name?>modules/broadcastimages/Home.png" width="114" height="103" border="0" alt="Home"></a></td>
+        <img src="<?=$http_dir_name?>/images/Home.png" width="114" height="103" border="0" alt="Home"></a></td>
 		<td>
         <a href="lists.php">
-        <img src="<?=$http_dir_name?>modules/broadcastimages/Lists.png" width="95" height="103" border="0" alt="Lists"></a></td>
+        <img src="<?=$http_dir_name?>/images/Lists.png" width="95" height="103" border="0" alt="Lists"></a></td>
 		<td>
         <a href="campaigns.php">
-        <img src="<?=$http_dir_name?>modules/broadcastimages/Campaigns.png" width="152" height="103" border="0" alt="Campaigns"></a></td>
+        <img src="<?=$http_dir_name?>/images/Campaigns.png" width="152" height="103" border="0" alt="Campaigns"></a></td>
 		<td>
         <a href="reports.php">
-        <img src="<?=$http_dir_name?>modules/broadcastimages/Reports.png" width="117" height="103" border="0" alt="Reports"></a></td>
+        <img src="<?=$http_dir_name?>/images/Reports.png" width="117" height="103" border="0" alt="Reports"></a></td>
 		<td colspan="2">
         <a href="<?=$http_dir_name?>logout.php">
-        <img src="<?=$http_dir_name?>modules/broadcastimages/Logout.png" width="121" height="103" border="0" alt="Logout"></a></td>
+        <img src="<?=$http_dir_name?>/images/Logout.png" width="121" height="103" border="0" alt="Logout"></a></td>
 		<td rowspan="2">
-        <img src="<?=$http_dir_name?>modules/broadcastimages/broadcast_11.png" width="103" height="104" alt=""></td>
+        <img src="<?=$http_dir_name?>/images/broadcast_11.png" width="103" height="104" alt=""></td>
 		<td rowspan="19">
-        <img src="<?=$http_dir_name?>modules/broadcastimages/rightbg.png" width="1" height="875" alt=""></td>
+        <img src="<?=$http_dir_name?>/images/rightbg.png" width="1" height="875" alt=""></td>
 		<td rowspan="19">
-        <img src="<?=$http_dir_name?>modules/broadcastimages/broadcast_13.png" width="1" height="875" alt=""></td>
+        <img src="<?=$http_dir_name?>/images/broadcast_13.png" width="1" height="875" alt=""></td>
 		<td>
-        <img src="<?=$http_dir_name?>modules/broadcastimages/spacer.gif" width="1" height="103" alt=""></td>
+        <img src="<?=$http_dir_name?>/images/spacer.gif" width="1" height="103" alt=""></td>
         </tr>
         <tr>
 		<td colspan="6">
-        <img src="<?=$http_dir_name?>modules/broadcastimages/broadcast_14.png" width="599" height="1" alt=""></td>
+        <img src="<?=$http_dir_name?>/images/broadcast_14.png" width="599" height="1" alt=""></td>
 		<td>
-        <img src="<?=$http_dir_name?>modules/broadcastimages/spacer.gif" width="1" height="1" alt=""></td>
+        <img src="<?=$http_dir_name?>/images/spacer.gif" width="1" height="1" alt=""></td>
         </tr>
         <tr>
 		<td colspan="14">
-        <img src="<?=$http_dir_name?>modules/broadcastimages/broadcast_15.png" width="1058" height="162" alt=""></td>
+        <img src="<?=$http_dir_name?>/images/broadcast_15.png" width="1058" height="162" alt=""></td>
 		<td>
-        <img src="<?=$http_dir_name?>modules/broadcastimages/spacer.gif" width="1" height="162" alt=""></td>
+        <img src="<?=$http_dir_name?>/images/spacer.gif" width="1" height="162" alt=""></td>
         </tr>
         <tr>
 		<td rowspan="14">
-        <img src="<?=$http_dir_name?>modules/broadcastimages/broadcast_16.png" width="35" height="487" alt=""></td>
+        <img src="<?=$http_dir_name?>/images/broadcast_16.png" width="35" height="487" alt=""></td>
 		<td colspan="3" rowspan="2">
-        <img src="<?=$http_dir_name?>modules/broadcastimages/broadcast_17.png" width="215" height="15" alt=""></td>
+        <img src="<?=$http_dir_name?>/images/broadcast_17.png" width="215" height="15" alt=""></td>
 		<td rowspan="14">
-        <img src="<?=$http_dir_name?>modules/broadcastimages/broadcast_18.png" width="37" height="487" alt=""></td>
+        <img src="<?=$http_dir_name?>/images/broadcast_18.png" width="37" height="487" alt=""></td>
 		<td colspan="9">
-        <img src="<?=$http_dir_name?>modules/broadcastimages/broadcast_19.png" width="771" height="5" alt=""></td>
+        <img src="<?=$http_dir_name?>/images/broadcast_19.png" width="771" height="5" alt=""></td>
 		<td>
-        <img src="<?=$http_dir_name?>modules/broadcastimages/spacer.gif" width="1" height="5" alt=""></td>
+        <img src="<?=$http_dir_name?>/images/spacer.gif" width="1" height="5" alt=""></td>
         </tr>
         <tr>
 		<td rowspan="13">
-        <img src="<?=$http_dir_name?>modules/broadcastimages/broadcast_20.png" width="6" height="482" alt=""></td>
+        <img src="<?=$http_dir_name?>/images/broadcast_20.png" width="6" height="482" alt=""></td>
 		<td width="658" height="478" colspan="6" rowspan="12" valign="top" style="padding: 20px; background: #ffffff;">
 		<font face="arial" color="#666666" size="2">
         <?
