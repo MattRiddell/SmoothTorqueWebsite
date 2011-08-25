@@ -794,7 +794,7 @@ if ($level!=sha1("level100")) {
     Site Name:
     </td>
     <td>
-    <input type="Text" name="title" value="<?echo $config_values['TITLE'];?>">
+    <input type="Text" name="title" value="<?echo stripslashes($config_values['TITLE']);?>">
     </td>
     </tr>
     
