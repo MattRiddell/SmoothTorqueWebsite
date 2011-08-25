@@ -7,8 +7,8 @@ $mail->Host = $config_values['SMTP_HOST']; // SMTP server
 $mail->From = $config_values['SMTP_FROM'];
 $mail->AddAddress("matt@venturevoip.com");
 
-$mail->Subject = $config_values['TITLE']." Test Message";
-$mail->Body = "Hi! \n\n This is a test e-mail sent from ".$config_values['TITLE'].".";
+$mail->Subject = stripslashes($config_values['TITLE'])." Test Message";
+$mail->Body = "Hi! \n\n This is a test e-mail sent from ".stripslashes($config_values['TITLE']).".";
 $mail->WordWrap = 80;
 
 if(!$mail->Send())
