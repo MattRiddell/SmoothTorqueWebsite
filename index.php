@@ -57,7 +57,7 @@ echo "<FONT FACE=\"ARIAL\">";
 <font color="#888888">
 <?
 if ($show_front_page_title == "1") {
-	echo $config_values['TITLE'];
+	echo stripslashes($config_values['TITLE']);
 	?><br /><br /><?
 }
 if ($show_front_page_text == "1") {
