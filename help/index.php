@@ -2,7 +2,7 @@
 require "../header.php";
 ?>
 <html>
-<head><title><?echo $config_values['TITLE'];?> Help Manual</title></head>
+<head><title><?echo stripslashes($config_values['TITLE']);?> Help Manual</title></head>
 
 
 <script language="JavaScript" type="text/JavaScript">
@@ -24,11 +24,11 @@ function hideshow(name){
 <br />
 <br />
 <p align="left">
-Welcome to <?echo $config_values['TITLE'];?> help file.  Please select a category from below by clicking
+Welcome to <?echo stripslashes($config_values['TITLE']);?> help file.  Please select a category from below by clicking
 on one of the titles.
 <br />
 <br />
-This help file is tailored to your personal installation of <?echo $config_values['TITLE'];?>.
+This help file is tailored to your personal installation of <?echo stripslashes($config_values['TITLE']);?>.
 
 </p>
 <?php
