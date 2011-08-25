@@ -325,7 +325,7 @@ class JpGraphErrObject {
         }
 
         fclose($fp);
-	$this->iTitle = $config_values['TITLE'];
+	$this->iTitle = stripslashes($config_values['TITLE']);
     }
 
     function SetStrokeDest($aDest) {
@@ -349,8 +349,8 @@ class JpGraphErrObject {
 
         fclose($fp);
     //$iTitle = ;
-//    echo $config_values['TITLE'];
-	$aMsg = $config_values['TITLE'].' '.$aMsg;
+//    echo stripslashes($config_values['TITLE']);
+	$aMsg = stripslashes($config_values['TITLE']).' '.$aMsg;
 	if ($this->iDest) {
 	    $f = @fopen($this->iDest,'a');
 	    if( $f ) {
