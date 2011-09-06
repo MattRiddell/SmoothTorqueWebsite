@@ -32,7 +32,7 @@
  3. Changes the status of numbers that have a status of "new_nodial" to "new" if
  the timezone now diallable.
  
- When numbers are imported into the database and they timezone management is enabled,
+ When numbers are imported into the database and timezone management is enabled,
  number are imported with new_nodial rather than new - in case someone imports
  numbers at a time they shouldn't be dialled.
  
