@@ -607,7 +607,7 @@ if ($interface_type == "broadcast") {
                             echo "<img width=\"16\" height=\"16\"  src=\"".$http_dir_name."images/help.png\" border=\"0\">";
                             echo "<b> Help</b>";
                             echo "</a>";
-                            echo "&nbsp;".ucwords(strftime('%A %d %B %Y %H:%M:%S'));
+                            echo "&nbsp;".ucwords(@strftime('%A %d %B %Y %H:%M:%S'));
                             echo "</font>";
                             echo "</center>";
                             echo "<br />";
@@ -628,9 +628,9 @@ if ($interface_type == "broadcast") {
                                 $postpay = 1;
                             }
                             if ($postpay == 1) {
-                                echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"".$http_dir_name."help/index.php\"><img width=\"16\" height=\"16\"  src=\"".$http_dir_name."images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(strftime('%A %d %B %Y %H:%M:%S'))." Credit: $credit Credit Limit: $creditlimit <a href=\"".$http_dir_name."viewcdr.php\"><img width=\"16\" height=\"16\" src=\"".$http_dir_name."images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"".$http_dir_name."billinglog_account.php\"><img width=\"16\" height=\"16\" src=\"".$http_dir_name."images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
+                                echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"".$http_dir_name."help/index.php\"><img width=\"16\" height=\"16\"  src=\"".$http_dir_name."images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(@strftime('%A %d %B %Y %H:%M:%S'))." Credit: $credit Credit Limit: $creditlimit <a href=\"".$http_dir_name."viewcdr.php\"><img width=\"16\" height=\"16\" src=\"".$http_dir_name."images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"".$http_dir_name."billinglog_account.php\"><img width=\"16\" height=\"16\" src=\"".$http_dir_name."images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
                             } else {
-                                echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"".$http_dir_name."help/index.php\"><img width=\"16\" height=\"16\"  src=\"".$http_dir_name."images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(strftime('%A %d %B %Y %H:%M:%S'))." Credit: $credit <a href=\"".$http_dir_name."viewcdr.php\"><img width=\"16\" height=\"16\"  src=\"".$http_dir_name."images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"".$http_dir_name."billinglog_account.php\"><img width=\"16\" height=\"16\"  src=\"".$http_dir_name."images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
+                                echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"".$http_dir_name."help/index.php\"><img width=\"16\" height=\"16\"  src=\"".$http_dir_name."images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(@strftime('%A %d %B %Y %H:%M:%S'))." Credit: $credit <a href=\"".$http_dir_name."viewcdr.php\"><img width=\"16\" height=\"16\"  src=\"".$http_dir_name."images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"".$http_dir_name."billinglog_account.php\"><img width=\"16\" height=\"16\"  src=\"".$http_dir_name."images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
                             }
                             unset($result_credit);
                             unset($postpay);
