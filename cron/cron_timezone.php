@@ -50,15 +50,50 @@ if (mysql_num_rows($result) > 0) {
     }
 }
 
-/*echo "Allowed: ";
+echo "Allowed: ";
 print_r($allowed);
 
 echo "Not Allowed: ";
 print_r($not_allowed);
-*/
+
+/* Get a list of prefixes that can be called */
+$prefixes_allowed = array();
+foreach ($allowed as $idx) {
+    $result = mysql_query("SELECT * FROM timezone_prefixes WHERE timezone = ".$idx);
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_assoc($result)) {
+            $prefixes_allowed[] = $row['prefix'];
+        }
+    }
+}
+
+/* Get a list of prefixes that can't be called */
+$prefixes_not_allowed = array();
+foreach ($not_allowed as $idx) {
+    $result = mysql_query("SELECT * FROM timezone_prefixes WHERE timezone = ".$idx);
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_assoc($result)) {
+            $prefixes_not_allowed[] = $row['prefix'];
+        }
+    }
+}
+
+echo "Allowed: ";
+print_r($prefixes_allowed);
+
+echo "Not Allowed: ";
+print_r($prefixes_not_allowed);
 
 /* Update the status of all numbers */
+foreach ($prefixes_allowed as $prefix) {
+    $sql = "UPDATE number SET status = 'new' WHERE status = 'new_nodial' and phonenumber like '$prefix%'";
+    mysql_query($sql);
+}
 
 /* Add a log entry to say what we've done */
+foreach ($prefixes_not_allowed as $prefix) {
+    $sql = "UPDATE number SET status = 'new_nodial' WHERE status = 'new' and phonenumber like '$prefix%'";
+    mysql_query($sql);
+}
 
 ?>
