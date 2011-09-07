@@ -56,6 +56,7 @@ $(document).ready(function() {
 
 </script>
 <center>
+<br />
 Please select a file to upload:<br />
 <br />
 <div id="fileQueue"></div>

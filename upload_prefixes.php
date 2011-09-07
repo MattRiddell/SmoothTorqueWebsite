@@ -2,12 +2,10 @@
 require "header.php";
 require "header_timezones.php";
 ?>
-<br /><br /><br /><br />
 <?
 box_start(360);
 ?>
 <center>
-<br />
 <br />
 Please select a timezone to add prefixes to<br />
 <br />
@@ -32,6 +30,7 @@ while ($row = mysql_fetch_assoc($result)) {
 </TD>
 </TR></table>
 </FORM>
+<br />
 <?
 box_end();
 ?>

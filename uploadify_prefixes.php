@@ -34,7 +34,7 @@ if (!empty($_FILES)) {
     $row = 0;
     $display2 = 0;
     $handle = fopen($filename, "r");
-    echo "<br /><br />Importing prefixes please wait<br /><br />";
+    echo "<br /><br />Importing prefixes please wait";
     $timezone = $_GET['timezone'];
     $sql = "INSERT IGNORE INTO timezone_prefixes (timezone,prefix) VALUES";
     $isfirst=true;
@@ -70,7 +70,9 @@ if (!empty($_FILES)) {
     echo "<br />";
     echo "<br />";
     fclose($handle);
-    echo "<b>A total of $row prefixes were inserted into the database</b><br /><br /><br />";
+//    echo "<b>A total of $row prefixes were inserted into the database</b><br /><br /><br />";
+    ?><center><img src="images/progress.gif" border="0"><br />Redirecting you...
+    <META HTTP-EQUIV=REFRESH CONTENT="1; URL=timezones.php?view_prefixes=1"><?
     
 }
 ?>
