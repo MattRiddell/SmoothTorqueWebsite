@@ -44,6 +44,10 @@ if (!empty($_FILES)) {
         $data[0] = str_replace("-","",$data[0]);
         $data[0] = str_replace(" ","",$data[0]);
         $data[0] = str_replace("\r","",$data[0]);
+        $data[0] = trim($data[0]);
+        if (strlen($data[0]) == 0) {
+            continue;
+        }
         if ($isfirst) {
             $sql.="(".$timezone.",'".$data[0]."')";
             $isfirst=false;
