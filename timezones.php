@@ -20,8 +20,7 @@
  
  The definition of the time_zone_prefixes table is:
  
- id: autoincrement integer (record id - auto created)
- prefix: varchar number prefix
+ prefix: varchar number prefix (unique)
  timezone: id of the timezone this prefix is associated with
  
  There is a cron job (cron/cron_timezone.php) that runs every 30 minutes and does the following:
@@ -187,7 +186,7 @@ if (isset($_GET['add_prefixes'])) {
     associated timezones.<br />
     <br />
     You can add a timezone area code by filling out the form below or by using
-    the <a href="timezones.php?upload=1">upload area codes</a> link.<br />
+    the <a href="upload_prefixes.php">upload area codes</a> link.<br />
     <br />
     <form action="timezones.php?save_prefix=1" method="post">
     <table>
