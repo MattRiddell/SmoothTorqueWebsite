@@ -18,7 +18,7 @@ while (1) {
 	if (mysql_num_rows($result) > 0) {
 		while ($row = mysql_fetch_assoc($result)) {
 			echo "Found campaign $row[campaignid]...\n";
-			if ($stream = fopen('http://italk.venturevoip.com/graph.php?id='.$row[campaignid], 'rb')) {
+			if ($stream = fopen('http://localhost/graph.php?id='.$row[campaignid], 'rb')) {
 				$contents = stream_get_contents($stream);
 				$output = fopen('images/live/campaign_'.$row[campaignid].'.png', 'wb');
 				fwrite($output, $contents);
@@ -26,7 +26,7 @@ while (1) {
 				fclose($output);
 				echo "Saved campaign $row[campaignid]\n";
 			}
-			if ($stream = fopen('http://italk.venturevoip.com/graph.php?id='.$row[campaignid].'&debug=1', 'rb')) {
+			if ($stream = fopen('http://localhost/graph.php?id='.$row[campaignid].'&debug=1', 'rb')) {
 				$contents = stream_get_contents($stream);
 				$output = fopen('images/live/debug_'.$row[campaignid].'.png', 'wb');
 				fwrite($output, $contents);
