@@ -36,7 +36,7 @@ if (!empty($_FILES)) {
     $handle = fopen($filename, "r");
     echo "<br /><br />Importing prefixes please wait";
     $timezone = $_GET['timezone'];
-    $sql = "INSERT IGNORE INTO timezone_prefixes (timezone,prefix) VALUES";
+    $sql = "REPLACE INTO timezone_prefixes (timezone,prefix) VALUES";
     $isfirst=true;
     while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
         $data[0] = str_replace("(","",$data[0]);
@@ -58,7 +58,7 @@ if (!empty($_FILES)) {
             ob_flush();flush();
             mysql_query($sql, $link) or die (mysql_error());;
             $display = 0;
-            $sql = "INSERT IGNORE INTO timezone_prefixes (timezone,prefix) VALUES";
+            $sql = "REPLACE INTO timezone_prefixes (timezone,prefix) VALUES";
             $sql.="(".$timezone.",'".$data[0]."')";
         } else {
             $sql.=",(".$timezone.",'".$data[0]."')";
@@ -72,7 +72,7 @@ if (!empty($_FILES)) {
     fclose($handle);
 //    echo "<b>A total of $row prefixes were inserted into the database</b><br /><br /><br />";
     ?><center><img src="images/progress.gif" border="0"><br />Redirecting you...
-    <META HTTP-EQUIV=REFRESH CONTENT="1; URL=timezones.php?view_prefixes=1"><?
+    <META HTTP-EQUIV=REFRESH CONTENT="1; URL=timezones.php?view_timezones=1"><?
     
 }
 ?>

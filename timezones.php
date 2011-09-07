@@ -126,7 +126,7 @@ if (isset($_GET['view_timezones'])) {
         //box_start(500);
         echo "<center>";
         echo '<table border="0" cellpadding="3" cellspacing="0">';
-        echo '<tr height="10"><td class="theadl"></td><td class="thead">Timezone Name</td><td class="thead">UTC Start Dialling Time</td><td class="thead">UTC End Dialling Time</td><td class="thead">Delete</td><td class="theadr"></td></tr>';
+        echo '<tr height="10"><td class="theadl"></td><td class="thead">Timezone Name</td><td class="thead">UTC Start Dialling Time</td><td class="thead">UTC End Dialling Time</td><td class="thead">Prefixes</td><td class="thead">Delete</td><td class="theadr"></td></tr>';
         $toggle = false;
         while ($row = mysql_fetch_assoc($result)) {
             if ($toggle){
@@ -137,9 +137,12 @@ if (isset($_GET['view_timezones'])) {
                 $class=" class=\"tborderx\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f0f0f0'\" ";
             }
             echo "<tr $class><td></td>";
+            $result_prefixes = mysql_query("SELECT count(*) FROM timezone_prefixes WHERE timezone = ".sanitize($row['id']));
+            $count_prefixes = mysql_result($result_prefixes, 0, 0);
             echo "<td>".'<a href="timezones.php?edit='.$row['id'].'">'.$row['name'].'&nbsp;<img src="images/pencil.png" border="0" alt="Edit TimeZone">'."</td>";
             echo "<td>".$row['start']."</td>";
             echo "<td>".$row['end']."</td>";
+            echo "<td>$count_prefixes prefixes</td>";
             echo "<td>".'<a href="timezones.php?delete='.$row['id'].'">&nbsp;<img src="images/delete.png" border="0" alt="Delete TimeZone">'."</td>";
             echo "<td></td></tr>";
         }
