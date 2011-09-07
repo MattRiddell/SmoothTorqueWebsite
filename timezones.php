@@ -170,7 +170,11 @@ if (isset($_GET['view_timezones'])) {
     require "footer.php";
     exit(0);
 }
-if (isset($_GET['add_prefixes'])) {
+if (isset($_GET['save_prefix'])) {
+    $result = mysql_query("INSERT INTO timezone_prefixes (prefix, timezone) VALUES (".sanitize($_POST['prefix']).", ".sanitize($_POST['timezone']).")");
+    ?><center><img src="images/progress.gif" border="0"><br />Adding your prefix...
+    <META HTTP-EQUIV=REFRESH CONTENT="1; URL=timezones.php?view_prefixes=1"><?
+
     require "footer.php";
     exit(0);
 }
