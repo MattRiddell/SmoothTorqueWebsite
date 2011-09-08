@@ -15,8 +15,8 @@
  
  id: autoincrement integer (record id - auto created)
  name: varchar - the name of the timezone
- start: varchar - the start time that this timezone can be called (UTC) 
- end: varchar - the end time that this timezone can be called (UTC) 
+ start: varchar - the start time that this timezone can be called (Local) 
+ end: varchar - the end time that this timezone can be called (Local) 
  
  The definition of the time_zone_prefixes table is:
  
@@ -120,11 +120,11 @@ if (isset($_GET['edit'])) {
     <td><input type="text" name="name" value="<?=$row['name']?>"></td>
     </tr>
     <tr>
-    <td>UTC Start Dialling Time:</td>
+    <td>Local Start Dialling Time:</td>
     <td><input type="text" name="start" value="<?=$row['start']?>"></td>
     </tr>
     <tr>
-    <td>UTC End Dialling Time:</td>
+    <td>Local End Dialling Time:</td>
     <td><input type="text" name="end" value="<?=$row['end']?>"></td>
     </tr>
     <tr>
@@ -150,11 +150,11 @@ if (isset($_GET['add'])) {
     <td><input type="text" name="name"></td>
     </tr>
     <tr>
-    <td>UTC Start Dialling Time:</td>
+    <td>Local Start Dialling Time:</td>
     <td><input type="text" name="start"></td>
     </tr>
     <tr>
-    <td>UTC End Dialling Time:</td>
+    <td>Local End Dialling Time:</td>
     <td><input type="text" name="end"></td>
     </tr>
     <tr>
@@ -176,7 +176,7 @@ if (isset($_GET['view_timezones'])) {
         //box_start(500);
         echo "<center>";
         echo '<table border="0" cellpadding="3" cellspacing="0">';
-        echo '<tr height="10"><td class="theadl"></td><td class="thead">Timezone Name</td><td class="thead">UTC Start Dialling Time</td><td class="thead">UTC End Dialling Time</td><td class="thead">Prefixes</td><td class="thead">Delete</td><td class="theadr"></td></tr>';
+        echo '<tr height="10"><td class="theadl"></td><td class="thead">Timezone Name</td><td class="thead">Local Start Dialling Time</td><td class="thead">Local End Dialling Time</td><td class="thead">Prefixes</td><td class="thead">Delete</td><td class="theadr"></td></tr>';
         $toggle = false;
         while ($row = mysql_fetch_assoc($result)) {
             if ($toggle){
