@@ -90,9 +90,59 @@ if (isset($_GET['save_new'])) {
     require "footer.php";
     exit(0);
 }
+if (isset($_GET['save_edit'])) {
+    $sql = "UPDATE SineDialer.time_zones SET ";
+    foreach($_POST as $field=>$value) {
+        if ($field != "id") {
+            $sql.=sanitize($field, false)."=";
+            $sql.= sanitize($value).",";
+        }
+    }
+    $sql = substr($sql,0,strlen($sql)-1)." where id = ".sanitize($_POST['id']);
+    mysql_query($sql) or die(mysql_error());
+    ?><center><img src="images/progress.gif" border="0"><br />Saving your timezone...
+    <META HTTP-EQUIV=REFRESH CONTENT="1; URL=timezones.php?view_timezones=1"><?
+ 
+    require "footer.php";
+    exit(0);
+}
+if (isset($_GET['edit'])) {
+    box_start(400);
+    $result = mysql_query("SELECT * FROM time_zones where id = ".sanitize($_GET['edit']));
+    $row = mysql_fetch_assoc($result);
+    ?>
+    <center><br />
+    <form action="timezones.php?save_edit=1" method="post">
+    <input type="hidden" name="id" value="<?=$row['id']?>">
+    <table>
+    <tr>
+    <td>Timezone Name:</td>
+    <td><input type="text" name="name" value="<?=$row['name']?>"></td>
+    </tr>
+    <tr>
+    <td>UTC Start Dialling Time:</td>
+    <td><input type="text" name="start" value="<?=$row['start']?>"></td>
+    </tr>
+    <tr>
+    <td>UTC End Dialling Time:</td>
+    <td><input type="text" name="end" value="<?=$row['end']?>"></td>
+    </tr>
+    <tr>
+    <td colspan="2">
+    <input type="submit" value="Save Changes"></td>
+    </tr>
+    </table>
+    </form><br />
+    <?
+    box_end();
+    // Don't fall through
+    require "footer.php";
+    exit(0);
+}
 if (isset($_GET['add'])) {
     box_start(400);
     ?>
+    <center><br />
     <form action="timezones.php?save_new=1" method="post">
     <table>
     <tr>
@@ -112,7 +162,7 @@ if (isset($_GET['add'])) {
     <input type="submit" value="Add Timezone"></td>
     </tr>
     </table>
-    </form>
+    </form><br />
     <?
     box_end();
     // Don't fall through
