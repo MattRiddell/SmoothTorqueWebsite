@@ -80,10 +80,13 @@ foreach ($not_allowed as $idx) {
 }
 
 echo "Allowed: ";
-print_r($prefixes_allowed);
+echo count($prefixes_allowed)."\n";
 
 echo "Not Allowed: ";
-print_r($prefixes_not_allowed);
+echo count($prefixes_not_allowed)."\n";
+
+echo "Starting queries...\n";
+$query_start = time();
 
 /* Update the status of all numbers */
 foreach ($prefixes_allowed as $prefix) {
@@ -96,5 +99,6 @@ foreach ($prefixes_not_allowed as $prefix) {
     $sql = "UPDATE number SET status = 'new_nodial' WHERE status = 'new' and phonenumber like '$prefix%'";
     mysql_query($sql);
 }
+echo "Finished queries (took ".(time()-$query_start)." seconds)\n";
 
 ?>
