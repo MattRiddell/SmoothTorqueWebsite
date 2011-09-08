@@ -151,9 +151,9 @@ if (mysql_num_rows($result) > 0) {
 
 <TR title="Evergreen Mode"><TD CLASS="thead">Allow Campaigns To Run Indefinitely
 
-<a href="#" onclick="displaySmallMessage('includes/help.php?section=If you would like this campaign to continuously redial all numbers whether answered or not');return false"><img src="images/help.png" border="0"></a>
+<a href="#" onclick="displaySmallMessage('includes/help.php?section=If you would like this campaign to continuously run the campaign if it has numbers');return false"><img src="images/help.png" border="0"></a>
 </TD><TD>
-<INPUT TYPE="radio" NAME="evergreen" VALUE="1" <?if ($row['evergreen'] == 1) {echo "checked";}?> onclick="displaySmallMessage('includes/help.php?section=Warning: this will redial all numbers whether they are answered or not');return true;"> Yes&nbsp;
+<INPUT TYPE="radio" NAME="evergreen" VALUE="1" <?if ($row['evergreen'] == 1) {echo "checked";}?>> Yes&nbsp;
 <INPUT TYPE="radio" NAME="evergreen" VALUE="0" <?if ($row['evergreen'] == 0) {echo "checked";}?>> No<br />
 </TD>
 </TR>
