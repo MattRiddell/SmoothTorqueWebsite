@@ -49,7 +49,7 @@ while ($accounts = mysql_fetch_assoc($result_accounts)) {
         and dcontext!='staff' and dcontext!='ls3' and userfield!='' order by calldate DESC limit 100000";
     //echo "Running: $sql\n";
     $result = mysql_query($sql,$cdrlink);
-    $start = time();
+    $start = time()-1;
     $count = mysql_num_rows($result);
     $i = 0;
     echo mysql_num_rows($result)." Records this run for $accountcode_in\n";
