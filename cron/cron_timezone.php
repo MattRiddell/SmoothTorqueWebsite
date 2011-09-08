@@ -7,8 +7,9 @@
  * funded by VentureVoIP Canada and TSOA International.
  */
 
-/* Find out what the current time is in UTC */
-date_default_timezone_set("UTC");
+/* Change this to your time zone */
+date_default_timezone_set("EST");
+
 $current_time = date("H:i:s");
 
 /* MySQL Connection details */
