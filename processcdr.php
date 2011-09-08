@@ -45,7 +45,7 @@ while ($accounts = mysql_fetch_assoc($result_accounts)) {
     echo "Checking $accountcode_in\n";
     $cdrlink = mysql_connect($db_host, $db_user, $db_pass) OR die("Error connecting to CDR database using $db_user:$db_pass@$db_host because: \n".mysql_error());
     mysql_select_db($config_values['CDR_DB'], $cdrlink);
-    $sql = "SELECT * from ".$config_values['CDR_TABLE']." WHERE userfield2 IS NULL and accountcode='$accountcode_in' and dcontext!='load-simulation'
+    $sql = "SELECT * from ".$config_values['CDR_TABLE']." WHERE userfield2 = '' and accountcode='$accountcode_in' and dcontext!='load-simulation'
         and dcontext!='staff' and dcontext!='ls3' and userfield!='' order by calldate DESC limit 100000";
     //echo "Running: $sql\n";
     $result = mysql_query($sql,$cdrlink);
@@ -178,7 +178,11 @@ while ($accounts = mysql_fetch_assoc($result_accounts)) {
 		$total_count++;
     } /* end of while on records */
     if ($count > 0) {
-    	echo $i."/$count (".round(($i/$count)*100,2).")% (".round($i/(time() - $start))." per sec) (Cost: ".($campaign_cost+$cost[$i-1]).") (totalcost: ".($totalcost[$accountcode[$i-1]]).") (total seconds: $total_billsec)\n";
+    	echo $i."/$count (".round(($i/$count)*100,2).")%";
+        echo "(".round($i/(time() - $start))." per sec) ";
+        echo "(Cost: ".($campaign_cost+$cost[$i-1]).") ";
+        echo "(totalcost: ".($totalcost[$accountcode[$i-1]]).")";
+        echo "(total seconds: $total_billsec)\n";
     }
 
     $sqlx = "select credit,creditlimit from billing where accountcode = '$accountcode_in'";
