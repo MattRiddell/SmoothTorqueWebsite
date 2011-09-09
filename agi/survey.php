@@ -79,6 +79,9 @@ if (!($survey_id > 0)) {
     $survey_id = 1;
 }
 
+a_echo("-----------------------------------");
+a_echo("SURVEY STARTING FOR $phonenumber");
+
 /* Get the survey */
 $sql = "SELECT * FROM survey_choices WHERE survey_id = ".$survey_id." order by question_number asc";
 a_echo("Executing sql: $sql");
@@ -98,8 +101,9 @@ if (mysql_num_rows($result) == 0) {
     }    
     for ($i = 0;$i<count($choices);$i++) {     
         a_echo("-----------------------------------");
-        a_echo("Playing ".$choices[$i]['filename']);
-        a_echo("Expecting ".$choices[$i]['expected']);
+        a_echo("Question: ".$choices[$i]['question_num']);
+        //a_echo("Playing ".$choices[$i]['filename']);
+        a_echo("Expecting: ".$choices[$i]['expected']);
         $res = $agi->get_data($choices[$i]['filename'], 2000, 1);        
         $response = $res['result'];
         if (strlen($response) > 0) {
@@ -123,6 +127,10 @@ if (mysql_num_rows($result) == 0) {
             $i--;
         } else {
             a_echo("You did enter a correct choice");
+            $sql = "INSERT INTO survey_results (campaign_id, phonenumber, question, choice) VALUES
+            ($campaign, '$phonenumber', ".$choices[$i]['question_num'].", '$response')";
+            a_echo ("Running $sql");
+            $result = mysql_query($sql);
             a_echo("-----------------------------------");
         }
     }    
