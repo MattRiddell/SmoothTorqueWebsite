@@ -80,7 +80,7 @@ if (!($survey_id > 0)) {
 }
 
 /* Get the survey */
-$sql = "SELECT * FROM survey WHERE id = ".$survey_id." order by question_number asc";
+$sql = "SELECT * FROM survey_choices WHERE survey_id = ".$survey_id." order by question_number asc";
 a_echo("Executing sql: $sql");
 $result = mysql_query($sql);
 if (mysql_num_rows($result) == 0) {
