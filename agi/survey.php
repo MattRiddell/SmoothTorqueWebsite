@@ -89,7 +89,7 @@ if (mysql_num_rows($result) == 0) {
     while ($row = mysql_fetch_assoc($result)) {
         a_echo("Playing ".$row['soundfile']);
         a_echo("Expecting ".$row['choices']);
-        $result = agi->stream_file($row['soundfile'], '1234567890*#',0);
+        $result = $agi->stream_file($row['soundfile'], '1234567890*#',0);
         a_echo("received ".$result['result']);
     }
 }
