@@ -59,14 +59,18 @@ $connection = mysql_connect($db_host,$db_user,$db_pass) or die("Error connecting
 mysql_select_db($db_name, $connection);
 
 /* Get Campaign ID */
-$result=$agi->get_variable(campaign);
+$result=$agi->get_variable("campaign");
 $campaign=$result[data];
 
 /* Get Phone Number */
-$result=$agi->get_variable(phonenumber);
+$result=$agi->get_variable("phonenumber");
 $phonenumber=$result[data];
 
-$result = mysql_query("SELECT survey FROM campaign WHERE campaignid = ".$campaign);
+$sql = "SELECT survey FROM campaign WHERE campaignid = ".$campaign;
+$result = mysql_query($sql);
+
+a_echo("Executing SQL: $sql");
+
 $survey_id = mysql_result($result,0,0);
 a_echo("Got Survey ID: $survey_id");
 
