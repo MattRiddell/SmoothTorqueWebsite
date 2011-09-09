@@ -1465,7 +1465,7 @@ if (!function_exists('create_missing_tables') ) {
             $result=mysql_query($sql, $link);
         }
         
-        if (!in_array('cost', $field_array))
+        if (!in_array('survey', $field_array))
         {
             $result = mysql_query('ALTER TABLE campaign ADD survey INT(10)');
             $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added campaign survey field')";
