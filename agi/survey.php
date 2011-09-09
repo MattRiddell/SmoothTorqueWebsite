@@ -80,9 +80,11 @@ if (!($survey_id > 0)) {
 }
 
 /* Get the survey */
-$result = mysql_query("SELECT * FROM survey WHERE id = ".$survey_id." order by question_number asc");
+$sql = "SELECT * FROM survey WHERE id = ".$survey_id." order by question_number asc";
+a_echo("Executing sql: $sql");
+$result = mysql_query($sql);
 if (mysql_num_rows($result) == 0) {
-
+    a_echo("No results found!");
 } else {
     while ($row = mysql_fetch_assoc($result)) {
         a_echo("Playing ".$row['soundfile']);
