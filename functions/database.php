@@ -1260,9 +1260,7 @@ if (!function_exists('create_missing_tables') ) {
             `survey_id` int(10) unsigned,
             `question_number` int(10) unsigned,
             `soundfile` varchar(1024) default NULL,
-            `choices` varchar(1024) default NULL,
-            PRIMARY KEY  (`id`)
-            )";
+            `choices` varchar(1024) default NULL)";
             $result = mysql_query($sql,$link) or die(mysql_error());
             $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created survey_choices Table')";
             $result=mysql_query($sql, $link);
@@ -1278,9 +1276,7 @@ if (!function_exists('create_missing_tables') ) {
             `campaign_id` int(10) unsigned,
             `phonenumber` varchar(1024) default NULL,
             `question` varchar(1024) default NULL,
-            `choice` varchar(1024) default NULL,
-            PRIMARY KEY  (`id`)
-            )";
+            `choice` varchar(1024) default NULL)";
             $result = mysql_query($sql,$link) or die(mysql_error());
             $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created survey_results Table')";
             $result=mysql_query($sql, $link);
