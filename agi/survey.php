@@ -91,9 +91,13 @@ if (mysql_num_rows($result) == 0) {
         $choices[$x]['filename'] = $row['soundfile'];
         $choices[$x]['expected'] = $row['choices'];
         $choices[$x]['question_num'] = $row['question_number'];        
+        if ($row['question_number'] == 0) {
+            $invalid = $row['soundfile'];
+        }
         $x++;
-    }
-    for ($i = 0;$i<count($choices);$i++) {        
+    }    
+    for ($i = 0;$i<count($choices);$i++) {     
+        a_echo("-----------------------------------");
         a_echo("Playing ".$choices[$i]['filename']);
         a_echo("Expecting ".$choices[$i]['expected']);
         $res = $agi->get_data($choices[$i]['filename'], 2000, 1);        
@@ -115,8 +119,11 @@ if (mysql_num_rows($result) == 0) {
         }
         if ($found == false) {
             a_echo("You did not enter a correct choice");
+            $res = $agi->get_data($invalid, 2000, 1);        
+            $i--;
         } else {
             a_echo("You did enter a correct choice");
+            a_echo("-----------------------------------");
         }
     }    
 }
