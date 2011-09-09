@@ -25,20 +25,20 @@ function errlog($line) {
     echo "VERBOSE \"$line\"\n";
 }
 /*
-function setVal()
-{
-    global $agi;
-    global $connection;
-
-    $query='INSERT INTO dnclist (addedby_id,dncnumber,campaign_id) VALUES (NULL,\''.$phonenumber.'\','.$campaign.')';
-    echo "VERBOSE \"Stage: ".$stage." \" \n";
-    echo "VERBOSE \"PhoneNumber: ".$phonenumber." \" \n";
-    echo "VERBOSE \"CampaignID: ".$campaign." \" \n";
-    echo "VERBOSE \"Query: ".$query." \" \n";
-    
-    $result=mysql_query($query, $connection) or die("VERBOSE \"".mysql_error()."\"\r\n");
-    echo "VERBOSE \"Query Completed ".$result." \" \n";
-}*/
+ function setVal()
+ {
+ global $agi;
+ global $connection;
+ 
+ $query='INSERT INTO dnclist (addedby_id,dncnumber,campaign_id) VALUES (NULL,\''.$phonenumber.'\','.$campaign.')';
+ echo "VERBOSE \"Stage: ".$stage." \" \n";
+ echo "VERBOSE \"PhoneNumber: ".$phonenumber." \" \n";
+ echo "VERBOSE \"CampaignID: ".$campaign." \" \n";
+ echo "VERBOSE \"Query: ".$query." \" \n";
+ 
+ $result=mysql_query($query, $connection) or die("VERBOSE \"".mysql_error()."\"\r\n");
+ echo "VERBOSE \"Query Completed ".$result." \" \n";
+ }*/
 function write($line) 
 {
     global $debug, $stdlog;
@@ -87,13 +87,36 @@ if (mysql_num_rows($result) == 0) {
     a_echo("No results found!");
 } else {
     while ($row = mysql_fetch_assoc($result)) {
-        a_echo("Playing ".$row['soundfile']);
-        a_echo("Expecting ".$row['choices']);
-        $result = $agi->get_data($res, $row['soundfile'], 2000, 0);
-        $response = chr($result['result']);
-        a_echo("received ".$result['result']);
-        a_echo("received ".$response);
+        $choices[]['filename'] = $row['soundfile'];
+        $choices[]['expected'] = $row['choices'];
+        $choices[]['question_num'] = $row['question_number'];        
     }
+    for ($i = 0;$i<count($choices['filename']);$i++) {        
+        a_echo("Playing ".$choices[$i]['filename']);
+        a_echo("Expecting ".$choices[$i]['expected']);
+        $result = $agi->get_data($res, $choices[$i]['filename'], 2000, 0);        
+        $response = $result['result'];
+        if (strlen($response) > 0) {
+            $response = substr($response,0,1);
+        } 
+        if (strlen($choices[$i]['expected']) > 0) {
+            $expected = explode(",",$choices[$i]['expected']);
+            $found = false;
+            foreach ($expected as $expect) {
+                if ($response == $expect) {
+                    $found = true;
+                    break;
+                }
+            }
+        } else {
+            $found = true;
+        }
+        if ($found == false) {
+            a_echo("You did not enter a correct choice");
+        } else {
+            a_echo("You did enter a correct choice");
+        }
+    }    
 }
 
 //setVal();
