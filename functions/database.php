@@ -1233,6 +1233,61 @@ if (!function_exists('create_missing_tables') ) {
             
         }
         
+        
+        /*======================================================================
+         surveys Table
+         ======================================================================*/
+        if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","surveys")){
+            include "admin/db_config.php";
+            $sql = "Create table `surveys` (
+            `id` int(10) unsigned NOT NULL auto_increment,
+            `name` varchar(1024) default NULL,
+            `description` text default NULL,
+            PRIMARY KEY  (`id`)
+            )";
+            $result = mysql_query($sql,$link) or die(mysql_error());
+            $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created surveys Table')";
+            $result=mysql_query($sql, $link);
+            
+        }
+        
+        /*======================================================================
+         survey_choices Table
+         ======================================================================*/
+        if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","survey_choices")){
+            include "admin/db_config.php";
+            $sql = "Create table `survey_choices` (
+            `survey_id` int(10) unsigned,
+            `question_number` int(10) unsigned,
+            `soundfile` varchar(1024) default NULL,
+            `choices` varchar(1024) default NULL,
+            PRIMARY KEY  (`id`)
+            )";
+            $result = mysql_query($sql,$link) or die(mysql_error());
+            $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created survey_choices Table')";
+            $result=mysql_query($sql, $link);
+            
+        }
+        
+        /*======================================================================
+         survey_results Table
+         ======================================================================*/
+        if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","survey_results")){
+            include "admin/db_config.php";
+            $sql = "Create table `survey_results` (
+            `campaign_id` int(10) unsigned,
+            `phonenumber` varchar(1024) default NULL,
+            `question` varchar(1024) default NULL,
+            `choice` varchar(1024) default NULL,
+            PRIMARY KEY  (`id`)
+            )";
+            $result = mysql_query($sql,$link) or die(mysql_error());
+            $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created survey_results Table')";
+            $result=mysql_query($sql, $link);
+            
+        }
+        
+        
         /*======================================================================
          timezones Table
          ======================================================================*/
