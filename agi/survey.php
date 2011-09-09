@@ -79,6 +79,17 @@ if (!($survey_id > 0)) {
     $survey_id = 1;
 }
 
+/* Get the survey */
+$result = mysql_query("SELECT * FROM survey WHERE id = ".$survey_id." order by question_number asc");
+if (mysql_num_rows($result) == 0) {
+
+} else {
+    while ($row = mysql_fetch_assoc($result)) {
+        a_echo("Playing ".$row['soundfile']);
+        a_echo("Expecting ".$row['choices']);
+    }
+}
+
 //setVal();
 fclose($in);
 fclose($stdlog);
