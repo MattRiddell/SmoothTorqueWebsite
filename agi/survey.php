@@ -66,13 +66,18 @@ $campaign=$result[data];
 $result=$agi->get_variable("phonenumber");
 $phonenumber=$result[data];
 
-$sql = "SELECT survey FROM campaign WHERE campaignid = ".$campaign;
+$sql = "SELECT survey FROM campaign WHERE id = ".$campaign;
 $result = mysql_query($sql);
 
 a_echo("Executing SQL: $sql");
 
 $survey_id = mysql_result($result,0,0);
 a_echo("Got Survey ID: $survey_id");
+
+if (!($survey_id > 0)) {
+    a_echo("Survey ID missing - setting to 1");
+    $survey_id = 1;
+}
 
 //setVal();
 fclose($in);
