@@ -127,8 +127,7 @@ if (mysql_num_rows($result) == 0) {
             $i--;
         } else {
             a_echo("You did enter a correct choice");
-            $sql = "INSERT INTO survey_results (campaign_id, phonenumber, question, choice) VALUES
-            ($campaign, '$phonenumber', ".$choices[$i]['question_num'].", '$response')";
+            $sql = "INSERT INTO survey_results (campaign_id, phonenumber, question, choice) VALUES ($campaign, '$phonenumber', ".$choices[$i]['question_num'].", '$response')";
             a_echo ("Running $sql");
             $result = mysql_query($sql);
             a_echo("-----------------------------------");
