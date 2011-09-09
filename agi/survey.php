@@ -94,8 +94,8 @@ if (mysql_num_rows($result) == 0) {
     for ($i = 0;$i<count($choices['filename']);$i++) {        
         a_echo("Playing ".$choices[$i]['filename']);
         a_echo("Expecting ".$choices[$i]['expected']);
-        $result = $agi->get_data($res, $choices[$i]['filename'], 2000, 0);        
-        $response = $result['result'];
+        $res = $agi->get_data($res, $choices[$i]['filename'], 2000, 0);        
+        $response = $res['result'];
         if (strlen($response) > 0) {
             $response = substr($response,0,1);
         } 
