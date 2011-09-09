@@ -86,12 +86,14 @@ $result = mysql_query($sql);
 if (mysql_num_rows($result) == 0) {
     a_echo("No results found!");
 } else {
+    $x = 0;
     while ($row = mysql_fetch_assoc($result)) {
-        $choices[]['filename'] = $row['soundfile'];
-        $choices[]['expected'] = $row['choices'];
-        $choices[]['question_num'] = $row['question_number'];        
+        $choices[$x]['filename'] = $row['soundfile'];
+        $choices[$x]['expected'] = $row['choices'];
+        $choices[$x]['question_num'] = $row['question_number'];        
+        $x++;
     }
-    for ($i = 0;$i<count($choices[]['filename']);$i++) {        
+    for ($i = 0;$i<count($choices);$i++) {        
         a_echo("Playing ".$choices[$i]['filename']);
         a_echo("Expecting ".$choices[$i]['expected']);
         $res = $agi->get_data($res, $choices[$i]['filename'], 2000, 0);        
