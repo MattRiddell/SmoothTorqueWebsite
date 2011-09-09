@@ -1465,6 +1465,13 @@ if (!function_exists('create_missing_tables') ) {
             $result=mysql_query($sql, $link);
         }
         
+        if (!in_array('cost', $field_array))
+        {
+            $result = mysql_query('ALTER TABLE campaign ADD survey INT(10)');
+            $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added campaign survey field')";
+            $result=mysql_query($sql, $link);
+        }
+        
         if (!in_array('drive_min', $field_array))
         {
             $result = mysql_query('ALTER TABLE campaign ADD drive_min VARCHAR(10) DEFAULT "43.0"');
