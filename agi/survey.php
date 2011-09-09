@@ -91,7 +91,7 @@ if (mysql_num_rows($result) == 0) {
         $choices[]['expected'] = $row['choices'];
         $choices[]['question_num'] = $row['question_number'];        
     }
-    for ($i = 0;$i<count($choices['filename']);$i++) {        
+    for ($i = 0;$i<count($choices[]['filename']);$i++) {        
         a_echo("Playing ".$choices[$i]['filename']);
         a_echo("Expecting ".$choices[$i]['expected']);
         $res = $agi->get_data($res, $choices[$i]['filename'], 2000, 0);        
