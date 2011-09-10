@@ -77,6 +77,7 @@
         menu_campaigns VARCHAR(250), menu_numbers VARCHAR(250),
         menu_dnc VARCHAR(250), menu_messages VARCHAR(250),
         menu_schedules VARCHAR(250), menu_customers VARCHAR(250),
+        menu_surveys VARCHAR(250),
         menu_queues VARCHAR(250), menu_servers VARCHAR(250),
         menu_trunks VARCHAR(250), menu_admin VARCHAR(250),
         menu_logout VARCHAR(250), date_colour VARCHAR(250),
@@ -257,6 +258,15 @@
     } else {
         $config_values['MENU_TIMEZONES'] = "Timezones";
     }
+    
+    /*$sql = 'SELECT value FROM config WHERE parameter=\'MENU_SURVEYS\'';
+    $result=mysql_query($sql, $link) or die (mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        $config_values['MENU_SURVEYS'] = mysql_result($result,0,'value');
+    } else {
+        $config_values['MENU_SURVEYS'] = "Surveys";
+    }*/
+    
     
     $sql = 'SELECT value FROM config WHERE parameter=\'sugar_user\'';
     $result=mysql_query($sql, $link) or die (mysql_error());

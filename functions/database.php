@@ -218,6 +218,19 @@ if (!function_exists('create_missing_tables') ) {
             $result=mysql_query($sql, $link);
         }
         
+        $result = mysql_query("SHOW COLUMNS FROM SineDialer.web_config");
+        $columns = mysql_num_rows($result) or die(mysql_error());
+        for ($i = 0; $i < $columns; $i++) {
+            $field_array[] = mysql_result($result, $i, "Field");
+        }
+        
+        if (!in_array('menu_surveys', $field_array)) {
+            $result = mysql_query('ALTER TABLE web_config ADD menu_surveys varchar(250)') or die(mysql_error());
+            $result = mysql_query('UPDATE web_config SET menu_surveys = "Surveys"') or die(mysql_error());            
+            $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added web_config menu_surveys field')";
+
+        }
+        
         $result = mysql_query("SELECT count(*) from web_config WHERE LANG = 'cn'");
         if (mysql_result($result,0,0) == 0) {
             $sql = "INSERT INTO web_config (url, LANG, language,colour,title,logo,contact_text,sox,userid,licence,cdr_host,cdr_user,cdr_pass,cdr_db,cdr_table,menu_home,menu_campaigns,menu_numbers,menu_dnc,menu_messages,menu_schedules,menu_customers,menu_queues,menu_servers,menu_trunks,menu_admin,menu_logout,date_colour,main_page_text,main_page_username,main_page_password,main_page_login,currency_symbol,per_minute,use_billing,front_page_billing,spare1,spare2,spare3,spare4,spare5,st_mysql_host,st_mysql_user,st_mysql_pass,add_campaign,view_campaign,per_page,numbers_view,numbers_system,numbers_generate,numbers_manual,numbers_upload,numbers_export,numbers_search,numbers_title,billing_text,cdr_text,use_generate,dnc_numbers_title,dnc_view,dnc_search,dnc_upload,dnc_add,per_lead,smtp_host,smtp_user,smtp_pass,smtp_from,use_separate_dnc,allow_numbers_manual) VALUES
