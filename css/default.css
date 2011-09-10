@@ -507,6 +507,7 @@ outset; COLOR: #000000; BORDER-BOTTOM: #245e83 0px outset
 	background: url(../images/ch.gif);
 	COLOR: #FFFFFF;
 	text-decoration: none;
+    text-align: center;
     FONT: 10pt verdana,geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
 }
 .theadl2 {
@@ -530,6 +531,7 @@ COLOR: #000000;
     background: url(../images/chb.gif);
     COLOR: #ffffff;
 	text-decoration: none;
+    text-align: center;
     FONT: 10pt verdana,geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
 }.theadl {
 background: url(../images/clb.gif);
