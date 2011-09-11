@@ -1,4 +1,14 @@
 <?
+if (isset($_GET['delete_choice'])) {
+    require "header.php";
+    $result = mysql_query("DELETE FROM survey_choices WHERE survey_id = ".sanitize($_GET['survey'])." AND question_number = ".sanitize($_GET['delete_choice']));
+    $result = mysql_query("UPDATE survey_choices SET question_number = question_number - 1 WHERE survey_id = ".sanitize($_GET['survey'])." AND question_number > ".sanitize($_GET['delete_choice']));
+    ?><center><img src="images/progress.gif" border="0"><br />Removing choice...
+    <META HTTP-EQUIV=REFRESH CONTENT="1; URL=surveys.php?edit=<?=$_GET['survey']?>"><?
+
+    require "footer.php";
+    exit(0);
+}
 if (isset($_GET['add_choice'])) {
     require "admin/db_config.php";
     require "functions/sanitize.php";
@@ -53,7 +63,7 @@ if (isset($_GET['display_message'])) {
     <input type="checkbox" value="*" class="chk">&nbsp;*
     <input type="checkbox" value="#" class="chk">&nbsp;#<br />
     <input type="hidden" name="allvals" id="allvals" value="No keys accepted">
-    <a href="#" onclick="$('#choices').append('<span class=\x22survey_choice\x22 id=\x22question_<?=$next?>\x22><b>File <?=$next?></b>&nbsp;'+$('#message option:selected').text()+'&nbsp;<b>Choices: </b>'+$('#allvals').val()+'</span>');$.ajax({url: 'surveys.php?add_choice=1&survey=<?=$_GET['display_message']?>&filename='+$('#message option:selected').val()+'&question_number=<?=$next?>&choices='+$('#allvals').val()});closeMessage();">Add Question</a>
+    <a href="#" onclick="$('#choices').append('<span class=\x22survey_choice\x22 id=\x22question_<?=$next?>\x22><b>File <?=$next?></b>&nbsp;'+$('#message option:selected').text()+'&nbsp;<b>Choices: </b>'+$('#allvals').val()+'<a href=\x22surveys.php?delete_choice=<?=$next?>&survey=<?=$_GET['display_message']?>\x22><img src=\x22images/delete.png\x22 alt=\x22Delete Choice\x22></a></span>');$.ajax({url: 'surveys.php?add_choice=1&survey=<?=$_GET['display_message']?>&filename='+$('#message option:selected').val()+'&question_number=<?=$next?>&choices='+$('#allvals').val()});closeMessage();">Add Question</a>
     <script type="text/javascript">
     $('.chk').click(function () {
                     var allVals = [];
@@ -101,6 +111,9 @@ if (isset($_GET['edit'])) {
         
         <div id="choices">
         <?
+        $delete_link_part1 = "<A href=\x22#\x22 onclick=\x22$('#question_";
+        $delete_link_part2 = "').remove();\x22><img src=\x22images/delete.png\x22></a>";
+
         $result_choices = mysql_query("SELECT * FROM survey_choices WHERE survey_id = ".$row['id']." order by question_number");
         if (mysql_num_rows($result_choices) > 0) {
             while ($row_choices = mysql_fetch_assoc($result_choices)) {
@@ -113,7 +126,7 @@ if (isset($_GET['edit'])) {
                     echo ''.$message_name.'';
                     
                     echo ''.$row_choices['choices'].'';
-                    echo "</span><br />";
+                    echo $delete_link."</span>";
                 } else {
                     // Valid choice message
                     echo '<span class="survey_choice" id="question_'.$row_choices['question_number'].'">';
@@ -129,7 +142,7 @@ if (isset($_GET['edit'])) {
                     } else {
                         echo '<b>No keys accepted</b>';
                     }
-                    echo "</span><br />";
+                    echo '<a href="surveys.php?delete_choice='.$row_choices['question_number'].'&survey='.$_GET['edit'].'"><img src="images/delete.png" alt="Delete Choice"></a>'."</span>";
                 }
             }
         }
