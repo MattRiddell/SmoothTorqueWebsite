@@ -1,7 +1,41 @@
 <?
+if (isset($_GET['display_message'])) {
+    require "admin/db_config.php";
+    ?>
+    <br />
+    <center>Please select a message:<br />
+    <br />
+    <select name="message" id="message">
+    <?
+    $result = mysql_query("SELECT * FROM campaignmessage where filename like 'x-%'");
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_assoc($result)) {
+            echo '<option value="'.$row['filename'].'">'.$row['name'].'</option>';
+        }
+    }
+    ?>
+    </select>
+    <br />
+    <br />
+    Acceptable Choices:<br />
+    <input type="checkbox" name="0">&nbsp;0
+    <input type="checkbox" name="1">&nbsp;1
+    <input type="checkbox" name="2">&nbsp;2<br />
+    <input type="checkbox" name="3">&nbsp;3
+    <input type="checkbox" name="4">&nbsp;4
+    <input type="checkbox" name="5">&nbsp;5<br />
+    <input type="checkbox" name="6">&nbsp;6
+    <input type="checkbox" name="7">&nbsp;7
+    <input type="checkbox" name="8">&nbsp;8<br />
+    <input type="checkbox" name="9">&nbsp;9
+    <input type="checkbox" name="*">&nbsp;*
+    <input type="checkbox" name="#">&nbsp;#<br />
+    <a href="#" onclick="$('#choices').append('sdfasfd<br />');closeMessage();">Add Question</a>
+    <?
+    exit(0);
+}
 require "header.php";
 require "header_surveys.php";
-
 if (isset($_GET['edit'])) {
     ?><script type="text/javascript" src="<?=$http_dir_name?>ajax/jquery.js"></script><?
 
@@ -28,7 +62,8 @@ if (isset($_GET['edit'])) {
         </table>
         </form>
         <h3>Choices</h3>        
-        <a href="#"><img src="images/add.png" alt="Add Choice">&nbsp;Add Choice</a><br />
+        <a href="#" onclick="displayMessage('surveys.php?display_message=1');"><img src="images/add.png" alt="Add Choice">&nbsp;Add Choice</a><br />
+        
         <div id="choices">
         <?
         $result_choices = mysql_query("SELECT * FROM survey_choices WHERE survey_id = ".$row['id']." order by question_number");
