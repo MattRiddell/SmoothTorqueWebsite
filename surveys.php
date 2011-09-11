@@ -13,24 +13,43 @@ if (isset($_GET['display_message'])) {
             echo '<option value="'.$row['filename'].'">'.$row['name'].'</option>';
         }
     }
+    $result = mysql_query("SELECT question_number FROM survey_choices order by question_number desc limit 1");
+    if (mysql_num_rows($result) > 0) {
+        $next = mysql_result($result,0,0)+1;
+    } else {
+        $next = 1;
+    }
     ?>
     </select>
     <br />
     <br />
     Acceptable Choices:<br />
-    <input type="checkbox" name="0">&nbsp;0
-    <input type="checkbox" name="1">&nbsp;1
-    <input type="checkbox" name="2">&nbsp;2<br />
-    <input type="checkbox" name="3">&nbsp;3
-    <input type="checkbox" name="4">&nbsp;4
-    <input type="checkbox" name="5">&nbsp;5<br />
-    <input type="checkbox" name="6">&nbsp;6
-    <input type="checkbox" name="7">&nbsp;7
-    <input type="checkbox" name="8">&nbsp;8<br />
-    <input type="checkbox" name="9">&nbsp;9
-    <input type="checkbox" name="*">&nbsp;*
-    <input type="checkbox" name="#">&nbsp;#<br />
-    <a href="#" onclick="$('#choices').append('sdfasfd<br />');closeMessage();">Add Question</a>
+    <input type="checkbox" value="0" class="chk">&nbsp;0
+    <input type="checkbox" value="1" class="chk">&nbsp;1
+    <input type="checkbox" value="2" class="chk">&nbsp;2<br />
+    <input type="checkbox" value="3" class="chk">&nbsp;3
+    <input type="checkbox" value="4" class="chk">&nbsp;4
+    <input type="checkbox" value="5" class="chk">&nbsp;5<br />
+    <input type="checkbox" value="6" class="chk">&nbsp;6
+    <input type="checkbox" value="7" class="chk">&nbsp;7
+    <input type="checkbox" value="8" class="chk">&nbsp;8<br />
+    <input type="checkbox" value="9" class="chk">&nbsp;9
+    <input type="checkbox" value="*" class="chk">&nbsp;*
+    <input type="checkbox" value="#" class="chk">&nbsp;#<br />
+    <input type="hidden" name="allvals" id="allvals" value="No keys accepted">
+    <a href="#" onclick="$('#choices').append('<span class=\x22survey_choice\x22 id=\x22question_<?=$next?>\x22><b>File <?=$next?></b>&nbsp;'+$('#message option:selected').text()+'&nbsp;<b>Choices: </b>'+$('#allvals').val()+'</span>');closeMessage();">Add Question</a>
+    <script type="text/javascript">
+    $('.chk').click(function () {
+                    var allVals = [];
+                    $('.chk:checked').each(function() {allVals.push($(this).val());});
+                    if (allVals.length > 0) {
+                        $('#allvals').val(allVals.toString());
+                    } else {                    
+                        $('#allvals').val("No keys accepted");
+                    }
+                    }
+                    );
+    </script>
     <?
     exit(0);
 }
@@ -38,7 +57,7 @@ require "header.php";
 require "header_surveys.php";
 if (isset($_GET['edit'])) {
     ?><script type="text/javascript" src="<?=$http_dir_name?>ajax/jquery.js"></script><?
-
+    
     $result = mysql_query("SELECT * FROM surveys WHERE id = ".sanitize($_GET['edit']));
     if (mysql_num_rows($result) == 0) {
         echo "Incorrect ID";
@@ -62,7 +81,7 @@ if (isset($_GET['edit'])) {
         </table>
         </form>
         <h3>Choices</h3>        
-        <a href="#" onclick="displayMessage('surveys.php?display_message=1');"><img src="images/add.png" alt="Add Choice">&nbsp;Add Choice</a><br />
+        <a href="#" onclick="ko = new Date();displayMessage('surveys.php?display_message=<?=$_GET['edit']?>&x='+ko.getTime());"><img src="images/add.png" alt="Add Choice">&nbsp;Add Choice</a><br />
         
         <div id="choices">
         <?
@@ -71,16 +90,29 @@ if (isset($_GET['edit'])) {
             while ($row_choices = mysql_fetch_assoc($result_choices)) {
                 if ($row_choices['question_number'] == 0) {
                     // Invalid choice message
-                    echo '<span class="survey_choice" id="question_'.$row_choices['question_number'].'">Invalid Choice Message&nbsp;';
-                    echo ''.$row_choices['soundfile'].'';
+                    echo '<span class="survey_choice" id="question_'.$row_choices['question_number'].'"><b>Invalid Choice Message</b>&nbsp;';
+                    $sql = "SELECT name FROM campaignmessage WHERE filename like ".sanitize($row_choices['soundfile']."%");
+                    $result_file = mysql_query($sql) or die(mysql_error());
+                    $message_name = mysql_result($result_file,0,0);
+                    echo ''.$message_name.'';
+                    
                     echo ''.$row_choices['choices'].'';
                     echo "</span><br />";
                 } else {
                     // Valid choice message
                     echo '<span class="survey_choice" id="question_'.$row_choices['question_number'].'">';
-                    echo ''.$row_choices['question_number'].'&nbsp;';
-                    echo ''.$row_choices['soundfile'].'&nbsp;';
-                    echo ''.$row_choices['choices'].'';
+                    echo '<b>File '.$row_choices['question_number'].'</b>&nbsp;';
+                    
+                    $sql = "SELECT name FROM campaignmessage WHERE filename like ".sanitize($row_choices['soundfile']."%");
+                    $result_file = mysql_query($sql) or die(mysql_error());
+                    $message_name = mysql_result($result_file,0,0);
+                    echo ''.$message_name.'&nbsp;';
+                    
+                    if (strlen($row_choices['choices']) > 0) {
+                        echo '<b>Choices:</b>&nbsp;'.$row_choices['choices'].'';
+                    } else {
+                        echo '<b>No keys accepted</b>';
+                    }
                     echo "</span><br />";
                 }
             }
