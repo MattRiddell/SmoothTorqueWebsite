@@ -1,6 +1,22 @@
 <?
+if (isset($_GET['add_choice'])) {
+    require "admin/db_config.php";
+    require "functions/sanitize.php";
+    $survey_id = sanitize($_GET['survey']);
+    $question_number = sanitize($_GET['question_number']);
+    $soundfile = sanitize($_GET['filename']);
+    if ($_GET['choices'] == "No keys accepted") {
+        $choices = sanitize("");
+    } else {
+        $choices = sanitize($_GET['choices']);
+    }
+    $sql = "INSERT INTO survey_choices (survey_id, question_number, soundfile, choices) VALUES ($survey_id, $question_number, $soundfile, $choices)";
+    mysql_query($sql);
+    exit(0);
+}
 if (isset($_GET['display_message'])) {
     require "admin/db_config.php";
+    require "functions/sanitize.php";
     ?>
     <br />
     <center>Please select a message:<br />
@@ -13,7 +29,7 @@ if (isset($_GET['display_message'])) {
             echo '<option value="'.$row['filename'].'">'.$row['name'].'</option>';
         }
     }
-    $result = mysql_query("SELECT question_number FROM survey_choices order by question_number desc limit 1");
+    $result = mysql_query("SELECT question_number FROM survey_choices WHERE survey_id = ".sanitize($_GET['display_message'])." order by question_number desc limit 1");
     if (mysql_num_rows($result) > 0) {
         $next = mysql_result($result,0,0)+1;
     } else {
@@ -37,7 +53,7 @@ if (isset($_GET['display_message'])) {
     <input type="checkbox" value="*" class="chk">&nbsp;*
     <input type="checkbox" value="#" class="chk">&nbsp;#<br />
     <input type="hidden" name="allvals" id="allvals" value="No keys accepted">
-    <a href="#" onclick="$('#choices').append('<span class=\x22survey_choice\x22 id=\x22question_<?=$next?>\x22><b>File <?=$next?></b>&nbsp;'+$('#message option:selected').text()+'&nbsp;<b>Choices: </b>'+$('#allvals').val()+'</span>');closeMessage();">Add Question</a>
+    <a href="#" onclick="$('#choices').append('<span class=\x22survey_choice\x22 id=\x22question_<?=$next?>\x22><b>File <?=$next?></b>&nbsp;'+$('#message option:selected').text()+'&nbsp;<b>Choices: </b>'+$('#allvals').val()+'</span>');$.ajax({url: 'surveys.php?add_choice=1&survey=<?=$_GET['display_message']?>&filename='+$('#message option:selected').val()+'&question_number=<?=$next?>&choices='+$('#allvals').val()});closeMessage();">Add Question</a>
     <script type="text/javascript">
     $('.chk').click(function () {
                     var allVals = [];
