@@ -29,27 +29,28 @@ if (isset($_GET['edit'])) {
         </form>
         <h3>Choices</h3>        
         <a href="#"><img src="images/add.png" alt="Add Choice">&nbsp;Add Choice</a><br />
-        <table width="540" border="1">
+        <div id="choices">
         <?
         $result_choices = mysql_query("SELECT * FROM survey_choices WHERE survey_id = ".$row['id']." order by question_number");
         if (mysql_num_rows($result_choices) > 0) {
             while ($row_choices = mysql_fetch_assoc($result_choices)) {
-                echo "<tr>";
                 if ($row_choices['question_number'] == 0) {
                     // Invalid choice message
-                    echo '<td>Invalid Choice Message</td>';
-                    echo '<td>'.$row_choices['soundfile'].'</td>';
-                    echo '<td>'.$row_choices['choices'].'</td>';
+                    echo '<span class="survey_choice" id="question_'.$row_choices['question_number'].'">Invalid Choice Message&nbsp;';
+                    echo ''.$row_choices['soundfile'].'';
+                    echo ''.$row_choices['choices'].'';
+                    echo "</span><br />";
                 } else {
                     // Valid choice message
-                    echo '<td>'.$row_choices['question_number'].'</td>';
-                    echo '<td>'.$row_choices['soundfile'].'</td>';
-                    echo '<td>'.$row_choices['choices'].'</td>';
+                    echo '<span class="survey_choice" id="question_'.$row_choices['question_number'].'">';
+                    echo ''.$row_choices['question_number'].'&nbsp;';
+                    echo ''.$row_choices['soundfile'].'&nbsp;';
+                    echo ''.$row_choices['choices'].'';
+                    echo "</span><br />";
                 }
-                echo "</tr>";
             }
         }
-        echo "</table>";
+        echo "</div>";
         box_end();
     }
     require "footer.php";

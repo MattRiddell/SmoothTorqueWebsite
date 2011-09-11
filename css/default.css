@@ -947,3 +947,11 @@ TD.subheader2:hover {
    background-position: 0 -6;
    border: 0px;
 }
+
+.survey_choice {
+    border: 1px solid #fff;
+    padding: 10px;
+    display: block;
+    width: 80%;
+    background: #ccc;
+}
