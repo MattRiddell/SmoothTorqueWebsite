@@ -9,6 +9,13 @@ if (isset($_GET['delete_choice'])) {
     require "footer.php";
     exit(0);
 }
+if (isset($_GET['change_invalid'])) {
+    require "admin/db_config.php";
+    require "functions/sanitize.php";
+    $result = mysql_query("UPDATE survey_choices SET soundfile = ".sanitize($_GET['change_invalid'])." WHERE question_number = 0 AND survey_id = ".sanitize($_GET['survey']));
+    exit(0);
+}
+
 if (isset($_GET['add_choice'])) {
     require "admin/db_config.php";
     require "functions/sanitize.php";
@@ -36,7 +43,7 @@ if (isset($_GET['display_message'])) {
     $result = mysql_query("SELECT * FROM campaignmessage where filename like 'x-%'");
     if (mysql_num_rows($result) > 0) {
         while ($row = mysql_fetch_assoc($result)) {
-            echo '<option value="'.$row['filename'].'">'.$row['name'].'</option>';
+            echo '<option value="'.substr($row['filename'],0,strlen($row['filename'])-4).'">'.$row['name'].'</option>';
         }
     }
     $result = mysql_query("SELECT question_number FROM survey_choices WHERE survey_id = ".sanitize($_GET['display_message'])." order by question_number desc limit 1");
@@ -63,7 +70,7 @@ if (isset($_GET['display_message'])) {
     <input type="checkbox" value="*" class="chk">&nbsp;*
     <input type="checkbox" value="#" class="chk">&nbsp;#<br />
     <input type="hidden" name="allvals" id="allvals" value="No keys accepted">
-    <a href="#" onclick="$('#choices').append('<span class=\x22survey_choice\x22 id=\x22question_<?=$next?>\x22><b>File <?=$next?></b>&nbsp;'+$('#message option:selected').text()+'&nbsp;<b>Choices: </b>'+$('#allvals').val()+'<a href=\x22surveys.php?delete_choice=<?=$next?>&survey=<?=$_GET['display_message']?>\x22><img src=\x22images/delete.png\x22 alt=\x22Delete Choice\x22></a></span>');$.ajax({url: 'surveys.php?add_choice=1&survey=<?=$_GET['display_message']?>&filename='+$('#message option:selected').val()+'&question_number=<?=$next?>&choices='+$('#allvals').val()});closeMessage();">Add Question</a>
+    <input type="button" value="Add Question" onclick="$('#choices').append('<span class=\x22survey_choice\x22 id=\x22question_<?=$next?>\x22><b>File <?=$next?></b>&nbsp;'+$('#message option:selected').text()+'&nbsp;<b>Choices: </b>'+$('#allvals').val()+'<a href=\x22surveys.php?delete_choice=<?=$next?>&survey=<?=$_GET['display_message']?>\x22><img src=\x22images/delete.png\x22 alt=\x22Delete Choice\x22></a></span>');$.ajax({url: 'surveys.php?add_choice=1&survey=<?=$_GET['display_message']?>&filename='+$('#message option:selected').val()+'&question_number=<?=$next?>&choices='+$('#allvals').val()});closeMessage();">
     <script type="text/javascript">
     $('.chk').click(function () {
                     var allVals = [];
@@ -107,7 +114,7 @@ if (isset($_GET['edit'])) {
         </table>
         </form>
         <h3>Choices</h3>        
-        <a href="#" onclick="ko = new Date();displayMessage('surveys.php?display_message=<?=$_GET['edit']?>&x='+ko.getTime());"><img src="images/add.png" alt="Add Choice">&nbsp;Add Choice</a><br />
+        <a href="#" onclick="ko = new Date();displaySmallMessage('surveys.php?display_message=<?=$_GET['edit']?>&x='+ko.getTime());"><img src="images/add.png" alt="Add Choice">&nbsp;Add Choice</a><br />
         
         <div id="choices">
         <?
@@ -119,13 +126,24 @@ if (isset($_GET['edit'])) {
             while ($row_choices = mysql_fetch_assoc($result_choices)) {
                 if ($row_choices['question_number'] == 0) {
                     // Invalid choice message
-                    echo '<span class="survey_choice" id="question_'.$row_choices['question_number'].'"><b>Invalid Choice Message</b>&nbsp;';
-                    $sql = "SELECT name FROM campaignmessage WHERE filename like ".sanitize($row_choices['soundfile']."%");
+                    echo '<span class="survey_choice" id="question_'.$row_choices['question_number'].'"><b>Invalid Choice Message:</b>&nbsp;';
+                    
+                    $result_x = mysql_query("SELECT * FROM campaignmessage WHERE filename like 'x-%'");
+                    echo '<select name="invalid_message" id="invalid_message" onchange="$.ajax({url: \'surveys.php?change_invalid=\'+$(\'#invalid_message option:selected\').val()+\'&survey='.$_GET['edit'].'\'});">';
+                    while ($row_x = mysql_fetch_assoc($result_x)) {
+                        echo '<option value="'.substr($row_x['filename'],0,strlen($row_x['filename'])-4).'"';
+                        if (substr($row_x['filename'],0,strlen($row_choices['soundfile'])) == $row_choices['soundfile']) {
+                            echo " selected ";
+                        } 
+                        echo '>'.$row_x['name'].'</option>';
+                    }
+                    echo "</select>";
+/*                    $sql = "SELECT name FROM campaignmessage WHERE filename like ".sanitize($row_choices['soundfile']."%");
                     $result_file = mysql_query($sql) or die(mysql_error());
                     $message_name = mysql_result($result_file,0,0);
                     echo ''.$message_name.'';
                     
-                    echo ''.$row_choices['choices'].'';
+                    echo ''.$row_choices['choices'].'';*/
                     echo $delete_link."</span>";
                 } else {
                     // Valid choice message
