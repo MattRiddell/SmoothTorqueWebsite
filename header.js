@@ -1,7 +1,7 @@
 function hideshow(name){
 	var opened = "images/open.png";
 	var closed = "images/closed.png";
-
+    
 	var element = document.getElementById(name);
 	var img = document.getElementsByName("img_"+name);
 	if(element.style.display == "none"){
@@ -19,417 +19,462 @@ function whatPaySelected(myval){
     } else {
         document.getElementById('mode').style.display='';
     }
-
+    
 	if (myval == '0') {
-    		if (document.all2) {
-        		document.all['mode'].style.display = "none";
-    		} else {
-        		document.getElementById('mode').style.display='none';
-    		}
-    		if (document.all2) {
-        		document.all['cc_number'].style.display = "none";
-        		document.all['live_message'].style.display = "none";
-        		document.all['answer_machine_message'].style.display = "none";
-        		document.all['dnc_list_message'].style.display = "none";
-        		document.all['outbound_callerid'].style.display = "none";
-        		document.all['max_connected_calls'].style.display = "visible";
-    		} else {
-        		document.getElementById('cc_number').style.display='none';
-        		document.getElementById('live_message').style.display='none';
-        		document.getElementById('answer_machine_message').style.display='none';
-        		document.getElementById('dnc_list_message').style.display='none';
-        		document.getElementById('outbound_callerid').style.display='none';
-        		document.getElementById('max_connected_calls').style.display='';
-    		}
+        if (document.all2) {
+            document.all['mode'].style.display = "none";
+        } else {
+            document.getElementById('mode').style.display='none';
+        }
+        if (document.all2) {
+            document.all['cc_number'].style.display = "none";
+            document.all['live_message'].style.display = "none";
+            document.all['answer_machine_message'].style.display = "none";
+            document.all['dnc_list_message'].style.display = "none";
+            document.all['outbound_callerid'].style.display = "none";
+            document.all['max_connected_calls'].style.display = "visible";
+            document.all['survey'].style.display = "none";
+        } else {
+            document.getElementById('cc_number').style.display='none';
+            document.getElementById('live_message').style.display='none';
+            document.getElementById('answer_machine_message').style.display='none';
+            document.getElementById('dnc_list_message').style.display='none';
+            document.getElementById('outbound_callerid').style.display='none';
+            document.getElementById('max_connected_calls').style.display='';
+            document.getElementById('survey').style.display='none';
+        }
 	} else if (myval == '10') {
-    		if (document.all2) {
-        		document.all['cc_number'].style.display = "visible";
-        		document.all['live_message'].style.display = "visible";
-        		document.all['answer_machine_message'].style.display = "visible";
-        		document.all['dnc_list_message'].style.display = "visible";
-        		document.all['outbound_callerid'].style.display = "visible";
-        		document.all['max_connected_calls'].style.display = "visible";
-    		} else {
-        		document.getElementById('cc_number').style.display='';
-        		document.getElementById('live_message').style.display='';
-        		document.getElementById('answer_machine_message').style.display='';
-        		document.getElementById('dnc_list_message').style.display='';
-        		document.getElementById('outbound_callerid').style.display='';
-        		document.getElementById('max_connected_calls').style.display='';
-    		}
+        if (document.all2) {
+            document.all['cc_number'].style.display = "visible";
+            document.all['live_message'].style.display = "visible";
+            document.all['answer_machine_message'].style.display = "visible";
+            document.all['dnc_list_message'].style.display = "visible";
+            document.all['outbound_callerid'].style.display = "visible";
+            document.all['max_connected_calls'].style.display = "visible";
+            document.all['survey'].style.display = "none";
+        } else {
+            document.getElementById('cc_number').style.display='';
+            document.getElementById('live_message').style.display='';
+            document.getElementById('answer_machine_message').style.display='';
+            document.getElementById('dnc_list_message').style.display='';
+            document.getElementById('outbound_callerid').style.display='';
+            document.getElementById('max_connected_calls').style.display='';
+            document.getElementById('survey').style.display='none';
+        }
 	} else if (myval == '11') {
-    		if (document.all2) {
-        		document.all['cc_number'].style.display = "visible";
-        		document.all['live_message'].style.display = "visible";
-        		document.all['answer_machine_message'].style.display = "visible";
-        		document.all['dnc_list_message'].style.display = "visible";
-        		document.all['outbound_callerid'].style.display = "visible";
-        		document.all['max_connected_calls'].style.display = "visible";
-    		} else {
-        		document.getElementById('cc_number').style.display='';
-        		document.getElementById('live_message').style.display='';
-        		document.getElementById('answer_machine_message').style.display='';
-        		document.getElementById('dnc_list_message').style.display='';
-        		document.getElementById('outbound_callerid').style.display='';
-        		document.getElementById('max_connected_calls').style.display='';
-    		}
+        if (document.all2) {
+            document.all['cc_number'].style.display = "visible";
+            document.all['live_message'].style.display = "visible";
+            document.all['answer_machine_message'].style.display = "visible";
+            document.all['dnc_list_message'].style.display = "visible";
+            document.all['outbound_callerid'].style.display = "visible";
+            document.all['max_connected_calls'].style.display = "visible";
+            document.all['survey'].style.display = "none";
+        } else {
+            document.getElementById('cc_number').style.display='';
+            document.getElementById('live_message').style.display='';
+            document.getElementById('answer_machine_message').style.display='';
+            document.getElementById('dnc_list_message').style.display='';
+            document.getElementById('outbound_callerid').style.display='';
+            document.getElementById('max_connected_calls').style.display='';
+            document.getElementById('survey').style.display='none';
+        }
 	} else if (myval == '12') {
-    		if (document.all2) {
-        		document.all['cc_number'].style.display = "visible";
-        		document.all['live_message'].style.display = "visible";
-        		document.all['answer_machine_message'].style.display = "visible";
-        		document.all['dnc_list_message'].style.display = "visible";
-        		document.all['outbound_callerid'].style.display = "visible";
-        		document.all['max_connected_calls'].style.display = "visible";
-    		} else {
-        		document.getElementById('cc_number').style.display='';
-        		document.getElementById('live_message').style.display='';
-        		document.getElementById('answer_machine_message').style.display='';
-        		document.getElementById('dnc_list_message').style.display='';
-        		document.getElementById('outbound_callerid').style.display='';
-        		document.getElementById('max_connected_calls').style.display='';
-    		}
+        if (document.all2) {
+            document.all['cc_number'].style.display = "visible";
+            document.all['live_message'].style.display = "visible";
+            document.all['answer_machine_message'].style.display = "visible";
+            document.all['dnc_list_message'].style.display = "visible";
+            document.all['outbound_callerid'].style.display = "visible";
+            document.all['max_connected_calls'].style.display = "visible";
+            document.all['survey'].style.display = "none";
+        } else {
+            document.getElementById('cc_number').style.display='';
+            document.getElementById('live_message').style.display='';
+            document.getElementById('answer_machine_message').style.display='';
+            document.getElementById('dnc_list_message').style.display='';
+            document.getElementById('outbound_callerid').style.display='';
+            document.getElementById('max_connected_calls').style.display='';
+            document.getElementById('survey').style.display='none';
+        }
 	} else if (myval == '13') {
-    if (document.all2) {
-        document.all['cc_number'].style.display = "visible";
-        document.all['live_message'].style.display = "visible";
-        document.all['answer_machine_message'].style.display = "visible";
-        document.all['dnc_list_message'].style.display = "visible";
-        document.all['outbound_callerid'].style.display = "visible";
-        document.all['max_connected_calls'].style.display = "visible";
-    } else {
-        document.getElementById('cc_number').style.display='';
-        document.getElementById('live_message').style.display='';
-        document.getElementById('answer_machine_message').style.display='';
-        document.getElementById('dnc_list_message').style.display='';
-        document.getElementById('outbound_callerid').style.display='';
-        document.getElementById('max_connected_calls').style.display='';
-    }
-} else if (myval == '14') {
-    if (document.all2) {
-        document.all['cc_number'].style.display = "visible";
-        document.all['live_message'].style.display = "visible";
-        document.all['answer_machine_message'].style.display = "visible";
-        document.all['dnc_list_message'].style.display = "visible";
-        document.all['outbound_callerid'].style.display = "visible";
-        document.all['max_connected_calls'].style.display = "visible";
-    } else {
-        document.getElementById('cc_number').style.display='';
-        document.getElementById('live_message').style.display='';
-        document.getElementById('answer_machine_message').style.display='';
-        document.getElementById('dnc_list_message').style.display='';
-        document.getElementById('outbound_callerid').style.display='';
-        document.getElementById('max_connected_calls').style.display='';
-    }
-} else if (myval == '15') { /* Automated Survey */
-    if (document.all2) {
-        document.all['cc_number'].style.display = "visible";
-        document.all['live_message'].style.display = "visible";
-        document.all['answer_machine_message'].style.display = "visible";
-        document.all['dnc_list_message'].style.display = "visible";
-        document.all['outbound_callerid'].style.display = "visible";
-        document.all['max_connected_calls'].style.display = "visible";
-    } else {
-        document.getElementById('cc_number').style.display='';
-        document.getElementById('live_message').style.display='';
-        document.getElementById('answer_machine_message').style.display='';
-        document.getElementById('dnc_list_message').style.display='';
-        document.getElementById('outbound_callerid').style.display='';
-        document.getElementById('max_connected_calls').style.display='';
-    }
-}  else if (myval == '1') {
-    if (document.all2) {
-        document.all['cc_number'].style.display = "none";/*the number for the call center*/
-        document.all['live_message'].style.display = "none";/*press 1 message*/
-        document.all['answer_machine_message'].style.display = "visible";/*answer machine message*/
-        document.all['dnc_list_message'].style.display = "none";/*dnc message*/
-        document.all['outbound_callerid'].style.display = "visible";/*caller id*/
-        document.all['max_connected_calls'].style.display = "visible";/*imax connected calls*/
-    } else {
-        document.getElementById('cc_number').style.display='none';
-        document.getElementById('live_message').style.display='none';
-        document.getElementById('answer_machine_message').style.display='';
-        document.getElementById('dnc_list_message').style.display='none';
-        document.getElementById('outbound_callerid').style.display='';
-        document.getElementById('max_connected_calls').style.display='';
-    }
-} else if (myval == '2') {
-    if (document.all2) {
-        document.all['cc_number'].style.display = "visible";
-        document.all['live_message'].style.display = "none";
-        document.all['answer_machine_message'].style.display = "none";
-        document.all['dnc_list_message'].style.display = "none";
-        document.all['outbound_callerid'].style.display = "visible";
-        document.all['max_connected_calls'].style.display = "visible";
-    } else {
-        document.getElementById('cc_number').style.display='';
-        document.getElementById('live_message').style.display='none';
-        document.getElementById('answer_machine_message').style.display='none';
-        document.getElementById('dnc_list_message').style.display='none';
-        document.getElementById('outbound_callerid').style.display='';
-        document.getElementById('max_connected_calls').style.display='';
-    }
-} else if (myval == '3') {
-    if (document.all2) {
-        document.all['cc_number'].style.display = "visible";
-        document.all['live_message'].style.display = "visible";
-        document.all['answer_machine_message'].style.display = "visible";
-        document.all['dnc_list_message'].style.display = "visible";
-        document.all['outbound_callerid'].style.display = "visible";
-        document.all['max_connected_calls'].style.display = "visible";
-    } else {
-        document.getElementById('cc_number').style.display='';
-        document.getElementById('live_message').style.display='';
-        document.getElementById('answer_machine_message').style.display='';
-        document.getElementById('dnc_list_message').style.display='';
-        document.getElementById('outbound_callerid').style.display='';
-        document.getElementById('max_connected_calls').style.display='';
-    }
-} else if (myval == '4') {
-    if (document.all2) {
-        document.all['cc_number'].style.display = "visible";
-        document.all['live_message'].style.display = "visible";
-        document.all['answer_machine_message'].style.display = "none";
-        document.all['dnc_list_message'].style.display = "visible";
-        document.all['outbound_callerid'].style.display = "visible";
-        document.all['max_connected_calls'].style.display = "visible";
-    } else {
-        document.getElementById('cc_number').style.display='';
-        document.getElementById('live_message').style.display='';
-        document.getElementById('answer_machine_message').style.display='none';
-        document.getElementById('dnc_list_message').style.display='';
-        document.getElementById('outbound_callerid').style.display='';
-        document.getElementById('max_connected_calls').style.display='';
-    }
-} else if (myval == '5') {
-    if (document.all2) {
-        document.all['cc_number'].style.display = "visible";
-        document.all['live_message'].style.display = "none";
-        document.all['answer_machine_message'].style.display = "visible";
-        document.all['dnc_list_message'].style.display = "none";
-        document.all['outbound_callerid'].style.display = "visible";
-        document.all['max_connected_calls'].style.display = "visible";
-    } else {
-        document.getElementById('cc_number').style.display='';
-        document.getElementById('live_message').style.display='none';
-        document.getElementById('answer_machine_message').style.display='';
-        document.getElementById('dnc_list_message').style.display='none';
-        document.getElementById('outbound_callerid').style.display='';
-        document.getElementById('max_connected_calls').style.display='';
-    }
-} else if (myval == '6') {
-    if (document.all2) {
-        document.all['cc_number'].style.display = "visible";
-        document.all['live_message'].style.display = "none";
-        document.all['answer_machine_message'].style.display = "none";
-        document.all['dnc_list_message'].style.display = "none";
-        document.all['outbound_callerid'].style.display = "visible";
-        document.all['max_connected_calls'].style.display = "visible";
-    } else {
-        document.getElementById('cc_number').style.display='';
-        document.getElementById('live_message').style.display='none';
-        document.getElementById('answer_machine_message').style.display='none';
-        document.getElementById('dnc_list_message').style.display='none';
-        document.getElementById('outbound_callerid').style.display='';
-        document.getElementById('max_connected_calls').style.display='';
-    }
-} else if (myval == '7') {
-/*
-    if (document.all2) {
-        document.all['mode'].style.display = "none";
-    } else {
-        document.getElementById('mode').style.display='none';
-    }
-   */
-    if (document.all2) {
-        document.all['cc_number'].style.display = "none";
-        document.all['live_message'].style.display = "visible";
-        document.all['answer_machine_message'].style.display = "none";
-        document.all['dnc_list_message'].style.display = "none";
-        document.all['outbound_callerid'].style.display = "visible";
-        document.all['max_connected_calls'].style.display = "visible";
-    } else {
-        document.getElementById('cc_number').style.display='none';
-        document.getElementById('live_message').style.display='';
-        document.getElementById('answer_machine_message').style.display='none';
-        document.getElementById('dnc_list_message').style.display='none';
-        document.getElementById('outbound_callerid').style.display='';
-        document.getElementById('max_connected_calls').style.display='';
-    }
-} else if (myval == '8') {
-    if (document.all2) {
-        document.all['mode'].style.display = "none";
-    } else {
-        document.getElementById('mode').style.display='none';
-    }
-    if (document.all2) {
-        document.all['fax'].style.display = "visible";
-    } else {
-        document.getElementById('fax').style.display='';
-    }
-
-
-    if (document.all2) {
-        document.all['cc_number'].style.display = "none";
-        document.all['live_message'].style.display = "none";
-        document.all['answer_machine_message'].style.display = "none";
-        document.all['dnc_list_message'].style.display = "none";
-        document.all['outbound_callerid'].style.display = "visible";
-        document.all['max_connected_calls'].style.display = "none";
-    } else {
-        document.getElementById('cc_number').style.display='none';
-        document.getElementById('live_message').style.display='none';
-        document.getElementById('answer_machine_message').style.display='none';
-        document.getElementById('dnc_list_message').style.display='none';
-        document.getElementById('outbound_callerid').style.display='';
-        document.getElementById('max_connected_calls').style.display='none';
-    }
-} else if (myval == '9') {
-    //alert('9');
-    if (document.all2) {
-        document.all['mode'].style.display = "none";
-    } else {
-        document.getElementById('mode').style.display='none';
-    }
-    if (document.all2) {
-        document.all['sms'].style.display = "visible";
-    } else {
-        document.getElementById('sms').style.display='';
-    }
-    if (document.all2) {
-        document.all['cc_number'].style.display = "none";
-        document.all['live_message'].style.display = "none";
-        document.all['answer_machine_message'].style.display = "none";
-        document.all['dnc_list_message'].style.display = "none";
-        document.all['outbound_callerid'].style.display = "visible";
-        document.all['max_connected_calls'].style.display = "visible";
-    } else {
-        document.getElementById('cc_number').style.display='none';
-        document.getElementById('live_message').style.display='none';
-        document.getElementById('answer_machine_message').style.display='none';
-        document.getElementById('dnc_list_message').style.display='none';
-        document.getElementById('outbound_callerid').style.display='';
-        document.getElementById('max_connected_calls').style.display='';
-    }
-} else if (myval == '054') {
-    if (document.all2) {
-        document.all['cc_number'].style.display = "visible";
-        document.all['live_message'].style.display = "visible";
-        document.all['answer_machine_message'].style.display = "visible";
-        document.all['dnc_list_message'].style.display = "visible";
-        document.all['outbound_callerid'].style.display = "visible";
-        document.all['max_connected_calls'].style.display = "visible";
-    } else {
-        document.getElementById('cc_number').style.display='';
-        document.getElementById('live_message').style.display='';
-        document.getElementById('answer_machine_message').style.display='';
-        document.getElementById('dnc_list_message').style.display='';
-        document.getElementById('outbound_callerid').style.display='';
-        document.getElementById('max_connected_calls').style.display='';
-    }
-} else if (myval == '-1') {
-    if (document.all2) {
-        document.all['mode'].style.display = "none";
-    } else {
-        document.getElementById('mode').style.display='none';
-    }
-    if (document.all2) {
-        document.all['cc_number'].style.display = "none";
-        document.all['live_message'].style.display = "none";
-        document.all['answer_machine_message'].style.display = "none";
-        document.all['dnc_list_message'].style.display = "none";
-        document.all['outbound_callerid'].style.display = "none";
-        document.all['max_connected_calls'].style.display = "none";
-    } else {
-        document.getElementById('cc_number').style.display='none';
-        document.getElementById('live_message').style.display='none';
-        document.getElementById('answer_machine_message').style.display='none';
-        document.getElementById('dnc_list_message').style.display='none';
-        document.getElementById('outbound_callerid').style.display='none';
-        document.getElementById('max_connected_calls').style.display='none';
-    }
-}
-}
-    <!--
-    function f_selectAll (s_select) {
-var e_select = document.forms['customer'].elements[s_select];
-for (var i = 0; i < e_select.options.length; i++)
-e_select.options[i].selected = true;
-}
-
-    function MoveOption(objSourceElement, objTargetElement)
-    {
-        var aryTempSourceOptions = new Array();
-        var x = 0;
-
-        //looping through source element to find selected options
-        for (var i = 0; i < objSourceElement.length; i++) {
-            if (objSourceElement.options[i].selected) {
-                //need to move this option to target element
-                var intTargetLen = objTargetElement.length++;
-                objTargetElement.options[intTargetLen].text = objSourceElement.options[i].text;
-                objTargetElement.options[intTargetLen].value = objSourceElement.options[i].value;
-            }
-            else {
-                //storing options that stay to recreate select element
-                var objTempValues = new Object();
-                objTempValues.text = objSourceElement.options[i].text;
-                objTempValues.value = objSourceElement.options[i].value;
-                aryTempSourceOptions[x] = objTempValues;
-                x++;
-            }
+        if (document.all2) {
+            document.all['cc_number'].style.display = "visible";
+            document.all['live_message'].style.display = "visible";
+            document.all['answer_machine_message'].style.display = "visible";
+            document.all['dnc_list_message'].style.display = "visible";
+            document.all['outbound_callerid'].style.display = "visible";
+            document.all['max_connected_calls'].style.display = "visible";
+            document.all['survey'].style.display = "none";
+        } else {
+            document.getElementById('cc_number').style.display='';
+            document.getElementById('live_message').style.display='';
+            document.getElementById('answer_machine_message').style.display='';
+            document.getElementById('dnc_list_message').style.display='';
+            document.getElementById('outbound_callerid').style.display='';
+            document.getElementById('max_connected_calls').style.display='';
+            document.getElementById('survey').style.display='none';
         }
-
-        //resetting length of source
-        objSourceElement.length = aryTempSourceOptions.length;
-        //looping through temp array to recreate source select element
-        for (var i = 0; i < aryTempSourceOptions.length; i++) {
-            objSourceElement.options[i].text = aryTempSourceOptions[i].text;
-            objSourceElement.options[i].value = aryTempSourceOptions[i].value;
-            objSourceElement.options[i].selected = false;
+    } else if (myval == '14') {
+        if (document.all2) {
+            document.all['cc_number'].style.display = "visible";
+            document.all['live_message'].style.display = "visible";
+            document.all['answer_machine_message'].style.display = "visible";
+            document.all['dnc_list_message'].style.display = "visible";
+            document.all['outbound_callerid'].style.display = "visible";
+            document.all['max_connected_calls'].style.display = "visible";
+            document.all['survey'].style.display = "none";
+        } else {
+            document.getElementById('cc_number').style.display='';
+            document.getElementById('live_message').style.display='';
+            document.getElementById('answer_machine_message').style.display='';
+            document.getElementById('dnc_list_message').style.display='';
+            document.getElementById('outbound_callerid').style.display='';
+            document.getElementById('max_connected_calls').style.display='';
+            document.getElementById('survey').style.display='none';
+        }
+    } else if (myval == '15') { /* Automated Survey */
+        if (document.all2) {
+            document.all['cc_number'].style.display = "visible";
+            document.all['live_message'].style.display = "visible";
+            document.all['answer_machine_message'].style.display = "visible";
+            document.all['dnc_list_message'].style.display = "visible";
+            document.all['outbound_callerid'].style.display = "visible";
+            document.all['max_connected_calls'].style.display = "visible";
+            document.all['survey'].style.display = "visible";
+        } else {
+            document.getElementById('cc_number').style.display='';
+            document.getElementById('live_message').style.display='';
+            document.getElementById('answer_machine_message').style.display='';
+            document.getElementById('dnc_list_message').style.display='';
+            document.getElementById('outbound_callerid').style.display='';
+            document.getElementById('max_connected_calls').style.display='';
+            document.getElementById('survey').style.display='';
+        }
+    }  else if (myval == '1') {
+        if (document.all2) {
+            document.all['cc_number'].style.display = "none";/*the number for the call center*/
+            document.all['live_message'].style.display = "none";/*press 1 message*/
+            document.all['answer_machine_message'].style.display = "visible";/*answer machine message*/
+            document.all['dnc_list_message'].style.display = "none";/*dnc message*/
+            document.all['outbound_callerid'].style.display = "visible";/*caller id*/
+            document.all['max_connected_calls'].style.display = "visible";/*imax connected calls*/
+            document.all['survey'].style.display = "none";
+        } else {
+            document.getElementById('cc_number').style.display='none';
+            document.getElementById('live_message').style.display='none';
+            document.getElementById('answer_machine_message').style.display='';
+            document.getElementById('dnc_list_message').style.display='none';
+            document.getElementById('outbound_callerid').style.display='';
+            document.getElementById('max_connected_calls').style.display='';
+            document.getElementById('survey').style.display='none';
+        }
+    } else if (myval == '2') {
+        if (document.all2) {
+            document.all['cc_number'].style.display = "visible";
+            document.all['live_message'].style.display = "none";
+            document.all['answer_machine_message'].style.display = "none";
+            document.all['dnc_list_message'].style.display = "none";
+            document.all['outbound_callerid'].style.display = "visible";
+            document.all['max_connected_calls'].style.display = "visible";
+            document.all['survey'].style.display = "none";
+        } else {
+            document.getElementById('cc_number').style.display='';
+            document.getElementById('live_message').style.display='none';
+            document.getElementById('answer_machine_message').style.display='none';
+            document.getElementById('dnc_list_message').style.display='none';
+            document.getElementById('outbound_callerid').style.display='';
+            document.getElementById('max_connected_calls').style.display='';
+            document.getElementById('survey').style.display='none';
+        }
+    } else if (myval == '3') {
+        if (document.all2) {
+            document.all['cc_number'].style.display = "visible";
+            document.all['live_message'].style.display = "visible";
+            document.all['answer_machine_message'].style.display = "visible";
+            document.all['dnc_list_message'].style.display = "visible";
+            document.all['outbound_callerid'].style.display = "visible";
+            document.all['max_connected_calls'].style.display = "visible";
+            document.all['survey'].style.display = "none";
+        } else {
+            document.getElementById('cc_number').style.display='';
+            document.getElementById('live_message').style.display='';
+            document.getElementById('answer_machine_message').style.display='';
+            document.getElementById('dnc_list_message').style.display='';
+            document.getElementById('outbound_callerid').style.display='';
+            document.getElementById('max_connected_calls').style.display='';
+            document.getElementById('survey').style.display='none';
+        }
+    } else if (myval == '4') {
+        if (document.all2) {
+            document.all['cc_number'].style.display = "visible";
+            document.all['live_message'].style.display = "visible";
+            document.all['answer_machine_message'].style.display = "none";
+            document.all['dnc_list_message'].style.display = "visible";
+            document.all['outbound_callerid'].style.display = "visible";
+            document.all['max_connected_calls'].style.display = "visible";
+            document.all['survey'].style.display = "none";
+        } else {
+            document.getElementById('cc_number').style.display='';
+            document.getElementById('live_message').style.display='';
+            document.getElementById('answer_machine_message').style.display='none';
+            document.getElementById('dnc_list_message').style.display='';
+            document.getElementById('outbound_callerid').style.display='';
+            document.getElementById('max_connected_calls').style.display='';
+            document.getElementById('survey').style.display='none';
+        }
+    } else if (myval == '5') {
+        if (document.all2) {
+            document.all['cc_number'].style.display = "visible";
+            document.all['live_message'].style.display = "none";
+            document.all['answer_machine_message'].style.display = "visible";
+            document.all['dnc_list_message'].style.display = "none";
+            document.all['outbound_callerid'].style.display = "visible";
+            document.all['max_connected_calls'].style.display = "visible";
+            document.all['survey'].style.display = "none";
+        } else {
+            document.getElementById('cc_number').style.display='';
+            document.getElementById('live_message').style.display='none';
+            document.getElementById('answer_machine_message').style.display='';
+            document.getElementById('dnc_list_message').style.display='none';
+            document.getElementById('outbound_callerid').style.display='';
+            document.getElementById('max_connected_calls').style.display='';
+            document.getElementById('survey').style.display='none';
+        }
+    } else if (myval == '6') {
+        if (document.all2) {
+            document.all['cc_number'].style.display = "visible";
+            document.all['live_message'].style.display = "none";
+            document.all['answer_machine_message'].style.display = "none";
+            document.all['dnc_list_message'].style.display = "none";
+            document.all['outbound_callerid'].style.display = "visible";
+            document.all['max_connected_calls'].style.display = "visible";
+            document.all['survey'].style.display = "none";
+        } else {
+            document.getElementById('cc_number').style.display='';
+            document.getElementById('live_message').style.display='none';
+            document.getElementById('answer_machine_message').style.display='none';
+            document.getElementById('dnc_list_message').style.display='none';
+            document.getElementById('outbound_callerid').style.display='';
+            document.getElementById('max_connected_calls').style.display='';
+            document.getElementById('survey').style.display='none';
+        }
+    } else if (myval == '7') {
+        /*
+         if (document.all2) {
+         document.all['mode'].style.display = "none";
+         } else {
+         document.getElementById('mode').style.display='none';
+         }
+         */
+        if (document.all2) {
+            document.all['cc_number'].style.display = "none";
+            document.all['live_message'].style.display = "visible";
+            document.all['answer_machine_message'].style.display = "none";
+            document.all['dnc_list_message'].style.display = "none";
+            document.all['outbound_callerid'].style.display = "visible";
+            document.all['max_connected_calls'].style.display = "visible";
+            document.all['survey'].style.display = "none";
+        } else {
+            document.getElementById('cc_number').style.display='none';
+            document.getElementById('live_message').style.display='';
+            document.getElementById('answer_machine_message').style.display='none';
+            document.getElementById('dnc_list_message').style.display='none';
+            document.getElementById('outbound_callerid').style.display='';
+            document.getElementById('max_connected_calls').style.display='';
+            document.getElementById('survey').style.display='none';
+        }
+    } else if (myval == '8') {
+        if (document.all2) {
+            document.all['mode'].style.display = "none";
+            document.all['survey'].style.display = "none";
+        } else {
+            document.getElementById('mode').style.display='none';
+            document.getElementById('survey').style.display='none';
+        }
+        if (document.all2) {
+            document.all['fax'].style.display = "visible";
+            document.all['survey'].style.display = "none";
+        } else {
+            document.getElementById('fax').style.display='';
+            document.getElementById('survey').style.display='none';
+        }
+        
+        
+        if (document.all2) {
+            document.all['cc_number'].style.display = "none";
+            document.all['live_message'].style.display = "none";
+            document.all['answer_machine_message'].style.display = "none";
+            document.all['dnc_list_message'].style.display = "none";
+            document.all['outbound_callerid'].style.display = "visible";
+            document.all['max_connected_calls'].style.display = "none";
+            document.all['survey'].style.display = "none";
+        } else {
+            document.getElementById('cc_number').style.display='none';
+            document.getElementById('live_message').style.display='none';
+            document.getElementById('answer_machine_message').style.display='none';
+            document.getElementById('dnc_list_message').style.display='none';
+            document.getElementById('outbound_callerid').style.display='';
+            document.getElementById('max_connected_calls').style.display='none';
+            document.getElementById('survey').style.display='none';
+        }
+    } else if (myval == '9') {
+        //alert('9');
+        if (document.all2) {
+            document.all['mode'].style.display = "none";
+            document.all['survey'].style.display = "none";
+        } else {
+            document.getElementById('mode').style.display='none';
+            document.getElementById('survey').style.display='none';
+        }
+        if (document.all2) {
+            document.all['sms'].style.display = "visible";
+            document.all['survey'].style.display = "none";
+        } else {
+            document.getElementById('sms').style.display='';
+            document.getElementById('survey').style.display='none';
+        }
+        if (document.all2) {
+            document.all['cc_number'].style.display = "none";
+            document.all['live_message'].style.display = "none";
+            document.all['answer_machine_message'].style.display = "none";
+            document.all['dnc_list_message'].style.display = "none";
+            document.all['outbound_callerid'].style.display = "visible";
+            document.all['max_connected_calls'].style.display = "visible";
+            document.all['survey'].style.display = "none";
+        } else {
+            document.getElementById('cc_number').style.display='none';
+            document.getElementById('live_message').style.display='none';
+            document.getElementById('answer_machine_message').style.display='none';
+            document.getElementById('dnc_list_message').style.display='none';
+            document.getElementById('outbound_callerid').style.display='';
+            document.getElementById('max_connected_calls').style.display='';
+            document.getElementById('survey').style.display='none';
+        }
+    } else if (myval == '054') {
+        if (document.all2) {
+            document.all['cc_number'].style.display = "visible";
+            document.all['live_message'].style.display = "visible";
+            document.all['answer_machine_message'].style.display = "visible";
+            document.all['dnc_list_message'].style.display = "visible";
+            document.all['outbound_callerid'].style.display = "visible";
+            document.all['max_connected_calls'].style.display = "visible";
+            document.all['survey'].style.display = "none";
+        } else {
+            document.getElementById('cc_number').style.display='';
+            document.getElementById('live_message').style.display='';
+            document.getElementById('answer_machine_message').style.display='';
+            document.getElementById('dnc_list_message').style.display='';
+            document.getElementById('outbound_callerid').style.display='';
+            document.getElementById('max_connected_calls').style.display='';
+            document.getElementById('survey').style.display='none';
+        }
+    } else if (myval == '-1') {
+        if (document.all2) {
+            document.all['mode'].style.display = "none";
+            document.all['survey'].style.display = "none";
+        } else {
+            document.getElementById('mode').style.display='none';
+        }
+        if (document.all2) {
+            document.all['cc_number'].style.display = "none";
+            document.all['live_message'].style.display = "none";
+            document.all['answer_machine_message'].style.display = "none";
+            document.all['dnc_list_message'].style.display = "none";
+            document.all['outbound_callerid'].style.display = "none";
+            document.all['max_connected_calls'].style.display = "none";
+            document.all['survey'].style.display = "none";
+        } else {
+            document.getElementById('cc_number').style.display='none';
+            document.getElementById('live_message').style.display='none';
+            document.getElementById('answer_machine_message').style.display='none';
+            document.getElementById('dnc_list_message').style.display='none';
+            document.getElementById('outbound_callerid').style.display='none';
+            document.getElementById('max_connected_calls').style.display='none';
+            document.getElementById('survey').style.display='none';
         }
     }
-    //-->
+}
+<!--
+function f_selectAll (s_select) {
+    var e_select = document.forms['customer'].elements[s_select];
+    for (var i = 0; i < e_select.options.length; i++)
+        e_select.options[i].selected = true;
+}
+
+function MoveOption(objSourceElement, objTargetElement)
+{
+    var aryTempSourceOptions = new Array();
+    var x = 0;
+    
+    //looping through source element to find selected options
+    for (var i = 0; i < objSourceElement.length; i++) {
+        if (objSourceElement.options[i].selected) {
+            //need to move this option to target element
+            var intTargetLen = objTargetElement.length++;
+            objTargetElement.options[intTargetLen].text = objSourceElement.options[i].text;
+            objTargetElement.options[intTargetLen].value = objSourceElement.options[i].value;
+        }
+        else {
+            //storing options that stay to recreate select element
+            var objTempValues = new Object();
+            objTempValues.text = objSourceElement.options[i].text;
+            objTempValues.value = objSourceElement.options[i].value;
+            aryTempSourceOptions[x] = objTempValues;
+            x++;
+        }
+    }
+    
+    //resetting length of source
+    objSourceElement.length = aryTempSourceOptions.length;
+    //looping through temp array to recreate source select element
+    for (var i = 0; i < aryTempSourceOptions.length; i++) {
+        objSourceElement.options[i].text = aryTempSourceOptions[i].text;
+        objSourceElement.options[i].value = aryTempSourceOptions[i].value;
+        objSourceElement.options[i].selected = false;
+    }
+}
+//-->
 
 
 /************************************************************************************************************
-*	DHTML modal dialog box
-*
-*	Created:						August, 26th, 2006
-*	@class Purpose of class:		Display a modal dialog box on the screen.
-*
-*	Css files used by this script:	modal-message.css
-*
-*	Demos of this class:			demo-modal-message-1.html
-*
-* 	Update log:
-*
-************************************************************************************************************/
+ *	DHTML modal dialog box
+ *
+ *	Created:						August, 26th, 2006
+ *	@class Purpose of class:		Display a modal dialog box on the screen.
+ *
+ *	Css files used by this script:	modal-message.css
+ *
+ *	Demos of this class:			demo-modal-message-1.html
+ *
+ * 	Update log:
+ *
+ ************************************************************************************************************/
 
 
 /**
-* @constructor
-*/
+ * @constructor
+ */
 
 DHTML_modalMessage = function()
 {
 	var url;								// url of modal message
 	var htmlOfModalMessage;					// html of modal message
-
+    
 	var divs_transparentDiv;				// Transparent div covering page content
 	var divs_content;						// Modal message div.
 	var iframe;								// Iframe used in ie
 	var layoutCss;							// Name of css file;
 	var width;								// Width of message box
 	var height;								// Height of message box
-
+    
 	var existingBodyOverFlowStyle;			// Existing body overflow css
 	var dynContentObj;						// Reference to dynamic content object
 	var cssClassOfMessageBox;				// Alternative css class of message box - in case you want a different appearance on one of them
 	var shadowDivVisible;					// Shadow div visible ?
 	var shadowOffset; 						// X and Y offset of shadow(pixels from content box)
 	var MSIE;
-
+    
 	this.url = '';							// Default url is blank
 	this.htmlOfModalMessage = '';			// Default message is blank
 	this.layoutCss = 'modal-message.css';	// Default CSS file
@@ -440,8 +485,8 @@ DHTML_modalMessage = function()
 	this.shadowOffset = 5;					// Default shadow offset.
 	this.MSIE = false;
 	if(navigator.userAgent.indexOf('MSIE')>=0) this.MSIE = true;
-
-
+    
+    
 }
 
 DHTML_modalMessage.prototype = {
@@ -455,7 +500,7 @@ DHTML_modalMessage.prototype = {
 	setSource : function(urlOfSource)
 	{
 		this.url = urlOfSource;
-
+        
 	}
 	// }}}
 	,
@@ -470,7 +515,7 @@ DHTML_modalMessage.prototype = {
 	setHtmlContent : function(newHtmlContent)
 	{
 		this.htmlOfModalMessage = newHtmlContent;
-
+        
 	}
 	// }}}
 	,
@@ -507,7 +552,7 @@ DHTML_modalMessage.prototype = {
 			else
 				this.divs_content.className='modalDialog_contentDiv';
 		}
-
+        
 	}
 	// }}}
 	,
@@ -522,7 +567,7 @@ DHTML_modalMessage.prototype = {
 	setShadowOffset : function(newShadowOffset)
 	{
 		this.shadowOffset = newShadowOffset
-
+        
 	}
 	// }}}
 	,
@@ -538,18 +583,18 @@ DHTML_modalMessage.prototype = {
 		if(!this.divs_transparentDiv){
 			this.__createDivs();
 		}
-
+        
 		// Redisplaying divs
 		this.divs_transparentDiv.style.display='block';
 		this.divs_content.style.display='block';
 		this.divs_shadow.style.display='block';
 		if(this.MSIE)this.iframe.style.display='block';
 		this.__resizeDivs();
-
+        
 		/* Call the __resizeDivs method twice in case the css file has changed. The first execution of this method may not catch these changes */
 		window.refToThisModalBoxObj = this;
 		setTimeout('window.refToThisModalBoxObj.__resizeDivs()',150);
-
+        
 		this.__insertContent();	// Calling method which inserts content into the message div.
 	}
 	// }}}
@@ -577,13 +622,13 @@ DHTML_modalMessage.prototype = {
 	close : function()
 	{
 		//document.documentElement.style.overflow = '';	// Setting the CSS overflow attribute of the <html> tag back to default.
-
+        
 		/* Hiding divs */
 		this.divs_transparentDiv.style.display='none';
 		this.divs_content.style.display='none';
 		this.divs_shadow.style.display='none';
 		if(this.MSIE)this.iframe.style.display='none';
-
+        
 	}
 	// }}}
 	,
@@ -596,13 +641,13 @@ DHTML_modalMessage.prototype = {
      */
 	addEvent : function(whichObject,eventType,functionName,suffix)
 	{
-	  if(!suffix)suffix = '';
-	  if(whichObject.attachEvent){
-	    whichObject['e'+eventType+functionName+suffix] = functionName;
-	    whichObject[eventType+functionName+suffix] = function(){whichObject['e'+eventType+functionName+suffix]( window.event );}
-	    whichObject.attachEvent( 'on'+eventType, whichObject[eventType+functionName+suffix] );
-	  } else
-	    whichObject.addEventListener(eventType,functionName,false);
+        if(!suffix)suffix = '';
+        if(whichObject.attachEvent){
+            whichObject['e'+eventType+functionName+suffix] = functionName;
+            whichObject[eventType+functionName+suffix] = function(){whichObject['e'+eventType+functionName+suffix]( window.event );}
+            whichObject.attachEvent( 'on'+eventType, whichObject[eventType+functionName+suffix] );
+        } else
+            whichObject.addEventListener(eventType,functionName,false);
 	}
 	// }}}
 	,
@@ -620,21 +665,21 @@ DHTML_modalMessage.prototype = {
 		this.divs_transparentDiv.className='modalDialog_transparentDivs';
 		this.divs_transparentDiv.style.left = '0px';
 		this.divs_transparentDiv.style.top = '0px';
-
+        
 		document.body.appendChild(this.divs_transparentDiv);
 		// Creating content div
 		this.divs_content = document.createElement('DIV');
 		this.divs_content.className = 'modalDialog_contentDiv';
 		this.divs_content.id = 'DHTMLSuite_modalBox_contentDiv';
 		this.divs_content.style.zIndex = 100000;
-
+        
 		if(this.MSIE){
 			this.iframe = document.createElement('<IFRAME src="about:blank" frameborder=0>');
 			this.iframe.style.zIndex = 90000;
 			this.iframe.style.position = 'absolute';
 			document.body.appendChild(this.iframe);
 		}
-
+        
 		document.body.appendChild(this.divs_content);
 		// Creating shadow div
 		this.divs_shadow = document.createElement('DIV');
@@ -644,8 +689,8 @@ DHTML_modalMessage.prototype = {
 		window.refToModMessage = this;
 		this.addEvent(window,'scroll',function(e){ window.refToModMessage.__repositionTransparentDiv() });
 		this.addEvent(window,'resize',function(e){ window.refToModMessage.__repositionTransparentDiv() });
-
-
+        
+        
 	}
 	// }}}
 	,
@@ -660,22 +705,22 @@ DHTML_modalMessage.prototype = {
 	{
     	var bodyWidth = document.documentElement.clientWidth;
     	var bodyHeight = document.documentElement.clientHeight;
-
+        
 		var bodyWidth, bodyHeight;
 		if (self.innerHeight){ // all except Explorer
-
-		   bodyWidth = self.innerWidth;
-		   bodyHeight = self.innerHeight;
+            
+            bodyWidth = self.innerWidth;
+            bodyHeight = self.innerHeight;
 		}  else if (document.documentElement && document.documentElement.clientHeight) {
-		   // Explorer 6 Strict Mode
-		   bodyWidth = document.documentElement.clientWidth;
-		   bodyHeight = document.documentElement.clientHeight;
+            // Explorer 6 Strict Mode
+            bodyWidth = document.documentElement.clientWidth;
+            bodyHeight = document.documentElement.clientHeight;
 		} else if (document.body) {// other Explorers
-		   bodyWidth = document.body.clientWidth;
-		   bodyHeight = document.body.clientHeight;
+            bodyWidth = document.body.clientWidth;
+            bodyHeight = document.body.clientHeight;
 		}
 		return [bodyWidth,bodyHeight];
-
+        
 	}
 	// }}}
 	,
@@ -688,66 +733,66 @@ DHTML_modalMessage.prototype = {
      */
     __resizeDivs : function()
     {
-
+        
     	var topOffset = Math.max(document.body.scrollTop,document.documentElement.scrollTop);
-
+        
 		if(this.cssClassOfMessageBox)
 			this.divs_content.className=this.cssClassOfMessageBox;
 		else
 			this.divs_content.className='modalDialog_contentDiv';
-
+        
     	if(!this.divs_transparentDiv)return;
-
+        
     	// Preserve scroll position
     	var st = Math.max(document.body.scrollTop,document.documentElement.scrollTop);
     	var sl = Math.max(document.body.scrollLeft,document.documentElement.scrollLeft);
-
+        
     	window.scrollTo(sl,st);
     	setTimeout('window.scrollTo(' + sl + ',' + st + ');',10);
-
+        
     	this.__repositionTransparentDiv();
-
-
+        
+        
 		var brSize = this.__getBrowserSize();
 		var bodyWidth = brSize[0];
 		var bodyHeight = brSize[1];
-
+        
     	// Setting width and height of content div
       	this.divs_content.style.width = this.width + 'px';
     	this.divs_content.style.height= this.height + 'px';
-
+        
     	// Creating temporary width variables since the actual width of the content div could be larger than this.width and this.height(i.e. padding and border)
     	var tmpWidth = this.divs_content.offsetWidth;
     	var tmpHeight = this.divs_content.offsetHeight;
-
-
+        
+        
     	// Setting width and height of left transparent div
-
-
-
-
-
-
+        
+        
+        
+        
+        
+        
     	this.divs_content.style.left = Math.ceil((bodyWidth - tmpWidth) / 2) + 'px';;
     	this.divs_content.style.top = (Math.ceil((bodyHeight - tmpHeight) / 2) +  topOffset) + 'px';
-
+        
  		if(this.MSIE){
  			this.iframe.style.left = this.divs_content.style.left;
  			this.iframe.style.top = this.divs_content.style.top;
  			this.iframe.style.width = this.divs_content.style.width;
  			this.iframe.style.height = this.divs_content.style.height;
  		}
-
+        
     	this.divs_shadow.style.left = (this.divs_content.style.left.replace('px','')/1 + this.shadowOffset) + 'px';
     	this.divs_shadow.style.top = (this.divs_content.style.top.replace('px','')/1 + this.shadowOffset) + 'px';
     	this.divs_shadow.style.height = tmpHeight + 'px';
     	this.divs_shadow.style.width = tmpWidth + 'px';
-
-
-
+        
+        
+        
     	if(!this.shadowDivVisible)this.divs_shadow.style.display='none';	// Hiding shadow if it has been disabled
-
-
+        
+        
     }
     // }}}
     ,
@@ -767,7 +812,7 @@ DHTML_modalMessage.prototype = {
 		var bodyHeight = brSize[1];
     	this.divs_transparentDiv.style.width = bodyWidth + 'px';
     	this.divs_transparentDiv.style.height = bodyHeight + 'px';
-
+        
     }
 	// }}}
 	,
@@ -789,31 +834,31 @@ DHTML_modalMessage.prototype = {
 }
 
 /************************************************************************************************************
-Ajax dynamic content
-Copyright (C) 2006  DTHMLGoodies.com, Alf Magne Kalleland
-
-This library is free software; you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public
-License as published by the Free Software Foundation; either
-version 2.1 of the License, or (at your option) any later version.
-
-This library is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-Lesser General Public License for more details.
-
-You should have received a copy of the GNU Lesser General Public
-License along with this library; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-
-Dhtmlgoodies.com., hereby disclaims all copyright interest in this script
-written by Alf Magne Kalleland.
-
-Alf Magne Kalleland, 2006
-Owner of DHTMLgoodies.com
-
-
-************************************************************************************************************/
+ Ajax dynamic content
+ Copyright (C) 2006  DTHMLGoodies.com, Alf Magne Kalleland
+ 
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
+ 
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Lesser General Public License for more details.
+ 
+ You should have received a copy of the GNU Lesser General Public
+ License along with this library; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ 
+ Dhtmlgoodies.com., hereby disclaims all copyright interest in this script
+ written by Alf Magne Kalleland.
+ 
+ Alf Magne Kalleland, 2006
+ Owner of DHTMLgoodies.com
+ 
+ 
+ ************************************************************************************************************/
 
 var enableCache = true;
 var jsCache = new Array();
@@ -828,7 +873,7 @@ function ajax_showContent(divId,ajaxIndex,url)
 		jsCache[url] = 	dynamicContent_ajaxObjects[ajaxIndex].response;
 	}
 	dynamicContent_ajaxObjects[ajaxIndex] = false;
-
+    
 	ajax_parseJs(targetObj)
 }
 
@@ -838,15 +883,15 @@ function ajax_loadContent(divId,url)
 		document.getElementById(divId).innerHTML = jsCache[url];
 		return;
 	}
-
+    
 	var ajaxIndex = dynamicContent_ajaxObjects.length;
 	document.getElementById(divId).innerHTML = 'Loading content - please wait';
 	dynamicContent_ajaxObjects[ajaxIndex] = new sack();
 	dynamicContent_ajaxObjects[ajaxIndex].requestFile = url;	// Specifying which file to get
 	dynamicContent_ajaxObjects[ajaxIndex].onCompletion = function(){ ajax_showContent(divId,ajaxIndex,url); };	// Specify function that will be executed after file has been found
 	dynamicContent_ajaxObjects[ajaxIndex].runAJAX();		// Execute AJAX function
-
-
+    
+    
 }
 
 function ajax_parseJs(obj)
@@ -858,7 +903,7 @@ function ajax_parseJs(obj)
 		if(scriptTags[no].src){
 	        var head = document.getElementsByTagName("head")[0];
 	        var scriptObj = document.createElement("script");
-
+            
 	        scriptObj.setAttribute("type", "text/javascript");
 	        scriptObj.setAttribute("src", scriptTags[no].src);
 		}else{
@@ -868,9 +913,9 @@ function ajax_parseJs(obj)
 			else
 				jsCode = jsCode + scriptTags[no].innerHTML;
 		}
-
+        
 	}
-
+    
 	if(jsCode)ajax_installScript(jsCode);
 }
 
@@ -891,18 +936,18 @@ function ajax_installScript(script)
 
 
 function beginUpload(sid) {
-      document.postform.submit();
-        var pb = document.getElementById("progress");
-        var pb2 = document.getElementById("matt");
-        var pb3 = document.getElementById("matt2");
-        pb.parentNode.parentNode.style.display='block';
-        pb2.style.display='none';
-        pb3.style.display='none';
-        pb.parentNode.parentNode.style.display='block';
-        new ProgressTracker(sid,{
-                progressBar: pb
-        });
-    }
+    document.postform.submit();
+    var pb = document.getElementById("progress");
+    var pb2 = document.getElementById("matt");
+    var pb3 = document.getElementById("matt2");
+    pb.parentNode.parentNode.style.display='block';
+    pb2.style.display='none';
+    pb3.style.display='none';
+    pb.parentNode.parentNode.style.display='block';
+    new ProgressTracker(sid,{
+                        progressBar: pb
+                        });
+}
 
 var ie=document.all;
 var nn6=document.getElementById&&!document.all;
@@ -913,42 +958,42 @@ var dobj;
 
 function movemouse(e)
 {
-  if (isdrag)
-  {
-    if ((nn6 ? ty + e.clientY - y : ty + event.clientY - y) > -57){
-        dobj.style.left = nn6 ? tx + e.clientX - x : tx + event.clientX - x;
-        dobj.style.top  = nn6 ? ty + e.clientY - y : ty + event.clientY - y;
-    } else {
-
-        dobj.style.left = nn6 ? tx + e.clientX - x : tx + event.clientX - x;
-        dobj.style.top  = -56;
-
+    if (isdrag)
+    {
+        if ((nn6 ? ty + e.clientY - y : ty + event.clientY - y) > -57){
+            dobj.style.left = nn6 ? tx + e.clientX - x : tx + event.clientX - x;
+            dobj.style.top  = nn6 ? ty + e.clientY - y : ty + event.clientY - y;
+        } else {
+            
+            dobj.style.left = nn6 ? tx + e.clientX - x : tx + event.clientX - x;
+            dobj.style.top  = -56;
+            
+        }
+        return false;
     }
-    return false;
-  }
 }
 
 function selectmouse(e)
 {
-  var fobj       = nn6 ? e.target : event.srcElement;
-  var topelement = nn6 ? "HTML" : "BODY";
-
-  while (fobj.tagName != topelement && fobj.className != "dragme")
-  {
-    fobj = nn6 ? fobj.parentNode : fobj.parentElement;
-  }
-
-  if (fobj.className=="dragme")
-  {
-    isdrag = true;
-    dobj = fobj;
-    tx = parseInt(dobj.style.left+0);
-    ty = parseInt(dobj.style.top+0);
-    x = nn6 ? e.clientX : event.clientX;
-    y = nn6 ? e.clientY : event.clientY;
-    document.onmousemove=movemouse;
-    return false;
-  }
+    var fobj       = nn6 ? e.target : event.srcElement;
+    var topelement = nn6 ? "HTML" : "BODY";
+    
+    while (fobj.tagName != topelement && fobj.className != "dragme")
+    {
+        fobj = nn6 ? fobj.parentNode : fobj.parentElement;
+    }
+    
+    if (fobj.className=="dragme")
+    {
+        isdrag = true;
+        dobj = fobj;
+        tx = parseInt(dobj.style.left+0);
+        ty = parseInt(dobj.style.top+0);
+        x = nn6 ? e.clientX : event.clientX;
+        y = nn6 ? e.clientY : event.clientY;
+        document.onmousemove=movemouse;
+        return false;
+    }
 }
 
 document.onmousedown=selectmouse;
@@ -958,7 +1003,7 @@ document.onmouseup=new Function("isdrag=false");
 function hideItem(obj) {
     var el = document.getElementById(obj);
     if (el) {
-    el.style.display = 'none';
+        el.style.display = 'none';
     }
 }
 messageObj = new DHTML_modalMessage();	// We only create one object of this class
@@ -967,7 +1012,7 @@ messageObj.setShadowOffset(5);	// Large shadow
 
 function displayMessage(url)
 {
-
+    
 	messageObj.setSource(url);
 	messageObj.setCssClassMessageBox('modalDialog_contentDiv');
 	messageObj.setSize(480,480);
@@ -976,7 +1021,7 @@ function displayMessage(url)
 }
 function displaySmallMessage(url)
 {
-
+    
 	messageObj.setSource(url);
 	messageObj.setCssClassMessageBox('modalDialog_contentDiv');
 	messageObj.setSize(330,200);
@@ -985,7 +1030,7 @@ function displaySmallMessage(url)
 }
 function displayLargeMessage(url)
 {
-
+    
 	messageObj.setSource(url);
 	messageObj.setCssClassMessageBox('modalDialog_contentDiv');
 	messageObj.setSize(500,500);
@@ -1000,8 +1045,8 @@ function displayStaticMessage(messageContent,cssClass)
 	messageObj.setSource(false);	// no html source since we want to use a static message here.
 	messageObj.setShadowDivVisible(false);	// Disable shadow for these boxes
 	messageObj.display();
-
-
+    
+    
 }
 
 function closeMessage()
@@ -1026,10 +1071,10 @@ function closeMessage()
 var containerTag = 'TR';
 
 var compatible = (
-	document.getElementById && document.getElementsByTagName && document.createElement
-	&&
-	!(navigator.userAgent.indexOf('MSIE 5') != -1 && navigator.userAgent.indexOf('Mac') != -1)
-	);
+                  document.getElementById && document.getElementsByTagName && document.createElement
+                  &&
+                  !(navigator.userAgent.indexOf('MSIE 5') != -1 && navigator.userAgent.indexOf('Mac') != -1)
+                  );
 
 if (compatible)
 {
@@ -1044,12 +1089,12 @@ function prepareForm()
 	if (!compatible) return;
 	var marker = document.createElement(containerTag);
 	marker.style.display = 'none';
-
+    
 	var x = document.getElementsByTagName('select');
 	for (var i=0;i<x.length;i++)
 		addEvent(x[i],'change',showHideFields)
-
-	var x = document.getElementsByTagName(containerTag);
+        
+        var x = document.getElementsByTagName(containerTag);
 	var hiddenFields = new Array;
 	for (var i=0;i<x.length;i++)
 	{
@@ -1067,7 +1112,7 @@ function prepareForm()
 			hiddenFields.push(x[i]);
 		}
 	}
-
+    
 	while (hiddenFields.length)
 	{
 		var rel = hiddenFields[0].getAttribute('rel');
@@ -1080,7 +1125,7 @@ function prepareForm()
 		hiddenFields[0].parentNode.replaceChild(newMarker,hiddenFields[0]);
 		waitingRoom.appendChild(hiddenFields.shift());
 	}
-
+    
 	setDefaults();
 	addEvent(document,'click',showHideFields);
 }
@@ -1092,36 +1137,36 @@ function setDefaults()
 	{
 		if (y[i].checked && y[i].getAttribute('rel'))
 			intoMainForm(y[i].getAttribute('rel'))
-	}
-
+            }
+    
 	var z = document.getElementsByTagName('select');
 	for (var i=0;i<z.length;i++)
 	{
 		if (z[i].options[z[i].selectedIndex].getAttribute('rel'))
 			intoMainForm(z[i].options[z[i].selectedIndex].getAttribute('rel'))
-	}
-
+            }
+    
 }
 
 function showHideFields(e)
 {
 	if (!e) var e = window.event;
 	var tg = e.target || e.srcElement;
-
+    
 	if (tg.nodeName == 'LABEL')
 	{
 		var relatedFieldName = tg.getAttribute('for') || tg.getAttribute('htmlFor');
 		tg = document.getElementById(relatedFieldName);
 	}
-
+    
 	if (
 		!(tg.nodeName == 'SELECT' && e.type == 'change')
 		&&
 		!(tg.nodeName == 'INPUT' && tg.getAttribute('rel'))
-	   ) return;
-
+        ) return;
+    
 	var fieldsToBeInserted = tg.getAttribute('rel');
-
+    
 	if (tg.type == 'checkbox')
 	{
 		if (tg.checked)
@@ -1242,21 +1287,21 @@ if (typeof Array.prototype.shift == "undefined") {
 
 
 /*********
-* Javascript for file upload demo
-* Copyright (C) Tomas Larsson 2006
-* http://tomas.epineer.se/
-
-* Licence:
-* The contents of this file are subject to the Mozilla Public
-* License Version 1.1 (the "License"); you may not use this file
-* except in compliance with the License. You may obtain a copy of
-* the License at http://www.mozilla.org/MPL/
-*
-* Software distributed under this License is distributed on an "AS
-* IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
-* implied. See the License for the specific language governing
-* rights and limitations under the License.
-*/
+ * Javascript for file upload demo
+ * Copyright (C) Tomas Larsson 2006
+ * http://tomas.epineer.se/
+ 
+ * Licence:
+ * The contents of this file are subject to the Mozilla Public
+ * License Version 1.1 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of
+ * the License at http://www.mozilla.org/MPL/
+ *
+ * Software distributed under this License is distributed on an "AS
+ * IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+ * implied. See the License for the specific language governing
+ * rights and limitations under the License.
+ */
 function PeriodicalAjax(url, parameters, frequency, decay, onSuccess, onFailure) {
 	function createRequestObject() {
 		var xhr;
@@ -1268,7 +1313,7 @@ function PeriodicalAjax(url, parameters, frequency, decay, onSuccess, onFailure)
 		}
 		return xhr;
 	}
-
+    
 	function send() {
 		if(!stopped) {
 			xhr.open('post', url, true);
@@ -1277,17 +1322,17 @@ function PeriodicalAjax(url, parameters, frequency, decay, onSuccess, onFailure)
 			xhr.send(parameters);
 		}
 	}
-
+    
 	this.stop = function() {
 		stopped = true;
 		clearTimeout(this.timer);
 	}
-
+    
 	this.start = function() {
 		stopped = false;
 		this.onTimerEvent();
 	}
-
+    
 	this.onComplete = function() {
 		if(this.stopped) return false;
 		if ( xhr.readyState == 4) {
@@ -1311,17 +1356,17 @@ function PeriodicalAjax(url, parameters, frequency, decay, onSuccess, onFailure)
 			}
 		}
 	}
-
+    
 	this.getResponse = function() {
 		if(xhr.responseText) {
 			return xhr.responseText;
 		}
 	}
-
+    
 	this.onTimerEvent = function() {
 		send();
 	}
-
+    
 	var self = this;
 	var stopped = false;
 	var originalDecay = decay || 1.2;
@@ -1332,7 +1377,7 @@ function PeriodicalAjax(url, parameters, frequency, decay, onSuccess, onFailure)
 }
 
 function ProgressTracker(sid, options) {
-
+    
 	this.onSuccess = function(xhr) {
 		if(parseInt(xhr.responseText) >= 100) {
 			periodicalAjax.stop();
@@ -1349,7 +1394,7 @@ function ProgressTracker(sid, options) {
 			}
 		}
 	}
-
+    
 	this.onFailure = function(xhr) {
 		if(options.onFailure instanceof Function) {
 			options.onFailure(xhr.responseText);
@@ -1358,7 +1403,7 @@ function ProgressTracker(sid, options) {
 		}
 		periodicalAjax.stop();
 	}
-
+    
 	var self = this;
 	var lastResponse = -1;
 	options = options || {};
@@ -1371,11 +1416,11 @@ function ProgressTracker(sid, options) {
 /* �2005 Gregory Wild-Smith */
 /* www.twilightuniverse.com */
 /* Software licenced under a modified X11 licence,
-   see documentation or authors website for more details */
+ see documentation or authors website for more details */
 
 function sack(file) {
 	this.xmlhttp = null;
-
+    
 	this.resetData = function() {
 		this.method = "POST";
   		this.queryStringSeparator = "?";
@@ -1389,7 +1434,7 @@ function sack(file) {
 		this.vars = new Object();
 		this.responseStatus = new Array(2);
   	};
-
+    
 	this.resetFunctions = function() {
   		this.onLoading = function() { };
   		this.onLoaded = function() { };
@@ -1398,12 +1443,12 @@ function sack(file) {
   		this.onError = function() { };
 		this.onFail = function() { };
 	};
-
+    
 	this.reset = function() {
 		this.resetFunctions();
 		this.resetData();
 	};
-
+    
 	this.createAJAX = function() {
 		try {
 			this.xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
@@ -1414,7 +1459,7 @@ function sack(file) {
 				this.xmlhttp = null;
 			}
 		}
-
+        
 		if (! this.xmlhttp) {
 			if (typeof XMLHttpRequest != "undefined") {
 				this.xmlhttp = new XMLHttpRequest();
@@ -1423,11 +1468,11 @@ function sack(file) {
 			}
 		}
 	};
-
+    
 	this.setVar = function(name, value){
 		this.vars[name] = Array(value, false);
 	};
-
+    
 	this.encVar = function(name, value, returnvars) {
 		if (true == returnvars) {
 			return Array(encodeURIComponent(name), encodeURIComponent(value));
@@ -1435,7 +1480,7 @@ function sack(file) {
 			this.vars[encodeURIComponent(name)] = Array(encodeURIComponent(value), true);
 		}
 	}
-
+    
 	this.processURLString = function(string, encode) {
 		encoded = encodeURIComponent(this.argumentSeparator);
 		regexp = new RegExp(this.argumentSeparator + "|" + encoded);
@@ -1449,12 +1494,12 @@ function sack(file) {
 			}
 		}
 	}
-
+    
 	this.createURLString = function(urlstring) {
 		if (this.encodeURIString && this.URLString.length) {
 			this.processURLString(this.URLString, true);
 		}
-
+        
 		if (urlstring) {
 			if (this.URLString.length) {
 				this.URLString += this.argumentSeparator + urlstring;
@@ -1462,10 +1507,10 @@ function sack(file) {
 				this.URLString = urlstring;
 			}
 		}
-
+        
 		// prevents caching of URLString
 		this.setVar("rndval", new Date().getTime());
-
+        
 		urlstringtemp = new Array();
 		for (key in this.vars) {
 			if (false == this.vars[key][1] && true == this.encodeURIString) {
@@ -1474,7 +1519,7 @@ function sack(file) {
 				this.vars[encoded[0]] = Array(encoded[1], true);
 				key = encoded[0];
 			}
-
+            
 			urlstringtemp[urlstringtemp.length] = key + "=" + this.vars[key][0];
 		}
 		if (urlstring){
@@ -1483,11 +1528,11 @@ function sack(file) {
 			this.URLString += urlstringtemp.join(this.argumentSeparator);
 		}
 	}
-
+    
 	this.runResponse = function() {
 		eval(this.response);
 	}
-
+    
 	this.runAJAX = function(urlstring) {
 		if (this.failed) {
 			this.onFail();
@@ -1507,7 +1552,7 @@ function sack(file) {
 						this.xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
 					} catch (e) { }
 				}
-
+                
 				this.xmlhttp.onreadystatechange = function() {
 					switch (self.xmlhttp.readyState) {
 						case 1:
@@ -1524,18 +1569,18 @@ function sack(file) {
 							self.responseXML = self.xmlhttp.responseXML;
 							self.responseStatus[0] = self.xmlhttp.status;
 							self.responseStatus[1] = self.xmlhttp.statusText;
-
+                            
 							if (self.execute) {
 								self.runResponse();
 							}
-
+                            
 							if (self.elementObj) {
 								elemNodeName = self.elementObj.nodeName;
 								elemNodeName.toLowerCase();
 								if (elemNodeName == "input"
-								|| elemNodeName == "select"
-								|| elemNodeName == "option"
-								|| elemNodeName == "textarea") {
+                                    || elemNodeName == "select"
+                                    || elemNodeName == "option"
+                                    || elemNodeName == "textarea") {
 									self.elementObj.value = self.response;
 								} else {
 									self.elementObj.innerHTML = self.response;
@@ -1546,17 +1591,17 @@ function sack(file) {
 							} else {
 								self.onError();
 							}
-
+                            
 							self.URLString = "";
 							break;
 					}
 				};
-
+                
 				this.xmlhttp.send(this.URLString);
 			}
 		}
 	};
-
+    
 	this.reset();
 	this.createAJAX();
 }
