@@ -956,3 +956,33 @@ TD.subheader2:hover {
     background: #fff;
     margin: 10px;
 }
+
+.jeip-saving {
+    /*            background-image: url( 'http://josephscott.org/wp-content/js-org/jeip/ajax-loader.gif' ); */
+    background-repeat: no-repeat;
+    background-position: left;
+    background-color: #903;
+    color: #fff;
+    font-size: 20px;
+    padding: 3px 20px 3px 20px;
+}
+
+.jeip-mouseover, .jeip-editfield {
+    background-color: #ffff99;
+    padding: 5px;
+}
+
+.jmo {
+    background-color: #ffff99;
+    padding: 2px;
+}
+
+.jeip-savebutton {
+    background-color: #6c0;
+    color: #fff;
+}
+
+.jeip-cancelbutton {
+    background-color: #ccc;
+    color: #fff;
+}

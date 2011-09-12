@@ -1,4 +1,15 @@
 <?
+if (isset($_GET['save_edit'])) {
+    require "admin/db_config.php";
+    require "functions/sanitize.php";
+    $response['is_error'] = false;
+    $response['error_string'] = "";
+    $sql = "UPDATE surveys SET ".sanitize($_POST['id'], false)."=".sanitize($_POST['new_value'])." WHERE id = ".sanitize($_GET['save_edit']);
+    $result = mysql_query($sql);
+    $response['html'] = $_POST['new_value'];
+    echo json_encode($response);
+    exit(0);
+}
 if (isset($_GET['delete_choice'])) {
     require "header.php";
     $result = mysql_query("DELETE FROM survey_choices WHERE survey_id = ".sanitize($_GET['survey'])." AND question_number = ".sanitize($_GET['delete_choice']));
@@ -89,7 +100,11 @@ if (isset($_GET['display_message'])) {
 require "header.php";
 require "header_surveys.php";
 if (isset($_GET['edit'])) {
-    ?><script type="text/javascript" src="<?=$http_dir_name?>ajax/jquery.js"></script><?
+    
+    ?>
+    <script src="js/jquery.min.1.6.3.js" type="text/javascript"></script>
+    <script type="text/javascript" src="<?=$http_dir_name?>js/jeip.js"></script>
+    <?
     
     $result = mysql_query("SELECT * FROM surveys WHERE id = ".sanitize($_GET['edit']));
     if (mysql_num_rows($result) == 0) {
@@ -98,28 +113,41 @@ if (isset($_GET['edit'])) {
         $row = mysql_fetch_assoc($result);
         $name = $row['name'];
         $description = $row['description'];
+        if (strlen(trim($name)) == 0) {
+            $name = "No Name";
+        }
+        if (strlen(trim($description)) == 0) {
+            $description = "No Description";
+        }
         box_start(600);
         ?>
+        <center>
+    
+        
         <center>
         <form action="surveys.php?save_edit=1" method="post">
         <table>
         <tr>
-        <td>Name</td>
-        <td><input type="text" name="name" value="<?=$name?>"></td>
+        <td><b>Name: </b></td>
+        <td><span id="name" ><?=$name?></span><img src="images/pencil.png"></td>
         </tr>
         <tr>
-        <td>Description</td>
-        <td><textarea name="description"><?=$description?></textarea></td>
+        <td><b>Description</b></td>
+        <td><span id="description" ><?=$description?></span><img src="images/pencil.png"></textarea></td>
         </tr>
         </table>
         </form>
         <h3>Choices</h3>        
         <a href="#" onclick="ko = new Date();displaySmallMessage('surveys.php?display_message=<?=$_GET['edit']?>&x='+ko.getTime());"><img src="images/add.png" alt="Add Choice">&nbsp;Add Choice</a><br />
+        <script>
+        $( "#name" ).eip( "surveys.php?save_edit=<?=$_GET['edit']?>", { select_text: true });
+        $( "#description" ).eip( "surveys.php?save_edit=<?=$_GET['edit']?>", { select_text: true , form_type: "textarea"});
+        </script>
         
         <div id="choices">
         <?
-        $delete_link_part1 = "<A href=\x22#\x22 onclick=\x22$('#question_";
-        $delete_link_part2 = "').remove();\x22><img src=\x22images/delete.png\x22></a>";
+        //$delete_link_part1 = "<A href=\x22#\x22 onclick=\x22$('#question_";
+        //$delete_link_part2 = "').remove();\x22><img src=\x22images/delete.png\x22></a>";
 
         $result_choices = mysql_query("SELECT * FROM survey_choices WHERE survey_id = ".$row['id']." order by question_number");
         if (mysql_num_rows($result_choices) > 0) {
