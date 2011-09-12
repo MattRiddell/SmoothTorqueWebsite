@@ -261,7 +261,7 @@ if (!function_exists('get_menu_html') ) {
             //=======================================================================================================
             // Surveys
             //=======================================================================================================
-            if ($self=="/surveys.php"){
+            if ($self=="/surveys.php"||$self=="/survey_results.php"){
                 $thead="thead";
             } else {
                 $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
