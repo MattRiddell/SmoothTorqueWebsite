@@ -57,8 +57,9 @@ if (isset($_POST[name])){
     $clid = sanitize($_POST['clid']);
     $trclid = sanitize($_POST['trclid']);
     $evergreen = sanitize($_POST['evergreen']);
+    $survey = sanitize($_POST['survey']);
     $sql = "UPDATE campaign SET name=$name, description=$description, messageid=$messageid, messageid2=$messageid2, messageid3=$messageid3,
-            mode=$mode, astqueuename=$astqueuename, did=$did, maxagents=$maxagents, clid=$clid, trclid=$trclid, context=$context, evergreen=$evergreen, drive_min=$drive_min, drive_max = $drive_max WHERE id=$id";
+            mode=$mode, astqueuename=$astqueuename, did=$did, maxagents=$maxagents, clid=$clid, trclid=$trclid, context=$context, evergreen=$evergreen, drive_min=$drive_min, survey=$survey, drive_max = $drive_max WHERE id=$id";
     if (isset($_GET['debug'])) {
         echo $sql;
         exit(0);
@@ -113,6 +114,15 @@ if (mysql_num_rows($result) > 0) {
     $row_queue[$count2][name] = mysql_result($result,0,0);
     $count2++;
 }
+
+$result_surveys=mysql_query("SELECT * FROM surveys",$link) or die (mysql_error());
+$count_surveys=0;
+if (mysql_num_rows($result_surveys) > 0) {
+    while ($row_surveys[$count_surveys] = mysql_fetch_assoc($result_surveys)) {
+        $count_surveys++;
+    }
+}
+
 ?>
 
 <form action="editcampaign.php" method="POST" id="addcampaign">
@@ -225,7 +235,29 @@ if ($config_values['configurable_drive'] == 1) {
                 </select>
             </td>
         </tr>
+<?/*
+   ===================================================================================================
+   This is for the survey
+   ===================================================================================================
+   */?>
 
+
+<TR id="survey" style="display:none" title="The survey you would like to run"><TD CLASS="thead">Survey
+<a href="#" onclick="displaySmallMessage('includes/help.php?section=Select the survey you would like to run for this campaign.');return false"><img src="images/help.png" border="0"></a>
+</TD><TD>
+<SELECT name="surveyid">
+<?
+for ($i=0;$i<$count_surveys;$i++){
+    $selected="";
+    if ($row['survey']==$row_surveys[$i]['id']){
+        $selected=" SELECTED";
+    }
+    echo "<OPTION VALUE=\"".$row_surveys[$i]['id']."\"$selected>".$row_surveys[$i]['name']."</OPTION>";
+}
+?>
+</SELECT>
+</TD>
+</TR>
         <?/* ==================== Fax Message Field ======================= */?>
         <tr id="fax" style="display:none" title="The fax you would like to send">
             <td class="thead">

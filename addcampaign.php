@@ -28,6 +28,7 @@
             
             
             $modein=($_POST['mode']);
+            $survey=($_POST['surveyid']);
             $maxagents=($_POST['agents']);
             if ($modein == "mode_queue"){
                 $mode = 1;
@@ -48,7 +49,7 @@
                 $drive_min = "43.0";
                 $drive_max = "61.0";
             }
-            $sql="INSERT INTO campaign (groupid,name,description,messageid,messageid2,messageid3,mode,astqueuename,did,maxagents,clid,trclid,context,evergreen,drive_min,drive_max) VALUES ('$campaigngroupid','$name', '$description', '$messageid','$messageid2','$messageid3','$mode','$astqueuename','$did','$maxagents','$clid','$trclid','$context','$evergreen','$drive_min','$drive_max')";
+            $sql="INSERT INTO campaign (groupid,name,description,messageid,messageid2,messageid3,mode,astqueuename,did,maxagents,clid,trclid,context,evergreen,drive_min,drive_max,survey) VALUES ('$campaigngroupid','$name', '$description', '$messageid','$messageid2','$messageid3','$mode','$astqueuename','$did','$maxagents','$clid','$trclid','$context','$evergreen','$drive_min','$drive_max','$survey')";
             //    echo $sql;
             $result=mysql_query($sql, $link) or die (mysql_error());;
             /*================= Log Access ======================================*/
@@ -194,6 +195,14 @@ if ($config_values['configurable_drive'] == 1) {
         $count_fax++;
     }
     
+    $result_surveys=mysql_query("SELECT * FROM surveys",$link) or die (mysql_error());
+    $count_surveys=0;
+    if (mysql_num_rows($result_surveys) > 0) {
+        while ($row_surveys[$count_surveys] = mysql_fetch_assoc($result_surveys)) {
+            $count_surveys++;
+        }
+    }
+
     $sql="SELECT * from queue_table";
     $result=mysql_query($sql,$link) or die (mysql_error());
     $count2=0;
@@ -209,6 +218,30 @@ if ($config_values['configurable_drive'] == 1) {
     
     
     ?>
+<?/*
+   ===================================================================================================
+   This is for the survey
+   ===================================================================================================
+   */?>
+
+
+<TR id="survey" style="display:none" title="The survey you would like to run"><TD CLASS="thead">Survey
+<a href="#" onclick="displaySmallMessage('includes/help.php?section=Select the survey you would like to run for this campaign.');return false"><img src="images/help.png" border="0"></a>
+</TD><TD>
+<SELECT name="surveyid">
+<?
+for ($i=0;$i<$count_surveys;$i++){
+    $selected="";
+    if ($row['survey']==$row_surveys[$i]['id']){
+        $selected=" SELECTED";
+    }
+    echo "<OPTION VALUE=\"".$row_surveys[$i]['id']."\"$selected>".$row_surveys[$i]['name']."</OPTION>";
+}
+?>
+</SELECT>
+</TD>
+</TR>
+
 
 <?/*
    ===================================================================================================
