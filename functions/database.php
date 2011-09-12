@@ -1305,7 +1305,7 @@ if (!function_exists('create_missing_tables') ) {
             $field_array[] = mysql_result($result, $i, "Field");
         }		
         if (!in_array('datetime', $field_array)) {
-            $result = mysql_query('ALTER TABLE .survey_results ADD `datetime` timestamp NULL default NULL on update CURRENT_TIMESTAMP') or die(mysql_error());
+            $result = mysql_query('ALTER TABLE .survey_results ADD `datetime` timestamp default CURRENT_TIMESTAMP') or die(mysql_error());
             $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added survey_results datetime field')";
             $result=mysql_query($sql, $link);
         }               
