@@ -216,6 +216,7 @@ if ($config_values['configurable_drive'] == 1) {
                     <option value="7" <?echo $row[context]==7?"SELECTED":""?> title="When a call is answered, play back the message and then hang up"> Immediate Message Playback</option>
                     <option value="8" <?echo $row[context]==8?"SELECTED":""?> title="Ring a number, when it answers start sending a fax" >Fax Broadcast</option>
                     <option value="9" <?echo $row[context]==9?"SELECTED":""?> title="Send SMS Messages">SMS Broadcast</option>
+                    <option value="15" <?echo $row[context]==15?"SELECTED":""?> title="Automated Survey">Automated Survey</option>
                     <option value="10" <?echo $row[context]==10?"SELECTED":""?>><?echo $config_values['SPARE1'];?></option>
                     <option value="11" <?echo $row[context]==11?"SELECTED":""?>><?echo $config_values['SPARE2'];?></option>
                     <option value="12" <?echo $row[context]==12?"SELECTED":""?>><?echo $config_values['SPARE3'];?></option>
@@ -294,7 +295,7 @@ if ($row['context'] == 9) {
         </tr>
 
         <?/* ==================== AMD Message Field ======================= */?>
-        <tr id="xx3"  style="display:none" title="The message to leave to the answer machine">
+        <tr id="answer_machine_message"  style="display:none" title="The message to leave to the answer machine">
             <td class="thead">
                 Answer Machine Message
                 <a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are leaving automated messages on answer machines then you can set this to a particular message you would like to have played when an answer machine is detected.  Usage of this will depend on your settings in the Type of Campaign section.');return false">
@@ -318,7 +319,7 @@ if ($row['context'] == 9) {
         </tr>
 
         <?/* ==================== DNC Message Field ======================= */?>
-        <tr id="xx4" style="display:none" title="The message played to someone who wants to be put on the DNC list">
+        <tr id="dnc_list_message" style="display:none" title="The message played to someone who wants to be put on the DNC list">
             <td class="thead">
                 DNC Confirmation Message
                 <a href="#" onclick="displaySmallMessage('includes/help.php?section=This message is played to a customer who presses 2 to be added to DNC.');return false">
@@ -369,7 +370,7 @@ if ($row['context'] == 9) {
         </tr>
 
         <?/* ===================== Max Calls Field ======================== */?>
-        <tr rel="didmode" id="xx6" title="The max number of concurrent calls to be connected to the call center">
+        <tr rel="didmode" id="max_connected_calls" title="The max number of concurrent calls to be connected to the call center">
             <td class="thead" width="216px">
                 <label for="agents">
                     Maximum Connected Calls:
@@ -384,7 +385,7 @@ if ($row['context'] == 9) {
         </tr>
 
         <?/* ===================== Caller ID Field ======================== */?>
-        <tr id="xx5" title="The caller ID you'd like to use">
+        <tr id="outbound_callerid" title="The caller ID you'd like to use">
             <td class="thead">
                 <label for="did">
                     Caller ID:
@@ -399,7 +400,7 @@ if ($row['context'] == 9) {
         </tr>
 
         <?/* ============== Call Centre Phone Number Field ================ */?>
-        <tr rel="didmode" id="xx1" title="Call Centre Phone Number">
+        <tr rel="didmode" id="cc_number" title="Call Centre Phone Number">
             <td class="thead">
                 <label for="did">
                     Call Center Phone Number:

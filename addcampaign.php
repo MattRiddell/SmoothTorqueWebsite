@@ -153,6 +153,7 @@ if ($config_values['configurable_drive'] == 1) {
 <OPTION VALUE="7" title="When a call is answered, play back the message and then hang up"> Immediate Message Playback</OPTION>
 <OPTION VALUE="8" title="Ring a number, when it answers start sending a fax">Fax Broadcast</OPTION>
 <OPTION VALUE="9">SMS Broadcast</OPTION>
+<OPTION VALUE="15">Automated Survey</OPTION>
 <OPTION VALUE="10"><?echo $config_values['SPARE1'];?></OPTION>
 <OPTION VALUE="11"><?echo $config_values['SPARE2'];?></OPTION>
 <OPTION VALUE="12"><?echo $config_values['SPARE3'];?></OPTION>
@@ -167,7 +168,7 @@ if ($config_values['configurable_drive'] == 1) {
 </SELECT>
 </TD>
 </TR>
-<tr rel="didmode" id="xx6" style="display:none" >
+<tr rel="didmode" id="max_connected_calls" style="display:none" >
 <td class="thead" width=200><label for="agents">Maximum Connected Calls:
 <a href="#" onclick="displaySmallMessage('includes/help.php?section=This is the number of concurrent calls you would like to receive on the call center number specified.  <br /><br />Normally this will be the number of staff you have.');return false" title="The number of concurrent calls to be put through to the call center"><img src="images/help.png" border="0"></a>
 </label></td>
@@ -279,7 +280,7 @@ if ($config_values['configurable_drive'] == 1) {
    */?>
 
 
-<TR id="xx3"  style="display:none" title="The message to leave to the answer machine"><TD CLASS="thead">Answer Machine Message<a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are leaving automated messages on answer machines then you can set this to a particular message you would like to have played when an answer machine is detected.  Usage of this will depend on your settings in the Type of Campaign section.');return false"><img src="images/help.png" border="0"></a>
+<TR id="answer_machine_message"  style="display:none" title="The message to leave to the answer machine"><TD CLASS="thead">Answer Machine Message<a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are leaving automated messages on answer machines then you can set this to a particular message you would like to have played when an answer machine is detected.  Usage of this will depend on your settings in the Type of Campaign section.');return false"><img src="images/help.png" border="0"></a>
 </TD><TD>
 <SELECT name="messageid2">
 <?
@@ -302,7 +303,7 @@ if ($config_values['configurable_drive'] == 1) {
    */?>
 
 
-<TR  id="xx4" style="display:none" title="The message played to someone who wants to be put on the DNC list"><TD CLASS="thead">DNC Confirmation Message
+<TR  id="dnc_list_message" style="display:none" title="The message played to someone who wants to be put on the DNC list"><TD CLASS="thead">DNC Confirmation Message
 <a href="#" onclick="displaySmallMessage('includes/help.php?section=This message is played to a customer who presses 2 to be added to DNC.');return false"><img src="images/help.png" border="0"></a>
 </TD><TD>
 <SELECT name="messageid3">
@@ -342,13 +343,13 @@ if ($config_values['configurable_drive'] == 1) {
 
 </td>
 </tr>
-<tr id="xx5" style="display:none" title="The caller id you would like to send out">
+<tr id="outbound_callerid" style="display:none" title="The caller id you would like to send out">
 <td class="thead"><label for="did">Caller ID:
 <a href="#" onclick="displaySmallMessage('includes/help.php?section=The CallerID you would like to send on calls to your customers');return false"><img src="images/help.png" border="0"></a>
 </label></td>
 <td><input type="text" name="clid" id="did" size=60 value="ls3"></td>
 </tr>
-<tr rel="didmode" id="xx1" style="display:none" title="The number for the call center">
+<tr rel="didmode" id="cc_number" style="display:none" title="The number for the call center">
 <td class="thead"><label for="did">Call Center Phone Number:
 <a href="#" onclick="displaySmallMessage('includes/help.php?section=The phone number you would like to have connected calls sent to. Eg: (123) 555-1234. ');return false"><img src="images/help.png" border="0" id="x"  ></a>
 </label></td>

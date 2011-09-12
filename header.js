@@ -27,211 +27,211 @@ function whatPaySelected(myval){
         		document.getElementById('mode').style.display='none';
     		}
     		if (document.all2) {
-        		document.all['xx1'].style.display = "none";
+        		document.all['cc_number'].style.display = "none";
         		document.all['live_message'].style.display = "none";
-        		document.all['xx3'].style.display = "none";
-        		document.all['xx4'].style.display = "none";
-        		document.all['xx5'].style.display = "none";
-        		document.all['xx6'].style.display = "visible";
+        		document.all['answer_machine_message'].style.display = "none";
+        		document.all['dnc_list_message'].style.display = "none";
+        		document.all['outbound_callerid'].style.display = "none";
+        		document.all['max_connected_calls'].style.display = "visible";
     		} else {
-        		document.getElementById('xx1').style.display='none';
+        		document.getElementById('cc_number').style.display='none';
         		document.getElementById('live_message').style.display='none';
-        		document.getElementById('xx3').style.display='none';
-        		document.getElementById('xx4').style.display='none';
-        		document.getElementById('xx5').style.display='none';
-        		document.getElementById('xx6').style.display='';
+        		document.getElementById('answer_machine_message').style.display='none';
+        		document.getElementById('dnc_list_message').style.display='none';
+        		document.getElementById('outbound_callerid').style.display='none';
+        		document.getElementById('max_connected_calls').style.display='';
     		}
 	} else if (myval == '10') {
     		if (document.all2) {
-        		document.all['xx1'].style.display = "visible";
+        		document.all['cc_number'].style.display = "visible";
         		document.all['live_message'].style.display = "visible";
-        		document.all['xx3'].style.display = "visible";
-        		document.all['xx4'].style.display = "visible";
-        		document.all['xx5'].style.display = "visible";
-        		document.all['xx6'].style.display = "visible";
+        		document.all['answer_machine_message'].style.display = "visible";
+        		document.all['dnc_list_message'].style.display = "visible";
+        		document.all['outbound_callerid'].style.display = "visible";
+        		document.all['max_connected_calls'].style.display = "visible";
     		} else {
-        		document.getElementById('xx1').style.display='';
+        		document.getElementById('cc_number').style.display='';
         		document.getElementById('live_message').style.display='';
-        		document.getElementById('xx3').style.display='';
-        		document.getElementById('xx4').style.display='';
-        		document.getElementById('xx5').style.display='';
-        		document.getElementById('xx6').style.display='';
+        		document.getElementById('answer_machine_message').style.display='';
+        		document.getElementById('dnc_list_message').style.display='';
+        		document.getElementById('outbound_callerid').style.display='';
+        		document.getElementById('max_connected_calls').style.display='';
     		}
 	} else if (myval == '11') {
     		if (document.all2) {
-        		document.all['xx1'].style.display = "visible";
+        		document.all['cc_number'].style.display = "visible";
         		document.all['live_message'].style.display = "visible";
-        		document.all['xx3'].style.display = "visible";
-        		document.all['xx4'].style.display = "visible";
-        		document.all['xx5'].style.display = "visible";
-        		document.all['xx6'].style.display = "visible";
+        		document.all['answer_machine_message'].style.display = "visible";
+        		document.all['dnc_list_message'].style.display = "visible";
+        		document.all['outbound_callerid'].style.display = "visible";
+        		document.all['max_connected_calls'].style.display = "visible";
     		} else {
-        		document.getElementById('xx1').style.display='';
+        		document.getElementById('cc_number').style.display='';
         		document.getElementById('live_message').style.display='';
-        		document.getElementById('xx3').style.display='';
-        		document.getElementById('xx4').style.display='';
-        		document.getElementById('xx5').style.display='';
-        		document.getElementById('xx6').style.display='';
+        		document.getElementById('answer_machine_message').style.display='';
+        		document.getElementById('dnc_list_message').style.display='';
+        		document.getElementById('outbound_callerid').style.display='';
+        		document.getElementById('max_connected_calls').style.display='';
     		}
 	} else if (myval == '12') {
     		if (document.all2) {
-        		document.all['xx1'].style.display = "visible";
+        		document.all['cc_number'].style.display = "visible";
         		document.all['live_message'].style.display = "visible";
-        		document.all['xx3'].style.display = "visible";
-        		document.all['xx4'].style.display = "visible";
-        		document.all['xx5'].style.display = "visible";
-        		document.all['xx6'].style.display = "visible";
+        		document.all['answer_machine_message'].style.display = "visible";
+        		document.all['dnc_list_message'].style.display = "visible";
+        		document.all['outbound_callerid'].style.display = "visible";
+        		document.all['max_connected_calls'].style.display = "visible";
     		} else {
-        		document.getElementById('xx1').style.display='';
+        		document.getElementById('cc_number').style.display='';
         		document.getElementById('live_message').style.display='';
-        		document.getElementById('xx3').style.display='';
-        		document.getElementById('xx4').style.display='';
-        		document.getElementById('xx5').style.display='';
-        		document.getElementById('xx6').style.display='';
+        		document.getElementById('answer_machine_message').style.display='';
+        		document.getElementById('dnc_list_message').style.display='';
+        		document.getElementById('outbound_callerid').style.display='';
+        		document.getElementById('max_connected_calls').style.display='';
     		}
 	} else if (myval == '13') {
     if (document.all2) {
-        document.all['xx1'].style.display = "visible";
+        document.all['cc_number'].style.display = "visible";
         document.all['live_message'].style.display = "visible";
-        document.all['xx3'].style.display = "visible";
-        document.all['xx4'].style.display = "visible";
-        document.all['xx5'].style.display = "visible";
-        document.all['xx6'].style.display = "visible";
+        document.all['answer_machine_message'].style.display = "visible";
+        document.all['dnc_list_message'].style.display = "visible";
+        document.all['outbound_callerid'].style.display = "visible";
+        document.all['max_connected_calls'].style.display = "visible";
     } else {
-        document.getElementById('xx1').style.display='';
+        document.getElementById('cc_number').style.display='';
         document.getElementById('live_message').style.display='';
-        document.getElementById('xx3').style.display='';
-        document.getElementById('xx4').style.display='';
-        document.getElementById('xx5').style.display='';
-        document.getElementById('xx6').style.display='';
+        document.getElementById('answer_machine_message').style.display='';
+        document.getElementById('dnc_list_message').style.display='';
+        document.getElementById('outbound_callerid').style.display='';
+        document.getElementById('max_connected_calls').style.display='';
     }
 } else if (myval == '14') {
     if (document.all2) {
-        document.all['xx1'].style.display = "visible";
+        document.all['cc_number'].style.display = "visible";
         document.all['live_message'].style.display = "visible";
-        document.all['xx3'].style.display = "visible";
-        document.all['xx4'].style.display = "visible";
-        document.all['xx5'].style.display = "visible";
-        document.all['xx6'].style.display = "visible";
+        document.all['answer_machine_message'].style.display = "visible";
+        document.all['dnc_list_message'].style.display = "visible";
+        document.all['outbound_callerid'].style.display = "visible";
+        document.all['max_connected_calls'].style.display = "visible";
     } else {
-        document.getElementById('xx1').style.display='';
+        document.getElementById('cc_number').style.display='';
         document.getElementById('live_message').style.display='';
-        document.getElementById('xx3').style.display='';
-        document.getElementById('xx4').style.display='';
-        document.getElementById('xx5').style.display='';
-        document.getElementById('xx6').style.display='';
+        document.getElementById('answer_machine_message').style.display='';
+        document.getElementById('dnc_list_message').style.display='';
+        document.getElementById('outbound_callerid').style.display='';
+        document.getElementById('max_connected_calls').style.display='';
     }
-} else if (myval == '15') {
+} else if (myval == '15') { /* Automated Survey */
     if (document.all2) {
-        document.all['xx1'].style.display = "visible";
+        document.all['cc_number'].style.display = "visible";
         document.all['live_message'].style.display = "visible";
-        document.all['xx3'].style.display = "visible";
-        document.all['xx4'].style.display = "visible";
-        document.all['xx5'].style.display = "visible";
-        document.all['xx6'].style.display = "visible";
+        document.all['answer_machine_message'].style.display = "visible";
+        document.all['dnc_list_message'].style.display = "visible";
+        document.all['outbound_callerid'].style.display = "visible";
+        document.all['max_connected_calls'].style.display = "visible";
     } else {
-        document.getElementById('xx1').style.display='';
+        document.getElementById('cc_number').style.display='';
         document.getElementById('live_message').style.display='';
-        document.getElementById('xx3').style.display='';
-        document.getElementById('xx4').style.display='';
-        document.getElementById('xx5').style.display='';
-        document.getElementById('xx6').style.display='';
+        document.getElementById('answer_machine_message').style.display='';
+        document.getElementById('dnc_list_message').style.display='';
+        document.getElementById('outbound_callerid').style.display='';
+        document.getElementById('max_connected_calls').style.display='';
     }
 }  else if (myval == '1') {
     if (document.all2) {
-        document.all['xx1'].style.display = "none";/*the number for the call center*/
+        document.all['cc_number'].style.display = "none";/*the number for the call center*/
         document.all['live_message'].style.display = "none";/*press 1 message*/
-        document.all['xx3'].style.display = "visible";/*answer machine message*/
-        document.all['xx4'].style.display = "none";/*dnc message*/
-        document.all['xx5'].style.display = "visible";/*caller id*/
-        document.all['xx6'].style.display = "visible";/*imax connected calls*/
+        document.all['answer_machine_message'].style.display = "visible";/*answer machine message*/
+        document.all['dnc_list_message'].style.display = "none";/*dnc message*/
+        document.all['outbound_callerid'].style.display = "visible";/*caller id*/
+        document.all['max_connected_calls'].style.display = "visible";/*imax connected calls*/
     } else {
-        document.getElementById('xx1').style.display='none';
+        document.getElementById('cc_number').style.display='none';
         document.getElementById('live_message').style.display='none';
-        document.getElementById('xx3').style.display='';
-        document.getElementById('xx4').style.display='none';
-        document.getElementById('xx5').style.display='';
-        document.getElementById('xx6').style.display='';
+        document.getElementById('answer_machine_message').style.display='';
+        document.getElementById('dnc_list_message').style.display='none';
+        document.getElementById('outbound_callerid').style.display='';
+        document.getElementById('max_connected_calls').style.display='';
     }
 } else if (myval == '2') {
     if (document.all2) {
-        document.all['xx1'].style.display = "visible";
+        document.all['cc_number'].style.display = "visible";
         document.all['live_message'].style.display = "none";
-        document.all['xx3'].style.display = "none";
-        document.all['xx4'].style.display = "none";
-        document.all['xx5'].style.display = "visible";
-        document.all['xx6'].style.display = "visible";
+        document.all['answer_machine_message'].style.display = "none";
+        document.all['dnc_list_message'].style.display = "none";
+        document.all['outbound_callerid'].style.display = "visible";
+        document.all['max_connected_calls'].style.display = "visible";
     } else {
-        document.getElementById('xx1').style.display='';
+        document.getElementById('cc_number').style.display='';
         document.getElementById('live_message').style.display='none';
-        document.getElementById('xx3').style.display='none';
-        document.getElementById('xx4').style.display='none';
-        document.getElementById('xx5').style.display='';
-        document.getElementById('xx6').style.display='';
+        document.getElementById('answer_machine_message').style.display='none';
+        document.getElementById('dnc_list_message').style.display='none';
+        document.getElementById('outbound_callerid').style.display='';
+        document.getElementById('max_connected_calls').style.display='';
     }
 } else if (myval == '3') {
     if (document.all2) {
-        document.all['xx1'].style.display = "visible";
+        document.all['cc_number'].style.display = "visible";
         document.all['live_message'].style.display = "visible";
-        document.all['xx3'].style.display = "visible";
-        document.all['xx4'].style.display = "visible";
-        document.all['xx5'].style.display = "visible";
-        document.all['xx6'].style.display = "visible";
+        document.all['answer_machine_message'].style.display = "visible";
+        document.all['dnc_list_message'].style.display = "visible";
+        document.all['outbound_callerid'].style.display = "visible";
+        document.all['max_connected_calls'].style.display = "visible";
     } else {
-        document.getElementById('xx1').style.display='';
+        document.getElementById('cc_number').style.display='';
         document.getElementById('live_message').style.display='';
-        document.getElementById('xx3').style.display='';
-        document.getElementById('xx4').style.display='';
-        document.getElementById('xx5').style.display='';
-        document.getElementById('xx6').style.display='';
+        document.getElementById('answer_machine_message').style.display='';
+        document.getElementById('dnc_list_message').style.display='';
+        document.getElementById('outbound_callerid').style.display='';
+        document.getElementById('max_connected_calls').style.display='';
     }
 } else if (myval == '4') {
     if (document.all2) {
-        document.all['xx1'].style.display = "visible";
+        document.all['cc_number'].style.display = "visible";
         document.all['live_message'].style.display = "visible";
-        document.all['xx3'].style.display = "none";
-        document.all['xx4'].style.display = "visible";
-        document.all['xx5'].style.display = "visible";
-        document.all['xx6'].style.display = "visible";
+        document.all['answer_machine_message'].style.display = "none";
+        document.all['dnc_list_message'].style.display = "visible";
+        document.all['outbound_callerid'].style.display = "visible";
+        document.all['max_connected_calls'].style.display = "visible";
     } else {
-        document.getElementById('xx1').style.display='';
+        document.getElementById('cc_number').style.display='';
         document.getElementById('live_message').style.display='';
-        document.getElementById('xx3').style.display='none';
-        document.getElementById('xx4').style.display='';
-        document.getElementById('xx5').style.display='';
-        document.getElementById('xx6').style.display='';
+        document.getElementById('answer_machine_message').style.display='none';
+        document.getElementById('dnc_list_message').style.display='';
+        document.getElementById('outbound_callerid').style.display='';
+        document.getElementById('max_connected_calls').style.display='';
     }
 } else if (myval == '5') {
     if (document.all2) {
-        document.all['xx1'].style.display = "visible";
+        document.all['cc_number'].style.display = "visible";
         document.all['live_message'].style.display = "none";
-        document.all['xx3'].style.display = "visible";
-        document.all['xx4'].style.display = "none";
-        document.all['xx5'].style.display = "visible";
-        document.all['xx6'].style.display = "visible";
+        document.all['answer_machine_message'].style.display = "visible";
+        document.all['dnc_list_message'].style.display = "none";
+        document.all['outbound_callerid'].style.display = "visible";
+        document.all['max_connected_calls'].style.display = "visible";
     } else {
-        document.getElementById('xx1').style.display='';
+        document.getElementById('cc_number').style.display='';
         document.getElementById('live_message').style.display='none';
-        document.getElementById('xx3').style.display='';
-        document.getElementById('xx4').style.display='none';
-        document.getElementById('xx5').style.display='';
-        document.getElementById('xx6').style.display='';
+        document.getElementById('answer_machine_message').style.display='';
+        document.getElementById('dnc_list_message').style.display='none';
+        document.getElementById('outbound_callerid').style.display='';
+        document.getElementById('max_connected_calls').style.display='';
     }
 } else if (myval == '6') {
     if (document.all2) {
-        document.all['xx1'].style.display = "visible";
+        document.all['cc_number'].style.display = "visible";
         document.all['live_message'].style.display = "none";
-        document.all['xx3'].style.display = "none";
-        document.all['xx4'].style.display = "none";
-        document.all['xx5'].style.display = "visible";
-        document.all['xx6'].style.display = "visible";
+        document.all['answer_machine_message'].style.display = "none";
+        document.all['dnc_list_message'].style.display = "none";
+        document.all['outbound_callerid'].style.display = "visible";
+        document.all['max_connected_calls'].style.display = "visible";
     } else {
-        document.getElementById('xx1').style.display='';
+        document.getElementById('cc_number').style.display='';
         document.getElementById('live_message').style.display='none';
-        document.getElementById('xx3').style.display='none';
-        document.getElementById('xx4').style.display='none';
-        document.getElementById('xx5').style.display='';
-        document.getElementById('xx6').style.display='';
+        document.getElementById('answer_machine_message').style.display='none';
+        document.getElementById('dnc_list_message').style.display='none';
+        document.getElementById('outbound_callerid').style.display='';
+        document.getElementById('max_connected_calls').style.display='';
     }
 } else if (myval == '7') {
 /*
@@ -242,19 +242,19 @@ function whatPaySelected(myval){
     }
    */
     if (document.all2) {
-        document.all['xx1'].style.display = "none";
+        document.all['cc_number'].style.display = "none";
         document.all['live_message'].style.display = "visible";
-        document.all['xx3'].style.display = "none";
-        document.all['xx4'].style.display = "none";
-        document.all['xx5'].style.display = "visible";
-        document.all['xx6'].style.display = "visible";
+        document.all['answer_machine_message'].style.display = "none";
+        document.all['dnc_list_message'].style.display = "none";
+        document.all['outbound_callerid'].style.display = "visible";
+        document.all['max_connected_calls'].style.display = "visible";
     } else {
-        document.getElementById('xx1').style.display='none';
+        document.getElementById('cc_number').style.display='none';
         document.getElementById('live_message').style.display='';
-        document.getElementById('xx3').style.display='none';
-        document.getElementById('xx4').style.display='none';
-        document.getElementById('xx5').style.display='';
-        document.getElementById('xx6').style.display='';
+        document.getElementById('answer_machine_message').style.display='none';
+        document.getElementById('dnc_list_message').style.display='none';
+        document.getElementById('outbound_callerid').style.display='';
+        document.getElementById('max_connected_calls').style.display='';
     }
 } else if (myval == '8') {
     if (document.all2) {
@@ -270,19 +270,19 @@ function whatPaySelected(myval){
 
 
     if (document.all2) {
-        document.all['xx1'].style.display = "none";
+        document.all['cc_number'].style.display = "none";
         document.all['live_message'].style.display = "none";
-        document.all['xx3'].style.display = "none";
-        document.all['xx4'].style.display = "none";
-        document.all['xx5'].style.display = "visible";
-        document.all['xx6'].style.display = "none";
+        document.all['answer_machine_message'].style.display = "none";
+        document.all['dnc_list_message'].style.display = "none";
+        document.all['outbound_callerid'].style.display = "visible";
+        document.all['max_connected_calls'].style.display = "none";
     } else {
-        document.getElementById('xx1').style.display='none';
+        document.getElementById('cc_number').style.display='none';
         document.getElementById('live_message').style.display='none';
-        document.getElementById('xx3').style.display='none';
-        document.getElementById('xx4').style.display='none';
-        document.getElementById('xx5').style.display='';
-        document.getElementById('xx6').style.display='none';
+        document.getElementById('answer_machine_message').style.display='none';
+        document.getElementById('dnc_list_message').style.display='none';
+        document.getElementById('outbound_callerid').style.display='';
+        document.getElementById('max_connected_calls').style.display='none';
     }
 } else if (myval == '9') {
     //alert('9');
@@ -297,35 +297,35 @@ function whatPaySelected(myval){
         document.getElementById('sms').style.display='';
     }
     if (document.all2) {
-        document.all['xx1'].style.display = "none";
+        document.all['cc_number'].style.display = "none";
         document.all['live_message'].style.display = "none";
-        document.all['xx3'].style.display = "none";
-        document.all['xx4'].style.display = "none";
-        document.all['xx5'].style.display = "visible";
-        document.all['xx6'].style.display = "visible";
+        document.all['answer_machine_message'].style.display = "none";
+        document.all['dnc_list_message'].style.display = "none";
+        document.all['outbound_callerid'].style.display = "visible";
+        document.all['max_connected_calls'].style.display = "visible";
     } else {
-        document.getElementById('xx1').style.display='none';
+        document.getElementById('cc_number').style.display='none';
         document.getElementById('live_message').style.display='none';
-        document.getElementById('xx3').style.display='none';
-        document.getElementById('xx4').style.display='none';
-        document.getElementById('xx5').style.display='';
-        document.getElementById('xx6').style.display='';
+        document.getElementById('answer_machine_message').style.display='none';
+        document.getElementById('dnc_list_message').style.display='none';
+        document.getElementById('outbound_callerid').style.display='';
+        document.getElementById('max_connected_calls').style.display='';
     }
 } else if (myval == '054') {
     if (document.all2) {
-        document.all['xx1'].style.display = "visible";
+        document.all['cc_number'].style.display = "visible";
         document.all['live_message'].style.display = "visible";
-        document.all['xx3'].style.display = "visible";
-        document.all['xx4'].style.display = "visible";
-        document.all['xx5'].style.display = "visible";
-        document.all['xx6'].style.display = "visible";
+        document.all['answer_machine_message'].style.display = "visible";
+        document.all['dnc_list_message'].style.display = "visible";
+        document.all['outbound_callerid'].style.display = "visible";
+        document.all['max_connected_calls'].style.display = "visible";
     } else {
-        document.getElementById('xx1').style.display='';
+        document.getElementById('cc_number').style.display='';
         document.getElementById('live_message').style.display='';
-        document.getElementById('xx3').style.display='';
-        document.getElementById('xx4').style.display='';
-        document.getElementById('xx5').style.display='';
-        document.getElementById('xx6').style.display='';
+        document.getElementById('answer_machine_message').style.display='';
+        document.getElementById('dnc_list_message').style.display='';
+        document.getElementById('outbound_callerid').style.display='';
+        document.getElementById('max_connected_calls').style.display='';
     }
 } else if (myval == '-1') {
     if (document.all2) {
@@ -334,19 +334,19 @@ function whatPaySelected(myval){
         document.getElementById('mode').style.display='none';
     }
     if (document.all2) {
-        document.all['xx1'].style.display = "none";
+        document.all['cc_number'].style.display = "none";
         document.all['live_message'].style.display = "none";
-        document.all['xx3'].style.display = "none";
-        document.all['xx4'].style.display = "none";
-        document.all['xx5'].style.display = "none";
-        document.all['xx6'].style.display = "none";
+        document.all['answer_machine_message'].style.display = "none";
+        document.all['dnc_list_message'].style.display = "none";
+        document.all['outbound_callerid'].style.display = "none";
+        document.all['max_connected_calls'].style.display = "none";
     } else {
-        document.getElementById('xx1').style.display='none';
+        document.getElementById('cc_number').style.display='none';
         document.getElementById('live_message').style.display='none';
-        document.getElementById('xx3').style.display='none';
-        document.getElementById('xx4').style.display='none';
-        document.getElementById('xx5').style.display='none';
-        document.getElementById('xx6').style.display='none';
+        document.getElementById('answer_machine_message').style.display='none';
+        document.getElementById('dnc_list_message').style.display='none';
+        document.getElementById('outbound_callerid').style.display='none';
+        document.getElementById('max_connected_calls').style.display='none';
     }
 }
 }
