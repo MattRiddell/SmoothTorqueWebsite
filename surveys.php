@@ -99,6 +99,34 @@ if (isset($_GET['display_message'])) {
 }
 require "header.php";
 require "header_surveys.php";
+if (isset($_GET['save_add'])) {
+    $result = mysql_query("INSERT INTO surveys (name, description) VALUES (".sanitize($_POST['name']).",".sanitize($_POST['description']).")") or die(mysql_error());
+    $id = mysql_insert_id();
+    
+    ?><center><img src="images/progress.gif" border="0"><br />Adding survey...
+    <META HTTP-EQUIV=REFRESH CONTENT="1; URL=surveys.php?edit=<?=$id?>"><?
+
+    require "footer.php";
+    exit(0);
+}
+if (isset($_GET['add'])) {
+    box_start(400);
+    ?>    
+    <center>
+    
+    <form action = "surveys.php?save_add=1" method="post">
+    <table>
+    <tr><td>Name: </td><td><input type="text" name="name"></td></tr>
+    <tr><td>Description: </td><td><input type="text" name="description"></td></tr>
+    <tr><td colspan="2"><input type="submit" value="Add Survey"></td></tr>
+    </table>
+    
+    </form>
+    <?
+    box_end();
+    require "footer.php";
+    exit(0);
+}
 if (isset($_GET['edit'])) {
     
     ?>
