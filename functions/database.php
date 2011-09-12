@@ -217,7 +217,8 @@ if (!function_exists('create_missing_tables') ) {
             $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created Web_config Table')";
             $result=mysql_query($sql, $link);
         }
-        
+        unset($field_array);
+
         $result = mysql_query("SHOW COLUMNS FROM SineDialer.web_config");
         $columns = mysql_num_rows($result) or die(mysql_error());
         for ($i = 0; $i < $columns; $i++) {
@@ -1288,14 +1289,26 @@ if (!function_exists('create_missing_tables') ) {
             $sql = "Create table `survey_results` (
             `campaign_id` int(10) unsigned,
             `phonenumber` varchar(1024) default NULL,
+            `phonenumber` varchar(1024) default NULL,
             `question` varchar(1024) default NULL,
+            `datetime` timestamp NULL default NULL on update CURRENT_TIMESTAMP,
             `choice` varchar(1024) default NULL)";
             $result = mysql_query($sql,$link) or die(mysql_error());
             $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created survey_results Table')";
             $result=mysql_query($sql, $link);
             
         }
-        
+        $result = mysql_query("SHOW COLUMNS FROM SineDialer.survey_results") or die(mysql_error());
+        $columns = mysql_num_rows($result) or die(mysql_error());
+        unset($field_array);
+        for ($i = 0; $i < $columns; $i++) {
+            $field_array[] = mysql_result($result, $i, "Field");
+        }		
+        if (!in_array('datetime', $field_array)) {
+            $result = mysql_query('ALTER TABLE .survey_results ADD `datetime` timestamp NULL default NULL on update CURRENT_TIMESTAMP') or die(mysql_error());
+            $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added survey_results datetime field')";
+            $result=mysql_query($sql, $link);
+        }               
         
         /*======================================================================
          timezones Table
@@ -1465,9 +1478,11 @@ if (!function_exists('create_missing_tables') ) {
             );";
             $result = mysql_query($sql,$link);
         }
+                 
         
         $result = mysql_query("SHOW COLUMNS FROM SineDialer.campaign");
         $columns = mysql_num_rows($result) or die(mysql_error());
+        unset($field_array);
         for ($i = 0; $i < $columns; $i++) {
             $field_array[] = mysql_result($result, $i, "Field");
         }		
