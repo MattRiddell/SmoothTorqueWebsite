@@ -171,7 +171,7 @@ if (isset($_GET['add'])) {
 }
 if (isset($_GET['view_timezones'])) {
     // Get all the timezones
-    $result = mysql_query("SELECT * FROM SineDialer.time_zones");
+    $result = mysql_query("SELECT * FROM SineDialer.time_zones order by start");
     if (mysql_num_rows($result) > 0) {
         //box_start(500);
         echo "<center>";
