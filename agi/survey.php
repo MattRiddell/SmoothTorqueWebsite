@@ -100,6 +100,7 @@ if (mysql_num_rows($result) == 0) {
         }
         $x++;
     }    
+    $incorrect = 0;
     for ($i = 1;$i<count($choices);$i++) {     
         a_echo("-----------------------------------");
         a_echo("Question: ".$choices[$i]['question_num']);
@@ -116,16 +117,23 @@ if (mysql_num_rows($result) == 0) {
             foreach ($expected as $expect) {
                 if ($response == $expect) {
                     $found = true;
+                    $incorrect = 0;
                     break;
                 }
             }
         } else {
             $found = true;
+            $incorrect = 0;
         }
         if ($found == false) {
             a_echo("You did not enter a correct choice");
             $res = $agi->get_data($invalid, 2000, 1);        
+            $incorrect++;
             $i--;
+            if ($incorrect > 3) {
+                echo "HANGUP \n";
+                $i = count($choices);
+            }
         } else {
             a_echo("You did enter a correct choice");
             $sql = "INSERT INTO survey_results (campaign_id, phonenumber, question, choice) VALUES ($campaign, '$phonenumber', ".$choices[$i]['question_num'].", '$response')";
