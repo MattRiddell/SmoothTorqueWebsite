@@ -102,7 +102,7 @@ require "header_surveys.php";
 if (isset($_GET['delete_sure'])) {
     $result = mysql_query("DELETE FROM survey_choices WHERE survey_id = ".sanitize($_GET['delete_sure']));
     $result = mysql_query("DELETE FROM surveys WHERE id = ".sanitize($_GET['delete_sure']));
-    ?><center><img src="images/progress.gif" border="0"><br />Deleteing survey...
+    ?><center><img src="images/progress.gif" border="0"><br />Deleting survey...
     <META HTTP-EQUIV=REFRESH CONTENT="1; URL=surveys.php"><?
     require "footer.php";
     exit(0);    
