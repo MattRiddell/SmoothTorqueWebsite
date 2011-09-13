@@ -70,9 +70,80 @@ if (isset($_GET['all_campaigns'])) {
         //print_pre($entry);
     }
     echo "</table>";
+    
+    $field[0] = "channel";
+    $field[1] = "context";
+    $field[2] = "exten";
+    $field[3] = "priority";
+    $field[4] = "status";
+    $field[5] = "application";
+    $field[6] = "data";
+    $field[7] = "callerid";
+    $field[8] = "accountcode";
+    $field[9] = "amaflags";
+    $field[10] = "duration";
+    $field[11] = "bridged";
+    
+    
+    /* Get Asterisk Details */    
+    $result = mysql_query("SELECT * FROM servers WHERE status = 1");
+    while ($row = mysqL_fetch_assoc($result)) {
+        //print_pre($row);
+        // Connect to Asterisk
+        $wrets = "";
+        flush();
+        $socket = fsockopen($row['address'],"5038", $errno, $errstr, 5);
+        if ($socket) {
+            fputs($socket, "Action: Login\r\n");
+            fputs($socket, "UserName: $row[username]\r\n");
+            fputs($socket, "Secret: $row[password]\r\n");
+            fputs($socket, "Events: off\r\n\r\n");
+            fputs($socket, "Action: Command\r\n");
+            fputs($socket, "Command: show channels concise\r\n\r\n");
+            fputs($socket, "Action: Logoff\r\n\r\n");
+            while (!feof($socket)) {
+                //echo "Reading From $row[name]<br />";
+                flush();
+                $wrets .= fread($socket, 8192);
+                
+            }
+            $wrets = str_replace("\r","",$wrets);
+            $exploded = explode("\n",$wrets);
+            $started = false;
+            foreach ($exploded as $line) {
+                if ($started) {
+                    if ($line == "--END COMMAND--") {
+                        $started = false;
+                    } else {
+                        $line_exp = explode("!",$line);
+                        /*for ($i = 0;$i<count($line_exp);$i++) {
+                            $channels[$field[$i]] = $line_exp[$i];
+                        }*/
+                        $line_exp[0] = str_replace("SIP/","",$line_exp[0]);
+                        $line_exp[0] = str_replace("IAX2/","",$line_exp[0]);
+                        $line_exp[0] = str_replace("dialmaxx","",$line_exp[0]);
+                        $line_exp[0] = str_replace("2talk","",$line_exp[0]);
+                                    
+                        print_pre($line_exp);
+                        //echo $line."<br /><br />";
+                    }
+                } else if ($line == "Privilege: Command") {
+                    $started = true;
+                }
+            }
+            //print_pre($exploded);
+            fclose($socket);
+            print_pre($channels[accountcode]);
+        }
+        // Get list of channels
+        // Disconnect        
+    }
+    
+    
+    
     require "footer.php";
     exit(0);
-
+    
 }
 if (isset($_GET['historical_campaign'])) {
     box_start(800);
