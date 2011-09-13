@@ -91,11 +91,12 @@ if (mysql_num_rows($result) == 0) {
 } else {
     $x = 0;
     while ($row = mysql_fetch_assoc($result)) {
-        $choices[$x]['filename'] = $row['soundfile'];
-        $choices[$x]['expected'] = $row['choices'];
-        $choices[$x]['question_num'] = $row['question_number'];        
         if ($row['question_number'] == 0) {
             $invalid = $row['soundfile'];
+        } else {
+            $choices[$x]['filename'] = $row['soundfile'];
+            $choices[$x]['expected'] = $row['choices'];
+            $choices[$x]['question_num'] = $row['question_number'];        
         }
         $x++;
     }    
