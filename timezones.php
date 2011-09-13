@@ -189,10 +189,16 @@ if (isset($_GET['view_timezones'])) {
             echo "<tr $class><td></td>";
             $result_prefixes = mysql_query("SELECT count(*) FROM timezone_prefixes WHERE timezone = ".sanitize($row['id']));
             $count_prefixes = mysql_result($result_prefixes, 0, 0);
+            $result_rand = mysql_query("SELECT prefix FROM timezone_prefixes WHERE timezone = ".sanitize($row['id'])." ORDER BY RAND() LIMIT 1");
+            if (mysql_num_rows($result_rand) > 0) {
+                $random_example = mysql_result($result_rand,0,0);
+            } else {
+                $random_example = "No entries";
+            }
             echo "<td>".'<a href="timezones.php?edit='.$row['id'].'">'.$row['name'].'&nbsp;<img src="images/pencil.png" border="0" alt="Edit TimeZone">'."</td>";
             echo "<td>".$row['start']."</td>";
             echo "<td>".$row['end']."</td>";
-            echo "<td>$count_prefixes prefixes</td>";
+            echo "<td title=\"Random Example: ".$random_example."\">$count_prefixes prefixes</td>";
             echo "<td>".'<a href="timezones.php?delete='.$row['id'].'">&nbsp;<img src="images/delete.png" border="0" alt="Delete TimeZone">'."</td>";
             echo "<td></td></tr>";
         }
