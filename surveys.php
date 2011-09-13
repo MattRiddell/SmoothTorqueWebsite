@@ -99,6 +99,26 @@ if (isset($_GET['display_message'])) {
 }
 require "header.php";
 require "header_surveys.php";
+if (isset($_GET['delete_sure'])) {
+    $result = mysql_query("DELETE FROM survey_choices WHERE survey_id = ".sanitize($_GET['delete_sure']));
+    $result = mysql_query("DELETE FROM surveys WHERE id = ".sanitize($_GET['delete_sure']));
+    ?><center><img src="images/progress.gif" border="0"><br />Deleteing survey...
+    <META HTTP-EQUIV=REFRESH CONTENT="1; URL=surveys.php"><?
+    require "footer.php";
+    exit(0);    
+}
+if (isset($_GET['delete'])) {
+    box_start(400);
+    echo "<center><br />";
+    echo "Are you sure you want to delete this survey?<br />";
+    echo "<br />";
+    $name = mysql_result(mysql_query("SELECT name FROM surveys WHERE id = ".sanitize($_GET['delete'])),0,0);
+    echo "<h3>$name</h3>";
+    echo '<a href="surveys.php?delete_sure='.$_GET['delete'].'">Yes, I am sure, delete it</a><br /><br />';
+    echo '<a href="surveys.php">No, do not delete it</a><br />';
+    require "footer.php";
+    exit(0);
+}
 if (isset($_GET['save_add'])) {
     $result = mysql_query("INSERT INTO surveys (name, description) VALUES (".sanitize($_POST['name']).",".sanitize($_POST['description']).")") or die(mysql_error());
     $id = mysql_insert_id();
