@@ -8,7 +8,7 @@ if (isset($_GET['campaign_id'])) {
     header("Pragma: no-cache");
     header("Expires: 0");
     echo "Phone Number, Question, Choice, Date/Time\n";
-    $result = mysql_query("SELECT * FROM survey_results WHERE campaign_id = ".sanitize($_GET['campaign_id'])." ORDER by phonenumber, question") or die(mysql_error());
+    $result = mysql_query("SELECT * FROM survey_results WHERE campaign_id = ".sanitize($_GET['campaign_id'])." ORDER by phonenumber, datetime") or die(mysql_error());
     if (mysql_num_rows($result) == 0) {
         echo "There are no responses";
     } else {
