@@ -116,15 +116,21 @@ if (isset($_GET['all_campaigns'])) {
                         $started = false;
                     } else {
                         $line_exp = explode("!",$line);
-                        /*for ($i = 0;$i<count($line_exp);$i++) {
+                        $line_exp[6] = str_replace("SIP/","",$line_exp[6]);
+                        $line_exp[6] = str_replace("dialmaxx","",$line_exp[6]);                        
+                        for ($i = 0;$i<count($line_exp);$i++) {
                             $channels[$field[$i]] = $line_exp[$i];
-                        }*/
-                        $line_exp[0] = str_replace("SIP/","",$line_exp[0]);
-                        $line_exp[0] = str_replace("IAX2/","",$line_exp[0]);
-                        $line_exp[0] = str_replace("dialmaxx","",$line_exp[0]);
-                        $line_exp[0] = str_replace("2talk","",$line_exp[0]);
+                        }
                                     
-                        print_pre($line_exp);
+                        /*if ($line_exp[1] == "dial-cc") {
+                            $line_exp[6] = str_replace("SIP/","",$line_exp[6]);
+                            $line_exp[6] = str_replace("dialmaxx","",$line_exp[6]);
+                            $calls[]['customer'] = $line_exp[7];
+                            $calls[]['callcentre'] = $line_exp[6];
+                            $calls[]['duration'] = $line_exp[10];
+                            
+                        }*/
+                        //print_pre($line_exp);
                         //echo $line."<br /><br />";
                     }
                 } else if ($line == "Privilege: Command") {
@@ -133,7 +139,7 @@ if (isset($_GET['all_campaigns'])) {
             }
             //print_pre($exploded);
             fclose($socket);
-            print_pre($channels[accountcode]);
+            print_pre($channels);
         }
         // Get list of channels
         // Disconnect        
