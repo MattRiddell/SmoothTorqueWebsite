@@ -112,6 +112,7 @@ if (isset($_GET['all_campaigns'])) {
             }
             $wrets = str_replace("\r","",$wrets);
             $exploded = explode("\n",$wrets);
+            print_pre($exploded);
             $started = false;
             foreach ($exploded as $line) {
                 if ($started) {
