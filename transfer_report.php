@@ -127,30 +127,15 @@ if (isset($_GET['all_campaigns'])) {
                             $channels[$line_exp[0]][$field[$i]] = $line_exp[$i];
                         }
                         $count++;            
-                        /*if ($line_exp[1] == "dial-cc") {
-                            $line_exp[6] = str_replace("SIP/","",$line_exp[6]);
-                            $line_exp[6] = str_replace("dialmaxx","",$line_exp[6]);
-                            $calls[]['customer'] = $line_exp[7];
-                            $calls[]['callcentre'] = $line_exp[6];
-                            $calls[]['duration'] = $line_exp[10];
-                            
-                        }*/
-                        //print_pre($line_exp);
-                        //echo $line."<br /><br />";
                     }
                 } else if ($line == "Privilege: Command") {
                     $started = true;
                 }
             }
-            //print_pre($exploded);
             fclose($socket);
             
         }
-        //print_pre($channels);
-        // Get list of channels
-        // Disconnect        
     }
-    //print_pre($channels);
     ?>
     <h3>Live Calls</h3>
     <table class="transfer_history">
@@ -160,6 +145,7 @@ if (isset($_GET['all_campaigns'])) {
     <?
     if (count($channels) > 0) {
     foreach ($channels as $chan=>$values) {
+        if ($values['context'] == "dial-cc") {
         echo "<tr>";
         echo "<td class=\"transfer_history\">$values[callerid]</td>";
         echo "<td class=\"transfer_history\">$values[data]</td>";
@@ -170,14 +156,8 @@ if (isset($_GET['all_campaigns'])) {
         echo "<td class=\"transfer_history\">".$channels[$values['bridged']]['duration']."</td>";
         echo "<td class=\"transfer_history\">".round($channels[$values['bridged']]['duration']/60,2)."</td>";
         echo "<td class=\"transfer_history\">".$values['duration']."</td>";
-        /*
-        echo "Chan: $chan";
-        echo " Context: ".$values['context'];        
-        echo " Duration: ".$values['duration'];        
-        echo " Bridged Duration: ".$channels[$values['bridged']]['duration'];        
-        echo "<br />";
-//        print_pre($values);*/
         echo "<tr>";
+        }
     }
     }
     echo "</table>";
