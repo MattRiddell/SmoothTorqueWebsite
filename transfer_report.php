@@ -151,15 +151,36 @@ if (isset($_GET['all_campaigns'])) {
         // Disconnect        
     }
     //print_pre($channels);
+    ?>
+    <h3>Live Calls</h3>
+    <table class="transfer_history">
+    <tr>
+    <th class="transfer_history">CID Num</th><th class="transfer_history">Dest</th><th class="transfer_history">Created</th><th class="transfer_history">Duration</th><th class="transfer_history">Minutes</th><th class="transfer_history">Total Duration</th>
+    </tr>
+    <?
+    if (count($channels) > 0) {
     foreach ($channels as $chan=>$values) {
+        echo "<tr>";
+        echo "<td class=\"transfer_history\">$values[callerid]</td>";
+        echo "<td class=\"transfer_history\">$values[data]</td>";
+        $start = @mktime(@date("h"),@date("i"), @date("s")-$values['duration'], @date("m")  , @date("d"), @date("Y"));
+        $created = @Date("m/d/Y H:i:s",$start);
+        echo "<td class=\"transfer_history\">$created</td>";
+        
+        echo "<td class=\"transfer_history\">".$channels[$values['bridged']]['duration']."</td>";
+        echo "<td class=\"transfer_history\">".round($channels[$values['bridged']]['duration']/60,2)."</td>";
+        echo "<td class=\"transfer_history\">".$values['duration']."</td>";
+        /*
         echo "Chan: $chan";
         echo " Context: ".$values['context'];        
         echo " Duration: ".$values['duration'];        
         echo " Bridged Duration: ".$channels[$values['bridged']]['duration'];        
         echo "<br />";
-//        print_pre($values);
+//        print_pre($values);*/
+        echo "<tr>";
     }
-    
+    }
+    echo "</table>";
     
     require "footer.php";
     exit(0);
