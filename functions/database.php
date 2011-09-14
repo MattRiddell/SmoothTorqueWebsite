@@ -1344,6 +1344,27 @@ if (!function_exists('create_missing_tables') ) {
             
         }
         
+        
+        /*======================================================================
+         recording files Table
+         ======================================================================*/
+        if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","files")){
+            include "admin/db_config.php";
+            $sql = "
+            CREATE TABLE `files` (
+            `filename` varchar(255) NOT NULL default '',
+            `uniqueid` varchar(255) default NULL,
+            `server` varchar(5) default NULL,
+            PRIMARY KEY  (`filename`),
+            KEY `uniqueid` (`uniqueid`),
+            KEY `server` (`server`)
+            )";
+            $result = mysql_query($sql,$link) or die(mysql_error());
+            $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created files Table')";
+            $result=mysql_query($sql, $link);
+            
+        }
+        
         /*======================================================================
          sugar_pull_rules Table
          ======================================================================*/
