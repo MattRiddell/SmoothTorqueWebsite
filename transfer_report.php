@@ -94,7 +94,6 @@ if (isset($_GET['all_campaigns'])) {
         flush();
         unset($exploded);
         unset($line_exp);
-        unset($channels);
         $socket = fsockopen($row['address'],"5038", $errno, $errstr, 5);
         if ($socket) {
             fputs($socket, "Action: Login\r\n");
@@ -123,8 +122,9 @@ if (isset($_GET['all_campaigns'])) {
                         $line_exp = explode("!",$line);
                         $line_exp[6] = str_replace("SIP/","",$line_exp[6]);
                         $line_exp[6] = str_replace("dialmaxx","",$line_exp[6]);                        
+                        $line_exp[6] = str_replace("@","",$line_exp[6]);                        
                         for ($i = 0;$i<count($line_exp);$i++) {
-                            $channels[$count][$field[$i]] = $line_exp[$i];
+                            $channels[$line_exp[0]][$field[$i]] = $line_exp[$i];
                         }
                         $count++;            
                         /*if ($line_exp[1] == "dial-cc") {
@@ -144,12 +144,21 @@ if (isset($_GET['all_campaigns'])) {
             }
             //print_pre($exploded);
             fclose($socket);
-            print_pre($channels);
+            
         }
+        //print_pre($channels);
         // Get list of channels
         // Disconnect        
     }
-    
+    //print_pre($channels);
+    foreach ($channels as $chan=>$values) {
+        echo "Chan: $chan";
+        echo " Context: ".$values['context'];        
+        echo " Duration: ".$values['duration'];        
+        echo " Bridged Duration: ".$channels[$values['bridged']]['duration'];        
+        echo "<br />";
+//        print_pre($values);
+    }
     
     
     require "footer.php";
