@@ -112,8 +112,9 @@ if (isset($_GET['all_campaigns'])) {
             }
             $wrets = str_replace("\r","",$wrets);
             $exploded = explode("\n",$wrets);
-            print_pre($exploded);
+            //print_pre($exploded);
             $started = false;
+            $count = 0;
             foreach ($exploded as $line) {
                 if ($started) {
                     if ($line == "--END COMMAND--") {
@@ -123,9 +124,9 @@ if (isset($_GET['all_campaigns'])) {
                         $line_exp[6] = str_replace("SIP/","",$line_exp[6]);
                         $line_exp[6] = str_replace("dialmaxx","",$line_exp[6]);                        
                         for ($i = 0;$i<count($line_exp);$i++) {
-                            $channels[$field[$i]] = $line_exp[$i];
+                            $channels[$count][$field[$i]] = $line_exp[$i];
                         }
-                                    
+                        $count++;            
                         /*if ($line_exp[1] == "dial-cc") {
                             $line_exp[6] = str_replace("SIP/","",$line_exp[6]);
                             $line_exp[6] = str_replace("dialmaxx","",$line_exp[6]);
