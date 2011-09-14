@@ -92,6 +92,9 @@ if (isset($_GET['all_campaigns'])) {
         // Connect to Asterisk
         $wrets = "";
         flush();
+        unset($exploded);
+        unset($line_exp);
+        unset($channels);
         $socket = fsockopen($row['address'],"5038", $errno, $errstr, 5);
         if ($socket) {
             fputs($socket, "Action: Login\r\n");
