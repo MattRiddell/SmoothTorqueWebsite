@@ -162,7 +162,7 @@ if (isset($_GET['all_campaigns'])) {
     ?>
     <table class="transfer_history">
     <tr>
-    <th class="transfer_history">Campaign</th><th class="transfer_history">Total Xfers</th><th class="transfer_history">Billable Xfers</th><th class="transfer_history">Less than half min</th><th class="transfer_history">0.5-2 mins</th><th class="transfer_history">2-5 mins</th><th class="transfer_history">5-10 mins</th><th class="transfer_history">10-15 mins</th><th class="transfer_history">15+ mins</th></th>
+    <th class="transfer_history">Campaign</th><th class="transfer_history">Total Xfers</th><th class="transfer_history">Billable Xfers</th><th class="transfer_history">Less than half min</th><th class="transfer_history">0.5-2 mins</th><th class="transfer_history">2-5 mins</th><th class="transfer_history">5-10 mins</th><th class="transfer_history">10-15 mins</th><th class="transfer_history">15+ mins</th><th>Billable Perc.</th>
     </tr>
     <?
     foreach ($totals as $name=>$entry) {
@@ -177,6 +177,7 @@ if (isset($_GET['all_campaigns'])) {
         echo "<td class=\"transfer_history\">".count($group_300_to_600[$name])."</td>";
         echo "<td class=\"transfer_history\">".count($group_600_to_900[$name])."</td>";
         echo "<td class=\"transfer_history\">".count($group_900_plus[$name])."</td>";
+        echo "<td class=\"transfer_history\">".round(($billables[$name]/$entry)*100,2)."</td>";
         echo "</tr>";
         //print_pre($entry);
     }
@@ -239,7 +240,7 @@ if (isset($_GET['historical_campaign'])) {
     ?>
     <table class="transfer_history">
     <tr>
-    <th class="transfer_history">Campaign</th><th class="transfer_history">Total Xfers</th><th class="transfer_history">Billable Xfers</th><th class="transfer_history">Less than half min</th><th class="transfer_history">0.5-2 mins</th><th class="transfer_history">2-5 mins</th><th class="transfer_history">5-10 mins</th><th class="transfer_history">10-15 mins</th><th class="transfer_history">15+ mins</th></th>
+    <th class="transfer_history">Campaign</th><th class="transfer_history">Total Xfers</th><th class="transfer_history">Billable Xfers</th><th class="transfer_history">Less than half min</th><th class="transfer_history">0.5-2 mins</th><th class="transfer_history">2-5 mins</th><th class="transfer_history">5-10 mins</th><th class="transfer_history">10-15 mins</th><th class="transfer_history">15+ mins</th><th>Billable Perc.</th>
     </tr>
     <?
     foreach ($totals as $date=>$entry) {
@@ -253,6 +254,7 @@ if (isset($_GET['historical_campaign'])) {
         echo "<td class=\"transfer_history\">".count($group_300_to_600[$date])."</td>";
         echo "<td class=\"transfer_history\">".count($group_600_to_900[$date])."</td>";
         echo "<td class=\"transfer_history\">".count($group_900_plus[$date])."</td>";
+        echo "<td class=\"transfer_history\">".round(($billables[$date]/$entry)*100,2)."</td>";
         echo "</tr>";
         //print_pre($entry);
     }
