@@ -10,9 +10,9 @@ if ($handle = opendir('/var/spool/asterisk/monitor')) {
             //          echo "$file\n";
             $server = substr($file,0,5);
             $filename = $file;
-            $uniqueid = substr($filename, 6, strlen($filename)-10);
+            $uniqueid = substr($filename, 0, strlen($filename)-4);
             //echo "Server: $server Filename: $filename UniqueID: $uniqueid\n";
-            $result = mysql_query("INSERT IGNORE into recordings.files (filename, uniqueid, server) VALUES ('$filename','$uniqueid', '$server')");
+            $result = mysql_query("INSERT IGNORE into SineDialer.files (filename, uniqueid, server) VALUES ('$filename','$uniqueid', '$server')");
         }
     }
     closedir($handle);

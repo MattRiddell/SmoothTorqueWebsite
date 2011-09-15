@@ -110,13 +110,67 @@ if (isset($_GET['live_calls'])) {
 
 require "header.php";
 require "header_surveys.php";
-if (isset($_GET['recordings'])) {
-    box_start(400);
-    echo "<center><h3>Recordings</h3>";
-    $result = mysql_query("SELECT * FROM files, cdr WHERE files.uniqueid = cdr.uniqueid and files.uniqueid is not null") or die (mysql_error());
+if (isset($_GET['recordings_date'])) {
+    $result_campaigns = mysql_query("SELECT name, id FROM campaign");
     while ($row = mysqL_fetch_assoc($result)) {
-        print_pre($row);
+        $campaign_names[$row['id']] = $row['name'];
     }
+    $result = mysql_query("SELECT * FROM files, cdr WHERE files.uniqueid = cdr.uniqueid and cdr.uniqueid is not null and date(calldate) = ".sanitize($_POST['date'])) or die (mysql_error());
+    box_start(600);
+    ?>
+    <br />
+    <center>
+    <table class="recordings">
+    <tr>
+    <th class="recordings">Date/Time</th>
+    <th class="recordings">Server</th>
+    <th class="recordings">CLID</th>
+    <th class="recordings">Duration</th>
+    <th class="recordings">Phone Number</th>
+    <th class="recordings">Campaign</th>
+    </tr>
+    <?
+    while ($row = mysqL_fetch_assoc($result)) {
+        //print_pre($row);
+        $exploded = split("-",$row['userfield']);
+        
+        echo '<tr>';
+        echo '<td class="recordings">'.$row['calldate'].'</td>';
+        echo '<td class="recordings">'.$row['server'].'</td>';
+        echo '<td class="recordings">'.$row['clid'].'</td>';
+        echo '<td class="recordings">'.$row['duration'].'</td>';
+        echo '<td class="recordings">'.$exploded[0].'</td>';
+        echo '<td class="recordings">'.$campaign_names[$exploded[1]].'</td>';
+        echo '</tr>';
+    }
+    ?>
+    </table>
+    <br />
+    <?
+    box_end();
+    require "footer.php";
+    exit(0);
+}
+if (isset($_GET['recordings'])) {
+    box_start(500);
+    echo "<center><h3>Recordings</h3>";
+    $result = mysql_query("SELECT count(*) as count, date(calldate) as date FROM files, cdr WHERE files.uniqueid = cdr.uniqueid and cdr.uniqueid is not null group by date(calldate)") or die (mysql_error());
+    ?>
+    <form action = "transfer_report.php?recordings_date=1" method="post">
+    Please select a date:
+    <select name="date">
+    <?
+    while ($row = mysqL_fetch_assoc($result)) {
+        echo '<option value="'.$row['date'].'">'.$row['date'].' ('.$row['count'].' recordings)</option>';
+        //        print_pre($row);
+    }
+    ?>    
+    </select>
+    
+    <input type="submit" value="Select Date">
+    </form>
+    <br />    <br />
+    <?
     box_end();
     require "footer.php";
     exit(0);
@@ -305,10 +359,11 @@ box_start(250);
 echo "<center>";
 ?>
 <h3>Transfer Reports</h3>
-<a href="transfer_report.php?all_campaigns=1"><img src="images/folder.png">&nbsp;All Campaigns All Time</a><br /><br />
-<a href="transfer_report.php?all_campaigns=1&span=0"><img src="images/folder.png">&nbsp;All Campaigns Today</a><br /><br />
-<a href="transfer_report.php?all_campaigns=1&span=7"><img src="images/folder.png">&nbsp;All Campaigns Last 7 Days</a><br /><br />
-<a href="transfer_report.php?historical=1"><img src="images/calendar.png">&nbsp;Historical Transfers</a><br />
+<a href="transfer_report.php?all_campaigns=1&span=0"><img src="images/calendar_view_day.png">&nbsp;All Campaigns Today</a><br /><br />
+<a href="transfer_report.php?all_campaigns=1&span=7"><img src="images/calendar_view_week.png">&nbsp;All Campaigns Last 7 Days</a><br /><br />
+<a href="transfer_report.php?all_campaigns=1"><img src="images/calendar_view_month.png">&nbsp;All Campaigns All Time</a><br /><br />
+<a href="transfer_report.php?historical=1"><img src="images/folder_explore.png">&nbsp;Select Campaign</a><br /><br />
+<a href="transfer_report.php?recordings=1"><img src="images/sound.png">&nbsp;Call Recordings</a><br />
 <br />
 <?
 box_end();
