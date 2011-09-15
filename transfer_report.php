@@ -113,7 +113,7 @@ if (isset($_GET['get_recording'])) {
     require "functions/sanitize.php";
     $result = mysql_query("SELECT address FROM servers WHERE name = ".sanitize($_GET['server']));
     $address = mysql_result($result,0,0);
-    $cmd = exec("/usr/bin/scp ".$address.":/var/spool/asterisk/monitor/".sanitize($_GET['get_recording'].".wav")." /tmp/");
+    $cmd = exec("/usr/bin/scp root@".$address.":/var/spool/asterisk/monitor/".sanitize($_GET['get_recording'].".wav")." /tmp/");
     $filename = "/tmp/".$_GET['get_recording'].".wav";
     $fp = fopen($filename, 'rb');
     
