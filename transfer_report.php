@@ -117,8 +117,8 @@ if (isset($_GET['get_recording'])) {
     //$name = $_GET['get_recording'];
     $name = preg_replace('[^a-zA-Z0-9\.]', '', $_GET['get_recording']);
              
-    $cmd = exec("/usr/bin/scp root@".$address.":/var/spool/asterisk/monitor/".sanitize($_GET['get_recording'].".wav")." /tmp/");
-    $filename = "/tmp/".$_GET['get_recording'].".wav";
+    $cmd = exec("/usr/bin/scp root@".$address.":/var/spool/asterisk/monitor/".sanitize($name.".wav")." /tmp/");
+    $filename = "/tmp/".$name.".wav";
     $fp = fopen($filename, 'rb');
     
     // send the right headers
