@@ -640,6 +640,19 @@ if (!function_exists('create_missing_tables') ) {
             $result=mysql_query($sql, $link);
             
         }
+        
+        // Add missing uniqueid field
+        $result = mysql_query("SHOW COLUMNS FROM SineDialer.cdr");
+        $columns = mysql_num_rows($result) or die(mysql_error());
+        for ($i = 0; $i < $columns; $i++) {
+            $field_array[] = mysql_result($result, $i, "Field");
+        }
+        
+        if (!in_array('uniqueid', $field_array)) {
+            $result = mysql_query("ALTER TABLE `cdr` ADD `uniqueid` VARCHAR(32) NOT NULL default ''");
+        }
+        
+        
         //$fields = mysql_list_fields('SineDialer', 'number', $link) or die(mysql_error());
         $result = mysql_query("SHOW COLUMNS FROM SineDialer.number");
         $columns = mysql_num_rows($result) or die(mysql_error());
