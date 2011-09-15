@@ -166,7 +166,12 @@ if (isset($_GET['all_campaigns'])) {
     </tr>
     <?
     foreach ($totals as $name=>$entry) {
-        $campaign_name = mysql_result(mysql_query("SELECT name FROM campaign WHERE id = ".sanitize($name)),0,0);
+        $result = mysql_query("SELECT name FROM campaign WHERE id = ".sanitize($name));
+        if (mysql_num_rows($result) == 0) {
+            $campaign_name = "Unknown";
+        } else {
+            $campaign_name = mysql_result($result,0,0);
+        }
         echo "<tr>";
         echo "<td class=\"transfer_history\">$campaign_name</td>";
         echo "<td class=\"transfer_history\">".count($entry)."</td>";
