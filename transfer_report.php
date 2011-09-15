@@ -108,6 +108,24 @@ if (isset($_GET['live_calls'])) {
     exit(0);
 }
 
+if (isset($_GET['get_recording'])) {
+    require "admin/db_config.php";
+    require "functions/sanitize.php";
+    $result = mysql_query("SELECT address FROM servers WHERE name = ".sanitize($_GET['server']));
+    $address = mysql_result($result,0,0);
+    $cmd = exec("/usr/bin/scp ".$address.":/var/spool/asterisk/monitor/".sanitize($_GET['get_recording'].".wav")." /tmp/");
+    $filename = "/tmp/".$_GET['get_recording'].".wav";
+    $fp = fopen($filename, 'rb');
+    
+    // send the right headers
+    header("Content-Type: audio/wav");
+    header("Content-Length: " . filesize($filename));
+    
+    fpassthru($fp);
+
+    require "footer.php";
+    exit(0);
+}
 require "header.php";
 require "header_surveys.php";
 if (isset($_GET['recordings_date'])) {
