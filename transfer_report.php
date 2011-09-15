@@ -111,19 +111,18 @@ if (isset($_GET['live_calls'])) {
 require "header.php";
 require "header_surveys.php";
 if (isset($_GET['recordings_date'])) {
-    $result_campaigns = mysql_query("SELECT name, id FROM campaign");
-    while ($row = mysqL_fetch_assoc($result)) {
+    $result_campaigns = mysql_query("SELECT name, id FROM campaign") or die(mysql_error());
+    while ($row = mysqL_fetch_assoc($result_campaigns)) {
         $campaign_names[$row['id']] = $row['name'];
     }
     $result = mysql_query("SELECT * FROM files, cdr WHERE files.uniqueid = cdr.uniqueid and cdr.uniqueid is not null and date(calldate) = ".sanitize($_POST['date'])) or die (mysql_error());
-    box_start(600);
+    box_start(800);
     ?>
     <br />
     <center>
-    <table class="recordings">
+    <table class="recordings" width="90%">
     <tr>
     <th class="recordings">Date/Time</th>
-    <th class="recordings">Server</th>
     <th class="recordings">CLID</th>
     <th class="recordings">Duration</th>
     <th class="recordings">Phone Number</th>
@@ -135,11 +134,10 @@ if (isset($_GET['recordings_date'])) {
         $exploded = split("-",$row['userfield']);
         
         echo '<tr>';
-        echo '<td class="recordings">'.$row['calldate'].'</td>';
-        echo '<td class="recordings">'.$row['server'].'</td>';
+        echo '<td class="recordings"><a href="transfer_report.php?get_recording='.$row['uniqueid'].'&server='.$row['server'].'">'.$row['calldate'].'</a></td>';
         echo '<td class="recordings">'.$row['clid'].'</td>';
         echo '<td class="recordings">'.$row['duration'].'</td>';
-        echo '<td class="recordings">'.$exploded[0].'</td>';
+        echo '<td class="recordings">'.$exploded[0].'</td>';        
         echo '<td class="recordings">'.$campaign_names[$exploded[1]].'</td>';
         echo '</tr>';
     }
