@@ -1003,4 +1003,16 @@ td.transfer_history {
     padding: 5px;
 }
 
+td.live_cc {
+    border: 1px solid #ccc;
+    background: #fcc;
+    color: #000;
+    padding: 5px;
+}
 
+td.live_survey {
+    border: 1px solid #ccc;
+    background: #cfc;
+    color: #000;
+    padding: 5px;
+}

@@ -71,23 +71,36 @@ if (isset($_GET['live_calls'])) {
     <h3>Live Calls</h3>
     <table class="transfer_history">
     <tr>
-    <th class="transfer_history">CID Num</th><th class="transfer_history">Dest</th><th class="transfer_history">Created</th><th class="transfer_history">Duration</th><th class="transfer_history">Minutes</th><th class="transfer_history">Total Duration</th>
+    <th class="transfer_history">CID Num</th><th class="transfer_history">Dest</th><th class="transfer_history">Created</th><th class="transfer_history">Duration</th><th class="transfer_history">Bridged Minutes</th><th class="transfer_history">Total Minutes</th>
     </tr>
     <?
     if (count($channels) > 0) {
         foreach ($channels as $chan=>$values) {
-            if (1 || $values['context'] == "dial-cc") {
+            if ($values['context'] == "dial-cc") {
                 echo "<tr>";
-                echo "<td class=\"transfer_history\">$values[callerid]</td>";
-                echo "<td class=\"transfer_history\">$values[data]</td>";
+                echo "<td class=\"live_cc\">$values[callerid]</td>";
+                echo "<td class=\"live_cc\">$values[data]</td>";
                 $start = @mktime(@date("h"),@date("i"), @date("s")-$values['duration'], @date("m")  , @date("d"), @date("Y"));
                 $created = @Date("m/d/Y H:i:s",$start);
-                echo "<td class=\"transfer_history\">$created</td>";
+                echo "<td class=\"live_cc\">$created</td>";
                 
-                echo "<td class=\"transfer_history\">".$channels[$values['bridged']]['duration']."</td>";
-                echo "<td class=\"transfer_history\">".round($channels[$values['bridged']]['duration']/60,2)."</td>";
-                echo "<td class=\"transfer_history\">".$values['duration']."</td>";
+                echo "<td class=\"live_cc\">".$channels[$values['bridged']]['duration']."</td>";
+                echo "<td class=\"live_cc\">".round($channels[$values['bridged']]['duration']/60,2)."</td>";
+                echo "<td class=\"live_cc\">".$values['duration']."</td>";
                 echo "<tr>";
+            } else if ($values['data'] == "survey.php") {
+                echo "<tr>";
+                echo "<td class=\"live_survey\">$values[callerid]</td>";
+                echo "<td class=\"live_survey\">$values[data]</td>";
+                $start = @mktime(@date("h"),@date("i"), @date("s")-$values['duration'], @date("m")  , @date("d"), @date("Y"));
+                $created = @Date("m/d/Y H:i:s",$start);
+                echo "<td class=\"live_survey\">$created</td>";
+                
+                echo "<td class=\"live_survey\">".$channels[$values['bridged']]['duration']."</td>";
+                echo "<td class=\"live_survey\">".round($channels[$values['bridged']]['duration']/60,2)."</td>";
+                echo "<td class=\"live_survey\">".round($values['duration']/60,2)."</td>";
+                echo "<tr>";
+                
             }
         }
     }
@@ -113,7 +126,7 @@ if (isset($_GET['all_campaigns'])) {
     <script src="js/jquery.min.1.6.3.js" type="text/javascript"></script>
     
     <?
-    box_start(900);
+    box_start(1000);
     echo "<center><h3>All Campaigns</h3>";
     
     $totals = array();
@@ -183,7 +196,7 @@ if (isset($_GET['all_campaigns'])) {
         echo "<td class=\"transfer_history\">".count($group_600_to_900[$name])."</td>";
         echo "<td class=\"transfer_history\">".count($group_900_plus[$name])."</td>";
         $perc = round(count($billables[$name])/count($entry)*100,2);
-        echo "<td class=\"transfer_history\">".$perc."</td>";
+        echo "<td class=\"transfer_history\">".$perc."%</td>";
         echo "</tr>";
         //print_pre($entry);
     }
@@ -204,7 +217,7 @@ if (isset($_GET['all_campaigns'])) {
     
 }
 if (isset($_GET['historical_campaign'])) {
-    box_start(900);
+    box_start(1000);
     echo "<center><br />";
     echo "<h3>".mysql_result(mysql_query("SELECT name FROM campaign WHERE id = ".sanitize($_POST['campaign_id'])),0,0)."</h3>";
     
@@ -260,7 +273,7 @@ if (isset($_GET['historical_campaign'])) {
         echo "<td class=\"transfer_history\">".count($group_300_to_600[$date])."</td>";
         echo "<td class=\"transfer_history\">".count($group_600_to_900[$date])."</td>";
         echo "<td class=\"transfer_history\">".count($group_900_plus[$date])."</td>";
-        echo "<td class=\"transfer_history\">".round((count($billables[$date])/count($entry))*100,2)."</td>";
+        echo "<td class=\"transfer_history\">".round((count($billables[$date])/count($entry))*100,2)."%</td>";
         echo "</tr>";
         //print_pre($entry);
     }
