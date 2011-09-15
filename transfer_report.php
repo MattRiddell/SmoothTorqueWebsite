@@ -97,14 +97,24 @@ if (isset($_GET['live_calls'])) {
 
 require "header.php";
 require "header_surveys.php";
-
+if (isset($_GET['recordings'])) {
+    box_start(400);
+    echo "<center><h3>Recordings</h3>";
+    $result = mysql_query("SELECT * FROM files, cdr WHERE files.uniqueid = cdr.uniqueid and files.uniqueid is not null") or die (mysql_error());
+    while ($row = mysqL_fetch_assoc($result)) {
+        print_pre($row);
+    }
+    box_end();
+    require "footer.php";
+    exit(0);
+}
 if (isset($_GET['all_campaigns'])) {
     ?>
     <script src="js/jquery.min.1.6.3.js" type="text/javascript"></script>
     
     <?
     box_start(800);
-    echo "<center><br /><h3>All Campaigns</h3>";
+    echo "<center><h3>All Campaigns</h3>";
     
     $totals = array();
     $billables = array();
@@ -152,7 +162,7 @@ if (isset($_GET['all_campaigns'])) {
     ?>
     <table class="transfer_history">
     <tr>
-    <th class="transfer_history">Campaign</th><th class="transfer_history">Total Xfers</th><th class="transfer_history">Billable Xfers</th><th class="transfer_history">0-29 secs</th><th class="transfer_history">30-119 secs</th><th class="transfer_history">2-5 mins</th><th class="transfer_history">5-10 mins</th><th class="transfer_history">10-15 mins</th><th class="transfer_history">15+ mins</th></th>
+    <th class="transfer_history">Campaign</th><th class="transfer_history">Total Xfers</th><th class="transfer_history">Billable Xfers</th><th class="transfer_history">Less than half min</th><th class="transfer_history">0.5-2 mins</th><th class="transfer_history">2-5 mins</th><th class="transfer_history">5-10 mins</th><th class="transfer_history">10-15 mins</th><th class="transfer_history">15+ mins</th></th>
     </tr>
     <?
     foreach ($totals as $name=>$entry) {
@@ -229,7 +239,7 @@ if (isset($_GET['historical_campaign'])) {
     ?>
     <table class="transfer_history">
     <tr>
-    <th class="transfer_history">Date</th><th class="transfer_history">Total Xfers</th><th class="transfer_history">Billable Xfers</th><th class="transfer_history">0-29 secs</th><th class="transfer_history">30-119 secs</th><th class="transfer_history">2-5 mins</th><th class="transfer_history">5-10 mins</th><th class="transfer_history">10-15 mins</th><th class="transfer_history">15+ mins</th></th>
+    <th class="transfer_history">Campaign</th><th class="transfer_history">Total Xfers</th><th class="transfer_history">Billable Xfers</th><th class="transfer_history">Less than half min</th><th class="transfer_history">0.5-2 mins</th><th class="transfer_history">2-5 mins</th><th class="transfer_history">5-10 mins</th><th class="transfer_history">10-15 mins</th><th class="transfer_history">15+ mins</th></th>
     </tr>
     <?
     foreach ($totals as $date=>$entry) {
