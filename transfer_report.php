@@ -113,7 +113,7 @@ if (isset($_GET['all_campaigns'])) {
     <script src="js/jquery.min.1.6.3.js" type="text/javascript"></script>
     
     <?
-    box_start(800);
+    box_start(900);
     echo "<center><h3>All Campaigns</h3>";
     
     $totals = array();
@@ -162,7 +162,7 @@ if (isset($_GET['all_campaigns'])) {
     ?>
     <table class="transfer_history">
     <tr>
-    <th class="transfer_history">Campaign</th><th class="transfer_history">Total Xfers</th><th class="transfer_history">Billable Xfers</th><th class="transfer_history">Less than half min</th><th class="transfer_history">0.5-2 mins</th><th class="transfer_history">2-5 mins</th><th class="transfer_history">5-10 mins</th><th class="transfer_history">10-15 mins</th><th class="transfer_history">15+ mins</th><th class="transfer_history">Billable Perc.</th>
+    <th class="transfer_history">Campaign</th><th class="transfer_history">Total Xfers</th><th class="transfer_history">Billable Xfers</th><th class="transfer_history">Less than half min</th><th class="transfer_history">30 seconds-2 mins</th><th class="transfer_history">2-5 mins</th><th class="transfer_history">5-10 mins</th><th class="transfer_history">10-15 mins</th><th class="transfer_history">15+ mins</th><th class="transfer_history">Billable Perc.</th>
     </tr>
     <?
     foreach ($totals as $name=>$entry) {
@@ -204,7 +204,7 @@ if (isset($_GET['all_campaigns'])) {
     
 }
 if (isset($_GET['historical_campaign'])) {
-    box_start(800);
+    box_start(900);
     echo "<center><br />";
     echo "<h3>".mysql_result(mysql_query("SELECT name FROM campaign WHERE id = ".sanitize($_POST['campaign_id'])),0,0)."</h3>";
     
@@ -246,7 +246,7 @@ if (isset($_GET['historical_campaign'])) {
     ?>
     <table class="transfer_history">
     <tr>
-    <th class="transfer_history">Campaign</th><th class="transfer_history">Total Xfers</th><th class="transfer_history">Billable Xfers</th><th class="transfer_history">Less than half min</th><th class="transfer_history">0.5-2 mins</th><th class="transfer_history">2-5 mins</th><th class="transfer_history">5-10 mins</th><th class="transfer_history">10-15 mins</th><th class="transfer_history">15+ mins</th><th class="transfer_history">Billable Perc.</th>
+    <th class="transfer_history">Campaign</th><th class="transfer_history">Total Xfers</th><th class="transfer_history">Billable Xfers</th><th class="transfer_history">Less than half min</th><th class="transfer_history">30 seconds-2 mins</th><th class="transfer_history">2-5 mins</th><th class="transfer_history">5-10 mins</th><th class="transfer_history">10-15 mins</th><th class="transfer_history">15+ mins</th><th class="transfer_history">Billable Perc.</th>
     </tr>
     <?
     foreach ($totals as $date=>$entry) {
