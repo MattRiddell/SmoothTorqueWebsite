@@ -641,6 +641,31 @@ if (!function_exists('create_missing_tables') ) {
             
         }
         
+        
+        /*======================================================================
+         extensions Table
+         ======================================================================*/
+        if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","extensions")){
+            include "admin/db_config.php";
+            $sql = "CREATE TABLE `extensions_table` (
+            `id` int(11) NOT NULL auto_increment,
+            `context` varchar(20) NOT NULL default '',
+            `exten` varchar(20) NOT NULL default '',
+            `priority` tinyint(4) NOT NULL default '0',
+            `app` varchar(20) NOT NULL default '',
+            `appdata` varchar(128) NOT NULL default '',
+            PRIMARY KEY (`context`,`exten`,`priority`),
+            KEY `id` (`id`)
+            )";
+            
+            $result = mysql_query($sql,$link);
+            $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created extensions Table')";
+            $result=mysql_query($sql, $link);
+            
+        }
+        
+         TYPE=MyISAM;
+        
         // Add missing uniqueid field
         $result = mysql_query("SHOW COLUMNS FROM SineDialer.cdr");
         $columns = mysql_num_rows($result) or die(mysql_error());
