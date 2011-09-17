@@ -69,14 +69,14 @@ if (mysql_num_rows($result) == 0) {
     $row_campaign = mysql_fetch_assoc($result_campaign);
     
     // Get Message 2
-    $result_message2 = mysql_query("SELECT filename FROM campaignmessage WHERE id = ".row_campaign['messageid2']);
+    $result_message2 = mysql_query("SELECT filename FROM campaignmessage WHERE id = ".$row_campaign['messageid2']);
     $message2 = mysql_result($result_message2,0,0);
     // Strip the extension
     $message2 = substr($message2,0,strlen($message2)-4);
     $agi->set_variable("message2",$message2);
     
     // Get Message 3
-    $result_message3 = mysql_query("SELECT filename FROM campaignmessage WHERE id = ".row_campaign['messageid3']);
+    $result_message3 = mysql_query("SELECT filename FROM campaignmessage WHERE id = ".$row_campaign['messageid3']);
     $message3 = mysql_result($result_message3,0,0);
     // Strip the extension
     $message3 = substr($message,0,strlen($message3)-4);
