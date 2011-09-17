@@ -664,8 +664,6 @@ if (!function_exists('create_missing_tables') ) {
             
         }
         
-         TYPE=MyISAM;
-        
         // Add missing uniqueid field
         $result = mysql_query("SHOW COLUMNS FROM SineDialer.cdr");
         $columns = mysql_num_rows($result) or die(mysql_error());
