@@ -1,0 +1,80 @@
+#!/usr/bin/php -q
+<?
+require "phpagi.php";
+$agi = new AGI();
+$db_host = "127.0.0.1";
+$db_user = "user";
+$db_pass = "pass";
+$db_name = "DNC";
+ob_implicit_flush(true);
+set_time_limit(6);
+$in = fopen("php://stdin","r");
+
+// toggle debugging output (more verbose)
+$debug = false;
+
+function read() {
+    global $in, $debug, $stdlog;
+    $input = str_replace("\n", "", fgets($in, 4096));
+    if ($debug) fputs($stdlog, "read: $input\n");
+    return $input;
+}
+
+function errlog($line) {
+    global $err;
+    echo "VERBOSE \"$line\"\n";
+}
+
+function write($line) 
+{
+    global $debug, $stdlog;
+    if ($debug) fputs($stdlog, "write: $line\n");
+    echo $line."\n";
+}
+
+function a_echo($line) 
+{
+    echo "VERBOSE \"".$line."\" \n";
+    read();
+}
+
+// main program
+
+/* Connect to Database */
+$connection = mysql_connect($db_host,$db_user,$db_pass) or die("Error connecting to database");
+mysql_select_db($db_name, $connection);
+
+/* Set all the variables then go to start-survey 
+ * The only difference is that message 1 is a different one 
+ */
+$extension = $agi->agi_extension;
+a_echo("Extension: $extension");
+/*$result = mysql_query("SELECT ");
+
+
+
+
+
+$sql = "SELECT survey FROM campaign WHERE id = ".$campaign;
+$result = mysql_query($sql);
+
+a_echo("Executing SQL: $sql");
+
+$survey_id = mysql_result($result,0,0);
+a_echo("Got Survey ID: $survey_id");
+
+if (!($survey_id > 0)) {
+    a_echo("Survey ID missing - setting to 1");
+    $survey_id = 1;
+}
+
+a_echo("-----------------------------------");
+a_echo("SURVEY STARTING FOR $phonenumber");
+
+*/
+
+//setVal();
+fclose($in);
+fclose($stdlog);
+exit;
+?>
