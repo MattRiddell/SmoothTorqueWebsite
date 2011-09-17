@@ -83,8 +83,8 @@ if (mysql_num_rows($result) == 0) {
     $agi->set_variable("message3",$message3);
     
     // Get Destination DID
-    $trunk-did = "SIP/".$row_campaign['did']."@flowroute";
-    $agi->set_variable("trunk-did",$trunk-did);
+    $trunk_did = "SIP/".$row_campaign['did']."@flowroute";
+    $agi->set_variable("trunk-did",$trunk_did);
 
     
 }
