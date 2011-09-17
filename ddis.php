@@ -15,6 +15,10 @@ require "header.php";
 require "header_surveys.php";
 if (isset($_GET['save_new'])) {
     $sql = "INSERT INTO dids (number, message_id, campaign_id) VALUES (".sanitize($_POST['ddi_number']).",".sanitize($_POST['message_id']).",".sanitize($_POST['campaign_id']).")";
+    $result = mysql_query($sql);
+    ?><center><img src="images/progress.gif" border="0"><br />Adding DDI...
+    <META HTTP-EQUIV=REFRESH CONTENT="1; URL=ddis.php"><?
+
     require "footer.php";
     exit(0);
 }
