@@ -54,7 +54,39 @@ if (mysql_num_rows($result) == 0) {
     a_echo("DDI not found!");
 } else {
     $row = mysql_fetch_assoc($result);
-    a_echo("Intro: ".$row['messageid']." Campaign: ".$row['campaignid']);
+    a_echo("Intro: ".$row['message_id']." Campaign: ".$row['campaign_id']);
+    $agi->set_variable("campaign",$row['campaign_id']);
+    
+    // Get Message 1
+    $result_message = mysql_query("SELECT filename FROM campaignmessage WHERE id = ".$row['message_id']);
+    $message = mysql_result($result_message,0,0);
+    
+    // Strip the extension
+    $message = substr($message,0,strlen($message)-4);
+    $agi->set_variable("message",$message);
+    
+    $result_campaign = mysql_query("SELECT * FROM campaign WHERE id = ".$row['campaign_id']);
+    $row_campaign = mysql_fetch_assoc($result_campaign);
+    
+    // Get Message 2
+    $result_message2 = mysql_query("SELECT filename FROM campaignmessage WHERE id = ".row_campaign['messageid2']);
+    $message2 = mysql_result($result_message2,0,0);
+    // Strip the extension
+    $message2 = substr($message2,0,strlen($message2)-4);
+    $agi->set_variable("message2",$message2);
+    
+    // Get Message 3
+    $result_message3 = mysql_query("SELECT filename FROM campaignmessage WHERE id = ".row_campaign['messageid3']);
+    $message3 = mysql_result($result_message3,0,0);
+    // Strip the extension
+    $message3 = substr($message,0,strlen($message3)-4);
+    $agi->set_variable("message3",$message3);
+    
+    // Get Destination DID
+    $trunk-did = "SIP/".$row_campaign['did']."@flowroute";
+    $agi->set_variable("trunk-did",$trunk-did);
+
+    
 }
 
 
