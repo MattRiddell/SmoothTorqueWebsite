@@ -490,6 +490,26 @@ if (!function_exists('create_missing_tables') ) {
             $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created profracs Table')";
             $result=mysql_query($sql, $link);
         }
+        
+        /*======================================================================
+         dids Table
+         ======================================================================*/
+        if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","dids")){
+            include "admin/db_config.php";
+            $sql = "
+            CREATE TABLE `dids` (
+            `number` varchar(250) NOT NULL,
+            `message_id` int(11),
+            `campaign_id` int(11),
+            PRIMARY KEY  (`number`)
+            ) 
+            ";
+            
+            $result = mysql_query($sql,$link) or die(mysql_error());
+            $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created dids Table')";
+            $result=mysql_query($sql, $link);
+        }
+        
         /*======================================================================
          profracs Table
          ======================================================================*/
