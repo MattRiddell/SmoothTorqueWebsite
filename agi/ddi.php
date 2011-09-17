@@ -47,7 +47,7 @@ function a_echo($line)
 /* Set all the variables then go to start-survey 
  * The only difference is that message 1 is a different one 
  */
-$extension = $agi->request['agi_extension']
+$extension = $agi->request['agi_extension'];
 a_echo("Extension: $extension");
 /*$result = mysql_query("SELECT ");
 
