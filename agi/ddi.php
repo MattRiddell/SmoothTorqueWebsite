@@ -41,37 +41,22 @@ function a_echo($line)
 // main program
 
 /* Connect to Database */
-//$connection = mysql_connect($db_host,$db_user,$db_pass) or die("Error connecting to database");
-//mysql_select_db($db_name, $connection);
+$connection = mysql_connect($db_host,$db_user,$db_pass) or die("Error connecting to database");
+mysql_select_db($db_name, $connection);
 
 /* Set all the variables then go to start-survey 
  * The only difference is that message 1 is a different one 
  */
 $extension = $agi->request['agi_extension'];
 a_echo("Extension: $extension");
-/*$result = mysql_query("SELECT ");
-
-
-
-
-
-$sql = "SELECT survey FROM campaign WHERE id = ".$campaign;
-$result = mysql_query($sql);
-
-a_echo("Executing SQL: $sql");
-
-$survey_id = mysql_result($result,0,0);
-a_echo("Got Survey ID: $survey_id");
-
-if (!($survey_id > 0)) {
-    a_echo("Survey ID missing - setting to 1");
-    $survey_id = 1;
+$result = mysql_query("SELECT * FROM dids WHERE number = '".$extension."'");
+if (mysql_num_rows($result) == 0) {
+    a_echo("DDI not found!");
+} else {
+    $row = mysql_fetch_assoc($result);
+    a_echo("Intro: ".$row['messageid']." Campaign: ".$row['campaignid']);
 }
 
-a_echo("-----------------------------------");
-a_echo("SURVEY STARTING FOR $phonenumber");
-
-*/
 
 //setVal();
 fclose($in);
