@@ -47,6 +47,11 @@ if (isset($_GET['add'])) {
     require "footer.php";
     exit(0);
 }
+if (isset($_GET['delete'])) {
+    $result = mysql_query("DELETE FROM dids WHERE number = ".sanitize($_GET['delete']));
+    ?><center><img src="images/progress.gif" border="0"><br />Delete DDI...
+    <META HTTP-EQUIV=REFRESH CONTENT="1; URL=ddis.php"><?    
+}
 if (isset($_GET['save_edit'])) {
     //print_pre($_POST);
     $result = mysql_query("UPDATE dids SET number=".sanitize($_POST['ddi_number']).", message_id = ".sanitize($_POST['message_id']).", campaign_id = ".sanitize($_POST['campaign_id'])." WHERE number = ".sanitize($_POST['old_number']));
