@@ -1,5 +1,7 @@
 <?
 if (isset($_GET['live_cps'])) {
+	header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+	header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
     require "admin/db_config.php";
     $sql = "select campaign.name, campaign_stats.* from campaign, campaign_stats, queue where campaign_stats.campaignid=queue.campaignID and queue.status = 101 and campaign_stats.campaignid = campaign.id";
     $result = mysql_query($sql);
@@ -28,7 +30,9 @@ if (isset($_GET['live_cps'])) {
     echo "</table>";
     exit(0);
 }
-if (isset($_GET['live_calls'])) {
+if (isset($_GET['live_calls'])) {    
+	header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+	header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
     require "admin/db_config.php";
     $field[0] = "channel";
     $field[1] = "context";
@@ -306,6 +310,8 @@ if (isset($_GET['all_campaigns'])) {
     echo "</table>";
     
     ?>
+    <div id="channels">
+    </div>
     <div id="live_cps">
     </div>
     <div id="live_calls">
@@ -313,6 +319,8 @@ if (isset($_GET['all_campaigns'])) {
     <script>
     jQuery('#live_calls').load('transfer_report.php?live_calls=1');
     setInterval(function(){ jQuery('#live_calls').load('transfer_report.php?live_calls=1'); }, 5000);
+    jQuery('#channels').load('server_total.php?ajax=1&nobox=1');
+    setInterval(function(){ jQuery('#channels').load('server_total.php?ajax=1&nobox=1'); }, 5000);
     jQuery('#live_cps').load('transfer_report.php?live_cps=1');
     setInterval(function(){ jQuery('#live_cps').load('transfer_report.php?live_cps=1'); }, 2000);
     
