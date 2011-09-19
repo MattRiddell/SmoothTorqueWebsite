@@ -546,7 +546,7 @@ if ($interface_type == "broadcast") {
             ?>
             <link rel="stylesheet" type="text/css" href="<?=$http_dir_name?>css/style.css">
             <link rel="stylesheet" href="<?=$http_dir_name?>example.css" TYPE="text/css" MEDIA="screen">
-            <link rel="stylesheet" href="<?=$http_dir_name?>example-print.css" TYPE="text/css" MEDIA="print">
+            <?/*<link rel="stylesheet" href="<?=$http_dir_name?>example-print.css" TYPE="text/css" MEDIA="print">*/?>
             <link rel="stylesheet" type="text/css" href="<?=$http_dir_name?>css/default.css">
             <link rel="shortcut icon" href="<?=$http_dir_name?>favicon.ico">
             <!-- Javascript includes -->
