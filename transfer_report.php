@@ -95,7 +95,7 @@ if (isset($_GET['live_calls'])) {
                 $start = @mktime(@date("h"),@date("i"), @date("s")-$values['duration'], @date("m")  , @date("d"), @date("Y"));
                 $created = @Date("m/d/Y H:i:s",$start);
                 echo "<td class=\"live_survey\">$created</td>";
-                echo "<td class=\"live_cc\">".$values['accountcode']."</td>";
+                echo "<td class=\"live_survey\">".$values['accountcode']."</td>";
                 
                 echo "<td class=\"live_survey\">".$channels[$values['bridged']]['duration']."</td>";
                 echo "<td class=\"live_survey\">".round($channels[$values['bridged']]['duration']/60,2)."</td>";
