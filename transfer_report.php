@@ -23,7 +23,7 @@ if (isset($_GET['live_cps'])) {
     echo "<tr>";
     echo '<th class="transfer_history">Total</th>';
     echo '<th class="transfer_history">'.round($total['busy_agents']/$total['total_agents'],2).'</th>';
-    echo '<th class="transfer_history">'.$total['cps']).'</th>';
+    echo '<th class="transfer_history">'.$total['cps'].'</th>';
     echo "</tr>";
     echo "</table>";
     exit(0);
