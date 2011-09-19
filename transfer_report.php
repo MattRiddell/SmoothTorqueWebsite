@@ -21,8 +21,8 @@ if (isset($_GET['live_cps'])) {
         $total['cps']+=round(1000/$row['ms_sleep'],2);
     }
     echo "<tr>";
-    echo '<td class="transfer_history">Total</td>';
-    echo '<td class="transfer_history">'.round($total['busy_agents']/$total['total_agents'],2).'</td>';
+    echo '<th class="transfer_history">Total</th>';
+    echo '<th class="transfer_history">'.round($total['busy_agents']/$total['total_agents'],2).'</th>';
     echo '<th class="transfer_history">'.$total['cps'].'</th>';
     echo "</tr>";
     echo "</table>";
