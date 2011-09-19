@@ -71,7 +71,7 @@ if (isset($_GET['live_calls'])) {
     <h3>Live Calls</h3>
     <table class="transfer_history">
     <tr>
-    <th class="transfer_history">CID Num</th><th class="transfer_history">Dest</th><th class="transfer_history">Created</th><th class="transfer_history">Duration</th><th class="transfer_history">Bridged Minutes</th><th class="transfer_history">Total Minutes</th>
+    <th class="transfer_history">CID Num</th><th class="transfer_history">Dest</th><th class="transfer_history">Created</th><th class="transfer_history">Accountcode</th><th class="transfer_history">Duration</th><th class="transfer_history">Bridged Minutes</th><th class="transfer_history">Total Minutes</th>
     </tr>
     <?
     if (count($channels) > 0) {
@@ -83,7 +83,7 @@ if (isset($_GET['live_calls'])) {
                 $start = @mktime(@date("h"),@date("i"), @date("s")-$values['duration'], @date("m")  , @date("d"), @date("Y"));
                 $created = @Date("m/d/Y H:i:s",$start);
                 echo "<td class=\"live_cc\">$created</td>";
-                
+                echo "<td class=\"live_cc\">".$values['accountcode']."</td>";
                 echo "<td class=\"live_cc\">".$channels[$values['bridged']]['duration']."</td>";
                 echo "<td class=\"live_cc\">".round($channels[$values['bridged']]['duration']/60,2)."</td>";
                 echo "<td class=\"live_cc\">".$values['duration']."</td>";
@@ -95,6 +95,7 @@ if (isset($_GET['live_calls'])) {
                 $start = @mktime(@date("h"),@date("i"), @date("s")-$values['duration'], @date("m")  , @date("d"), @date("Y"));
                 $created = @Date("m/d/Y H:i:s",$start);
                 echo "<td class=\"live_survey\">$created</td>";
+                echo "<td class=\"live_cc\">".$values['accountcode']."</td>";
                 
                 echo "<td class=\"live_survey\">".$channels[$values['bridged']]['duration']."</td>";
                 echo "<td class=\"live_survey\">".round($channels[$values['bridged']]['duration']/60,2)."</td>";
