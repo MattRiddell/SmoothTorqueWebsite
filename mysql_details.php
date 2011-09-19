@@ -38,7 +38,7 @@ while ($row = mysql_fetch_assoc($result)){
         $uptime = sec2hms($row['Value']);
 		$uptime_s = $row['Value'];
     }
-    if ($row[Variable_name] == 'Connections') {
+    if ($row['Variable_name'] == 'Connections') {
         $connections = number_format($row['Value']);
     }
 }
