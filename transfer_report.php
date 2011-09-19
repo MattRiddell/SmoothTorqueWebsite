@@ -1,5 +1,33 @@
 <?
-
+if (isset($_GET['live_cps'])) {
+    require "admin/db_config.php";
+    $sql = "select campaign.name, campaign_stats.* from campaign, campaign_stats, queue where campaign_stats.campaignid=queue.campaignID and queue.status = 101 and campaign_stats.campaignid = campaign.id";
+    $result = mysql_query($sql);
+    ?>
+    <h3>Running Campaign Stats</h3>
+    <table class="transfer_history">
+    <tr>
+    <th class="transfer_history">Campaign</th><th class="transfer_history">Busy</th><th class="transfer_history">Calls Per Second</th>
+    </tr>
+    <?
+    while ($row = mysqL_fetch_assoc($result)) {
+        echo "<tr>";
+        echo '<th class="transfer_history">'.$row['name'].'</th>';
+        echo '<th class="transfer_history">'.round($row['busy_agents']/$row['total_agents'],2).'</th>';
+        echo '<th class="transfer_history">'.round($row['ms_sleep']/1000,2).'</th>';
+        echo "</tr>";
+        $total['busy_agents']+=$row['busy_agents'];
+        $total['total_agents']+=$row['total_agents'];
+        $total['cps']+=round($row['ms_sleep']/1000,2);
+    }
+    echo "<tr>";
+    echo '<th class="transfer_history">Total</th>';
+    echo '<th class="transfer_history">'.round($total['busy_agents']/$total['total_agents'],2).'</th>';
+    echo '<th class="transfer_history">'.$total['cps']).'</th>';
+    echo "</tr>";
+    echo "</table>";
+    exit(0);
+}
 if (isset($_GET['live_calls'])) {
     require "admin/db_config.php";
     $field[0] = "channel";
@@ -280,9 +308,13 @@ if (isset($_GET['all_campaigns'])) {
     ?>
     <div id="live_calls">
     </div>
+    <div id="live_cps">
+    </div>
     <script>
     jQuery('#live_calls').load('transfer_report.php?live_calls=1');
     setInterval(function(){ jQuery('#live_calls').load('transfer_report.php?live_calls=1'); }, 5000);
+    jQuery('#live_cps').load('transfer_report.php?live_cps=1');
+    setInterval(function(){ jQuery('#live_cps').load('transfer_report.php?live_cps=1'); }, 2000);
     
     </script>
     <?
