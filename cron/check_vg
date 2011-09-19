@@ -11,7 +11,7 @@ then
 #Run the process
 cd /SmoothTorque
 screen -dmS smoothtorque ./vg 
-/usr/bin/mysql -x 'update SineDialer.queue set status = 1 WHERE status = 101'
+/usr/bin/mysql -e 'update SineDialer.queue set status = 1 WHERE status = 101'
 echo "Started Process at `date`" >> $logfile
 else
 echo "Process is already Running with PID=$PID"
