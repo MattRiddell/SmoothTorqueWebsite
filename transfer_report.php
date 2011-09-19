@@ -325,9 +325,7 @@ if (isset($_GET['all_campaigns'])) {
     <script>
     jQuery('#live_calls').load('transfer_report.php?live_calls=1');
     setInterval(function(){ jQuery('#live_calls').load('transfer_report.php?live_calls=1'); }, 5000);
-    jQuery('#channels').load('server_total.php?ajax=1&nobox=1');
     setInterval(function(){ jQuery('#channels').load('server_total.php?ajax=1&nobox=1'); }, 5000);
-    jQuery('#live_cps').load('transfer_report.php?live_cps=1');
     setInterval(function(){ jQuery('#live_cps').load('transfer_report.php?live_cps=1'); }, 2000);
     
     </script>
