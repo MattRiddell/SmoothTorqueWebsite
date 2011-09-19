@@ -1345,7 +1345,6 @@ if (!function_exists('create_missing_tables') ) {
             $sql = "Create table `survey_results` (
             `campaign_id` int(10) unsigned,
             `phonenumber` varchar(1024) default NULL,
-            `phonenumber` varchar(1024) default NULL,
             `question` varchar(1024) default NULL,
             `datetime` timestamp NULL default NULL on update CURRENT_TIMESTAMP,
             `choice` varchar(1024) default NULL)";
