@@ -68,6 +68,10 @@ $sqlx = "SELECT messageid FROM campaign WHERE id=$_GET[id]";
 $result=mysql_query($sqlx, $link) or die (mysql_error());;
 $messageid=mysql_result($result,0,'messageid');
 
+$sqlx = "SELECT groupid FROM campaign WHERE id=$_GET[id]";
+$result_new_groupid=mysql_query($sqlx, $link) or die (mysql_error());;
+$new_group_id=mysql_result($result_new_groupid,0,0);
+
 $sqlx = "SELECT length FROM campaignmessage WHERE id=$messageid";
 $result=mysql_query($sqlx, $link) or die (mysql_error());;
 unset($length);
@@ -238,13 +242,16 @@ if (isset($_GET['drive_min'])) {
     $drive_max = "61.0";
 }
 
+$result_group_id = mysql_query("SELECT username FROM customer WHERE campaigngroupid = $new_group_id");
+$new_username = mysql_result($result_group_id,0,0);
+
 $sql2="INSERT INTO queue (campaignid,queuename,status,details,flags,transferclid,
     starttime,endtime,startdate,enddate,did,clid,context,maxcalls,maxchans,maxretries
     ,retrytime,waittime,trunk,astqueuename, accountcode, trunkid, customerID, maxcps, mode, expectedRate, drive_min, drive_max) VALUES
     ('$_GET[id]','autostart-$_GET[id]','1','No details','0','$_GET[trclid]',
     '00:00','23:59','2005-01-01','2020-01-01','$did','$_GET[clid]',
     '$_GET[context]','$_GET[agents]','$maxchans','0'
-    ,'0','30','".$dialstring."','$_GET[astqueuename]','stl-".$username."','$trunkid','$campaigngroupid','$maxcps','$mode', '$expected_rate','$drive_min','$drive_max') ";
+    ,'0','30','".$dialstring."','$_GET[astqueuename]','stl-".$new_username."','$trunkid','$campaigngroupid','$maxcps','$mode', '$expected_rate','$drive_min','$drive_max') ";
 //    echo $sql2;
 //exit(0);
 //echo $sql2;
