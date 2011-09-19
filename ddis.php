@@ -111,7 +111,12 @@ if (mysql_num_rows($result) > 0) {
         echo "<td class=\"transfer_history\">".'<a href="ddis.php?edit='.$row['number'].'">'.$row['number']."&nbsp;";
         echo '<img src="images/pencil.png">'."</td>";
         echo "</td>";
-        $message = mysql_result(mysql_query("SELECT name FROM campaignmessage WHERE id = ".$row['message_id']),0,0);
+        $result_message = mysql_query("SELECT name FROM campaignmessage WHERE id = ".$row['message_id']);
+        if (mysql_num_rows($result_message) > 0) {
+            $message = mysql_result($result_message,0,0);
+        } else {
+            $message = '<b>MISSING MESSAGE FILE</b>';
+        }
         echo "<td class=\"transfer_history\">".$message."</td>";
         $campaign = mysql_result(mysql_query("SELECT name FROM campaign WHERE id = ".$row['campaign_id']),0,0);
         echo "<td class=\"transfer_history\">".$campaign."</td>";
