@@ -13,8 +13,8 @@ if (isset($_GET['live_cps'])) {
     while ($row = mysqL_fetch_assoc($result)) {
         echo "<tr>";
         echo '<td class="transfer_history">'.$row['name'].'</td>';
-        echo '<td class="transfer_history">'.round($row['busy_agents']/$row['total_agents'],2).'</td>';
-        echo '<td class="transfer_history">'.round(1000/$row['ms_sleep']*100,2).'%</td>';
+        echo '<td class="transfer_history">'.round($row['busy_agents']/$row['total_agents']*100,2).'%</td>';
+        echo '<td class="transfer_history">'.round(1000/$row['ms_sleep'],2).'</td>';
         echo "</tr>";
         $total['busy_agents']+=$row['busy_agents'];
         $total['total_agents']+=$row['total_agents'];
