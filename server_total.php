@@ -59,9 +59,12 @@ echo "<br />";
 box_end();
 }*/
 
-box_start();
+if (!isset($_GET['nobox'])) {
+    box_start();
+}
 echo "<center>Total channels across all servers: <b>$tot</b></center>";;
-box_end();
-
+if (!isset($_GET['nobox'])) {
+    box_end();
+}
 
 ?>
