@@ -12,18 +12,18 @@ if (isset($_GET['live_cps'])) {
     <?
     while ($row = mysqL_fetch_assoc($result)) {
         echo "<tr>";
-        echo '<th class="transfer_history">'.$row['name'].'</th>';
-        echo '<th class="transfer_history">'.round($row['busy_agents']/$row['total_agents'],2).'</th>';
-        echo '<th class="transfer_history">'.round($row['ms_sleep']/1000,2).'</th>';
+        echo '<td class="transfer_history">'.$row['name'].'</td>';
+        echo '<td class="transfer_history">'.round($row['busy_agents']/$row['total_agents'],2).'</td>';
+        echo '<td class="transfer_history">'.round(1000/$row['ms_sleep'],2).'</td>';
         echo "</tr>";
         $total['busy_agents']+=$row['busy_agents'];
         $total['total_agents']+=$row['total_agents'];
-        $total['cps']+=round($row['ms_sleep']/1000,2);
+        $total['cps']+=round(1000/$row['ms_sleep'],2);
     }
     echo "<tr>";
-    echo '<th class="transfer_history">Total</th>';
-    echo '<th class="transfer_history">'.round($total['busy_agents']/$total['total_agents'],2).'</th>';
-    echo '<th class="transfer_history">'.$total['cps'].'</th>';
+    echo '<td class="transfer_history">Total</td>';
+    echo '<td class="transfer_history">'.round($total['busy_agents']/$total['total_agents'],2).'</td>';
+    echo '<td class="transfer_history">'.$total['cps'].'</td>';
     echo "</tr>";
     echo "</table>";
     exit(0);
@@ -306,9 +306,9 @@ if (isset($_GET['all_campaigns'])) {
     echo "</table>";
     
     ?>
-    <div id="live_calls">
-    </div>
     <div id="live_cps">
+    </div>
+    <div id="live_calls">
     </div>
     <script>
     jQuery('#live_calls').load('transfer_report.php?live_calls=1');
