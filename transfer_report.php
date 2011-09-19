@@ -310,7 +310,7 @@ if (isset($_GET['all_campaigns'])) {
     echo "</table>";
     
     ?>
-    <br />
+    <?/*<br />
     <table>
     <tr>
     <td class="transfer_history">
@@ -320,6 +320,7 @@ if (isset($_GET['all_campaigns'])) {
     <br />
     <div id="live_cps">
     </div>
+       */?>
     <div id="live_calls">
     </div>
     <script>
