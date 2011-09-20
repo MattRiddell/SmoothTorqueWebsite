@@ -291,7 +291,7 @@ if (isset($_GET['all_campaigns'])) {
     foreach ($totals as $name=>$entry) {
         $result = mysql_query("SELECT name FROM campaign WHERE id = ".sanitize($name));
         if (mysql_num_rows($result) == 0) {
-            $campaign_name = "Unknown";
+            $campaign_name = "Unknown (".sanitize($name).")";
         } else {
             $campaign_name = mysql_result($result,0,0);
         }
