@@ -34,8 +34,8 @@ if (isset($_GET['live_cps'])) {
     exit(0);
 }
 if (isset($_GET['live_calls'])) {    
-	header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
-	header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
+	//header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+	//header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
     require "admin/db_config.php";
     $field[0] = "channel";
     $field[1] = "context";
@@ -100,6 +100,8 @@ if (isset($_GET['live_calls'])) {
             }
             fclose($socket);
             
+        } else {
+            echo "Unable to connect to ".$row['name']."<br />";
         }
     }
     ?>
