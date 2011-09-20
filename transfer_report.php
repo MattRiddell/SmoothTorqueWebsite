@@ -24,6 +24,9 @@ if (isset($_GET['live_cps'])) {
     }
     echo "<tr>";
     echo '<th class="transfer_history">Total</th>';
+    if ($total['total_agents'] == 0) {
+        $total['total_agents'] = 1;
+    }
     echo '<th class="transfer_history">'.round($total['busy_agents']/$total['total_agents']*100,2).'%</th>';
     echo '<th class="transfer_history">'.$total['cps'].'</th>';
     echo "</tr>";
