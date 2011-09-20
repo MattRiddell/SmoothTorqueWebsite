@@ -83,9 +83,13 @@ if (mysql_num_rows($result) == 0) {
     $agi->set_variable("message3",$message3);
     
     // Get Destination DID
-    $trunk_did = "SIP/1".$row_campaign['did']."@flowroute";
+    $trunk_did = "SIP/1".$row_campaign['did']."@dialmaxx";
     $agi->set_variable("trunk-did",$trunk_did);
 
+    $result=$agi->get_variable("phonenumber");
+    $num=$result['data'];
+    $agi->set_variable("CDR(userfield)",$num."-".$row['campaign_id']);
+    
     
 }
 
