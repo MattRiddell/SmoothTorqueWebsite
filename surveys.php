@@ -196,7 +196,10 @@ if (isset($_GET['edit'])) {
         <?
         //$delete_link_part1 = "<A href=\x22#\x22 onclick=\x22$('#question_";
         //$delete_link_part2 = "').remove();\x22><img src=\x22images/delete.png\x22></a>";
-
+        $zero_result = mysql_query("SELECT * FROM survey_choices WHERE survey_id = ".$row['id']." AND question_number = 0");
+        if (mysql_num_rows($result) == 0) {
+            mysql_query("INSERT INTO survey_choices (survey_id, question_number) VALUES (".$row['id'].",)");
+        }
         $result_choices = mysql_query("SELECT * FROM survey_choices WHERE survey_id = ".$row['id']." order by question_number");
         if (mysql_num_rows($result_choices) > 0) {
             while ($row_choices = mysql_fetch_assoc($result_choices)) {
