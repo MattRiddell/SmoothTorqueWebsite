@@ -293,7 +293,7 @@ if (isset($_GET['all_campaigns'])) {
             $mins[trim($row_mins['accountcode'])] = $row_mins['sum(rounded_billsec)'];
         }
     }
-    //print_pre($mins);
+    print_pre($mins);
     ?>
     <table class="transfer_history">
     <tr>
