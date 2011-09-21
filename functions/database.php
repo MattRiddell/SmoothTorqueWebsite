@@ -1371,9 +1371,9 @@ if (!function_exists('create_missing_tables') ) {
         for ($i = 0; $i < $columns; $i++) {
             $field_array[] = mysql_result($result, $i, "Field");
         }		
-        if (!in_array('rounded_billsecs', $field_array)) {
-            $result = mysql_query('ALTER TABLE cdr ADD `rounded_billsecs` int(5) default NULL') or die(mysql_error());
-            $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added rounded_billsecs datetime field')";
+        if (!in_array('rounded_billsec', $field_array)) {
+            $result = mysql_query('ALTER TABLE cdr ADD `rounded_billsec` int(5) default NULL') or die(mysql_error());
+            $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added rounded_billsec datetime field')";
             $result=mysql_query($sql, $link);
         }   
         
