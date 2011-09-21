@@ -14,7 +14,7 @@ if (mysql_num_rows($result) > 0) {
             $x = 0;
         }
         echo $row['billsec']." = ";
-        echo (round(($row['billsec']/6)+(0.05), 1)*6)."\n";
+        echo (ceil($row['billsec']/6)*6)."\n";
         $x++;
         $z++;
     }
