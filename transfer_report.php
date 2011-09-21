@@ -290,7 +290,7 @@ if (isset($_GET['all_campaigns'])) {
     }
     if (mysql_num_rows($result_mins) > 0) {
         while ($row_mins = mysqL_fetch_assoc($result_mins)) {
-            $mins[trim($row_mins['accountcode'])] = $row_mins['sum(rounded_billsec)'];
+            $mins[strtolower(trim($row_mins['accountcode']))] = $row_mins['sum(rounded_billsec)'];
         }
     }
     print_pre($mins);
