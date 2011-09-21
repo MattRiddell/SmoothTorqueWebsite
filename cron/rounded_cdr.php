@@ -14,7 +14,7 @@ if (mysql_num_rows($result) > 0) {
             $x = 0;
         }
         echo $row['billsec']." = ";
-        echo $row['rounded'];
+        echo $row['rounded']."\n";
         //echo (ceil($row['billsec']/6)*6)."\n";
         //$result_new = mysql_query("UPDATE SineDialer.cdr SET rounded_billsec = 
         $x++;
