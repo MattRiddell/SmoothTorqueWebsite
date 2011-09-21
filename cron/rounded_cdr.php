@@ -4,7 +4,7 @@ $db_host = "localhost";
 $db_user = "root";
 $db_pass = "";
 mysql_connect($db_host, $db_user, $db_pass);
-$result = mysql_query("SELECT * FROM SineDialer.cdr WHERE rounded_billsec is NULL limit 20000");
+$result = mysql_query("SELECT billsec, (CEILING(billsec/6)*6) as rounded FROM SineDialer.cdr WHERE rounded_billsec is NULL limit 20000");
 if (mysql_num_rows($result) > 0) {
     $x = 1000;
     $z = 0;
@@ -14,7 +14,9 @@ if (mysql_num_rows($result) > 0) {
             $x = 0;
         }
         echo $row['billsec']." = ";
-        echo (ceil($row['billsec']/6)*6)."\n";
+        echo $row['rounded'];
+        //echo (ceil($row['billsec']/6)*6)."\n";
+        //$result_new = mysql_query("UPDATE SineDialer.cdr SET rounded_billsec = 
         $x++;
         $z++;
     }
