@@ -290,7 +290,7 @@ if (isset($_GET['all_campaigns'])) {
     }
     if (mysql_num_rows($result_mins) > 0) {
         while ($row_mins = mysqL_fetch_assoc($result_mins)) {
-            $mins[$row_mins['accountcode']] = $row_mins['sum(rounded_billsec)'];
+            $mins[trim($row_mins['accountcode'])] = $row_mins['sum(rounded_billsec)'];
         }
     }
     print_pre($mins);
@@ -309,7 +309,7 @@ if (isset($_GET['all_campaigns'])) {
             $campaign_name = mysql_result($result,0,0);
             $groupid = mysql_result($result,0,1);
             $result2 = mysql_query("SELECT username FROM customer WHERE campaigngroupid = ".sanitize($groupid));        
-            $mins_text = number_format($mins[strtolower("stl-".mysql_result($result2,0,0))]/60)." (".mysql_result($result2,0,0).")";
+            $mins_text = number_format($mins[trim(strtolower("stl-".mysql_result($result2,0,0)))]/60)." (".mysql_result($result2,0,0).")";
         }
         
         echo "<tr>";
