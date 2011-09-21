@@ -4,15 +4,17 @@ $db_host = "localhost";
 $db_user = "root";
 $db_pass = "";
 mysql_connect($db_host, $db_user, $db_pass);
-$result = mysql_query("SELECT * FROM SineDialer.cdr WHERE rounded_billsec is NULL");
+$result = mysql_query("SELECT * FROM SineDialer.cdr WHERE rounded_billsec is NULL limit 20000");
 if (mysql_num_rows($result) > 0) {
-    $x = 0;
+    $x = 1000;
     $z = 0;
     while ($row = mysql_fetch_assoc($result)) {
-        if ($x == 0) {
+        if ($x > 999) {
             echo "Processing Row $z of ".mysql_num_rows($result)."\n";
+            $x = 0;
         }
-        echo $row['billsec']."\n";
+        echo $row['billsec']." = ";
+        echo round($row['billsec']/6,1,PHP_ROUND_HALF_UP)."\n";
         $x++;
         $z++;
     }
