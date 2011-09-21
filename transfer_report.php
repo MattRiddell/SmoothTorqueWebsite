@@ -308,8 +308,11 @@ if (isset($_GET['all_campaigns'])) {
         } else {
             $campaign_name = mysql_result($result,0,0);
             $groupid = mysql_result($result,0,1);
+            echo "<tr><td>$groupid </td></tr>";
             $result2 = mysql_query("SELECT * FROM customer WHERE campaigngroupid = ".sanitize($groupid));        
+            echo "<tr><td>"SELECT * FROM customer WHERE campaigngroupid = ".sanitize($groupid)."</td></tr>";
             $mins_text = ($mins["stl-".mysql_result($result2,0,0)]/60);
+            echo "<tr><td>"."stl-".mysql_result($result2,0,0)."</td></tr>";
         }
         
         echo "<tr>";
