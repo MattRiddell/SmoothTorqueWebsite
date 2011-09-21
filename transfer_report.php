@@ -301,13 +301,17 @@ if (isset($_GET['all_campaigns'])) {
     </tr>
     <?
     foreach ($totals as $name=>$entry) {
-        $result = mysql_query("SELECT name FROM campaign WHERE id = ".sanitize($name));
+        $result = mysql_query("SELECT name, groupid FROM campaign WHERE id = ".sanitize($name));
         if (mysql_num_rows($result) == 0) {
             $campaign_name = "Unknown (".sanitize($name).")";
+            $mins_text = ($mins[""]/60);
         } else {
             $campaign_name = mysql_result($result,0,0);
+            $groupid = mysql_result($result,0,1);
+            $result2 = mysql_query("SELECT * FROM customer WHERE campaigngroupid = ".sanitize($groupid));        
+            $mins_text = ($mins["st-".mysql_result($result2,0,0)]/60);
         }
-        $mins_text = ($mins[$name]/60);
+        
         echo "<tr>";
         echo "<td class=\"transfer_history\">$campaign_name</td>";
         echo "<td class=\"transfer_history\">".count($entry)."</td>";
