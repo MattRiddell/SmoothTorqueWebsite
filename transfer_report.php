@@ -309,7 +309,7 @@ if (isset($_GET['all_campaigns'])) {
             $campaign_name = mysql_result($result,0,0);
             $groupid = mysql_result($result,0,1);
             $result2 = mysql_query("SELECT username FROM customer WHERE campaigngroupid = ".sanitize($groupid));        
-            $mins_text = ($mins["stl-".mysql_result($result2,0,0)]/60);
+            $mins_text = ($mins["stl-".mysql_result($result2,0,0)]/60)." (".mysql_result($result2,0,0)].")";
         }
         
         echo "<tr>";
@@ -324,7 +324,7 @@ if (isset($_GET['all_campaigns'])) {
         echo "<td class=\"transfer_history\">".count($group_900_plus[$name])."</td>";
         $perc = round(count($billables[$name])/count($entry)*100,2);
         echo "<td class=\"transfer_history\">".$perc."%</td>";
-        echo "<td class=\"transfer_history\">".$mins_text."%</td>";
+        echo "<td class=\"transfer_history\">".$mins_text."</td>";
         echo "</tr>";
         //print_pre($entry);
     }
