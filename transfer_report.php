@@ -141,6 +141,8 @@ if (isset($_GET['live_calls'])) {
                 
             }
         }
+    } else {
+        echo "No channels";
     }
     echo "</table>";
     exit(0);
@@ -252,8 +254,11 @@ if (isset($_GET['all_campaigns'])) {
     
     if (isset($_GET['span'])) {
         $result = mysql_query("SELECT userfield, billsec FROM cdr WHERE amaflags = '-1' AND calldate >= DATE_SUB(CURDATE(), INTERVAL ".sanitize($_GET['span'])." DAY)") or die(mysql_error());
+        
+        $result_mins = mysql_query("SELECT accountcode, sum(rounded_billsec) FROM cdr WHERE amaflags != '-1' AND calldate >= DATE_SUB(CURDATE(), INTERVAL ".sanitize($_GET['span'])." DAY) group by accountcode") or die(mysql_error());
     } else {
         $result = mysql_query("SELECT userfield, billsec FROM cdr WHERE amaflags = '-1'");
+        $result_mins = mysql_query("SELECT accountcode, sum(rounded_billsec) FROM cdr WHERE amaflags != '-1' group by accountcode");
     }
     
     if (mysql_num_rows($result) > 0) {
@@ -283,11 +288,16 @@ if (isset($_GET['all_campaigns'])) {
             }
         }
     }
+    if (mysql_num_rows($result_mins) > 0) {
+        while ($row_mins = mysqL_fetch_assoc($result_mins)) {
+            $mins[$row_mins['accountcode']] = $row_mins['sum(rounded_billsec)'];
+        }
+    }
     //print_pre($totals);
     ?>
     <table class="transfer_history">
     <tr>
-    <th class="transfer_history">Campaign</th><th class="transfer_history">Total Xfers</th><th class="transfer_history">Billable Xfers</th><th class="transfer_history">Less than half min</th><th class="transfer_history">30 seconds-2 mins</th><th class="transfer_history">2-5 mins</th><th class="transfer_history">5-10 mins</th><th class="transfer_history">10-15 mins</th><th class="transfer_history">15+ mins</th><th class="transfer_history">Billable Perc.</th>
+    <th class="transfer_history">Campaign</th><th class="transfer_history">Total Xfers</th><th class="transfer_history">Billable Xfers</th><th class="transfer_history">< half min</th><th class="transfer_history">30 secs-2 mins</th><th class="transfer_history">2-5 mins</th><th class="transfer_history">5-10 mins</th><th class="transfer_history">10-15 mins</th><th class="transfer_history">15+ mins</th><th class="transfer_history">Billable Perc.</th><th class="transfer_history">Minutes</th>
     </tr>
     <?
     foreach ($totals as $name=>$entry) {
@@ -297,6 +307,7 @@ if (isset($_GET['all_campaigns'])) {
         } else {
             $campaign_name = mysql_result($result,0,0);
         }
+        $mins_text = ($mins[$name]/60);
         echo "<tr>";
         echo "<td class=\"transfer_history\">$campaign_name</td>";
         echo "<td class=\"transfer_history\">".count($entry)."</td>";
@@ -309,6 +320,7 @@ if (isset($_GET['all_campaigns'])) {
         echo "<td class=\"transfer_history\">".count($group_900_plus[$name])."</td>";
         $perc = round(count($billables[$name])/count($entry)*100,2);
         echo "<td class=\"transfer_history\">".$perc."%</td>";
+        echo "<td class=\"transfer_history\">".$mins_text."%</td>";
         echo "</tr>";
         //print_pre($entry);
     }
