@@ -1378,6 +1378,22 @@ if (!function_exists('create_missing_tables') ) {
         }   
         
         /*======================================================================
+         historic_cps Table
+         ======================================================================*/
+        if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","historic_cps")){
+            include "admin/db_config.php";
+            $sql = "CREATE TABLE `historic_cps` (
+            `record_timestamp` timestamp NULL default CURRENT_TIMESTAMP,
+            `campaign_id` int(11) default NULL,
+            `cps` varchar(5) default NULL
+            )";
+            $result = mysql_query($sql,$link) or die(mysql_error());
+            $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created historic_cps Table')";
+            $result=mysql_query($sql, $link);
+            
+        }
+        
+        /*======================================================================
          timezones Table
          ======================================================================*/
         if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","time_zones")){
