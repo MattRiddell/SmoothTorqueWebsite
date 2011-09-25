@@ -665,7 +665,7 @@ if (!function_exists('create_missing_tables') ) {
         /*======================================================================
          extensions Table
          ======================================================================*/
-        if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","extensions")){
+        if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","extensions_table")){
             include "admin/db_config.php";
             $sql = "CREATE TABLE `extensions_table` (
             `id` int(11) NOT NULL auto_increment,
