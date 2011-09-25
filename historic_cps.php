@@ -12,7 +12,7 @@ while (1) {
             $result = mysql_query("INSERT INTO historic_cps (camapign_id, cps) VALUES (".sanitize($row['id']).",".sanitize((1000/$row['ms_sleep'])).")");
         }
         echo "Total: ".$total['cps']."\n";
-        $result = mysql_query("INSERT INTO historic_cps (camapign_id, cps) VALUES (0,".sanitize($total['cps']).")");
+        $result_new = mysql_query("INSERT INTO historic_cps (camapign_id, cps) VALUES (0,".sanitize($total['cps']).")");
     }
     sleep(10);
 }
