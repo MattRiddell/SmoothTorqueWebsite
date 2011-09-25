@@ -16,6 +16,7 @@ while (1) {
         $result_new = mysql_query("INSERT INTO historic_cps (campaign_id, cps) VALUES (0,".sanitize($total['cps']).")");
     } else {
         echo "-- No campaigns running --\n";
+        $result_new = mysql_query("INSERT INTO historic_cps (campaign_id, cps) VALUES (0,0)");
     }
     sleep(10);
 }
