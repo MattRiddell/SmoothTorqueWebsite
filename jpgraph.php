@@ -646,15 +646,15 @@ class DateLocale {
 
 	$this->iLocale = $aLocale;
 
-	for ( $i = 0, $ofs = 0 - strftime('%w'); $i < 7; $i++, $ofs++ ){
-	    $day = strftime('%a', strtotime("$ofs day"));
+	for ( $i = 0, $ofs = 0 - @strftime('%w'); $i < 7; $i++, $ofs++ ){
+	    $day = @strftime('%a', @strtotime("$ofs day"));
 	    $day{0} = strtoupper($day{0});
 	    $this->iDayAbb[$aLocale][]= $day{0};
 	    $this->iShortDay[$aLocale][]= $day;
 	}
 
 	for($i=1; $i<=12; ++$i) {
-	    list($short ,$full) = explode('|', strftime("%b|%B",strtotime("2001-$i-01")));
+	    list($short ,$full) = explode('|', @strftime("%b|%B",@strtotime("2001-$i-01")));
 	    $this->iShortMonth[$aLocale][] = ucfirst($short);
 	    $this->iMonthName [$aLocale][] = ucfirst($full);
 	}
@@ -4412,7 +4412,7 @@ class LinearTicks extends Ticks {
 		elseif( $this->label_formatstr != '' )
 		    $l = sprintf($this->label_formatstr,$label);
 		elseif( $this->label_dateformatstr != '' ) {
-		    $l = date($this->label_dateformatstr,$label);
+		    $l = @date($this->label_dateformatstr,$label);
 		}
 		else {
 		    $v = round($label,$precision);

@@ -148,8 +148,8 @@ class DateScale extends LinearScale {
 //------------------------------------------------------------------------------------------
 
     function AdjTime($aTime,$aRound=0,$aHourType=false,$aMinType=false,$aSecType=false) {
-	$y = (int)date('Y',$aTime); $m = (int)date('m',$aTime); $d = (int)date('d',$aTime);
-	$h = (int)date('H',$aTime); $i = (int)date('i',$aTime); $s = (int)date('s',$aTime);
+	$y = (int)@date('Y',$aTime); $m = (int)@date('m',$aTime); $d = (int)@date('d',$aTime);
+	$h = (int)@date('H',$aTime); $i = (int)@date('i',$aTime); $s = (int)@date('s',$aTime);
 	if( $aHourType !== false ) {
 	    $aHourType %= 6;
 	    $hourAdj = array(0=>1, 1=>2, 2=>3, 3=>4, 4=>6, 5=>12);
@@ -203,7 +203,7 @@ class DateScale extends LinearScale {
 		}
 	    }
 	}
-	return mktime($h,$i,$s,$m,$d,$y);
+	return @mktime($h,$i,$s,$m,$d,$y);
     }
 
 //------------------------------------------------------------------------------------------
