@@ -225,9 +225,9 @@ if (!function_exists('create_missing_tables') ) {
             $field_array[] = mysql_result($result, $i, "Field");
         }
         
-        if (!in_array('MENU_SURVEYS', $field_array)) {
+        if (!in_array('menu_surveys', $field_array)) {
             $result = mysql_query('ALTER TABLE web_config ADD MENU_SURVEYS varchar(250)') or die(mysql_error());
-            $result = mysql_query('UPDATE web_config SET MENU_SURVEYS = "Surveys"') or die(mysql_error());            
+            $result = mysql_query('UPDATE web_config SET menu_surveys = "Surveys"') or die(mysql_error());            
             $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added web_config MENU_SURVEYS field')";
 
         }
