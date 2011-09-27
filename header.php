@@ -557,7 +557,6 @@ if ($interface_type == "broadcast") {
             <body bgcolor="<?echo $config_values['COLOUR'];?>" >
             
             <?
-            if (strlen($config_values['
             if (isset($menu) && $loggedin == true){
                 $sql = 'SELECT value FROM config WHERE parameter=\'logo_width\'';
                 $result=mysql_query($sql, $link) or die (mysql_error());
