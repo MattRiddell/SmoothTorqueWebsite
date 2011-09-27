@@ -259,13 +259,13 @@
         $config_values['MENU_TIMEZONES'] = "Timezones";
     }
     
-    /*$sql = 'SELECT value FROM config WHERE parameter=\'MENU_SURVEYS\'';
+    $sql = 'SELECT value FROM config WHERE parameter=\'MENU_SURVEYS\'';
     $result=mysql_query($sql, $link) or die (mysql_error());
     if (mysql_num_rows($result) > 0) {
         $config_values['MENU_SURVEYS'] = mysql_result($result,0,'value');
     } else {
         $config_values['MENU_SURVEYS'] = "Surveys";
-    }*/
+    }
     
     
     $sql = 'SELECT value FROM config WHERE parameter=\'sugar_user\'';
@@ -557,6 +557,7 @@ if ($interface_type == "broadcast") {
             <body bgcolor="<?echo $config_values['COLOUR'];?>" >
             
             <?
+            if (strlen($config_values['
             if (isset($menu) && $loggedin == true){
                 $sql = 'SELECT value FROM config WHERE parameter=\'logo_width\'';
                 $result=mysql_query($sql, $link) or die (mysql_error());
