@@ -207,6 +207,10 @@
     unset($result_config);
     unset($header_row);
     
+    if (!isset($config_values['MENU_SURVEY'])) {
+        $config_values['MENU_SURVEY'] = "Surveys";
+    }
+    
     /* Check all connections are ok */
     create_missing_tables($db_host,$db_user,$db_pass);
     
