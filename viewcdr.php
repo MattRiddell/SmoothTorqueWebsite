@@ -12,7 +12,7 @@ To: <input name="enddate">
     <input type=button value="select" onclick="displayDatePicker('enddate', false, 'ymd', '-');"><BR>
     <?
     if (isset($_GET['all'])) {
-        ?><input type="hidden" name="all" value="1>"><?    
+        ?><input type="hidden" name="all" value="1"><?    
     } 
     ?>
     <?if (isset($_GET[accountcode])) {?>
