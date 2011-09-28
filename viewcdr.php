@@ -1,9 +1,23 @@
 <?
 require "header.php";
 if (!isset($_GET[startdate])){
+    box_start(400);
+    ?>
+    <center>  
+    <h3>Call Detail Records</h3>
+    <?
+    if (isset($_GET['all'])) {
+        ?>
+        <a href="viewcdr.php?startdate=<?=@Date("Y-m-d")?>&enddate=<?=@Date("Y-m-d")?>&all=1">View records for today</a><br />
+        <?
+    } else {
+        ?>
+        <a href="viewcdr.php?startdate=<?=@Date("Y-m-d")?>&enddate=<?=@Date("Y-m-d")?>">View records for today</a><br />
+        <?
+    }
     ?>
     <br />
-    Please select the dates you would like to view:<br />
+    Alternatively select the dates you would like to view:<br />
     <br />
     <form action="viewcdr.php">
 From: <input name="startdate">
@@ -21,6 +35,7 @@ To: <input name="enddate">
     <input type="submit" value="Select">
     </form>
     <?
+    box_end();
 } else {
     $startdate = $_GET[startdate];
     $enddate = $_GET[enddate];
@@ -308,7 +323,7 @@ To: <input name="enddate">
                 if ($config_values['CDR_USE_STATE'] == "YES") {
                     echo $td.$state[$i]."</td>";
                 }
-
+                
                 echo "$td".$accountcode[$i]."</td>$td".$phonenumber[$i]."</b></td>$td<b>".$dst[$i]."</b></td>";
                 echo "</tr>";
             } else {
@@ -320,7 +335,7 @@ To: <input name="enddate">
                 if ($config_values['CDR_USE_STATE'] == "YES") {
                     echo $td.$state[$i]."</td>";
                 }
-
+                
                 echo "$td".$accountcode[$i]."</td>$td".$phonenumber[$i]."</b></td>$td<b>".$dst[$i]."</b></td>";
                 echo $td.$currency.$costperminute[$i]."</td>".$td.$currency.$costpercall[$i]."</td>".
                 $td.$currency.$costperconnect[$i]."</td>".$td.$currency.$costperpress1[$i]."</td>".$td.$currency.$cost[$i]."</td>".$paid[$i]."</td>";
