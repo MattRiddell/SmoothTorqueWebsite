@@ -40,15 +40,19 @@ To: <input name="enddate">
     }
     $cdrlink = mysql_connect($db_host, $db_user, $db_pass) OR die(mysql_error());
     mysql_select_db($config_values['CDR_DB'], $cdrlink);
-    
-    if (isset($_GET['all'])&&$_GET['all'] == "1") {
-        $sql = "SELECT count(*) from ".$config_values['CDR_TABLE']." WHERE calldate between '".$_GET['startdate']." 00:00:00' and '".$_GET['enddate']." 23:59:59' and dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!=''";
+    if (!isset($_GET['count'])) {
+        if (isset($_GET['all'])&&$_GET['all'] == "1") {
+            $sql = "SELECT count(*) from ".$config_values['CDR_TABLE']." WHERE calldate between '".$_GET['startdate']." 00:00:00' and '".$_GET['enddate']." 23:59:59' and dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!=''";
+        } else {
+            $sql = "SELECT count(*) from ".$config_values['CDR_TABLE']." WHERE calldate between '".$_GET['startdate']." 00:00:00' and '".$_GET['enddate']." 23:59:59' and dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode_in'";
+            $_GET['all'] = 0;
+        }
+        
+        $result = mysql_query($sql,$cdrlink);
+        $count = mysql_result($result,0,0);
     } else {
-        $sql = "SELECT count(*) from ".$config_values['CDR_TABLE']." WHERE calldate between '".$_GET['startdate']." 00:00:00' and '".$_GET['enddate']." 23:59:59' and dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode_in'";
-        $_GET['all'] = 0;
+        $count = $_GET['count'];
     }
-    $result = mysql_query($sql,$cdrlink);
-    $count = mysql_result($result,0,0);
     //echo $count." Total Records";
     $page = $_GET[page];
     if ($_GET[page]>0) {
@@ -56,9 +60,9 @@ To: <input name="enddate">
     } else {
         $start = 0;
     }
-    echo '<a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page=0&accountcode='.$accountcode_in.'&all='.$_GET['all'].'"><img src="images/resultset_first.png" border="0"></a> ';
+    echo '<a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page=0&accountcode='.$accountcode_in.'&all='.$_GET['all'].'&count='.$count.'"><img src="images/resultset_first.png" border="0"></a> ';
     if ($page > 0) {
-        echo '<a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page='.($page-1).'&accountcode='.$accountcode_in.'&all='.$_GET['all'].'"><img src="images/resultset_previous.png" border="0"></a> ';
+        echo '<a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page='.($page-1).'&accountcode='.$accountcode_in.'&all='.$_GET['all'].'&count='.$count.'"><img src="images/resultset_previous.png" border="0"></a> ';
     }
     if ($page > 5) {
         $pagex= $page-4;
@@ -70,13 +74,13 @@ To: <input name="enddate">
             if ($page == $i) {
                 echo "<b>$i</b> ";
             } else {
-                echo '<a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page='.$i.'&accountcode='.$accountcode_in.'&all='.$_GET['all'].'">'.$i.'</a> ';
+                echo '<a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page='.$i.'&accountcode='.$accountcode_in.'&all='.$_GET['all'].'&count='.$count.'">'.$i.'</a> ';
             }
         }
     }
     
-    echo '<a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page='.($page+1).'&accountcode='.$accountcode_in.'&all='.$_GET['all'].'"><img src="images/resultset_next.png" border="0"></a> ';
-    echo '<a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page='.round($count/20).'&accountcode='.$accountcode_in.'&all='.$_GET['all'].'"><img src="images/resultset_last.png" border="0"></a> ';
+    echo '<a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page='.($page+1).'&accountcode='.$accountcode_in.'&all='.$_GET['all'].'&count='.$count.'"><img src="images/resultset_next.png" border="0"></a> ';
+    echo '<a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page='.round($count/20).'&accountcode='.$accountcode_in.'&all='.$_GET['all'].'&count='.$count.'"><img src="images/resultset_last.png" border="0"></a> ';
     //$sql = "SELECT * from ".$config_values['CDR_TABLE']." order by calldate DESC LIMIT $start,20";
     if (isset($_GET['all'])&&$_GET['all'] == "1") {
         $sql = "SELECT * from ".$config_values['CDR_TABLE']." WHERE calldate between '".$_GET['startdate']." 00:00:00' and '".$_GET['enddate']." 23:59:59' and dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' order by calldate DESC LIMIT $start,20";
