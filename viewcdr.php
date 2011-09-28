@@ -195,7 +195,7 @@ To: <input name="enddate">
                 $priceperpress1[$accountcode[$i]] = mysql_result($resultx, 0, 'priceperpress1');
             }
         } else {
-            $priceperminute[$accountcode[$i]] = 0
+            $priceperminute[$accountcode[$i]] = 0;
             //echo mysql_result($resultx, 0, 'priceperminute');
             $customerid[$accountcode[$i]] = "";
             $firstperiod[$accountcode[$i]] = 1;
