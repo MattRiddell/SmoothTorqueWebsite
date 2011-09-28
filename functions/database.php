@@ -110,6 +110,24 @@ if (!function_exists('create_missing_tables') ) {
             
         }
         
+        /*======================================================================
+         states Table
+         ======================================================================*/
+        if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","states")){
+            include "admin/db_config.php";
+            $sql = "CREATE TABLE `states` (
+            `prefix` varchar(6) NOT NULL DEFAULT '',
+            `offset` varchar(20) DEFAULT NULL,
+            `state` varchar(20) DEFAULT NULL,
+            PRIMARY KEY (`prefix`)
+            )";
+            
+            $result = mysql_query($sql,$link) or die(mysql_error());
+            $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created states Table')";
+            $result=mysql_query($sql, $link);
+            
+        }
+        
         
         
         
