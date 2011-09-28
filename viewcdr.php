@@ -92,15 +92,22 @@ To: <input name="enddate">
     $titletd = "<td bgcolor=\"#000000\"><font color=\"#CCCCFF\"><b>&nbsp;&nbsp;";
     $titletdc = "&nbsp;&nbsp;</td>";
     echo "<center><table border=0>";
-    
-    echo "<tr>".$titletd."Call Date/Time".$titletdc."".$titletd.
-    /*"DContext".$titletdc."".$titletd."Caller ID".$titletdc."".$titletd.*/"Duration".
-    $titletdc."".$titletd."Billsec".$titletdc."".$titletd."Disposition".$titletdc."".$titletd
-    ."AccountCode".$titletdc."".$titletd."Phone Number".$titletdc."".$titletd.
-    "Result".$titletdc.$titletd.$config_values['PER_MINUTE'].$titletdc.$titletd.
-    "Lead".$titletdc.$titletd."Connected".$titletdc.$titletd."Press1".$titletdc.$titletd.
-    "Total".$titletdc.$titletd."Charged".$titletdc.
-    "</tr>";
+    if (isset($_GET['all'])&&$_GET['all'] == "1") {
+        echo "<tr>".$titletd."Call Date/Time".$titletdc."".$titletd.
+        /*"DContext".$titletdc."".$titletd."Caller ID".$titletdc."".$titletd.*/"Duration".
+        $titletdc."".$titletd."Billsec".$titletdc."".$titletd."Disposition".$titletdc."".$titletd
+        ."AccountCode".$titletdc."".$titletd."Phone Number".$titletdc."".$titletd.
+        "Result".$titletdc."</tr>";
+    } else {
+        echo "<tr>".$titletd."Call Date/Time".$titletdc."".$titletd.
+        /*"DContext".$titletdc."".$titletd."Caller ID".$titletdc."".$titletd.*/"Duration".
+        $titletdc."".$titletd."Billsec".$titletdc."".$titletd."Disposition".$titletdc."".$titletd
+        ."AccountCode".$titletdc."".$titletd."Phone Number".$titletdc."".$titletd.
+        "Result".$titletdc.$titletd.$config_values['PER_MINUTE'].$titletdc.$titletd.
+        "Lead".$titletdc.$titletd."Connected".$titletdc.$titletd."Press1".$titletdc.$titletd.
+        "Total".$titletdc.$titletd."Charged".$titletdc.
+        "</tr>";
+    }
     while ($row = mysql_fetch_assoc($result)) {
         $calldate[$i] = $row[calldate];
         $dcontext[$i] = $row[dcontext];
@@ -268,13 +275,22 @@ To: <input name="enddate">
         }
         if ($display) {
             echo     "<tr>";
-            echo $td.$calldate[$i]."</td>$td"/*.$dcontext[$i]."</td>$td".
-                                              $clid[$i]."</td>$td"*/.
-            /*$lastapp[$i]."</td>$td".$lastdata[$i]."</td>$td".*/$duration[$i]."</td>$td".$billsec[$i]."</td>$td".
-            $disposition[$i]."</td>$td".$accountcode[$i]."</td>$td".$phonenumber[$i]."</b></td>$td<b>".$dst[$i]."</b></td>";
-            echo $td.$currency.$costperminute[$i]."</td>".$td.$currency.$costpercall[$i]."</td>".
-            $td.$currency.$costperconnect[$i]."</td>".$td.$currency.$costperpress1[$i]."</td>".$td.$currency.$cost[$i]."</td>".$paid[$i]."</td>";
-            echo "</tr>";
+            
+            if (isset($_GET['all'])&&$_GET['all'] == "1") {
+                echo $td.$calldate[$i]."</td>$td"/*.$dcontext[$i]."</td>$td".
+                                                  $clid[$i]."</td>$td"*/.
+                /*$lastapp[$i]."</td>$td".$lastdata[$i]."</td>$td".*/$duration[$i]."</td>$td".$billsec[$i]."</td>$td".
+                $disposition[$i]."</td>$td".$accountcode[$i]."</td>$td".$phonenumber[$i]."</b></td>$td<b>".$dst[$i]."</b></td>";
+                echo "</tr>";
+            } else {
+                echo $td.$calldate[$i]."</td>$td"/*.$dcontext[$i]."</td>$td".
+                                                  $clid[$i]."</td>$td"*/.
+                /*$lastapp[$i]."</td>$td".$lastdata[$i]."</td>$td".*/$duration[$i]."</td>$td".$billsec[$i]."</td>$td".
+                $disposition[$i]."</td>$td".$accountcode[$i]."</td>$td".$phonenumber[$i]."</b></td>$td<b>".$dst[$i]."</b></td>";
+                echo $td.$currency.$costperminute[$i]."</td>".$td.$currency.$costpercall[$i]."</td>".
+                $td.$currency.$costperconnect[$i]."</td>".$td.$currency.$costperpress1[$i]."</td>".$td.$currency.$cost[$i]."</td>".$paid[$i]."</td>";
+                echo "</tr>";                
+            }
         }
         $i++;
     }
