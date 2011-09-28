@@ -306,7 +306,7 @@ To: <input name="enddate">
                 /*$lastapp[$i]."</td>$td".$lastdata[$i]."</td>$td".*/$duration[$i]."</td>$td".$billsec[$i]."</td>$td".
                 $disposition[$i]."</td>";
                 if ($config_values['CDR_USE_STATE'] == "YES") {
-                    echo $td.$state[$i]"</td>";
+                    echo $td.$state[$i]."</td>";
                 }
 
                 echo "$td".$accountcode[$i]."</td>$td".$phonenumber[$i]."</b></td>$td<b>".$dst[$i]."</b></td>";
@@ -318,7 +318,7 @@ To: <input name="enddate">
                 $disposition[$i]."</td>";
                 
                 if ($config_values['CDR_USE_STATE'] == "YES") {
-                    echo $td.$state[$i]"</td>";
+                    echo $td.$state[$i]."</td>";
                 }
 
                 echo "$td".$accountcode[$i]."</td>$td".$phonenumber[$i]."</b></td>$td<b>".$dst[$i]."</b></td>";
