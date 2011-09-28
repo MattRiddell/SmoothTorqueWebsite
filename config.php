@@ -178,6 +178,9 @@ if ($level!=sha1("level100")) {
         $sql = "REPLACE INTO config (parameter, value) VALUES ('configurable_target',".sanitize($_POST['configurable_target']).")";
         mysql_query($sql) or die(mysql_error());
         
+        $sql = "REPLACE INTO config (parameter, value) VALUES ('cdr_workaround',".sanitize($_POST['cdr_workaround']).")";
+        mysql_query($sql) or die(mysql_error());
+        
         
         
         /*
@@ -1552,6 +1555,18 @@ Language:
     <select name="configurable_target">
     <option value="1" <?if ($config_values['configurable_target'] == 1) echo "selected";?>>Yes</option>
     <option value="0" <?if ($config_values['configurable_target'] != 1) echo "selected";?>>No</option>
+    </select>
+    </td>
+    </tr>
+    
+    <tr  class="tborder2">
+    <td>
+    Use CDR Count InnoDB Workaround:
+    </td>
+    <td>
+    <select name="cdr_workaround">
+    <option value="1" <?if ($config_values['cdr_workaround'] == 1) echo "selected";?>>Yes</option>
+    <option value="0" <?if ($config_values['cdr_workaround'] != 1) echo "selected";?>>No</option>
     </select>
     </td>
     </tr>

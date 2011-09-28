@@ -353,8 +353,13 @@
         $config_values['configurable_target'] = "0";
     }
     
-    
-    
+    $sql = 'SELECT value FROM config WHERE parameter=\'cdr_workaround\'';
+    $result=mysql_query($sql, $link) or die (mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        $config_values['cdr_workaround'] = mysql_result($result,0,'value');
+    } else {
+        $config_values['cdr_workaround'] = "0";
+    }
     
     
     mysql_select_db("SineDialer", $link);
