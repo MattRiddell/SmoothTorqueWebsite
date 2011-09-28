@@ -69,6 +69,7 @@ if ($level!=sha1("level100")) {
         mysql_query("UPDATE web_config SET menu_messages=".sanitize($_POST[MENU_MESSAGES])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
         mysql_query("UPDATE web_config SET menu_schedules=".sanitize($_POST[MENU_SCHEDULES])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
         mysql_query("UPDATE web_config SET menu_customers=".sanitize($_POST[MENU_CUSTOMERS])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
+        mysql_query("UPDATE web_config SET menu_cdr=".sanitize($_POST[MENU_CDR])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
         mysql_query("UPDATE web_config SET menu_surveys=".sanitize($_POST[MENU_SURVEYS])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
         mysql_query("UPDATE web_config SET menu_queues=".sanitize($_POST[MENU_QUEUES])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
         mysql_query("UPDATE web_config SET menu_servers=".sanitize($_POST[MENU_SERVERS])." WHERE url = ".sanitize($url)." and LANG = ".sanitize($language));
@@ -977,6 +978,14 @@ Language:
     </td>
     <td>
     <input type="Text" name="MENU_SURVEYS" value="<?echo $config_values['MENU_SURVEYS'];?>">
+    </td>
+    </tr>
+    <tr  class="tborder2">
+    <td>
+    CDR Menu Text:
+    </td>
+    <td>
+    <input type="Text" name="MENU_CDR" value="<?echo $config_values['MENU_CDR'];?>">
     </td>
     </tr>
     <tr  class="tborder2">

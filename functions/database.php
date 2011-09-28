@@ -166,6 +166,8 @@ if (!function_exists('create_missing_tables') ) {
             `menu_customers` varchar(250) default NULL,
             `menu_queues` varchar(250) default NULL,
             `menu_servers` varchar(250) default NULL,
+            `menu_surveys` varchar(250) default NULL,
+            `menu_cdr` varchar(250) default NULL,
             `menu_trunks` varchar(250) default NULL,
             `menu_admin` varchar(250) default NULL,
             `menu_logout` varchar(250) default NULL,
@@ -226,10 +228,16 @@ if (!function_exists('create_missing_tables') ) {
         }
         
         if (!in_array('menu_surveys', $field_array)) {
-            $result = mysql_query('ALTER TABLE web_config ADD MENU_SURVEYS varchar(250)') or die(mysql_error());
+            $result = mysql_query('ALTER TABLE web_config ADD menu_surveys varchar(250)') or die(mysql_error());
             $result = mysql_query('UPDATE web_config SET menu_surveys = "Surveys"') or die(mysql_error());            
-            $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added web_config MENU_SURVEYS field')";
-
+            $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added web_config menu_surveys field')";
+            
+        }
+        if (!in_array('menu_cdr', $field_array)) {
+            $result = mysql_query('ALTER TABLE web_config ADD menu_cdr varchar(250)') or die(mysql_error());
+            $result = mysql_query('UPDATE web_config SET menu_cdr = "CDR"') or die(mysql_error());            
+            $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added web_config menu_cdr field')";
+            
         }
         
         $result = mysql_query("SELECT count(*) from web_config WHERE LANG = 'cn'");
