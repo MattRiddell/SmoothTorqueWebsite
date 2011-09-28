@@ -169,6 +169,8 @@ To: <input name="enddate">
                     $dst[$i] = "answer machine";
                 } else if ($dcontext[$i] == "do-live") {
                     $dst[$i] = "human";
+                }  else  {
+                    $dst[$i] = $dcontext[$i];
                 } /*else {
                    $dst[$i] = "answered";
                    }*/
