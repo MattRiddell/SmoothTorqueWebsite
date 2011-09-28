@@ -1,4 +1,3 @@
-#!/usr/bin/php
 <?
 function print_pre($text) {
     echo "<pre>";
