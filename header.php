@@ -246,7 +246,14 @@
         $config_values['EVERGREEN'] = "NO";
     }
     
-    
+    $sql = 'SELECT value FROM config WHERE parameter=\'CDR_USE_STATE\'';
+    $result=mysql_query($sql, $link) or die (mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        $config_values['CDR_USE_STATE'] = mysql_result($result,0,'value');
+    } else {
+        $config_values['CDR_USE_STATE'] = "NO";
+    }
+       
     $sql = 'SELECT value FROM config WHERE parameter=\'USE_TIMEZONES\'';
     $result=mysql_query($sql, $link) or die (mysql_error());
     if (mysql_num_rows($result) > 0) {
