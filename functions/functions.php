@@ -273,12 +273,12 @@ if (!function_exists('get_menu_html') ) {
                 //=======================================================================================================
                 // CDRs
                 //=======================================================================================================
-                if ($self=="/cdrs.php"){
+                if ($self=="/viewcdr.php"){
                     $thead="thead";
                 } else {
                     $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
                 }
-                $menu.='<TD class="'.$thead.'"><A HREF="'.$http_dir_name.'cdrs.php"><img width="16" height="16"  src="'.$http_dir_name.'images/page_green.png" border="0" ><br />'.str_replace(" ","&nbsp;",$config_values['MENU_CDR']).'</A>&nbsp;</TD>';
+                $menu.='<TD class="'.$thead.'"><A HREF="'.$http_dir_name.'viewcdr.php"><img width="16" height="16"  src="'.$http_dir_name.'images/page_green.png" border="0" ><br />'.str_replace(" ","&nbsp;",$config_values['MENU_CDR']).'</A>&nbsp;</TD>';
                 //=======================================================================================================
                 
                 //=======================================================================================================
