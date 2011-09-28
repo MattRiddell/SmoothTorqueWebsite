@@ -100,14 +100,24 @@ To: <input name="enddate">
     if (isset($_GET['all'])&&$_GET['all'] == "1") {
         echo "<tr>".$titletd."Call Date/Time".$titletdc."".$titletd.
         /*"DContext".$titletdc."".$titletd."Caller ID".$titletdc."".$titletd.*/"Duration".
-        $titletdc."".$titletd."Billsec".$titletdc."".$titletd."Disposition".$titletdc."".$titletd
-        ."AccountCode".$titletdc."".$titletd."Phone Number".$titletdc."".$titletd.
+        $titletdc."".$titletd."Billsec".$titletdc."".$titletd."Disposition".$titletdc."";
+        
+        if ($config_values['CDR_USE_STATE'] == "YES") {
+            echo $titletd."State".$titletdc;
+        }
+        
+        echo $titletd."AccountCode".$titletdc."".$titletd."Phone Number".$titletdc."".$titletd.
         "Result".$titletdc."</tr>";
     } else {
         echo "<tr>".$titletd."Call Date/Time".$titletdc."".$titletd.
         /*"DContext".$titletdc."".$titletd."Caller ID".$titletdc."".$titletd.*/"Duration".
-        $titletdc."".$titletd."Billsec".$titletdc."".$titletd."Disposition".$titletdc."".$titletd
-        ."AccountCode".$titletdc."".$titletd."Phone Number".$titletdc."".$titletd.
+        $titletdc."".$titletd."Billsec".$titletdc."".$titletd."Disposition".$titletdc."";
+        
+        if ($config_values['CDR_USE_STATE'] == "YES") {
+            echo $titletd."State".$titletdc;
+        }        
+        
+        echo $titletd."AccountCode".$titletdc."".$titletd."Phone Number".$titletdc."".$titletd.
         "Result".$titletdc.$titletd.$config_values['PER_MINUTE'].$titletdc.$titletd.
         "Lead".$titletdc.$titletd."Connected".$titletdc.$titletd."Press1".$titletdc.$titletd.
         "Total".$titletdc.$titletd."Charged".$titletdc.
@@ -138,6 +148,15 @@ To: <input name="enddate">
             $campaignid = substr($userfield[$i], $pos + 1);
             $phonenumber[$i] = substr($userfield[$i], 0, $pos);
             //echo "x".$campaignid." - $cost[$i] x ";
+        }
+        
+        if ($config_values['CDR_USE_STATE'] == "YES") {
+            $result_state = mysql_query("SELECT state FROM SineDialer.states WHERE prefix = ".sanitize(substr($phonenumber[$i],0,6)));
+            if (mysql_num_rows($result_state) == 0) {
+                $state[$i] = "Unknown";
+            } else {
+                $state[$i] = mysql_result($result_state,0,0);
+            }
         }
         
         $userfield2[$i] = $row[userfield2];
@@ -285,13 +304,24 @@ To: <input name="enddate">
                 echo $td.$calldate[$i]."</td>$td"/*.$dcontext[$i]."</td>$td".
                                                   $clid[$i]."</td>$td"*/.
                 /*$lastapp[$i]."</td>$td".$lastdata[$i]."</td>$td".*/$duration[$i]."</td>$td".$billsec[$i]."</td>$td".
-                $disposition[$i]."</td>$td".$accountcode[$i]."</td>$td".$phonenumber[$i]."</b></td>$td<b>".$dst[$i]."</b></td>";
+                $disposition[$i]."</td>";
+                if ($config_values['CDR_USE_STATE'] == "YES") {
+                    echo $td.$state[$i]"</td>";
+                }
+
+                echo "$td".$accountcode[$i]."</td>$td".$phonenumber[$i]."</b></td>$td<b>".$dst[$i]."</b></td>";
                 echo "</tr>";
             } else {
                 echo $td.$calldate[$i]."</td>$td"/*.$dcontext[$i]."</td>$td".
                                                   $clid[$i]."</td>$td"*/.
                 /*$lastapp[$i]."</td>$td".$lastdata[$i]."</td>$td".*/$duration[$i]."</td>$td".$billsec[$i]."</td>$td".
-                $disposition[$i]."</td>$td".$accountcode[$i]."</td>$td".$phonenumber[$i]."</b></td>$td<b>".$dst[$i]."</b></td>";
+                $disposition[$i]."</td>";
+                
+                if ($config_values['CDR_USE_STATE'] == "YES") {
+                    echo $td.$state[$i]"</td>";
+                }
+
+                echo "$td".$accountcode[$i]."</td>$td".$phonenumber[$i]."</b></td>$td<b>".$dst[$i]."</b></td>";
                 echo $td.$currency.$costperminute[$i]."</td>".$td.$currency.$costpercall[$i]."</td>".
                 $td.$currency.$costperconnect[$i]."</td>".$td.$currency.$costperpress1[$i]."</td>".$td.$currency.$cost[$i]."</td>".$paid[$i]."</td>";
                 echo "</tr>";                
