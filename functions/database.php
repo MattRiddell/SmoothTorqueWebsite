@@ -675,6 +675,8 @@ if (!function_exists('create_missing_tables') ) {
             `type` int(5) NOT NULL default '0',
             `datetime` timestamp NULL default NULL on update CURRENT_TIMESTAMP,
             `random_sort` int(10) NOT NULL default '0',
+            `start_time` time default null,
+            `end_time` time default null,
             PRIMARY KEY  (`campaignid`,`phonenumber`),
             KEY `status` (`campaignid`,`status`),
             KEY `randomize` (`random_sort`,`campaignid`, `status`),
@@ -729,8 +731,15 @@ if (!function_exists('create_missing_tables') ) {
             $field_array[] = mysql_result($result, $i, "Field");
         }
         
-        if (!in_array('random_sort', $field_array))
-        {
+        if (!in_array('start_time', $field_array)) {
+            $result = mysql_query("ALTER TABLE `number` ADD `start_time` time default null");
+        }
+        if (!in_array('end_time', $field_array)) {
+            $result = mysql_query("ALTER TABLE `number` ADD `end_time` time default null");
+        }
+        
+        
+        if (!in_array('random_sort', $field_array)) {
             echo "Please wait, updating system...this may take a while - please don't stop it<br />";
             flush();
             sleep(1);
