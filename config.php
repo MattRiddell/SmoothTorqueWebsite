@@ -524,7 +524,7 @@ if ($level!=sha1("level100")) {
     SmoothTorque MySQL Password
     </td>
     <td>
-    <input type="Text" name="ST_MYSQL_PASS" value="<?echo $db_pass;?>">
+    <input type="password" name="ST_MYSQL_PASS" value="<?echo $db_pass;?>">
     </td>
     </tr>
     
