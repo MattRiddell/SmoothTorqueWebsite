@@ -178,20 +178,33 @@ To: <input name="enddate">
             
         }
         //$billtype[$i] = "Per Minute";
-        if (!($customerid[$accountcode[$i]]>0)) {
-            $sqlx = "SELECT * from SineDialer.billing where accountcode = '".$accountcode[$i]."'";
-            //echo $sqlx;
-            $resultx = mysql_query($sqlx,$link);
-            $priceperminute[$accountcode[$i]] = mysql_result($resultx, 0, 'priceperminute');
+        if ( $config_values['USE_BILLING'] == "YES") {
+            if (!($customerid[$accountcode[$i]]>0)) {
+                $sqlx = "SELECT * from SineDialer.billing where accountcode = '".$accountcode[$i]."'";
+                //echo $sqlx;
+                $resultx = mysql_query($sqlx,$link);
+                $priceperminute[$accountcode[$i]] = mysql_result($resultx, 0, 'priceperminute');
+                //echo mysql_result($resultx, 0, 'priceperminute');
+                $customerid[$accountcode[$i]] = mysql_result($resultx, 0, 'customerid');
+                $firstperiod[$accountcode[$i]] = mysql_result($resultx, 0, 'firstperiod');
+                $increment[$accountcode[$i]] = mysql_result($resultx, 0, 'increment');
+                $firstperiod[$accountcode[$i]] = mysql_result($resultx, 0, 'firstperiod');
+                $credit[$accountcode[$i]] = mysql_result($resultx, 0, 'credit');
+                $pricepercall[$accountcode[$i]] = mysql_result($resultx, 0, 'pricepercall');
+                $priceperconnectedcall[$accountcode[$i]] = mysql_result($resultx, 0, 'priceperconnectedcall');
+                $priceperpress1[$accountcode[$i]] = mysql_result($resultx, 0, 'priceperpress1');
+            }
+        } else {
+            $priceperminute[$accountcode[$i]] = 0
             //echo mysql_result($resultx, 0, 'priceperminute');
-            $customerid[$accountcode[$i]] = mysql_result($resultx, 0, 'customerid');
-            $firstperiod[$accountcode[$i]] = mysql_result($resultx, 0, 'firstperiod');
-            $increment[$accountcode[$i]] = mysql_result($resultx, 0, 'increment');
-            $firstperiod[$accountcode[$i]] = mysql_result($resultx, 0, 'firstperiod');
-            $credit[$accountcode[$i]] = mysql_result($resultx, 0, 'credit');
-            $pricepercall[$accountcode[$i]] = mysql_result($resultx, 0, 'pricepercall');
-            $priceperconnectedcall[$accountcode[$i]] = mysql_result($resultx, 0, 'priceperconnectedcall');
-            $priceperpress1[$accountcode[$i]] = mysql_result($resultx, 0, 'priceperpress1');
+            $customerid[$accountcode[$i]] = "";
+            $firstperiod[$accountcode[$i]] = 1;
+            $increment[$accountcode[$i]] = 1;
+            $firstperiod[$accountcode[$i]] = 1;
+            $credit[$accountcode[$i]] = 0;
+            $pricepercall[$accountcode[$i]] = 0;
+            $priceperconnectedcall[$accountcode[$i]] = 0;
+            $priceperpress1[$accountcode[$i]] = 0;
         }
         //$cost[$i] = round((1/60)*$billsec[$i],2);
         $cost[$i] = 0;
