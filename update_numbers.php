@@ -13,7 +13,7 @@ $result = mysql_query("select time_zones.start, time_zones.end, prefix from time
 while ($row = mysql_fetch_assoc($result)) {
     $sql = "UPDATE number set start_time = '".$row['start']."', end_time = '".$row['end']."' WHERE phonenumber like '".$row['prefix']."%'";
     $result2 = mysql_query($sql);
-    echo $sql."<br /";
+    echo $sql."<br />";
     flush();
     //print_pre($row);
 }
