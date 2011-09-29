@@ -232,18 +232,33 @@ while ($row = mysql_fetch_assoc($result)) {
     ?>
     </TD>
     <?
+    if ($config_values['USE_TIMEZONES'] == 'YES') {
+        $extra_sql = " AND NOW() between start_time and end_time ";
+    } else {
+        $extra_sql = "";
+    }
     if ($config_values['SHOW_NUMBERS_LEFT'] == 'YES') {
-        $sql = 'SELECT count(*) from number where campaignid='.$row['id'].' and (status="manual_dial" or status="new" or status="new_nodial" or status="no-credit")';
+        $sql = 'SELECT count(*) from number where campaignid='.$row['id'].' and (status="manual_dial" or status="new" or status="new_nodial" or status="no-credit") '.$extra_sql;
         $result2=mysql_query($sql, $link) or die (mysql_error());;
         $new_numbers=mysql_result($result2,0,'count(*)');
         
-        $sql = 'SELECT count(*) from number where campaignid='.$row['id'].' and (status="manual_dial" or status="no-credit")';
+        $sql = 'SELECT count(*) from number where campaignid='.$row['id'].' and (status="manual_dial" or status="no-credit") '.$extra_sql;
         $result2=mysql_query($sql, $link) or die (mysql_error());;
         $manual_numbers=mysql_result($result2,0,'count(*)');
         
         $sql = 'SELECT count(*) from number where campaignid='.$row['id'];
         $result2=mysql_query($sql, $link) or die (mysql_error());;
         $total_numbers=mysql_result($result2,0,'count(*)');
+
+        $sql = 'SELECT count(*) from number where campaignid='.$row['id']." AND NOT (NOW() between start_time and end_time)";
+        $result2=mysql_query($sql, $link) or die (mysql_error());;
+        $out_of_tz=mysql_result($result2,0,'count(*)');
+        
+        if ($config_values['USE_TIMEZONES'] == 'YES') {
+            $tz = " ($tz out of Time Zone) "
+        } else {
+            $tz = "";
+        }
     }
     
     
@@ -254,14 +269,14 @@ while ($row = mysql_fetch_assoc($result)) {
         if ($progress>0){
             ?>
             <img src="images/percentImage.png" width="123" height="12" title="<?
-            echo "Remaining: $new_numbers/$total_numbers\"";?>"
+            echo "Remaining: $new_numbers/$total_numbers $tz\"";?>"
             class="percentImage"
             style="background-position: -<?echo ((100-(($new_numbers/$total_numbers)*100))*1.2)-1; ?>px 0pt;" border="0" />
             <?
             } else if ($manual_numbers > 0){
             ?>
             <img src="images/percentImage.png" width="123" height="12" title="<?
-            echo "Remaining: $new_numbers/$total_numbers\"";?>"
+            echo "Remaining: $new_numbers/$total_numbers $tz\"";?>"
             class="percentImage3"
             style="background-position: -<?echo ((100-(($new_numbers/$total_numbers)*100))*1.2)-1; ?>px 0pt;" border="0" />
             <?
@@ -269,14 +284,14 @@ while ($row = mysql_fetch_assoc($result)) {
             if ($total_numbers > 0) {
             ?>
             <img src="images/percentImage.png" width="123" height="12" title="<?
-            echo "Remaining: $new_numbers/$total_numbers\"";?>"
+            echo "Remaining: $new_numbers/$total_numbers $tz\"";?>"
             class="percentImage2"
             style="background-position: -<?echo ((100-(($new_numbers/$total_numbers)*100))*1.2)-1; ?>px 0pt;" border="0" />
             <?
             } else {
             ?>
             <img src="images/percentImage.png" width="123" height="12" title="<?
-            echo "Remaining: $new_numbers/$total_numbers\"";?>"
+            echo "Remaining: $new_numbers/$total_numbers $tz\"";?>"
             class="percentImage2"
             style="background-position: -<?echo ((100-((0)*100))*1.2)-1; ?>px 0pt;" border="0" />
             <?
