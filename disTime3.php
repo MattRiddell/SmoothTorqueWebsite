@@ -66,6 +66,14 @@ if ($result) {
     }
 }
 
+$sql = 'SELECT value FROM config WHERE parameter=\'USE_TIMEZONES\'';
+$result=@mysql_query($sql, $link);
+if ($result) {
+    if (mysql_num_rows($result) > 0) {
+        $config_values['USE_TIMEZONES'] = mysql_result($result,0,'value');
+    }
+}
+
 $sql = 'SELECT value FROM config WHERE parameter=\'DELETE_ALL\'';
 $result=@mysql_query($sql, $link);
 if ($result) {
@@ -232,11 +240,11 @@ while ($row = mysql_fetch_assoc($result)) {
     ?>
     </TD>
     <?
-    if ($config_values['USE_TIMEZONES'] == 'YES') {
-        $extra_sql = " AND NOW() between start_time and end_time ";
-    } else {
+    //if ($config_values['USE_TIMEZONES'] == 'YES') {
+    //    $extra_sql = " AND NOW() between start_time and end_time ";
+    //} else {
         $extra_sql = "";
-    }
+    //}
     if ($config_values['SHOW_NUMBERS_LEFT'] == 'YES') {
         $sql = 'SELECT count(*) from number where campaignid='.$row['id'].' and (status="manual_dial" or status="new" or status="new_nodial" or status="no-credit") '.$extra_sql;
         $result2=mysql_query($sql, $link) or die (mysql_error());;
