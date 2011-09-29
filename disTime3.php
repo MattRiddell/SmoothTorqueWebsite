@@ -250,7 +250,7 @@ while ($row = mysql_fetch_assoc($result)) {
         $result2=mysql_query($sql, $link) or die (mysql_error());;
         $total_numbers=mysql_result($result2,0,'count(*)');
 
-        $sql = 'SELECT count(*) from number where campaignid='.$row['id']." AND NOT (NOW() between start_time and end_time)";
+        $sql = 'SELECT count(*) from number where campaignid='.$row['id']." AND status = 'new' and NOT (NOW() between start_time and end_time)";
         $result2=mysql_query($sql, $link) or die (mysql_error());;
         $out_of_tz=mysql_result($result2,0,'count(*)');
         
