@@ -255,7 +255,7 @@ while ($row = mysql_fetch_assoc($result)) {
         $out_of_tz=mysql_result($result2,0,'count(*)');
         
         if ($config_values['USE_TIMEZONES'] == 'YES') {
-            $tz = " ($tz out of Time Zone) "
+            $tz = " ($tz out of Time Zone) ";
         } else {
             $tz = "";
         }
