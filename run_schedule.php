@@ -15,7 +15,7 @@ $self=$_SERVER['PHP_SELF'];
 require "/".$current_directory."/functions/functions.php";
 
 /* Config File Parsing */
-require "default_configs.php";
+//require "default_configs.php";
 
 /* Load in the database connection values and chose the database name */
 include "admin/db_config.php";
@@ -66,6 +66,9 @@ while ($row = mysql_fetch_assoc($result)) {
         $sqlx = "SELECT messageid FROM campaign WHERE id=$row[campaignid]";
         $resultz=mysql_query($sqlx, $link) or die (mysql_error());;
         $messageid=mysql_result($resultz,0,'messageid');
+        
+        $result_billing = mysql_query("SELECT use_billing FROM SineDialer.web_config");
+        $config_values['USE_BILLING'] = mysql_result($result,0,0);
         
         if ( $config_values['USE_BILLING'] == "YES") {
             $sqlx = "SELECT length FROM campaignmessage WHERE id=$messageid";
