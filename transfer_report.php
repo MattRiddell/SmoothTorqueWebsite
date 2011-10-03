@@ -11,7 +11,11 @@ if (isset($_GET['live_cps'])) {
     $result = mysql_query("SELECT value FROM SineDialer.config WHERE parameter = 'mysql_queue'") or die(mysql_error());
     $pending = 0;
     if (mysql_num_rows($result) > 0 && mysql_result($result,0,0) > 0) {
-        $pending = "<font color=\"red\"><b>Queued Writes: ".mysql_result($result,0,0)."</b></font> ";
+        if (mysql_result($result,0,0) > 5000) {
+            $pending = "<font color=\"red\">".mysql_result($result,0,0)."</font> ";
+        } else {
+            $pending = "".mysql_result($result,0,0)."";
+        }
     }
     echo $pending;
     ?>
