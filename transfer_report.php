@@ -11,8 +11,8 @@ if (isset($_GET['live_cps'])) {
     $resultxx = mysql_query("SELECT value FROM SineDialer.config WHERE parameter = 'mysql_queue'") or die(mysql_error());
     $pending = 0;
     if (mysql_num_rows($resultxx) > 0 && mysql_result($resultxx,0,0) > 0) {
-        if (mysql_result($resultxx,0,0) > 5000) {
-            $pending = "<font color=\"red\">".mysql_result($resultxx,0,0)."</font> ";
+        if (mysql_result($resultxx,0,0) > 10000) {
+            $pending = "<font color=\"red\">".mysql_result($resultxx,0,0)." (Over capacity)</font> ";
         } else {
             $pending = "".mysql_result($resultxx,0,0)."";
         }
