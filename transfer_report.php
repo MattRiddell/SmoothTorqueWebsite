@@ -6,6 +6,16 @@ if (isset($_GET['live_cps'])) {
     $sql = "select campaign.name, campaign_stats.* from campaign, campaign_stats, queue where campaign_stats.campaignid=queue.campaignID and queue.status = 101 and campaign_stats.campaignid = campaign.id";
     $result = mysql_query($sql);
     ?>
+    <h3>MySQL Queue: 
+    <?
+    $result = mysql_query("SELECT value FROM SineDialer.config WHERE parameter = 'mysql_queue'") or die(mysql_error());
+    $pending = 0;
+    if (mysql_num_rows($result) > 0 && mysql_result($result,0,0) > 0) {
+        $pending = "<font color=\"red\"><b>Queued Writes: ".mysql_result($result,0,0)."</b></font> ";
+    }
+    echo $pending;
+    ?>
+    </h3>
     <h3>Running Campaign Stats</h3>
     <table class="transfer_history">
     <tr>
