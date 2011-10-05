@@ -1,5 +1,4 @@
 <?
-
 require_once("read_settings.php");
 require_once("receive_helper.php");
 require "header.php";
@@ -13,7 +12,6 @@ if ($config_values['USE_TIMEZONES'] == "YES") {
     $new = "new";
 }
 
-
 $_POST = array_map(mysql_real_escape_string,$_POST);
 $_GET = array_map(mysql_real_escape_string,$_GET);
 
@@ -21,14 +19,16 @@ if(!empty($data)){
     if(isset($data['title'])){
         ?>
         <div class="inputhead">Title</div>
-        <div class="data"><?
-        php echo $data['title']; ?></div>
+        <div class="data">
+        <?
+        echo $data['title']; 
+        ?></div>
         <?
     }
     if(isset($data['body'])){?>
         <div class="inputhead">Body</div>
         <div class="data"><?
-        php echo $data['body']; ?></div>
+        echo $data['body']; ?></div>
         <?
     }
 }
@@ -38,6 +38,8 @@ if(!empty($files)){
     <?
     foreach($files as $file) {
         $filename = $file[path];
+        //print_r($filename);
+        //exit(0);
         $row = 0;
         $display2 = 0;
         $handle = fopen($filename, "r");
