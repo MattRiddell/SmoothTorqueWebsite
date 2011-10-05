@@ -137,7 +137,7 @@ if (isset($_GET['live_calls'])) {
                 echo "<td class=\"live_cc\">".$values['accountcode']."</td>";
                 echo "<td class=\"live_cc\">".$channels[$values['bridged']]['duration']."</td>";
                 echo "<td class=\"live_cc\">".round($channels[$values['bridged']]['duration']/60,2)."</td>";
-                echo "<td class=\"live_cc\">".$values['duration']."</td>";
+                echo "<td class=\"live_cc\">".round($values['duration']/60,2)."</td>";
                 echo "<tr>";
             } else if ($values['data'] == "survey.php") {
                 echo "<tr>";
