@@ -36,13 +36,55 @@ if(!empty($files)){
     ?>
 	<div class="data">
     <?
+    $zip_file = false;
     foreach($files as $file) {
         $filename = $file[path];
-        //print_r($filename);
-        //exit(0);
+        $extension = strtolower(substr($filename,strlen($filename)-3));
+        if ($extension == "zip") {        
+            // A Zip file is being uploaded
+            $zip = new ZipArchive();
+            $x = $zip->open($filename);
+            if ($x === true) {
+                for($i = 0; $i < $zip->numFiles; $i++) {   
+                    $exten = strtolower(substr($zip->getNameIndex($i),strlen($zip->getNameIndex($i))-3));
+                    $total_files[] = $zip->getNameIndex($i);
+                    if ($exten == "csv" || $exten == "txt") {
+                        $zip_files[] = $zip->getNameIndex($i);
+                    } 
+                } 
+                if (count($zip_files) == 0) {
+                    // No compatible files in zip file
+                    box_start();
+                    echo "<center><br />There are no compatible files in this zip file.<br />The lists need to be either csv or txt files<br /><br />This zip file contains:<br /><pre>";
+                    foreach ($total_files as $filename) {
+                        echo $filename."<br />";
+                    }
+                    echo "<br />";
+                    box_end();
+                    $zip->close();
+                    unlink($filename);
+                    exit(0);
+                } else {
+                    
+                    $zip_file = true;
+                    
+                }
+                
+                // // change this to the correct site path
+                
+                
+                //
+            }
+//            exit(0);
+
+        }
         $row = 0;
         $display2 = 0;
-        $handle = fopen($filename, "r");
+        if ($zip_file) {
+            $handle = $zip->getStream($zip_files[0]);
+        } else {
+            $handle = fopen($filename, "r");
+        }
         echo "<br />Importing numbers, please wait<br /><br />";
         $campaignid = $data["id"];
         $sql = "INSERT IGNORE INTO number (campaignid,phonenumber,status,type, random_sort) VALUES";
@@ -101,6 +143,10 @@ if ($config_values['USE_TIMEZONES'] == "YES") {
         flush();
     }
 }
+if ($zip_file) {
+    $zip->close();
+}
+unlink($filename);
 ?>
 </body>
 </html>
