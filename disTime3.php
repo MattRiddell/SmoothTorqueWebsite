@@ -273,8 +273,21 @@ while ($row = mysql_fetch_assoc($result)) {
     ?>
     <TD>
     <?
+    /* Detect ipod/iphone/ipad as they can't see hover text */
+    $isiPad = (bool) strpos($_SERVER['HTTP_USER_AGENT'],'iPad');
+    $isiPod = (bool) strpos($_SERVER['HTTP_USER_AGENT'],'iPod');
+    $isiPhone = (bool) strpos($_SERVER['HTTP_USER_AGENT'],'iPhone');
+    if ($isiPod || $isiPad || $isiPhone) {
+        $isApple = true;
+    } else {
+        $isApple = false;
+    }
     if ($config_values['SHOW_NUMBERS_LEFT'] == 'YES') {
+        if ($isApple) {
+            echo "Remaining: $new_numbers/$total_numbers $tz";
+        }
         if ($progress>0){
+
             ?>
             <img src="images/percentImage.png" width="123" height="12" title="<?
             echo "Remaining: $new_numbers/$total_numbers $tz\"";?>"
