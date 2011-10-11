@@ -4,6 +4,10 @@ $db_host = "localhost";
 $db_user = "root";
 $db_pass = "";
 mysql_connect($db_host, $db_user, $db_pass);
+
+/* Select the appropriate database */
+mysql_select_db("SineDialer");
+
 if (isset($_GET['span'])) {
     $result = mysql_query("SELECT userfield, billsec FROM cdr WHERE amaflags = '-1' AND calldate >= DATE_SUB(CURDATE(), INTERVAL ".sanitize($_GET['span'])." DAY)") or die(mysql_error());
     
