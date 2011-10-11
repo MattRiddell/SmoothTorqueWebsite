@@ -1338,6 +1338,29 @@ if (!function_exists('create_missing_tables') ) {
             
         }
         
+        /*======================================================================
+         transfer_reports Table
+         ======================================================================*/
+        if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","transfer_reports")){
+            include "admin/db_config.php";
+            $sql = "CREATE TABLE `transfer_reports` (
+            `campaign_id` int(11) unsigned NOT NULL,
+            `campaign_name` varchar(250) DEFAULT NULL,
+            `report_date` date DEFAULT NULL,
+            `total_transfers` int(11) DEFAULT NULL,
+            `under_30_secs` int(11) DEFAULT NULL,
+            `30_to_2_mins` int(11) DEFAULT NULL,
+            `2_to_5_mins` int(11) DEFAULT NULL,
+            `5_to_10_mins` int(11) DEFAULT NULL,
+            `10_to_15_mins` int(11) DEFAULT NULL,
+            `15_plus_mins` int(11) DEFAULT NULL,
+            `billable_perc` double DEFAULT NULL,
+            `total_mins` double DEFAULT NULL)";
+            $result = mysql_query($sql,$link) or die(mysql_error());
+            $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created transfer_reports Table')";
+            $result=mysql_query($sql, $link);
+            
+        }
         
         /*======================================================================
          surveys Table
