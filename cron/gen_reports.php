@@ -88,7 +88,12 @@ foreach ($totals as $name=>$entry) {
     $perc = round(count($billables[$name])/count($entry)*100,2);
 
     
-    $sql = "INSERT INTO transfer_reports (campaign_id, campaign_name, report_date, total_transfers, under_30_secs, 30_to_2_mins, 2_to_5_mins, 5_to_10_mins, 10_to_15_mins, 15_plus_mins, billable_perc, total_mins) VALUES (".sanitize($name).",".sanitize($campaign_name).",CURDATE(), ".sanitize(count($entry)).",".sanitize(count($billables[$name])).",".sanitize(count($group_0_to_29[$name])).",".sanitize(count($group_30_to_119[$name])).",".sanitize(count($group_120_to_299[$name])).",".sanitize(count($group_300_to_600[$name])).",".sanitize(count($group_600_to_900[$name])).",".count($group_900_plus[$name]).",".sanitize($perc).",".sanitize($mins[trim(strtolower("stl-".mysql_result($result2,0,0)))]/60).")";
+    $sql = "INSERT INTO transfer_reports ";
+    $sql .= "(campaign_id, campaign_name, report_date, total_transfers, ";
+    $sql .= "billable_transfers, under_30_secs, 30_to_2_mins, 2_to_5_mins, 5_to_10_mins, ";
+    $sql .= "10_to_15_mins, 15_plus_mins, billable_perc, total_mins) VALUES (";
+    $sql .=sanitize($name).",".sanitize($campaign_name).",CURDATE(), ".sanitize(count($entry))
+    $sql .=",".sanitize(count($billables[$name])).",".sanitize(count($group_0_to_29[$name])).",".sanitize(count($group_30_to_119[$name])).",".sanitize(count($group_120_to_299[$name])).",".sanitize(count($group_300_to_600[$name])).",".sanitize(count($group_600_to_900[$name])).",".count($group_900_plus[$name]).",".sanitize($perc).",".sanitize($mins[trim(strtolower("stl-".mysql_result($result2,0,0)))]/60).")";
     
     //echo $sql."\n";
     $result = mysql_query($sql) or die (mysql_error());
