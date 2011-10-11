@@ -1348,6 +1348,7 @@ if (!function_exists('create_missing_tables') ) {
             `campaign_name` varchar(250) DEFAULT NULL,
             `report_date` date DEFAULT NULL,
             `total_transfers` int(11) DEFAULT NULL,
+            `billable_transfers` int(11) DEFAULT NULL,
             `under_30_secs` int(11) DEFAULT NULL,
             `30_to_2_mins` int(11) DEFAULT NULL,
             `2_to_5_mins` int(11) DEFAULT NULL,
