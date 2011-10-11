@@ -1,5 +1,6 @@
 #!/usr/bin/php
 <?
+$query_start = time();
 $db_host = "localhost";
 $db_user = "root";
 $db_pass = "";
@@ -32,23 +33,19 @@ if (!function_exists('sanitize') ) {
     }
 }
 
-$_GET['span'] = 0;
+/* Check previous day - this is supposed to be run after midnight */
+$_GET['span'] = 1;
 
 if (isset($_GET['span'])) {
     $result = mysql_query("SELECT userfield, billsec FROM cdr WHERE amaflags = '-1' AND calldate >= DATE_SUB(CURDATE(), INTERVAL ".sanitize($_GET['span'])." DAY)") or die(mysql_error());
     
     $result_mins = mysql_query("SELECT accountcode, sum(rounded_billsec) FROM cdr WHERE amaflags != '-1' AND calldate >= DATE_SUB(CURDATE(), INTERVAL ".sanitize($_GET['span'])." DAY) group by accountcode") or die(mysql_error());
-} else {
-    $result = mysql_query("SELECT userfield, billsec FROM cdr WHERE amaflags = '-1'");
-    $result_mins = mysql_query("SELECT accountcode, sum(rounded_billsec) FROM cdr WHERE amaflags != '-1' group by accountcode");
 }
 
 if (mysql_num_rows($result) > 0) {
     while ($row = mysqL_fetch_assoc($result)) {
         $userfield = split("-",$row['userfield']);
         $campaign_id = $userfield[1];
-        //echo $campaign_id."<br />";;
-        //echo "CallDate: ".$row['calldate']." Length: ".$row['billsec']."<br />";
         $totals[$campaign_id][] = $row['billsec'];
         if ($row['billsec'] < 30) {
             $group_0_to_29[$campaign_id][] = $row['billsec'];
@@ -75,15 +72,7 @@ if (mysql_num_rows($result_mins) > 0) {
         $mins[strtolower(trim($row_mins['accountcode']))] = $row_mins['sum(rounded_billsec)'];
     }
 }
-//print_pre($mins);
-/*
-?>
-<table class="transfer_history">
 
-<th class="transfer_history">< half min</th><th class="transfer_history">30 secs-2 mins</th><th class="transfer_history">2-5 mins</th><th class="transfer_history">5-10 mins</th><th class="transfer_history">10-15 mins</th><th class="transfer_history">15+ mins</th><th class="transfer_history">Billable Perc.</th><th class="transfer_history">Minutes</th>
-
-<?
-*/
 foreach ($totals as $name=>$entry) {
     $result = mysql_query("SELECT name, groupid FROM campaign WHERE id = ".sanitize($name));
     if (mysql_num_rows($result) == 0) {
@@ -102,8 +91,8 @@ foreach ($totals as $name=>$entry) {
     $sql = "INSERT INTO transfer_reports (campaign_id, campaign_name, report_date, total_transfers, under_30_secs, 30_to_2_mins, 2_to_5_mins, 5_to_10_mins, 10_to_15_mins, 15_plus_mins, billable_perc, total_mins) VALUES (".sanitize($name).",".sanitize($campaign_name).",".sanitize(count($entry)).",".sanitize(count($billables[$name])).",".sanitize(count($group_0_to_29[$name])).",".sanitize(count($group_30_to_119[$name])).",".sanitize(count($group_120_to_299[$name])).",".sanitize(count($group_300_to_600[$name])).",".sanitize(count($group_600_to_900[$name])).",".count($group_900_plus[$name]).",".sanitize($perc).",".sanitize($mins_text).")";
     
     echo $sql."\n";
-
+    $result = mysql_query($sql) or die (mysql_error());
 }
-
+echo "Finished queries (took ".(time()-$query_start)." seconds)\n";
 
 ?>
