@@ -76,12 +76,14 @@ if (mysql_num_rows($result_mins) > 0) {
     }
 }
 //print_pre($mins);
+/*
 ?>
 <table class="transfer_history">
-<tr>
-<th class="transfer_history">Campaign</th><th class="transfer_history">Total Xfers</th><th class="transfer_history">Billable Xfers</th><th class="transfer_history">< half min</th><th class="transfer_history">30 secs-2 mins</th><th class="transfer_history">2-5 mins</th><th class="transfer_history">5-10 mins</th><th class="transfer_history">10-15 mins</th><th class="transfer_history">15+ mins</th><th class="transfer_history">Billable Perc.</th><th class="transfer_history">Minutes</th>
-</tr>
+
+<th class="transfer_history">< half min</th><th class="transfer_history">30 secs-2 mins</th><th class="transfer_history">2-5 mins</th><th class="transfer_history">5-10 mins</th><th class="transfer_history">10-15 mins</th><th class="transfer_history">15+ mins</th><th class="transfer_history">Billable Perc.</th><th class="transfer_history">Minutes</th>
+
 <?
+*/
 foreach ($totals as $name=>$entry) {
     $result = mysql_query("SELECT name, groupid FROM campaign WHERE id = ".sanitize($name));
     if (mysql_num_rows($result) == 0) {
@@ -94,23 +96,14 @@ foreach ($totals as $name=>$entry) {
         $mins_text = number_format($mins[trim(strtolower("stl-".mysql_result($result2,0,0)))]/60)." (".mysql_result($result2,0,0).")";
     }
     
-    echo "<tr>";
-    echo "<td class=\"transfer_history\">$campaign_name</td>";
-    echo "<td class=\"transfer_history\">".count($entry)."</td>";
-    echo "<td class=\"transfer_history\">".count($billables[$name])."</td>";
-    echo "<td class=\"transfer_history\">".count($group_0_to_29[$name])."</td>";
-    echo "<td class=\"transfer_history\">".count($group_30_to_119[$name])."</td>";
-    echo "<td class=\"transfer_history\">".count($group_120_to_299[$name])."</td>";
-    echo "<td class=\"transfer_history\">".count($group_300_to_600[$name])."</td>";
-    echo "<td class=\"transfer_history\">".count($group_600_to_900[$name])."</td>";
-    echo "<td class=\"transfer_history\">".count($group_900_plus[$name])."</td>";
     $perc = round(count($billables[$name])/count($entry)*100,2);
-    echo "<td class=\"transfer_history\">".$perc."%</td>";
-    echo "<td class=\"transfer_history\">".$mins_text."</td>";
-    echo "</tr>";
-    //print_pre($entry);
+
+    
+    $sql = "INSERT INTO transfer_reports (campaign_id, campaign_name, report_date, total_transfers, under_30_secs, 30_to_2_mins, 2_to_5_mins, 5_to_10_mins, 10_to_15_mins, 15_plus_mins, billable_perc, total_mins) VALUES (".sanitize($name).",".sanitize($campaign_name).",".sanitize(count($entry)).",".sanitize(count($billables[$name])).",".sanitize(count($group_0_to_29[$name])).",".sanitize(count($group_30_to_119[$name])).",".sanitize(count($group_120_to_299[$name])).",".sanitize(count($group_300_to_600[$name])).",".sanitize(count($group_600_to_900[$name])).",".count($group_900_plus[$name]).",".sanitize($perc).",",sanitize($mins_text).")";
+    
+    echo $sql."\n";
+
 }
-echo "</table>";
 
 
 ?>
