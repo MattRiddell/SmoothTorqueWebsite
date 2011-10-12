@@ -22,11 +22,11 @@ if (isset($_POST[name])) {
     'internal', '$dtmfmode', 'dynamic', 'en', 'yes', 'yes', '$password', 'friend', '$name',
     'all', '$allowed')";
 //    echo $sql;
-    $result = mysql_query($sql, $link) or die(mysql_error());
+    $result = mysql_query($sql, $link) or die("1".mysql_error());
 
     $sql = "INSERT INTO queue_member_table (membername, queue_name, interface) values
     ('$name','$queue_name','SIP/$name')";
-    $result = mysql_query($sql, $link) or die(mysql_error());
+    $result = mysql_query($sql, $link) or die("2".mysql_error());
 
     include "queues.php";
 } else {
