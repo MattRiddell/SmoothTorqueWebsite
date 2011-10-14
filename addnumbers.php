@@ -6,7 +6,7 @@ include "admin/db_config.php";
 mysql_select_db("SineDialer", $link);
 
 if ($config_values['USE_TIMEZONES'] == "YES") {
-    $new = "new_nodial";
+    $new = "new";
 } else {
     $new = "new";
 }
@@ -94,6 +94,18 @@ Which campaign would you like to add numbers to?<br /><br />
         flush();
         }
     }
+     if ($config_values['USE_TIMEZONES'] == "YES") {
+         /* Get all of the timezone prefixes and times */
+         $result = mysql_query("select time_zones.start, time_zones.end, prefix from time_zones, timezone_prefixes where timezone_prefixes.timezone = time_zones.id");
+         
+         while ($row = mysql_fetch_assoc($result)) {
+             $sql = "UPDATE number set start_time = '".$row['start']."', end_time = '".$row['end']."', status='new' WHERE phonenumber like '".$row['prefix']."%' and status = 'new_nodial'";
+             $result2 = mysql_query($sql);
+             echo "Done Prefix ".$row['prefix']."<br />";
+             flush();
+         }
+     }
+
      echo "</div><img src=\"images/tick.gif\">Completed Saving";
      ?>
     <script language="javascript">
