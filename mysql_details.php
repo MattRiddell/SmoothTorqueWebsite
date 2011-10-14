@@ -27,11 +27,24 @@ include "admin/db_config.php";
 mysql_select_db("SineDialer", $link) or die("Unable to connect: ".mysql_error());
 echo "<b>Database Statistics:<br /></b>";
 $result = mysql_query("SHOW STATUS");
+$version = mysql_get_server_info();
+$version = substr($version,0,strpos($version,"-"));
+$exp_version = explode(".",$version);
+$questions = "Questions";
+if ($exp_version[0] >= 5 && $exp_version[1] >= 0 && $exp_version[2] >= 72) {
+    $questions = "Queries";
+}
+if ($exp_version[0] >= 5 && $exp_version[1] >= 1) {
+    $questions = "Queries";
+}
+if ($exp_version[0] >= 5) {
+    $questions = "Queries";
+}
 while ($row = mysql_fetch_assoc($result)){
     if ($row['Variable_name'] == 'Slow_queries') {
         $slow_queries = $row['Value'];
     }
-    if ($row['Variable_name'] == 'Questions') {
+    if ($row['Variable_name'] == $questions) {
         $questions = $row['Value'];
     }
     if ($row['Variable_name'] == 'Uptime') {

@@ -148,10 +148,10 @@ while ($row = mysql_fetch_assoc($result)) {
 			echo "<td".$tdstyle.">$row[Name]</td>";
 			echo "<td".$tdstyle.">".number_format($rows)."</td>";
 			echo "<td".$tdstyle."><b>".number_format($size,$digits)." $size_text</b></td>";
-			$update_time = strtotime($row[Update_time]);
-			$check_time = strtotime($row[Check_time]);
-			echo "<td".$tdstyle.">".date("D M j G:i:s Y", $update_time)."</td>";
-			echo "<td".$tdstyle.">".date("D M j G:i:s Y", $check_time)."</td>";
+			$update_time = @strtotime($row[Update_time]);
+			$check_time = @strtotime($row[Check_time]);
+			echo "<td".$tdstyle.">".@date("D M j G:i:s Y", $update_time)."</td>";
+			echo "<td".$tdstyle.">".@date("D M j G:i:s Y", $check_time)."</td>";
 			echo "<td".$tdstyle.">";
 			echo "$row[Engine] <a href=\"mysql_stats.php?convert_table=$row[Name]\">Convert</a>";
 		}
