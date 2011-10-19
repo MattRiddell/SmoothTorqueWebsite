@@ -515,7 +515,6 @@ echo "<center>";
 <a href="transfer_report.php?historical=1"><img src="images/folder_explore.png">&nbsp;Select Campaign</a><br /><br />
 <a href="transfer_report.php?transfer_cdrs=1"><img src="images/folder_explore.png">&nbsp;Transfer CDRs</a><br /><br />
 <a href="transfer_report.php?recordings=1"><img src="images/sound.png">&nbsp;Call Recordings</a><br />
-<a href="transfer_report.php?recordings=1"><img src="images/sound.png">&nbsp;Call Recordings</a><br />
 <br />
 <?
 box_end();
