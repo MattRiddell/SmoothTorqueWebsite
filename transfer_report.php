@@ -1,4 +1,29 @@
 <?
+if (isset($_GET['transfer_cdrs_print'])) {
+    require "admin/db_config.php";
+    require "functions/sanitize.php";
+    
+    header("Content-type: application/csv"); 
+    header("Content-Disposition: attachment; filename=".$_POST['accountcode']."_".@date('l jS \of F Y h:i:s A').".csv");
+    header("Pragma: no-cache");
+    header("Expires: 0");
+    
+    $sql ="select billsec, calldate as start, date_add(calldate, interval billsec second) as end, left(userfield, 10) as phonenumber, accountcode  from cdr where amaflags = -1 and billsec > 30 and LOWER(accountcode) = ".sanitize("stl-".strtolower($_POST['accountcode']))." order by calldate asc";
+    //echo $sql;
+    $result = mysql_query($sql);
+    $x = 0;
+    echo "Start, End, Phone Number, Duration\n";
+    while ($row = mysql_fetch_assoc($result)) {
+        $x++;
+        if ($x > 100) {
+            flush();
+            $x = 0;
+        }
+        echo $row['start'].",".$row['end'].",".$row['phonenumber'].",".$row['billsec']."\n";
+    }
+    exit(0);
+}
+
 if (isset($_GET['live_cps'])) {
 	header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
 	header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
@@ -458,6 +483,28 @@ if (isset($_GET['historical'])) {
     require "footer.php";
     exit(0);
 }
+
+if (isset($_GET['transfer_cdrs'])) {
+    box_start();
+    echo "<center><h3>Select Customer:</h3>";
+    //TODO: split by user/admin
+    $result = mysql_query("SELECT * from customer");
+    ?>
+    <form action="transfer_report.php?transfer_cdrs_print=1" method="post">
+    <select name="accountcode">
+    <?
+    while ($row = mysqL_fetch_assoc($result)) {
+//        print_pre($row);
+        echo '<option value="'.$row['username'].'">'.$row['company'].' ('.$row['username'].')</option>';
+    }
+    ?>
+    </select>
+    <input type="submit" value="Display Report">
+    </form>
+    <?
+    require "footer.php";
+    exit(0);
+}
 box_start(250);
 echo "<center>";
 ?>
@@ -466,6 +513,8 @@ echo "<center>";
 <a href="transfer_report.php?all_campaigns=1&span=7"><img src="images/calendar_view_week.png">&nbsp;All Campaigns Last 7 Days</a><br /><br />
 <a href="transfer_report.php?all_campaigns=1"><img src="images/calendar_view_month.png">&nbsp;All Campaigns All Time</a><br /><br />
 <a href="transfer_report.php?historical=1"><img src="images/folder_explore.png">&nbsp;Select Campaign</a><br /><br />
+<a href="transfer_report.php?transfer_cdrs=1"><img src="images/folder_explore.png">&nbsp;Transfer CDRs</a><br /><br />
+<a href="transfer_report.php?recordings=1"><img src="images/sound.png">&nbsp;Call Recordings</a><br />
 <a href="transfer_report.php?recordings=1"><img src="images/sound.png">&nbsp;Call Recordings</a><br />
 <br />
 <?
