@@ -1364,6 +1364,24 @@ if (!function_exists('create_missing_tables') ) {
         }
         
         /*======================================================================
+         survey_schedules Table
+         ======================================================================*/
+        if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","survey_schedules")){
+            include "admin/db_config.php";
+            $sql = "CREATE TABLE `survey_schedules` (
+            `campaign_id` int(11) unsigned NOT NULL,
+            `start_hour` int(10) unsigned NOT NULL,
+            `leads_required` int(10) unsigned NOT NULL,
+            PRIMARY KEY (`campaign_id`,`start_hour`)
+            )
+            ";
+            $result = mysql_query($sql,$link) or die(mysql_error());
+            $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created survey_schedules Table')";
+            $result=mysql_query($sql, $link);
+            
+        }                
+        
+        /*======================================================================
          surveys Table
          ======================================================================*/
         if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","surveys")){

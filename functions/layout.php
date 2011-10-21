@@ -19,6 +19,12 @@ if (!function_exists('shadow_end') ) {
         echo '</div></div></div></div></div></td></tr></table>';
      }
 }
+if (!function_exists('redirect')) {
+    function redirect($url, $text = "", $timeout = 1) {
+        ?><center><img src="images/progress.gif" border="0"><br /><?=$text?>
+        <META HTTP-EQUIV=REFRESH CONTENT="<?=$timeout?>; URL=<?=$url?>"><?
+    }
+}
 if (!function_exists('box_button') ) {
      function box_button($name,$image,$url,$description) {
 ?><div style="width:50%;height:80px;display:inline-table">
