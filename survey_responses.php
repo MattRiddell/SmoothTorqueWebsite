@@ -30,7 +30,7 @@ if (mysql_num_rows($result) == 0) {
 } else {
     while ($row = mysql_fetch_assoc($result)) {
         $campaign_names = mysql_query("SELECT name FROM campaign WHERE id = ".$row['campaign_id']);
-        if (mysql_num_rows($result) == 0) {
+        if (mysql_num_rows($campaign_names) == 0) {
             $name = "Unknown (deleted)";
         } else {
             $name = mysql_result($campaign_names,0,0);
