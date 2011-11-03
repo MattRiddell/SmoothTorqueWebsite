@@ -8,7 +8,7 @@ if (isset($_GET['transfer_cdrs_print'])) {
     header("Pragma: no-cache");
     header("Expires: 0");
     
-    $sql ="select billsec, calldate as start, date_add(calldate, interval billsec second) as end, left(userfield, 10) as phonenumber, accountcode  from cdr where amaflags = -1 and billsec > 30 and LOWER(accountcode) = ".sanitize("stl-".strtolower($_POST['accountcode']))." order by calldate asc";
+    $sql ="select billsec, calldate as start, date_add(calldate, interval billsec second) as end, left(userfield, 10) as phonenumber, accountcode  from cdr where amaflags = -1 and billsec > 30 and LOWER(accountcode) = ".sanitize("stl-".strtolower($_POST['accountcode']))." and calldate > ".sanitize($_POST['startdate'])." and calldate < ".sanitize($_POST['enddate'])." order by calldate asc";
     //echo $sql;
     $result = mysql_query($sql);
     $x = 0;
@@ -494,11 +494,22 @@ if (isset($_GET['transfer_cdrs'])) {
     <select name="accountcode">
     <?
     while ($row = mysqL_fetch_assoc($result)) {
-//        print_pre($row);
+        //        print_pre($row);
         echo '<option value="'.$row['username'].'">'.$row['company'].' ('.$row['username'].')</option>';
     }
     ?>
-    </select>
+    </select><br />
+    <br />
+    Select the dates you would like to view:<br />
+    <br />
+    <form action="viewcdr.php">
+From: <input name="startdate">
+    <input type=button value="select" onclick="displayDatePicker('startdate', false, 'ymd', '-');"><BR>
+To: <input name="enddate">
+    <input type=button value="select" onclick="displayDatePicker('enddate', false, 'ymd', '-');"><BR>
+    <br />
+    
+
     <input type="submit" value="Display Report">
     </form>
     <?
