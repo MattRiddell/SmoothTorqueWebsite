@@ -101,7 +101,7 @@ if (mysql_num_rows($result) == 0) {
         $x++;
     }    
     $incorrect = 0;
-    for ($i = 1;$i<count($choices);$i++) {     
+    for ($i = 1;$i<=count($choices);$i++) {     
         a_echo("-----------------------------------");
         a_echo("Question: ".$choices[$i]['question_num']);
         //a_echo("Playing ".$choices[$i]['filename']);
