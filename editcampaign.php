@@ -75,13 +75,17 @@ $id = $_GET['id'];
 $sql = 'SELECT * FROM campaign WHERE id='.sanitize($id).' limit 1';
 $result=mysql_query($sql,$link) or die(mysql_error());
 $row = mysql_fetch_assoc($result);
-$row = array_map(stripslashes,$row);
+//$row = array_map(stripslashes,$row);
 //$sms = str_replace("#~#",".",$row['message3']);
 /* SMS Stuff */
 $sql_sms = 'SELECT filename FROM campaignmessage WHERE id = '.$row['messageid3'];
 $result_sms = mysql_query($sql_sms);
-$sms = str_replace("#~#",".",mysql_result($result_sms,0,0));
-$sms = substr($sms,0,strlen($sms)-1);
+if (mysql_num_rows($result_sms) > 0) {
+    $sms = str_replace("#~#",".",mysql_result($result_sms,0,0));
+    $sms = substr($sms,0,strlen($sms)-1);
+} else {
+    $sms = "";
+}
 
 if ($_COOKIE['level'] == sha1("level100")) {
     $sql = 'SELECT * FROM campaignmessage where filename like "x-%"';
