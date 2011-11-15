@@ -262,8 +262,14 @@ while ($row = mysql_fetch_assoc($result)) {
         $result2=mysql_query($sql, $link) or die (mysql_error());;
         $out_of_tz=mysql_result($result2,0,'count(*)');
         
+        $sql = 'Select count(*) from number where status='new' and campaignid = '.$row['id']." and TIME(NOW()) between start_time and end_time";
+        $result2=mysql_query($sql, $link) or die (mysql_error());;
+        $in_tz=mysql_result($result2,0,'count(*)');
+        
+        // ;           
+        
         if ($config_values['USE_TIMEZONES'] == 'YES') {
-            $tz = " ($out_of_tz out of Time Zone) ";
+            $tz = " ($out_of_tz out of Time Zone - $in_tz in TZ) ";
         } else {
             $tz = "";
         }
