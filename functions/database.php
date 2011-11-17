@@ -705,7 +705,22 @@ if (!function_exists('create_missing_tables') ) {
             
         }
         
-        
+        /*======================================================================
+         notifications Table
+         ======================================================================*/
+        if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","notifications")){
+            include "admin/db_config.php";
+            $sql = "CREATE TABLE `notifications` (
+            `campaign_id` int(11) NOT NULL,
+            `percent_remaining` double DEFAULT NULL,
+            `email_address` varchar(255) DEFAULT NULL
+            )";
+            
+            $result = mysql_query($sql,$link);
+            $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created notifications Table')";
+            $result=mysql_query($sql, $link);
+            
+        }
         
         /*======================================================================
          extensions Table
