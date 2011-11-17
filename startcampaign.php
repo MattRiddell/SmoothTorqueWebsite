@@ -6,7 +6,6 @@ $out=_get_browser();
 $_POST = array_map(mysql_real_escape_string,$_POST);
 $_GET = array_map(mysql_real_escape_string,$_GET);
 
-//print_r($_POST);
 ?>
 <br /><br /><br /><br />
 <center>
@@ -17,11 +16,8 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
 <td width="260">
 <?
 $sql = "SELECT count(*) FROM number WHERE status='new' and campaignid='$_GET[id]'";
-//echo $sql;
 $result = mysql_query($sql);
 $num_numbers = mysql_result($result,0,0);
-//echo $num_numbers;
-//exit(0);
 if ($num_numbers <1&& !isset($_GET['debug'])) {
         /* Not enough credit - error and return */
         ?>
@@ -38,39 +34,25 @@ if ($num_numbers <1&& !isset($_GET['debug'])) {
         exit(0);
 
 }
-/*Maximum Concurrent Calls:<b> <?echo $_POST[agents];?></b><br />
-Call Center Phone Number:<b> <?echo $_POST[did];?></b><br />
-Type of campaign:<b>
 
-if ($_POST[context]==0) {
-    echo "Load Simulation";
-} else if ($_POST[context]==1) {
-    echo "Answer Machine Only";
-} else if ($_POST[context]==2) {
-    echo "Immediate Live";
-} else if ($_POST[context]==3) {
-    echo "Press 1 Live";
-} else if ($_POST[context]==4) {
-    echo "Immediate Live and Answer Machine";
-} else if ($_POST[context]==5) {
-    echo "Press 1 Live and Answer Machine";
-}
-*/
+$sqlx = "SELECT groupid FROM campaign WHERE id=$_GET[id]";
+$result_new_groupid=mysql_query($sqlx, $link) or die (mysql_error());;
+$campaigngroupid=mysql_result($result_new_groupid,0,0);
 
-$sqlx = 'SELECT campaigngroupid, maxchans, maxcps FROM customer WHERE username=\''.$_COOKIE[user].'\'';
+$result_group_id = mysql_query("SELECT username FROM customer WHERE campaigngroupid = $campaigngroupid");
+$new_username = mysql_result($result_group_id,0,0);
+
+$sqlx = 'SELECT campaigngroupid, maxchans, maxcps FROM customer WHERE username=\''.$new_username.'\'';
 $result=mysql_query($sqlx, $link) or die (mysql_error());;
 $campaigngroupid=mysql_result($result,0,'campaigngroupid');
 $maxchans=mysql_result($result,0,'maxchans');
 $maxcps=mysql_result($result,0,'maxcps');
-$username=$_COOKIE[user];
+$username=$new_username;
 
 $sqlx = "SELECT messageid FROM campaign WHERE id=$_GET[id]";
 $result=mysql_query($sqlx, $link) or die (mysql_error());;
 $messageid=mysql_result($result,0,'messageid');
 
-$sqlx = "SELECT groupid FROM campaign WHERE id=$_GET[id]";
-$result_new_groupid=mysql_query($sqlx, $link) or die (mysql_error());;
-$new_group_id=mysql_result($result_new_groupid,0,0);
 
 $sqlx = "SELECT length FROM campaignmessage WHERE id=$messageid";
 $result=mysql_query($sqlx, $link) or die (mysql_error());;
@@ -242,8 +224,6 @@ if (isset($_GET['drive_min'])) {
     $drive_max = "61.0";
 }
 
-$result_group_id = mysql_query("SELECT username FROM customer WHERE campaigngroupid = $new_group_id");
-$new_username = mysql_result($result_group_id,0,0);
 
 $sql2="INSERT INTO queue (campaignid,queuename,status,details,flags,transferclid,
     starttime,endtime,startdate,enddate,did,clid,context,maxcalls,maxchans,maxretries
