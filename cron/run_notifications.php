@@ -71,7 +71,7 @@ foreach ($count_array as $key=>$array) {
                 /* If the last time it ran we had more than the threshold and
                  now we have less than the threshold then send an email */
                 if ($prev_perc > $row['percent_remaining']) {
-                    echo "Sending email to ".$row['email_address']."\n"
+                    echo "Sending email to ".$row['email_address']."\n";
                     // TODO: Send the email
                 }
                 
@@ -79,6 +79,6 @@ foreach ($count_array as $key=>$array) {
         }
     }
     /* Go through and update the num_of_num table */
-    $result_x = mysql_query("REPLACE INTO num_of_num (campaignid, total_count, remaining_count) VALUES ('$key','".$num_array[$key]['total_count']."','".$num_array[$key]['remaining_count']."')";
+    $result_x = mysql_query("REPLACE INTO num_of_num (campaignid, total_count, remaining_count) VALUES ('".$key."','".$num_array[$key]['total_count']."','".$num_array[$key]['remaining_count']."')");
 }
 
