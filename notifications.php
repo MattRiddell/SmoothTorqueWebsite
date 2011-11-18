@@ -12,6 +12,35 @@ echo "<br />";
 box_end();
 echo "<br />";
 
+if (isset($_GET['delete_sure'])) {
+    $result = mysql_query("DELETE FROM notifications WHERE campaign_id = ".sanitize($_GET['campaign_id'])." AND email_address = ".sanitize($_GET['email']));
+    redirect("notifications.php","Deleting your notification");
+    require "footer.php";
+    exit(0);
+}
+
+if (isset($_GET['delete'])) {
+    box_start(400);
+    echo "<center><br />";
+    echo 'Are you sure you want to delete the following notification?<br />';
+    echo "<br />";
+    if ($_GET['campaign_id'] == -1) {
+        $name = "All Campaigns";
+    } else {
+        $result = mysql_query("SELECT name FROM campaign WHERE id = ".sanitize($_GET['campaign_id']));
+        $name = mysql_result($result,0,0);
+    }
+    echo "<b>Campaign: </b>$name<br />";
+    echo "<b>Email: </b>$_GET[email]<br />";
+    echo "<br />";
+    echo '<a href="notifications.php?delete_sure=1&campaign_id='.$_GET['campaign_id'].'&email='.$_GET['email'].'">Yes, delete it</a><br />';
+    echo "<br />";
+    echo '<a href="notifications.php">No, leave it</a><br />';
+    echo "<br />";
+    box_end();
+    require "footer.php";
+    exit(0);
+}
 if (isset($_GET['save_new'])) {
     $sql1 = "INSERT INTO notifications (";
     $sql2 = ") VALUES (";
