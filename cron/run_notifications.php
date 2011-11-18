@@ -23,13 +23,22 @@ $count_array = array();
 if (mysql_num_rows($result1) > 0) {
     while ($row = mysql_fetch_assoc($result1)) {
         $sql = 'Select count(*) from number where status="new" and campaignid = '.$row['id']." and TIME(NOW()) between start_time and end_time";
-        $result2=mysql_query($sql, $link) or die (mysql_error());;
-        $count_array[$row['id']] == mysql_result($result2,0,'count(*)');
+        $result2=mysql_query($sql) or die (mysql_error());;
+        $count = mysql_result($result2,0,'count(*)');
+        $count_array[$row['id']]['remaining'] = $count;
+        
+        $sql = 'Select count(*) from number where campaignid = '.$row['id'];
+        $result2=mysql_query($sql) or die (mysql_error());;
+        $count = mysql_result($result2,0,'count(*)');
+        $count_array[$row['id']]['total'] = $count;
     }
 }
 
-print_r($count_array);
+//print_r($count_array);
 
+foreach ($count_array as $key=>$array) {
+    echo "Campaign ID $key has ".round($array['remaining']/$array['total']*100,2)." percent remaining\n";
+}
 /*
 
 $result = mysql_query("SELECT campaign_id FROM survey_schedules WHERE leads_required > 0 AND start_hour = ".date("H"));
