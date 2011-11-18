@@ -150,6 +150,9 @@ if ($level!=sha1("level100")) {
         
         $sql = "REPLACE INTO config (parameter, value) VALUES ('CDR_USE_STATE',".sanitize($_POST['CDR_USE_STATE']).")";
         mysql_query($sql) or die(mysql_error());
+        
+        $sql = "REPLACE INTO config (parameter, value) VALUES ('NUMBER_EXHAUSTION',".sanitize($_POST['NUMBER_EXHAUSTION']).")";
+        mysql_query($sql) or die(mysql_error());
                         
         $sql = "REPLACE INTO config (parameter, value) VALUES ('MENU_TIMEZONES',".sanitize($_POST['MENU_TIMEZONES']).")";
         mysql_query($sql) or die(mysql_error());
@@ -328,6 +331,14 @@ if ($level!=sha1("level100")) {
         $config_values['CDR_USE_STATE'] = mysql_result($result,0,'value');
     } else {
         $config_values['CDR_USE_STATE'] = "NO";
+    }
+    
+    $sql = 'SELECT value FROM config WHERE parameter=\'NUMBER_EXHAUSTION\'';
+    $result=mysql_query($sql, $link) or die (mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        $config_values['NUMBER_EXHAUSTION'] = mysql_result($result,0,'value');
+    } else {
+        $config_values['NUMBER_EXHAUSTION'] = "NO";
     }
     
     $sql = 'SELECT value FROM config WHERE parameter=\'USE_TIMEZONES\'';
@@ -1245,6 +1256,16 @@ Language:
     <td>
     <input type="radio" name="CDR_USE_STATE" value="YES" <?if ( $config_values['CDR_USE_STATE'] == "YES") {echo "checked";}?>> Yes
     <input type="radio" name="CDR_USE_STATE" value="NO" <?if ( $config_values['CDR_USE_STATE'] != "YES") {echo "checked";}?>> No
+    </td>
+    </tr>
+    
+    <tr  class="tborder2">
+    <td>
+    Provide number exhaustion warning emails:
+    </td>
+    <td>
+    <input type="radio" name="NUMBER_EXHAUSTION" value="YES" <?if ( $config_values['NUMBER_EXHAUSTION'] == "YES") {echo "checked";}?>> Yes
+    <input type="radio" name="NUMBER_EXHAUSTION" value="NO" <?if ( $config_values['NUMBER_EXHAUSTION'] != "YES") {echo "checked";}?>> No
     </td>
     </tr>
     
