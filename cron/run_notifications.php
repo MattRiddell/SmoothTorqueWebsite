@@ -46,7 +46,7 @@ foreach ($count_array as $key=>$array) {
     /* Find any notifications that relate to the campaign we're looking at.  
      This means any that have a campaign id of the one we're looking for or a 
      campaign id of -1 (i.e. they're interested in all campaigns) */
-    $result = mysql_query("SELECT * FROM notifcations WHERE campaign_id = ".$key." or campaign_id = '-1'");
+    $result = mysql_query("SELECT * FROM notifications WHERE campaign_id = ".$key." or campaign_id = '-1'");
     if (mysql_num_rows($result) == 0) {
         echo "Nobody cares about Campaign ID ".$key."\n";
     } else {
