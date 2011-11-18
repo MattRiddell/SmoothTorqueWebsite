@@ -79,6 +79,6 @@ foreach ($count_array as $key=>$array) {
         }
     }
     /* Go through and update the num_of_num table */
-    $result_x = mysql_query("REPLACE INTO num_of_num (campaignid, total_count, remaining_count) VALUES ('".$key."','".$num_array[$key]['total_count']."','".$num_array[$key]['remaining_count']."')");
+    $result_x = mysql_query("REPLACE INTO num_of_num (campaignid, total_count, remaining_count) VALUES ('".$key."','".$array[$key]['total_count']."','".$array[$key]['remaining_count']."')");
 }
 
