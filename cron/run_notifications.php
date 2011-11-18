@@ -37,7 +37,11 @@ if (mysql_num_rows($result1) > 0) {
 //print_r($count_array);
 
 foreach ($count_array as $key=>$array) {
-    echo "Campaign ID $key has ".round($array['remaining']/$array['total']*100,2)." percent remaining\n";
+    if ($array['total'] > 0) {
+        echo "Campaign ID $key has ".round($array['remaining']/$array['total']*100,2)." percent remaining\n";
+    } else {
+        echo "Campaign ID $key has 0.00 percent remaining\n";
+    }
 }
 /*
 
