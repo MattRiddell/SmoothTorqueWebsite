@@ -54,6 +54,7 @@ PER_PAGE=200
 NUMBERS_VIEW=Visualizza i numeri di telefono
 NUMBERS_SYSTEM=Utilizzare System elenchi
 NUMBERS_GENERATE=Generare automaticamente il numero
+NUMBERS_WARNING=Number Exhaustion Warning Emails
 NUMBERS_MANUAL=Aggiungere manualmente i numeri
 NUMBERS_UPLOAD=Carica numeri da un file di testo
 NUMBERS_EXPORT=Esporta i numeri di telefono
@@ -126,6 +127,7 @@ PER_PAGE=200
 NUMBERS_VIEW=Ver los números de teléfono
 NUMBERS_SYSTEM=Utilice sistema de listas
 NUMBERS_GENERATE=Generar automáticamente los números
+NUMBERS_WARNING=Number Exhaustion Warning Emails
 NUMBERS_MANUAL=Añadir manualmente los números de
 NUMBERS_UPLOAD=Cargar los números de un archivo de texto
 NUMBERS_EXPORT=Exportación números de teléfono
@@ -197,6 +199,7 @@ PER_PAGE=200
 NUMBERS_VIEW=View phone numbers
 NUMBERS_SYSTEM=Use System Lists
 NUMBERS_GENERATE=Generate numbers automatically
+NUMBERS_WARNING=Number Exhaustion Warning Emails
 NUMBERS_MANUAL=Add number(s) manually
 NUMBERS_UPLOAD=Upload numbers from a text file
 NUMBERS_EXPORT=Export Phone Numbers
@@ -472,7 +475,11 @@ if ($config_values['NUMBERS_SYSTEM'] == "") {
 if ($config_values['NUMBERS_GENERATE'] == "") {
     $config_values['NUMBERS_GENERATE'] = "Generate numbers automatically";
 }
-
+    
+if ($config_values['NUMBERS_WARNING'] == "") {
+    $config_values['NUMBERS_WARNING'] = "Number Exhaustion Warning Emails";
+}
+    
 if ($config_values['NUMBERS_MANUAL'] == "") {
     $config_values['NUMBERS_MANUAL'] = "Add number(s) manually";
 }

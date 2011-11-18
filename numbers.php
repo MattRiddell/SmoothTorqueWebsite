@@ -49,6 +49,14 @@ if ($config_values['USE_GENERATE'] == "YES") {
 <a href="gennumbers.php"><img src="images/page_white_lightning.png" border="0">&nbsp; <?echo $config_values['NUMBERS_GENERATE'];?></a><br />
 <?
 }
+
+if ($config_values['NUMBER_EXHAUSTION'] == "YES") {
+    ?>
+    <br />
+    <a href="gennumbers.php"><img src="images/page_white_lightning.png" border="0">&nbsp; <?echo $config_values['NUMBERS_WARNING'];?></a><br />
+    <?
+}
+
 ?>
 <br />
 </center>
