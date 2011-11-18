@@ -31,6 +31,8 @@ if (mysql_num_rows($result1) > 0) {
         $result2=mysql_query($sql) or die (mysql_error());;
         $count = mysql_result($result2,0,'count(*)');
         $count_array[$row['id']]['total'] = $count;
+        
+        $campaign_names[$row['id']] = $row['name'];
     }
 }
 
@@ -72,13 +74,19 @@ foreach ($count_array as $key=>$array) {
                  now we have less than the threshold then send an email */
                 if ($prev_perc > $row['percent_remaining']) {
                     echo "Sending email to ".$row['email_address']."\n";
-                    // TODO: Send the email
+                    $campaign_name = $campaign_names[$key];
+                    $message = "You have asked to monitor the ".$campaign_name." campaign.\n";
+                    $message.= "The number of numbers remaining is less than ".$row['percent_remaining']." percent\n";
+                    $message.= "There are currently ".$array['remaining']." out of ".$array['total']." numbers remaining\n";
+                    mail($row['email_address'],"Dialer number remainng threshold breached",$message);
+                } else {
+                    //echo "Not Sending email to ".$row['email_address']."\n";
                 }
                 
             }
         }
     }
     /* Go through and update the num_of_num table */
-    $result_x = mysql_query("REPLACE INTO num_of_num (campaignid, total_count, remaining_count) VALUES ('".$key."','".$array[$key]['total_count']."','".$array[$key]['remaining_count']."')");
+    $result_x = mysql_query("REPLACE INTO num_of_num (campaignid, total_count, remaining_count) VALUES ('".$key."','".$array['total']."','".$array['remaining']."')");
 }
 
