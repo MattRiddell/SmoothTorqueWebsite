@@ -221,7 +221,7 @@ if (!function_exists('get_menu_html') ) {
             //=======================================================================================================
             // Numbers
             //=======================================================================================================
-            if ($self=="/addnumbers.php"||$self=="/serverlist.php"||$self=="/numbers.php"||$self=="/deletenumber.php"||$self=="/viewnumbers.php"||$self == "/gennumbers.php"||$self == "/upload.php"||$self =="//receive.php"||$self=="/resetnumber.php"){
+            if ($self=="/addnumbers.php"||$self=="/notifications.php"||$self=="/serverlist.php"||$self=="/numbers.php"||$self=="/deletenumber.php"||$self=="/viewnumbers.php"||$self == "/gennumbers.php"||$self == "/upload.php"||$self =="//receive.php"||$self=="/resetnumber.php"){
                 $thead="thead";
             } else {
                 $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
@@ -258,18 +258,19 @@ if (!function_exists('get_menu_html') ) {
             }
             $menu.='<TD class="'.$thead.'"><A HREF="'.$http_dir_name.'schedule.php"><img width="16" height="16"  src="'.$http_dir_name.'images/clock.png" border="0" ><br />'.str_replace(" ","&nbsp;",$config_values['MENU_SCHEDULES']).'</A>&nbsp;</TD>';
             
-            //=======================================================================================================
-            // Surveys
-            //=======================================================================================================
-            if ($self=="/surveys.php"||$self=="/survey_responses.php"||$self=="/transfer_report.php"){
-                $thead="thead";
-            } else {
-                $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
-            }
-            $menu.='<TD class="'.$thead.'"><A HREF="'.$http_dir_name.'surveys.php"><img width="16" height="16"  src="'.$http_dir_name.'images/table.png" border="0" ><br />'.str_replace(" ","&nbsp;",$config_values['MENU_SURVEYS']).'</A>&nbsp;</TD>';
             
             if ($level==sha1("level100")){
                 
+                //=======================================================================================================
+                // Surveys
+                //=======================================================================================================
+                if ($self=="/surveys.php"||$self=="/survey_responses.php"||$self=="/transfer_report.php"){
+                    $thead="thead";
+                } else {
+                    $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
+                }
+                $menu.='<TD class="'.$thead.'"><A HREF="'.$http_dir_name.'surveys.php"><img width="16" height="16"  src="'.$http_dir_name.'images/table.png" border="0" ><br />'.str_replace(" ","&nbsp;",$config_values['MENU_SURVEYS']).'</A>&nbsp;</TD>';
+
                 //=======================================================================================================
                 // CDRs
                 //=======================================================================================================
