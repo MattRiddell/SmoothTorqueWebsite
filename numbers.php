@@ -53,7 +53,7 @@ if ($config_values['USE_GENERATE'] == "YES") {
 if ($config_values['NUMBER_EXHAUSTION'] == "YES") {
     ?>
     <br />
-    <a href="notifications.php"><img src="images/page_white_lightning.png" border="0">&nbsp; <?echo $config_values['NUMBERS_WARNING'];?></a><br />
+    <a href="notifications.php"><img src="images/email.png" border="0">&nbsp; <?echo $config_values['NUMBERS_WARNING'];?></a><br />
     <?
 }
 
