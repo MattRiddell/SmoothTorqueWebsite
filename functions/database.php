@@ -695,9 +695,11 @@ if (!function_exists('create_missing_tables') ) {
         if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","num_of_num")){
             include "admin/db_config.php";
             $sql = "CREATE TABLE `num_of_num` (
-            `campaignid` int(200) NOT NULL default '0',
-            `total_count` int(200) NOT NULL default '0',
-            `remaining_count` int(200) NOT NULL default '0')";
+            `campaignid` int(200) NOT NULL DEFAULT '0',
+            `total_count` int(200) NOT NULL DEFAULT '0',
+            `remaining_count` int(200) NOT NULL DEFAULT '0',
+            PRIMARY KEY (`campaignid`)
+            )";
             
             $result = mysql_query($sql,$link);
             $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created num_of_num Table')";
