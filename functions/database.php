@@ -696,7 +696,7 @@ if (!function_exists('create_missing_tables') ) {
             include "admin/db_config.php";
             $sql = "CREATE TABLE `num_of_num` (
             `campaignid` int(200) NOT NULL default '0',
-            `total_count` int(200) NOT NULL default '0'),
+            `total_count` int(200) NOT NULL default '0',
             `remaining_count` int(200) NOT NULL default '0')";
             
             $result = mysql_query($sql,$link);
