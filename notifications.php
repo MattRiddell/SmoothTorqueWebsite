@@ -12,8 +12,54 @@ echo "<br />";
 box_end();
 echo "<br />";
 
+if (isset($_GET['save_new'])) {
+    $sql1 = "INSERT INTO notifications (";
+    $sql2 = ") VALUES (";
+    foreach ($_POST as $field=>$value) {
+        $sql1.=sanitize($field,false).",";
+        $sql2.=sanitize($value,true).",";
+    }
+    $sql = substr($sql1,0,strlen($sql1)-1).substr($sql2,0,strlen($sql2)-1).")";;
+    $result = mysql_query($sql);
+    redirect("notifications.php","Adding your notification");
+    require "footer.php";
+    exit(0);
+}
 
 if (isset($_GET['add'])) {
+    box_start(500);
+    echo "<br /><center>";
+    ?>
+    <form action="notifications.php?save_new=1" method="post">
+    <table>
+    <tr>
+    <td>Campaign:</td>
+    <td><select name="campaign_id">
+    <option value="-1">All Camapaigns</option>
+    <?
+    $result = mysql_query("SELECT id, name FROM campaign");
+    while ($row = mysql_fetch_assoc($result)) {
+        echo '<option value="'.$row['id'].'">'.$row['name'].'</option>';        
+    }
+    ?>
+    </select></td>
+    </tr>
+    <tr>
+    <td>Percentage to warn at</td>    
+    <td><input type="text" name="percent_remaining" value="10">%</td>
+    </tr>
+    <tr>
+    <td>Email address</td>    
+    <td><input type="text" name="email_address" value=""></td>
+    </tr>
+    <tr>
+    <td colspan="2"><input type="submit" value="Add Notification"></td>    
+    </tr>
+    
+    </table>
+    </form>
+    <?
+    box_end();
     require "footer.php";
     exit(0);
 }
