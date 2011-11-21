@@ -104,9 +104,9 @@ $row = mysql_fetch_assoc($result);
 $backend=$row['value'];
 $level=$_COOKIE['level'];
 if ($level==sha1("level100") && $_GET['type']=="all") {
-    $sql = 'SELECT * FROM campaign order by name';
+    $sql = 'SELECT * FROM campaign order by groupid, name';
 } else {
-    $sql = 'SELECT * FROM campaign WHERE groupid='.$campaigngroupid.' order by name';
+    $sql = 'SELECT * FROM campaign WHERE groupid='.$campaigngroupid.' order by groupid, name';
 }
 $result=mysql_query($sql, $link) or die (mysql_error());;
 if (mysql_num_rows($result)==0){
