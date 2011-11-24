@@ -141,7 +141,6 @@
         `smtp_pass` varchar(250) default NULL,
         `smtp_from` varchar(250) default NULL,
         `use_separate_dnc` varchar(250) default NULL,
-        `numbers_warning` varchar(250) default NULL,
         `allow_numbers_manual` varchar(250) default NULL
                                    
         )		  ";
