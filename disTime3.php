@@ -287,7 +287,7 @@ while ($row = mysql_fetch_assoc($result)) {
             $tz = "";
         }
         
-        $tz = "";
+        //$tz = "";
     }
     
     
