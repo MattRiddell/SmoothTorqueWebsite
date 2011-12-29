@@ -307,6 +307,14 @@
     } else {
         $config_values['NUMBER_EXHAUSTION'] = "NO";
     }
+    
+    $sql = 'SELECT value FROM config WHERE parameter=\'DISABLE_RECYCLE_ALL\'';
+    $result=mysql_query($sql, $link) or die (mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        $config_values['DISABLE_RECYCLE_ALL'] = mysql_result($result,0,'value');
+    } else {
+        $config_values['DISABLE_RECYCLE_ALL'] = "NO";
+    }
        
     $sql = 'SELECT value FROM config WHERE parameter=\'USE_TIMEZONES\'';
     $result=mysql_query($sql, $link) or die (mysql_error());

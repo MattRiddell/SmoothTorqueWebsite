@@ -153,7 +153,10 @@ if ($level!=sha1("level100")) {
         
         $sql = "REPLACE INTO config (parameter, value) VALUES ('NUMBER_EXHAUSTION',".sanitize($_POST['NUMBER_EXHAUSTION']).")";
         mysql_query($sql) or die(mysql_error());
-                        
+        
+        $sql = "REPLACE INTO config (parameter, value) VALUES ('DISABLE_RECYCLE_ALL',".sanitize($_POST['DISABLE_RECYCLE_ALL']).")";
+        mysql_query($sql) or die(mysql_error());
+        
         $sql = "REPLACE INTO config (parameter, value) VALUES ('MENU_TIMEZONES',".sanitize($_POST['MENU_TIMEZONES']).")";
         mysql_query($sql) or die(mysql_error());
         
@@ -339,6 +342,14 @@ if ($level!=sha1("level100")) {
         $config_values['NUMBER_EXHAUSTION'] = mysql_result($result,0,'value');
     } else {
         $config_values['NUMBER_EXHAUSTION'] = "NO";
+    }
+    
+    $sql = 'SELECT value FROM config WHERE parameter=\'DISABLE_RECYCLE_ALL\'';
+    $result=mysql_query($sql, $link) or die (mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        $config_values['DISABLE_RECYCLE_ALL'] = mysql_result($result,0,'value');
+    } else {
+        $config_values['DISABLE_RECYCLE_ALL'] = "NO";
     }
     
     $sql = 'SELECT value FROM config WHERE parameter=\'USE_TIMEZONES\'';
@@ -1266,6 +1277,16 @@ Language:
     <td>
     <input type="radio" name="NUMBER_EXHAUSTION" value="YES" <?if ( $config_values['NUMBER_EXHAUSTION'] == "YES") {echo "checked";}?>> Yes
     <input type="radio" name="NUMBER_EXHAUSTION" value="NO" <?if ( $config_values['NUMBER_EXHAUSTION'] != "YES") {echo "checked";}?>> No
+    </td>
+    </tr>
+    
+    <tr  class="tborder2">
+    <td>
+    Disable "Recycle All Numbers" Option:
+    </td>
+    <td>
+    <input type="radio" name="DISABLE_RECYCLE_ALL" value="YES" <?if ( $config_values['DISABLE_RECYCLE_ALL'] == "YES") {echo "checked";}?>> Yes
+    <input type="radio" name="DISABLE_RECYCLE_ALL" value="NO" <?if ( $config_values['DISABLE_RECYCLE_ALL'] != "YES") {echo "checked";}?>> No
     </td>
     </tr>
     
