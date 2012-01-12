@@ -42,6 +42,8 @@ a_echo("###########################################################");
 $res = $agi->get_data("agent-pass", 2000, 4);     
 $response = $res['result'];
 a_echo("Got pin of ".$response);
+record_file("record_$response", "sln", "#", "-1", NULL, true, NULL);
+stream_file("record_$response");
 fclose($in);
 fclose($stdlog);
 exit;
