@@ -62,7 +62,7 @@ switch ($response) {
     case 1:
         // accept
         $cmd = "/usr/bin/mutt -s 'Recording received' -f /dev/null -e 'set copy=no' -e 'set from = \"recordings@survey.tsoainternational.com\"' -a '/var/lib/asterisk/sounds/record_$pin.sln' 'matt@venturevoip.com' </dev/null 2>&1";
-        a_echo $cmd;
+        a_echo ($cmd);
         exec ($cmd);
         $agi->stream_file("auth-thankyou");
         break;
