@@ -45,6 +45,7 @@ while (strlen($response) != 4) {
     $response = $res['result'];
     a_echo("Got pin of ".$response);
 }
+stream_file("auth-thankyou");
 record_file("record_$response", "sln", "#", "-1", NULL, true, NULL);
 stream_file("record_$response");
 fclose($in);
