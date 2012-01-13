@@ -61,7 +61,9 @@ $response = $res['result'];
 switch ($response) {
     case 1:
         // accept
-        exec ("/usr/bin/mutt -s 'Recording received' -f /dev/null -e 'set copy=no' -e 'set from = \"recordings@survey.tsoainternational.com\"' -a '/var/lib/asterisk/sounds/record_$pin.sln' 'matt@venturevoip.com' </dev/null 2>&1");
+        $cmd = "/usr/bin/mutt -s 'Recording received' -f /dev/null -e 'set copy=no' -e 'set from = \"recordings@survey.tsoainternational.com\"' -a '/var/lib/asterisk/sounds/record_$pin.sln' 'matt@venturevoip.com' </dev/null 2>&1";
+        a_echo $cmd;
+        exec ($cmd);
         $agi->stream_file("auth-thankyou");
         break;
     case 2:
