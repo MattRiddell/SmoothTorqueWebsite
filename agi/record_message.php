@@ -34,14 +34,17 @@ function a_echo($line)
     read();
 }
 
-a_echo("###########################################################");
-a_echo("#                                                         #");
-a_echo("#            Inbound DDI Recording System                 #");
-a_echo("#                                                         #");
-a_echo("###########################################################");
-$res = $agi->get_data("agent-pass", 2000, 4);     
-$response = $res['result'];
-a_echo("Got pin of ".$response);
+a_echo("+---------------------------------------------------------+");
+a_echo("|                                                         |");
+a_echo("|            Inbound DDI Recording System                 |");
+a_echo("|                                                         |");
+a_echo("+---------------------------------------------------------+");
+$response = "";
+while (strlen($response) != 4) {
+    $res = $agi->get_data("agent-pass", 15000, 4);     
+    $response = $res['result'];
+    a_echo("Got pin of ".$response);
+}
 record_file("record_$response", "sln", "#", "-1", NULL, true, NULL);
 stream_file("record_$response");
 fclose($in);
