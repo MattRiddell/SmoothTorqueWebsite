@@ -43,11 +43,14 @@ $response = "";
 while (strlen($response) != 4) {
     $res = $agi->get_data("agent-pass", 15000, 4);     
     $response = $res['result'];
-    a_echo("Got pin of ".$response);
+    if (strlen($response) != 4) {
+        a_echo("Got pin of ".$response);
+    }
 }
-stream_file("auth-thankyou");
-record_file("record_$response", "sln", "#", "-1", NULL, true, NULL);
-stream_file("record_$response");
+a_echo("Got good pin of ".$response);
+$agi->stream_file("auth-thankyou");
+$agi->record_file("record_$response", "sln", "#", "-1", NULL, true, NULL);
+$agi->stream_file("record_$response");
 fclose($in);
 fclose($stdlog);
 exit;
