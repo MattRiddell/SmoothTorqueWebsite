@@ -39,19 +39,19 @@ a_echo("|                                                         |");
 a_echo("|            Inbound DDI Recording System                 |");
 a_echo("|                                                         |");
 a_echo("+---------------------------------------------------------+");
-$response = "";
-while (strlen($response) != 4) {
+$pin = "";
+while (strlen($pin) != 4) {
     $res = $agi->get_data("agent-pass", 15000, 4);     
-    $response = $res['result'];
-    if (strlen($response) != 4) {
-        a_echo("Got pin of ".$response);
+    $pin = $res['result'];
+    if (strlen($pin) != 4) {
+        a_echo("Got pin of ".$pin);
     }
 }
-a_echo("Got good pin of ".$response);
+a_echo("Got good pin of ".$pin);
 $agi->stream_file("auth-thankyou");
 record:
 $agi->stream_file("vm-intro");
-$agi->record_file("record_$response", "sln", "#", "-1", NULL, true, NULL);
+$agi->record_file("record_$pin", "sln", "#", "-1", NULL, true, NULL);
 
 menu:
 /* Press 1 to accept this recording. Press 2 to listen to it. Press 3 to re-record your message. */
@@ -64,7 +64,7 @@ switch ($response) {
         break;
     case 2:
         // listen
-        $agi->stream_file("record_$response");
+        $agi->stream_file("record_$pin");
         goto menu;
         break;
     case 3:
