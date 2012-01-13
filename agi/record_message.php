@@ -49,8 +49,33 @@ while (strlen($response) != 4) {
 }
 a_echo("Got good pin of ".$response);
 $agi->stream_file("auth-thankyou");
+record:
+$agi->stream_file("vm-intro");
 $agi->record_file("record_$response", "sln", "#", "-1", NULL, true, NULL);
-$agi->stream_file("record_$response");
+
+menu:
+/* Press 1 to accept this recording. Press 2 to listen to it. Press 3 to re-record your message. */
+$res = $agi->get_data("vm-review", 15000, 1);     
+$response = $res['result'];
+
+switch ($response) {
+    case 1:
+        // accept
+        break;
+    case 2:
+        // listen
+        $agi->stream_file("record_$response");
+        goto menu;
+        break;
+    case 3:
+        // re-record
+        goto record;
+        break;
+    default:
+        goto menu;
+        break;
+}
+
 fclose($in);
 fclose($stdlog);
 exit;
