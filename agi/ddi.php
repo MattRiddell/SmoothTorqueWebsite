@@ -51,7 +51,19 @@ $extension = $agi->request['agi_extension'];
 a_echo("Extension: $extension");
 $result = mysql_query("SELECT * FROM dids WHERE number = '".$extension."'");
 if (mysql_num_rows($result) == 0) {
-    a_echo("DDI not found!");
+    a_echo("DDI not found in DDIs!  Checking campaigns");
+    $result = mysql_query("SELECT * FROM SineDialer.campaign WHERE clid = '".$extension."'");
+    if (mysql_num_rows($result) == 0) {
+        a_echo("DDI not found in campaigns");
+    } else {
+        $row = mysql_fetch_assoc($result);
+        $result = mysql_query("SELECT filename FROM campaignmessage WHERE id = ".$row['messageid']);
+        $message = mysql_result($result,0,0);
+        $message = substr($message,0,strlen($message)-4);
+        $result=$agi->get_variable("phonenumber");
+        $num=$result['data'];
+        $agi->set_variable("CDR(userfield)",$num."-".$row['id']);
+    }    
 } else {
     $row = mysql_fetch_assoc($result);
     a_echo("Intro: ".$row['message_id']." Campaign: ".$row['campaign_id']);
