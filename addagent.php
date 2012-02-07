@@ -16,7 +16,7 @@ if (isset($_POST[name])) {
     }
     $allowed = $codec1.";".$codec2;
     $callerid = $name." <0000>";
-    $sql = "INSERT INTO sip_buddies (name, accountcode, callerid, canreinvite,
+    $sql = "REPLACE INTO sip_buddies (name, accountcode, callerid, canreinvite,
     context, dtmfmode, host, language, nat, qualify, secret, type, username,
     disallow, allow) values ('$name', '$name', '$callerid', 'no',
     'internal', '$dtmfmode', 'dynamic', 'en', 'yes', 'yes', '$password', 'friend', '$name',
