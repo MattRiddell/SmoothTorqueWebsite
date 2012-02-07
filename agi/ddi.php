@@ -63,6 +63,8 @@ if (mysql_num_rows($result) == 0) {
         $result=$agi->get_variable("phonenumber");
         $num=$result['data'];
         $agi->set_variable("CDR(userfield)",$num."-".$row['id']);
+        $agi->set_variable("message",$message);
+        
     }    
 } else {
     $row = mysql_fetch_assoc($result);
