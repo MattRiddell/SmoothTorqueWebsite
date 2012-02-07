@@ -36,7 +36,7 @@ if (isset($_POST[name])){
     /*    $SMDB2->executeUpdate($sql);*/
     
     
-    header("Location: /messages.php");
+    header("Location: messages.php");
     exit;
 }
 //require "header_campaign.php";

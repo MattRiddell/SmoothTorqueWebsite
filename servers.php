@@ -45,7 +45,7 @@ if ($level!=sha1("level100")) {
     $out=_get_browser();
     if ($out[browser]=="MSIE"){
     ?>
-        <script type="text/javascript" src="ajax/jquery.js"></script>
+        <script type="text/javascript" src="<?=$http_dir_name?>ajax/jquery.js"></script>
         <script type="text/javascript">
             $(function(){ // jquery onload
                     window.setInterval(function(){
@@ -56,7 +56,7 @@ if ($level!=sha1("level100")) {
 
         </script>
     <?} else {?>
-        <script type="text/javascript" src="ajax/jquery.js"></script>
+        <script type="text/javascript" src="<?=$http_dir_name?>ajax/jquery.js"></script>
         <script type="text/javascript">
             $(function(){ // jquery onload
                     window.setInterval(function(){
@@ -69,12 +69,12 @@ if ($level!=sha1("level100")) {
 
     <div id = "ajaxDiv">
         <?
-        include "server_total.php";
+          include "<?=$http_dir_name?>server_total.php";
         ?>
     </div>
     <div id = "ajaxDiv2">
         <?
-        include "server_details.php";
+          include "<?=$http_dir_name?>server_details.php";
         ?>
     </div>
     <?

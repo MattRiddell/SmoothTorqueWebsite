@@ -22,7 +22,7 @@ $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE
 $result=mysql_query($sql, $link);
 /*================= Log Access ======================================*/
 
-    header("Location: /trunks.php");
+    header("Location: trunks.php");
     exit;
 }
 //require "header_campaign.php";

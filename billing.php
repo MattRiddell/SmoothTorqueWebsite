@@ -46,7 +46,7 @@ $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE
 $result=mysql_query($sql, $link);
 /*================= Log Access ======================================*/
 
-    header("Location: /customers.php");
+    header("Location: customers.php");
     exit;
 }
 

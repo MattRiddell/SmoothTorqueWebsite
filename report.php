@@ -9,7 +9,7 @@ if ($id<1){
 }
 ?><script>
 var changing_image;
-var imgBase="/graph2.php?id=<?echo $id;?>&debug=<?echo $debug;?>&type=<?echo $type;?>&x="
+var imgBase="graph2.php?id=<?echo $id;?>&debug=<?echo $debug;?>&type=<?echo $type;?>&x="
 var c = 0;
 function count()
 {

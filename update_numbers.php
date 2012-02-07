@@ -15,6 +15,5 @@ while ($row = mysql_fetch_assoc($result)) {
     $result2 = mysql_query($sql);
     echo $sql."<br />";
     flush();
-    //print_pre($row);
 }
 ?>

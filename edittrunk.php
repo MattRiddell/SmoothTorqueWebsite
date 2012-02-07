@@ -20,7 +20,7 @@ if (isset($_POST[name])){
 /*    $SMDB2->executeUpdate($sql);*/
 
 
-    header("Location: /trunks.php");
+    header("Location: trunks.php");
     exit;
 }
 //require "header_campaign.php";
