@@ -8,7 +8,7 @@ $db_pass = "pass";
 $db_name = "SineDialer";
 
 $use_single_transfer_trunk = true;
-$transfer_trunk = 'SIP/${EXTEN}@transfer';
+$transfer_trunk = 'SIP/1${EXTEN}@transfer';
 
 ob_implicit_flush(true);
 set_time_limit(6);
