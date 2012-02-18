@@ -97,7 +97,7 @@ if (mysql_num_rows($result) == 0) {
     $agi->set_variable("message3",$message3);
     
     // Get Destination DID
-    $trunk_did = "SIP/1".$row_campaign['did']."@dialmaxx";
+    $trunk_did = "SIP/1".$row_campaign['did']."@transfer";
     $agi->set_variable("trunk-did",$trunk_did);
 
     $result=$agi->get_variable("phonenumber");
