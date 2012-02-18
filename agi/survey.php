@@ -5,7 +5,11 @@ $agi = new AGI();
 $db_host = "127.0.0.1";
 $db_user = "user";
 $db_pass = "pass";
-$db_name = "DNC";
+$db_name = "SineDialer";
+
+$use_single_transfer_trunk = true;
+$transfer_trunk = 'SIP/${EXTEN}@transfer';
+
 ob_implicit_flush(true);
 set_time_limit(6);
 $in = fopen("php://stdin","r");
@@ -65,6 +69,14 @@ $campaign=$result[data];
 /* Get Phone Number */
 $result=$agi->get_variable("phonenumber");
 $phonenumber=$result[data];
+
+/* Get DID */
+$result=$agi->get_variable("did");
+$did=$result[data];
+
+if ($use_single_transfer_trunk) {
+    $agi->set_variable("trunk-did",str_replace('${EXTEN}',$did,$transfer_trunk));
+}
 
 $sql = "SELECT survey FROM campaign WHERE id = ".$campaign;
 $result = mysql_query($sql);
