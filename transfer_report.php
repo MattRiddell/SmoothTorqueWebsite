@@ -106,7 +106,7 @@ if (isset($_GET['live_calls'])) {
             fputs($socket, "Secret: $row[password]\r\n");
             fputs($socket, "Events: off\r\n\r\n");
             fputs($socket, "Action: Command\r\n");
-            fputs($socket, "Command: show channels concise\r\n\r\n");
+            fputs($socket, "Command: core show channels concise\r\n\r\n");
             fputs($socket, "Action: Logoff\r\n\r\n");
             while (!feof($socket)) {
                 //echo "Reading From $row[name]<br />";
