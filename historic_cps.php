@@ -18,5 +18,5 @@ while (1) {
         echo "-- No campaigns running --\n";
         $result_new = mysql_query("INSERT INTO historic_cps (campaign_id, cps) VALUES (0,0)");
     }
-    sleep(10);
+    sleep(30);
 }
