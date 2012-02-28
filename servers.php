@@ -69,12 +69,12 @@ if ($level!=sha1("level100")) {
 
     <div id = "ajaxDiv">
         <?
-          include "<?=$http_dir_name?>server_total.php";
+          include $http_dir_name."server_total.php";
         ?>
     </div>
     <div id = "ajaxDiv2">
         <?
-          include "<?=$http_dir_name?>server_details.php";
+          include $http_dir_name."server_details.php";
         ?>
     </div>
     <?
