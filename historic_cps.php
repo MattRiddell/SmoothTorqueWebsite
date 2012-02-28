@@ -3,7 +3,7 @@
 require "admin/db_config.php";
 require "functions/sanitize.php";
 while (1) {
-    $sql = "select campaign.id, campaign.name, campaign_stats.* from campaign, campaign_stats, queue where campaign_stats.campaignid=queue.campaignID and queue.status = 101 and campaign_stats.campaignid = campaign.id";
+    $sql = "select distinct(campaign.id), campaign.name, campaign_stats.*, queue.status from campaign, campaign_stats, queue where campaign_stats.campaignid=queue.campaignID and (queue.status = 101 or queue.status = 103 or queue.status = 104) and campaign_stats.campaignid = campaign.id";
     $result = mysql_query($sql) or die(mysql_error());
     if (mysql_num_rows($result) > 0) {
         $total['cps'] = 0;
