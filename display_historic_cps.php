@@ -4,7 +4,7 @@ require_once ('jpgraph_line.php');
 require_once ('jpgraph_date.php');
 require "admin/db_config.php";
 
-$result = mysql_query("SELECT * FROM historic_cps where date(record_timestamp) = date(now()) order by record_timestamp asc");
+$result = mysql_query("SELECT * FROM historic_cps where date(record_timestamp) = date(now()) and cps > 0 order by record_timestamp asc");
 while ($row = mysql_fetch_assoc($result)) {
     $data[] = $row['cps'];
     $xdata[] = @strtotime($row['record_timestamp']);
