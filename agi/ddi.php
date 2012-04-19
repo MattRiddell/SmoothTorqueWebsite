@@ -5,7 +5,7 @@ $agi = new AGI();
 $db_host = "127.0.0.1";
 $db_user = "user";
 $db_pass = "pass";
-$db_name = "DNC";
+$db_name = "SineDialer";
 ob_implicit_flush(true);
 set_time_limit(6);
 $in = fopen("php://stdin","r");
