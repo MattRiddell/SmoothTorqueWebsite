@@ -54,7 +54,8 @@ if (mysql_num_rows($result) == 0) {
     a_echo("DDI not found in DDIs!  Checking campaigns");
     $result = mysql_query("SELECT * FROM SineDialer.campaign WHERE clid = '".$extension."'");
     if (mysql_num_rows($result) == 0) {
-        a_echo("DDI not found in campaigns");
+        a_echo("DDI not found in campaigns - getting first one we can find");
+        $result = mysql_query("SELECT * FROM dids limit 1");
     } else {
         $row = mysql_fetch_assoc($result);
         $result = mysql_query("SELECT filename FROM campaignmessage WHERE id = ".$row['messageid']);
@@ -66,7 +67,6 @@ if (mysql_num_rows($result) == 0) {
         $agi->set_variable("message",$message);
         
     }    
-} else {
     $row = mysql_fetch_assoc($result);
     a_echo("Intro: ".$row['message_id']." Campaign: ".$row['campaign_id']);
     $agi->set_variable("campaign",$row['campaign_id']);
@@ -99,17 +99,15 @@ if (mysql_num_rows($result) == 0) {
     // Get Destination DID
     $trunk_did = "SIP/1".$row_campaign['did']."@transfer";
     $agi->set_variable("trunk-did",$trunk_did);
-
+    
     $result=$agi->get_variable("phonenumber");
     $num=$result['data'];
     $agi->set_variable("CDR(userfield)",$num."-".$row['campaign_id']);
     
     
-}
-
-
-//setVal();
-fclose($in);
-fclose($stdlog);
-exit;
-?>
+    
+    //setVal();
+    fclose($in);
+    fclose($stdlog);
+    exit;
+    ?>
