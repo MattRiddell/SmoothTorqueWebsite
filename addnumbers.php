@@ -6,7 +6,7 @@ include "admin/db_config.php";
 mysql_select_db("SineDialer", $link);
 
 if ($config_values['USE_TIMEZONES'] == "YES") {
-    $new = "new";
+    $new = "new_nodial";
 } else {
     $new = "new";
 }
