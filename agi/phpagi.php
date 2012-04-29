@@ -1180,14 +1180,14 @@
     * @param string $context
     * @param string $extension
     * @param string $priority
-    */
+    
     function goto($context, $extension='s', $priority=1)
     {
       $this->set_context($context);
       $this->set_extension($extension);
       $this->set_priority($priority);
     }
-
+    */
    /**
     * Parse caller id.
     *
