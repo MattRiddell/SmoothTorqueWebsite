@@ -20,6 +20,12 @@ if (isset($_GET['delete_choice'])) {
     require "footer.php";
     exit(0);
 }
+if (isset($_GET['change_choice'])) {
+    require "admin/db_config.php";
+    require "functions/sanitize.php";
+    $result = mysql_query("UPDATE survey_choices SET soundfile = ".sanitize($_GET['change_choice'])." WHERE question_number = ".sanitize($_GET['question'])." AND survey_id = ".sanitize($_GET['survey']));
+    exit(0);
+}
 if (isset($_GET['change_invalid'])) {
     require "admin/db_config.php";
     require "functions/sanitize.php";
@@ -229,10 +235,16 @@ if (isset($_GET['edit'])) {
                     echo '<span class="survey_choice" id="question_'.$row_choices['question_number'].'">';
                     echo '<b>File '.$row_choices['question_number'].'</b>&nbsp;';
                     
-                    $sql = "SELECT name FROM campaignmessage WHERE filename like ".sanitize($row_choices['soundfile']."%");
-                    $result_file = mysql_query($sql) or die(mysql_error());
-                    $message_name = mysql_result($result_file,0,0);
-                    echo ''.$message_name.'&nbsp;';
+                    $result_x = mysql_query("SELECT * FROM campaignmessage WHERE filename like 'x-%'");
+                    echo '<select name="choice_'.$row_choices['question_number'].'" id="choice_'.$row_choices['question_number'].'" onchange="$.ajax({url: \'surveys.php?question='.$row_choices['question_number'].'&change_choice=\'+$(\'#choice_'.$row_choices['question_number'].' option:selected\').val()+\'&survey='.$_GET['edit'].'\'});">';
+                    while ($row_x = mysql_fetch_assoc($result_x)) {
+                        echo '<option value="'.substr($row_x['filename'],0,strlen($row_x['filename'])-4).'"';
+                        if (substr($row_x['filename'],0,strlen($row_choices['soundfile'])) == $row_choices['soundfile']) {
+                            echo " selected ";
+                        } 
+                        echo '>'.$row_x['name'].'</option>';
+                    }
+                    echo "</select>&nbsp;";
                     
                     if (strlen($row_choices['choices']) > 0) {
                         echo '<b>Choices:</b>&nbsp;'.$row_choices['choices'].'';
