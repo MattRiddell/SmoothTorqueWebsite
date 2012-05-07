@@ -104,7 +104,7 @@ if (!isset($_POST[campaignid])){
             
             while ($row = mysql_fetch_assoc($result)) {
                 $sql = "UPDATE number set start_time = '".$row['start']."', end_time = '".$row['end']."', status='new' WHERE phonenumber like '".$row['prefix']."%' and status = 'new_nodial'";
-                $result2 = mysql_query($sql);
+                $result2 = mysql_query($sql) or die(mysql_error());
                 echo "Done Prefix ".$row['prefix']."<br />";
                 flush();
             }
