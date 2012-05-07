@@ -157,6 +157,9 @@ if ($level!=sha1("level100")) {
         $sql = "REPLACE INTO config (parameter, value) VALUES ('DISABLE_RECYCLE_ALL',".sanitize($_POST['DISABLE_RECYCLE_ALL']).")";
         mysql_query($sql) or die(mysql_error());
         
+        $sql = "REPLACE INTO config (parameter, value) VALUES ('DISABLE_MESSAGE_UPLOAD',".sanitize($_POST['DISABLE_MESSAGE_UPLOAD']).")";
+        mysql_query($sql) or die(mysql_error());
+        
         $sql = "REPLACE INTO config (parameter, value) VALUES ('MENU_TIMEZONES',".sanitize($_POST['MENU_TIMEZONES']).")";
         mysql_query($sql) or die(mysql_error());
         
@@ -351,6 +354,7 @@ if ($level!=sha1("level100")) {
     } else {
         $config_values['DISABLE_RECYCLE_ALL'] = "NO";
     }
+    
     
     $sql = 'SELECT value FROM config WHERE parameter=\'USE_TIMEZONES\'';
     $result=mysql_query($sql, $link) or die (mysql_error());
@@ -1613,6 +1617,16 @@ Language:
     </td>
     </tr>
     
+    
+    <tr  class="tborder2">
+    <td>
+    Disable "Disable Message Upload" Option:
+    </td>
+    <td>
+    <input type="radio" name="DISABLE_MESSAGE_UPLOAD" value="YES" <?if ( $config_values['DISABLE_MESSAGE_UPLOAD'] == "YES") {echo "checked";}?>> Yes
+    <input type="radio" name="DISABLE_MESSAGE_UPLOAD" value="NO" <?if ( $config_values['DISABLE_MESSAGE_UPLOAD'] != "YES") {echo "checked";}?>> No
+    </td>
+    </tr>
     
     <tr  class="tborder2">
     <td colspan="2">
