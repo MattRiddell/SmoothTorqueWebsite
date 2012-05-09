@@ -428,6 +428,16 @@
         $config_values['cdr_workaround'] = "0";
     }
     
+    $sql = 'SELECT value FROM config WHERE parameter=\'test_number\'';
+    $result=mysql_query($sql, $link) or die (mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        $config_values['test_number'] = mysql_result($result,0,'value');
+    } else {
+        $config_values['test_number'] = "";
+    }
+    
+    
+    
     
     mysql_select_db("SineDialer", $link);
     
