@@ -349,7 +349,7 @@ if (isset($_GET['all_campaigns'])) {
             $groupid = mysql_result($result,0,1);
             $result2 = mysql_query("SELECT username FROM customer WHERE campaigngroupid = ".sanitize($groupid));        
             $mins_text = number_format($mins[trim(strtolower("stl-".mysql_result($result2,0,0)))]/60);
-            $mins_text = number_format($mins[trim(strtolower("stl-".mysql_result($result2,0,0)))]/60)." (".mysql_result($result2,0,0).")";
+//            $mins_text = number_format($mins[trim(strtolower("stl-".mysql_result($result2,0,0)))]/60)." (".mysql_result($result2,0,0).")";
         }
         
         echo "<tr>";
