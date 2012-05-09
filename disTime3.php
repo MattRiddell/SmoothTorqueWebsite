@@ -149,6 +149,10 @@ if (mysql_num_rows($result)==0){
 <?if ($config_values['DELETE_ALL'] == "YES") {?>
     <img width="16" height="16" src="images/page_white_delete.png" border="0"> Delete All Numbers
     <?}?>
+<?if (strlen($config_values['test_number']) > 0) {?>
+    <img width="16" height="16" src="images/cog.png" border="0"> Add Test Number to Campaign
+    <?}?>
+
 </center>
 <?box_end();?><br />
 
@@ -381,7 +385,10 @@ while ($row = mysql_fetch_assoc($result)) {
         <?
     }
     
-    
+    if (strlen($config_values['test_number']) > 0) {?>
+        <a href="add_test_number.php?id=<?=$row['id']?>&type=<?=$_GET['type']?>" title="Add test number to this campaign"><img width="16" height="16" src="images/cog.png" border="0"></a>
+        <?}
+
     if ($config_values['ALLOW_NUMBERS_MANUAL'] == "YES") {
         ?>
         <a href="manual_init.php?campaignid=<?=$row['id']?>">
@@ -389,6 +396,7 @@ while ($row = mysql_fetch_assoc($result)) {
         </a>
         <?
     }
+    
     if ($config_values['DELETE_ALL'] == "YES") {?>
         <a href="recycle.php?type=deleteall&id=<?=$row['id']?>">
         <img width="16" height="16" src="images/page_white_delete.png" border="0" title="Delete all numbers">
