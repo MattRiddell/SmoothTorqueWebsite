@@ -92,10 +92,10 @@ echo "<A HREF=\"editmessage.php?id=".$row[id]."\"><img src=\"images/pencil.png\"
 </TD>
 <TD>
 <?
-if (strlen($row[description])<25){
+if (strlen($row[description])<225){
 echo $row[description];
 } else {
-echo trim(substr($row[description],0,25))."...";
+echo trim(substr($row[description],0,225))."...";
 }
 ?>
 </TD>
