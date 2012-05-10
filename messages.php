@@ -83,10 +83,10 @@ $class=" class=\"tborderx\"  onmouseover=\"style.backgroundColor='#84DFC1';\" on
 <TR <?echo $class;?>>
 <TD>
 <?
-if (strlen($row[name])<15){
-echo "<A HREF=\"editmessage.php?id=".$row[id]."\"><img src=\"images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit $row[name]\">".$row[name]."</A>";
+if (strlen($row[name])<115){
+    echo "<A HREF=\"editmessage.php?id=".$row[id]."\"><img src=\"images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit $row[name]\">".$row[name]."</A>";
 } else {
-echo "<A HREF=\"editmessage.php?id=".$row[id]."\"><img src=\"images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit $row[name]\">".trim(substr($row[name],0,15))."...</A>";
+    echo "<A HREF=\"editmessage.php?id=".$row[id]."\"><img src=\"images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit $row[name]\">".trim(substr($row[name],0,115))."...</A>";
 }
 ?>
 </TD>
