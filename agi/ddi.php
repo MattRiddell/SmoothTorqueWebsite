@@ -41,7 +41,7 @@ function a_echo($line)
 // main program
 
 /* Connect to Database */
-$connection = mysql_connect($db_host,$db_user,$db_pass) or die("Error connecting to database");
+$connection = mysql_pconnect($db_host,$db_user,$db_pass) or die("Error connecting to database");
 mysql_select_db($db_name, $connection);
 
 /* Set all the variables then go to start-survey 
