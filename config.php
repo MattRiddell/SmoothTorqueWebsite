@@ -381,14 +381,52 @@ if ($level!=sha1("level100")) {
     
     
     ?>
+    
+    <link type="text/css" href="css/cupertino/jquery-ui-1.8.20.custom.css" rel="stylesheet" />
+    <script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="js/jquery-ui-1.8.20.custom.min.js" type="text/javascript"></script>
+    
+   
+    
+    <script>
+	$(function() {
+      $( "#tabberx" ).tabs();
+      $( "#loading" ).hide();
+      $( "#tabberx" ).show();
+      });
+	</script>
+    <div id="loading" height="100%">
+    <br />
+    <?box_start();?>
+    <center>
+    <br />
+    Loading config information...<br />
+    <br />
+    <?box_end();?>
+    </div>
     <form action="config.php" name="config" method="post">
     <center>
-    <table width="860px"><tr><td>
-    <div class="tabber" >
-    
+    <table width="80%"><tr><td>
+    <div id="tabberx" style="display:none">
+    <ul>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#system">System</a></li>
+    <li><a href="#email">Email</a></li>
+    <li><a href="#mysql">Database</a></li>
+    <li><a href="#multi">Multi Tennant Hosting</a></li>
+    <li><a href="#numbers">Numbers</a></li>
+    <li><a href="#dnc">Do Not Call (DNC)</a></li>
+    <li><a href="#licensing">Licensing</a></li>
+	<li><a href="#look">Look and Feel</a></li>
+	<li><a href="#menutext">Menu Text</a></li>
+	<li><a href="#other">Other Text</a></li>
+	<li><a href="#billing">Billing</a></li>
+	<li><a href="#advanced">Advanced</a></li>
+	<li><a href="#credits">Credits</a></li>
+    </ul>
     <? /************************** SETTINGS TAB *************************/ ?>
     
-    <div class="tabbertab" title="Tools">
+    <div id="tools" title="Tools">
     <br />
     <center>
     <table cellpadding="20">
@@ -415,7 +453,7 @@ if ($level!=sha1("level100")) {
     <? /************************** SYSTEM TAB *************************/ ?>
     
     
-    <div class="tabbertab" title="System">
+    <div id="system" title="System">
     <center>
     <table>
     <tr>
@@ -461,17 +499,13 @@ if ($level!=sha1("level100")) {
     </td>
     </tr>
     
-    
-    
-    <tr  class="tborder2">
-    <td colspan="2">
-    <input type="submit" value="Save Config Information">
-    </td>
-    </tr>
+    <tr  class="tborder2"><td colspan="2"><input type="submit" value="Save Config Information"></td></tr>
     </table>
     </div>
+    
+    
     <? /************************** EMAIL TAB *************************/ ?>
-    <div class="tabbertab" title="Email">
+    <div id="email" title="Email">
     <center>
     <table>
     
@@ -514,21 +548,14 @@ if ($level!=sha1("level100")) {
     </tr>
     
     
-    <tr  class="tborder2">
-    <td colspan="2">
-    <input type="submit" value="Save Config Information">
-    </td>
-    </tr>
+    <tr  class="tborder2"><td colspan="2"><input type="submit" value="Save Config Information"></td></tr>
     </table>
     </div>
     
     <? /************************** Mysql TAB *************************/ ?>
-    <div class="tabbertab" title="MySQL">
+    <div id="mysql" title="MySQL">
     <center>
     <table>
-    
-    
-    
     
     <tr><td CLASS="thead" colspan="2">MySQL Settings</td>
     
@@ -557,8 +584,7 @@ if ($level!=sha1("level100")) {
     <td>
     <input type="password" name="ST_MYSQL_PASS" value="<?echo $db_pass;?>">
     </td>
-    </tr>
-    
+    </tr>    
     
     <tr  class="tborder2">
     <td>
@@ -605,8 +631,6 @@ if ($level!=sha1("level100")) {
     </td>
     </tr>
     
-    
-    
     <tr  class="tborder2">
     <td>
     SugarCRM MySQL Hostname:
@@ -615,8 +639,6 @@ if ($level!=sha1("level100")) {
     <input type="Text" name="sugar_host" value="<?echo $config_values['SUGAR_HOST'];?>">
     </td>
     </tr>
-    
-    
     
     <tr  class="tborder2">
     <td>
@@ -627,8 +649,6 @@ if ($level!=sha1("level100")) {
     </td>
     </tr>
     
-    
-    
     <tr  class="tborder2">
     <td>
     SugarCRM MySQL Password:
@@ -637,8 +657,6 @@ if ($level!=sha1("level100")) {
     <input type="Text" name="sugar_pass" value="<?echo $config_values['SUGAR_PASS'];?>">
     </td>
     </tr>
-    
-    
     
     <tr  class="tborder2">
     <td>
@@ -649,19 +667,13 @@ if ($level!=sha1("level100")) {
     </td>
     </tr>
     
-    
-    
-    
-    <tr  class="tborder2">
-    <td colspan="2">
-    <input type="submit" value="Save Config Information">
-    </td>
-    </tr>
+    <tr  class="tborder2"><td colspan="2"><input type="submit" value="Save Config Information"></td></tr>
     </table>
     </div>
     
+    <? /************************** Multi Tenant TAB *************************/ ?>
     
-    <div class="tabbertab" title="Hosting">
+    <div id="multi" title="Hosting">
     <center>
     <table>
     <tr>
@@ -715,14 +727,11 @@ if ($level!=sha1("level100")) {
     
     </table>
     </div>
+    <? /********************************** Licensing TAB ***********************/?>
     
-    
-    <? /*
-        <div class="tabbertab" title="Licensing">
+        <div id="licensing" title="Licensing">
         <center>
         <table>
-        
-        
         
         <tr>
         <td CLASS="thead" colspan="2">Licence Details</td>
@@ -789,17 +798,13 @@ if ($level!=sha1("level100")) {
         </td>
         </tr>
         
-        <tr  class="tborder2">
-        <td colspan="2">
-        <input type="submit" value="Save Config Information">
-        </td>
-        </tr>
-        </table>
-        </div>
-        */
-    ?>
+    <tr  class="tborder2"><td colspan="2"><input type="submit" value="Save Config Information"></td></tr>
+    </table>
+    </div>
+        
+    
     <? /************************** Look and Feel TAB *************************/ ?>
-    <div class="tabbertab" title="Theme">
+    <div id="look" title="Theme">
     <center>
     <table>
     
@@ -922,15 +927,11 @@ if ($level!=sha1("level100")) {
     
     
     
-    <tr  class="tborder2">
-    <td colspan="2">
-    <input type="submit" value="Save Config Information">
-    </td>
-    </tr>
+    <tr  class="tborder2"><td colspan="2"><input type="submit" value="Save Config Information"></td></tr>
     </table>
     </div>
     <? /************************** Menu Text TAB *************************/ ?>
-    <div class="tabbertab" title="Menu Text">
+    <div id="menutext" title="Menu Text">
     <center>
     <table>
     
@@ -1077,7 +1078,7 @@ Language:
     
     
     <? /************************** Misc Text TAB *************************/ ?>
-    <div class="tabbertab" title="Misc Text">
+    <div id="other" title="Misc Text">
     <center>
     <table>
     
@@ -1151,7 +1152,7 @@ Language:
     
     
     <? /************************** DNC TAB *************************/ ?>
-    <div class="tabbertab" title="DNC">
+    <div id="dnc" title="DNC">
     <center>
     <table>
     
@@ -1222,7 +1223,7 @@ Language:
     </table>
     </div>
     <? /************************** Numbers TAB *************************/ ?>
-    <div class="tabbertab" title="Numbers">
+    <div id="numbers" title="Numbers">
     <center>
     <table>
     
@@ -1433,7 +1434,7 @@ Language:
     </table>
     </div>
     <? /************************** Billing TAB *************************/ ?>
-    <div class="tabbertab" title="Billing">
+    <div id="billing" title="Billing">
     <center>
     <table>
     
@@ -1526,7 +1527,7 @@ Language:
     </table>
     </div>
     <? /************************** Advanced TAB *************************/ ?>
-    <div class="tabbertab" title="Advanced">
+    <div id="advanced" title="Advanced">
     <center>
     <table>
     
@@ -1650,7 +1651,7 @@ Language:
     </div>
     <? /************************** SETTINGS TAB *************************/ ?>
     
-    <div class="tabbertab" title="Credits">
+    <div id="credits" title="Credits">
     <br />
     <img src="images/00_logo.jpg" border="0"><br /><br />
     SmoothTorque was written by the following staff from <a href="http://www.venturevoip.com/about.php">VentureVoIP</a>:<br />
@@ -1675,5 +1676,7 @@ Language:
     <br />
     </div>
     </td></tr></table>
+    </div>
+    </div>
     <?
 }?>
