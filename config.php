@@ -758,7 +758,7 @@ if ($level!=sha1("level100")) {
         </td>
         <td>
         <?
-        $handle = fopen("http://www.venturevoip.com/licencest.php?userid=$userid&licence=$licencekey", "rb");
+        $handle = fopen("http://license.venturevoip.com/licencest.php?userid=$userid&licence=$licencekey", "rb");
         $contents2 = '';
         while (!feof($handle)) {
         $contents2 .= fread($handle, 8192);
