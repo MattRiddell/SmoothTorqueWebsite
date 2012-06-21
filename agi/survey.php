@@ -45,14 +45,16 @@ function errlog($line) {
  }*/
 function write($line) 
 {
-    global $debug, $stdlog;
+    global $debug, $stdlog, $phonenumber;
     if ($debug) fputs($stdlog, "write: $line\n");
     echo $line."\n";
 }
 
 function a_echo($line) 
 {
-    echo "VERBOSE \"".$line."\" \n";
+    global $phonenumber;
+//    echo "VERBOSE \"".$line."\" \n";
+    echo "VERBOSE \"(".date("H:i:s").") ".$phonenumber.": $line\"\n";
     read();
 }
 
