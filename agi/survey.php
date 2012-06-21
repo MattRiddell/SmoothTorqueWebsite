@@ -25,8 +25,8 @@ function read() {
 }
 
 function errlog($line) {
-    global $err;
-    echo "VERBOSE \"$line\"\n";
+    global $err, $phonenumber;
+    echo "VERBOSE \"(".date("H:i:s").") ".$phonenumber.": $line\"\n";
 }
 /*
  function setVal()
