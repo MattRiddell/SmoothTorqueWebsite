@@ -120,7 +120,11 @@ if (mysql_num_rows($result) == 0) {
         a_echo("Question: ".$choices[$i]['question_num']);
         //a_echo("Playing ".$choices[$i]['filename']);
         a_echo("Expecting: ".$choices[$i]['expected']);
-        $res = $agi->get_data($choices[$i]['filename'], 2000, 1);        
+        if (strlen($choices[$i]['expected']) == 0) {
+            $res = $agi->get_data($choices[$i]['filename'], 10, 1);
+        } else {
+            $res = $agi->get_data($choices[$i]['filename'], 4000, 1);
+        }        
         $response = $res['result'];
         if (strlen($response) > 0) {
             $response = substr($response,0,1);
