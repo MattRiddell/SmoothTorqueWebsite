@@ -145,7 +145,7 @@ if (mysql_num_rows($result) == 0) {
         }
         if ($found == false) {
             a_echo("You did not enter a correct choice");
-            $res = $agi->get_data($invalid, 2000, 1);        
+            $res = $agi->get_data($invalid, 10, 1);
             $incorrect++;
             $i--;
             if ($incorrect > 3) {
