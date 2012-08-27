@@ -189,17 +189,19 @@ $("#status").text("Query run against database - about to start scrubbing");
 
 $num_rows_dnc = mysql_num_rows($resultdnc);
 $count_dnc_rows_so_far = 0;
+?><script>
+$("#status").text("Scrubbing against DNC");
+</script><?
 //echo $dncsql."<br />";
 while ($row = mysql_fetch_assoc($resultdnc)) {
     $count_dnc_rows_so_far++;
-    ?><script>
-    $("#status").text("Scrubbing against DNC");
-    </script><?
+    
     if ($count_dnc_rows_so_far % 100) {
         ?><script>
         $("#status").text("Query run against database - about to start scrubbing");
         $("#progress").progressbar({value: <?=round($count_dnc_rows_so_far/$num_rows_dnc*100)?>});
         </script><?
+        flush();
     }
 //    echo $row[phonenumber]." is in dnc<br />";
     echo "<!-- . -->";
