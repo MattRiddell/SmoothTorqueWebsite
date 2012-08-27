@@ -7,6 +7,10 @@ $_POST = array_map(mysql_real_escape_string,$_POST);
 $_GET = array_map(mysql_real_escape_string,$_GET);
 
 ?>
+<link type="text/css" href="css/cupertino/jquery-ui-1.8.20.custom.css" rel="stylesheet" />
+<script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
+<script src="js/jquery-ui-1.8.20.custom.min.js" type="text/javascript"></script>
+
 <br /><br /><br /><br />
 <center>
 <table background="images/sdbox.png" width="300" height="200" class="dragme22">
@@ -161,17 +165,52 @@ if ($trunkid==-1){
     $resultx=mysql_query($sql3, $link) or die ("d:".mysql_error());;
     $dialstring=mysql_result($resultx,0,'dialstring');
 }
-
+?>
+<div id="progressdiv" style="display:none" title="Starting your campaign..."><center>
+<span id="status"></span>
+<div id="progress" style="height: 20px"></div>
+</center>
+</div>
+<script>
+$("#progressdiv").dialog({modal: true});
+</script>
+<?
+//exit(0);
 $dncsql = "SELECT number.phonenumber FROM number LEFT JOIN dncnumber ON number.phonenumber=dncnumber.phonenumber WHERE dncnumber.phonenumber IS NOT NULL AND number.campaignid='$_GET[id]'";
+?><script>
+$("#status").text("Scrubbing against Do Not Call list");
+$("#progress").progressbar({value: 0});
+</script><?
+
 $resultdnc=mysql_query($dncsql, $link) or die ("e:".mysql_error());;
+?><script>
+$("#status").text("Query run against database - about to start scrubbing");
+</script><?
+
+$num_rows_dnc = mysql_num_rows($resultdnc);
+$count_dnc_rows_so_far = 0;
 //echo $dncsql."<br />";
 while ($row = mysql_fetch_assoc($resultdnc)) {
+    $count_dnc_rows_so_far++;
+    ?><script>
+    $("#status").text("Scrubbing against DNC");
+    </script><?
+    if ($count_dnc_rows_so_far % 100) {
+        ?><script>
+        $("#status").text("Query run against database - about to start scrubbing");
+        $("#progress").progressbar({value: <?=round($count_dnc_rows_so_far/$num_rows_dnc*100)?>});
+        </script><?
+    }
 //    echo $row[phonenumber]." is in dnc<br />";
     echo "<!-- . -->";
     $removedncsql = "UPDATE number set status = 'indnc' where phonenumber='$row[phonenumber]'";
     $resultremovednc=mysql_query($removedncsql, $link) or die ("f:".mysql_error());;
 }
-
+?>
+<script>
+$("#progressdiv").dialog("close");
+</script>
+<?
 if ( $config_values['USE_BILLING'] == "YES") {
     if ($config_values['strict_credit_limit'] == "YES") {
         if ($_GET[context] != 0) {
