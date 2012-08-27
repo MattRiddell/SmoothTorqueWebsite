@@ -29,14 +29,18 @@ while ($row = mysql_fetch_assoc($result)) {
     if ($x % 100) {
         ?>
         <script>
-    $("#progress").progressbar({value: <?=round($x/$count*100)?>});
-    $("#status").text("Updating prefix <?=$row['prefix']?>");
+        $("#progress").progressbar({value: <?=round($x/$count*100)?>});
+        $("#status").text("Updating prefix <?=$row['prefix']?>");
         </script>
         <?
-}
+        flush();
+    }
     $sql = "UPDATE number set start_time = '".$row['start']."', end_time = '".$row['end']."' WHERE phonenumber like '".$row['prefix']."%'";
     $result2 = mysql_query($sql);
-    //echo $sql."<br />";
-    flush();
 }
+?>
+<script>
+$("#status").text("Timezone script completed");
+</script>
+<?
 ?>
