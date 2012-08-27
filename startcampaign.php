@@ -198,7 +198,7 @@ while ($row = mysql_fetch_assoc($resultdnc)) {
     
     if ($count_dnc_rows_so_far % 100) {
         ?><script>
-        $("#status").text("Query run against database - about to start scrubbing");
+        $("#status").text("Scrubbing <?=$row['phonenumber']?> against DNC");
         $("#progress").progressbar({value: <?=round($count_dnc_rows_so_far/$num_rows_dnc*100)?>});
         </script><?
         flush();
