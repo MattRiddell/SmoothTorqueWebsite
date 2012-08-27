@@ -39,8 +39,10 @@ while ($row = mysql_fetch_assoc($result)) {
     $result2 = mysql_query($sql);
 }
 ?>
+Time Zone Script Completed
 <script>
 $("#status").text("Timezone script completed");
+$("#progress_dialog").dialog("close");
 </script>
 <?
 ?>
