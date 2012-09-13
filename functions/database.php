@@ -779,6 +779,9 @@ if (!function_exists('create_missing_tables') ) {
         if (!in_array('end_time', $field_array)) {
             $result = mysql_query("ALTER TABLE `number` ADD `end_time` time default null");
         }
+        if (!in_array('record_id', $field_array)) {
+            $result = mysql_query("ALTER TABLE `number` ADD `record_id` int(11) default null");
+        }
         
         
         if (!in_array('random_sort', $field_array)) {
