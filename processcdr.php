@@ -192,7 +192,7 @@ while ($accounts = mysql_fetch_assoc($result_accounts)) {
     if (mysql_num_rows($result_credit) > 0) {
         $credit = mysql_result($result_credit,0,'credit') or die (mysql_error());
         $credit_limit = mysql_result($result_credit,0,'creditlimit');
-        if (($credit - $totalcost[$accountcode_in]) != $credit) {
+        if (isset($totalcost[$accountcode_in]) && ($credit - $totalcost[$accountcode_in]) != $credit) {
             echo "[".$accountcode_in."] Credit was $credit and will now be ".($credit - $totalcost[$accountcode_in])."\n";
             $sql = "update billing set credit = ".($credit - $totalcost[$accountcode_in])." where accountcode = '$accountcode_in'";
             mysql_select_db("SineDialer", $link);
