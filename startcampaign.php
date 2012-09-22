@@ -176,7 +176,7 @@ $("#progressdiv").dialog({modal: true});
 </script>
 <?
 //exit(0);
-$dncsql = "SELECT number.phonenumber FROM number LEFT JOIN dncnumber ON number.phonenumber=dncnumber.phonenumber WHERE dncnumber.phonenumber IS NOT NULL AND number.campaignid='$_GET[id]'";
+$dncsql = "SELECT number.phonenumber FROM number LEFT JOIN dncnumber ON number.phonenumber=dncnumber.phonenumber WHERE dncnumber.phonenumber IS NOT NULL AND number.campaignid='$_GET[id]' and number.status = 'new'";
 ?><script>
 $("#status").text("Scrubbing against Do Not Call list");
 $("#progress").progressbar({value: 0});
