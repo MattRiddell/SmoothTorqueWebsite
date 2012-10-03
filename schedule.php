@@ -18,7 +18,11 @@ $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $campaigngroupid=mysql_result($result,0,'campaigngroupid');
 require "header_schedule.php";
-$sql = 'SELECT * FROM campaign JOIN schedule ON schedule.campaignid = campaign.id WHERE campaign.groupid='.$campaigngroupid.'';
+if ($_COOKIE['level'] == sha1("level100")) {
+    $sql = 'SELECT * FROM campaign JOIN schedule ON schedule.campaignid = campaign.id';
+} else {
+    $sql = 'SELECT * FROM campaign JOIN schedule ON schedule.campaignid = campaign.id WHERE campaign.groupid='.$campaigngroupid.'';
+}
 //echo $sql."<br />";
 $result=mysql_query($sql, $link) or die (mysql_error());;
 if (mysql_num_rows($result) == 0) {
