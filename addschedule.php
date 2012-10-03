@@ -56,9 +56,9 @@ if (!isset($_POST[campaignid])){
         <?
         //
     if ($_COOKIE['level'] == sha1("level100")) {
-        $sql = 'SELECT id,name FROM campaign WHERE groupid='.$campaigngroupid.' ORDER BY name';
-    } else {
         $sql = 'SELECT id,name FROM campaign ORDER BY name';
+    } else {
+        $sql = 'SELECT id,name FROM campaign WHERE groupid='.$campaigngroupid.' ORDER BY name';
     }
         $result=mysql_query($sql, $link) or die (mysql_error());;
         //$campaigngroupid=mysql_result($result,0,'campaigngroupid');
