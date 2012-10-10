@@ -27,7 +27,9 @@ if ($count <= $min_new_records) {
     $x = 0;
     foreach ($lines as $line) {
         $random_sort = rand(1,999999999);
-        $result = mysql_query("INSERT INTO number (campaignid, phonenumber, random_sort) VALUES ($campaignid, $line, $random_sort") or die(mysql_error());
+        $sql = "INSERT INTO number (campaignid, phonenumber, random_sort, status) VALUES ($campaignid, $line, $random_sort, 'new'";
+        echo $sql;
+        $result = mysql_query($sql) or die(mysql_error());
         $x++;
         if ($x % 1000 == 0) {
             echo ($x/$number_to_get*100)."% done\n";
