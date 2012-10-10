@@ -31,14 +31,15 @@ if ($count <= $min_new_records) {
         if (strlen(trim($line)) > 0) {
             $random_sort = rand(1,999999999);
             $sql = "INSERT IGNORE INTO number (campaignid, phonenumber, random_sort, status) VALUES ($campaignid, $line, $random_sort, 'new')";
-            echo $sql."\n";
+            //echo $sql."\n";
             $result = mysql_query($sql) or die(mysql_error());
             $x++;
             if ($x % 1000 == 0) {
-                echo ($x/$number_to_get*100)."% done\n";
+                echo ($x/$number_to_get*100)."% done\r";
             }
         }
     }
+    echo "\n";
     echo "Scrub against DNC\n";
     $result = mysql_query("SELECT number.phonenumber FROM number LEFT JOIN dncnumber ON number.phonenumber=dncnumber.phonenumber WHERE dncnumber.phonenumber IS NOT NULL AND number.campaignid=$campaignid") or die(mysql_error());
     $x = 0;
