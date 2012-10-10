@@ -40,7 +40,26 @@ if ($count <= $min_new_records) {
         }
     }
     echo "Scrub against DNC\n";
+    $result = mysql_query("SELECT number.phonenumber FROM number LEFT JOIN dncnumber ON number.phonenumber=dncnumber.phonenumber WHERE dncnumber.phonenumber IS NOT NULL AND number.campaignid=64") or die(mysql_error());
+    $x = 0;
+    while ($row = mysql_fetch_assoc($result)) {
+        $x++;
+        echo $row['phonenumber']." (".round($x/mysql_num_rows($result)*100,2).")\n";
+        $resultx = mysql_query("UPDATE number set status='indnc' WHERE phonenumber = '".$row['phonenumber']."'") or die(mysql_error());
+    }
     echo "Run TimeZone script\n";
+    $result = mysql_query("select time_zones.start, time_zones.end, prefix from time_zones, timezone_prefixes where timezone_prefixes.timezone = time_zones.id");
+    $count = mysql_num_rows($result);
+    $x = 0;
+    while ($row = mysql_fetch_assoc($result)) {
+        $x++;
+        if ($x % 100) {
+            echo "Progress: ".round($x/$count*100)."\n";
+        }
+        $sql = "UPDATE number set start_time = '".$row['start']."', end_time = '".$row['end']."' WHERE phonenumber like '".$row['prefix']."%'";
+        $result2 = mysql_query($sql);
+    }
+
 } else {
     echo "We have enough records ($count > $min_new_records)\n";
 }
