@@ -3,7 +3,7 @@
 $number_to_get = 1000000;
 $min_new_records = 1000000;
 $campaignid = 63;
-$url = "http://someserver/getleads/leads.aspx?apikey=x&qty="
+$url = "http://someserver/getleads/leads.aspx?apikey=x&qty=";
 require "admin/db_config.php";
 $result = mysql_query("SELECT count(*) from number where status = 'new'");
 $count = mysql_result($result,0,0);
