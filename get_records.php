@@ -30,7 +30,7 @@ if ($count <= $min_new_records) {
     foreach ($lines as $line) {
         if (strlen(trim($line)) > 0) {
             $random_sort = rand(1,999999999);
-            $sql = "INSERT INTO number (campaignid, phonenumber, random_sort, status) VALUES ($campaignid, $line, $random_sort, 'new')";
+            $sql = "INSERT IGNORE INTO number (campaignid, phonenumber, random_sort, status) VALUES ($campaignid, $line, $random_sort, 'new')";
             echo $sql."\n";
             $result = mysql_query($sql) or die(mysql_error());
             $x++;
@@ -44,7 +44,7 @@ if ($count <= $min_new_records) {
     $x = 0;
     while ($row = mysql_fetch_assoc($result)) {
         $x++;
-        echo $row['phonenumber']." (".round($x/mysql_num_rows($result)*100,2).")                \r";
+        echo "IN DNC: ".$row['phonenumber']." (".round($x/mysql_num_rows($result)*100,2).")                \r";
         $resultx = mysql_query("UPDATE number set status='indnc' WHERE phonenumber = '".$row['phonenumber']."'") or die(mysql_error());
     }
     echo "\n";
@@ -55,7 +55,7 @@ if ($count <= $min_new_records) {
     while ($row = mysql_fetch_assoc($result)) {
         $x++;
         if ($x % 100) {
-            echo "Progress: ".round($x/$count*100)."\r";
+            echo "Timezone Progress: ".round($x/$count*100)."%\r";
         }
         $sql = "UPDATE number set start_time = '".$row['start']."', end_time = '".$row['end']."' WHERE phonenumber like '".$row['prefix']."%' and campaignid=$campaignid";
         $result2 = mysql_query($sql);
