@@ -40,7 +40,7 @@ if ($count <= $min_new_records) {
         }
     }
     echo "Scrub against DNC\n";
-    $result = mysql_query("SELECT number.phonenumber FROM number LEFT JOIN dncnumber ON number.phonenumber=dncnumber.phonenumber WHERE dncnumber.phonenumber IS NOT NULL AND number.campaignid=64") or die(mysql_error());
+    $result = mysql_query("SELECT number.phonenumber FROM number LEFT JOIN dncnumber ON number.phonenumber=dncnumber.phonenumber WHERE dncnumber.phonenumber IS NOT NULL AND number.campaignid=$campaignid") or die(mysql_error());
     $x = 0;
     while ($row = mysql_fetch_assoc($result)) {
         $x++;
@@ -56,7 +56,7 @@ if ($count <= $min_new_records) {
         if ($x % 100) {
             echo "Progress: ".round($x/$count*100)."\n";
         }
-        $sql = "UPDATE number set start_time = '".$row['start']."', end_time = '".$row['end']."' WHERE phonenumber like '".$row['prefix']."%'";
+        $sql = "UPDATE number set start_time = '".$row['start']."', end_time = '".$row['end']."' WHERE phonenumber like '".$row['prefix']."%' and campaignid=$campaignid";
         $result2 = mysql_query($sql);
     }
 
