@@ -26,13 +26,15 @@ if ($count <= $min_new_records) {
     echo "Import new data\n";
     $x = 0;
     foreach ($lines as $line) {
-        $random_sort = rand(1,999999999);
-        $sql = "INSERT INTO number (campaignid, phonenumber, random_sort, status) VALUES ($campaignid, $line, $random_sort, 'new')";
-        echo $sql."\n";
-        $result = mysql_query($sql) or die(mysql_error());
-        $x++;
-        if ($x % 1000 == 0) {
-            echo ($x/$number_to_get*100)."% done\n";
+        if (strlen(trim($line)) > 0) {
+            $random_sort = rand(1,999999999);
+            $sql = "INSERT INTO number (campaignid, phonenumber, random_sort, status) VALUES ($campaignid, $line, $random_sort, 'new')";
+            echo $sql."\n";
+            $result = mysql_query($sql) or die(mysql_error());
+            $x++;
+            if ($x % 1000 == 0) {
+                echo ($x/$number_to_get*100)."% done\n";
+            }
         }
     }
     echo "Scrub against DNC\n";
