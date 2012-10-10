@@ -17,9 +17,9 @@ srand(make_seed());
 if ($count <= $min_new_records) {
     echo "Not enough records ($count <= $min_new_records)\n";
     echo "Copy existing data to backup table\n";
-    $result = mysql_query("INSERT IGNORE INTO number_backup(SELECT * FROM number where campaignid = $campaignid)");
+    $result = mysql_query("INSERT IGNORE INTO number_backup(SELECT * FROM number where campaignid = $campaignid where status != 'new')");
     echo "Delete existing data (leave press 1s)\n";
-    $result = mysql_query("DELETE FROM number WHERE camapaignid = $campaignid and status != 'pressed1'");
+    $result = mysql_query("DELETE FROM number WHERE camapaignid = $campaignid and status != 'pressed1' and status != 'new'");
     echo "Get new data\n";
     $contents = file_get_contents($url.$number_to_get);
     $lines = explode("\n",$contents);
@@ -27,7 +27,7 @@ if ($count <= $min_new_records) {
     $x = 0;
     foreach ($lines as $line) {
         $random_sort = rand(1,999999999);
-        $result = mysql_query("INSERT INTO number (campaignid, phonenumber, random_sort) VALUES ($campaignid, $line, $random_sort");
+        $result = mysql_query("INSERT INTO number (campaignid, phonenumber, random_sort) VALUES ($campaignid, $line, $random_sort") or die(mysql_error());
         $x++;
         if ($x % 1000 == 0) {
             echo ($x/$number_to_get*100)."% done\n";
