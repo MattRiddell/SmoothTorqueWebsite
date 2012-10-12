@@ -50,13 +50,13 @@ while ($row = mysql_fetch_assoc($result)) {
         $campaign_row = mysql_fetch_assoc($result_campaign);
         
         // Get the details of the user
-        $sqlx = 'SELECT campaigngroupid, maxchans, maxcps, trunkid FROM customer WHERE username=\''.$row[username].'\'';
+        $sqlx = 'SELECT campaigngroupid, maxchans, maxcps, trunkid FROM customer WHERE username=\''.$row['username'].'\'';
         $resultz=mysql_query($sqlx, $link) or die (mysql_error());;
         $campaigngroupid=mysql_result($resultz,0,'campaigngroupid');
         $maxchans=mysql_result($resultz,0,'maxchans');
         $maxcps=mysql_result($resultz,0,'maxcps');
         $trunkid=mysql_result($resultz,0,'trunkid');
-        $username=$row[username];
+        $username=$row['username'];
         
         // Get the trunk details
         if ($trunkid==-1){
@@ -97,7 +97,7 @@ while ($row = mysql_fetch_assoc($result)) {
         }
         
         // Clear out the queue table
-        $sql1="delete from queue where campaignid=".$row[campaignid];
+        $sql1="delete from queue where campaignid=".$row['campaignid'];
         
         // Create the actual queue entry
         $sql2="INSERT INTO queue (campaignid,queuename,status,details,flags,transferclid,
@@ -109,6 +109,7 @@ while ($row = mysql_fetch_assoc($result)) {
         ,'0','30','".$dialstring."','$campaign_row[astqueuename]','stl-".$username."','$trunkid','$campaigngroupid','$maxcps','$mode') ";
         $resultx=mysql_query($sql1, $link) or die ("j:".mysql_error());;
         $resultx=mysql_query($sql2, $link) or die ("k:".mysql_error());;
+        echo "Started ".$row['campaignid']."\n";
     }
     
 }
@@ -136,13 +137,14 @@ while ($row = mysql_fetch_assoc($result)) {
             
     }
     if ($right_day) {                
-        $sql1="delete from queue where campaignid=".$row[campaignid];
+        $sql1="delete from queue where campaignid=".$row['campaignid'];
         $sql2="INSERT INTO queue (campaignid,queuename,status,
         starttime,endtime,startdate,enddate) VALUES
         ('$row[campaignid]','scheduled-stop-$row[campaignid]','2',
         '00:00:00','23:59:59','2005-01-01','2099-01-01') ";
         $resultx=mysql_query($sql1, $link) or die (mysql_error());;
         $resultx=mysql_query($sql2, $link) or die (mysql_error());;
+        echo "Stopped ".$row['campaignid']."\n";
     }
 }
 
