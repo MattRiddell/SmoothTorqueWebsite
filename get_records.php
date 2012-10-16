@@ -19,9 +19,9 @@ srand(make_seed());
 if ($count <= $min_new_records) {
     echo "Not enough records ($count <= $min_new_records)\n";
     echo "Copy existing data to backup table\n";
-    $result = mysql_query("INSERT IGNORE INTO number_backup(SELECT * FROM number where campaignid = $campaignid where status != 'new')");
+    $result = mysql_query("INSERT IGNORE INTO number_backup(SELECT * FROM number where campaignid = $campaignid and status != 'new')");
     echo "Delete existing data (leave press 1s)\n";
-    $result = mysql_query("DELETE FROM number WHERE camapaignid = $campaignid and status != 'pressed1' and status != 'new'");
+    $result = mysql_query("DELETE FROM number WHERE campaignid = $campaignid and status != 'pressed1' and status != 'new'");
     echo "Get new data\n";
     $contents = file_get_contents($url.$number_to_get);
     $lines = explode("\r\n",$contents);
