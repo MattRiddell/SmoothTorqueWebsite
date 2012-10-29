@@ -323,7 +323,14 @@
     } else {
         $config_values['DISABLE_MESSAGE_UPLOAD'] = "NO";
     }
-
+    
+    $sql = 'SELECT value FROM config WHERE parameter=\'DISABLE_SURVEYS\'';
+    $result=mysql_query($sql, $link) or die (mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        $config_values['DISABLE_SURVEYS'] = mysql_result($result,0,'value');
+    } else {
+        $config_values['DISABLE_SURVEYS'] = "NO";
+    }
     
     $sql = 'SELECT value FROM config WHERE parameter=\'USE_TIMEZONES\'';
     $result=mysql_query($sql, $link) or die (mysql_error());
