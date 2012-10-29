@@ -1635,7 +1635,7 @@ Language:
     
     <tr  class="tborder2">
     <td>
-    Disable "Disable Message Upload" Option:
+    Disable "Message Upload" Option:
     </td>
     <td>
     <input type="radio" name="DISABLE_MESSAGE_UPLOAD" value="YES" <?if ( $config_values['DISABLE_MESSAGE_UPLOAD'] == "YES") {echo "checked";}?>> Yes
@@ -1646,7 +1646,7 @@ Language:
     
     <tr  class="tborder2">
     <td>
-    Disable "Disable Surveys" Option:
+    Disable "Surveys" Option:
     </td>
     <td>
     <input type="radio" name="DISABLE_SURVEYS" value="YES" <?if ( $config_values['DISABLE_SURVEYS'] == "YES") {echo "checked";}?>> Yes
