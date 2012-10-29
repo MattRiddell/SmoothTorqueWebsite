@@ -264,7 +264,7 @@ if (!function_exists('get_menu_html') ) {
                 //=======================================================================================================
                 // Surveys
                 //=======================================================================================================
-                if ($config_values['DISABLE_SURVEYS'] != "NO") {
+                if ($config_values['DISABLE_SURVEYS'] != "YES") {
                     if ($self=="/surveys.php"||$self=="/survey_responses.php"||$self=="/transfer_report.php"){
                         $thead="thead";
                     } else {
