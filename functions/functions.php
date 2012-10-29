@@ -264,13 +264,14 @@ if (!function_exists('get_menu_html') ) {
                 //=======================================================================================================
                 // Surveys
                 //=======================================================================================================
-                if ($self=="/surveys.php"||$self=="/survey_responses.php"||$self=="/transfer_report.php"){
-                    $thead="thead";
-                } else {
-                    $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
+                if ($config_values['DISABLE_SURVEYS'] != "NO") {
+                    if ($self=="/surveys.php"||$self=="/survey_responses.php"||$self=="/transfer_report.php"){
+                        $thead="thead";
+                    } else {
+                        $thead="thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
+                    }
+                    $menu.='<TD class="'.$thead.'"><A HREF="'.$http_dir_name.'surveys.php"><img width="16" height="16"  src="'.$http_dir_name.'images/table.png" border="0" ><br />'.str_replace(" ","&nbsp;",$config_values['MENU_SURVEYS']).'</A>&nbsp;</TD>';
                 }
-                $menu.='<TD class="'.$thead.'"><A HREF="'.$http_dir_name.'surveys.php"><img width="16" height="16"  src="'.$http_dir_name.'images/table.png" border="0" ><br />'.str_replace(" ","&nbsp;",$config_values['MENU_SURVEYS']).'</A>&nbsp;</TD>';
-
                 //=======================================================================================================
                 // CDRs
                 //=======================================================================================================
