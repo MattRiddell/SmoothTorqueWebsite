@@ -160,6 +160,9 @@ if ($level!=sha1("level100")) {
         $sql = "REPLACE INTO config (parameter, value) VALUES ('DISABLE_MESSAGE_UPLOAD',".sanitize($_POST['DISABLE_MESSAGE_UPLOAD']).")";
         mysql_query($sql) or die(mysql_error());
         
+        $sql = "REPLACE INTO config (parameter, value) VALUES ('DISABLE_SURVEYS',".sanitize($_POST['DISABLE_SURVEYS']).")";
+        mysql_query($sql) or die(mysql_error());
+        
         $sql = "REPLACE INTO config (parameter, value) VALUES ('MENU_TIMEZONES',".sanitize($_POST['MENU_TIMEZONES']).")";
         mysql_query($sql) or die(mysql_error());
         
@@ -1639,6 +1642,18 @@ Language:
     <input type="radio" name="DISABLE_MESSAGE_UPLOAD" value="NO" <?if ( $config_values['DISABLE_MESSAGE_UPLOAD'] != "YES") {echo "checked";}?>> No
     </td>
     </tr>
+    
+    
+    <tr  class="tborder2">
+    <td>
+    Disable "Disable Surveys" Option:
+    </td>
+    <td>
+    <input type="radio" name="DISABLE_SURVEYS" value="YES" <?if ( $config_values['DISABLE_SURVEYS'] == "YES") {echo "checked";}?>> Yes
+    <input type="radio" name="DISABLE_SURVEYS" value="NO" <?if ( $config_values['DISABLE_SURVEYS'] != "YES") {echo "checked";}?>> No
+    </td>
+    </tr>
+    
     
     <tr  class="tborder2">
     <td colspan="2">
