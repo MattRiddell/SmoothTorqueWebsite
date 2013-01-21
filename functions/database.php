@@ -1451,6 +1451,7 @@ if (!function_exists('create_missing_tables') ) {
             $sql = "Create table `survey_choices` (
             `survey_id` int(10) unsigned,
             `question_number` int(10) unsigned,
+            `question_text` text,
             `soundfile` varchar(1024) default NULL,
             `choices` varchar(1024) default NULL,
             PRIMARY KEY (`survey_id`, `question_number`)
@@ -1460,6 +1461,18 @@ if (!function_exists('create_missing_tables') ) {
             $result=mysql_query($sql, $link);
             
         }
+        $result = mysql_query("SHOW COLUMNS FROM ClusterControl.survey_choices");
+        $columns = mysql_num_rows($result) or die(mysql_error());
+        for ($i = 0; $i < $columns; $i++) {
+            $field_array[] = mysql_result($result, $i, "Field");
+        }
+        
+        if (!in_array('question_text', $field_array)) {
+            $result = mysql_query('ALTER TABLE survey_choices ADD question_text text') or die(mysql_error());
+            $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Added survey_choices question_text field')";
+            
+        }
+        
         
         /*======================================================================
          survey_results Table
