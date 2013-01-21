@@ -1461,7 +1461,7 @@ if (!function_exists('create_missing_tables') ) {
             $result=mysql_query($sql, $link);
             
         }
-        $result = mysql_query("SHOW COLUMNS FROM ClusterControl.survey_choices");
+        $result = mysql_query("SHOW COLUMNS FROM SineDialer.survey_choices");
         $columns = mysql_num_rows($result) or die(mysql_error());
         for ($i = 0; $i < $columns; $i++) {
             $field_array[] = mysql_result($result, $i, "Field");
