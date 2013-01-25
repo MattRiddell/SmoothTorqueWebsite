@@ -40,8 +40,8 @@ if ($count <= $min_new_records) {
         }
     }
     echo "\n";
-    echo "Remove records that have taken surveys\n";
-    $result = mysql_query("DELETE FROM number WHERE phonenumber in (SELECT phonenumber FROM survey_results)");    
+    //echo "Remove records that have taken surveys\n";
+    //$result = mysql_query("DELETE FROM number WHERE phonenumber in (SELECT phonenumber FROM survey_results)");
     echo "Scrub against DNC\n";
     $result = mysql_query("SELECT number.phonenumber FROM number LEFT JOIN dncnumber ON number.phonenumber=dncnumber.phonenumber WHERE dncnumber.phonenumber IS NOT NULL AND number.campaignid=$campaignid") or die(mysql_error());
     $x = 0;
