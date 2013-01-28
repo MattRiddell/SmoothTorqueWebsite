@@ -70,9 +70,9 @@ foreach ($records as $number=>$name) {
         $highest = -1;
         $highest_percentage = -1;
         for ($i = 0;$i<4;$i++) {
-            if ($percentage_match > $highest_percentage) {
+            if ($percentage_match[$i] > $highest_percentage) {
                 $highest = $i;
-                $highest_percentage = $percentage_match;
+                $highest_percentage = $percentage_match[$i];
             }
         }
         
