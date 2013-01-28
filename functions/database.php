@@ -1481,10 +1481,10 @@ if (!function_exists('create_missing_tables') ) {
             include "admin/db_config.php";
             $sql = "Create table `survey_results` (
             `campaign_id` int(10) unsigned,
-            `phonenumber` varchar(1024) default NULL,
-            `question` varchar(1024) default NULL,
+            `phonenumber` varchar(15) default NULL,
+            `question` varchar(3) default NULL,
             `datetime` timestamp NULL default NULL on update CURRENT_TIMESTAMP,
-            `choice` varchar(1024) default NULL)";
+            `choice` varchar(2) default NULL)";
             $result = mysql_query($sql,$link) or die(mysql_error());
             $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created survey_results Table')";
             $result=mysql_query($sql, $link);
