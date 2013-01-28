@@ -44,6 +44,7 @@ function get_data($url, $number) {
 
 foreach ($records as $number=>$name) {
     $name = strtoupper($name);
+    $name = str_replace(","," ");
     foreach ($sources as $source) {
         /*$response = get_data($source['url'], $number);
         $number_arr = array();
