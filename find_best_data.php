@@ -50,7 +50,10 @@ foreach ($records as $number=>$name) {
         $response = file_get_contents($new_url);
         //$response = get_data($source['url'], $number_arr);
         $exploded = explode($source['delim'],$response);
-        print_r($exploded);
+        foreach ($i = 0;$i<length($exploded);$i++) {
+            $exploded[$i] = str_replace("\"","",$exploded[$i]);
+        }
+        //print_r($exploded);
         $full_name = $exploded[$source['first_name_field']]." ".$exploded[$source['last_name_field']];
         $full_name_reverse = $exploded[$source['last_name_field']]." ".$exploded[$source['first_name_field']];
         $full_name_init = $exploded[$source['last_name_field']]." ".substr($exploded[$source['first_name_field']],0,1);
