@@ -3,7 +3,7 @@ $cnam_lookup = "http://x.x.x.x/api/query.php?mode=all&output=txt&dn=";
 $userpass = "user:pass";
 require "admin/db_config.php";
 require "functions/sanitize.php";
-mysql_select_db("ClusterControl");
+mysql_select_db("SineDialer");
 while (1) {
     $result = mysql_query("select distinct survey_results.phonenumber from survey_results left join names on survey_results.phonenumber=names.phonenumber where survey_results.campaign_id = 64 and names.phonenumber is null");
     while ($row = mysql_fetch_assoc($result)) {
