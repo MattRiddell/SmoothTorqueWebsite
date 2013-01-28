@@ -41,8 +41,8 @@ function get_data($url, $number) {
 
 foreach ($records as $number=>$name) {
     foreach ($sources as $source) {
-        $response[$source['name']] = get_data($source['url'], $number);
-        $exploded = explode($source['delim'],$response[0]);
+        $response = get_data($source['url'], $number);
+        $exploded = explode($source['delim'],$response);
         $full_name = $exploded[$sources['first_name_field']]." ".$exploded[$sources['last_name_field']];
         $full_name_reverse = $exploded[$sources['last_name_field']]." ".$exploded[$sources['first_name_field']];
         $full_name_init = $exploded[$sources['last_name_field']]." ".substr($exploded[$sources['first_name_field']],0,1);
