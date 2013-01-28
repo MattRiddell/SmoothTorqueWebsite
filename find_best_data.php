@@ -35,7 +35,7 @@ function get_data($url, $number) {
     curl_setopt( $ch, CURLOPT_HEADER, 0);
     curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
     
-    return = curl_exec( $ch );
+    return curl_exec( $ch );
 }
 
 
