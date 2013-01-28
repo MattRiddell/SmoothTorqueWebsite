@@ -43,10 +43,10 @@ foreach ($records as $number=>$name) {
     foreach ($sources as $source) {
         $response = get_data($source['url'], $number);
         $exploded = explode($source['delim'],$response);
-        $full_name = $exploded[$sources['first_name_field']]." ".$exploded[$sources['last_name_field']];
-        $full_name_reverse = $exploded[$sources['last_name_field']]." ".$exploded[$sources['first_name_field']];
-        $full_name_init = $exploded[$sources['last_name_field']]." ".substr($exploded[$sources['first_name_field']],0,1);
-        $full_name_init_reverse = substr($exploded[$sources['first_name_field']],0,1)." ".$exploded[$sources['last_name_field']];
+        $full_name = $exploded[$source['first_name_field']]." ".$exploded[$source['last_name_field']];
+        $full_name_reverse = $exploded[$source['last_name_field']]." ".$exploded[$source['first_name_field']];
+        $full_name_init = $exploded[$source['last_name_field']]." ".substr($exploded[$source['first_name_field']],0,1);
+        $full_name_init_reverse = substr($exploded[$source['first_name_field']],0,1)." ".$exploded[$source['last_name_field']];
         similar_text($full_name, $name, $percentage_match_1);
         similar_text($full_name_reverse, $name, $percentage_match_2);
         similar_text($full_name_init, $name, $percentage_match_3);
