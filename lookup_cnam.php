@@ -21,8 +21,14 @@ while (1) {
                     if (preg_match('/[^A-Za-z]/',$test_string)) {
                         echo "CITY: ".$data."\n";
                         $skip = true;
+                    } else {
+                        echo substr($data,15,1) ." is not a letter\n";
                     }
+                } else {
+                    echo substr($data,14,1) ." is not a letter\n";
                 }
+            } else {
+                echo substr($data,13,1)." is not space\n";
             }
         } else {
             $skip = true;
