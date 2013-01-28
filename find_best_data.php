@@ -40,6 +40,7 @@ function get_data($url, $number) {
 
 
 foreach ($records as $number=>$name) {
+    $name = strtoupper($name);
     foreach ($sources as $source) {
         /*$response = get_data($source['url'], $number);
         $number_arr = array();
@@ -51,7 +52,7 @@ foreach ($records as $number=>$name) {
         //$response = get_data($source['url'], $number_arr);
         $exploded = explode($source['delim'],$response);
         for ($i = 0;$i<count($exploded);$i++) {
-            $exploded[$i] = str_replace("\"","",$exploded[$i]);
+            $exploded[$i] = strtoupper(str_replace("\"","",$exploded[$i]));
         }
         //print_r($exploded);
         $full_name = $exploded[$source['first_name_field']]." ".$exploded[$source['last_name_field']];
