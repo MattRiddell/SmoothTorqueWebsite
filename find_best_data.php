@@ -101,9 +101,9 @@ foreach ($records as $number=>$name) {
             if ($highest_percentage < 50) {
                 //echo "- No Match $highest_percentage $name with ".$text."\n";
             } else if ($highest_percentage < 75) {
-                echo "+ Spouse Match $highest_percentage $name with ".$text."\n";
+                echo "+ Spouse Match $highest_percentage $name with ".$text." ".$exploded[6]." ".$exploded[7]."\n";
             } else if ($highest_percentage < 100) {
-                echo "+ Almost exact Match $highest_percentage $name with ".$text." ".$exploded[4]."\n";
+                echo "+ Almost exact Match $highest_percentage $name with ".$text." ".$exploded[6]." ".$exploded[7]."\n";
             } else {
                 echo "+ EXACT MATCH $name with ".$text." ".$exploded[4]."\n";
             }            
