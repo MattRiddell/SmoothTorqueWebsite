@@ -50,7 +50,7 @@ foreach ($records as $number=>$name) {
         $response = file_get_contents($new_url);
         //$response = get_data($source['url'], $number_arr);
         $exploded = explode($source['delim'],$response);
-        foreach ($i = 0;$i<length($exploded);$i++) {
+        for ($i = 0;$i<count($exploded);$i++) {
             $exploded[$i] = str_replace("\"","",$exploded[$i]);
         }
         //print_r($exploded);
