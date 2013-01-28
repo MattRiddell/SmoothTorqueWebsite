@@ -45,7 +45,9 @@ foreach ($records as $number=>$name) {
         $number_arr = array();
         $number_arr[0] = $number;
         $number_arr[1] = $number;*/
-        $response = file_get_contents($source['url'].$number);
+        $new_url = $source['url'].$number;
+        echo "Loading: $new_url\n";
+        $response = file_get_contents($new_url);
         $response = get_data($source['url'], $number_arr);
         $exploded = explode($source['delim'],$response);
         print_r($exploded);
