@@ -105,7 +105,7 @@ foreach ($records as $number=>$name) {
             } else if ($highest_percentage < 100) {
                 echo "+ Almost exact Match $highest_percentage $name with ".$text." ".$exploded[6]." ".$exploded[7]."\n";
             } else {
-                echo "+ EXACT MATCH $name with ".$text." ".$exploded[4]."\n";
+                echo "+ EXACT MATCH $name with ".$text." ".$exploded[6]." ".$exploded[7]."\n";
             }            
         } else {
             echo "No match";
