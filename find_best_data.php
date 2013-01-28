@@ -51,10 +51,10 @@ foreach ($records as $number=>$name) {
         similar_text($full_name_reverse, $name, $percentage_match_2);
         similar_text($full_name_init, $name, $percentage_match_3);
         similar_text($full_name_init_reverse, $name, $percentage_match_4);
-        echo $source['name'].": Match 1: ".$percentage_match_1."\n";
-        echo $source['name'].": Match 2: ".$percentage_match_2."\n";
-        echo $source['name'].": Match 3: ".$percentage_match_3."\n";
-        echo $source['name'].": Match 4: ".$percentage_match_4."\n";
+        echo $source['name'].": ".$full_name." Match 1: $name ".$percentage_match_1."\n";
+        echo $source['name'].": ".$full_name_reverse." Match 2: $name ".$percentage_match_2."\n";
+        echo $source['name'].": ".$full_name_init." Match 3: $name ".$percentage_match_3."\n";
+        echo $source['name'].": ".$full_name_init_reverse." Match 4: $name ".$percentage_match_4."\n";
     }
 }
 
