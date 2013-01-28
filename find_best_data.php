@@ -50,7 +50,7 @@ foreach ($records as $number=>$name) {
         $number_arr[0] = $number;
         $number_arr[1] = $number;*/
         $new_url = $source['url'].$number;
-        echo "Loading: $new_url\n";
+        //echo "Loading: $new_url\n";
         $response = file_get_contents($new_url);
         //$response = get_data($source['url'], $number_arr);
         $exploded = explode($source['delim'],$response);
@@ -109,7 +109,7 @@ foreach ($records as $number=>$name) {
         } else {
             echo "No match";
         }
-        
+        echo "\n";
     }
 }
 
