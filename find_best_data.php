@@ -42,6 +42,9 @@ function get_data($url, $number) {
 foreach ($records as $number=>$name) {
     foreach ($sources as $source) {
         $response = get_data($source['url'], $number);
+        $number_arr = array();
+        $number_arr[0] = $number;
+        $response = get_data($source['url'], $number_arr);
         $exploded = explode($source['delim'],$response);
         print_r($exploded);
         $full_name = $exploded[$source['first_name_field']]." ".$exploded[$source['last_name_field']];
