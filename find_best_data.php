@@ -17,9 +17,12 @@ mysql_select_db("SineDialer");
  Create rank for record authenticity
  
  */
-
-$records['14072674434'] = "Matt Riddell";
-$records['14072674435'] = "John Smith";
+$result = mysql_query("SELECT * FROM names limit 100");
+while ($row = mysql_fetch_assoc($result)) {
+    $records[$row['phonenumber']] = $row['name'];
+}
+//$records['14072674434'] = "Matt Riddell";
+//$records['14072674435'] = "John Smith";
 
 $sources[0]['name'] = "neel";
 $sources[0]['url'] = "http://x.x.x.x/optinlookup/default.aspx";
