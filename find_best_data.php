@@ -44,6 +44,7 @@ foreach ($records as $number=>$name) {
         $response = get_data($source['url'], $number);
         $number_arr = array();
         $number_arr[0] = $number;
+        $number_arr[1] = $number;
         $response = get_data($source['url'], $number_arr);
         $exploded = explode($source['delim'],$response);
         print_r($exploded);
