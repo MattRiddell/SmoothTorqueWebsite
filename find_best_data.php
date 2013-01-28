@@ -27,10 +27,10 @@ $sources[0]['delim'] = ",";
 $sources[0]['first_name_field'] = 3;
 $sources[0]['last_name_field'] = 4;
 
-function get_data($url) {
+function get_data($url, $number) {
     $ch = curl_init( $url );
     curl_setopt( $ch, CURLOPT_POST, 1);
-    curl_setopt( $ch, CURLOPT_POSTFIELDS, $numbers);
+    curl_setopt( $ch, CURLOPT_POSTFIELDS, $number);
     curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
     curl_setopt( $ch, CURLOPT_HEADER, 0);
     curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
@@ -41,7 +41,7 @@ function get_data($url) {
 
 foreach ($records as $number=>$name) {
     foreach ($sources as $source) {
-        $response[$source['name']] = get_data($source['url']);
+        $response[$source['name']] = get_data($source['url'], $number);
         $exploded = explode($source['delim'],$response);
         $full_name = $exploded[$sources['first_name_field']]." ".$exploded[$sources['last_name_field']];
         $full_name_reverse = $exploded[$sources['last_name_field']]." ".$exploded[$sources['first_name_field']];
