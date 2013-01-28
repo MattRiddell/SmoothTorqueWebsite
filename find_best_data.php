@@ -99,7 +99,7 @@ foreach ($records as $number=>$name) {
         }
         if ($highest > -1) {
             if ($highest_percentage < 50) {
-                echo "- No Match $highest_percentage $name with ".$text;
+                //echo "- No Match $highest_percentage $name with ".$text;
             } else if ($highest_percentage < 75) {
                 echo "+ Spouse Match $highest_percentage $name with ".$text;
             } else if ($highest_percentage < 100) {
