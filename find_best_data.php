@@ -24,8 +24,8 @@ $records['14072674435'] = "John Smith";
 $sources[0]['name'] = "neel";
 $sources[0]['url'] = "http://x.x.x.x/optinlookup/default.aspx";
 $sources[0]['delim'] = ",";
-$sources[0]['first_name_field'] = 3;
-$sources[0]['last_name_field'] = 4;
+$sources[0]['first_name_field'] = 2;
+$sources[0]['last_name_field'] = 3;
 
 function get_data($url, $number) {
     $ch = curl_init( $url );
