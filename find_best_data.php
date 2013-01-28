@@ -48,7 +48,7 @@ foreach ($records as $number=>$name) {
         $new_url = $source['url'].$number;
         echo "Loading: $new_url\n";
         $response = file_get_contents($new_url);
-        $response = get_data($source['url'], $number_arr);
+        //$response = get_data($source['url'], $number_arr);
         $exploded = explode($source['delim'],$response);
         print_r($exploded);
         $full_name = $exploded[$source['first_name_field']]." ".$exploded[$source['last_name_field']];
