@@ -12,7 +12,7 @@ while (1) {
         $phonenumber = $row['phonenumber'];
         $url = $cnam_lookup.$phonenumber;
         $data = file_get_contents($url, false, $context);
-        echo "XXXXXXXXXXX: ".$phonenumber." returns ".$data."\n";
+        //echo "XXXXXXXXXXX: ".$phonenumber." returns ".$data."\n";
         $skip = false;
         if (strlen(trim($data)) > 0 && $data != "WIRELESS CALLER" && $data != "U.S. CELLULAR") {
             if (substr($data,12,1) == " ") {
@@ -23,13 +23,13 @@ while (1) {
                         echo "CITY: ".$data."\n";
                         $skip = true;
                     } else {
-                        echo substr($data,14,1) ." is not a letter\n";
+                        //echo substr($data,14,1) ." is not a letter\n";
                     }
                 } else {
-                    echo substr($data,13,1) ." is not a letter\n";
+                    //echo substr($data,13,1) ." is not a letter\n";
                 }
             } else {
-                echo substr($data,12,1)." is not space\n";
+                //echo substr($data,12,1)." is not space\n";
             }
         } else {
             $skip = true;
