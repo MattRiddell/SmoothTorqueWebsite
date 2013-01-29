@@ -20,7 +20,7 @@ while (1) {
                 if (preg_match('/[A-Za-z]/',$test_string)) {
                     $test_string = substr($data,14,1);
                     if (preg_match('/[A-Za-z]/',$test_string)) {
-                        echo "CITY: ".$data."\n";
+                        //echo "CITY: ".$data."\n";
                         $skip = true;
                     } else {
                         //echo substr($data,14,1) ." is not a letter\n";
