@@ -1,11 +1,12 @@
 <?
-$cnam_lookup = "http://x.x.x.x/api/query.php?mode=all&output=txt&dn=";
+$cnam_lookup = "http://x.com/api/query.php?mode=all&output=txt&dn=";
 $userpass = "user:pass";
+$campaign = 64;
 require "admin/db_config.php";
 require "functions/sanitize.php";
 mysql_select_db("SineDialer");
 while (1) {
-    $result = mysql_query("select distinct survey_results.phonenumber from survey_results left join names on survey_results.phonenumber=names.phonenumber where survey_results.campaign_id = 64 and names.phonenumber is null");
+    $result = mysql_query("sexplain select distinct survey_results.phonenumber from survey_results where survey_results.campaign_id = $campaign and phonenumber in (select phonenumber from names)");
     while ($row = mysql_fetch_assoc($result)) {
         $context = stream_context_create(array('http' => array('header'  => "Authorization: Basic " . base64_encode($userpass))));
         $phonenumber = $row['phonenumber'];
@@ -14,21 +15,21 @@ while (1) {
         echo "XXXXXXXXXXX: ".$phonenumber." returns ".$data."\n";
         $skip = false;
         if (strlen(trim($data)) > 0 && $data != "WIRELESS CALLER" && $data != "U.S. CELLULAR") {
-            if (substr($data,13,1) == " ") {
-                $test_string = substr($data,14,1);
-                if (preg_match('/[^A-Za-z]/',$test_string)) {
-                    $test_string = substr($data,15,1);
-                    if (preg_match('/[^A-Za-z]/',$test_string)) {
+            if (substr($data,12,1) == " ") {
+                $test_string = substr($data,13,1);
+                if (preg_match('/[A-Za-z]/',$test_string)) {
+                    $test_string = substr($data,14,1);
+                    if (preg_match('/[A-Za-z]/',$test_string)) {
                         echo "CITY: ".$data."\n";
                         $skip = true;
                     } else {
-                        echo substr($data,15,1) ." is not a letter\n";
+                        echo substr($data,14,1) ." is not a letter\n";
                     }
                 } else {
-                    echo substr($data,14,1) ." is not a letter\n";
+                    echo substr($data,13,1) ." is not a letter\n";
                 }
             } else {
-                echo substr($data,13,1)." is not space\n";
+                echo substr($data,12,1)." is not space\n";
             }
         } else {
             $skip = true;
