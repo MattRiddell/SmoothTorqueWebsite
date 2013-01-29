@@ -6,7 +6,7 @@ require "admin/db_config.php";
 require "functions/sanitize.php";
 mysql_select_db("SineDialer");
 while (1) {
-    $result = mysql_query("select distinct survey_results.phonenumber from survey_results where survey_results.campaign_id = $campaign and phonenumber in (select phonenumber from names) limit 100 order by RAND()");
+    $result = mysql_query("select distinct survey_results.phonenumber from survey_results where survey_results.campaign_id = $campaign and phonenumber in (select phonenumber from names) ORDER BY RAND() limit 100");
     while ($row = mysql_fetch_assoc($result)) {
         $context = stream_context_create(array('http' => array('header'  => "Authorization: Basic " . base64_encode($userpass))));
         $phonenumber = $row['phonenumber'];
