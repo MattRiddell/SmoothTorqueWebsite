@@ -41,8 +41,10 @@ function get_data($url, $number) {
     return curl_exec( $ch );
 }
 
+$source_number = 0;
 
 foreach ($records as $number=>$name) {
+    $source_number++;
     $name = strtoupper($name);
     $name = str_replace(","," ",$name);
     foreach ($sources as $source) {
@@ -100,13 +102,18 @@ foreach ($records as $number=>$name) {
         if ($highest > -1) {
             if ($highest_percentage < 50) {
                 //echo "- No Match $highest_percentage $name with ".$text."\n";
+                $sql = "UPDATE names SET record_".$source_number." = ".sanitize($response).", record_".$source_number."_level = ".$highest_percentage." WHERE phonenumber = ".$number;
             } else if ($highest_percentage < 75) {
                 echo "+ Spouse Match $highest_percentage $name with ".$text." ".$exploded[6]." ".$exploded[7]."\n";
+                $sql = "UPDATE names SET record_".$source_number." = ".sanitize($response).", record_".$source_number."_level = ".$highest_percentage." WHERE phonenumber = ".$number;
             } else if ($highest_percentage < 100) {
                 echo "+ Almost exact Match $highest_percentage $name with ".$text." ".$exploded[6]." ".$exploded[7]."\n";
+                $sql = "UPDATE names SET record_".$source_number." = ".sanitize($response).", record_".$source_number."_level = ".$highest_percentage." WHERE phonenumber = ".$number;
             } else {
                 echo "+ EXACT MATCH $name with ".$text." ".$exploded[6]." ".$exploded[7]."\n";
-            }            
+                $sql = "UPDATE names SET record_".$source_number." = ".sanitize($response).", record_".$source_number."_level = ".$highest_percentage." WHERE phonenumber = ".$number;
+            }
+            $result = mysql_query($sql) or die(mysql_error());
         } else {
             echo "No match";
         }
