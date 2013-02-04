@@ -41,13 +41,13 @@ function get_data($url, $number) {
     return curl_exec( $ch );
 }
 
-$source_number = 0;
 
 foreach ($records as $number=>$name) {
-    $source_number++;
     $name = strtoupper($name);
     $name = str_replace(","," ",$name);
+    $source_number = 0;
     foreach ($sources as $source) {
+        $source_number = ++;
         /*$response = get_data($source['url'], $number);
         $number_arr = array();
         $number_arr[0] = $number;
