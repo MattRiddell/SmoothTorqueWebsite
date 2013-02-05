@@ -29,7 +29,7 @@ function get_data($url, $number) {
  
  */
 while (1) {
-$result = mysql_query("SELECT * FROM names where record_1 is null limit 100");
+$result = mysql_query("SELECT * FROM names where record_1_level is null limit 100");
 while ($row = mysql_fetch_assoc($result)) {
     $records[$row['phonenumber']] = $row['name'];
 }
@@ -54,7 +54,14 @@ foreach ($records as $number=>$name) {
         $number_arr[1] = $number;*/
         $new_url = $source['url'].$number;
         //echo "Loading: $new_url\n";
-        $response = file_get_contents($new_url);
+        
+        
+        $result_x = mysql_query("SELECT record_1 FROM names where phonenumber = ".$number);
+        $response = mysql_result($result_x,0,0);
+//        $response = file_get_contents($new_url);
+        
+        
+        
         //$response = get_data($source['url'], $number_arr);
         $exploded = explode($source['delim'],$response);
         for ($i = 0;$i<count($exploded);$i++) {
