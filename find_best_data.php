@@ -2,6 +2,17 @@
 require "admin/db_config.php";
 require "functions/sanitize.php";
 mysql_select_db("SineDialer");
+function get_data($url, $number) {
+    $ch = curl_init( $url );
+    curl_setopt( $ch, CURLOPT_POST, 1);
+    curl_setopt( $ch, CURLOPT_POSTFIELDS, $number);
+    curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
+    curl_setopt( $ch, CURLOPT_HEADER, 0);
+    curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
+    return curl_exec( $ch );
+}
+
+
 
 /* 1. Lookup data from multiple sources
  * 2. Compare the data
@@ -17,30 +28,19 @@ mysql_select_db("SineDialer");
  Create rank for record authenticity
  
  */
-$result = mysql_query("SELECT * FROM names limit 100");
+while (1) {
+$result = mysql_query("SELECT * FROM names where record_1 is null limit 100");
 while ($row = mysql_fetch_assoc($result)) {
     $records[$row['phonenumber']] = $row['name'];
 }
 //$records['14072674434'] = "Matt Riddell";
 //$records['14072674435'] = "John Smith";
 
-$sources[0]['name'] = "neel";
-$sources[0]['url'] = "http://x.x.x.x/optinlookup/default.aspx";
+$sources[0]['name'] = "x";
+$sources[0]['url'] = "http://x.x.x.x/optinlookup/default.aspx?number=";
 $sources[0]['delim'] = ",";
 $sources[0]['first_name_field'] = 2;
 $sources[0]['last_name_field'] = 3;
-
-function get_data($url, $number) {
-    $ch = curl_init( $url );
-    curl_setopt( $ch, CURLOPT_POST, 1);
-    curl_setopt( $ch, CURLOPT_POSTFIELDS, $number);
-    curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
-    curl_setopt( $ch, CURLOPT_HEADER, 0);
-    curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
-    
-    return curl_exec( $ch );
-}
-
 
 foreach ($records as $number=>$name) {
     $name = strtoupper($name);
@@ -120,5 +120,5 @@ foreach ($records as $number=>$name) {
         //echo "\n";
     }
 }
-
+}
 ?>
