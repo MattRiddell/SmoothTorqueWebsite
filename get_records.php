@@ -59,6 +59,15 @@ if ($count <= $min_new_records) {
         $resultx = mysql_query("UPDATE number set status='previous_press1' WHERE campaignid = $campaignid and phonenumber = '".$row['phonenumber']."'") or die(mysql_error());
     }
     
+    echo "Remove State Omits\n";
+    $result = mysql_query("select prefix from states where state in (select * from state_omits)");
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_assoc($result)) {
+            $result_x = mysql_query("delete from number where status = 'new' and campaignid = $campaignid and phonenumber like '".$row['prefix']."%'");
+        }
+    }
+    
+    
     echo "\n";
     echo "Run TimeZone script\n";
     $result = mysql_query("select time_zones.start, time_zones.end, prefix from time_zones, timezone_prefixes where timezone_prefixes.timezone = time_zones.id");
