@@ -1426,7 +1426,7 @@ if (!function_exists('create_missing_tables') ) {
         /*======================================================================
          state_omits Table
          ======================================================================*/
-        if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","pressed1")){
+        if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","state_omits")){
             include "admin/db_config.php";
             $sql = "CREATE TABLE `state_omits` (
             `state` varchar(2) NOT NULL DEFAULT '',
