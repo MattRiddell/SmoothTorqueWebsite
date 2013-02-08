@@ -50,6 +50,15 @@ if ($count <= $min_new_records) {
         echo "IN DNC: ".$row['phonenumber']." (".round($x/mysql_num_rows($result)*100,2).")                \r";
         $resultx = mysql_query("UPDATE number set status='indnc' WHERE phonenumber = '".$row['phonenumber']."'") or die(mysql_error());
     }
+    echo "Scrub against Existing\n";
+    $result = mysql_query("SELECT number.phonenumber, number.status FROM number LEFT JOIN pressed1 ON number.phonenumber=pressed1.phonenumber WHERE pressed1.phonenumber IS NOT NULL AND number.campaignid=$campaignid and number.status = 'new'") or die(mysql_error());
+    $x = 0;
+    while ($row = mysql_fetch_assoc($result)) {
+        $x++;
+        echo "Old Press1: ".$row['phonenumber']." (".round($x/mysql_num_rows($result)*100,2).")                \r";
+        $resultx = mysql_query("UPDATE number set status='previous_press1' WHERE campaignid = $campaignid and phonenumber = '".$row['phonenumber']."'") or die(mysql_error());
+    }
+    
     echo "\n";
     echo "Run TimeZone script\n";
     $result = mysql_query("select time_zones.start, time_zones.end, prefix from time_zones, timezone_prefixes where timezone_prefixes.timezone = time_zones.id");
