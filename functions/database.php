@@ -1409,6 +1409,21 @@ if (!function_exists('create_missing_tables') ) {
         }
         
         /*======================================================================
+         pressed1 Table
+         ======================================================================*/
+        if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","pressed1")){
+            include "admin/db_config.php";
+            $sql = "CREATE TABLE `pressed1` (
+            `phonenumber` varchar(15) NOT NULL DEFAULT '',
+            PRIMARY KEY (`phonenumber`)
+            ) ENGINE=InnoDB";
+            $result = mysql_query($sql,$link) or die(mysql_error());
+            $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created pressed1 Table')";
+            $result=mysql_query($sql, $link);
+            
+        }
+        
+        /*======================================================================
          survey_schedules Table
          ======================================================================*/
         if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","survey_schedules")){
