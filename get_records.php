@@ -63,7 +63,7 @@ if ($count <= $min_new_records) {
     $result = mysql_query("select prefix from states where state in (select * from state_omits)");
     if (mysql_num_rows($result) > 0) {
         while ($row = mysql_fetch_assoc($result)) {
-            $result_x = mysql_query("delete from number where status = 'new' and campaignid = $campaignid and phonenumber like '".$row['prefix']."%'");
+            $result_x = mysql_query("delete from number where status = 'new' and campaignid = $campaignid and phonenumber like '1".$row['prefix']."%'");
         }
     }
     
