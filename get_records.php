@@ -67,6 +67,14 @@ if ($count <= $min_new_records) {
         }
     }
     
+    echo "Remove AreaCode Omits\n";
+    $result = mysql_query("select areacode from areacode_omits");
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_assoc($result)) {
+            $result_x = mysql_query("delete from number where status = 'new' and campaignid = $campaignid and phonenumber like '".$row['areacode']."%'");
+        }
+    }
+    
     
     echo "\n";
     echo "Run TimeZone script\n";
