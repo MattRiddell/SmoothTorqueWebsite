@@ -1424,6 +1424,21 @@ if (!function_exists('create_missing_tables') ) {
         }
         
         /*======================================================================
+         state_omits Table
+         ======================================================================*/
+        if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","pressed1")){
+            include "admin/db_config.php";
+            $sql = "CREATE TABLE `state_omits` (
+            `state` varchar(2) NOT NULL DEFAULT '',
+            PRIMARY KEY (`state`)
+            ) ENGINE=InnoDB";
+            $result = mysql_query($sql,$link) or die(mysql_error());
+            $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created state_omits Table')";
+            $result=mysql_query($sql, $link);
+            
+        }
+        
+        /*======================================================================
          survey_schedules Table
          ======================================================================*/
         if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","survey_schedules")){
