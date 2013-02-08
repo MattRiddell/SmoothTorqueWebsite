@@ -1444,8 +1444,8 @@ if (!function_exists('create_missing_tables') ) {
         if (!mysql_is_table($db_host,$db_user,$db_pass,"SineDialer","areacode_omits")){
             include "admin/db_config.php";
             $sql = "CREATE TABLE `areacode_omits` (
-            `areacode` varchar(2) NOT NULL DEFAULT '',
-            PRIMARY KEY (`state`)
+            `areacode` varchar(10) NOT NULL DEFAULT '',
+            PRIMARY KEY (`areacode`)
             ) ENGINE=InnoDB";
             $result = mysql_query($sql,$link) or die(mysql_error());
             $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_POST[user]', 'Created areacode_omits Table')";
