@@ -82,6 +82,14 @@ if ($result) {
     }
 }
 
+$sql = 'SELECT value FROM config WHERE parameter=\'LEAVE_PRESS1\'';
+$result=@mysql_query($sql, $link);
+if ($result) {
+    if (mysql_num_rows($result) > 0) {
+        $config_values['LEAVE_PRESS1'] = mysql_result($result,0,'value');
+    }
+}
+
 
 $sql = 'SELECT value FROM config WHERE parameter=\'use_new_pie\'';
 $result=mysql_query($sql, $link) or die (mysql_error());

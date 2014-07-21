@@ -10,7 +10,11 @@ if (isset($_GET[type])){
         $sql = 'UPDATE number SET status="new" where campaignid='.$_GET[id];
     } else if ($_GET['type'] == "deleteall") {
         if (isset($_GET['sure'])) {
-            $sql = 'DELETE FROM number WHERE campaignid='.$_GET[id];
+            if ($config_values['LEAVE_PRESS1'] == "NO") {
+                $sql = 'DELETE FROM number WHERE campaignid='.$_GET[id];
+            } else {
+                $sql = 'DELETE FROM number WHERE campaignid='.$_GET[id]." and status != 'pressed1' and status != 'pressedf'";
+            }
         } else {
             require "header.php";
             ?>

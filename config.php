@@ -168,6 +168,9 @@ if ($level!=sha1("level100")) {
         
         $sql = "REPLACE INTO config (parameter, value) VALUES ('DELETE_ALL',".sanitize($_POST['DELETE_ALL']).")";
         mysql_query($sql) or die(mysql_error());
+
+        $sql = "REPLACE INTO config (parameter, value) VALUES ('LEAVE_PRESS1',".sanitize($_POST['LEAVE_PRESS1']).")";
+        mysql_query($sql) or die(mysql_error());
         
         $sql = "REPLACE INTO config (parameter, value) VALUES ('use_names',".sanitize($_POST['use_names']).")";
         mysql_query($sql) or die(mysql_error());
@@ -1311,6 +1314,16 @@ Language:
     <td>
     <input type="radio" name="DELETE_ALL" value="YES" <?if ( $config_values['DELETE_ALL'] == "YES") {echo "checked";}?>> Yes
     <input type="radio" name="DELETE_ALL" value="NO" <?if ( $config_values['DELETE_ALL'] != "YES") {echo "checked";}?>> No
+    </td>
+    </tr>
+    
+    <tr  class="tborder2">
+    <td>
+    Leave Press 1 with Delete All Option:
+    </td>
+    <td>
+    <input type="radio" name="LEAVE_PRESS1" value="YES" <?if ( $config_values['LEAVE_PRESS1'] == "YES") {echo "checked";}?>> Yes
+    <input type="radio" name="LEAVE_PRESS1" value="NO" <?if ( $config_values['LEAVE_PRESS1'] != "YES") {echo "checked";}?>> No
     </td>
     </tr>
     
