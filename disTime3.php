@@ -90,6 +90,13 @@ if ($result) {
     }
 }
 
+$sql = 'SELECT value FROM config WHERE parameter=\'test_number\'';
+$result=@mysql_query($sql, $link);
+if ($result) {
+    if (mysql_num_rows($result) > 0) {
+        $config_values['test_number'] = mysql_result($result,0,'value');
+    }
+}
 
 $sql = 'SELECT value FROM config WHERE parameter=\'use_new_pie\'';
 $result=mysql_query($sql, $link) or die (mysql_error());
