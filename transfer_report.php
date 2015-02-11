@@ -263,7 +263,7 @@ if (isset($_GET['recordings_date'])) {
         <source id="source-<?=$x?>" src="recordings/<?=$row['uniqueid']?>" />
         </audio>
         
-        <div id="play-<?=$x?>" style="cursor: pointer" onclick="play<?=$x?>()">Play Audio</div>
+        <div id="play-<?=$x?>" style="cursor: pointer" onclick="play<?=$x?>()"><?=$row['calldate']?> - Play Audio</div>
         <script>
         function play<?=$x?>() {
             var foo = document.getElementById('player-<?=$x?>');
