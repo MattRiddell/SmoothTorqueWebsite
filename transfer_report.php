@@ -256,7 +256,7 @@ if (isset($_GET['recordings_date'])) {
         $x++;
         $exploded = split("-",$row['userfield']);
         
-        echo '<tr>';
+        echo '<tr id="tr<?=$x?>">';
         echo '<td class="recordings">';
         ?>
         <audio id="player-<?=$x?>" preload="auto">
@@ -268,6 +268,14 @@ if (isset($_GET['recordings_date'])) {
         function play<?=$x?>() {
             var foo = document.getElementById('player-<?=$x?>');
             foo.play();
+            <?
+            for ($i = 0;$i <mysql_num_rows($result)+1;$i++) {
+                ?>
+                jQuery("#tr<?$i?>").css("background-color","#ffffff");
+                <?
+            }
+            ?>
+            jQuery("#tr<?$x?>").css("background-color","#cccccc");
         }
         </script>
         <?
