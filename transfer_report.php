@@ -264,6 +264,7 @@ if (isset($_GET['recordings_date'])) {
         </audio>
         
         <div id="play-<?=$x?>" style="cursor: pointer" onclick="play<?=$x?>()"><?=$row['calldate']?> - Play Audio</div>
+        <a href="recordings/<?=$row['uniqueid']?>.wav" target="_blank" onclick="play<?=$x?>()"><?=$row['calldate']?> - Play Audio</a>
         <script>
         function play<?=$x?>() {
             var audio = jQuery("#player-<?=$x?>");
