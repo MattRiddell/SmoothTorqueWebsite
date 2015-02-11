@@ -271,6 +271,7 @@ if (isset($_GET['recordings_date'])) {
             }
             ?>
             jQuery("#play-<?=$x?>").css("background-color","#cccccc");
+            return true;
         }
         </script>
         <?
