@@ -271,11 +271,11 @@ if (isset($_GET['recordings_date'])) {
             <?
             for ($i = 0;$i <mysql_num_rows($result)+1;$i++) {
                 ?>
-                jQuery("#tr<?$i?>").css("background-color","#ffffff");
+                jQuery("#tr<?=$i?>").css("background-color","#ffffff");
                 <?
             }
             ?>
-            jQuery("#tr<?$x?>").css("background-color","#cccccc");
+            jQuery("#tr<?=$x?>").css("background-color","#cccccc");
         }
         </script>
         <?
