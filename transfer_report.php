@@ -260,7 +260,7 @@ if (isset($_GET['recordings_date'])) {
         echo '<td class="recordings" id="play-<?=$x?>">';
         ?>
         
-        <a href="transfer_report.php?get_recording=1&name=<?=$row['uniqueid']?>" target="_blank" onclick="play<?=$x?>()"><?=$row['calldate']?> - Play Audio</a>
+        <a href="transfer_report.php?get_recording=<?=$row['uniqueid']?>" target="_blank" onclick="play<?=$x?>()"><?=$row['calldate']?> - Play Audio</a>
         <script>
         function play<?=$x?>() {
             <?
