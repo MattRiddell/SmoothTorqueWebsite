@@ -257,7 +257,7 @@ if (isset($_GET['recordings_date'])) {
         $exploded = split("-",$row['userfield']);
         
         echo '<tr id="tr'.$x.'">';
-        echo '<td class="recordings" id="play-'.$x.'">';
+        echo '<td class="recordings play-'.$x.'">';
         ?>
         
         <a href="transfer_report.php?get_recording=<?=$row['uniqueid']?>" target="_blank" onclick="play<?=$x?>()"><?=$row['calldate']?> - Play Audio</a>
@@ -266,20 +266,20 @@ if (isset($_GET['recordings_date'])) {
             <?
             for ($i = 0;$i <mysql_num_rows($result)+1;$i++) {
                 ?>
-                jQuery("#play-<?=$i?>").css("background-color","#ffffff");
+                jQuery(".play-<?=$i?>").css("background-color","#ffffff");
                 <?
             }
             ?>
-            jQuery("#play-<?=$x?>").css("background-color","#cccccc");
+            jQuery(".play-<?=$x?>").css("background-color","#cccccc");
             return false;
         }
         </script>
         <?
         echo '</td>';
-        echo '<td class="recordings">'.$row['clid'].'</td>';
-        echo '<td class="recordings">'.$row['duration'].'</td>';
-        echo '<td class="recordings">'.$exploded[0].'</td>';        
-        echo '<td class="recordings">'.$campaign_names[$exploded[1]].'</td>';
+        echo '<td class="recordings play-'.$x.'">'.$row['clid'].'</td>';
+        echo '<td class="recordings play-'.$x.'">'.$row['duration'].'</td>';
+        echo '<td class="recordings play-'.$x.'">'.$exploded[0].'</td>';
+        echo '<td class="recordings play-'.$x.'">'.$campaign_names[$exploded[1]].'</td>';
         $resultx = mysql_query("SELECT * from cdr_dispositions WHERE uniqueid = ".sanitize($row['uniqueid']));
         if (mysql_num_rows($resultx) == 0) {
             $disposition = 0;
@@ -289,7 +289,7 @@ if (isset($_GET['recordings_date'])) {
             $disposition = $rowx['disposition'];
             $notes = $rowx['notes'];
         }
-        echo '<td class="recordings">';
+        echo '<td class="recordings play-'.$x.'">';
         echo '<select name="disposition" id="disp_'.str_replace(".","__",$row['uniqueid']).'">';
         echo '<option value="-1">-</option>';
         foreach ($dispositions as $disp=>$name) {
@@ -302,7 +302,7 @@ if (isset($_GET['recordings_date'])) {
         }
         echo '</select>';
         echo '</td>';
-        echo '<td class="recordings"><form><input type="text" value="'.$notes.'" name="notes_'.$row['uniqueid'].'" id="notes_'.str_replace(".","__",$row['uniqueid']).'"></form>';
+        echo '<td class="recordings play-'.$x.'"><form><input type="text" value="'.$notes.'" name="notes_'.$row['uniqueid'].'" id="notes_'.str_replace(".","__",$row['uniqueid']).'"></form>';
         echo '<input type="submit" value="Save" onclick="clicker(\''.str_replace(".","__",$row['uniqueid']).'\')">';
         
         echo '</td>';
