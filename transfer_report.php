@@ -330,18 +330,13 @@ if (isset($_GET['recordings_date'])) {
 if (isset($_GET['recordings'])) {
     box_start(500);
     echo "<center><h3>Recordings</h3>";
-    $result = mysql_query("SELECT count(*) as count, date(calldate) as date FROM files, cdr WHERE files.uniqueid = cdr.uniqueid and cdr.uniqueid is not null group by date(calldate) order by calldate desc") or die (mysql_error());
+    //$result = mysql_query("SELECT count(*) as count, date(calldate) as date FROM files, cdr WHERE files.uniqueid = cdr.uniqueid and cdr.uniqueid is not null group by date(calldate) order by calldate desc") or die (mysql_error());
     ?>
     <form action = "transfer_report.php?recordings_date=1" method="post">
     Please select a date:
-    <select name="date">
-    <?
-    while ($row = mysqL_fetch_assoc($result)) {
-        echo '<option value="'.$row['date'].'">'.$row['date'].' ('.$row['count'].' recordings)</option>';
-        //        print_pre($row);
-    }
-    ?>    
-    </select>
+<input type="text" name="date">
+    <input type=button value="select" onclick="displayDatePicker('date', false, 'ymd', '-');"><BR>
+
     
     <input type="submit" value="Select Date">
     </form>
