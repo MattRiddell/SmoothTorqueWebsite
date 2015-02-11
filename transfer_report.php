@@ -256,7 +256,7 @@ if (isset($_GET['recordings_date'])) {
         $x++;
         $exploded = split("-",$row['userfield']);
         
-        echo '<tr id="tr<?=$x?>">';
+        echo '<tr id="tr'.$x.'">';
         echo '<td class="recordings">';
         ?>
         <audio id="player-<?=$x?>" preload="auto">
