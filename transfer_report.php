@@ -271,17 +271,17 @@ if (isset($_GET['recordings_date'])) {
             audio[0].play();
             
             
-            jQuery(".recordings").css("background","");
+            //jQuery(".recordings").css("background","");
             //var foo = document.getElementById('player-<?=$x?>');
             //foo.play();
             <?
             for ($i = 0;$i <mysql_num_rows($result)+1;$i++) {
                 ?>
-                jQuery("#tr<?=$i?>").css("background-color","#ffffff");
+                jQuery("#play-<?=$i?>").css("background-color","#ffffff");
                 <?
             }
             ?>
-            jQuery("#tr<?=$x?>").css("background-color","#cccccc");
+            jQuery("#play-<?=$x?>").css("background-color","#cccccc");
         }
         </script>
         <?
