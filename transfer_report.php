@@ -297,7 +297,7 @@ if (isset($_GET['recordings_date'])) {
         //alert(disp);
         //alert (notes);
         jQuery.post("transfer_report.php?save_disposition=1", {disp: disp, notes: notes, uniqueid: val}).done(function( data ) {
-                                                                            alert( "Data Loaded: " + data );
+                                                                            //alert( "Data Loaded: " + data );
                                                                             });;
     }
     </script>
