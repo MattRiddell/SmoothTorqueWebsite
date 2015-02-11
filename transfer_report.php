@@ -1,4 +1,12 @@
 <?
+if (isset($_GET['save_disposition'])) {
+    require "admin/db_config.php";
+    require "functions/sanitize.php";
+    
+    $result = mysql_query("REPLACE INTO cdr_dispositions (uniqueid, disposition, notes) VALUES (".sanitize(str_replace("__",".",$_POST['uniqueid'])).",".sanitize($_POST['disp']).",".sanitize($_POST['notes']).")") or die(mysql_error());
+    //print_r($_POST);
+    exit(0);
+}
 if (isset($_GET['transfer_cdrs_print'])) {
     require "admin/db_config.php";
     require "functions/sanitize.php";
@@ -212,15 +220,25 @@ if (isset($_GET['get_recording'])) {
 require "header.php";
 require "header_surveys.php";
 if (isset($_GET['recordings_date'])) {
+    $result = mysql_query("SELECT * FROM cdr_disposition_names") or die(mysql_error());
+    if (mysql_num_rows($result) == 0) {
+        // No rows
+    } else {
+        while ($row = mysql_fetch_assoc($result)) {
+            $dispositions[$row['id']] = $row['name'];
+        }
+    }
+    //print_pre($dispositions);
     $result_campaigns = mysql_query("SELECT name, id FROM campaign") or die(mysql_error());
     while ($row = mysqL_fetch_assoc($result_campaigns)) {
         $campaign_names[$row['id']] = $row['name'];
     }
-    $result = mysql_query("SELECT * FROM files, cdr WHERE files.uniqueid = cdr.uniqueid and cdr.uniqueid is not null and date(calldate) = ".sanitize($_POST['date'])) or die (mysql_error());
-    box_start(800);
+    $result = mysql_query("SELECT * FROM files, cdr WHERE files.uniqueid = cdr.uniqueid and cdr.uniqueid is not null and date(calldate) = ".sanitize($_POST['date'])." ") or die (mysql_error());
+    box_start(1500);
     ?>
     <br />
     <center>
+    <script src="js/jquery.min.1.6.3.js"></script>
     <table class="recordings" width="90%">
     <tr>
     <th class="recordings">Date/Time</th>
@@ -228,6 +246,8 @@ if (isset($_GET['recordings_date'])) {
     <th class="recordings">Duration</th>
     <th class="recordings">Phone Number</th>
     <th class="recordings">Campaign</th>
+    <th class="recordings">Disposition</th>
+    <th class="recordings">Notes</th>
     </tr>
     <?
     while ($row = mysqL_fetch_assoc($result)) {
@@ -240,10 +260,47 @@ if (isset($_GET['recordings_date'])) {
         echo '<td class="recordings">'.$row['duration'].'</td>';
         echo '<td class="recordings">'.$exploded[0].'</td>';        
         echo '<td class="recordings">'.$campaign_names[$exploded[1]].'</td>';
+        $resultx = mysql_query("SELECT * from cdr_dispositions WHERE uniqueid = ".sanitize($row['uniqueid']));
+        if (mysql_num_rows($resultx) == 0) {
+            $disposition = 0;
+            $notes = "";
+        } else {
+            $rowx = mysql_fetch_assoc($resultx);
+            $disposition = $rowx['disposition'];
+            $notes = $rowx['notes'];
+        }
+        echo '<td class="recordings">';
+        echo '<select name="disposition" id="disp_'.str_replace(".","__",$row['uniqueid']).'">';
+        echo '<option value="-1">-</option>';
+        foreach ($dispositions as $disp=>$name) {
+            if ($disp == $disposition) {
+                $selected = " SELECTED ";
+            } else {
+                $selected = "";
+            }
+            echo '<option value="'.$disp.'" '.$selected.'>'.$name.'</option>';
+        }
+        echo '</select>';
+        echo '</td>';
+        echo '<td class="recordings"><form><input type="text" value="'.$notes.'" name="notes_'.$row['uniqueid'].'" id="notes_'.str_replace(".","__",$row['uniqueid']).'"></form>';
+        echo '<input type="submit" value="Save" onclick="clicker(\''.str_replace(".","__",$row['uniqueid']).'\')">';
+        
+        echo '</td>';
         echo '</tr>';
     }
     ?>
     </table>
+    <script>
+    function clicker(val) {
+        var disp = jQuery("#disp_"+val).val();
+        var notes = jQuery("#notes_"+val).val();
+        //alert(disp);
+        //alert (notes);
+        jQuery.post("transfer_report.php?save_disposition=1", {disp: disp, notes: notes, uniqueid: val}).done(function( data ) {
+                                                                            alert( "Data Loaded: " + data );
+                                                                            });;
+    }
+    </script>
     <br />
     <?
     box_end();
