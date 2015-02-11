@@ -233,7 +233,7 @@ if (isset($_GET['recordings_date'])) {
     while ($row = mysqL_fetch_assoc($result_campaigns)) {
         $campaign_names[$row['id']] = $row['name'];
     }
-    $result = mysql_query("SELECT * FROM files, cdr WHERE files.uniqueid = cdr.uniqueid and cdr.uniqueid is not null and calldate between = ".sanitize($_POST['date']." 00:00:00")." and ".sanitize($_POST['date']." 23:59:59")." ") or die (mysql_error());
+    $result = mysql_query("SELECT * FROM files, cdr WHERE files.uniqueid = cdr.uniqueid and cdr.uniqueid is not null and calldate between  ".sanitize($_POST['date']." 00:00:00")." and ".sanitize($_POST['date']." 23:59:59")." ") or die (mysql_error());
     box_start(1500);
     ?>
     <br />
