@@ -250,12 +250,28 @@ if (isset($_GET['recordings_date'])) {
     <th class="recordings">Notes</th>
     </tr>
     <?
+    $x = 0;
     while ($row = mysqL_fetch_assoc($result)) {
         //print_pre($row);
+        $x++;
         $exploded = split("-",$row['userfield']);
         
         echo '<tr>';
-        echo '<td class="recordings"><a href="transfer_report.php?get_recording='.$row['uniqueid'].'&server='.$row['server'].'">'.$row['calldate'].'</a></td>';
+        echo '<td class="recordings">';
+        ?>
+        <audio id="player-<?=$x?>" preload="auto">
+        <source id="source-<?=$x?>" src="recordings/<?=$row['uniqueid']?>" />
+        </audio>
+        
+        <div id="play-<?=$x?>" style="cursor: pointer" onclick="play<?=$x?>()">Play Audio</div>
+        <script>
+        function play<?=$x?>() {
+            var foo = document.getElementById('player-<?=$x?>');
+            foo.play();
+        }
+        </script>
+        <?
+        echo '</td>';
         echo '<td class="recordings">'.$row['clid'].'</td>';
         echo '<td class="recordings">'.$row['duration'].'</td>';
         echo '<td class="recordings">'.$exploded[0].'</td>';        
