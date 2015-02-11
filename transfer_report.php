@@ -271,7 +271,7 @@ if (isset($_GET['recordings_date'])) {
             audio[0].play();
             
             
-            
+            jQuery("td").removeClass("recordings");
             //var foo = document.getElementById('player-<?=$x?>');
             //foo.play();
             <?
