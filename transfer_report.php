@@ -259,15 +259,21 @@ if (isset($_GET['recordings_date'])) {
         echo '<tr id="tr'.$x.'">';
         echo '<td class="recordings">';
         ?>
-        <audio id="player-<?=$x?>" preload="auto">
+        <audio id="player-<?=$x?>" >
         <source id="source-<?=$x?>" src="recordings/<?=$row['uniqueid']?>.wav" />
         </audio>
         
         <div id="play-<?=$x?>" style="cursor: pointer" onclick="play<?=$x?>()"><?=$row['calldate']?> - Play Audio</div>
         <script>
         function play<?=$x?>() {
-            var foo = document.getElementById('player-<?=$x?>');
-            foo.play();
+            var audio = jQuery("#player-<?=$x?>");
+            audio[0].load();
+            audio[0].play();
+            
+            
+            
+            //var foo = document.getElementById('player-<?=$x?>');
+            //foo.play();
             <?
             for ($i = 0;$i <mysql_num_rows($result)+1;$i++) {
                 ?>
