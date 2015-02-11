@@ -257,7 +257,7 @@ if (isset($_GET['recordings_date'])) {
         $exploded = split("-",$row['userfield']);
         
         echo '<tr id="tr'.$x.'">';
-        echo '<td class="recordings">';
+        echo '<td class="recordings" id="play<?=$x?>">';
         ?>
         
         <a href="recordings/<?=$row['uniqueid']?>.wav" target="_blank" onclick="play<?=$x?>()"><?=$row['calldate']?> - Play Audio</a>
@@ -271,6 +271,7 @@ if (isset($_GET['recordings_date'])) {
             }
             ?>
             jQuery("#play-<?=$x?>").css("background-color","#cccccc");
+            return false;
         }
         </script>
         <?
