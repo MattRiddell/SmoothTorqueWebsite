@@ -257,7 +257,7 @@ if (isset($_GET['recordings_date'])) {
         $exploded = split("-",$row['userfield']);
         
         echo '<tr id="tr'.$x.'">';
-        echo '<td class="recordings" id="play-<?=$x?>">';
+        echo '<td class="recordings" id="play-'.$x.'">';
         ?>
         
         <a href="transfer_report.php?get_recording=<?=$row['uniqueid']?>" target="_blank" onclick="play<?=$x?>()"><?=$row['calldate']?> - Play Audio</a>
