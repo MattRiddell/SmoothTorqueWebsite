@@ -31,11 +31,11 @@ if (mysql_num_rows($result) == 0) {
         </audio><br />
         <?
         echo '</td>';
-        echo '<td>'.str_replace(".wav","",$exp[2]).'</td>';
         
         $exp = explode("-",$row['filename']);
 //        print_pre($exp);
         echo '<td>'.$exp[0].'</td>';
+        echo '<td>'.str_replace(".wav","",$exp[2]).'</td>';
         echo '<td>'.$row['datetime'].'</td>';
         echo '<td>';
         ?>
