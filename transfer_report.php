@@ -217,6 +217,70 @@ if (isset($_GET['get_recording'])) {
     require "footer.php";
     exit(0);
 }
+
+
+if (isset($_GET['download'])&&isset($_GET['recordings_date'])) {
+    require "admin/db_config.php";
+    require "functions/sanitize.php";
+    
+    $result = mysql_query("SELECT * FROM cdr_disposition_names") or die(mysql_error());
+    if (mysql_num_rows($result) == 0) {
+        // No rows
+    } else {
+        while ($row = mysql_fetch_assoc($result)) {
+            $dispositions[$row['id']] = $row['name'];
+        }
+    }
+    //print_pre($dispositions);
+    $result_campaigns = mysql_query("SELECT name, id FROM campaign") or die(mysql_error());
+    while ($row = mysqL_fetch_assoc($result_campaigns)) {
+        $campaign_names[$row['id']] = $row['name'];
+    }
+    $result = mysql_query("SELECT * FROM files, cdr WHERE files.uniqueid = cdr.uniqueid and cdr.uniqueid is not null and calldate between  ".sanitize($_POST['date']." 00:00:00")." and ".sanitize($_POST['date']." 23:59:59")." ") or die (mysql_error());
+    box_start(1500);
+    ?>
+    Date/Time,
+    CLID,
+    Duration,
+    Phone Number,
+    Campaign,
+    Disposition,
+    Notes\n
+    <?
+    $x = 0;
+    while ($row = mysqL_fetch_assoc($result)) {
+        //print_pre($row);
+        $x++;
+        $exploded = split("-",$row['userfield']);
+        
+        //echo '<tr id="tr'.$x.'">';
+        //echo '<td class="recordings play-'.$x.'">';
+        ?>
+        
+        <?=$row['calldate']?>,
+        echo ''.$row['clid'].',';
+        echo ''.$row['duration'].',';
+        echo ''.$exploded[0].',';
+        echo ''.$campaign_names[$exploded[1]].',';
+        $resultx = mysql_query("SELECT * from cdr_dispositions WHERE uniqueid = ".sanitize($row['uniqueid']));
+        if (mysql_num_rows($resultx) == 0) {
+            $disposition = 0;
+            $notes = "";
+        } else {
+            $rowx = mysql_fetch_assoc($resultx);
+            $disposition = $rowx['disposition'];
+            $notes = $rowx['notes'];
+        }
+        echo $disposition.",";
+        echo $notes."\n";
+    }
+    ?>
+    exit(0);
+}
+
+
+
+
 require "header.php";
 require "header_surveys.php";
 if (isset($_GET['recordings_date'])) {
