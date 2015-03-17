@@ -268,7 +268,7 @@ if (isset($_GET['download'])&&isset($_GET['recordings_date'])) {
         }
         echo $disposition.",";
         echo $notes."\n";
-    }F
+    }
     exit(0);
 }
 
