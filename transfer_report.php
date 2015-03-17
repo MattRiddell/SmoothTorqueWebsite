@@ -262,7 +262,7 @@ if (isset($_GET['download'])&&isset($_GET['recordings_date'])) {
             $disposition = $rowx['disposition'];
             $notes = $rowx['notes'];
         }
-        echo $disposition.",";
+        echo $dispositions[$disposition].",";
         echo $notes."\n";
     }
     exit(0);
