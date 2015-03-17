@@ -223,7 +223,11 @@ if (isset($_GET['download'])&&isset($_GET['recordings_date'])) {
     
     require "admin/db_config.php";
     require "functions/sanitize.php";
-    
+    header("Content-type: application/csv");
+    header("Content-Disposition: attachment; filename=report.csv");
+    header("Pragma: no-cache");
+    header("Expires: 0");
+
     $result = mysql_query("SELECT * FROM cdr_disposition_names") or die(mysql_error());
     if (mysql_num_rows($result) == 0) {
         // No rows
@@ -291,7 +295,7 @@ if (isset($_GET['recordings_date'])) {
     while ($row = mysqL_fetch_assoc($result_campaigns)) {
         $campaign_names[$row['id']] = $row['name'];
     }
-    $result = mysql_query("SELECT * FROM files, cdr WHERE files.uniqueid = cdr.uniqueid and cdr.uniqueid is not null and calldate between  ".sanitize($_POST['date']." 00:00:00")." and ".sanitize($_POST['date']." 23:59:59")." ") or die (mysql_error());
+    $result = mysql_query("SELECT filename FROM files, cdr WHERE files.uniqueid = cdr.uniqueid and cdr.uniqueid is not null and calldate between  ".sanitize($_POST['date']." 00:00:00")." and ".sanitize($_POST['date']." 23:59:59")." ") or die (mysql_error());
     box_start(1500);
     ?>
     <br />
