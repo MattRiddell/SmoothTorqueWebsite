@@ -241,16 +241,8 @@ if (isset($_GET['download'])&&isset($_GET['recordings_date'])) {
     while ($row = mysqL_fetch_assoc($result_campaigns)) {
         $campaign_names[$row['id']] = $row['name'];
     }
-    $result = mysql_query("SELECT * FROM files, cdr WHERE files.uniqueid = cdr.uniqueid and cdr.uniqueid is not null and calldate between  ".sanitize($_POST['date']." 00:00:00")." and ".sanitize($_POST['date']." 23:59:59")." ") or die (mysql_error());
-    ?>
-    Date/Time,
-    CLID,
-    Duration,
-    Phone Number,
-    Campaign,
-    Disposition,
-    Notes\n
-    <?
+    $result = mysql_query("SELECT files.filename, cdr.* FROM files, cdr WHERE files.uniqueid = cdr.uniqueid and cdr.uniqueid is not null and calldate between  ".sanitize($_POST['date']." 00:00:00")." and ".sanitize($_POST['date']." 23:59:59")." ") or die (mysql_error());
+    echo "Date/Time,CLID,Duration,Phone Number,Campaign,Disposition,Notes\n";
     
     while ($row = mysqL_fetch_assoc($result)) {
         //print_pre($row);
@@ -295,7 +287,7 @@ if (isset($_GET['recordings_date'])) {
     while ($row = mysqL_fetch_assoc($result_campaigns)) {
         $campaign_names[$row['id']] = $row['name'];
     }
-    $result = mysql_query("SELECT filename FROM files, cdr WHERE files.uniqueid = cdr.uniqueid and cdr.uniqueid is not null and calldate between  ".sanitize($_POST['date']." 00:00:00")." and ".sanitize($_POST['date']." 23:59:59")." ") or die (mysql_error());
+    $result = mysql_query("SELECT files.filename, cdr.* FROM files, cdr WHERE files.uniqueid = cdr.uniqueid and cdr.uniqueid is not null and calldate between  ".sanitize($_POST['date']." 00:00:00")." and ".sanitize($_POST['date']." 23:59:59")." ") or die (mysql_error());
     box_start(1500);
     ?>
     <br />
