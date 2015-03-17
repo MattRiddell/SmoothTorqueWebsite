@@ -220,6 +220,7 @@ if (isset($_GET['get_recording'])) {
 
 
 if (isset($_GET['download'])&&isset($_GET['recordings_date'])) {
+    
     require "admin/db_config.php";
     require "functions/sanitize.php";
     
@@ -237,7 +238,6 @@ if (isset($_GET['download'])&&isset($_GET['recordings_date'])) {
         $campaign_names[$row['id']] = $row['name'];
     }
     $result = mysql_query("SELECT * FROM files, cdr WHERE files.uniqueid = cdr.uniqueid and cdr.uniqueid is not null and calldate between  ".sanitize($_POST['date']." 00:00:00")." and ".sanitize($_POST['date']." 23:59:59")." ") or die (mysql_error());
-    box_start(1500);
     ?>
     Date/Time,
     CLID,
@@ -247,17 +247,12 @@ if (isset($_GET['download'])&&isset($_GET['recordings_date'])) {
     Disposition,
     Notes\n
     <?
-    $x = 0;
+    
     while ($row = mysqL_fetch_assoc($result)) {
         //print_pre($row);
         $x++;
         $exploded = split("-",$row['userfield']);
-        
-        //echo '<tr id="tr'.$x.'">';
-        //echo '<td class="recordings play-'.$x.'">';
-        ?>
-        
-        <?=$row['calldate']?>,
+        echo $row['calldate'].",";
         echo ''.$row['clid'].',';
         echo ''.$row['duration'].',';
         echo ''.$exploded[0].',';
@@ -273,8 +268,7 @@ if (isset($_GET['download'])&&isset($_GET['recordings_date'])) {
         }
         echo $disposition.",";
         echo $notes."\n";
-    }
-    ?>
+    }F
     exit(0);
 }
 
