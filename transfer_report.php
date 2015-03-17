@@ -241,7 +241,7 @@ if (isset($_GET['download'])&&isset($_GET['recordings_date'])) {
     while ($row = mysqL_fetch_assoc($result_campaigns)) {
         $campaign_names[$row['id']] = $row['name'];
     }
-    $result = mysql_query("SELECT files.filename, cdr.* FROM files, cdr WHERE files.uniqueid = cdr.uniqueid and cdr.uniqueid is not null and calldate between  ".sanitize($_POST['date']." 00:00:00")." and ".sanitize($_POST['date']." 23:59:59")." ") or die (mysql_error());
+    $result = mysql_query("SELECT files.filename, cdr.* FROM files, cdr WHERE files.uniqueid = cdr.uniqueid and cdr.uniqueid is not null and calldate between  ".sanitize($_GET['date']." 00:00:00")." and ".sanitize($_GET['date']." 23:59:59")." ") or die (mysql_error());
     echo "Date/Time,CLID,Duration,Phone Number,Campaign,Disposition,Notes\n";
     
     while ($row = mysqL_fetch_assoc($result)) {
@@ -292,6 +292,9 @@ if (isset($_GET['recordings_date'])) {
     ?>
     <br />
     <center>
+    <?
+    echo '<a href="transfer_report.php?date='.$_POST['date'].'&recordings_date=1&download=1">Download Report</a><br />';
+    ?>
     <script src="js/jquery.min.1.6.3.js"></script>
     <table class="recordings" width="90%">
     <tr>
