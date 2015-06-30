@@ -265,7 +265,7 @@ while ($row = mysql_fetch_assoc($result)) {
     </TD>
     <TD>
     <?
-    $max_str_len = 45;
+    $max_str_len = 25;
     
     if (strlen($row['description'])<$max_str_len){
         echo $row['description'];
