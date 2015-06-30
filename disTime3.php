@@ -247,10 +247,10 @@ while ($row = mysql_fetch_assoc($result)) {
     <td></td>
     <TD>
     <?
-    if (strlen($row['name'])<35){
+    if (strlen($row['name'])<25){
         echo "<A class=\"btn btn-default\" title=\"Edit this campaign\" HREF=\"editcampaign.php?id=".$row['id']."\"><img width=\"16\" height=\"16\" src=\"images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit This Campaign\">".$row['name']."</A>";
     } else {
-        echo "<A class=\"btn btn-default\" title=\"Edit this campaign\" HREF=\"editcampaign.php?id=".$row['id']."\"><img width=\"16\" height=\"16\" src=\"images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit This Campaign\">".trim(substr($row['name'],0,35))."...</A>";
+        echo "<A class=\"btn btn-default\" title=\"Edit this campaign\" HREF=\"editcampaign.php?id=".$row['id']."\"><img width=\"16\" height=\"16\" src=\"images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit This Campaign\">".trim(substr($row['name'],0,22))."...</A>";
     }
     if ($level==sha1("level100") && $_GET['type']=="all") {
         $result_acct = mysql_query("SELECT username FROM customer WHERE campaigngroupid = ".$row['groupid']);
