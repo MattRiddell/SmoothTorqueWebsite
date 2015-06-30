@@ -22,41 +22,41 @@ $result=mysql_query($sql, $link);
 $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $campaigngroupid=mysql_result($result,0,'campaigngroupid');
-shadow_start();
+//shadow_start();
 ?>
 
-<table class="" align="center" border="0" cellpadding="2" cellspacing="0">
+<table class="table table-bordered" align="center" border="0" cellpadding="2" cellspacing="0">
 <TR>
-<TD CLASS="thead">
+<TD CLASS="">
 Name
 </TD>
-<TD CLASS="thead">
+<TD CLASS="">
 Username
 </TD>
-<TD CLASS="thead">
+<TD CLASS="">
 Call Details
 </TD>
-<TD CLASS="thead">
+<TD CLASS="">
 City
 </TD>
-<TD CLASS="thead">
+<TD CLASS="">
 Country
 </TD>
-<TD CLASS="thead">
+<TD CLASS="">
 Phone
 </TD>
 <?if ( $config_values['USE_BILLING'] == "YES") {?>
-<TD CLASS="thead">
+<TD CLASS="">
 Credit
 </TD>
-<TD CLASS="thead">
+<TD CLASS="">
 Credit Limit
 </TD>
 <?}?>
-<TD CLASS="thead">
+<TD CLASS="">
 Trunk
 </TD>
-<TD CLASS="thead">
+<TD CLASS="">
 </TD>
 </TR>
 <?

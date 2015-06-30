@@ -29,27 +29,27 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
 
 ?>
 <?/* start of shadow */?>
-<table align="center"><tr><td><div class="example" id="v6"><div id="main"><div class="wrap1"><div class="wrap2"><div class="wrap3" align="center">
 
-<table class="" align="center" border="0" cellpadding="2" cellspacing="0">
+
+<table class="table table-bordered" align="center" border="0" cellpadding="2" cellspacing="0">
 <TR>
-<?if ($backend == 0) {?><TD CLASS="thead">
+<?if ($backend == 0) {?><TD CLASS="">
 Default
 </TD>
 <?}?>
-<TD CLASS="thead">
+<TD CLASS="">
 Name
 </TD>
-<TD CLASS="thead">
+<TD CLASS="">
 Dial String
 </TD>
-<TD CLASS="thead">
+<TD CLASS="">
 Max CPS
 </TD>
-<TD CLASS="thead">
+<TD CLASS="">
 Max Chans
 </TD>
-<TD CLASS="thead">
+<TD CLASS="">
 
 </TD>
 </TR>

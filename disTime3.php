@@ -174,43 +174,43 @@ if (mysql_num_rows($result)==0){
 <?
 $user = $_COOKIE['user'];
 ?>
-<table class="" align="center" border="0" cellpadding="2" cellspacing="0">
+<table class="table" align="center" border="0" cellpadding="2" cellspacing="0">
 <TR>
-<td style="background-image: url(images/clb.gif);" width=2></td>
+<td ></td>
 
-<TD CLASS="thead">
+<TD CLASS="">
 <?if ($level==sha1("level100") && $_GET['type']=="all") {?>
     Name (Account)
     <?} else {?>
 Name
         <?}?>
 </TD>
-<TD CLASS="thead">
+<TD CLASS="">
 Description
 </TD>
-<TD CLASS="thead">
+<TD CLASS="">
 </TD>
-<TD CLASS="thead">
+<TD CLASS="">
 
 </TD>
-<TD CLASS="thead">
+<TD CLASS="">
 
 </TD>
-<TD CLASS="thead">
+<TD CLASS="">
 
 </TD>
 <?if ( $config_values['USE_BILLING'] == "YES") {?>
-    <TD CLASS="thead">
+    <TD CLASS="">
     Cost
     </TD>
     <?}?>
 
 
 
-<TD CLASS="thead">
+<TD CLASS="">
 Percentage Busy
 </TD>
-<td style="background-image: url(images/crb.gif);" width=2></td>
+<td ></td>
 </TR>
 <?
 $toggle=false;

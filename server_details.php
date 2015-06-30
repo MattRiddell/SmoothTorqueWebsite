@@ -41,25 +41,25 @@ if ($_GET['ajax'] == 1) {
 		    //.animateProperty({duration:5000, properties:{color: {start: "#000", end:"#00ff00"}}}).play();
 	    });
 </script>
-<table align="center"><tr><td><div class="example" id="v6"><div id="main"><div class="wrap1"><div class="wrap2"><div class="wrap3" align="center">
 
-<table class="" align="center" border="0" cellpadding="2" cellspacing="0">
+
+<table class="table table-bordered" align="center" border="0" cellpadding="2" cellspacing="0">
     <TR>
-        <TD CLASS="thead">
+        <TD CLASS="">
             Name
         </TD>
-        <TD CLASS="thead">
+        <TD CLASS="">
             Username
         </TD>
-        <TD CLASS="thead">
+        <TD CLASS="">
             Address
         </TD>
-        <TD CLASS="thead">
+        <TD CLASS="">
             Status
         </TD>
-        <TD CLASS="thead">
+        <TD CLASS="">
         </TD>
-        <TD CLASS="thead">
+        <TD CLASS="">
             Current Status
         </TD>
     </TR>

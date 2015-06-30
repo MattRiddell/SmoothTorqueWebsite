@@ -36,22 +36,21 @@ function EvalSound2(soundobj) {
 </script>
 
 <?/* start of shadow */?>
-<table align="center"><tr><td><div class="example" id="v6"><div id="main"><div class="wrap1"><div class="wrap2"><div class="wrap3" align="center">
 
-<table class="" align="center" border="0" cellpadding="2" cellspacing="0">
+<table class="table table-bordered" align="center" border="0" cellpadding="2" cellspacing="0">
 <TR>
-<TD CLASS="thead">
+<TD CLASS="">
 Name
 </TD>
-<TD CLASS="thead">
+<TD CLASS="">
 Description
 </TD>
-<TD CLASS="thead">
+<TD CLASS="">
 Length
 </TD>
-<TD CLASS="thead">
+<TD CLASS="">
 </TD>
-<TD CLASS="thead">
+<TD CLASS="">
 
 </TD>
 </TR>
