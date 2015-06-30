@@ -664,10 +664,10 @@ if ($interface_type == "broadcast") {
             <?
         } else {
             ?>
-            <link rel="stylesheet" type="text/css" href="<?=$http_dir_name?>css/style.css?version=2">
-            <link rel="stylesheet" href="<?=$http_dir_name?>example.css" TYPE="text/css" MEDIA="screen">
+            <link rel="stylesheet" type="text/css" href="<?=$http_dir_name?>css/style.css?version=3">
+            <link rel="stylesheet" href="<?=$http_dir_name?>example.css?version=3" TYPE="text/css" MEDIA="screen">
             <?/*<link rel="stylesheet" href="<?=$http_dir_name?>example-print.css" TYPE="text/css" MEDIA="print">*/?>
-            <link rel="stylesheet" type="text/css" href="<?=$http_dir_name?>css/default.css?version=2">
+            <link rel="stylesheet" type="text/css" href="<?=$http_dir_name?>css/default.css?version=3">
             <link rel="shortcut icon" href="<?=$http_dir_name?>favicon.ico">
             <!-- Javascript includes -->
             <script type="text/javascript" src="<?=$http_dir_name?>ajax/picker.js"></script>
