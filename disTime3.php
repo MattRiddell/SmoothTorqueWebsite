@@ -182,7 +182,7 @@ $user = $_COOKIE['user'];
 
         <th CLASS="">
             <? if ($level == sha1("level100") && $_GET['type'] == "all") { ?>
-                Name (Account)
+                Name<br />(Account)
             <? } else { ?>
                 Name
             <? } ?>
@@ -259,7 +259,7 @@ while ($row = mysql_fetch_assoc($result)) {
         } else {
             $acct = mysql_result($result_acct,0,0);
         }
-        echo " ($acct)";
+        echo "<br />($acct)";
     }
     ?>
     </TD>
