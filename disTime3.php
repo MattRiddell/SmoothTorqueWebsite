@@ -175,43 +175,46 @@ if (mysql_num_rows($result)==0){
 $user = $_COOKIE['user'];
 ?>
 <table class="table" align="center" border="0" cellpadding="2" cellspacing="0">
-<TR>
-<td ></td>
+    <thead>
+    <TR>
 
-<TD CLASS="">
-<?if ($level==sha1("level100") && $_GET['type']=="all") {?>
-    Name (Account)
-    <?} else {?>
-Name
-        <?}?>
-</TD>
-<TD CLASS="">
-Description
-</TD>
-<TD CLASS="">
-</TD>
-<TD CLASS="">
+        <th></th>
 
-</TD>
-<TD CLASS="">
+        <th CLASS="">
+            <? if ($level == sha1("level100") && $_GET['type'] == "all") { ?>
+                Name (Account)
+            <? } else { ?>
+                Name
+            <? } ?>
+        </th>
+        <th CLASS="">
+            Description
+        </th>
+        <th CLASS="">
+        </th>
+        <th CLASS="">
 
-</TD>
-<TD CLASS="">
+        </th>
+        <th CLASS="">
 
-</TD>
-<?if ( $config_values['USE_BILLING'] == "YES") {?>
-    <TD CLASS="">
-    Cost
-    </TD>
-    <?}?>
+        </th>
+        <th CLASS="">
+
+        </th>
+        <? if ($config_values['USE_BILLING'] == "YES") { ?>
+            <th CLASS="">
+                Cost
+            </th>
+        <? } ?>
 
 
 
-<TD CLASS="">
-Percentage Busy
-</TD>
-<td ></td>
-</TR>
+        <th CLASS="">
+            Percentage Busy
+        </th>
+        <th></th>
+    </thead>
+    </TR>
 <?
 $toggle=false;
 while ($row = mysql_fetch_assoc($result)) {
