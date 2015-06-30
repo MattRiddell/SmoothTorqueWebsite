@@ -561,6 +561,8 @@ if ($self == "/test.php" || $self == "/report.php" || $self == "/servers.php" ||
 
 
     <!-- Latest compiled and minified JavaScript -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <?
 if ($loggedin) {
