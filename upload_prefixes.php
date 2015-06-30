@@ -26,7 +26,7 @@ while ($row = mysql_fetch_assoc($result)) {
 </TD>
 </TR><TR>
 <TD COLSPAN=2 ALIGN="CENTER"><br />
-<INPUT TYPE="SUBMIT" VALUE="Select TimeZone">
+<INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Select TimeZone">
 </TD>
 </TR></table>
 </FORM>

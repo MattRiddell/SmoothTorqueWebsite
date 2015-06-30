@@ -497,7 +497,7 @@ if ($level != sha1("level100")) {
     </td>
     </tr>
     
-    <tr  class="tborder2"><td colspan="2"><input type="submit" value="Save Config Information"></td></tr>
+    <tr  class="tborder2"><td colspan="2"><input class="btn btn-primary" type="submit" value="Save Config Information"></td></tr>
     </table>
     </div>
     
@@ -546,7 +546,7 @@ if ($level != sha1("level100")) {
     </tr>
     
     
-    <tr  class="tborder2"><td colspan="2"><input type="submit" value="Save Config Information"></td></tr>
+    <tr  class="tborder2"><td colspan="2"><input class="btn btn-primary" type="submit" value="Save Config Information"></td></tr>
     </table>
     </div>
     
@@ -665,7 +665,7 @@ if ($level != sha1("level100")) {
     </td>
     </tr>
     
-    <tr  class="tborder2"><td colspan="2"><input type="submit" value="Save Config Information"></td></tr>
+    <tr  class="tborder2"><td colspan="2"><input class="btn btn-primary" type="submit" value="Save Config Information"></td></tr>
     </table>
     </div>
     
@@ -701,7 +701,7 @@ if ($level != sha1("level100")) {
         ?>
         </select></td></tr>
         <tr><td colspan="2">
-        <input type="submit" value="Add URL">
+        <input class="btn btn-primary" type="submit" value="Add URL">
         </form>
         <?
     } else {
@@ -715,7 +715,7 @@ if ($level != sha1("level100")) {
         <form action="config.php?add_url=1" method="POST">
             <input type="text" name="url_to_add" value="">
             <input type="hidden" name="copy_from" value="default">
-            <input type="submit" value="Add URL">
+            <input class="btn btn-primary" type="submit" value="Add URL">
         </form>
     <?
     }
@@ -796,7 +796,7 @@ if ($level != sha1("level100")) {
         </td>
         </tr>
         
-    <tr  class="tborder2"><td colspan="2"><input type="submit" value="Save Config Information"></td></tr>
+    <tr  class="tborder2"><td colspan="2"><input class="btn btn-primary" type="submit" value="Save Config Information"></td></tr>
     </table>
     </div>
         
@@ -937,7 +937,7 @@ if ($level != sha1("level100")) {
     
     
     
-    <tr  class="tborder2"><td colspan="2"><input type="submit" value="Save Config Information"></td></tr>
+    <tr  class="tborder2"><td colspan="2"><input class="btn btn-primary" type="submit" value="Save Config Information"></td></tr>
     </table>
     </div>
     <? /************************** Menu Text TAB *************************/ ?>
@@ -1080,7 +1080,7 @@ Language:
     </tr>
     <tr  class="tborder2">
     <td colspan="2">
-    <input type="submit" value="Save Config Information">
+    <input class="btn btn-primary" type="submit" value="Save Config Information">
     </td>
     </tr>
     </table>
@@ -1154,7 +1154,7 @@ Language:
     
     <tr  class="tborder2">
     <td colspan="2">
-    <input type="submit" value="Save Config Information">
+    <input class="btn btn-primary" type="submit" value="Save Config Information">
     </td>
     </tr>
     </table>
@@ -1231,7 +1231,7 @@ Language:
     </tr>
     <tr  class="tborder2">
     <td colspan="2">
-    <input type="submit" value="Save Config Information">
+    <input class="btn btn-primary" type="submit" value="Save Config Information">
     </td>
     </tr>
     </table>
@@ -1496,7 +1496,7 @@ Language:
     
     <tr  class="tborder2">
     <td colspan="2">
-    <input type="submit" value="Save Config Information">
+    <input class="btn btn-primary" type="submit" value="Save Config Information">
     </td>
     </tr>
     </table>
@@ -1601,7 +1601,7 @@ Language:
     
     <tr  class="tborder2">
     <td colspan="2">
-    <input type="submit" value="Save Config Information">
+    <input class="btn btn-primary" type="submit" value="Save Config Information">
     </td>
     </tr>
     </table>
@@ -1754,7 +1754,7 @@ Language:
     
     <tr  class="tborder2">
     <td colspan="2">
-    <input type="submit" value="Save Config Information">
+    <input class="btn btn-primary" type="submit" value="Save Config Information">
     </td>
     </tr>
     </table>

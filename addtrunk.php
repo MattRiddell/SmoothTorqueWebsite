@@ -59,7 +59,7 @@ $campaigngroupid=$groupid;
 
 
 <TR><TD COLSPAN=2 ALIGN="RIGHT">
-<INPUT TYPE="SUBMIT" VALUE="Add Trunk">
+<INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Add Trunk">
 </TD>
 </TR>
 <?

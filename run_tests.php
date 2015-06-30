@@ -156,7 +156,7 @@ if (mysql_num_rows($result) > 0) {
 	echo "No servers available";
 }
 ?>
-<input type="submit">
+<input class="btn btn-primary" type="submit">
 </form>
 </p>
 <?

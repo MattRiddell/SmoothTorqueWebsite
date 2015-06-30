@@ -23,5 +23,5 @@ $telnet->Disconnect();
 Name: <INPUT TYPE="TEXT" NAME="name"><BR>
 Description: <INPUT TYPE="TEXT" NAME="description"><BR>
 Group ID: <?echo $groupid;?><BR>
-<INPUT TYPE="SUBMIT" VALUE="Add New">
+<INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Add New">
 </FORM>

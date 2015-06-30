@@ -144,7 +144,7 @@ while ($row = mysql_fetch_assoc($result)) {
 </TR>
 
 <TR><TD COLSPAN=2 ALIGN="RIGHT">
-<INPUT TYPE="SUBMIT" VALUE="Save Billing Information">
+<INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Save Billing Information">
 </TD>
 </TR>
 <?

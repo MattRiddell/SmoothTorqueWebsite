@@ -33,7 +33,7 @@ Please select a campaign<br /><br />
     </TD>
     </TR><TR>
     <TD COLSPAN=2 ALIGN="CENTER"><br />
-    <INPUT TYPE="SUBMIT" VALUE="Select Campaign">
+    <INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Select Campaign">
     </TD>
     </TR></table>
     </FORM><br />

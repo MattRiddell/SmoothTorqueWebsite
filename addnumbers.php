@@ -50,7 +50,7 @@ if (!isset($_POST[campaignid])){
     </TR><TR>
     <TD COLSPAN=2 ALIGN="CENTER">
     <br />
-    <INPUT TYPE="SUBMIT" VALUE="Select Campaign">
+    <INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Select Campaign">
     </TD>
     </TR></table>
     </FORM></td>
@@ -135,7 +135,7 @@ if (!isset($_POST[campaignid])){
         </TD>
         </TR>
         <TR><TD COLSPAN=2 ALIGN="RIGHT">
-        <INPUT TYPE="SUBMIT" VALUE="Add Numbers">
+        <INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Add Numbers">
         </TD>
         </TR>
         <?

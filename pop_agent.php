@@ -87,7 +87,7 @@ if (isset($_POST['reason'])||(isset($_GET['type']) && $_GET['type'] == "in")) {
 			</td>
 		</tr>
     </table>
-    <input type="submit" value="Sign Out">
+    <input class="btn btn-primary" type="submit" value="Sign Out">
     </form>
     <script language="javascript">
     

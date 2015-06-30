@@ -96,7 +96,7 @@ foreach ($y as $line) {
 </TR>
 
 <TR><TD COLSPAN=2 ALIGN="RIGHT">
-<INPUT TYPE="SUBMIT" VALUE="Add Message">
+<INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Add Message">
 </TD>
 </TR>
 <?

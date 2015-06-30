@@ -45,7 +45,7 @@ while (substr(trim($result),0,3)!="END") {
 ?>
 </select>
 </td></tr><tr><td colspan=2>
-<input type="submit" value="Monitor Campaign">
+<input class="btn btn-primary" type="submit" value="Monitor Campaign">
 </td></tr></table>
 </form>
 <?} else {

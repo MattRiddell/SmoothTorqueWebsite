@@ -129,7 +129,7 @@ if (isset($_GET['edit'])) {
     </tr>
     <tr>
     <td colspan="2">
-    <input type="submit" value="Save Changes"></td>
+    <input class="btn btn-primary" type="submit" value="Save Changes"></td>
     </tr>
     </table>
     </form><br />
@@ -159,7 +159,7 @@ if (isset($_GET['add'])) {
     </tr>
     <tr>
     <td colspan="2">
-    <input type="submit" value="Add Timezone"></td>
+    <input class="btn btn-primary" type="submit" value="Add Timezone"></td>
     </tr>
     </table>
     </form><br />
@@ -276,7 +276,7 @@ if (isset($_GET['add_prefixes'])) {
     </tr>
     <tr>
     <td colspan="2">
-    <input type="submit" value="Add Area Code">
+    <input class="btn btn-primary" type="submit" value="Add Area Code">
     </td>
     </tr>
     </table>

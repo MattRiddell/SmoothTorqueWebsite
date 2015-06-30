@@ -82,7 +82,7 @@ if (isset($_GET['add'])) {
     <td><input type="text" name="email_address" value=""></td>
     </tr>
     <tr>
-    <td colspan="2"><input type="submit" value="Add Notification"></td>    
+    <td colspan="2"><input class="btn btn-primary" type="submit" value="Add Notification"></td>
     </tr>
     
     </table>

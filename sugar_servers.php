@@ -276,7 +276,7 @@ if (isset($_GET['add_rules'])) {
         
         
         </table>
-        <input type="submit" value="Add Rule">
+        <input class="btn btn-primary" type="submit" value="Add Rule">
         </form>
         <?
         echo "<br />";
@@ -490,7 +490,7 @@ if (isset($_GET['edit_rules'])) {
         
         
         </table>
-        <input type="submit" value="Save Rule Changes">
+        <input class="btn btn-primary" type="submit" value="Save Rule Changes">
         </form>
         <?
         echo "<br />";
@@ -566,7 +566,7 @@ if (isset($_GET['verify_connection'])) {
         <h3>Verify Server Connection</h3>
         <form action="sugar_servers.php?verify_connection=1" method="post">
         <input type="text" name="number">
-        <input type="submit" value="Lookup Number">
+        <input class="btn btn-primary" type="submit" value="Lookup Number">
         </form>
         <br />
         <br />
@@ -1015,7 +1015,7 @@ if (isset($_GET['verify_connection'])) {
         </select><br />
         <br />
         
-        <input type="submit" value="Save Changes">
+        <input class="btn btn-primary" type="submit" value="Save Changes">
         <br />
         <br />
         </form>
@@ -1125,7 +1125,7 @@ if (isset($_GET['verify_connection'])) {
         }
         ?>
         <br />
-        <input type="submit" value="Save Changes">
+        <input class="btn btn-primary" type="submit" value="Save Changes">
         </td></tr></table>
         </form>
         <?}
@@ -1161,7 +1161,7 @@ if (isset($_GET['verify_connection'])) {
         Start: <input type="text" name="start"><br />
         End: <input type="text" name="end"><br />
         <br />
-        <input type="submit" value="Add Timezone">
+        <input class="btn btn-primary" type="submit" value="Add Timezone">
         </form>
         <?
     }else if (isset($_GET['edit'])) {
@@ -1173,7 +1173,7 @@ if (isset($_GET['verify_connection'])) {
         Name: <input type="text" name="name" value="<?=$row['name']?>"><br />
         Start: <input type="text" name="start" value="<?=$row['start']?>"><br />
         End: <input type="text" name="end" value="<?=$row['end']?>"><br />
-        <input type="submit" value="Save Changes">
+        <input class="btn btn-primary" type="submit" value="Save Changes">
         </form>
         <?
     } else {

@@ -74,7 +74,7 @@ $row = mysql_fetch_assoc($result);
 
 
 <TR><TD COLSPAN=2 ALIGN="RIGHT">
-<INPUT TYPE="SUBMIT" VALUE="Save Message">
+<INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Save Message">
 </TD>
 </TR>
 

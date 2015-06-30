@@ -33,5 +33,5 @@ while (substr(trim($result),0,3)!="END") {
 ?>
 </select>
 </td></tr><tr><td colspan=2>
-<INPUT TYPE="Submit" VALUE="Delete Campaign"></td></tr></table>
+<INPUT class="btn btn-primary" TYPE="Submit" VALUE="Delete Campaign"></td></tr></table>
 </form>

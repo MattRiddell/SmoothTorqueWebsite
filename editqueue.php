@@ -168,7 +168,7 @@ $row = mysql_fetch_assoc($result);
 </td><td><p onClick="resetToDefault('weight','');">default</p></tr>
 <tr class="tborderx" title="A number of seconds of silence is played before the call is connected to the agent"><td class="thead">Member Delay<a href="#" onClick="displaySmallMessage('/includes/help.php?section=A number of seconds of silence before the member of the queue is connected to the agent');return false;"><img src="images/help.png" border="0"></a></td><td><input type="text" value="<?echo $row[memberdelay];?>" name="memberdelay" maxlength="<?echo $is_int[memberdelay][1]?>"></td><td><p onClick="resetToDefault('memberdelay','');">default</p></tr>
 </table>
-<input type="submit" value="Save Queue">
+<input class="btn btn-primary" type="submit" value="Save Queue">
 </form>
 <?php
 require "footer.php";

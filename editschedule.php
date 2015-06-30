@@ -98,7 +98,7 @@ echo ($row[end_hour]-0).":".$row[end_minute]." am";
 
 
 <TR><TD COLSPAN=2 ALIGN="RIGHT">
-<INPUT TYPE="SUBMIT" VALUE="Save Schedule">
+<INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Save Schedule">
 </TD>
 </TR>
 <?

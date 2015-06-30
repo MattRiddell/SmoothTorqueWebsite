@@ -52,7 +52,7 @@ if (isset($error)){
 
 
 <TR><TD COLSPAN=2 ALIGN="RIGHT">
-<INPUT TYPE="SUBMIT" VALUE="Save Password Change">
+<INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Save Password Change">
 </TD>
 </TR>
 <?

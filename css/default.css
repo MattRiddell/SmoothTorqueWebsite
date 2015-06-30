@@ -413,8 +413,7 @@ div.inputhead {
 }
 BODY {
 	PADDING-RIGHT: 0px; PADDING-LEFT: 0px;
-	PADDING-BOTTOM: 0px; MARGIN: 0px; FONT: 9pt verdana,
-geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; COLOR: #000000; PADDING-TOP: 0px
+	PADDING-BOTTOM: 0px; MARGIN: 0px;
 }
 .editable, textarea{
 	background-color: #ffffd3;
@@ -443,11 +442,11 @@ A:active {
 	BACKGROUND: #ffffff; COLOR: #000000
 }
 TD {
-	FONT: 9pt verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+
         	text-align: center;
 	}
 TH {
-	FONT: 9pt verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+
     	text-align: center;
 }
 P {

@@ -3,22 +3,15 @@
 require "header.php";
 ?>
 
-<br /><br /><br /><br />
+
 <center>
 <?
 box_start(330);
 
 ?>
-<table width="300" height="200" class="dragme22">
-<tr>
-<td>
-</td>
-<td width="260">
 
-<center>
+<h3><?echo stripslashes($config_values['TITLE']);?></h3>
 
-<h3><?echo stripslashes($config_values['TITLE']);?></h3><br />
-<br />
 
 
 <?
@@ -47,11 +40,6 @@ if ($level==sha1("level10")){
 
 ?>
 <br />
-</td>
-<td>
-</td></tr>
-</table>
-</center>
 <?
 
 box_end();

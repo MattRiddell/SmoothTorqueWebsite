@@ -266,7 +266,7 @@ if (isset($_POST[name])){
 	
 	</td></tr>
 	</TR><TR><TD COLSPAN=3 ALIGN="RIGHT">
-	<INPUT TYPE="SUBMIT" VALUE="Save Customer" onclick="f_selectAll('enabled[]')">
+	<INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Save Customer" onclick="f_selectAll('enabled[]')">
 	
 	</TD>
 	</TR>

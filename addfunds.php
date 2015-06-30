@@ -37,7 +37,7 @@ if (!isset($_GET[id])) {
         //echo '<A HREF="addfunds.php?id='.$row[id].'">'.$row[company].'</a>';
     }
     ?>        </select>
-    <br /><br /><input type="submit" value="Select Customer">
+    <br /><br /><input class="btn btn-primary" type="submit" value="Select Customer">
 
         </form><br />
 </td>
@@ -64,7 +64,7 @@ include "header.php";
 Are you sure you would like to Add funds to <?echo $_POST[company];?>?
 Doing so will immediately update their funds. <br />
 <br />
-<input type="submit" value="Yes">
+<input class="btn btn-primary" type="submit" value="Yes">
 <input type="button" value="No" onclick="window.location='addfunds.php'">
 
 <br />
@@ -188,7 +188,7 @@ while ($row = mysql_fetch_assoc($result)) {
 <INPUT TYPE="HIDDEN" NAME="company" value="<?echo $row[accountcode];?>">
 
 <TR><TD COLSPAN=2 ALIGN="RIGHT">
-<INPUT TYPE="SUBMIT" VALUE="Add Funds">
+<INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Add Funds">
 </TD>
 </TR>
 <?

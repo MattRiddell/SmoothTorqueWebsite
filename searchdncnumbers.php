@@ -31,7 +31,7 @@ if (!isset($_POST[campaignid])&&!isset($_GET[campaignid])){
     <TR>
 
     <TD COLSPAN=2 ALIGN="CENTER">
-    <INPUT TYPE="SUBMIT" VALUE="Find Number">
+    <INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Find Number">
     </TD>
     </TR></table>
     </FORM><br />

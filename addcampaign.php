@@ -418,7 +418,7 @@ for ($i=0;$i<$count_surveys;$i++){
 
 
 </TR><TR><TD COLSPAN=2 ALIGN="RIGHT">
-<INPUT TYPE="SUBMIT" VALUE="<?echo $config_values['ADD_CAMPAIGN'];?>">
+<INPUT TYPE="SUBMIT" class="btn btn-primary"  VALUE="<?echo $config_values['ADD_CAMPAIGN'];?>">
 </TD>
 </TR>
 <?

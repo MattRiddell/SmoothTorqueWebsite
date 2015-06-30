@@ -144,7 +144,7 @@ if (isset($_GET['add'])) {
     <table>
     <tr><td>Name: </td><td><input type="text" name="name"></td></tr>
     <tr><td>Description: </td><td><input type="text" name="description"></td></tr>
-    <tr><td colspan="2"><input type="submit" value="Add Survey"></td></tr>
+    <tr><td colspan="2"><input class="btn btn-primary" type="submit" value="Add Survey"></td></tr>
     </table>
     
     </form>

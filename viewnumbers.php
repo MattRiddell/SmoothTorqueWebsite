@@ -41,7 +41,7 @@ From here you can chose a campaign that<br />you would like to see the numbers f
     	echo "<tr><td colspan=\"2\"><font size=\"1\">(Campaigns marked with a * do not belong to you)</font></td></tr>";
 ?>
     <TD COLSPAN=2 ALIGN="CENTER"><br />
-    <INPUT TYPE="SUBMIT" VALUE="Display Numbers">
+    <INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Display Numbers">
     </TD>
     </TR></table>
     </FORM><br />

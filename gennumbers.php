@@ -48,7 +48,7 @@ Please select a campaign to add numbers to<br /><br />
     </TR><TR>
     <TD COLSPAN=2 ALIGN="CENTER">
     <br />
-    <INPUT TYPE="SUBMIT" VALUE="Select Campaign">
+    <INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Select Campaign">
     </TD>
     </TR></table>
     </FORM></td>
@@ -181,7 +181,7 @@ if (substr($_POST[start],0,3) == "000") {
                 <TR>
                     <TD COLSPAN=2 ALIGN="RIGHT">
                         <br />
-                        <INPUT TYPE="SUBMIT" VALUE="Create Campaign">
+                        <INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Create Campaign">
                     </TD>
                 </TR>
             </TABLE>
@@ -225,7 +225,7 @@ $sql = "INSERT INTO campaign (name, description, groupid, messageid, messageid2,
                 <TR>
                     <TD COLSPAN=2 ALIGN="RIGHT">
                         <br />
-                        <INPUT TYPE="SUBMIT" VALUE="Generate Numbers">
+                        <INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Generate Numbers">
                     </TD>
                 </TR>
             </TABLE>
@@ -269,7 +269,7 @@ $sql = "INSERT INTO campaign (name, description, groupid, messageid, messageid2,
                 <TR>
                     <TD COLSPAN=2 ALIGN="RIGHT">
                         <br />
-                        <INPUT TYPE="SUBMIT" VALUE="Generate Numbers">
+                        <INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Generate Numbers">
                     </TD>
                 </TR>
             </TABLE>

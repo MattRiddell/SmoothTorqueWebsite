@@ -14,7 +14,7 @@
 		<tr>
 			<td></td>
 			<td><input type="button" value="Cancel" onclick="closeMessage()">
-			<input type="submit" value="Start Campaign" onclick="closeMessage()"></td>
+			<input class="btn btn-primary" type="submit" value="Start Campaign" onclick="closeMessage()"></td>
 		</tr>
 	</table>
 	<script type="text/javascript">

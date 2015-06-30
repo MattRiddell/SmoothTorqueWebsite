@@ -21,7 +21,7 @@ Campaign Added
 <FORM ACTION="addCampaign.php" METHOD="POST">
 Name: <INPUT TYPE="TEXT" NAME="name"><BR>
 Description: <INPUT TYPE="TEXT" NAME="description"><BR>
-<INPUT TYPE="SUBMIT">
+<INPUT class="btn btn-primary" TYPE="SUBMIT">
 <?
 }
 ?>

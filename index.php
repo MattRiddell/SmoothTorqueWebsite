@@ -107,7 +107,7 @@ echo "<FONT FACE=\"ARIAL\">";
                         }
                         echo '</select><br /><br />';
                     } ?>
-                    <INPUT TYPE="SUBMIT" VALUE="<? echo $config_values['MAIN_PAGE_LOGIN']; ?>">
+                    <INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="<? echo $config_values['MAIN_PAGE_LOGIN']; ?>">
                 </TD>
             </TR>
         </TABLE>

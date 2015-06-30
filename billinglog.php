@@ -13,7 +13,7 @@ To: <input name="enddate">
 <?if (isset($_GET[accountcode])) {?>
 <input type="hidden" name="accountcode" value="<?echo $_GET[accountcode];?>">
 <?}?>
-<input type="submit" value="Select">
+<input class="btn btn-primary" type="submit" value="Select">
 </form>
 <?
 } else {

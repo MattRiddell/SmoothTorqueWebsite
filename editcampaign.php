@@ -461,7 +461,7 @@ if ($row['context'] == 9) {
         </tr>
         <tr>
             <td colspan="2" align="RIGHT">
-                <input type="SUBMIT" value="Save Campaign">
+                <input class="btn btn-primary" type="SUBMIT" value="Save Campaign">
             </td>
         </tr>
     </table>

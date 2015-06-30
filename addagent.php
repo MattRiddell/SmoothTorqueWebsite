@@ -93,7 +93,7 @@ Name
 <TR  class="tborderx">
 <td></td>
 <td colspan = "2">
-<input type="submit" value="Save Account"></td>
+<input class="btn btn-primary" type="submit" value="Save Account"></td>
 <td></td>
 </tr>
 

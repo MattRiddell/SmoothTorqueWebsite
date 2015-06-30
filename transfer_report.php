@@ -360,7 +360,7 @@ if (isset($_GET['recordings_date'])) {
         echo '</select>';
         echo '</td>';
         echo '<td class="recordings play-'.$x.'"><form><input type="text" value="'.$notes.'" name="notes_'.$row['uniqueid'].'" id="notes_'.str_replace(".","__",$row['uniqueid']).'"></form>';
-        echo '<input type="submit" value="Save" onclick="clicker(\''.str_replace(".","__",$row['uniqueid']).'\')">';
+        echo '<input class="btn btn-primary" type="submit" value="Save" onclick="clicker(\''.str_replace(".","__",$row['uniqueid']).'\')">';
         
         echo '</td>';
         echo '</tr>';
@@ -395,7 +395,7 @@ if (isset($_GET['recordings'])) {
     <input type=button value="select" onclick="displayDatePicker('date', false, 'ymd', '-');"><BR>
 
     
-    <input type="submit" value="Select Date">
+    <input class="btn btn-primary" type="submit" value="Select Date">
     </form>
     <br />    <br />
     <?
@@ -607,7 +607,7 @@ if (isset($_GET['historical'])) {
     }
     ?>
     </select>
-    <input type="submit" value="Display Report">
+    <input class="btn btn-primary" type="submit" value="Display Report">
     </form>
     <?
     require "footer.php";
@@ -640,7 +640,7 @@ To: <input name="enddate">
     <br />
     
 
-    <input type="submit" value="Display Report">
+    <input class="btn btn-primary" type="submit" value="Display Report">
     </form>
     <?
     require "footer.php";

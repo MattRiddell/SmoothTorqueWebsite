@@ -70,7 +70,7 @@ From here you can chose a campaign that you would like to export the numbers fro
     </TD>
     </TR><TR>
     <TD COLSPAN=2 ALIGN="CENTER"><br />
-    <INPUT TYPE="SUBMIT" VALUE="Chose Types to Export">
+    <INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Chose Types to Export">
     </TD>
     </TR></table>
     </FORM><br />

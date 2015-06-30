@@ -30,7 +30,7 @@ header('Location: http://data.venturevoip.com:81/index.php?module=Notes&action=E
 ?>
 <FORM ACTION="/vtiger.php" METHOD="GET">
 <INPUT TYPE="TEXT" NAME="clid" VALUE="001 800 385 7000">
-<INPUT TYPE="SUBMIT" VALUE="Find Number">
+<INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Find Number">
 <?
 }
 ?>

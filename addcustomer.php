@@ -212,7 +212,7 @@ while ($rowx = mysql_fetch_assoc($resultss)) {
 </TR>
 
 </TR><TR><TD COLSPAN=2 ALIGN="RIGHT">
-<INPUT TYPE="SUBMIT" VALUE="Add Customer">
+<INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Add Customer">
 </TD>
 </TR>
 <?

@@ -39,7 +39,7 @@ Which campaign would you like to add numbers to?<br /><br />
     </TR><TR>
     <TD COLSPAN=2 ALIGN="CENTER">
     <br />
-    <INPUT TYPE="SUBMIT" VALUE="Select Campaign">
+    <input type="submit" value="select campaign" class="btn btn-primary">
     </TD>
     </TR></table>
     </FORM></td>
@@ -148,7 +148,7 @@ while ($rowx2 = mysql_fetch_assoc($resultss2)) {
 </TD>
 </TR>
 <TR><TD COLSPAN=2 ALIGN="RIGHT">
-<INPUT TYPE="SUBMIT" VALUE="Add Numbers">
+<INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Add Numbers">
 </TD>
 </TR>
 <?

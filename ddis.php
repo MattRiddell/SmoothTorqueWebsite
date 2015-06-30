@@ -40,7 +40,7 @@ if (isset($_GET['add'])) {
         echo '<option value="'.$row['id'].'">'.substr($row['name'],0,20).'</option>';
     }    
     ?></select><br />
-    <input type="submit" value="Add DDI">
+    <input class="btn btn-primary" type="submit" value="Add DDI">
     </form>
     <?
     box_end();
@@ -88,7 +88,7 @@ if (isset($_GET['edit'])) {
         }
     }    
     ?></select><br />
-    <input type="submit" value="Save DDI">
+    <input class="btn btn-primary" type="submit" value="Save DDI">
     </form>
     <?
     box_end();

@@ -95,7 +95,7 @@ if (!isset($_POST[campaignid])){
     </TD>
     </TR><TR>
     <TD COLSPAN=2 ALIGN="CENTER">
-    <INPUT TYPE="SUBMIT" VALUE="Display Numbers">
+    <INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Display Numbers">
     </TD>
     </TR></table>
     </FORM>

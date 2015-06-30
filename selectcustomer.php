@@ -26,7 +26,7 @@
         //echo '<A HREF="addfunds.php?id='.$row[id].'">'.$row[company].'</a>';
     }
     ?>        </select>
-    <br /><br /><input type="submit" value="Select Customer">
+    <br /><br /><input class="btn btn-primary" type="submit" value="Select Customer">
 
         </form><br />
 </td>

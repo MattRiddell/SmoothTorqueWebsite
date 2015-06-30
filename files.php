@@ -52,7 +52,7 @@ if (mysql_num_rows($result) == 0) {
         echo '<td>';
         ?>
         <input type="text" name="text" value="<?echo $row['answer'];?>"  id = "<?=$z?>">
-        <input type="submit" value="Save" onclick="send('<?=$row['filename']?>','<?=$z?>');">
+        <input class="btn btn-primary" type="submit" value="Save" onclick="send('<?=$row['filename']?>','<?=$z?>');">
         <?
         echo '</td>';
         

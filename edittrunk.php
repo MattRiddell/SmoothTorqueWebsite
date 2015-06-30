@@ -60,7 +60,7 @@ while ($row = mysql_fetch_assoc($result)) {
 </TR>
 
 <TR><TD COLSPAN=2 ALIGN="RIGHT">
-<INPUT TYPE="SUBMIT" VALUE="Save Trunk">
+<INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Save Trunk">
 </TD>
 </TR>
 <?

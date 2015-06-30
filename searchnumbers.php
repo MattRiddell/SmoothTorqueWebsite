@@ -45,7 +45,7 @@ From here you can chose a campaign that you would like to search for the numbers
     <TR>
 
     <TD COLSPAN=2 ALIGN="CENTER">
-    <INPUT TYPE="SUBMIT" VALUE="Find Number">
+    <INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Find Number">
     </TD>
     </TR></table>
     </FORM><br />

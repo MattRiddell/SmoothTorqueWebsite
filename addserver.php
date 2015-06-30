@@ -48,7 +48,7 @@ require "header_server.php";
 
 
 <TR><TD COLSPAN=2 ALIGN="RIGHT">
-<INPUT TYPE="SUBMIT" VALUE="Add Server">
+<INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Add Server">
 </TD>
 </TR>
 <?

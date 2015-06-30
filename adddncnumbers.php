@@ -61,7 +61,7 @@ if (1) {
 </TD>
 </TR>
 <TR><TD COLSPAN=2 ALIGN="RIGHT">
-<INPUT TYPE="SUBMIT" VALUE="Add DNC Numbers">
+<INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Add DNC Numbers">
 </TD>
 </TR>
 <?

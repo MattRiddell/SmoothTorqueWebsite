@@ -36,7 +36,7 @@ if (!isset($_POST[campaignid])){
 		</TD>
 		</TR><TR>
 		<TD COLSPAN=2 ALIGN="CENTER"><br />
-		<INPUT TYPE="SUBMIT" VALUE="Select Campaign">
+		<INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Select Campaign">
 		</TD>
 		</TR></table>
 		</FORM>
@@ -77,7 +77,7 @@ if (!isset($_POST[campaignid])){
 						<TR>
 							<TD COLSPAN=2 ALIGN="RIGHT">
 								<br />
-								<INPUT TYPE="SUBMIT" VALUE="Create Campaign">
+								<INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Create Campaign">
 							</TD>
 						</TR>
 					</TABLE>

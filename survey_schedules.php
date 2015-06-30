@@ -104,7 +104,7 @@ if (isset($_GET['edit'])) {
         }
         echo '<tr><td>'.$i.':00</td><td><input type="text" name="start_hour_'.$i.'" value="'.$count.'"></td></tr>';
     }
-    echo '<tr><td colspan="2"><input type="submit" value="Save Schedule"></td></tr>';
+    echo '<tr><td colspan="2"><input class="btn btn-primary" type="submit" value="Save Schedule"></td></tr>';
     echo "</table></form>";        
     box_end();
     require "footer.php";
@@ -147,7 +147,7 @@ if (isset($_GET['add'])) {
         for ($i = 0;$i<24;$i++) {
             echo '<tr><td>'.$i.':00</td><td><input type="text" name="start_hour_'.$i.'" value="0"></td></tr>';
         }
-        echo '<tr><td colspan="2"><input type="submit" value="Add Schedule"></td></tr>';
+        echo '<tr><td colspan="2"><input class="btn btn-primary" type="submit" value="Add Schedule"></td></tr>';
         echo "</table></form>";        
         box_end();
     }

@@ -93,7 +93,7 @@ if (!isset($_GET['number'])) {
         ?>
         <form action="pop.php" method="get">
         <input type="text" name="number">
-        <input type="submit" value="Lookup Number">
+        <input class="btn btn-primary" type="submit" value="Lookup Number">
         </form>
         <?
 } else {
