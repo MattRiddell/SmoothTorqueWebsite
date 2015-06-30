@@ -20,13 +20,13 @@ require "header_numbers.php";
 <?box_start();?>
 <center>
 <h3><?echo $config_values['DNC_NUMBERS_TITLE'];?> (<?echo $count;?> numbers)</h3>
-<a href="searchdncnumbers.php"><img src="images/magnifier.png" border="0"> <?echo $config_values['DNC_SEARCH'];?></a><br />
+<a  class="btn btn-default navbar-btn" href="searchdncnumbers.php"><img src="images/magnifier.png" border="0"> <?echo $config_values['DNC_SEARCH'];?></a>
 <br />
-<a href="viewdncnumbers.php"><img src="images/magnifier.png" border="0"> <?echo $config_values['DNC_VIEW'];?></a><br />
+<a  class="btn btn-default navbar-btn" href="viewdncnumbers.php"><img src="images/magnifier.png" border="0"> <?echo $config_values['DNC_VIEW'];?></a>
 <br />
-<a href="uploaddnc.php"><img src="images/page_white_get.png" border="0"> <?echo $config_values['DNC_UPLOAD'];?></a><br />
+<a  class="btn btn-default navbar-btn" href="uploaddnc.php"><img src="images/page_white_get.png" border="0"> <?echo $config_values['DNC_UPLOAD'];?></a>
 <br />
-<a href="adddncnumbers.php"><img src="images/page_white_add.png" border="0"> <?echo $config_values['DNC_ADD'];?></a><br />
+<a  class="btn btn-default navbar-btn" href="adddncnumbers.php"><img src="images/page_white_add.png" border="0"> <?echo $config_values['DNC_ADD'];?></a>
 <br />
 </center>
 <?box_end();?>
@@ -97,7 +97,7 @@ $class=" class=\"tborderx\"";
 <?echo $row[status];?>
 </TD>
 <TD>
-<A HREF="deletenumber.php?campaignid=<?echo $_POST[campaignid];?>&number=<?echo $row[phonenumber];?>">Delete</A>
+<a  class="btn btn-default navbar-btn" HREF="deletenumber.php?campaignid=<?echo $_POST[campaignid];?>&number=<?echo $row[phonenumber];?>">Delete</A>
 </TD>
 </TR>
 

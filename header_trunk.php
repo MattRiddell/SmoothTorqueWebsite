@@ -14,8 +14,8 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><A HREF="addtrunk.php"><img src="images/telephone_add.png" border="0" align="left">Add Trunk</A></li>
-                <li><A HREF="trunks.php"><img src="images/telephone_link.png" border="0" align="left">View Trunks</A></li>
+                <li><A HREF="addtrunk.php" class="btn btn-default navbar-btn"><img src="images/telephone_add.png" border="0" align="left">Add Trunk</A></li>
+                <li><A HREF="trunks.php" class="btn btn-default navbar-btn"><img src="images/telephone_link.png" border="0" align="left">View Trunks</A></li>
             </ul>
         </div>
     </div>

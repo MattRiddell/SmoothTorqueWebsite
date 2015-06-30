@@ -14,10 +14,6 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><A HREF="addschedule.php"><img src="images/clock_add.png" border="0" align="left">Add Schedule</A>
-                </li>
-                <li><A HREF="schedule.php"><img src="images/clock.png" border="0" align="left">View Schedules</A></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+    <li><A HREF="addschedule.php" class="btn btn-default navbar-btn"><img src="images/clock_add.png" border="0" align="left">Add Schedule</A></li>
+                <li><A HREF="schedule.php" class="btn btn-default navbar-btn"><img src="images/clock.png" border="0" align="left">View Schedules</A></li>
+    </ul></div></div></nav>

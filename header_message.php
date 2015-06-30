@@ -19,15 +19,15 @@
 
                     ?>
                     <li>
-                        <A HREF="uploadmessage.php?type=audio"><img src="images/sound_add.png" border="0" align="left">Upload New Audio Message</A>
+                        <A HREF="uploadmessage.php?type=audio" class="btn btn-default navbar-btn"><img src="images/sound_add.png" border="0" align="left">Upload New Audio Message</A>
                     </li>
                     <li>
-                        <A HREF="uploadmessage.php?type=fax"><img src="images/page_add.png" border="0" align="left">Upload New Fax Message</A>
+                        <A HREF="uploadmessage.php?type=fax" class="btn btn-default navbar-btn"><img src="images/page_add.png" border="0" align="left">Upload New Fax Message</A>
                     </li>
                 <?
                 }
                 ?>
-                <li><A HREF="messages.php"><img src="images/sound.png" border="0" align="left">View All Messages</A>
+                <li><A HREF="messages.php" class="btn btn-default navbar-btn"><img src="images/sound.png" border="0" align="left">View All Messages</A>
                 </li>
             </ul>
         </div>

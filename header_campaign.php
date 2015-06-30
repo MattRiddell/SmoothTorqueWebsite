@@ -32,11 +32,11 @@ if ($_COOKIE['level'] == sha1("level100")) {
             <ul class="nav navbar-nav">
 
                 <li>
-                    <A HREF="addcampaign.php"><img src="images/folder_add.png" border="0" align="left"><? echo $config_values['ADD_CAMPAIGN']; ?>
+                    <A HREF="addcampaign.php" class="btn btn-default navbar-btn"><img src="images/folder_add.png" border="0" align="left"><? echo $config_values['ADD_CAMPAIGN']; ?>
                     </A>
                 </li>
                 <li>
-                    <A HREF="campaigns.php"><img src="images/folder_explore.png" border="0" align="left"><? echo $config_values['VIEW_CAMPAIGN']; ?>
+                    <A HREF="campaigns.php" class="btn btn-default navbar-btn"><img src="images/folder_explore.png" border="0" align="left"><? echo $config_values['VIEW_CAMPAIGN']; ?>
                         </a>
                 </li>
 
@@ -47,13 +47,13 @@ if ($_COOKIE['level'] == sha1("level100")) {
                     //if (isset($_GET['type']) && $_GET['type'] == "all") {
                         ?>
                         <li>
-                            <A HREF="campaigns.php?type=admin"><img src="images/cog.png" border="0">&nbsp;Admin Campaigns</A>
+                            <A HREF="campaigns.php?type=admin" class="btn btn-default navbar-btn"><img src="images/cog.png" border="0">&nbsp;Admin Campaigns</A>
                         </li>
                         <li>
-                            <A HREF="selectcustomer.php"><img src="images/user.png" border="0">&nbsp;Select Customer</A>
+                            <A HREF="selectcustomer.php" class="btn btn-default navbar-btn"><img src="images/user.png" border="0">&nbsp;Select Customer</A>
                         </li>
                     <li>
-                        <A HREF="campaigns.php?type=all"><img src="images/folder.png" border="0">&nbsp;All Campaigns</A>
+                        <A HREF="campaigns.php?type=all" class="btn btn-default navbar-btn"><img src="images/folder.png" border="0">&nbsp;All Campaigns</A>
                     </li>
                     <?
 

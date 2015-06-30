@@ -15,10 +15,10 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
 
-                <li><A HREF="addcustomer.php"><img src="images/group_add.png" border="0" align="left">Add Customer</A>
+                <li><A HREF="addcustomer.php" class="btn btn-default navbar-btn"><img src="images/group_add.png" border="0" align="left">Add Customer</A>
                 </li>
                 <li>
-                <A HREF="customers.php"><img src="images/group.png" border="0" align="left">View Customers</A></li>
+                <A HREF="customers.php" class="btn btn-default navbar-btn"><img src="images/group.png" border="0" align="left">View Customers</A></li>
             </ul>
         </div>
     </div>

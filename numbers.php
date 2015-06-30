@@ -23,37 +23,37 @@ box_start();
 ?>
 <center>
 <h3><?echo $config_values['NUMBERS_TITLE'];?></h3>
-<a href="serverlist.php"><img src="images/report.png" border="0">&nbsp; <?echo $config_values['NUMBERS_SYSTEM'];?></a><br />
+<a  class="btn btn-default navbar-btn" href="serverlist.php"><img src="images/report.png" border="0">&nbsp; <?echo $config_values['NUMBERS_SYSTEM'];?></a>
 <br />
-<a href="viewnumbers.php"><img src="images/page_white_stack.png" border="0">&nbsp; <?echo $config_values['NUMBERS_VIEW'];?></a><br />
+<a  class="btn btn-default navbar-btn" href="viewnumbers.php"><img src="images/page_white_stack.png" border="0">&nbsp; <?echo $config_values['NUMBERS_VIEW'];?></a>
 <br />
-<a href="searchnumbers.php"><img src="images/magnifier.png" border="0">&nbsp; <?echo $config_values['NUMBERS_SEARCH'];?></a><br />
+<a  class="btn btn-default navbar-btn" href="searchnumbers.php"><img src="images/magnifier.png" border="0">&nbsp; <?echo $config_values['NUMBERS_SEARCH'];?></a>
 <br />
-<a href="exportnumbers.php"><img src="images/table_save.png" border="0">&nbsp; <?echo $config_values['NUMBERS_EXPORT'];?></a><br />
+<a  class="btn btn-default navbar-btn" href="exportnumbers.php"><img src="images/table_save.png" border="0">&nbsp; <?echo $config_values['NUMBERS_EXPORT'];?></a>
 <br />
 <?
 if ($config_values['use_names'] == 'YES') {
 ?>
-	<a href="upload_names.php"><img src="images/page_white_get.png" border="0">&nbsp;Upload names and numbers from a text file</a><br />
+	<a  class="btn btn-default navbar-btn" href="upload_names.php"><img src="images/page_white_get.png" border="0">&nbsp;Upload names and numbers from a text file</a>
 	<br />
 <?
 }
 ?>
-<a href="upload.php"><img src="images/page_white_get.png" border="0">&nbsp; <?echo $config_values['NUMBERS_UPLOAD'];?></a><br />
+<a  class="btn btn-default navbar-btn" href="upload.php"><img src="images/page_white_get.png" border="0">&nbsp; <?echo $config_values['NUMBERS_UPLOAD'];?></a>
 <br />
-<a href="addnumbers.php"><img src="images/page_white_add.png" border="0">&nbsp; <?echo $config_values['NUMBERS_MANUAL'];?></a><br />
+<a  class="btn btn-default navbar-btn" href="addnumbers.php"><img src="images/page_white_add.png" border="0">&nbsp; <?echo $config_values['NUMBERS_MANUAL'];?></a>
 <?
 if ($config_values['USE_GENERATE'] == "YES") {
 ?>
 <br />
-<a href="gennumbers.php"><img src="images/page_white_lightning.png" border="0">&nbsp; <?echo $config_values['NUMBERS_GENERATE'];?></a><br />
+<a  class="btn btn-default navbar-btn" href="gennumbers.php"><img src="images/page_white_lightning.png" border="0">&nbsp; <?echo $config_values['NUMBERS_GENERATE'];?></a>
 <?
 }
 
 if ($config_values['NUMBER_EXHAUSTION'] == "YES") {
     ?>
     <br />
-    <a href="notifications.php"><img src="images/email.png" border="0">&nbsp; <?echo $config_values['NUMBERS_WARNING'];?></a><br />
+    <a  class="btn btn-default navbar-btn" href="notifications.php"><img src="images/email.png" border="0">&nbsp; <?echo $config_values['NUMBERS_WARNING'];?></a>
     <?
 }
 
@@ -136,7 +136,7 @@ $class=" class=\"tborderx\"";
 <?echo $row[status];?>
 </TD>
 <TD>
-<A HREF="deletenumber.php?campaignid=<?echo $_POST[campaignid];?>&number=<?echo $row[phonenumber];?>">Delete</A>
+<a  class="btn btn-default navbar-btn" HREF="deletenumber.php?campaignid=<?echo $_POST[campaignid];?>&number=<?echo $row[phonenumber];?>">Delete</A>
 </TD>
 </TR>
 

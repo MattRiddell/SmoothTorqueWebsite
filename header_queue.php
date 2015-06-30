@@ -15,9 +15,9 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li>
-                    <A HREF="addqueue.php"><img src="images/database_lightning.png" border="0" align="left">Add Queue Wizard</A>
+                    <A HREF="addqueue.php" class="btn btn-default navbar-btn"><img src="images/database_lightning.png" border="0" align="left">Add Queue Wizard</A>
                 </li>
-                <li><A HREF="queues.php"><img src="images/database.png" border="0" align="left">View Queues</A></li>
+                <li><A HREF="queues.php" class="btn btn-default navbar-btn"><img src="images/database.png" border="0" align="left">View Queues</A></li>
             </ul>
         </div>
     </div>
