@@ -248,9 +248,9 @@ while ($row = mysql_fetch_assoc($result)) {
     <TD>
     <?
     if (strlen($row['name'])<35){
-        echo "<A title=\"Edit this campaign\" HREF=\"editcampaign.php?id=".$row['id']."\"><img width=\"16\" height=\"16\" src=\"images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit This Campaign\">".$row['name']."</A>";
+        echo "<A class=\"btn btn-default\" title=\"Edit this campaign\" HREF=\"editcampaign.php?id=".$row['id']."\"><img width=\"16\" height=\"16\" src=\"images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit This Campaign\">".$row['name']."</A>";
     } else {
-        echo "<A title=\"Edit this campaign\" HREF=\"editcampaign.php?id=".$row['id']."\"><img width=\"16\" height=\"16\" src=\"images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit This Campaign\">".trim(substr($row['name'],0,35))."...</A>";
+        echo "<A class=\"btn btn-default\" title=\"Edit this campaign\" HREF=\"editcampaign.php?id=".$row['id']."\"><img width=\"16\" height=\"16\" src=\"images/pencil.png\" border=\"0\" align=\"right\" title=\"Edit This Campaign\">".trim(substr($row['name'],0,35))."...</A>";
     }
     if ($level==sha1("level100") && $_GET['type']=="all") {
         $result_acct = mysql_query("SELECT username FROM customer WHERE campaigngroupid = ".$row['groupid']);
@@ -383,40 +383,40 @@ while ($row = mysql_fetch_assoc($result)) {
             </TD>
             <td>
             <?if ($user!="demo"){?>
-            <a title="Stop running this campaign" href="stopcampaign.php?id=<?echo $row['id'];?>"><img width="16" height="16" src="images/control_stop_blue.png" border="0"></a>
+            <a class="btn btn-default" title="Stop running this campaign" href="stopcampaign.php?id=<?echo $row['id'];?>"><img width="16" height="16" src="images/control_stop_blue.png" border="0"></a>
             <?} else {?>
-            <a href="#" title="Stop campaign (Not running)"><img width="16" height="16" src="images/control_stop_blue.png" border="0"></a>
+            <a href="#" class="btn btn-failure" title="Stop campaign (Not running)"><img width="16" height="16" src="images/control_stop_blue.png" border="0"></a>
             <?
         }
     } else {
         
         ?>
         <?if ($user!="demo"){?>
-            <a title="Start running this campaign" href="startcampaign.php?id=<?echo $row['id'];?>&astqueuename=<?echo $row['astqueuename'];?>&clid=<?echo $row['clid'];?>&trclid=<?echo $row['trclid'];?>&agents=<?echo $row['maxagents'];?>&did=<?echo $row['did'];?>&context=<?echo $row['context'];?>&drive_min=<?=$row['drive_min']?>&drive_max=<?=$row['drive_max']?>">
+            <a class="btn btn-success" title="Start running this campaign" href="startcampaign.php?id=<?echo $row['id'];?>&astqueuename=<?echo $row['astqueuename'];?>&clid=<?echo $row['clid'];?>&trclid=<?echo $row['trclid'];?>&agents=<?echo $row['maxagents'];?>&did=<?echo $row['did'];?>&context=<?echo $row['context'];?>&drive_min=<?=$row['drive_min']?>&drive_max=<?=$row['drive_max']?>">
             <IMG width="16" height="16" SRC="images/control_play_blue.png" BORDER="0"></a><br>
             <?} else {?>
-                <a href="#" title="Start campaign (Already started)"><IMG width="16" height="16" SRC="images/control_play_blue.png" BORDER="0"></a><br>
+                <a class="btn btn-default" href="#" title="Start campaign (Already started)"><IMG width="16" height="16" SRC="images/control_play_blue.png" BORDER="0"></a><br>
                 <?}?>
         </TD>
         <td>
-        <img width="16" height="16" src="images/control_stop.png" border="0" title="Stop running campaign">
+        <a href="#" class="btn btn-default disabled" ><img width="16" height="16" src="images/control_stop.png" border="0" title="Stop running campaign"></a>
         <?
     }
     
     if (strlen($config_values['test_number']) > 0) {?>
-        <a href="add_test_number.php?id=<?=$row['id']?>&type=<?=$_GET['type']?>" title="Add test number to this campaign"><img width="16" height="16" src="images/cog.png" border="0"></a>
+        <a class="btn btn-default" href="add_test_number.php?id=<?=$row['id']?>&type=<?=$_GET['type']?>" title="Add test number to this campaign"><img width="16" height="16" src="images/cog.png" border="0"></a>
         <?}
 
     if ($config_values['ALLOW_NUMBERS_MANUAL'] == "YES") {
         ?>
-        <a href="manual_init.php?campaignid=<?=$row['id']?>">
+        <a class="btn btn-default" href="manual_init.php?campaignid=<?=$row['id']?>">
         <img width="16" height="16" src="images/database_lightning.png" border="0" title="Initialise campaign for manual dialing">
         </a>
         <?
     }
     
     if ($config_values['DELETE_ALL'] == "YES") {?>
-        <a href="recycle.php?type=deleteall&id=<?=$row['id']?>">
+        <a class="btn btn-default" href="recycle.php?type=deleteall&id=<?=$row['id']?>">
         <img width="16" height="16" src="images/page_white_delete.png" border="0" title="Delete all numbers">
         </a>
         <?}
@@ -424,16 +424,16 @@ while ($row = mysql_fetch_assoc($result)) {
     </td>
     <TD>
     <?if ($backend == 0) {?>
-        <a title="View the report for this campaign" href="report<?if ($use_new_pie == 1) {echo "2";}?>.php?id=<?echo $row['id'];?>" class="abcd"><img width="16" height="16" src="images/chart_pie.png" border="0"></a>
-        <a title="View the graph for this campaign" href="test.php?id=<?echo $row['id'];?>" class="abcd"><img width="16" height="16" src="images/chart_curve.png" border="0"></a>&nbsp;
+        <a class="btn btn-default" title="View the report for this campaign" href="report<?if ($use_new_pie == 1) {echo "2";}?>.php?id=<?echo $row['id'];?>" class="abcd"><img width="16" height="16" src="images/chart_pie.png" border="0"></a>
+        <a class="btn btn-default" title="View the graph for this campaign" href="test.php?id=<?echo $row['id'];?>" class="abcd"><img width="16" height="16" src="images/chart_curve.png" border="0"></a>&nbsp;
         <?}?>
-    <a title="Recycle Numbers" href="recycle.php?id=<?echo $row['id'];?>&type_input=<?echo $_GET['type'];?>" class="abcd"><img width="16" height="16" src="images/arrow_refresh.png" border="0"></a>&nbsp;
-    <a title="List Numbers" href="viewnumbers.php?campaignid=<?echo $row['id'];?>" class="abcd"><img width="16" height="16" src="images/table.png" border="0"></a>&nbsp;
+    <a class="btn btn-default" title="Recycle Numbers" href="recycle.php?id=<?echo $row['id'];?>&type_input=<?echo $_GET['type'];?>" class="abcd"><img width="16" height="16" src="images/arrow_refresh.png" border="0"></a>&nbsp;
+    <a class="btn btn-default" title="List Numbers" href="viewnumbers.php?campaignid=<?echo $row['id'];?>" class="abcd"><img width="16" height="16" src="images/table.png" border="0"></a>&nbsp;
     <?
     if ($user!="demo"){
-        echo "<A title=\"Delete this campaign\" HREF=\"deletecampaign.php?id=".$row['id']."\"><IMG width=\"16\" height=\"16\" SRC=\"images/delete.png\" BORDER=\"0\"></A>";
+        echo "<A class=\"btn btn-default\" title=\"Delete this campaign\" HREF=\"deletecampaign.php?id=".$row['id']."\"><IMG width=\"16\" height=\"16\" SRC=\"images/delete.png\" BORDER=\"0\"></A>";
     } else {
-        echo "<A title=\"Delete this campaign\" HREF=\"#\"><IMG SRC=\"images/delete.png\" BORDER=\"0\" width=\"16\" height=\"16\" ></A>";
+        echo "<A class=\"btn btn-default\" title=\"Delete this campaign\" HREF=\"#\"><IMG SRC=\"images/delete.png\" BORDER=\"0\" width=\"16\" height=\"16\" ></A>";
     }
     ?>
     </TD>
@@ -442,7 +442,7 @@ while ($row = mysql_fetch_assoc($result)) {
         <TD>
         <?
         if ($row['cost']>0) {
-            echo '<A HREF="viewcdr_campaign.php?campaignid='.$row['id'].'">';
+            echo '<A class="btn btn-default" HREF="viewcdr_campaign.php?campaignid='.$row['id'].'">';
             echo $config_values['CURRENCY_SYMBOL']." ".number_format($row['cost'],2)."</a>";
         } else {
             echo "-";
