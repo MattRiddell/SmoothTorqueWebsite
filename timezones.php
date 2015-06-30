@@ -175,8 +175,8 @@ if (isset($_GET['view_timezones'])) {
     if (mysql_num_rows($result) > 0) {
         //box_start(500);
         echo "<center>";
-        echo '<table border="0" cellpadding="3" cellspacing="0">';
-        echo '<tr height="10"><td class="theadl"></td><td class="thead">Timezone Name</td><td class="thead">Local Start Dialling Time</td><td class="thead">Local End Dialling Time</td><td class="thead">Prefixes</td><td class="thead">Delete</td><td class="theadr"></td></tr>';
+        echo '<table border="0" cellpadding="3" cellspacing="0" class="table">';
+        echo '<tr height="10"><td class=""></td><td class="">Timezone Name</td><td class="">Local Start Dialling Time</td><td class="">Local End Dialling Time</td><td class="">Prefixes</td><td class="">Delete</td><td class=""></td></tr>';
         $toggle = false;
         while ($row = mysql_fetch_assoc($result)) {
             if ($toggle){
