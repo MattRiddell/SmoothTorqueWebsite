@@ -422,22 +422,19 @@ geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; COLOR: #000000; P
 
 A:link {
     text-decoration: none;
-	COLOR: #2222fc;
+
     }
 A:visited {
     text-decoration: none;
-	COLOR: #2222fc;
+
     }
 A:hover {
-	COLOR: #ff4400
-    ;
-//    font-weight: bold;
+
     text-decoration: none;
 
 }
 A:active {
-	COLOR: #ff4400
-    ;
+
 //    font-weight: bold;
     text-decoration: none;
 
