@@ -139,7 +139,7 @@ if (mysql_num_rows($result_surveys) > 0) {
     <table class="tborder" align="center" border="0" cellpadding="0" cellspacing="2">
         <?/* =================== Campaign Name Field ====================== */?>
         <tr title="A short name to give to the campaign">
-            <td class="theadx">
+            <td class="thead">
                 Campaign Name
                 <a href="#" onclick="displaySmallMessage('includes/help.php?section=A short name you would like to give to the campaign - preferrably one word');return false">
                     <img src="images/help.png" border="0">
@@ -153,7 +153,7 @@ if (mysql_num_rows($result_surveys) > 0) {
 
         <?/* ================ Campaign Description Field ================== */?>
         <tr title="A short description of the campaign">
-            <td class="theadx">
+            <td class="thead">
                 Campaign Description
                 <a href="#" onclick="displaySmallMessage('includes/help.php?section=A short description of the campaign in case you are not able to tell from the Campaign Name');return false">
                     <img src="images/help.png" border="0">
@@ -169,7 +169,7 @@ if (mysql_num_rows($result_surveys) > 0) {
         ?>
 <!-- Evergreen -->
 
-<TR title="Evergreen Mode"><TD CLASS="theadx">Allow Campaigns To Run Indefinitely
+<TR title="Evergreen Mode"><TD CLASS="thead">Allow Campaigns To Run Indefinitely
 
 <a href="#" onclick="displaySmallMessage('includes/help.php?section=If you would like this campaign to continuously run the campaign if it has numbers');return false"><img src="images/help.png" border="0"></a>
 </TD><TD>
@@ -182,15 +182,15 @@ if (mysql_num_rows($result_surveys) > 0) {
     }
 if ($config_values['configurable_drive'] == 1) {
     ?>
-    
-    <TR title="Configurable Drive"><TD CLASS="theadx">Configurable Drive
-    
+
+    <TR title="Configurable Drive"><TD CLASS="thead">Configurable Drive
+
     <a href="#" onclick="displaySmallMessage('includes/help.php?section=Provide SmoothTorque with a different value for intensity. Lower values will make campaigns slower, higher values will cause more overs');return false"><img src="images/help.png" border="0"></a>
     </TD><TD>
     Minimum Drive (Default 43.0) <input type="text" name="drive_min" value="<?=$row['drive_min']?>"><br />
     Maximum Drive (Default 61.0) <input type="text" name="drive_max" value="<?=$row['drive_max']?>">
-    
-    
+
+
     </TD>
     </TR>
     <?
@@ -200,7 +200,7 @@ if ($config_values['configurable_drive'] == 1) {
 
         <?/* =================== Queue/DID Mode Field ===================== */?>
         <tr id="mode">
-            <td class="theadx" width=200>
+            <td class="thead" width=200>
                 Mode
                 <a href="#" onclick="displaySmallMessage('includes/help.php?section=What type of campaign you would like to run. <br /><br />If you are connected to the machine doing the calling then chose Queue Mode.  If you would like to receive any connected calls at a particular phone number, chose DID Mode.  Normally you will use DID Mode unless you have been told to use Queue Mode.');return false">
                     <img src="images/help.png" border="0">
@@ -217,7 +217,7 @@ if ($config_values['configurable_drive'] == 1) {
 
         <?/* =================== Campaign Type Field ====================== */?>
         <tr>
-            <td class="theadx">
+            <td class="thead">
                 Type of Campaign
                 <a href="#" onclick="displayLargeMessage('includes/campaign_types.php');return false">
                     <img src="images/help.png" border="0" title="Type Of Campaign">
@@ -252,7 +252,7 @@ if ($config_values['configurable_drive'] == 1) {
    */?>
 
 
-<TR id="survey" style="display:none" title="The survey you would like to run"><TD CLASS="theadx">Survey
+<TR id="survey" style="display:none" title="The survey you would like to run"><TD CLASS="thead">Survey
 <a href="#" onclick="displaySmallMessage('includes/help.php?section=Select the survey you would like to run for this campaign.');return false"><img src="images/help.png" border="0"></a>
 </TD><TD>
 <SELECT name="surveyid">
@@ -270,7 +270,7 @@ for ($i=0;$i<$count_surveys;$i++){
 </TR>
         <?/* ==================== Fax Message Field ======================= */?>
         <tr id="fax" style="display:none" title="The fax you would like to send">
-            <td class="theadx">
+            <td class="thead">
                 Fax Message
                 <a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are running a campaign which sends a fax to the user then this is the fax that will be used.');return false">
                     <img src="images/help.png" border="0">
@@ -304,7 +304,7 @@ if ($row['context'] == 9) {
     echo '<input type="hidden" name="sms_id" value="'.$row['messageid3'].'">';
 }
 ?>
-<TR id="sms" style="display:none" title="The SMS you would like to send"><TD CLASS="theadx">SMS Message
+<TR id="sms" style="display:none" title="The SMS you would like to send"><TD CLASS="thead">SMS Message
 <a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are running a campaign which sends an SMS to the user then this is the SMS that will be sent.');return false"><img src="images/help.png" border="0"></a>
 </TD><TD>
 <input type="text" name="sms_message" size="60" value="<?=$sms?>">
@@ -314,7 +314,7 @@ if ($row['context'] == 9) {
 
         <?/* ==================== Live Message Field ====================== */?>
         <tr id="live_message" style="display:none" title="The message to play to the person who answers the phone">
-            <td class="theadx">
+            <td class="thead">
                 Live Message
                 <a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are running a campaign which plays a message to the user while waiting for them to press 1 then this is the message that will be used.');return false">
                     <img src="images/help.png" border="0">
@@ -338,7 +338,7 @@ if ($row['context'] == 9) {
 
         <?/* ==================== AMD Message Field ======================= */?>
         <tr id="answer_machine_message"  style="display:none" title="The message to leave to the answer machine">
-            <td class="theadx">
+            <td class="thead">
                 Answer Machine Message
                 <a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are leaving automated messages on answer machines then you can set this to a particular message you would like to have played when an answer machine is detected.  Usage of this will depend on your settings in the Type of Campaign section.');return false">
                     <img src="images/help.png" border="0">
@@ -362,7 +362,7 @@ if ($row['context'] == 9) {
 
         <?/* ==================== DNC Message Field ======================= */?>
         <tr id="dnc_list_message" style="display:none" title="The message played to someone who wants to be put on the DNC list">
-            <td class="theadx">
+            <td class="thead">
                 DNC Confirmation Message
                 <a href="#" onclick="displaySmallMessage('includes/help.php?section=This message is played to a customer who presses 2 to be added to DNC.');return false">
                     <img src="images/help.png" border="0">
@@ -387,7 +387,7 @@ if ($row['context'] == 9) {
         <?/* ===================== Queue Name Field ======================= */?>
         <tr id = "queue_field" title="The name of the queue used for agents" style="display: <?=$row['mode']==1?"visible":"none"?>">
 
-            <td class="theadx" width=200>
+            <td class="thead" width=200>
                 <label for="agents">
                     Queue Name
                     <a href="#" onclick="displaySmallMessage('includes/help.php?section=This is the name of a Queue on the telephone system of the provider of this system. Normally this will be assigned to you when you set up an account.');return false">
@@ -413,7 +413,7 @@ if ($row['context'] == 9) {
 
         <?/* ===================== Max Calls Field ======================== */?>
         <tr rel="didmode" id="max_connected_calls" title="The max number of concurrent calls to be connected to the call center">
-            <td class="theadx" width="216px">
+            <td class="thead" width="216px">
                 <label for="agents">
                     Maximum Connected Calls:
                     <a href="#" onclick="displaySmallMessage('includes/help.php?section=This is the number of concurrent calls you would like to receive on the call center number specified.  <br /><br />Normally this will be the number of staff you have.');return false">
@@ -428,7 +428,7 @@ if ($row['context'] == 9) {
 
         <?/* ===================== Caller ID Field ======================== */?>
         <tr id="outbound_callerid" title="The caller ID you'd like to use">
-            <td class="theadx">
+            <td class="thead">
                 <label for="did">
                     Caller ID:
                     <a href="#" onclick="displaySmallMessage('includes/help.php?section=The CallerID you would like to send on calls to your customers');return false">
@@ -443,7 +443,7 @@ if ($row['context'] == 9) {
 
         <?/* ============== Call Centre Phone Number Field ================ */?>
         <tr rel="didmode" id="cc_number" title="Call Centre Phone Number">
-            <td class="theadx">
+            <td class="thead">
                 <label for="did">
                     Call Center Phone Number:
                     <a href="#" onclick="displaySmallMessage('includes/help.php?section=The phone number you would like to have connected calls sent to. Eg: (123) 555-1234. ');return false">
