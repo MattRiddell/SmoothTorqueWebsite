@@ -1,12 +1,21 @@
 <?
 if (!function_exists('box_start') ) {
      function box_start($size = "400") {
-        echo '<div id="box" style="width:'.$size.'px;"><!--- box border --><div id="lb"><div id="rb"><div id="bb"><div id="blc"><div id="brc"><div id="tb"><div id="tlc"><div id="trc"><div id="boxcontent">';
+        //echo '<div id="box" style="width:'.$size.'px;"><!--- box border --><div id="lb"><div id="rb"><div id="bb"><div id="blc"><div id="brc"><div id="tb"><div id="tlc"><div id="trc"><div id="boxcontent">';
+         ?>
+         <div class="panel panel-default">
+             <div class="panel-body">
+
+
+
+<?
      }
 }
 if (!function_exists('box_end') ) {
      function box_end() {
-        echo '</div><!--- end of box border --></div></div></div></div></div></div></div></div></div>';
+        echo '
+             </div>
+         </div>';
      }
 }
 if (!function_exists('shadow_start') ) {

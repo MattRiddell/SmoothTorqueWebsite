@@ -17,7 +17,7 @@ box_start(330);
 
 <center>
 
-<b><?echo stripslashes($config_values['TITLE']);?></b><br />
+<h3><?echo stripslashes($config_values['TITLE']);?></h3><br />
 <br />
 
 

@@ -9,31 +9,60 @@ if ($config_values['VIEW_CAMPAIGN'] == "") {
     //echo $config_values['VIEW_CAMPAIGN'];
 }
 if ($_COOKIE['level'] == sha1("level100")) {
-box_start(700);
+//box_start(700);
 } else {
-box_start(295);
+//box_start(295);
 }
 ?>
-<table  align="center" width="100%" border="0" cellpadding="0" cellspacing="3"><TR>
-    <TD class="subheader"><A HREF="addcampaign.php"><img src="images/folder_add.png" border="0" align="left"><?echo $config_values['ADD_CAMPAIGN'];?></A>&nbsp;&nbsp;</TD>
-    <TD class="subheader"><A HREF="campaigns.php"><img src="images/folder_explore.png" border="0" align="left"><?echo $config_values['VIEW_CAMPAIGN'];?></A>&nbsp;&nbsp;</TD>
+<nav class="navbar navbar-default center">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+
+                <li>
+                    <A HREF="addcampaign.php"><img src="images/folder_add.png" border="0" align="left"><? echo $config_values['ADD_CAMPAIGN']; ?>
+                    </A>
+                </li>
+                <li>
+                    <A HREF="campaigns.php"><img src="images/folder_explore.png" border="0" align="left"><? echo $config_values['VIEW_CAMPAIGN']; ?>
+                        </a>
+                </li>
 
 
-    <?
-    if ($_COOKIE['level'] == sha1("level100")) {
+                <?
+                if ($_COOKIE['level'] == sha1("level100")) {
 
-        if (isset($_GET['type']) && $_GET['type']=="all") {
-            echo "<TD class=\"subheader\"><A HREF=\"campaigns.php?type=admin\"><img src=\"images/cog.png\" border=\"0\">&nbsp;Admin Campaigns</A></TD>";
-            echo "<TD class=\"subheader\"><A HREF=\"selectcustomer.php\"><img src=\"images/user.png\" border=\"0\">&nbsp;Select Customer</A></TD>";
-            echo "<TD class=\"subheader\"><b><img src=\"images/folder.png\" border=\"0\">&nbsp;All Campaigns</b></TD>";
-        } else {
-            echo "<TD class=\"subheader\"><b><img src=\"images/cog.png\" border=\"0\">&nbsp;Admin Campaigns</b></TD>";
-            echo "<TD class=\"subheader\"><A HREF=\"selectcustomer.php\"><img src=\"images/user.png\" border=\"0\">&nbsp;Select Customer</A></TD>";
-            echo "<TD class=\"subheader\"><A HREF=\"campaigns.php?type=all\"><img src=\"images/folder.png\" border=\"0\">&nbsp;All Campaigns</A></TD>";
-        }
-    }
-    ?>
+                    //if (isset($_GET['type']) && $_GET['type'] == "all") {
+                        ?>
+                        <li>
+                            <A HREF="campaigns.php?type=admin"><img src="images/cog.png" border="0">&nbsp;Admin Campaigns</A>
+                        </li>
+                        <li>
+                            <A HREF="selectcustomer.php"><img src="images/user.png" border="0">&nbsp;Select Customer</A>
+                        </li>
+                    <li>
+                        <A HREF="campaigns.php?type=all"><img src="images/folder.png" border="0">&nbsp;All Campaigns</A>
+                    </li>
+                    <?
+
+                }
+                ?>
+
+            </ul>
+        </div>
+    </div>
+</nav>
 
 
-    </TR></table><?box_end();?>
-<?flush();?>

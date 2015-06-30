@@ -149,7 +149,8 @@ if ($interface_type == "broadcast") {
 </html><?
 } else {
 ?>
-<BR><BR></TD></TR></TABLE>
+
+</div>
 </BODY>
 <HEAD>
 <?

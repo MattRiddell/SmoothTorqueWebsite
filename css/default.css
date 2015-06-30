@@ -466,7 +466,17 @@ LI {
 	BORDER-BOTTOM: #245e83 1px outset;
 }
 .tborderx {
-	BORDER-RIGHT: #245e83 1px outset; BORDER-TOP: #245e83 1px outset; BACKGROUND: #f2f2f2; BORDER-LEFT: #245e83 1px outset; COLOR: #000000; BORDER-BOTTOM: #245e83 1px outset;
+	BORDER-RIGHT: #245e83 0px outset; BORDER-TOP: #245e83 0px outset; BACKGROUND: #f2f2f2; BORDER-LEFT: #245e83 0px outset; COLOR: #000000; BORDER-BOTTOM: #245e83 0px outset;
+    padding: 10px;
+}
+.tborderx td {
+    padding: 10px;
+}
+.tborder2 td {
+    padding: 10px;
+}
+.tborderxxx td {
+    padding: 10px;
 }
 .tborder_active {
 	BORDER-RIGHT: #245e83 1px outset; BORDER-TOP: #245e83 1px outset; BACKGROUND: #66f266; BORDER-LEFT: #245e83 1px outset; COLOR: #000000; BORDER-BOTTOM: #245e83 1px outset;
@@ -480,11 +490,12 @@ LI {
 
 }
 .tborder2 {
-	BORDER-RIGHT: #245e83 1px outset; BORDER-TOP: #245e83 1px outset; BACKGROUND: #f8f8f8; BORDER-LEFT: #245e83 1px
-outset; COLOR: #000000; BORDER-BOTTOM: #245e83 1px outset
+	BORDER-RIGHT: #245e83 0px outset; BORDER-TOP: #245e83 0px outset; BACKGROUND: #f8f8f8; BORDER-LEFT: #245e83 0px
+outset; COLOR: #000000; BORDER-BOTTOM: #245e83 0px outset;
+    padding: 10px;
 }
 .tborder3{
-	BORDER-RIGHT: #245e83 0px outset; BORDER-TOP: #0000ff 1px inset; BORDER-LEFT: #245e83 0px
+	BORDER-RIGHT: #245e83 0px outset; BORDER-TOP: #0000ff 0px inset; BORDER-LEFT: #245e83 0px
 outset; COLOR: #000000; BORDER-BOTTOM: #245e83 0px outset
 }
 .tcat {
@@ -764,7 +775,7 @@ OPTGROUP {
 	BACKGROUND: #f7f7f7; COLOR: #000000
 }
 .panel {
-	BORDER-RIGHT: 2px inset; PADDING-RIGHT: 10px; BORDER-TOP: 2px inset; PADDING-LEFT: 10px; BACKGROUND: #e4e7f5 repeat-x left top; PADDING-BOTTOM: 10px; BORDER-LEFT: 2px inset; COLOR: #000000; PADDING-TOP: 10px; BORDER-BOTTOM: 2px inset
+	/*BORDER-RIGHT: 2px inset; PADDING-RIGHT: 10px; BORDER-TOP: 2px inset; PADDING-LEFT: 10px; BACKGROUND: #e4e7f5 repeat-x left top; PADDING-BOTTOM: 10px; BORDER-LEFT: 2px inset; COLOR: #000000; PADDING-TOP: 10px; BORDER-BOTTOM: 2px inset*/
 }
 .panelsurround {
 	BACKGROUND: url(../..../images/gradients/gradient_panelsurround.gif) #d5d8e5 repeat-x left top; COLOR: #000000
@@ -918,16 +929,16 @@ img.percentImage3 {
 TD.subheader {
 margin: 0px;
 padding:0px;
-   background: #eeeeee;
-   background-position: 0 -6;
+   //background: #eeeeee;
+   //background-position: 0 -6;
    border: 0px;
    text-align: left;
 }
 
 TD.subheader:hover {
 
-   background: url(../images/chb.gif);
-   background-position: 0 -6;
+   //background: url(../images/chb.gif);
+   //background-position: 0 -6;
    border: 0px;
 }
 

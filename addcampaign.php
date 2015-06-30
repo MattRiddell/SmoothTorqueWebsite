@@ -28,7 +28,12 @@
             
             
             $modein=($_POST['mode']);
-            $survey=($_POST['surveyid']);
+            if (!isset($_POST['surveyid'])) {
+                $survey=-1;
+            } else {
+                $survey=($_POST['surveyid']);
+            }
+
             $maxagents=($_POST['agents']);
             if ($modein == "mode_queue"){
                 $mode = 1;

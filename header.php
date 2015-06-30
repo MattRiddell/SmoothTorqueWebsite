@@ -532,7 +532,7 @@ if ($loggedin) {
     
     /* Get the menu structure based on the config values, the current
      page, and the security level of the person viewing the page */
-    $menu = get_menu_html($config_values, $self, $level);
+    $menu = get_menu_html($config_values, $self, $level, 1);
 }
 
 /* Start printing out the HTML page */
@@ -554,6 +554,14 @@ if ($self == "/test.php" || $self == "/report.php" || $self == "/servers.php" ||
     <script type="text/javascript" src="js/slider.js"></script>
     <?}?>
 <script type="text/javascript" src="<?=$http_dir_name?>tabber.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <?
 if ($loggedin) {
 	$result_if = mysql_query("SELECT interface_type FROM customer where username = '$_COOKIE[user]'");
@@ -667,7 +675,7 @@ if ($interface_type == "broadcast") {
             </head>
             
             <body bgcolor="<?echo $config_values['COLOUR'];?>" >
-            
+            <div class="container-fluid">
             <?
             if (isset($menu) && $loggedin == true){
                 $sql = 'SELECT value FROM config WHERE parameter=\'logo_width\'';
@@ -763,4 +771,5 @@ if ($interface_type == "broadcast") {
                 }
             }
             ?>
+                    </div><div class="container">
             <?}?>
