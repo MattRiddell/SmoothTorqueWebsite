@@ -174,7 +174,7 @@ if (mysql_num_rows($result)==0){
 <?
 $user = $_COOKIE['user'];
 ?>
-<table class="table" align="center" border="0" cellpadding="2" cellspacing="0">
+<table class="table table-striped" align="center" border="0" cellpadding="2" cellspacing="0">
     <thead>
     <TR>
 
@@ -236,10 +236,10 @@ while ($row = mysql_fetch_assoc($result)) {
         $class=" class=\"tborder_active\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#88f888'\"   ";
     } else if ($toggle){
         $toggle=false;
-        $class=" class=\"tborder2\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f8f8f8'\"   ";
+        //$class=" class=\"tborder2\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f8f8f8'\"   ";
     } else {
         $toggle=true;
-        $class=" class=\"tborderx\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f0f0f0'\" ";
+        //$class=" class=\"tborderx\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f0f0f0'\" ";
     }
     
     ?>
