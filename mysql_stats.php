@@ -90,15 +90,18 @@ include "mysql_details.php";
 box_end();
 $result = mysql_query("SHOW TABLE STATUS");
 ?>
-<center><table class="tborder2p" cellspacing="1" boreder="0" cellpadding="5">
+<center><table class="table-border table" cellspacing="1" boreder="0" cellpadding="5">
+        <thead>
 <tr>
-<td CLASS="thead">Name</td>
-<td CLASS="thead">Rows</td>
-<td CLASS="thead">Total Size</td>
-<td CLASS="thead">Last Update</td>
-<td CLASS="thead">Last Check</td>
-<td CLASS="thead">Engine</td>
+<th>Name</th>
+    <th>Rows</th>
+    <th>Total Size</th>
+    <th>Last Update</th>
+    <th>Last Check</th>
+    <th>Engine</th>
 </tr>
+        </thead>
+        <tbody>
 <?
 while ($row = mysql_fetch_assoc($result)) {
 //	print_pre($row);
