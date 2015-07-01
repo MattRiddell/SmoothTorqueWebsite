@@ -332,10 +332,9 @@ $user = $_COOKIE['user'];
                         $perc = 0;
                     } else {
 
-                        $perc = ((100 - (($new_numbers / $total_numbers) * 100)) * 1) - 1;
+                        $perc = round(((100 - (($new_numbers / $total_numbers) * 100)) * 1) - 1,2);
                     }
 
-                    if ($progress > 0) {
 
                         ?>
 
@@ -345,37 +344,7 @@ $user = $_COOKIE['user'];
                             </div>
                         </div>
                     <?
-                    } else if ($manual_numbers > 0) {
-                        ?>
 
-                        <div class="progress">
-                            <div class="progress-bar <? if ($perc == 0) { ?>progress-bar-danger<? } ?>" role="progressbar" aria-valuenow="<?= $perc ?>" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;width: <?= $perc ?>%;">
-                                <?= $perc ?>%
-                            </div>
-                        </div>
-                    <?
-                    } else {
-                        if ($total_numbers > 0) {
-                            ?>
-
-                            <div class="progress">
-                                <div class="progress-bar <? if ($perc == 0) { ?>progress-bar-danger<? } ?>" role="progressbar" aria-valuenow="<?= $perc ?>" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;width: <?= $perc ?>%;">
-                                    <?= $perc ?>%
-                                </div>
-                            </div>
-                        <?
-                        } else {
-                            ?>
-
-                            <div class="progress">
-                                <div class="progress-bar <?if ($perc == 0) { ?>progress-bar-danger<?
-                                } ?>" role="progressbar" aria-valuenow="<?= $perc ?>" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;width: <?= $perc ?>%;">
-                                    <?= $perc ?>%
-                                </div>
-                            </div>
-                        <?
-                        }
-                    }
                 }
                 ?>
             </TD>
