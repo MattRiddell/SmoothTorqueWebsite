@@ -356,7 +356,7 @@ $user = $_COOKIE['user'];
                 }
                 if ($status == 101){
                 ?>
-                <a class="btn btn-default" href="#" title="Start campaign (Already started)"><IMG width="16" height="16" SRC="images/control_play_blue.png" BORDER="0"></a>
+                <a class="btn btn-default disabled" href="#" title="Start campaign (Already started)"><IMG width="16" height="16" SRC="images/control_play_blue.png" BORDER="0"></a>
             </TD>
         <td>
         <? if ($user != "demo") {
@@ -373,7 +373,7 @@ $user = $_COOKIE['user'];
             <a class="btn btn-success" title="Start running this campaign" href="startcampaign.php?id=<? echo $row['id']; ?>&astqueuename=<? echo $row['astqueuename']; ?>&clid=<? echo $row['clid']; ?>&trclid=<? echo $row['trclid']; ?>&agents=<? echo $row['maxagents']; ?>&did=<? echo $row['did']; ?>&context=<? echo $row['context']; ?>&drive_min=<?= $row['drive_min'] ?>&drive_max=<?= $row['drive_max'] ?>">
                 <IMG width="16" height="16" SRC="images/control_play_blue.png" BORDER="0"></a><br>
         <? } else { ?>
-            <a class="btn btn-default" href="#" title="Start campaign (Already started)"><IMG width="16" height="16" SRC="images/control_play_blue.png" BORDER="0"></a>
+            <a class="btn btn-default disabled" href="#" title="Start campaign (Already started)"><IMG width="16" height="16" SRC="images/control_play_blue.png" BORDER="0"></a>
             <br>
         <?
         } ?>
