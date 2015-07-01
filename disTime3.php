@@ -232,7 +232,7 @@ $user = $_COOKIE['user'];
         flush();
         $row = @array_map(stripslashes, $row);
         if ($status == 101) {
-            $class = " class=\"tborder_active\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#88f888'\"   ";
+            //$class = " class=\"tborder_active\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#88f888'\"   ";
         } else if ($toggle) {
             $toggle = FALSE;
             //$class=" class=\"tborder2\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f8f8f8'\"   ";
