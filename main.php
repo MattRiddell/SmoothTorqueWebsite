@@ -18,7 +18,7 @@ box_start(330);
 if ($level==sha1("level5")) {
     /* Manual Dialing agent logging in */
     echo "Please wait."; ?>
-    <br /></td><td></td></tr></table>
+
     <?
 box_end();
 ?>
@@ -35,7 +35,7 @@ if ($level==sha1("level10")){
     echo '<a href="billinglog.php">View Billing Log</a><br />';
 
 } else {
-    echo $config_values['MAIN_PAGE_TEXT'];
+    echo "<p>".$config_values['MAIN_PAGE_TEXT']."</p>";
 }
 
 ?>
