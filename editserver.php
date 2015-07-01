@@ -27,42 +27,43 @@ $result=mysql_query($sql,$link);
 $row=mysql_fetch_assoc($result);
 ?>
 
-<FORM ACTION="editserver.php" METHOD="POST">
-<table class="tborder" align="center" border="0" cellpadding="0" cellspacing="2">
-<?
-?>
-<TR><TD CLASS="thead">Asterisk Server Name</TD><TD>
-<INPUT TYPE="TEXT" NAME="name" VALUE="<?echo $row[name];?>" size="60">
-<INPUT TYPE="HIDDEN" NAME="id" VALUE="<?echo $_GET[id];?>">
-</TD>
-</TR>
+<form class="form-horizontal" action="addserver.php" method="post">
+    <input type="hidden" name="id" value="<?echo $_get[id];?>">
+    <div class="form-group">
+        <label for="name" class="col-sm-4 control-label">Asterisk server name</label>
 
-<TR><TD CLASS="thead">Asterisk Server Address</TD><TD>
-<INPUT TYPE="TEXT" NAME="address" VALUE="<?echo $row[address];?>" size="60">
-</TD>
-</TR>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="name" name="name"value="<? echo $row[name]; ?>" >
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="address" class="col-sm-4 control-label">Asterisk server address</label>
 
-<TR><TD CLASS="thead">Asterisk Server Username</TD><TD>
-<INPUT TYPE="TEXT" NAME="username" VALUE="<?echo $row[username];?>" size="60">
-</TD>
-</TR>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="address" name="address"value="<? echo $row[address]; ?>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="username" class="col-sm-4 control-label">Asterisk server username</label>
 
-<TR><TD CLASS="thead">Asterisk Server Password</TD><TD>
-<INPUT TYPE="password" NAME="password" VALUE="xxxxxxxxxxxx" size="60">
-</TD>
-</TR>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="username" name="username"value="<? echo $row[username]; ?>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="password" class="col-sm-4 control-label">Asterisk server password</label>
+
+        <div class="col-sm-8">
+            <input type="password" class="form-control" id="password" name="password"value="xxxxxxxxxxxx">
+        </div>
+    </div>
+
+    <div class="col-sm-12">
+        <input class="btn btn-primary" type="submit" value="Save server">
+    </div>
+</form>
 
 
-
-<TR><TD COLSPAN=2 ALIGN="RIGHT">
-<INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Save Server">
-</TD>
-</TR>
-<?
-?>
-
-</TABLE>
-</FORM>
 <?
 require "footer.php";
 ?>

@@ -90,7 +90,7 @@ include "mysql_details.php";
 box_end();
 $result = mysql_query("SHOW TABLE STATUS");
 ?>
-<center><table class="table-border table" cellspacing="1" boreder="0" cellpadding="5">
+<center><table class="table-border table table-striped" cellspacing="1" boreder="0" cellpadding="5">
         <thead>
 <tr>
 <th>Name</th>
@@ -119,20 +119,20 @@ while ($row = mysql_fetch_assoc($result)) {
 
 		if ($size < 1) {
 			$size *= 1024;
-			$tdstyle = " style=\"background: #eeffee \"";
+			//$tdstyle = " style=\"background: #eeffee \"";
 			$size_text = "Kb";
 			$digits = 0;
 		} else if ($size<1024) {
-			$tdstyle = " style=\"background: #ffdd88 url('images/grad_green.gif');\"";
+			//$tdstyle = " style=\"background: #ffdd88 url('images/grad_green.gif');\"";
 			$size_text = "Mb";
 			$digits = 1;
 		} else if ($size <10240) {
-			$tdstyle = " style=\"background: #ff8844 url('images/grad_orange.gif');\"";
+			//$tdstyle = " style=\"background: #ff8844 url('images/grad_orange.gif');\"";
 			$size/=1024;
 	                $size_text = "Gb";
 			$digits = 2;
 		} else {
-			$tdstyle = " style=\"background: #ff4444\"";
+			//$tdstyle = " style=\"background: #ff4444\"";
 			$size/=1024;
 	                $size_text = "Gb";
 			$digits = 4;

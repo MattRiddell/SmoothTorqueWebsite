@@ -43,7 +43,7 @@ if ($_GET['ajax'] == 1) {
 </script>
 
 
-<table class="table table-bordered" align="center" border="0" cellpadding="2" cellspacing="0">
+<table class="table table-bordered table-striped" align="center" border="0" cellpadding="2" cellspacing="0">
     <TR>
         <TD CLASS="">
             Name
@@ -69,10 +69,10 @@ if ($_GET['ajax'] == 1) {
     while ($row = mysql_fetch_assoc($result)) {
         if ($toggle){
             $toggle=false;
-            $class=" class=\"tborder2\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f8f8f8'\"   ";
+            //$class=" class=\"tborder2\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f8f8f8'\"   ";
         } else {
             $toggle=true;
-            $class=" class=\"tborderx\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f0f0f0'\" ";
+            //$class=" class=\"tborderx\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f0f0f0'\" ";
         }
         ?>
         <TR <?echo $class;?>>
