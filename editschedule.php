@@ -88,7 +88,7 @@ echo ($row[end_hour]-0).":".$row[end_minute]." am";
 <TR>
 <TD CLASS="thead">How often to run</TD>
 <TD>
-<select name="regularity">
+<select  class="form-control" name="regularity">
 <option value="every-day">Every Day</option>
 <option value="mon-fri">Monday to Friday</option>
 <option value="mon-sat">Monday to Saturday</option>

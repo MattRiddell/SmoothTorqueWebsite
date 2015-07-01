@@ -30,7 +30,7 @@ if (!isset($_POST[campaignid])){
     <FORM ACTION="addnumbers.php" METHOD="POST">
     <table class="tborderxxx2" align="center" border="0" cellpadding="0" cellspacing="2"><TR>
     <TD>Select Campaign:</TD><TD>
-    <SELECT NAME="campaignid">
+    <SELECT  class="form-control" NAME="campaignid">
     <?
     //
     if ($level==sha1("level100")) {

@@ -52,7 +52,7 @@ if (!isset($_POST[campaignid])){
     Please select one from the choices below:
     <table class="tborderxxxx" align="center" border="0" cellpadding="0" cellspacing="2"><TR>
     <TD></TD><TD> <br />
-        <SELECT NAME="campaignid">
+        <SELECT  class="form-control" NAME="campaignid">
         <?
         //
     if ($_COOKIE['level'] == sha1("level100")) {
@@ -103,7 +103,7 @@ if (!isset($_POST[campaignid])){
 <TR>
 <TD CLASS="thead">How often to run</TD>
 <TD>
-<select name="regularity">
+<select  class="form-control" name="regularity">
 <option value="every-day">Every Day</option>
 <option value="mon-fri">Monday to Friday</option>
 <option value="mon-sat">Monday to Saturday</option>

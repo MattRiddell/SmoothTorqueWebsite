@@ -14,7 +14,8 @@ if (!isset($_GET[id])){
 ?>
 <form action="chart.php" method="get">
 <table class="tborder" align="center" border="0" cellpadding="0" cellspacing="2"><TR>
-    <TD>Select Campaign:</TD><TD>    <select name="id">
+    <TD>Select Campaign:</TD><TD>
+            <select  class="form-control" name="id">
 
 <?
 require_once "PHPTelnet.php";

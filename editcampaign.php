@@ -224,7 +224,7 @@ if ($config_values['configurable_drive'] == 1) {
                 </a>
             </td>
             <td>
-                <select name="context" id="context" onchange="whatPaySelected(this.value)">
+                <select name="context"  class="form-control" id="context" onchange="whatPaySelected(this.value)">
                     <option value="-1">Please chose a type of campaign...</option>
                     <option value="0" <?echo $row[context]==0?"SELECTED":""?> title="No numbers are dialed">Load Simulation</option>
                     <option value="1" <?echo $row[context]==1?"SELECTED":""?> title="Only leave a message if an answer machine is detected, hangup otherwise">Answer Machine Only</option>
@@ -255,7 +255,7 @@ if ($config_values['configurable_drive'] == 1) {
 <TR id="survey" style="display:none" title="The survey you would like to run"><TD CLASS="thead">Survey
 <a href="#" onclick="displaySmallMessage('includes/help.php?section=Select the survey you would like to run for this campaign.');return false"><img src="images/help.png" border="0"></a>
 </TD><TD>
-<SELECT name="surveyid">
+<SELECT  class="form-control" name="surveyid">
 <?
 for ($i=0;$i<$count_surveys;$i++){
     $selected="";
@@ -277,7 +277,7 @@ for ($i=0;$i<$count_surveys;$i++){
                 </a>
             </td>
             <td>
-                <select name="faxid">
+                <select  class="form-control" name="faxid">
                     <?
                     for ($i=0; $i<$count_fax; $i++){
                         if ($row['messageid']==$row2_fax[$i]['id']){
@@ -321,7 +321,7 @@ if ($row['context'] == 9) {
                 </a>
             </td>
             <td>
-                <select name="messageid">
+                <select  class="form-control" name="messageid">
                     <?
                     for ($count2=0; $count2<$count; $count2++){
                         if ($row['messageid']==$row2[$count2]['id']){
@@ -345,7 +345,7 @@ if ($row['context'] == 9) {
                 </a>
             </td>
             <td>
-                <select name="messageid2">
+                <select  class="form-control" name="messageid2">
                     <?
                     for ($count2=0; $count2<$count; $count2++){
                         if ($row['messageid2']==$row2[$count2]['id']){
@@ -369,7 +369,7 @@ if ($row['context'] == 9) {
                 </a>
             </td>
             <td>
-                <select name="messageid3">
+                <select  class="form-control" name="messageid3">
                     <?
                     for ($count2=0; $count2<$count; $count2++){
                         if ($row['messageid3']==$row2[$count2]['id']){
@@ -396,7 +396,7 @@ if ($row['context'] == 9) {
                 </label>
             </td>
             <td width=*>
-                <select name="astqueuename">
+                <select  class="form-control" name="astqueuename">
                     <?
                     for ($count2=0; $count2<sizeof($row_queue); $count2++){
                         if ($row['astqueuename']==$row_queue[$count2]['name']){

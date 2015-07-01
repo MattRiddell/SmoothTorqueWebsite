@@ -24,7 +24,7 @@ From here you can chose a campaign that you would like to see the numbers for.<b
 <FORM ACTION="viewnumbers.php" METHOD="POST">
     <table class="tborderdd" align="center" border="0" cellpadding="0" cellspacing="2"><TR>
     <TD>Select Campaign:</TD><TD>
-        <SELECT NAME="campaignid">
+        <SELECT  class="form-control" NAME="campaignid">
         <?
         $sql = 'SELECT id,name FROM campaign WHERE groupid='.$campaigngroupid;
         $result=mysql_query($sql, $link) or die (mysql_error());;

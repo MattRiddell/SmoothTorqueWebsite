@@ -23,7 +23,7 @@ Which campaign would you like to add numbers to?<br /><br />
 <FORM ACTION="serverlist.php" METHOD="POST">
     <table class="tborderxxx2" align="center" border="0" cellpadding="0" cellspacing="2"><TR>
     <TD>Select Campaign:</TD><TD>
-        <SELECT NAME="campaignid">
+        <SELECT  class="form-control" NAME="campaignid">
         <?
         //
         $sql = 'SELECT id,name FROM campaign WHERE groupid='.$campaigngroupid;
@@ -114,7 +114,7 @@ Please choose a list to use:<br /><br />
 <?
 ?>
 <TR><TD>
-<select name="importfrom">
+<select  class="form-control" name="importfrom">
 <?
 $resultx=mysql_query("SELECT adminlists FROM customer WHERE username='".$_COOKIE[user]."'",$link) or die(mysql_error());
 $row2=explode(",",mysql_result($resultx,0,0));

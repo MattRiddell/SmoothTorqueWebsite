@@ -29,7 +29,7 @@ Please select a campaign to add numbers to<br /><br />
 <FORM ACTION="gennumbers.php" METHOD="POST">
     <table class="tborderxsxx" align="center" border="0" cellpadding="0" cellspacing="2"><TR>
     <TD>
-        <SELECT NAME="campaignid">
+        <SELECT  class="form-control" NAME="campaignid">
         <?
         if ($_COOKIE[level] == sha1("level100")) {
             echo "<OPTION VALUE=\"-1\">Shared List</OPTION>";

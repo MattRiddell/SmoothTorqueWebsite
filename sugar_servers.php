@@ -114,7 +114,7 @@ if (isset($_GET['add_rules'])) {
         Last Dialed:
         </td>
         <td>
-        <select name="last_dialed">
+        <select  class="form-control" name="last_dialed">
         <option value="1">1 Day or More</option>
         <option value="2">2 Days or More</option>
         <option value="3">3 Days or More</option>
@@ -128,31 +128,31 @@ if (isset($_GET['add_rules'])) {
         </select>
         </td>
         </tr>
-        
-        
+
+
         <tr>
         <td>
         Dial undialed records?
         </td>
         <td>
-        <select name="include_undialed">
+        <select  class="form-control" name="include_undialed">
         <option value="1">Yes</option>
         <option value="0">No</option>
         </select>
         </td>
         </tr>
-        
+
         <tr>
         <td>
         Use Status Based Dialling?
         </td>
         <td>
-        <select name="use_status" onchange="show_hide('use_status',this.selectedIndex);">
+        <select  class="form-control" name="use_status" onchange="show_hide('use_status',this.selectedIndex);">
         <option value="0">No</option>
         <option value="1">Yes</option>
         </select>
         <div id="use_status" style="display:none">
-        <select name="status">
+        <select  class="form-control" name="status">
         <option value="New">New</option>
         <option value="Assigned">Assigned</option>
         <option value="In Process">In Process</option>
@@ -161,21 +161,21 @@ if (isset($_GET['add_rules'])) {
         <option value="Dead">Dead</option>
         </select>
         </div>
-        
+
         </td>
         </tr>
-        
+
         <tr>
         <td>
         Use Lead Source Based Dialling?
         </td>
         <td>
-        <select name="use_lead_source" onchange="show_hide('use_lead_source',this.selectedIndex);">
+        <select  class="form-control" name="use_lead_source" onchange="show_hide('use_lead_source',this.selectedIndex);">
         <option value="0">No</option>
         <option value="1">Yes</option>
         </select>
         <div id="use_lead_source" style="display:none">
-        <select name="lead_source">
+        <select  class="form-control" name="lead_source">
         <option value="Cold Call">Cold Call</option>
         <option value="Existing Customer">Existing Customer</option>
         <option value="Self Generated">Self Generated</option>
@@ -193,32 +193,32 @@ if (isset($_GET['add_rules'])) {
         <option value="Other">Other</option>
         </select>
         </div>
-        
+
         </td>
         </tr>
-        
+
         <tr>
         <td>
         Use City Based Dialling?
         </td>
         <td>
-        <select name="use_city" onchange="show_hide('use_city',this.selectedIndex);">
+        <select  class="form-control" name="use_city" onchange="show_hide('use_city',this.selectedIndex);">
         <option value="0">No</option>
         <option value="1">Yes</option>
         </select>
         <div id="use_city" style="display:none">
         City:<input type="text" name="city">
         </div>
-        
+
         </td>
         </tr>
-        
+
         <tr>
         <td>
         Maximum times to call?
         </td>
         <td>
-        <select name="max_calls">
+        <select  class="form-control" name="max_calls">
         <option value="0">Unlimited</option>
         <option value="1">Once</option>
         <option value="2">Twice</option>
@@ -233,48 +233,48 @@ if (isset($_GET['add_rules'])) {
         </select>
         </td>
         </tr>
-        
-        
-        
+
+
+
         <tr>
         <td>
         Use Home Number?
         </td>
         <td>
-        <select name="use_home">
+        <select  class="form-control" name="use_home">
         <option value="1">Yes</option>
         <option value="0">No</option>
         </select>
         </td>
         </tr>
-        
+
         <tr>
         <td>
         Use Work Number?
         </td>
         <td>
-        <select name="use_work">
+        <select  class="form-control" name="use_work">
         <option value="1">Yes</option>
         <option value="0">No</option>
         </select>
         </td>
         </tr>
-        
+
         <tr>
         <td>
         Use Mobile Number?
         </td>
         <td>
-        <select name="use_mobile">
+        <select  class="form-control" name="use_mobile">
         <option value="1">Yes</option>
         <option value="0">No</option>
         </select>
         </td>
         </tr>
-        
-        
-        
-        
+
+
+
+
         </table>
         <input class="btn btn-primary" type="submit" value="Add Rule">
         </form>
@@ -320,15 +320,15 @@ if (isset($_GET['edit_rules'])) {
         <form action="sugar_servers.php?save_edit_rule=1" method="post">
         <input type="hidden" name="campaign_id" value="<?=$_GET['edit_rules']?>">
         <table>
-        
-        
-        
+
+
+
         <tr>
         <td>
         Last Dialed:
         </td>
         <td>
-        <select name="last_dialed">
+        <select  class="form-control" name="last_dialed">
         <option value="1" <?if ($row_current_rules['last_dialed'] == 1) {echo "selected";}?>>1 Day or More</option>
         <option value="2" <?if ($row_current_rules['last_dialed'] == 2) {echo "selected";}?>>2 Days or More</option>
         <option value="3" <?if ($row_current_rules['last_dialed'] == 3) {echo "selected";}?>>3 Days or More</option>
@@ -342,31 +342,31 @@ if (isset($_GET['edit_rules'])) {
         </select>
         </td>
         </tr>
-        
-        
+
+
         <tr>
         <td>
         Dial undialed records?
         </td>
         <td>
-        <select name="include_undialed">
+        <select  class="form-control" name="include_undialed">
         <option value="1" <?if ($row_current_rules['include_undialed'] == 1) {echo "selected";}?>>Yes</option>
         <option value="0" <?if ($row_current_rules['include_undialed'] == 0) {echo "selected";}?>>No</option>
         </select>
         </td>
         </tr>
-        
+
         <tr>
         <td>
         Use Status Based Dialling?
         </td>
         <td>
-        <select name="use_status" onchange="show_hide('use_status',this.selectedIndex);">
+        <select  class="form-control" name="use_status" onchange="show_hide('use_status',this.selectedIndex);">
         <option value="0" <?if ($row_current_rules['use_status'] == 0) {echo "selected";}?>>No</option>
         <option value="1" <?if ($row_current_rules['use_status'] == 1) {echo "selected";}?>>Yes</option>
         </select>
         <div id="use_status" style="<?if ($row_current_rules['use_status'] == 0) {echo "display:none";}?>">
-        <select name="status">
+        <select  class="form-control" name="status">
         <option value="New">New</option>
         <option value="Assigned">Assigned</option>
         <option value="In Process">In Process</option>
@@ -375,21 +375,21 @@ if (isset($_GET['edit_rules'])) {
         <option value="Dead">Dead</option>
         </select>
         </div>
-        
+
         </td>
         </tr>
-        
+
         <tr>
         <td>
         Use Lead Source Based Dialling?
         </td>
         <td>
-        <select name="use_lead_source" onchange="show_hide('use_lead_source',this.selectedIndex);">
+        <select  class="form-control" name="use_lead_source" onchange="show_hide('use_lead_source',this.selectedIndex);">
         <option value="0" <?if ($row_current_rules['use_lead_source'] == 0) {echo "selected";}?>>No</option>
         <option value="1" <?if ($row_current_rules['use_lead_source'] == 1) {echo "selected";}?>>Yes</option>
         </select>
         <div id="use_lead_source" style="<?if ($row_current_rules['use_lead_source'] == 0) {echo "display:none";}?>">
-        <select name="lead_source">
+        <select  class="form-control" name="lead_source">
         <option value="Cold Call" <?if ($row_current_rules['lead_source'] == "Cold Call") {echo "selected";}?>>Cold Call</option>
         <option value="Existing Customer" <?if ($row_current_rules['lead_source'] == "Existing Customer") {echo "selected";}?>>Existing Customer</option>
         <option value="Self Generated" <?if ($row_current_rules['lead_source'] == "Self Generated") {echo "selected";}?>>Self Generated</option>
@@ -407,32 +407,32 @@ if (isset($_GET['edit_rules'])) {
         <option value="Other" <?if ($row_current_rules['lead_source'] == "Other") {echo "selected";}?>>Other</option>
         </select>
         </div>
-        
+
         </td>
         </tr>
-        
+
         <tr>
         <td>
         Use City Based Dialling?
         </td>
         <td>
-        <select name="use_city" onchange="show_hide('use_city',this.selectedIndex);">
+        <select  class="form-control" name="use_city" onchange="show_hide('use_city',this.selectedIndex);">
         <option value="0" <?if ($row_current_rules['use_city'] == 0) {echo "selected";}?>>No</option>
         <option value="1" <?if ($row_current_rules['use_city'] == 1) {echo "selected";}?>>Yes</option>
         </select>
         <div id="use_city" style="<?if ($row_current_rules['use_city'] == 0) {echo "display:none";}?>">
         City:<input type="text" name="city" value="<?=$row_current_rules['city']?>">
         </div>
-        
+
         </td>
         </tr>
-        
+
         <tr>
         <td>
         Maximum times to call?
         </td>
         <td>
-        <select name="max_calls">
+        <select  class="form-control" name="max_calls">
         <option value="0" <?if ($row_current_rules['max_calls'] == 0) {echo "selected";}?>>Unlimited</option>
         <option value="1" <?if ($row_current_rules['max_calls'] == 1) {echo "selected";}?>>Once</option>
         <option value="2" <?if ($row_current_rules['max_calls'] == 2) {echo "selected";}?>>Twice</option>
@@ -447,48 +447,48 @@ if (isset($_GET['edit_rules'])) {
         </select>
         </td>
         </tr>
-        
-        
-        
+
+
+
         <tr>
         <td>
         Use Home Number?
         </td>
         <td>
-        <select name="use_home">
+        <select  class="form-control" name="use_home">
         <option value="1" <?if ($row_current_rules['use_home'] == 1) {echo "selected";}?>>Yes</option>
         <option value="0" <?if ($row_current_rules['use_home'] == 0) {echo "selected";}?>>No</option>
         </select>
         </td>
         </tr>
-        
+
         <tr>
         <td>
         Use Work Number?
         </td>
         <td>
-        <select name="use_work">
+        <select  class="form-control" name="use_work">
         <option value="1" <?if ($row_current_rules['use_work'] == 1) {echo "selected";}?>>Yes</option>
         <option value="0" <?if ($row_current_rules['use_work'] == 0) {echo "selected";}?>>No</option>
         </select>
         </td>
         </tr>
-        
+
         <tr>
         <td>
         Use Mobile Number?
         </td>
         <td>
-        <select name="use_mobile">
+        <select  class="form-control" name="use_mobile">
         <option value="1" <?if ($row_current_rules['use_mobile'] == 1) {echo "selected";}?>>Yes</option>
         <option value="0" <?if ($row_current_rules['use_mobile'] == 0) {echo "selected";}?>>No</option>
         </select>
         </td>
         </tr>
-        
-        
-        
-        
+
+
+
+
         </table>
         <input class="btn btn-primary" type="submit" value="Save Rule Changes">
         </form>
@@ -545,7 +545,7 @@ if (isset($_GET['rules'])) {
             } else {
                 echo '<a href="sugar_servers.php?edit_rules='.$row['id'].'"><img src="images/pencil.png" alt="Edit Rules Defined"> &nbsp;Edit Rules</a>';
             }
-            
+
             echo "</td><td>";
             echo '<a href="sugar_servers.php?delete_rules='.$row['id'].'"><img src="images/delete.png" alt="Delete Rules">&nbsp;Delete</a>';
             echo "</td><td>";
@@ -613,19 +613,19 @@ if (isset($_GET['verify_connection'])) {
     $link = mysql_connect($db_host, $db_user, $db_pass) or die("error:".mysql_error());
     //echo "Connected";
     mysql_select_db($config_values['SUGAR_DB'], $link) or die(mysql_error());
-    
+
     $guid = sanitize(create_guid());
     $datetime = sanitize(date('Y-m-d H:i:s'));
     $name = sanitize($_GET['name']);
     $description = sanitize($_GET['description']);
     $parent_id = sanitize($_GET['parent_id']);
-    $result = mysql_query("INSERT INTO notes 
+    $result = mysql_query("INSERT INTO notes
     (id, date_entered, date_modified, modified_user_id, created_by, name, parent_type, parent_id, description) VALUES
     ($guid, $datetime, $datetime, 1, 1, $name, 'Leads', $parent_id, $description)") or die (mysql_error());
     ?><META HTTP-EQUIV=REFRESH CONTENT="0; URL=sugar_servers.php?stats=1"><?
 } else if (isset($_GET['stats'])) {
-    
-    $result = mysql_query("SELECT * FROM urgent_lead_sources");        
+
+    $result = mysql_query("SELECT * FROM urgent_lead_sources");
     $db_u_l_s = Array();
     if (mysql_num_rows($result) > 0) {
         $urgent_sources = "(";
@@ -636,10 +636,10 @@ if (isset($_GET['verify_connection'])) {
     } else {
         $urgent_sources = "('')";
     }
-    
+
     ?>
     <br /><br />
-    
+
     <b>Total Leads: </b><?
     $db_host = $config_values['SUGAR_HOST'];
     $db_user = $config_values['SUGAR_USER'];
@@ -651,25 +651,25 @@ if (isset($_GET['verify_connection'])) {
     //echo "Connected";
     $result = mysql_query("SELECT count(*) FROM leads where  deleted = 0 ");
     echo number_format(mysql_result($result,0,0))."<br /><br />";
-    
+
     if ($custom == true) {
         $result = mysql_query("SELECT id FROM lc_customstatus WHERE name = 'new'");
         $new_status = mysql_result($result,0,0);
-        
+
         $result = mysql_query("SELECT id FROM lc_customstatus WHERE name like 'Left Message%'");
         $status_left_messages = "(";
         while ($row = mysql_fetch_assoc($result)) {
             $status_left_messages .= sanitize($row['id']).",";
         }
         $status_left_messages = substr($status_left_messages,0,strlen($status_left_messages)-1).")";
-        
+
         ?>
         <br />
         <br />
-        
-        
-        
-        
+
+
+
+
         <b>NEW not left message Stage 1 (Urgent)</b> (Entered Last 5 Days): <?
         $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered and leads.deleted = 0 and status='$new_status' and lead_source in $urgent_sources");
         echo number_format(mysql_result($result,0,0));
@@ -678,7 +678,7 @@ if (isset($_GET['verify_connection'])) {
         <hr>
         <b>Numbers:</b><br />
         <?
-        
+
         $result = mysql_query("SELECT phone_home, phone_mobile, lead_source FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered and leads.deleted = 0 and status='$new_status'  and lead_source in $urgent_sources");
         while ($row = mysql_fetch_assoc($result)) {
             if (isset($row['phone_mobile']) && $row['phone_mobile'] != $row['phone_home']) {
@@ -688,11 +688,11 @@ if (isset($_GET['verify_connection'])) {
             }
         }
     } else {
-        
-        /* This section contains the code to display some sample records from 
+
+        /* This section contains the code to display some sample records from
          * the Sugar Database to confirm all is working.
-         */    
-        
+         */
+
         $result = mysql_query("SELECT * FROM leads limit 5");
         // Doesn't need to be last 5 days
         //$result = mysql_query("SELECT * FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered limit 5");
@@ -700,7 +700,7 @@ if (isset($_GET['verify_connection'])) {
             //print_pre($row);
             $name = $row['salutation']." ".$row['first_name']." ".$row['last_name'];
             ?><a href="http://<?=$config_values['SUGAR_HOST']?>/index.php?module=Leads&offset=1&stamp=1309417637080258700&return_module=Leads&action=DetailView&record=<?=$row['id']?>">
-            <? 
+            <?
             echo $name."</a><br />";;
             if (strlen(trim($row['lead_source'])) == 0) {
                 $row['lead_source'] = "No Lead Source";
@@ -713,7 +713,7 @@ if (isset($_GET['verify_connection'])) {
             if (isset($row['phone_mobile'])) {
                 echo " Mobile Phone: ".$row['phone_mobile']." ";
                 $found_number = true;
-            } 
+            }
             if (isset($row['phone_home'])) {
                 echo " Home Phone: ".$row['phone_home']." ";
                 $found_number = true;
@@ -735,14 +735,14 @@ if (isset($_GET['verify_connection'])) {
         echo "Dummy GUID: ".create_guid()."<br />";
     }
     ?>
-    
+
     <hr />
     <br />
-    
-    
-    
-    
-    
+
+
+
+
+
     <?if ($custom == true) {?>
         <b>NEW not left message Stage 1</b> (Entered Last 5 Days): <?
         $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered and leads.deleted = 0 and status='$new_status'");
@@ -761,99 +761,99 @@ if (isset($_GET['verify_connection'])) {
             }
         }
         ?>
-        
+
         <hr />
         <br />
-        
+
         <b>New or left message Stage 1</b> (Entered Last 5 Days): <?
         $sql = "SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) <= date_entered and leads.deleted = 0 and (status='$new_status' or status in $status_left_messages)";
         $result = mysql_query($sql) or die(mysql_error());
         echo number_format(mysql_result($result,0,0));
         ?>
         <br />
-        
-        
-        
-        
+
+
+
+
         <b>Stage 2</b> (Entered 6-10 days ago): <?
         $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 5 DAY) > date_entered and DATE_SUB(CURDATE(),INTERVAL 10 DAY) <= date_entered and leads.deleted = 0  and (status='$new_status' or status in $status_left_messages)");
         echo number_format(mysql_result($result,0,0));
         ?>
         <br />
-        
-        
+
+
         <b>Stage 3</b> (Entered 11-20 days ago): <?
         $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 10 DAY) > date_entered and DATE_SUB(CURDATE(),INTERVAL 20 DAY) <= date_entered and leads.deleted = 0  and (status='$new_status' or status in $status_left_messages)");
         echo number_format(mysql_result($result,0,0));
         ?>
         <br />
-        
-        
+
+
         <b>Stage 4</b> (Entered 21-30 days ago): <?
         $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 20 DAY) > date_entered and DATE_SUB(CURDATE(),INTERVAL 30 DAY) <= date_entered and leads.deleted = 0  and (status='$new_status' or status in $status_left_messages)");
         echo number_format(mysql_result($result,0,0));
         ?>
         <br />
-        
-        
+
+
         <b>Stage 5</b> (Entered 31-60 days ago): <?
         $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 30 DAY) > date_entered and DATE_SUB(CURDATE(),INTERVAL 60 DAY) <= date_entered and leads.deleted = 0  and (status='$new_status' or status in $status_left_messages)");
         echo number_format(mysql_result($result,0,0));
         ?>
         <br />
         <br />
-        
+
         <b>Old</b> (Entered >60 days ago): <?
         $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 60 DAY) > date_entered and leads.deleted = 0  and (status='$new_status' or status in $status_left_messages)");
         echo number_format(mysql_result($result,0,0));
         ?>
         <br />
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
         <br />
-        
-        
-        
+
+
+
         <?
     }
     ?>
-    
-    
+
+
     <b>Leads</b> (Modified Last 24 Hours): <?
     $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 1 DAY) <= date_modified and leads.deleted = 0 ");
     echo number_format(mysql_result($result,0,0));
     ?>
     <br />
-    
-    
-    
-    
+
+
+
+
     <b>Leads</b> (Modified Last Week): <?
     $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 7 DAY) <= date_modified and leads.deleted = 0 ");
     echo number_format(mysql_result($result,0,0));
     ?>
     <br />
-    
-    
-    
-    
+
+
+
+
     <b>Leads</b> (Modified Last Month): <?
     $result = mysql_query("SELECT count(*) FROM leads WHERE DATE_SUB(CURDATE(),INTERVAL 1 MONTH) <= date_modified and leads.deleted = 0 ");
     echo number_format(mysql_result($result,0,0));
     ?>
     <br />
-    
-    
-    
-    
+
+
+
+
     <br />
-    
+
     <?if ($custom == true) {?>
-        
+
         <b>Timezones:</b> <br /><?
         $result = mysql_query("select count(*), time_zone_c from leads, leads_cstm where leads.id = leads_cstm.id_c and leads.deleted = 0 group by time_zone_c");
         while ($row = mysql_fetch_assoc($result)) {
@@ -864,7 +864,7 @@ if (isset($_GET['verify_connection'])) {
              $tz_db_name[] = $row['name'];
              $tz_db_start[] = $row['start'];
              $tz_db_end[] = $row['end'];
-             
+
              */
             //    $key = -1;
             //        if (in_array($row['time_zone_c'], $tz_db_name) {
@@ -872,18 +872,18 @@ if (isset($_GET['verify_connection'])) {
             if ($key === false) {
                 echo '<a href="sugar_servers.php?tz=1&add=1&name='.trim($row['time_zone_c']).'">TIME ZONE NOT FOUND!</a> - ';
                 $key = array_search('UNSET', $tz_db_name);
-                
+
             }
             //      }
             echo $row['time_zone_c'].": ".$row['count(*)']." (".$tz_db_start[$key]."-".$tz_db_end[$key].")<br />";
         }
         ?>
         <br />
-        
-        
+
+
         <br />
-        
-        
+
+
         <b>Statuses:</b> <br /><?
         $result = mysql_query("select count(*), lc_customstatus.name as name from leads, lc_customstatus where leads.status = lc_customstatus.id and leads.deleted = 0 group by leads.status order by count(*) desc");
         while ($row = mysql_fetch_assoc($result)) {
@@ -891,12 +891,12 @@ if (isset($_GET['verify_connection'])) {
         }
         ?>
         <br />
-        
-        
-        <br />    
-        
-        
-        
+
+
+        <br />
+
+
+
         <b>Lead Sources:</b> <br /><?
         $result = mysql_query("select count(*), lead_source from leads where deleted = 0 group by lead_source order by count(*) desc");
         while ($row = mysql_fetch_assoc($result)) {
@@ -905,11 +905,11 @@ if (isset($_GET['verify_connection'])) {
         ?>
         <br />
         <br />
-        
-        
-        
-        
-        
+
+
+
+
+
         <b>Below 10k:</b> <?
         $result = mysql_query("select count(*) from leads, leads_cstm where leads.id = leads_cstm.id_c and debt_amt_c < 10000 and leads.deleted = 0");
         while ($row = mysql_fetch_assoc($result)) {
@@ -917,7 +917,7 @@ if (isset($_GET['verify_connection'])) {
         }
         ?>
         <br />
-        
+
         <b>Above 10k:</b> <?
         $result = mysql_query("select count(*) from leads, leads_cstm where leads.id = leads_cstm.id_c and debt_amt_c > 10000 and leads.deleted = 0");
         while ($row = mysql_fetch_assoc($result)) {
@@ -925,7 +925,7 @@ if (isset($_GET['verify_connection'])) {
         }
         ?>
         <br />
-        
+
         <b>Above 100k:</b> <?
         $result = mysql_query("select count(*) from leads, leads_cstm where leads.id = leads_cstm.id_c and debt_amt_c > 100000 and leads.deleted = 0");
         while ($row = mysql_fetch_assoc($result)) {
@@ -933,14 +933,14 @@ if (isset($_GET['verify_connection'])) {
         }
         ?>
         <br />
-        
+
         <?
     }
     ?>
-    
-    
-    
-    <?    
+
+
+
+    <?
 } else if (isset($_GET['vm'])) {
     //1, 2, 3, 4, 5, 6, 10, 14, 19, 31, 36, 41, 46, 51, 56
     if (isset($_GET['save'])) {
@@ -961,8 +961,8 @@ if (isset($_GET['verify_connection'])) {
         $sql = "INSERT IGNORE INTO config (parameter, value) VALUES ('vm_31_60', ".sanitize($_POST['vm_31_60']).")";
         $result = mysql_query($sql) or die(mysql_error());
         echo "Saved";
-        
-        
+
+
     } else {
         //        print_pre($config_values);
         $vm_0_5=$config_values['vm_0_5'];
@@ -974,47 +974,47 @@ if (isset($_GET['verify_connection'])) {
         ?>
         <form action="sugar_servers.php?vm=1&save=1" method="post">
         <h3>VoiceMail Logic</h3>
-        0-5 days old: 
-        <select name="vm_0_5">
+        0-5 days old:
+        <select  class="form-control" name="vm_0_5">
         <option value="0" <?=$vm_0_5=="0"?"selected":""?>>No VoiceMail</option>
         <option value="1" <?=$vm_0_5=="1"?"selected":""?>>Every Day</option>
         <option value="2" <?=$vm_0_5=="2"?"selected":""?>>Every Second Day</option>
         <option value="3" <?=$vm_0_5=="3"?"selected":""?>>Every Week</option>
         </select><br />
-        
-        6-10 days old: 
-        <select name="vm_6_10">
+
+        6-10 days old:
+        <select  class="form-control" name="vm_6_10">
         <option value="0" <?=$vm_6_10=="0"?"selected":""?>>No VoiceMail</option>
         <option value="1" <?=$vm_6_10=="0"?"selected":""?>>Every Day</option>
         <option value="2" <?=$vm_6_10=="0"?"selected":""?>>Every Second Day</option>
         <option value="3" <?=$vm_6_10=="0"?"selected":""?>>Every Week</option>
         </select><br />
-        
-        11-20 days old: 
-        <select name="vm_11_20">
+
+        11-20 days old:
+        <select  class="form-control" name="vm_11_20">
         <option value="0" <?=$vm_11_20=="0"?"selected":""?>>No VoiceMail</option>
         <option value="1" <?=$vm_11_20=="1"?"selected":""?>>Every Day</option>
         <option value="2" <?=$vm_11_20=="2"?"selected":""?>>Every Second Day</option>
         <option value="3" <?=$vm_11_20=="3"?"selected":""?>>Every Week</option>
         </select><br />
-        
-        21-30 days old: 
-        <select name="vm_21_30">
+
+        21-30 days old:
+        <select  class="form-control" name="vm_21_30">
         <option value="0" <?=$vm_21_30=="0"?"selected":""?>>No VoiceMail</option>
         <option value="1" <?=$vm_21_30=="1"?"selected":""?>>Every Day</option>
         <option value="2" <?=$vm_21_30=="2"?"selected":""?>>Every Second Day</option>
         <option value="3" <?=$vm_21_30=="3"?"selected":""?>>Every Week</option>
         </select><br />
-        
-        31-60 days old: 
-        <select name="vm_31_60">
+
+        31-60 days old:
+        <select  class="form-control" name="vm_31_60">
         <option value="0" <?=$vm_31_60=="0"?"selected":""?>>No VoiceMail</option>
         <option value="1" <?=$vm_31_60=="1"?"selected":""?>>Every Day</option>
         <option value="2" <?=$vm_31_60=="2"?"selected":""?>>Every Second Day</option>
         <option value="3" <?=$vm_31_60=="3"?"selected":""?>>Every Week</option>
         </select><br />
         <br />
-        
+
         <input class="btn btn-primary" type="submit" value="Save Changes">
         <br />
         <br />
@@ -1024,8 +1024,8 @@ if (isset($_GET['verify_connection'])) {
 } else if (isset($_GET['call'])) {
     ?>
     <form action="sugar_servers.php?call=1&save=1" method="post">
-    0-5 days old: 
-    <select name="call_0_5">
+    0-5 days old:
+    <select  class="form-control" name="call_0_5">
     <option value="3">3 times per day</option> 
     <option value="2">2 times per day</option> 
     <option value="1">1 times per day</option> 

@@ -147,7 +147,7 @@ if ($config_values['configurable_drive'] == 1) {
 <TR><TD CLASS="thead">Type of Campaign
 <a href="#" onclick="displayLargeMessage('includes/campaign_types.php');return false"><img src="images/help.png" border="0" title="Type Of Campaign"></a>
 </TD><TD>
-<SELECT NAME="context" id="context" onchange="whatPaySelected(this.value)">
+<SELECT NAME="context" class="form-control" id="context" onchange="whatPaySelected(this.value)">
 <OPTION VALUE="-1" SELECTED>Please chose a type of campaign...</OPTION>
 <OPTION VALUE="0" title="No phone calls are made">Load Simulation</OPTION>
 <OPTION VALUE="1" title="Only leave a message for answering machines, hang up when a person answers">Answer Machine Only</OPTION>
@@ -233,7 +233,7 @@ if ($config_values['configurable_drive'] == 1) {
 <TR id="survey" style="display:none" title="The survey you would like to run"><TD CLASS="thead">Survey
 <a href="#" onclick="displaySmallMessage('includes/help.php?section=Select the survey you would like to run for this campaign.');return false"><img src="images/help.png" border="0"></a>
 </TD><TD>
-<SELECT name="surveyid">
+<SELECT  class="form-control" name="surveyid">
 <?
 for ($i=0;$i<$count_surveys;$i++){
     $selected="";
@@ -258,7 +258,7 @@ for ($i=0;$i<$count_surveys;$i++){
 <TR id="fax" style="display:none" title="The fax you would like to send"><TD CLASS="thead">Fax Message
 <a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are running a campaign which sends a fax to the user then this is the fax that will be used.');return false"><img src="images/help.png" border="0"></a>
 </TD><TD>
-<SELECT name="faxid">
+<SELECT  class="form-control" name="faxid">
 <?
     for ($i=0;$i<$count_fax;$i++){
         $selected="";
@@ -297,7 +297,7 @@ for ($i=0;$i<$count_surveys;$i++){
 <TR id="live_message" style="display:none" title="The message to play to the person who answers the phone"><TD CLASS="thead">Live Message
 <a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are running a campaign which plays a message to the user while waiting for them to press 1 then this is the message that will be used.');return false"><img src="images/help.png" border="0"></a>
 </TD><TD>
-<SELECT name="messageid">
+<SELECT  class="form-control" name="messageid">
 <?
     for ($count2=0;$count2<$count;$count2++){
         $selected="";
@@ -320,7 +320,7 @@ for ($i=0;$i<$count_surveys;$i++){
 
 <TR id="answer_machine_message"  style="display:none" title="The message to leave to the answer machine"><TD CLASS="thead">Answer Machine Message<a href="#" onclick="displaySmallMessage('includes/help.php?section=If you are leaving automated messages on answer machines then you can set this to a particular message you would like to have played when an answer machine is detected.  Usage of this will depend on your settings in the Type of Campaign section.');return false"><img src="images/help.png" border="0"></a>
 </TD><TD>
-<SELECT name="messageid2">
+<SELECT  class="form-control" name="messageid2">
 <?
     for ($count2=0;$count2<$count;$count2++){
         $selected="";
@@ -344,7 +344,7 @@ for ($i=0;$i<$count_surveys;$i++){
 <TR  id="dnc_list_message" style="display:none" title="The message played to someone who wants to be put on the DNC list"><TD CLASS="thead">DNC Confirmation Message
 <a href="#" onclick="displaySmallMessage('includes/help.php?section=This message is played to a customer who presses 2 to be added to DNC.');return false"><img src="images/help.png" border="0"></a>
 </TD><TD>
-<SELECT name="messageid3">
+<SELECT  class="form-control" name="messageid3">
 <?
     for ($count2=0;$count2<$count;$count2++){
         $selected="";
@@ -367,7 +367,7 @@ for ($i=0;$i<$count_surveys;$i++){
 </label></td>
 <td width=*>
 
-<SELECT name="astqueuename">
+<SELECT  class="form-control" name="astqueuename">
 <?
     for ($count2=0;$count2<sizeof($row_queue);$count2++){
         $selected="";

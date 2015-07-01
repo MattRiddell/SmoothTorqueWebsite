@@ -692,7 +692,7 @@ if ($level != sha1("level100")) {
         </tr><tr class="tborder2"><td>
         <form action="config.php" method="POST">
         New URL:</td><td> <input type="text" name="url_to_add" value=""></td></tr>
-        <tr class="tborder2"><td>Copy From: </td><td><select name="copy_from">
+        <tr class="tborder2"><td>Copy From: </td><td><select  class="form-control" name="copy_from">
         <option value="default">Default Configs</option>
         <?
         foreach ($servers as $url => $bla) {
@@ -892,7 +892,7 @@ if ($level != sha1("level100")) {
     Use Flash-based Pie Chart:
     </td>
     <td>
-    <select name="use_new_pie">
+    <select  class="form-control" name="use_new_pie">
     <option value="1" <? if ($use_new_pie == 1) {
         echo "selected";
     } ?>>Yes</option>
@@ -908,7 +908,7 @@ if ($level != sha1("level100")) {
     Show the title on the front page:
     </td>
     <td>
-    <select name="show_front_page_title">
+    <select  class="form-control" name="show_front_page_title">
     <option value="1" <? if ($show_front_page_title == 1) {
         echo "selected";
     } ?>>Yes</option>
@@ -924,7 +924,7 @@ if ($level != sha1("level100")) {
     Show the text on the front page:
     </td>
     <td>
-    <select name="show_front_page_text">
+    <select  class="form-control" name="show_front_page_text">
     <option value="1" <? if ($show_front_page_text == 1) {
         echo "selected";
     } ?>>Yes</option>
@@ -1667,7 +1667,7 @@ Language:
     <i>(<font color="red">WARNING:</font> configurable drive is an incredibly<br> powerful feature and should be used carefully)</i>
     </td>
     <td>
-    <select name="configurable_drive">
+    <select  class="form-control" name="configurable_drive">
     <option value="1" <? if ($config_values['configurable_drive'] == 1) {
         echo "selected";
     } ?>>Yes</option>
@@ -1685,7 +1685,7 @@ Language:
     <i>(<font color="red">WARNING:</font> configurable target percentage can override<br> predictive capabilities and should be used carefully)</i>
     </td>
     <td>
-    <select name="configurable_target">
+    <select  class="form-control" name="configurable_target">
     <option value="1" <? if ($config_values['configurable_target'] == 1) {
         echo "selected";
     } ?>>Yes</option>
@@ -1701,7 +1701,7 @@ Language:
     Use CDR Count InnoDB Workaround:
     </td>
     <td>
-    <select name="cdr_workaround">
+    <select  class="form-control" name="cdr_workaround">
     <option value="1" <? if ($config_values['cdr_workaround'] == 1) {
         echo "selected";
     } ?>>Yes</option>

@@ -15,7 +15,7 @@ if (!isset($_POST[campaignid])){
 	<FORM ACTION="upload_names.php" METHOD="POST">
 		<table class="tborderx2xx" align="center" border="0" cellpadding="0" cellspacing="2"><TR>
 		<TD>
-			<SELECT NAME="campaignid">
+			<SELECT  class="form-control" NAME="campaignid">
 			<?
 			if ($_COOKIE[level] == sha1("level100")) {
 				echo "<OPTION VALUE=\"-1\">Shared List</OPTION>";
@@ -108,7 +108,7 @@ if (!isset($_POST[campaignid])){
 			<form enctype="multipart/form-data" name="postform" action="/cgi-bin/upload.cgi?sid=<?php echo $sid; ?>&target=<?echo normal_target('receive_names.php');?>" method="post">
 			<center><table><tr><td>
 			<div id="matt">
-			<select name="order">
+			<select  class="form-control" name="order">
 				<option value="names_first">Names in first column</option>
 				<option value="numbers_first">Numbers in first column</option>
 			</select><br />
@@ -146,7 +146,7 @@ if (!isset($_POST[campaignid])){
 			<form enctype="multipart/form-data" name="postform" action="/cgi-bin/upload.cgi?sid=<?php echo $sid; ?>&target=<?echo normal_target('receive_names.php');?>" method="post">
 			<center><table><tr><td>
 			<div id="matt">
-			<select name="order">
+			<select  class="form-control" name="order">
 				<option value="names_first">Names in first column</option>
 				<option value="numbers_first">Numbers in first column</option>
 			</select><br />

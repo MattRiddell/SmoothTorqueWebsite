@@ -64,7 +64,7 @@ Name
 <td></td>
 <td>Codec 1</td>
 <td>
-<select name = "codec1">
+<select class="form-control"name = "codec1">
 <option value="ulaw">G711 Ulaw</option>
 <option value="alaw">G711 Alaw</option>
 <option value="gsm">GSM</option>
@@ -79,7 +79,7 @@ Name
 <td></td>
 <td>Codec 2</td>
 <td>
-<select name = "codec2">
+<select class="form-control"name = "codec2">
 <option value="ulaw">G711 Ulaw</option>
 <option value="alaw">G711 Alaw</option>
 <option value="gsm">GSM</option>

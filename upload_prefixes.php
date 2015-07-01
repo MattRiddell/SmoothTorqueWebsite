@@ -12,7 +12,7 @@ Please select a timezone to add prefixes to<br />
 <FORM ACTION="index_prefixes.php" METHOD="POST">
 <table class="tborderx2xx" align="center" border="0" cellpadding="0" cellspacing="2"><TR>
 <TD>
-<SELECT NAME="timezone">
+<SELECT  class="form-control" NAME="timezone">
 <?
 $sql = 'SELECT id, name FROM time_zones order by name';
 $result=mysql_query($sql, $link) or die (mysql_error());;

@@ -27,7 +27,7 @@ if (!isset($_GET[id])) {
 
         Please select a customer:<br /><br />
         <form action="addfunds.php" METHOD="get">
-        <select name="id"><?
+        <select  class="form-control" name="id"><?
     while ($row = mysql_fetch_assoc($result)) {
         //echo $row[id]." - ".$row[customerid]."<br>";
         ?>
@@ -177,7 +177,7 @@ while ($row = mysql_fetch_assoc($result)) {
 </TR>
 
 <TR><TD CLASS="thead">Payment Mode</TD><TD>
-<SELECT NAME="paymentmode">
+<SELECT  class="form-control" NAME="paymentmode">
 <OPTION VALUE="Cash Payment">Cash</OPTION>
 <OPTION VALUE="Bank Deposit">Bank Deposit</OPTION>
 <OPTION VALUE="Credit Card">Credit Card</OPTION>

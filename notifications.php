@@ -63,7 +63,7 @@ if (isset($_GET['add'])) {
     <table>
     <tr>
     <td>Campaign:</td>
-    <td><select name="campaign_id">
+    <td><select  class="form-control" name="campaign_id">
     <option value="-1">All Camapaigns</option>
     <?
     $result = mysql_query("SELECT id, name FROM campaign");

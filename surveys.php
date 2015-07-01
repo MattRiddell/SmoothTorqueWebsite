@@ -55,7 +55,7 @@ if (isset($_GET['display_message'])) {
     <br />
     <center>Please select a message:<br />
     <br />
-    <select name="message" id="message">
+    <select  class="form-control" name="message" id="message">
     <?
     $result = mysql_query("SELECT * FROM campaignmessage where filename like 'x-%'");
     if (mysql_num_rows($result) > 0) {

@@ -600,7 +600,7 @@ if (isset($_GET['historical'])) {
     $result = mysql_query("SELECT * from campaign");
     ?>
     <form action="transfer_report.php?historical_campaign=1" method="post">
-    <select name="campaign_id">
+    <select  class="form-control" name="campaign_id">
     <?
     while ($row = mysqL_fetch_assoc($result)) {
         echo '<option value="'.$row['id'].'">'.$row['name'].'</option>';
@@ -621,7 +621,7 @@ if (isset($_GET['transfer_cdrs'])) {
     $result = mysql_query("SELECT * from customer");
     ?>
     <form action="transfer_report.php?transfer_cdrs_print=1" method="post">
-    <select name="accountcode">
+    <select  class="form-control" name="accountcode">
     <?
     while ($row = mysqL_fetch_assoc($result)) {
         //        print_pre($row);

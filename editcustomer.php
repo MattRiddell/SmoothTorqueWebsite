@@ -155,7 +155,7 @@ if (isset($_POST[name])){
 	<INPUT TYPE="TEXT" NAME="didlogin" VALUE="<?echo $row[didlogin];?>" size="60">
 	</TD>
 	</TR><TR><TD CLASS="thead">Customer Type</TD><TD colspan=2>
-	<SELECT NAME="security">
+	<SELECT  class="form-control" NAME="security">
 	<OPTION VALUE="0" <?if ($row[security]==0){echo "SELECTED";}?>>Normal Customer</OPTION>
 	<OPTION VALUE="5" <?if ($row[security]==5){echo "SELECTED";}?>>Agent</OPTION>
 	<OPTION VALUE="10" <?if ($row[security]==10){echo "SELECTED";}?>>Accounts Management</OPTION>
@@ -174,7 +174,7 @@ if (isset($_POST[name])){
 	</TR>
 	*/?>
 	<TR><TD CLASS="thead">Queue Name</TD><TD colspan=2>
-	<SELECT NAME="astqueuename">
+	<SELECT  class="form-control" NAME="astqueuename">
 	<?
 	$resultss=mysql_query("SELECT name from queue_table",$link);
 	while ($rowx = mysql_fetch_assoc($resultss)) {
@@ -188,7 +188,7 @@ if (isset($_POST[name])){
 	<a href="queues.php"><IMG SRC="images/pencil.png" border="0"></a>
 	</TD>
 	</TR><TR><TD CLASS="thead">Trunk</TD><TD colspan=2>
-	<SELECT NAME="trunkid">
+	<SELECT  class="form-control" NAME="trunkid">
 	<?
 	$resultss=mysql_query("SELECT name,id from trunk",$link);
 	?>
@@ -211,7 +211,7 @@ if (isset($_POST[name])){
 	<?
 	$rows = explode(",",$row['adminlists']);
 	?>
-	<select name="enabled[]" id="enabled" size="5" multiple style="width: 200px;">
+	<select  class="form-control" name="enabled[]" id="enabled" size="5" multiple style="width: 200px;">
 		  <?
 	$resultss2=mysql_query("SELECT distinct(campaignid) from number where campaignid<0",$link);
 	while ($rowx2 = mysql_fetch_assoc($resultss2)) {
@@ -239,7 +239,7 @@ if (isset($_POST[name])){
 	onClick="MoveOption(this.form.disabled, this.form.enabled)"><br>
 	
 	</td><TD>
-	<select name="disabled[]" id="disabled" size="5" multiple style="width: 200px;">
+	<select  class="form-control" name="disabled[]" id="disabled" size="5" multiple style="width: 200px;">
 		 <?
 	//$sqlx = "SELECT adminlists from customer WHERE customerid=".
 	

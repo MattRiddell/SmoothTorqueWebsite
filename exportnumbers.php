@@ -34,7 +34,7 @@ From here you can chose a campaign that you would like to export the numbers fro
 <FORM ACTION="exportnumbers.php" METHOD="POST">
     <table class="tborderdd" align="center" border="0" cellpadding="0" cellspacing="2"><TR>
     <TD>Select Campaign:</TD><TD>
-        <SELECT NAME="campaignid">
+        <SELECT  class="form-control" NAME="campaignid">
         <?
     if ($level >= 100) {
         $sql = 'SELECT id,name FROM campaign order by name';
@@ -53,7 +53,7 @@ From here you can chose a campaign that you would like to export the numbers fro
     </TD>
     </TR><TR>
     <TD>Type:</TD><TD>
-        <SELECT NAME="type">
+        <SELECT  class="form-control" NAME="type">
         <OPTION VALUE="all">All Numbers</OPTION>
         <OPTION VALUE="pressed1">Pressed 1</OPTION>
         <OPTION VALUE="hungup">Did Not Press 1</OPTION>

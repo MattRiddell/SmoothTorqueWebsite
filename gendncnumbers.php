@@ -26,7 +26,7 @@ Which campaign would you like to add numbers to?<br /><br />
 <FORM ACTION="gennumbers.php" METHOD="POST">
     <table class="tborderxxx" align="center" border="0" cellpadding="0" cellspacing="2"><TR>
     <TD>Select Campaign:</TD><TD>
-        <SELECT NAME="campaignid">
+        <SELECT  class="form-control" NAME="campaignid">
         <?
         //
         $sql = 'SELECT id,name FROM campaign WHERE groupid='.$campaigngroupid;

@@ -28,13 +28,13 @@ if (isset($_GET['add'])) {
     <center>
     <form action="ddis.php?save_new=1" method="post">
     DDI Number: <input type="text" name="ddi_number"><br />
-    Message To Play on Answer: <select name="message_id"><?
+    Message To Play on Answer: <select  class="form-control" name="message_id"><?
     $result = mysql_query("SELECT * FROM campaignmessage where filename like 'x-%'");
     while ($row = mysql_fetch_assoc($result)) {
         echo '<option value="'.$row['id'].'">'.substr($row['name'],0,20).'</option>';
     }
     ?></select><br />
-    Campaign To Associate With:<select name="campaign_id"><?
+    Campaign To Associate With:<select  class="form-control" name="campaign_id"><?
     $result = mysql_query("SELECT * FROM campaign");
     while ($row = mysql_fetch_assoc($result)) {
         echo '<option value="'.$row['id'].'">'.substr($row['name'],0,20).'</option>';
@@ -68,7 +68,7 @@ if (isset($_GET['edit'])) {
     <form action="ddis.php?save_edit=1" method="post">
     <input type="hidden" name="old_number" value="<?=$row_start['number']?>">
     DDI Number: <input type="text" name="ddi_number" value="<?=$row_start['number']?>"><br />
-    Message To Play on Answer: <select name="message_id"><?
+    Message To Play on Answer: <select  class="form-control" name="message_id"><?
     $result = mysql_query("SELECT * FROM campaignmessage where filename like 'x-%'");
     while ($row = mysql_fetch_assoc($result)) {
         if ($row_start['message_id'] == $row['id']) {
@@ -78,7 +78,7 @@ if (isset($_GET['edit'])) {
         }
     }
     ?></select><br />
-    Campaign To Associate With:<select name="campaign_id"><?
+    Campaign To Associate With:<select  class="form-control" name="campaign_id"><?
     $result = mysql_query("SELECT * FROM campaign");
     while ($row = mysql_fetch_assoc($result)) {
         if ($row_start['campaign_id'] == $row['id']) {

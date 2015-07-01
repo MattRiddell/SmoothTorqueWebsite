@@ -262,7 +262,7 @@ if (isset($_GET['add_prefixes'])) {
     TimeZone
     </td>
     <td>
-    <select name="timezone">
+    <select  class="form-control" name="timezone">
     <?
     $result_timezones = mysql_query("SELECT * FROM SineDialer.time_zones order by name");
     if (mysql_num_rows($result) > 0) {

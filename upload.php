@@ -25,7 +25,7 @@ box_start(360);
 <FORM ACTION="<?=$action?>" METHOD="POST">
     <table class="tborderx2xx" align="center" border="0" cellpadding="0" cellspacing="2"><TR>
     <TD>
-        <SELECT NAME="campaignid">
+        <SELECT  class="form-control" NAME="campaignid">
         <?
         if ($_COOKIE[level] == sha1("level100")) {
             echo "<OPTION VALUE=\"-1\">Shared List</OPTION>";
