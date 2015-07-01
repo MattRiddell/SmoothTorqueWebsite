@@ -340,7 +340,7 @@ $user = $_COOKIE['user'];
 
                         <div class="progress">
                             <div class="progress-bar <? if ($perc == 0) { ?>progress-bar-danger<? } ?>" role="progressbar" aria-valuenow="<?= $perc ?>" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;width: <?= $perc ?>%;">
-                                <?= $perc ?>%
+                                <?= $perc ?>% (<?echo "Remaining: $new_numbers/$total_numbers $tz";?>
                             </div>
                         </div>
                     <?
