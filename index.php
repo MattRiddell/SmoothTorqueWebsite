@@ -73,13 +73,11 @@ echo "<FONT FACE=\"ARIAL\">";
         </font>
 
 
-        <? //box_start();
+        <?
         ?>
 
 
-        <table align="center" width="390" height="217" cellpadding="0" cellspacing="0" style="background: url('./images/login.png');">
-            <tr>
-                <td>
+
                     <?
                     if (isset($_GET['error'])) {
                         echo "<CENTER><B><FONT COLOR=\"RED\">".$_GET[error]."</FONT></B></CENTER>";
@@ -88,7 +86,7 @@ echo "<FONT FACE=\"ARIAL\">";
                     ?>
 
                     <? echo $config_values['MAIN_PAGE_USERNAME']; ?>:<br/>
-                    <INPUT class="input130" TYPE="TEXT" NAME="user"><br/>
+                    <INPUT class="" TYPE="TEXT" NAME="user" ><br/>
                     <? echo $config_values['MAIN_PAGE_PASSWORD']; ?>:<br/>
                     <INPUT class="input130" TYPE="PASSWORD" NAME="pass"><br/><br/>
                     <?
@@ -108,15 +106,12 @@ echo "<FONT FACE=\"ARIAL\">";
                         echo '</select><br /><br />';
                     } ?>
                     <INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="<? echo $config_values['MAIN_PAGE_LOGIN']; ?>">
-                </TD>
-            </TR>
-        </TABLE>
-    </CENTER>
+
 </FORM>
 
 
 
-<? //box_end();
+<?
 ?>
 
 <?
