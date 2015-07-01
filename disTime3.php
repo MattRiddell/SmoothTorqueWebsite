@@ -324,7 +324,7 @@ $user = $_COOKIE['user'];
                         $perc = 0;
                     } else {
 
-                        $perc = round(((100 - (($new_numbers / $total_numbers) * 100)) * 1) - 1,0);
+                        $perc = round((( (($new_numbers / $total_numbers) * 100)) * 1) - 1,0);
                     }
 
 
