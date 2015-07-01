@@ -356,7 +356,7 @@ $user = $_COOKIE['user'];
                 }
                 if ($status == 101){
                 ?>
-                <IMG SRC="images/control_play.png" BORDER="0" width="16" height="16">
+                <a class="btn btn-default" href="#" title="Start campaign (Already started)"><IMG width="16" height="16" SRC="images/control_play_blue.png" BORDER="0"></a>
             </TD>
         <td>
         <? if ($user != "demo") {
