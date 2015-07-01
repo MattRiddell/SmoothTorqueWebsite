@@ -453,10 +453,15 @@ while ($row = mysql_fetch_assoc($result)) {
     
     <td>
     
-    <img src="images/percentImage.png" width="123" height="12" title="<?echo
-    $perc;?>% of staff are busy"
-    class="percentImage"
-    style="background-position: -<?echo 119-($perc*1.2); ?>px 0pt;" border="0" />
+
+
+        <div class="progress">
+            <div class="progress-bar <?if ($perc == 0) {?>progress-bar-danger<?}?>" role="progressbar" aria-valuenow="<?=$perc?>" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;width: <?=$perc?>%;">
+                <?=$perc?>%
+            </div>
+        </div>
+
+
     
     </td>
     
