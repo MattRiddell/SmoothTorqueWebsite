@@ -313,17 +313,9 @@ $user = $_COOKIE['user'];
 
 
             ?>
-            <TD>
+            <TD width="209">
                 <?
-                /* Detect ipod/iphone/ipad as they can't see hover text */
-                $isiPad = (bool)strpos($_SERVER['HTTP_USER_AGENT'], 'iPad');
-                $isiPod = (bool)strpos($_SERVER['HTTP_USER_AGENT'], 'iPod');
-                $isiPhone = (bool)strpos($_SERVER['HTTP_USER_AGENT'], 'iPhone');
-                if ($isiPod || $isiPad || $isiPhone) {
-                    $isApple = TRUE;
-                } else {
-                    $isApple = FALSE;
-                }
+
                 if ($config_values['SHOW_NUMBERS_LEFT'] == 'YES') {
                     if ($isApple) {
                         echo "Remaining: $new_numbers/$total_numbers $tz";
@@ -338,6 +330,7 @@ $user = $_COOKIE['user'];
 
                         ?>
 
+                    </div>
                         <div class="progress">
                             <div  data-toggle="tooltip" data-placement="left" title="(<?echo "Remaining: $new_numbers/$total_numbers $tz";?>)" class="progress-bar <? if ($perc == 0) { ?>progress-bar-danger<? } ?>" role="progressbar" aria-valuenow="<?= $perc ?>" aria-valuemin="0" aria-valuemax="100" style="min-width: 4em;width: <?= $perc ?>%;">
                                 <?= $perc ?>%

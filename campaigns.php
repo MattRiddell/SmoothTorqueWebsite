@@ -51,7 +51,7 @@ if ($out['browser']=="MSIE"){
     $(function(){ // jquery onload
       window.setInterval(function(){
                          $('#ajaxDiv').loadIfModified('disTime3.php?campaigngroupid=<?echo $campaigngroupid;?>&id=<?echo $_POST['campaignid'];?>&type=<?echo $_GET['type'];?>');  // jquery ajax load into div
-                         },10000);
+                         },100000);
       });
     
     </script>
@@ -64,7 +64,7 @@ if ($out['browser']=="MSIE"){
                              function(){
                              $('#ajaxDiv').load('disTime3.php?campaigngroupid=<?echo $campaigngroupid;?>&id=<?echo $_POST['campaignid'];?>&type=<?echo $_GET['type'];?>');  // jquery ajax load into div
                              }
-                             ,10000);
+                             ,100000);
           });
         </script>
         <?}?>
