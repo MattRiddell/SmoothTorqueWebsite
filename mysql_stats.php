@@ -90,7 +90,7 @@ include "mysql_details.php";
 box_end();
 $result = mysql_query("SHOW TABLE STATUS");
 ?>
-<center><table class="table-border table table-striped" cellspacing="1" boreder="0" cellpadding="5">
+<center><table class="table-border table table-striped table-hover" cellspacing="1" boreder="0" cellpadding="5">
         <thead>
 <tr>
 <th>Name</th>
