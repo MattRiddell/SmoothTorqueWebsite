@@ -108,27 +108,20 @@ if (!isset($_POST[campaignid])){
         echo "<BR></TD></TR>
         </TABLE>";
     } else {
+            box_start();
         ?>
         
         <FORM ACTION="addnumbers.php" METHOD="POST">
-        <table class="tborder" align="center" border="0" cellpadding="0" cellspacing="2">
-        <?
-        ?>
-        <TR><TD CLASS="thead">Enter Numbers (One Per Line)</TD></TR>
-        <TR><TD>
+        <h3>Enter Numbers (One Per Line)</h3>
         <INPUT TYPE="HIDDEN" NAME="campaignid" VALUE="<?echo $_POST[campaignid];?>">
-        <TEXTAREA NAME="start" COLS="20" ROWS="20"></TEXTAREA>
-        </TD>
-        </TR>
-        <TR><TD COLSPAN=2 ALIGN="RIGHT">
+        <TEXTAREA class="form-control" NAME="start" COLS="20" ROWS="20"></TEXTAREA><br />
         <INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Add Numbers">
-        </TD>
-        </TR>
         <?
         ?>
         
         </TABLE>
         </FORM><?
+            box_end();
     }}
 require "footer.php";
 ?>

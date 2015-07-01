@@ -19,16 +19,10 @@ $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $campaigngroupid=mysql_result($result,0,'campaigngroupid');
 require "header_numbers.php";
+    box_start();
     ?>
 
 
-    <br /><br /><br /><br />
-<center>
-<table background="images/sdbox.png" width="300" height="200" class="dragme22">
-<tr>
-<td>
-</td>
-<td width="260">
 <b>Export Numbers</b><br /><br />
 From here you can chose a campaign that you would like to export the numbers from.<br /><br />
 <FORM ACTION="exportnumbers.php" METHOD="POST">
@@ -73,20 +67,10 @@ From here you can chose a campaign that you would like to export the numbers fro
     <INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Chose Types to Export">
     </TD>
     </TR></table>
-    </FORM><br />
-</td>
-<td>
-</td></tr>
-</table>
-</center>
-
-
-
-
-
-
+    </FORM>
 
     <?
+    box_end();
     require "footer.php";
 
 } else {
