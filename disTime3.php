@@ -313,7 +313,7 @@ $user = $_COOKIE['user'];
 
 
             ?>
-            <TD width="209">
+            <TD width="100">
                 <?
 
                 if ($config_values['SHOW_NUMBERS_LEFT'] == 'YES') {
