@@ -339,8 +339,8 @@ $user = $_COOKIE['user'];
                         ?>
 
                         <div class="progress">
-                            <div class="progress-bar <? if ($perc == 0) { ?>progress-bar-danger<? } ?>" role="progressbar" aria-valuenow="<?= $perc ?>" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;width: <?= $perc ?>%;">
-                                <?= $perc ?>% (<?echo "Remaining: $new_numbers/$total_numbers $tz";?>
+                            <div  data-toggle="tooltip" data-placement="left" title="(<?echo "Remaining: $new_numbers/$total_numbers $tz";?>)" class="progress-bar <? if ($perc == 0) { ?>progress-bar-danger<? } ?>" role="progressbar" aria-valuenow="<?= $perc ?>" aria-valuemin="0" aria-valuemax="100" style="min-width: 4em;width: <?= $perc ?>%;">
+                                <?= $perc ?>%
                             </div>
                         </div>
                     <?
