@@ -17,15 +17,9 @@ $result=mysql_query($sql, $link) or die (mysql_error());;
 $campaigngroupid=mysql_result($result,0,'campaigngroupid');
 
 if (!isset($_POST[campaignid])){
+    box_start();
     ?>
-    
-    <br /><br /><br /><br />
-    <center>
-    <table background="images/sdbox.png" width="300" height="200" class="dragme22">
-    <tr>
-    <td>
-    </td>
-    <td width="260">
+
     Which campaign would you like to add numbers to?<br /><br />
     <FORM ACTION="addnumbers.php" METHOD="POST">
     <table class="tborderxxx2" align="center" border="0" cellpadding="0" cellspacing="2"><TR>
@@ -53,17 +47,9 @@ if (!isset($_POST[campaignid])){
     <INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Select Campaign">
     </TD>
     </TR></table>
-    </FORM></td>
-    <td>
-    </td></tr>
-    </table>
-    </center>
-    
-    
-    
-    
-    
+    </FORM>
     <?
+    box_end();
 } else {
     if (isset($_POST[start])){?>
         <br /><br /><br /><br /><br />
