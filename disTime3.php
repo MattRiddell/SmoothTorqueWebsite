@@ -361,7 +361,7 @@ $user = $_COOKIE['user'];
         <td>
         <? if ($user != "demo") {
             ?>
-            <a class="btn btn-failure" title="Stop running this campaign" href="stopcampaign.php?id=<? echo $row['id'];?>"><img width="16" height="16" src="images/control_stop_blue.png" border="0"></a>
+            <a class="btn btn-danger" title="Stop running this campaign" href="stopcampaign.php?id=<? echo $row['id'];?>"><img width="16" height="16" src="images/control_stop_blue.png" border="0"></a>
         <? } else { ?>
             <a href="#" class="btn btn-default disabled" title="Stop campaign (Not running)"><img width="16" height="16" src="images/control_stop_blue.png" border="0"></a>
         <?
