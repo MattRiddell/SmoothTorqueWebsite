@@ -61,10 +61,10 @@ if (isset($_POST[name])){
     if ($context >= 10 && $context <= 14) {
 
         $sql = "UPDATE campaign SET name=$name, description=$description, messageid=$messageid, messageid2=$messageid2, messageid3=$messageid3,
-            mode=$mode, astqueuename=$astqueuename, did=$did, maxagents=$maxagents, clid=$clid, trclid=$trclid, context=$context, evergreen=$evergreen, drive_min=$drive_min, survey=$survey, drive_max = $drive_max WHERE id=$id";
+            mode=$mode, astqueuename=$astqueuename, did=$did, maxagents=$maxagents, clid=$clid, trclid=$trclid, context=$context, evergreen=$evergreen, drive_min=$drive_min, drive_max = $drive_max WHERE id=$id";
     } else {
         $sql = "UPDATE campaign SET name=$name, description=$description, messageid=$messageid, messageid2=$messageid2, messageid3=$messageid3,
-            mode=$mode, astqueuename=$astqueuename, did=$did, maxagents=$maxagents, clid=$clid, trclid=$trclid, context=$context, evergreen=$evergreen, drive_min=$drive_min, drive_max = $drive_max WHERE id=$id";
+            mode=$mode, astqueuename=$astqueuename, did=$did, maxagents=$maxagents, clid=$clid, trclid=$trclid, context=$context, evergreen=$evergreen, drive_min=$drive_min, survey=$survey, drive_max = $drive_max WHERE id=$id";
     }
     if (isset($_GET['debug'])) {
         echo $sql;

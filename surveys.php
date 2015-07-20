@@ -192,7 +192,7 @@ if (isset($_GET['edit'])) {
         </table>
         </form>
         <h3>Choices</h3>        
-        <a href="#" onclick="ko = new Date();displaySmallMessage('surveys.php?display_message=<?=$_GET['edit']?>&x='+ko.getTime());"><img src="images/add.png" alt="Add Choice">&nbsp;Add Choice</a><br />
+        <a href="#" onclick="ko = new Date();displayMessage('surveys.php?display_message=<?=$_GET['edit']?>&x='+ko.getTime());"><img src="images/add.png" alt="Add Choice">&nbsp;Add Choice</a><br />
         <script>
         $( "#name" ).eip( "surveys.php?save_edit=<?=$_GET['edit']?>", { select_text: true });
         $( "#description" ).eip( "surveys.php?save_edit=<?=$_GET['edit']?>", { select_text: true , form_type: "textarea"});
