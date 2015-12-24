@@ -4,7 +4,56 @@
  */
 
 require "header.php";
-//echo '<div class="container" style="min-height: 800px">';
+$sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE['user'].'\'';
+$result=mysql_query($sql, $link) or die (mysql_error());;
+$campaigngroupid=mysql_result($result,0,'campaigngroupid');
+if (isset($_GET['save_new'])) {
+    //print_pre($_POST);
+    $_POST['groupid'] = $campaigngroupid;
+    $_POST['maxagents'] = 100;
+    $_POST['context'] = 1;
+    $_POST['did'] = $_POST['clid'];
+    $sql1 = "INSERT INTO campaign (";
+    $sql2 = ") VALUES (";
+    foreach ($_POST as $key=>$value) {
+        $sql1.=sanitize($key,FALSE).",";
+        $sql2.=sanitize($value,TRUE).",";
+    }
+    $sql = substr($sql1,0,strlen($sql1)-1).substr($sql2,0,strlen($sql2)-1).")";
+    mysql_query($sql) or die ("There was an error with the query $sql - ".mysql_error());
+    ?>
+    <div class="jumbotron">
+    <h3>Saved Your Campaign</h3>
+    <p>Please wait while we return you to the campaign list</p>
+    </div>
+    <META HTTP-EQUIV=REFRESH CONTENT="3; URL=new_campaign.php?view=1">
+        <?
+
+    require "footer.php";
+    exit(0);
+}
+if (isset($_GET['save_edit'])) {
+    $_POST['did'] = $_POST['clid'];
+    $sql1 = "UPDATE campaign SET ";
+    $id = $_POST['id'];
+    unset($_POST['id']);
+    foreach ($_POST as $key=>$value) {
+        $sql1.=sanitize($key,FALSE)."=";
+        $sql1.=sanitize($value,TRUE).",";
+    }
+    $sql = substr($sql1,0,strlen($sql1)-1)." WHERE id = ".sanitize($id);
+    mysql_query($sql) or die ("There was an error with the query $sql - ".mysql_error());
+    ?>
+    <div class="jumbotron">
+    <h3>Saved Your Campaign</h3>
+    <p>Please wait while we return you to the campaign list</p>
+    </div>
+    <META HTTP-EQUIV=REFRESH CONTENT="3; URL=new_campaign.php?view=1">
+        <?
+
+    require "footer.php";
+    exit(0);
+}
 if (isset($_GET['edit']) || isset($_GET['add'])) {
     if ($_COOKIE['level'] == sha1("level100")) {
         $sql = 'SELECT * FROM campaignmessage where filename like "x-%"';
@@ -33,6 +82,7 @@ if (isset($_GET['edit']) || isset($_GET['add'])) {
             <h3 class="panel-title">Edit Existing campaign</h3>
         </div>
         <form action="new_campaign.php?save_edit=1" method="post" data-toggle="validator" role="form">
+        <input type="hidden" name="id" value="<?=$record['id']?>">
         <?
     } else {
         // Adding a new entry
@@ -73,7 +123,7 @@ if (isset($_GET['edit']) || isset($_GET['add'])) {
         </div>
         <div class="form-group">
             <label for="clid">Caller ID Number</label>
-            <input type="text" class="form-control" id="clid" name="clid" placeholder="I.E. 14075551234"  value="<?=$record['clid']?>" required data-error="You forgot to add an outgoing caller id number" >
+            <input type="number" class="form-control" id="clid" name="clid" placeholder="I.E. 14075551234"  value="<?=$record['clid']?>" required data-error="You need a caller ID number with only the 0-9 characters (no letters or puctuation)" >
             <div class="help-block with-errors"></div>
         </div>
         <input type="submit" class="btn btn-primary" value="Save Campaign">
@@ -102,7 +152,7 @@ if (isset($_GET['edit']) || isset($_GET['add'])) {
         echo '</tr></thead><tbody>';
         while ($row = mysql_fetch_assoc($result)) {
             echo '<tr>';
-            echo '<td><a href="new_campaign.php?edit=1" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i>&nbsp;'.ucwords($row['name']).'</td>';
+            echo '<td><a href="new_campaign.php?edit='.$row['id'].'" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i>&nbsp;'.ucwords($row['name']).'</td>';
             $sql = "SELECT count(*) from number where status = 'new' AND campaignid = ".sanitize($row['id']);
             if (isset($_GET['debug'])) {
                 echo $sql;
