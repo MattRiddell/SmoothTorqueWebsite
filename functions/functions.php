@@ -278,7 +278,7 @@ if (!function_exists('get_menu_html')) {
       <ul class="nav navbar-nav">
 
 
-<a class="navbar-brand" href="main.php">'.$config_values['brand'].'</a>
+<a class="navbar-brand" href="main.php">'.$config_values['TITLE'].'</a>
 
 
      ';
