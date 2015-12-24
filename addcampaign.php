@@ -146,33 +146,39 @@ if ($config_values['configurable_drive'] == 1) {
 </tr>
 <TR><TD CLASS="thead">Type of Campaign
 <a href="#" onclick="displayLargeMessage('includes/campaign_types.php');return false"><img src="images/help.png" border="0" title="Type Of Campaign"></a>
-</TD><TD>
-<SELECT NAME="context" class="form-control" id="context" onchange="whatPaySelected(this.value)">
-<OPTION VALUE="-1" SELECTED>Please chose a type of campaign...</OPTION>
-<OPTION VALUE="0" title="No phone calls are made">Load Simulation</OPTION>
-<OPTION VALUE="1" title="Only leave a message for answering machines, hang up when a person answers">Answer Machine Only</OPTION>
-<OPTION VALUE="2" title="Automatically send a person straight through to the call center">Immediate Live</OPTION>
-<OPTION VALUE="4" title="Play a message to a person, hang up for answering machines">Press 1 Live Only</OPTION>
-<OPTION VALUE="5" title="Put a person straight through to the call center, and leave a message for the answer machines">Immediate Live and Answer Machine</OPTION>
-<OPTION VALUE="3" title="Play a message to a person, if they press 1, put them through to the call center. Leave a message for answering machines">Press 1 Live and Answer Machine</OPTION>
-<OPTION VALUE="6" title="As soon as a number is connected, transfer it to a staff memeber"> Direct Transfer</OPTION>
-<OPTION VALUE="7" title="When a call is answered, play back the message and then hang up"> Immediate Message Playback</OPTION>
-<OPTION VALUE="8" title="Ring a number, when it answers start sending a fax">Fax Broadcast</OPTION>
-<OPTION VALUE="9">SMS Broadcast</OPTION>
-<OPTION VALUE="15">Automated Survey</OPTION>
-<OPTION VALUE="10"><?echo $config_values['SPARE1'];?></OPTION>
-<OPTION VALUE="11"><?echo $config_values['SPARE2'];?></OPTION>
-<OPTION VALUE="12"><?echo $config_values['SPARE3'];?></OPTION>
-<OPTION VALUE="13"><?echo $config_values['SPARE4'];?></OPTION>
-<OPTION VALUE="14"><?echo $config_values['SPARE5'];?></OPTION>
-<?/*<OPTION VALUE="5" <?if ($row[context]==5){echo "SELECTED";}?>>Spare 2</OPTION>
-<OPTION VALUE="6" <?if ($row[context]==6){echo "SELECTED";}?>>Spare 3</OPTION>
-<OPTION VALUE="7" <?if ($row[context]==7){echo "SELECTED";}?>>Spare 4</OPTION>
-<OPTION VALUE="8" <?if ($row[context]==8){echo "SELECTED";}?>>Spare 5</OPTION>
-<OPTION VALUE="9" <?if ($row[context]==9){echo "SELECTED";}?>>Spare 6</OPTION>
-<OPTION VALUE="10" <?if ($row[context]==10){echo "SELECTED";}?>>Spare 6</OPTION>*/?>
-</SELECT>
-</TD>
+</TD><td>
+        <select name="context" class="form-control" id="context" onchange="whatPaySelected(this.value)">
+            <option value="-1">Please chose a type of campaign...</option>
+            <?
+            if ($config_values['disable_all_types'] != "YES") {
+                ?>
+                <option value="0" <? echo $row[context] == 0 ? "SELECTED" : "" ?> title="No numbers are dialed">Load Simulation</option>
+                <option value="1" <? echo $row[context] == 1 ? "SELECTED" : "" ?> title="Only leave a message if an answer machine is detected, hangup otherwise">Answer Machine Only</option>
+                <option value="2" <? echo $row[context] == 2 ? "SELECTED" : "" ?> title="Connect a person directly to the call center, don't bother with answer machines">Immediate Live</option>
+                <option value="4" <? echo $row[context] == 4 ? "SELECTED" : "" ?> title="Play a message to a person, and if they press 1 transfer them to the call center, don't bother with answer machines">Press 1 Live Only</option>
+                <option value="5" <? echo $row[context] == 5 ? "SELECTED" : "" ?> title="Connect a person directly to the call center, and leave a message on the answer machine">Immediate Live and Answer Machine</option>
+                <option value="3" <? echo $row[context] == 3 ? "SELECTED" : "" ?> title="Play a message to a person, if they press 1 they go to the call center, leave a message on the answer machine">Press 1 Live and Answer Machine</option>
+                <option value="6" <? echo $row[context] == 6 ? "SELECTED" : "" ?> title="As soon as a number is connected, transfer it to a staff memeber"> Direct Transfer</option>
+                <option value="7" <? echo $row[context] == 7 ? "SELECTED" : "" ?> title="When a call is answered, play back the message and then hang up"> Immediate Message Playback</option>
+                <option value="8" <? echo $row[context] == 8 ? "SELECTED" : "" ?> title="Ring a number, when it answers start sending a fax">Fax Broadcast</option>
+                <option value="9" <? echo $row[context] == 9 ? "SELECTED" : "" ?> title="Send SMS Messages">SMS Broadcast</option>
+                <option value="15" <? echo $row[context] == 15 ? "SELECTED" : "" ?> title="Automated Survey">Automated Survey</option>
+                <?
+            }
+            ?>
+            <option value="10" <? echo $row[context] == 10 ? "SELECTED" : "" ?>><? echo $config_values['SPARE1']; ?></option>
+            <?
+            if ($config_values['disable_all_types'] != "YES") {
+                ?>
+                <option value="11" <? echo $row[context] == 11 ? "SELECTED" : "" ?>><? echo $config_values['SPARE2']; ?></option>
+                <option value="12" <? echo $row[context] == 12 ? "SELECTED" : "" ?>><? echo $config_values['SPARE3']; ?></option>
+                <option value="13" <? echo $row[context] == 13 ? "SELECTED" : "" ?>><? echo $config_values['SPARE4']; ?></option>
+                <option value="14" <? echo $row[context] == 14 ? "SELECTED" : "" ?>><? echo $config_values['SPARE5']; ?></option>
+                <?
+            }
+            ?>
+        </select>
+    </td>
 </TR>
 <tr rel="didmode" id="max_connected_calls" style="display:none" >
 <td class="thead" width=200><label for="agents">Maximum Connected Calls:

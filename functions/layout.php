@@ -5,10 +5,7 @@ if (!function_exists('box_start') ) {
          ?>
          <div class="panel panel-default">
              <div class="panel-body">
-
-
-
-<?
+                 <?
      }
 }
 if (!function_exists('box_end') ) {

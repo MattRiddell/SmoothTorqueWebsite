@@ -188,12 +188,79 @@ if (!function_exists('_get_browser')) {
     }
 }
 
+
+if (!function_exists('get_bootstrap_menu')) {
+    function get_bootstrap_menu($config_values, $self, $level, $mode = 0) {
+        $response = '
+
+        <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="main.php">'.$config_values['brand'].'</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-list"></i> Campaigns <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="new_campaign.php?view=1">View existing campaigns</a></li>
+            <li><a href="new_campaign.php?add=1">Add a new campaign</a></li>
+
+          </ul>
+        </li>
+        <li>
+          <a href = "messages.php"  ><i class="glyphicon glyphicon-play-circle"></i> Messages </a >
+
+        </li >
+        ';
+        if ($level == sha1("level100")) {
+
+            $response .= '
+            <li>
+          <a href = "config.php"  ><i class="glyphicon glyphicon-cog"></i> Settings </a >
+
+        </li >
+        <li>
+          <a href = "trunks.php"  ><i class="glyphicon glyphicon-phone-alt"></i> Phone Lines </a >
+
+        </li >
+        <li>
+          <a href = "customers.php"  ><i class="glyphicon glyphicon-user"></i> Customers </a >
+
+        </li >
+        ';
+        }
+        $response .= '
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="logout.php"><i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
+
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+        ';
+        return $response;
+    }
+}
+
 if (!function_exists('get_menu_html')) {
     function get_menu_html($config_values, $self, $level, $mode = 0) {
         global $http_dir_name;
         if ($mode == 1) {
             $menu = '<CENTER>
-<nav class="navbar navbar-default center">
+<nav class="navbar navbar-default ">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -211,6 +278,9 @@ if (!function_exists('get_menu_html')) {
       <ul class="nav navbar-nav">
 
 
+<a class="navbar-brand" href="main.php">'.$config_values['brand'].'</a>
+
+
      ';
             //=======================================================================================================
             // Home
@@ -223,7 +293,7 @@ if (!function_exists('get_menu_html')) {
 
             }
 
-            $menu .= '<A HREF="'.$http_dir_name.'main.php"><img width="16" height="16" src="'.$http_dir_name.'images/house.png" border="0"><br />'.str_replace(" ", "&nbsp;", $config_values['MENU_HOME']).'</A></li>';
+            $menu .= '<A HREF="'.$http_dir_name.'main.php"><i class="glyphicon glyphicon-home"></i> '.str_replace(" ", "&nbsp;", $config_values['MENU_HOME']).'</A></li>';
 
             //=======================================================================================================
             // Campaigns
@@ -235,7 +305,7 @@ if (!function_exists('get_menu_html')) {
                 } else {
                     $menu .= '<li>';
                 }
-                $menu .= '<A HREF="'.$http_dir_name.'campaigns.php"><img width="16" height="16"  src="'.$http_dir_name.'images/folder.png" border="0" ><br />'.str_replace(" ", "&nbsp;", $config_values['MENU_CAMPAIGNS']).'</A></li>';
+                $menu .= '<A HREF="'.$http_dir_name.'campaigns.php"><i class="glyphicon glyphicon-file"></i> '.str_replace(" ", "&nbsp;", $config_values['MENU_CAMPAIGNS']).'</A></li>';
 
                 //=======================================================================================================
                 // Numbers
@@ -245,7 +315,7 @@ if (!function_exists('get_menu_html')) {
                 } else {
                     $menu .= '<li>';
                 }
-                $menu .= '<A HREF="'.$http_dir_name.'numbers.php"><img width="16" height="16"  src="'.$http_dir_name.'images/telephone.png" border="0" ><br />'.str_replace(" ", "&nbsp;", $config_values['MENU_NUMBERS']).'</A></li>';
+                $menu .= '<A HREF="'.$http_dir_name.'numbers.php"><i class="glyphicon glyphicon-list"></i> '.str_replace(" ", "&nbsp;", $config_values['MENU_NUMBERS']).'</A></li>';
 
                 //=======================================================================================================
                 // DNC Numbers
@@ -255,7 +325,7 @@ if (!function_exists('get_menu_html')) {
                 } else {
                     $menu .= '<li>';
                 }
-                $menu .= '<A HREF="'.$http_dir_name.'dncnumbers.php"><img width="16" height="16"  src="'.$http_dir_name.'images/telephone_error.png" border="0" ><br />'.str_replace(" ", "&nbsp;", $config_values['MENU_DNC']).'</A></li>';
+                $menu .= '<A HREF="'.$http_dir_name.'dncnumbers.php"><i class="glyphicon glyphicon-remove-circle"></i> '.str_replace(" ", "&nbsp;", $config_values['MENU_DNC']).'</A></li>';
 
                 //=======================================================================================================
                 // Messages
@@ -265,7 +335,7 @@ if (!function_exists('get_menu_html')) {
                 } else {
                     $menu .= '<li>';
                 }
-                $menu .= '<A HREF="'.$http_dir_name.'messages.php"><img width="16" height="16"  src="'.$http_dir_name.'images/sound.png" border="0" ><br />'.str_replace(" ", "&nbsp;", $config_values['MENU_MESSAGES']).'</A></li>';
+                $menu .= '<A HREF="'.$http_dir_name.'messages.php"><i class="glyphicon glyphicon-volume-up"></i> '.str_replace(" ", "&nbsp;", $config_values['MENU_MESSAGES']).'</A></li>';
 
                 //=======================================================================================================
                 // Schedules
@@ -275,7 +345,7 @@ if (!function_exists('get_menu_html')) {
                 } else {
                     $menu .= '<li>';
                 }
-                $menu .= '<A HREF="'.$http_dir_name.'schedule.php"><img width="16" height="16"  src="'.$http_dir_name.'images/clock.png" border="0" ><br />'.str_replace(" ", "&nbsp;", $config_values['MENU_SCHEDULES']).'</A></li>';
+                $menu .= '<A HREF="'.$http_dir_name.'schedule.php"><i class="glyphicon glyphicon-calendar"></i> '.str_replace(" ", "&nbsp;", $config_values['MENU_SCHEDULES']).'</A></li>';
 
 
                 if ($level == sha1("level100")) {
@@ -289,7 +359,7 @@ if (!function_exists('get_menu_html')) {
                         } else {
                             $menu .= '<li>';
                         }
-                        $menu .= '<A HREF="'.$http_dir_name.'surveys.php"><img width="16" height="16"  src="'.$http_dir_name.'images/table.png" border="0" ><br />'.str_replace(" ", "&nbsp;", $config_values['MENU_SURVEYS']).'</A></li>';
+                        $menu .= '<A HREF="'.$http_dir_name.'surveys.php"><i class="glyphicon glyphicon-earphone"></i> '.str_replace(" ", "&nbsp;", $config_values['MENU_SURVEYS']).'</A></li>';
                     }
                     //=======================================================================================================
                     // CDRs
@@ -299,7 +369,7 @@ if (!function_exists('get_menu_html')) {
                     } else {
                         $menu .= '<li>';
                     }
-                    $menu .= '<A HREF="'.$http_dir_name.'viewcdr.php?all=1"><img width="16" height="16"  src="'.$http_dir_name.'images/page_green.png" border="0" ><br />'.str_replace(" ", "&nbsp;", $config_values['MENU_CDR']).'</A></li>';
+                    $menu .= '<A HREF="'.$http_dir_name.'viewcdr.php?all=1"><i class="glyphicon glyphicon-list-alt"></i> '.str_replace(" ", "&nbsp;", $config_values['MENU_CDR']).'</A></li>';
                     //=======================================================================================================
 
                     //=======================================================================================================
@@ -310,7 +380,7 @@ if (!function_exists('get_menu_html')) {
                     } else {
                         $menu .= '<li>';
                     }
-                    $menu .= '<A HREF="'.$http_dir_name.'customers.php"><img width="16" height="16"  src="'.$http_dir_name.'images/group.png" border="0" ><br />'.str_replace(" ", "&nbsp;", $config_values['MENU_CUSTOMERS']).'</A></li>';
+                    $menu .= '<A HREF="'.$http_dir_name.'customers.php"><i class="glyphicon glyphicon-user"></i> '.str_replace(" ", "&nbsp;", $config_values['MENU_CUSTOMERS']).'</A></li>';
                     //=======================================================================================================
 
                     //=======================================================================================================
@@ -321,7 +391,7 @@ if (!function_exists('get_menu_html')) {
                     } else {
                         $menu .= '<li>';
                     }
-                    $menu .= '<A HREF="'.$http_dir_name.'queues.php"><img width="16" height="16"  src="'.$http_dir_name.'images/database.png" border="0" ><br />'.str_replace(" ", "&nbsp;", $config_values['MENU_QUEUES']).'</A></li>';
+                    $menu .= '<A HREF="'.$http_dir_name.'queues.php"><i class="glyphicon glyphicon-align-justify"></i> '.str_replace(" ", "&nbsp;", $config_values['MENU_QUEUES']).'</A></li>';
                     //=======================================================================================================
 
                     //=======================================================================================================
@@ -333,7 +403,7 @@ if (!function_exists('get_menu_html')) {
                         $menu .= '<li>';
                     }
 
-                    $menu .= '<A HREF="'.$http_dir_name.'servers.php"><img width="16" height="16"  src="'.$http_dir_name.'images/server.png" border="0" ><br />'.str_replace(" ", "&nbsp;", $config_values['MENU_SERVERS']).'</A></li>';
+                    $menu .= '<A HREF="'.$http_dir_name.'servers.php"><i class="glyphicon glyphicon-hdd"></i> '.str_replace(" ", "&nbsp;", $config_values['MENU_SERVERS']).'</A></li>';
                     //=======================================================================================================
 
 
@@ -345,7 +415,7 @@ if (!function_exists('get_menu_html')) {
                     } else {
                         $menu .= '<li>';
                     }
-                    $menu .= '<A HREF="'.$http_dir_name.'trunks.php"><img width="16" height="16"  src="'.$http_dir_name.'images/telephone_link.png" border="0" ><br />'.str_replace(" ", "&nbsp;", $config_values['MENU_TRUNKS']).'</A></li>';
+                    $menu .= '<A HREF="'.$http_dir_name.'trunks.php"><i class="glyphicon glyphicon-phone-alt"></i> '.str_replace(" ", "&nbsp;", $config_values['MENU_TRUNKS']).'</A></li>';
                     //=======================================================================================================
 
                     //=======================================================================================================
@@ -357,7 +427,7 @@ if (!function_exists('get_menu_html')) {
                         } else {
                             $menu .= '<li>';
                         }
-                        $menu .= '<A HREF="'.$http_dir_name.'timezones.php?view_timezones=1"><img width="16" height="16"  src="'.$http_dir_name.'images/world.png" border="0" ><br />'.str_replace(" ", "&nbsp;", $config_values['MENU_TIMEZONES']).'</A></li>';
+                        $menu .= '<A HREF="'.$http_dir_name.'timezones.php?view_timezones=1"><i class="glyphicon glyphicon-time"></i> '.str_replace(" ", "&nbsp;", $config_values['MENU_TIMEZONES']).'</A></li>';
                     }
                     //=======================================================================================================
 
@@ -369,7 +439,7 @@ if (!function_exists('get_menu_html')) {
                     } else {
                         $menu .= '<li>';
                     }
-                    $menu .= '<A HREF="'.$http_dir_name.'config.php"><img width="16" height="16"  src="'.$http_dir_name.'images/cog.png" border="0" ><br />'.str_replace(" ", "&nbsp;", $config_values['MENU_ADMIN']).'</A></li>';
+                    $menu .= '<A HREF="'.$http_dir_name.'config.php"><i class="glyphicon glyphicon-cog"></i> '.str_replace(" ", "&nbsp;", $config_values['MENU_ADMIN']).'</A></li>';
                     //=======================================================================================================
 
                 }
@@ -397,13 +467,13 @@ if (!function_exists('get_menu_html')) {
                 } else {
                     $menu .= '<li>';
                 }
-                $menu .= '<TD class="'.$thead.'"><A HREF="'.$http_dir_name.'addfunds.php"><img width="16" height="16"  src="'.$http_dir_name.'images/group.png" border="0" ><br />'.str_replace(" ", "&nbsp;", $config_values['MENU_ADDFUNDS']).'</A></li>';
+                $menu .= '<TD class="'.$thead.'"><A HREF="'.$http_dir_name.'addfunds.php"><i class="glyphicon glyphicon-credit-card"></i> '.str_replace(" ", "&nbsp;", $config_values['MENU_ADDFUNDS']).'</A></li>';
                 //=======================================================================================================
 
             }
             $thead = "thead2\" onmouseover=\"this.className='thead'\" onmouseout=\"this.className='thead2'\"  \"";
 
-            $menu .= '<li><A HREF="'.$http_dir_name.'logout.php"><img width="16" height="16"  src="'.$http_dir_name.'images/door_in.png" border="0" ><br />'.str_replace(" ", "&nbsp;", $config_values['MENU_LOGOUT']).'</A></li><TD CLASS="theadr2" WIDTH=0></li>
+            $menu .= '</ul><ul class="nav navbar-nav navbar-right"><li><A HREF="'.$http_dir_name.'logout.php"><i class="glyphicon glyphicon-log-out"></i> '.str_replace(" ", "&nbsp;", $config_values['MENU_LOGOUT']).'</A></li><TD CLASS="theadr2" WIDTH=0></li>
  </ul>
 
     </div><!-- /.navbar-collapse -->

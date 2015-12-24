@@ -108,6 +108,10 @@ if (mysql_num_rows($result) > 0) {
 
 if (isset($_GET['campaigngroupid'])) {
     $campaigngroupid = ($_GET['campaigngroupid']);
+} else {
+    $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE['user'].'\'';
+    $result=mysql_query($sql, $link) or die (mysql_error());;
+    $campaigngroupid=mysql_result($result,0,'campaigngroupid');
 }
 if (isset($_POST['id'])) {
     $id = $_POST['id'];
@@ -123,7 +127,7 @@ if ($level == sha1("level100") && $_GET['type'] == "all") {
 } else {
     $sql = 'SELECT * FROM campaign WHERE groupid='.$campaigngroupid.' order by groupid, name';
 }
-$result = mysql_query($sql, $link) or die (mysql_error());;
+$result = mysql_query($sql, $link) or die ("1: ".mysql_error()." FROM ".$sql);;
 if (mysql_num_rows($result) == 0) {
     ?>
     <br/><br/>
