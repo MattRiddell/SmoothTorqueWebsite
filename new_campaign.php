@@ -96,10 +96,10 @@ if (isset($_GET['edit']) || isset($_GET['add'])) {
         echo '<table class="table table-striped">';
         echo '<thead><tr>';
         echo '<th>Campaign Name</th><th colspan="2">Numbers</th><th>Start/Stop</th><th>Delete Campaign</th>';
-        echo '</tr></thead>';
+        echo '</tr></thead><tbody>';
         while ($row = mysql_fetch_assoc($result)) {
             echo '<tr>';
-            echo '<td><a href="new_campaign.php?edit=1" class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i>&nbsp;'.ucwords($row['name']).'</td>';
+            echo '<td><a href="new_campaign.php?edit=1" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i>&nbsp;'.ucwords($row['name']).'</td>';
             $sql = "SELECT count(*) from number where status = 'new' AND campaignid = ".sanitize($row['id']);
             if (isset($_GET['debug'])) {
                 echo $sql;
@@ -111,23 +111,23 @@ if (isset($_GET['edit']) || isset($_GET['add'])) {
             echo '<td>'.number_format($count)."/".number_format($total)."</td>";
             ?>
             <td>
-                <a href="manage_numbers.php?add=<?=$row['id']?>" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Numbers</a>&nbsp;
-                <a href="manage_numbers.php?add=<?=$row['id']?>" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i>&nbsp;View Numbers</a>&nbsp;
-                <a href="recycle_new.php?id=<?=$row['id']?>" class="btn btn-primary"><i class="glyphicon glyphicon-repeat"></i>&nbsp;Recycle Numbers</a>&nbsp;
-                <a href="recycle.php?id=<?=$row['id']?>&type=deleteall" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>&nbsp;Delete Numbers</a>&nbsp;
+                <a href="manage_numbers.php?add=<?=$row['id']?>" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Numbers</a>&nbsp;
+                <a href="manage_numbers.php?search=<?=$row['id']?>" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-search"></i>&nbsp;View Numbers</a>&nbsp;
+                <a href="recycle_new.php?id=<?=$row['id']?>" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-repeat"></i>&nbsp;Recycle Numbers</a>&nbsp;
+                <a href="recycle.php?id=<?=$row['id']?>&type=deleteall" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i>&nbsp;Delete Numbers</a>&nbsp;
             </td>
 
             <td>
-                <a href="api.php?start=<?=$row['id']?>" class="btn btn-success"><i class="glyphicon glyphicon-play"></i>&nbsp;Start</a>&nbsp;
-                <a href="api.php?stop=<?=$row['id']?>" class="btn btn-warning"><i class="glyphicon glyphicon-stop"></i>&nbsp;Stop</a>&nbsp;
+                <a href="api.php?start=<?=$row['id']?>" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-play"></i>&nbsp;Start</a>
+                <a href="api.php?stop=<?=$row['id']?>" class="btn btn-warning  btn-sm disabled"><i class="glyphicon glyphicon-stop"></i>&nbsp;Stop</a>
             </td>
             <td>
-                <a href="new_campaign.php?delete=<?=$row['id']?>" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>&nbsp;Delete Campaign</a>&nbsp;
+                <a href="new_campaign.php?delete=<?=$row['id']?>" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i>&nbsp;Delete Campaign</a>&nbsp;
             </td>
             <?
             echo '</tr>';
         }
-        echo '</table>';
+        echo '</tbody></table>';
     }
 }
 //echo '</div>';
