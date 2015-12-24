@@ -100,13 +100,13 @@ if (isset($_GET['edit']) || isset($_GET['add'])) {
         while ($row = mysql_fetch_assoc($result)) {
             echo '<tr>';
             echo '<td><a href="new_campaign.php?edit=1" class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i>&nbsp;'.ucwords($row['name']).'</td>';
-            $sql = "SELECT count(*) from NUMBER where status = 'new' AND campaignid = ".sanitize($row['id']);
+            $sql = "SELECT count(*) from number where status = 'new' AND campaignid = ".sanitize($row['id']);
             if (isset($_GET['debug'])) {
                 echo $sql;
             }
             $res = mysql_query($sql);
             $count = mysql_result($res,0,0);
-            $res = mysql_query("SELECT count(*) from NUMBER where campaignid = ".sanitize($row['id']));
+            $res = mysql_query("SELECT count(*) from number where campaignid = ".sanitize($row['id']));
             $total = mysql_result($res,0,0);
             echo '<td>'.number_format($count)."/".number_format($total)."</td>";
             ?>
