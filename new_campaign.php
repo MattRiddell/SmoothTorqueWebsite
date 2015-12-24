@@ -109,6 +109,7 @@ if (isset($_GET['edit']) || isset($_GET['add'])) {
             <td>
                 <a href="manage_numbers.php?add=<?=$row['id']?>" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Numbers</a>&nbsp;
                 <a href="recycle_new.php?id=<?=$row['id']?>" class="btn btn-primary"><i class="glyphicon glyphicon-repeat"></i>&nbsp;Recycle Numbers</a>&nbsp;
+                <a href="recycle.php?id=<?=$row['id']?>&type=deleteall" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>&nbsp;Delete Numbers</a>&nbsp;
             </td>
 
             <td>
