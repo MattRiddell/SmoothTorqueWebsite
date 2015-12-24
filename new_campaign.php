@@ -112,8 +112,8 @@ if (isset($_GET['edit']) || isset($_GET['add'])) {
             </td>
 
             <td>
-                <a href="api.php?start=<?=$row['id']?>" class="btn btn-success"><i class="glyphicon glyphicon-play"></i>&nbsp;Start Campaign</a>&nbsp;
-                <a href="api.php?stop=<?=$row['id']?>" class="btn btn-warning"><i class="glyphicon glyphicon-stop"></i>&nbsp;Stop Campaign</a>&nbsp;
+                <a href="api.php?start=<?=$row['id']?>" class="btn btn-success"><i class="glyphicon glyphicon-play"></i>&nbsp;Start</a>&nbsp;
+                <a href="api.php?stop=<?=$row['id']?>" class="btn btn-warning"><i class="glyphicon glyphicon-stop"></i>&nbsp;Stop</a>&nbsp;
             </td>
             <td>
                 <a href="new_campaign.php?delete=<?=$row['id']?>" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>&nbsp;Delete Campaign</a>&nbsp;
