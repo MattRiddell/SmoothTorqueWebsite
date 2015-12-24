@@ -49,11 +49,11 @@ if (isset($_GET['edit']) || isset($_GET['add'])) {
     <div class="panel-body" style="text-align: left">
         <div class="form-group">
             <label for="name">Campaign Name</label>
-            <input type="email" class="form-control" id="name" name="name" placeholder="Please enter a short name for your campaign" value="<?=$record['name']?>">
+            <input type="text" class="form-control" id="name" name="name" placeholder="Please enter a short name for your campaign" value="<?=$record['name']?>">
         </div>
         <div class="form-group">
             <label for="description">Campaign Description</label>
-            <input type="email" class="form-control" id="description" name="description" placeholder="Please enter a description of your campaign"  value="<?=$record['description']?>">
+            <input type="text" class="form-control" id="description" name="description" placeholder="Please enter a description of your campaign"  value="<?=$record['description']?>">
         </div>
         <div class="form-group">
             <label for="exampleInputEmail1">Message To Play</label>
@@ -71,7 +71,7 @@ if (isset($_GET['edit']) || isset($_GET['add'])) {
         </div>
         <div class="form-group">
             <label for="clid">Caller ID Number</label>
-            <input type="email" class="form-control" id="clid" name="clid" placeholder="I.E. 14075551234"  value="<?=$record['clid']?>">
+            <input type="text" class="form-control" id="clid" name="clid" placeholder="I.E. 14075551234"  value="<?=$record['clid']?>">
         </div>
         <input type="submit" class="btn btn-primary" value="Save Campaign">
 
@@ -112,7 +112,7 @@ if (isset($_GET['edit']) || isset($_GET['add'])) {
             ?>
             <td>
                 <a href="manage_numbers.php?add=<?=$row['id']?>" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Numbers</a>&nbsp;
-                <a href="manage_numbers.php?search=<?=$row['id']?>" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-search"></i>&nbsp;View Numbers</a>&nbsp;
+                <a href="manage_numbers.php?view=<?=$row['id']?>" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-search"></i>&nbsp;View Numbers</a>&nbsp;
                 <a href="recycle_new.php?id=<?=$row['id']?>" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-repeat"></i>&nbsp;Recycle Numbers</a>&nbsp;
                 <a href="recycle.php?id=<?=$row['id']?>&type=deleteall" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i>&nbsp;Delete Numbers</a>&nbsp;
             </td>
