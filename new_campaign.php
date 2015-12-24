@@ -32,7 +32,7 @@ if (isset($_GET['edit']) || isset($_GET['add'])) {
         <div class="panel-heading">
             <h3 class="panel-title">Edit Existing campaign</h3>
         </div>
-        <form action="new_campaign.php?save_edit=1" method="post">
+        <form action="new_campaign.php?save_edit=1" method="post" data-toggle="validator" role="form">
         <?
     } else {
         // Adding a new entry
@@ -41,7 +41,7 @@ if (isset($_GET['edit']) || isset($_GET['add'])) {
         <div class="panel-heading">
             <h3 class="panel-title">Add a new campaign</h3>
         </div>
-        <form action="new_campaign.php?save_new=1" method="post">
+        <form action="new_campaign.php?save_new=1" method="post" data-toggle="validator" role="form">
         <?
         $record = array();
     }
@@ -49,11 +49,13 @@ if (isset($_GET['edit']) || isset($_GET['add'])) {
     <div class="panel-body" style="text-align: left">
         <div class="form-group">
             <label for="name">Campaign Name</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Please enter a short name for your campaign" value="<?=$record['name']?>">
+            <input type="text" class="form-control" id="name" name="name" placeholder="Please enter a short name for your campaign" value="<?=$record['name']?>" data-error="You need to give your campaign a name" required>
+            <div class="help-block with-errors"></div>
         </div>
         <div class="form-group">
             <label for="description">Campaign Description</label>
-            <input type="text" class="form-control" id="description" name="description" placeholder="Please enter a description of your campaign"  value="<?=$record['description']?>">
+            <input type="text" class="form-control" id="description" name="description" placeholder="Please enter a description of your campaign"  value="<?=$record['description']?>" data-error="You need to give your campaign a short description" required>
+            <div class="help-block with-errors"></div>
         </div>
         <div class="form-group">
             <label for="exampleInputEmail1">Message To Play</label>
@@ -71,7 +73,8 @@ if (isset($_GET['edit']) || isset($_GET['add'])) {
         </div>
         <div class="form-group">
             <label for="clid">Caller ID Number</label>
-            <input type="text" class="form-control" id="clid" name="clid" placeholder="I.E. 14075551234"  value="<?=$record['clid']?>">
+            <input type="text" class="form-control" id="clid" name="clid" placeholder="I.E. 14075551234"  value="<?=$record['clid']?>" required data-error="You forgot to add an outgoing caller id number" >
+            <div class="help-block with-errors"></div>
         </div>
         <input type="submit" class="btn btn-primary" value="Save Campaign">
 
