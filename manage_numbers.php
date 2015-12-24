@@ -13,6 +13,23 @@ if (isset($_GET['reset'])) {
  */
 
 require "header.php";
+if (isset($_GET['add'])) {
+    ?>
+    <div class="jumbotron">
+        <h3>Add Numbers To Campaign</h3>
+        <p>When you add numbers to a campaign you have two choices.  You can either copy and paste them from somewhere else (or type them manually), or you can import a text file.</p>
+        <p>If you are importing a text file you need to make sure that the file only has numbers in it (no names or anything else) and just one 10 digit number per line</p>
+        <p>
+            <a href="manage_numbers.php?add_manual=<?=$_GET['add']?>" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i> Add by copying and pasting or typing</a>
+        </p>
+        <p>
+            <a href="manage_numbers.php?import=<?=$_GET['add']?>" class="btn btn-primary"><i class="glyphicon glyphicon-upload"></i> Upload a text file</a>
+        </p>
+    </div>
+    <?
+    require "footer.php";
+    exit(0);
+}
 if (isset($_GET['view'])) {
     if ($_GET['view'])
         ?>
