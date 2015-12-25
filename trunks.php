@@ -30,7 +30,7 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
 ?>
 <?/* start of shadow */?>
 
-
+<div class="table-responsive">
 <table class="table table-bordered" align="center" border="0" cellpadding="2" cellspacing="0">
 <TR>
 <?if ($backend == 0) {?><TD CLASS="">
@@ -129,6 +129,7 @@ $countx++;
 ?>
 
 </TABLE>
+</div>
 <?/*end of shadow */?>
 </div></div></div></div></div></td></tr></table>
 
