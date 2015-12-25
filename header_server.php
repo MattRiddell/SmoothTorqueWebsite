@@ -2,7 +2,7 @@
     <A HREF="addserver.php" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Add Asterisk Server</A>
 
 
-    <A HREF="servers.php" class="btn btn-primary"><i class="glyphicon glyphicon-list"></i> Asterisk Servers</A>
+    <A HREF="servers.php" class="btn btn-primary"><i class="glyphicon glyphicon-asterisk"></i> Asterisk Servers</A>
 
 <?
 if (isset($_GET['debug'])) {
