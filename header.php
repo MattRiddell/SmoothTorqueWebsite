@@ -759,7 +759,7 @@ if ($loggedin) {
                         if ($logo_width > 0) {
                             echo ' width="'.$logo_width.'"';
                         }
-                        ?>>
+                        ?>></center>
                         <?
 
                         if ($loggedin) {
