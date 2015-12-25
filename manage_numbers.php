@@ -8,6 +8,15 @@ if (isset($_GET['reset'])) {
     echo "Success";
     exit(0);
 }
+if (isset($_GET['delete'])) {
+    // For ajax reset
+    include "admin/db_config.php";
+    require "functions/sanitize.php";
+    //print_r($_POST);
+    $result = mysql_query("DELETE FROM number WHERE campaignid = ".sanitize($_POST['campaignid'])." and phonenumber = ".sanitize($_POST['phonenumber'])) or die(mysql_error());
+    echo "Success";
+    exit(0);
+}
 /**
  * Created by PhpStorm User: mattriddell Date: 24/12/15 Time: 09:47
  */
@@ -122,14 +131,44 @@ if (isset($_GET['view'])) {
                 echo '<td>'.$row['datetime'].'</td>';
                 echo '<td><button class="btn btn-primary" onclick="reset(\''.$_GET['view'].'\',\''.$row['phonenumber'].'\');"><i class="glyphicon glyphicon-refresh" ></i></button></td>';
 
-                echo '<td>'.$row['phonenumber'].'</td>';
+                echo '<td><button class="btn btn-danger" onclick="delete(\''.$_GET['view'].'\',\''.$row['phonenumber'].'\');" data-toggle="modal" data-target="#myModal'.$row['phonenumber'].'"><i class="glyphicon glyphicon-remove" ></i></button></td>';
                 echo "</tr>";
+                ?>
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal<?=$row['phonenumber']?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Delete <?=$row['phonenumber']?></h4>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to delete <?=$row['phonenumber']?> from the database?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" onclick="delete_number('<?=$_GET['view']?>','<?=$row['phonenumber']?>')">Yes, delete it</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <?
             }
         }
         ?>
         </tbody>
     </table>
+
     <script>
+        function delete_number(campaignid, phonenumber) {
+            //alert("deleting");
+            $.post("manage_numbers.php?delete=1", {campaignid: campaignid, phonenumber: phonenumber})
+                .done(function (data) {
+                    location.reload();
+                });
+        }
         function reset(campaignid, phonenumber) {
             //alert("Resetting");
             $.post("manage_numbers.php?reset=1", {campaignid: campaignid, phonenumber: phonenumber})
