@@ -30,7 +30,7 @@ if (!isset($_GET[startdate])) {
     $sql = "select * from billinglog where timestamp between '".$_GET['startdate']." 00:00:00' and '".$_GET['enddate']." 23:59:59' and username='stl-$_COOKIE[user]' order by timestamp desc";
 //    echo $sql;
     $result = mysql_query($sql, $link);
-    echo "<br /><center><table border=\"0\">";
+    echo '<br /><div class="table-responsive"><table class="table table-striped">';
     echo "<tr><td>TimeStamp</td><td>Amount</td><td>Receipt</td><td>Payment Mode</td><td>User Name</td><td>Added By</td></tr>";
     while ($row = mysql_fetch_assoc($result)) {
         $class_bold = " class=\"tborder2x\"  onmouseover=\"style.backgroundColor='#C10000';\" onmouseout=\"style.backgroundColor='#FF6666'\"   ";
@@ -51,6 +51,6 @@ if (!isset($_GET[startdate])) {
         echo "<td>$row[addedby]</td>";
         echo "</tr>";
     }
-    echo "</table>";
+    echo "</table></div>";
 }
 ?>
