@@ -567,6 +567,13 @@ if ($loggedin) {
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <? /*<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">*/ ?>
     <TITLE><? echo stripslashes(stripslashes($config_values['TITLE'])); ?></TITLE>
+    <style>
+        @media (max-width: 978px) {
+            .jumbotron {
+                padding: 40px;
+            }
+        }
+    </style>
     <?
     /* If we are on one of the realtime graph pages we don't want it to be cached */
     if ($self == "/test.php" || $self == "/report.php" || $self == "/servers.php" || $self == "/mysql_stats.php" || $self == "/config.php") { ?>
