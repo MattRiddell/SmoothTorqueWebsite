@@ -745,7 +745,7 @@ if ($loggedin) {
 
 
                     ?>
-                    <center><img src="./<? echo $config_values['LOGO']; ?>"<?
+                    <center><img class="img-responsive" src="./<? echo $config_values['LOGO']; ?>"<?
                         if ($logo_height > 0) {
                             echo ' height="'.$logo_height.'"';
                         }
