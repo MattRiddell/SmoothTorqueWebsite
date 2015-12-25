@@ -225,16 +225,20 @@ if (!function_exists('get_bootstrap_menu')) {
         if ($level == sha1("level100")) {
 
             $response .= '
-            <li>
-          <a href = "config.php"  ><i class="glyphicon glyphicon-cog"></i> Settings </a >
 
-        </li >
         <li>
           <a href = "trunks.php"  ><i class="glyphicon glyphicon-phone-alt"></i> Phone Lines </a >
 
         </li >
         <li>
+          <a href = "servers.php"  ><i class="glyphicon glyphicon-hdd"></i> Servers </a >
+
+        </li ><li>
           <a href = "customers.php"  ><i class="glyphicon glyphicon-user"></i> Customers </a >
+
+        </li >
+          <li>
+          <a href = "config.php"  ><i class="glyphicon glyphicon-cog"></i> Settings </a >
 
         </li >
         ';

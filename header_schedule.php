@@ -1,4 +1,4 @@
 <? box_start(); ?>
-    <A HREF="addschedule.php" class="btn btn-default navbar-btn"><img src="images/clock_add.png" border="0" align="left">Add Schedule</A>
-    <A HREF="schedule.php" class="btn btn-default navbar-btn"><img src="images/clock.png" border="0" align="left">View Schedules</A>
+    <A HREF="addschedule.php" class="btn btn-primary navbar-btn"><i class="glyphicon glyphicon-plus"></i> Add Schedule</A>
+    <A HREF="schedule.php" class="btn btn-primary navbar-btn"><i class="glyphicon glyphicon-list"></i> View Schedules</A>
 <? box_end(); ?>

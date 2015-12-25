@@ -16,29 +16,19 @@ if ($_COOKIE['level'] == sha1("level100")) {
 
 box_start();
 ?>
-                    <A HREF="addcampaign.php" class="btn btn-default navbar-btn"><img src="images/folder_add.png" border="0" align="left"><? echo $config_values['ADD_CAMPAIGN']; ?>
-                    </A>
-                
-                    <A HREF="campaigns.php" class="btn btn-default navbar-btn"><img src="images/folder_explore.png" border="0" align="left"><? echo $config_values['VIEW_CAMPAIGN']; ?>
-                        </a>
-                
+    <a href="addcampaign.php" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> <? echo $config_values['ADD_CAMPAIGN']; ?>
+    </a>
+    <a href="campaigns.php" class="btn btn-primary"><i class="glyphicon glyphicon-list"></i> <? echo $config_values['VIEW_CAMPAIGN']; ?>
+    </a>
 
 
-                <?
-                if ($_COOKIE['level'] == sha1("level100")) {
+<?
+if ($_COOKIE['level'] == sha1("level100")) {
+    ?>
+    <A HREF="campaigns.php?type=admin" class="btn btn-primary"><i class="glyphicon glyphicon-cog"></i> &nbsp;Admin Campaigns</A>
+    <A HREF="selectcustomer.php" class="btn btn-primary"><i class="glyphicon glyphicon-user"></i> &nbsp;Select Customer</A>
+    <A HREF="campaigns.php?type=all" class="btn btn-primary"><i class="glyphicon glyphicon-list"></i> &nbsp;All Campaigns</A>
+    <?
 
-                    //if (isset($_GET['type']) && $_GET['type'] == "all") {
-                        ?>
-                        
-                            <A HREF="campaigns.php?type=admin" class="btn btn-default navbar-btn"><img src="images/cog.png" border="0">&nbsp;Admin Campaigns</A>
-                        
-                        
-                            <A HREF="selectcustomer.php" class="btn btn-default navbar-btn"><img src="images/user.png" border="0">&nbsp;Select Customer</A>
-                        
-                    
-                        <A HREF="campaigns.php?type=all" class="btn btn-default navbar-btn"><img src="images/folder.png" border="0">&nbsp;All Campaigns</A>
-                    
-                    <?
-
-                }
+}
 box_end();
