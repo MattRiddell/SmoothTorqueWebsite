@@ -789,6 +789,7 @@ if ($loggedin) {
                                      customer */
                                     $sql = "SELECT credit, creditlimit from billing where accountcode = 'stl-$_COOKIE[user]'";
                                     $result_credit = mysql_query($sql, $link);
+                                    box_start();
                                     if (mysql_num_rows($result_credit) == 0) {
                                         /* They have no billing account - set to defaults */
                                         $credit = $config_values['CURRENCY_SYMBOL']." 0.00";
@@ -801,14 +802,16 @@ if ($loggedin) {
                                         $postpay = 1;
                                     }
                                     if ($postpay == 1) {
-                                        echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"".$http_dir_name."help/index.php\"><img width=\"16\" height=\"16\"  src=\"".$http_dir_name."images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(@strftime('%A %d %B %Y %H:%M:%S'))." Credit: $credit Credit Limit: $creditlimit <a href=\"".$http_dir_name."viewcdr.php\"><img width=\"16\" height=\"16\" src=\"".$http_dir_name."images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"".$http_dir_name."billinglog_account.php\"><img width=\"16\" height=\"16\" src=\"".$http_dir_name."images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
+                                        echo 'Credit: '.$credit.' Credit Limit: $creditlimit <a href="'.$http_dir_name.'"viewcdr.php" class="btn btn-primary"><i class="glyphicon glyphicon-phone-alt"></i> '.$config_values['CDR_TEXT'].'</a> <a href="'.$http_dir_name.'billinglog_account.php" class="btn btn-primary"><i class="glyphicon glyphicon-list"></i> '.$config_values['BILLING_TEXT'].'</a></font><br /></center>';
+
                                     } else {
-                                        echo "<center><font color=\"".$config_values['DATE_COLOUR']."\"><a href=\"".$http_dir_name."help/index.php\"><img width=\"16\" height=\"16\"  src=\"".$http_dir_name."images/help.png\" border=\"0\"><b> Help</b></a> ".ucwords(@strftime('%A %d %B %Y %H:%M:%S'))." Credit: $credit <a href=\"".$http_dir_name."viewcdr.php\"><img width=\"16\" height=\"16\"  src=\"".$http_dir_name."images/table.png\" border=\"0\"> ".$config_values['CDR_TEXT']."</a> <a href=\"".$http_dir_name."billinglog_account.php\"><img width=\"16\" height=\"16\"  src=\"".$http_dir_name."images/cart_edit.png\" border=\"0\"> ".$config_values['BILLING_TEXT']."</a></font><br /></center>";
+                                        echo 'Credit: '.$credit.' <a href="'.$http_dir_name.'viewcdr.php" class="btn btn-success"><i class="glyphicon glyphicon-phone-alt"></i> '.$config_values['CDR_TEXT'].'</a> <a href="'.$http_dir_name.'billinglog_account.php" class="btn btn-success"><i class="glyphicon glyphicon-list"></i>  '.$config_values['BILLING_TEXT'].'</a></font><br /></center>';
                                     }
                                     unset($result_credit);
                                     unset($postpay);
                                     unset($credit);
                                     unset($creditlimit);
+                                    box_end();
                                 }
                             }
                         }
