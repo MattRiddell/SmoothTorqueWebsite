@@ -42,7 +42,7 @@ if ($_GET['ajax'] == 1) {
 	    });
 </script>
 
-
+<div class="table-responsive">
 <table class="table table-bordered table-striped" align="center" border="0" cellpadding="2" cellspacing="0">
     <TR>
         <TD CLASS="">
@@ -149,6 +149,7 @@ if ($_GET['ajax'] == 1) {
         </TR>
     <?}?>
 </TABLE>
+</div>
 <?/*end of shadow */?>
 </div></div></div></div></div></td></tr></table>
 <?
