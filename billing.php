@@ -1,64 +1,64 @@
 <?
-$level=$_COOKIE[level];
+$level = $_COOKIE[level];
 
-if ($level!=sha1("level100") && $level!=sha1("level10")) {
-include "header.php";
-$ip = $_SERVER['REMOTE_ADDR'];
-echo "Attempted break in attempt from $ip ($_COOKIE[user])";
-/*================= Log Access ======================================*/
-$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', ' $ip attempted to view the admin page')";
-$result=mysql_query($sql, $link);
-/*================= Log Access ======================================*/
+if ($level != sha1("level100") && $level != sha1("level10")) {
+    include "header.php";
+    $ip = $_SERVER['REMOTE_ADDR'];
+    echo "Attempted break in attempt from $ip ($_COOKIE[user])";
+    /*================= Log Access ======================================*/
+    $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', ' $ip attempted to view the admin page')";
+    $result = mysql_query($sql, $link);
+    /*================= Log Access ======================================*/
 
 } else {
 
-include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(mysql_error());
-mysql_select_db("SineDialer", $link);
+    include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(mysql_error());
+    mysql_select_db("SineDialer", $link);
 
-$_POST = array_map(mysql_real_escape_string,$_POST);
-$_GET = array_map(mysql_real_escape_string,$_GET);
+    $_POST = array_map(mysql_real_escape_string, $_POST);
+    $_GET = array_map(mysql_real_escape_string, $_GET);
 
-$sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
-$result=mysql_query($sql, $link) or die (mysql_error());;
-$campaigngroupid=mysql_result($result,0,'campaigngroupid');
+    $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
+    $result = mysql_query($sql, $link) or die (mysql_error());;
+    $campaigngroupid = mysql_result($result, 0, 'campaigngroupid');
 
-if (isset($_POST[firstperiod])){
-    $firstperiod=$_POST[firstperiod];
-    $customerid = $_POST[id];
-    $priceperminute = $_POST[priceperminute];
-    $increment = $_POST[increment];
-    $pricepercall = $_POST[pricepercall];
-    $priceperconnectedcall = $_POST[priceperconnectedcall];
-    $priceperpress1 = $_POST[priceperpress1];
-    $credit = $_POST[credit];
-    $creditlimit = $_POST[creditlimit];
+    if (isset($_POST[firstperiod])) {
+        $firstperiod = $_POST[firstperiod];
+        $customerid = $_POST[id];
+        $priceperminute = $_POST[priceperminute];
+        $increment = $_POST[increment];
+        $pricepercall = $_POST[pricepercall];
+        $priceperconnectedcall = $_POST[priceperconnectedcall];
+        $priceperpress1 = $_POST[priceperpress1];
+        $credit = $_POST[credit];
+        $creditlimit = $_POST[creditlimit];
 
 
-    $sql="update billing ".
-         "set firstperiod='$firstperiod', increment='$increment', priceperminute='$priceperminute',
+        $sql = "update billing ".
+            "set firstperiod='$firstperiod', increment='$increment', priceperminute='$priceperminute',
          pricepercall = '$pricepercall', priceperconnectedcall='$priceperconnectedcall', priceperpress1='$priceperpress1',
          credit='$credit', creditlimit='$creditlimit' where customerid=".$customerid;
-    $result=mysql_query($sql, $link) or die (mysql_error());;
-/*    $SMDB2->executeUpdate($sql);*/
+        $result = mysql_query($sql, $link) or die (mysql_error());;
+        /*    $SMDB2->executeUpdate($sql);*/
 
-/*================= Log Access ======================================*/
-$sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Updated a billing record for customer id: $customerid (Credit: $credit Credit Limit $creditlimit)')";
-$result=mysql_query($sql, $link);
-/*================= Log Access ======================================*/
+        /*================= Log Access ======================================*/
+        $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Updated a billing record for customer id: $customerid (Credit: $credit Credit Limit $creditlimit)')";
+        $result = mysql_query($sql, $link);
+        /*================= Log Access ======================================*/
 
-    header("Location: customers.php");
-    exit;
-}
+        header("Location: customers.php");
+        exit;
+    }
 
 //require "header_campaign.php";
-$pagenum="2";
-require "header.php";
+    $pagenum = "2";
+    require "header.php";
 //require "header_trunk.php";
-$campaigngroupid=$groupid;
-$sql = 'SELECT * FROM billing WHERE customerid='.$_GET[id];
-$result=mysql_query($sql, $link);
-if (mysql_error()=="Table 'SineDialer.billing' doesn't exist") {
-    $sql = "CREATE TABLE `billing` (
+    $campaigngroupid = $groupid;
+    $sql = 'SELECT * FROM billing WHERE customerid='.$_GET[id];
+    $result = mysql_query($sql, $link);
+    if (mysql_error() == "Table 'SineDialer.billing' doesn't exist") {
+        $sql = "CREATE TABLE `billing` (
   `customerid` int(11) unsigned NOT NULL default '0',
   `accountcode` varchar(250) NOT NULL default '',
   `priceperminute` double(10,5) default '0.00000',
@@ -71,89 +71,114 @@ if (mysql_error()=="Table 'SineDialer.billing' doesn't exist") {
   `priceperpress1` double(10,5) default '0.00000',
   PRIMARY KEY  (`customerid`,`accountcode`)
 )";
-$result=mysql_query($sql, $link);
+        $result = mysql_query($sql, $link);
 
 
-}
-if (mysql_num_rows($result) == 0) {
-    $sql = 'SELECT * FROM customer WHERE id='.$_GET[id];
-    $result=mysql_query($sql, $link) or die (mysql_error());;
-    $accountcode = "stl-".mysql_result($result,0,"username");
+    }
+    if (mysql_num_rows($result) == 0) {
+        $sql = 'SELECT * FROM customer WHERE id='.$_GET[id];
+        $result = mysql_query($sql, $link) or die (mysql_error());;
+        $accountcode = "stl-".mysql_result($result, 0, "username");
+        ?>
+        <div class="jumbotron">
+
+        <br/>
+        <h3>There is no billing information for this customer yet</h3>
+
+        <p>Would you like to create a record?<br/>
+            <br/>
+            <a href="addbilling.php?accountcode=<? echo $accountcode."&id=".$_GET[id]; ?>" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Yes please</a><br/><br/>
+            <a href="customers.php" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> No thanks</a>
+        </p>
+        </div>
+        <?
+
+    } else {
+        while ($row = mysql_fetch_assoc($result)) {
+            ?>
+
+            <FORM ACTION="billing.php" METHOD="POST">
+            <table class="table table-striped" align="center" border="0" cellpadding="0" cellspacing="2">
+            <?
+            ?>
+            <TR>
+                <td>AccountCode</TD>
+                <TD>
+                    <? echo $row[accountcode]; ?>
+                </TD>
+            </TR>
+
+            <TR>
+                <td>Price Per Minute</TD>
+                <TD>
+                    <INPUT TYPE="HIDDEN" NAME="customerid" VALUE="<? echo $groupid; ?>">
+                    <INPUT TYPE="HIDDEN" NAME="id" VALUE="<? echo $row[customerid]; ?>">
+                    <INPUT TYPE="TEXT" NAME="priceperminute" VALUE="<? echo $row[priceperminute]; ?>" size="60">
+                </TD>
+            </TR>
+
+            <TR>
+                <td>First Period</TD>
+                <TD>
+                    <INPUT TYPE="TEXT" NAME="firstperiod" VALUE="<? echo $row[firstperiod]; ?>" size="60">
+                </TD>
+            </TR>
+
+            <TR>
+                <td>Increment</TD>
+                <TD>
+                    <INPUT TYPE="TEXT" NAME="increment" VALUE="<? echo $row[increment]; ?>" size="60">
+                </TD>
+            </TR>
+
+            <TR>
+                <td><? echo $config_values['PER_LEAD']; ?></TD>
+                <TD>
+                    <INPUT TYPE="TEXT" NAME="pricepercall" VALUE="<? echo $row[pricepercall]; ?>" size="60">
+                </TD>
+            </TR>
+
+            <TR>
+                <td>Price Per Connected Call</TD>
+                <TD>
+                    <INPUT TYPE="TEXT" NAME="priceperconnectedcall" VALUE="<? echo $row[priceperconnectedcall]; ?>" size="60">
+                </TD>
+            </TR>
+
+            <TR>
+                <td>Price Per Press 1</TD>
+                <TD>
+                    <INPUT TYPE="TEXT" NAME="priceperpress1" VALUE="<? echo $row[priceperpress1]; ?>" size="60">
+                </TD>
+            </TR>
+
+            <TR>
+                <td>Credit</TD>
+                <TD>
+                    <INPUT TYPE="TEXT" NAME="credit" VALUE="<? echo $row[credit]; ?>" size="60">
+                </TD>
+            </TR>
+
+            <TR>
+                <td>Credit Limit (0.00 for prepay)</TD>
+                <TD>
+                    <INPUT TYPE="TEXT" NAME="creditlimit" VALUE="<? echo $row[creditlimit]; ?>" size="60">
+                </TD>
+            </TR>
+
+            <TR>
+                <TD COLSPAN=2 ALIGN="RIGHT">
+                    <INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Save Billing Information">
+                </TD>
+            </TR>
+            <?
+        }
+    }
     ?>
-    <br />
-    There is no billing information for this customer yet<br />
-    <br />
-    Would you like to create a record?<br />
-    <br />
-    <a href="addbilling.php?accountcode=<?echo $accountcode."&id=".$_GET[id];?>">Yes please</a><br /><br />
-    <a href="customers.php">No thanks</a>
+
+    </TABLE>
+    </FORM>
     <?
-} else {
-while ($row = mysql_fetch_assoc($result)) {
-?>
-
-<FORM ACTION="billing.php" METHOD="POST">
-<table class="tborder" align="center" border="0" cellpadding="0" cellspacing="2">
-<?
-?>
-<TR><TD CLASS="thead">AccountCode</TD><TD>
-<?echo $row[accountcode];?>
-</TD>
-</TR>
-
-<TR><TD CLASS="thead">Price Per Minute</TD><TD>
-<INPUT TYPE="HIDDEN" NAME="customerid" VALUE="<?echo $groupid;?>">
-<INPUT TYPE="HIDDEN" NAME="id" VALUE="<?echo $row[customerid];?>">
-<INPUT TYPE="TEXT" NAME="priceperminute" VALUE="<?echo $row[priceperminute];?>" size="60">
-</TD>
-</TR>
-
-<TR><TD CLASS="thead">First Period</TD><TD>
-<INPUT TYPE="TEXT" NAME="firstperiod" VALUE="<?echo $row[firstperiod];?>" size="60">
-</TD>
-</TR>
-
-<TR><TD CLASS="thead">Increment</TD><TD>
-<INPUT TYPE="TEXT" NAME="increment" VALUE="<?echo $row[increment];?>" size="60">
-</TD>
-</TR>
-
-<TR><TD CLASS="thead"><?echo $config_values['PER_LEAD'];?></TD><TD>
-<INPUT TYPE="TEXT" NAME="pricepercall" VALUE="<?echo $row[pricepercall];?>" size="60">
-</TD>
-</TR>
-
-<TR><TD CLASS="thead">Price Per Connected Call</TD><TD>
-<INPUT TYPE="TEXT" NAME="priceperconnectedcall" VALUE="<?echo $row[priceperconnectedcall];?>" size="60">
-</TD>
-</TR>
-
-<TR><TD CLASS="thead">Price Per Press 1</TD><TD>
-<INPUT TYPE="TEXT" NAME="priceperpress1" VALUE="<?echo $row[priceperpress1];?>" size="60">
-</TD>
-</TR>
-
-<TR><TD CLASS="thead">Credit</TD><TD>
-<INPUT TYPE="TEXT" NAME="credit" VALUE="<?echo $row[credit];?>" size="60">
-</TD>
-</TR>
-
-<TR><TD CLASS="thead">Credit Limit (0.00 for prepay)</TD><TD>
-<INPUT TYPE="TEXT" NAME="creditlimit" VALUE="<?echo $row[creditlimit];?>" size="60">
-</TD>
-</TR>
-
-<TR><TD COLSPAN=2 ALIGN="RIGHT">
-<INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="Save Billing Information">
-</TD>
-</TR>
-<?
+    require "footer.php";
 }
-}
-?>
-
-</TABLE>
-</FORM>
-<?
-require "footer.php";}
 ?>
