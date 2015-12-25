@@ -146,7 +146,7 @@ if (isset($_GET['edit']) || isset($_GET['add'])) {
     if (mysql_num_rows($result) == 0) {
         // No rows
     } else {
-        echo '<table class="table table-striped">';
+        echo '<div class="table-responsive"><table class="table table-striped">';
         echo '<thead><tr>';
         echo '<th>Campaign Name</th><th colspan="2">Numbers</th><th>Start/Stop</th><th>Delete Campaign</th>';
         echo '</tr></thead><tbody>';
@@ -180,7 +180,7 @@ if (isset($_GET['edit']) || isset($_GET['add'])) {
             <?
             echo '</tr>';
         }
-        echo '</tbody></table>';
+        echo '</tbody></table></div>';
     }
 }
 //echo '</div>';
