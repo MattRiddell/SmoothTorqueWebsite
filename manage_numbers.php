@@ -22,6 +22,75 @@ if (isset($_GET['delete'])) {
  */
 
 require "header.php";
+if (isset($_GET['search'])) {
+    //print_pre($_POST);
+    $result = mysql_query("SELECT * FROM number WHERE phonenumber = ".sanitize($_POST['number'])." AND campaignid = ".sanitize($_GET['search'])) or die(mysql_error());
+    echo '<div class="jumbotron"><h3>Searching for '.$_POST['number'].'</h3>';
+
+    if (mysql_num_rows($result) == 0) {
+        // No rows
+        ?>
+        <p>We were unable to find that number in the database</p>
+        <p><a href="manage_numbers.php?view=<?=$_GET['search']?>" class="btn btn-primary">Go back to the list of numbers</a></p>
+
+        <?
+    } else {
+        while ($row = mysql_fetch_assoc($result)) {
+            //print_pre($row);
+            ?>
+            <p>We found the following information for <?=$row['phonenumber']?>:</p>
+            <p>Last Update: <?=date("d/m/Y H:i:s",strtotime($row['datetime']))?></p>
+            <p>Status: <?=$row['status']?></p>
+            <p>
+                <?
+                echo '<button class="btn btn-primary" onclick="reset(\''.$_GET['view'].'\',\''.$row['phonenumber'].'\');"><i class="glyphicon glyphicon-refresh" ></i> Reset Number back to New</button><br /><br />';
+
+                echo '<button class="btn btn-danger" onclick="delete(\''.$_GET['view'].'\',\''.$row['phonenumber'].'\');" data-toggle="modal" data-target="#myModal'.$row['phonenumber'].'"><i class="glyphicon glyphicon-remove" ></i> Delete Number</button>';
+
+                ?>
+                <!-- Modal -->
+                <div class="modal fade" id="myModal<?=$row['phonenumber']?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Delete <?=$row['phonenumber']?></h4>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to delete <?=$row['phonenumber']?> from the database?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" onclick="delete_number('<?=$_GET['search']?>','<?=$row['phonenumber']?>')">Yes, delete it</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </p>
+            <script>
+        function delete_number(campaignid, phonenumber) {
+            //alert("deleting");
+            $.post("manage_numbers.php?delete=1", {campaignid: campaignid, phonenumber: phonenumber})
+                .done(function (data) {
+                    window.location="manage_numbers.php?view=<?=$_GET['search']?>"
+                });
+        }
+        function reset(campaignid, phonenumber) {
+            //alert("Resetting");
+            $.post("manage_numbers.php?reset=1", {campaignid: campaignid, phonenumber: phonenumber})
+                .done(function (data) {
+                    window.location="manage_numbers.php?view=<?=$_GET['search']?>"
+                });
+
+        }
+    </script>
+            <?
+        }
+    }
+    echo '</div>';
+    require "footer.php";
+    exit(0);
+}
 if (isset($_GET['add'])) {
     ?>
     <div class="jumbotron">
@@ -67,7 +136,7 @@ if (isset($_GET['view'])) {
     ?>
 
     <? box_start(); ?>
-    <form action="manage_numbers.php?search=1" method="post" class="form-inline">
+    <form action="manage_numbers.php?search=<?=$_GET['view']?>" method="post" class="form-inline">
         <div class="form-group">
             <label for="number">Number: </label>
             <input type="text" class="form-control" id="number" name="number" placeholder="I.E. 4071231234" value="<?= $record['number'] ?>">
