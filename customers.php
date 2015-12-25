@@ -24,7 +24,7 @@ if ($level != sha1("level100")) {
     $campaigngroupid = mysql_result($result, 0, 'campaigngroupid');
 //shadow_start();
     ?>
-    <
+
     <div class="table-responsive">
         <table class="table table-bordered" align="center" border="0" cellpadding="2" cellspacing="0">
             <TR>
