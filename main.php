@@ -3,6 +3,88 @@
 require "header.php";
 
 
+
+
+$level = $_COOKIE['level'];
+
+/* If we are an administrator and billing is enabled */
+if ($level == sha1("level100") && $config_values['USE_BILLING'] == "YES" && $config_values['FRONT_PAGE_BILLING'] == "YES") {
+    if (!isset($_GET['size'])) {
+        $size = 144;
+    } else {
+        $size = $_GET['size'];
+    }
+    mysql_select_db("SineDialer", $link);
+    $resultx = mysql_query("select distinct system_billing.groupid, customer.* from system_billing left join customer on system_billing.groupid=customer.campaigngroupid");
+    $x = 0;
+    $highest = 0;
+
+    ?>
+
+<div class="jumbotron">
+    <?
+
+    //$size_x= $size;
+    while ($rowx = mysql_fetch_assoc($resultx)) {
+        $result = mysql_query("select max(totalcost) from system_billing where groupid = ".$rowx['groupid']);
+        $totalcost[$x] = mysql_result($result, 0, 0);
+        if ($totalcost[$x] > $highest) {
+            $highest_array[$x] = $totalcost[$x];
+        }
+        $company[$x] = $rowx[company];
+        $groupid[$x] = $rowx[groupid];
+        $real_total_cost += $totalcost[$x];
+        $x++;
+    }
+    for ($i = 0; $i < $x; $i++) {
+        $highest += $highest_array[$i];
+//echo "Adding $company[$i]";
+    }
+    $highest = $highest + ($highest / 10);
+    //for($i = 0;$i<$x;$i++) {
+    //        //echo $size_x;
+    //        $totalcost
+    //
+    //    }
+    $totalcost_cr = $config_values['CURRENCY_SYMBOL']." ".number_format($real_total_cost, 2);
+    echo "<h3>Total System Revenue: $totalcost_cr</h3><br />";
+
+    ?>
+    <p>Below you can find information on billing that the system has done. This page is only viewable by an administrator account when billing is enabled.</p>
+    <?
+
+    if ($size == 144) {
+        $class = "btn btn-info";
+    } else {
+        $class = "btn btn-primary";
+    }
+    echo '<a href="main.php?size=144" class="'.$class.'">Today</a>&nbsp;';
+    if ($size == 700) {
+        $class = "btn btn-info";
+    } else {
+        $class = "btn btn-primary";
+    }
+    echo '<a href="main.php?size=700" class="'.$class.'">5 Days</a>&nbsp;';
+    if ($size == 1400) {
+        $class = "btn btn-info";
+    } else {
+        $class = "btn btn-primary";
+    }
+    echo '<a href="main.php?size=1400" class="'.$class.'">10 Days</a>&nbsp;';
+    if ($size == 4200) {
+        $class = "btn btn-info";
+    } else {
+        $class = "btn btn-primary";
+    }
+    echo '<a href="main.php?size=4200" class="'.$class.'">30 Days</a>&nbsp;';
+
+    echo "<br /><br />";
+
+
+    echo '<a href="system_bill_graph.php?xsize=800&ysize=600&size='.$size.'&max='.$highest.'&groupid=-1"><img src="system_bill_graph.php?xsize=1020&ysize=400&size='.$size.'&max='.$highest.'&groupid=-1" width="1020" height="400" style="border: 1px solid #ccc" class="img-responsive img-rounded"></a>';
+    echo "<br>";
+    echo '</div>';
+} else {
     ?>
     <div class="jumbotron">
 
@@ -10,15 +92,15 @@ require "header.php";
 
     <p>
 
-        <?
-        if ($level == sha1("level5")) {
+    <?
+    if ($level == sha1("level5")) {
         /* Manual Dialing agent logging in */
         echo "Please wait."; ?>
-    </p></div>
-    <META HTTP-EQUIV=REFRESH CONTENT="0; URL=manualdial.php">
+        </p></div>
+        <META HTTP-EQUIV=REFRESH CONTENT="0; URL=manualdial.php">
 
-    <?
-    exit(0);
+        <?
+        exit(0);
     }
     if ($level == sha1("level10")) {
         /* Accounts user logging in */
@@ -33,86 +115,17 @@ require "header.php";
             $url = "addcampaign.php";
         }
         ?>
-        <p><a class="btn btn-primary btn-lg" href="<?=$url?>" role="button"><i class="glyphicon glyphicon-plus"></i> Add A New Campaign</a></p>
+        <p>
+            <a class="btn btn-primary btn-lg" href="<?= $url ?>" role="button"><i class="glyphicon glyphicon-plus"></i> Add A New Campaign</a>
+        </p>
         <?
     }
     echo '</p></div>';
 
-
-    $level = $_COOKIE['level'];
-
-    /* If we are an administrator and billing is enabled */
-    if ($level == sha1("level100") && $config_values['USE_BILLING'] == "YES" && $config_values['FRONT_PAGE_BILLING'] == "YES") {
-    if (!isset($_GET['size'])) {
-        $size = 144;
-    } else {
-        $size = $_GET['size'];
-    }
-    mysql_select_db("SineDialer", $link);
-    $resultx = mysql_query("select distinct system_billing.groupid, customer.* from system_billing left join customer on system_billing.groupid=customer.campaigngroupid");
-    $x = 0;
-    $highest = 0;
-    box_start();
-    ?>
-    <table align="center" border="0" cellpadding="0" cellspacing="2">
-        <TR>
-            <td class=subheader>
-            </td>
+}
 
 
-            <?
-            if ($size == 144) {
-                echo "<td class=subheader><b>Today&nbsp;</b></td>";
-            } else {
-                echo '<td class=subheader><a href="main.php?size=144">Today</a>&nbsp;</td>';
-            }
-            if ($size == 700) {
-                echo "<td class=subheader><b>5 Days&nbsp;</b></td>";
-            } else {
-                echo '<td class=subheader><a href="main.php?size=700">5 Days</a>&nbsp;</td>';
-            }
-            if ($size == 1400) {
-                echo "<td class=subheader><b>10 Days&nbsp;</b></td>";
-            } else {
-                echo '<td class=subheader><a href="main.php?size=1400">10 Days</a>&nbsp;</td>';
-            }
-            if ($size == 4200) {
-                echo "<td class=subheader><b>30 Days&nbsp;</b></td>";
-            } else {
-                echo '<td class=subheader><a href="main.php?size=4200">30 Days</a>&nbsp;</td>';
-            }
-            echo "    </TR></table>";
-            box_end();
-
-            //echo "<br /><br />";
-            //$size_x= $size;
-            while ($rowx = mysql_fetch_assoc($resultx)) {
-                $result = mysql_query("select max(totalcost) from system_billing where groupid = ".$rowx['groupid']);
-                $totalcost[$x] = mysql_result($result, 0, 0);
-                if ($totalcost[$x] > $highest) {
-                    $highest_array[$x] = $totalcost[$x];
-                }
-                $company[$x] = $rowx[company];
-                $groupid[$x] = $rowx[groupid];
-                $real_total_cost += $totalcost[$x];
-                $x++;
-            }
-            for ($i = 0; $i < $x; $i++) {
-                $highest += $highest_array[$i];
-//echo "Adding $company[$i]";
-            }
-            $highest = $highest + ($highest / 10);
-            //for($i = 0;$i<$x;$i++) {
-            //        //echo $size_x;
-            //        $totalcost
-            //
-            //    }
-            $totalcost_cr = $config_values['CURRENCY_SYMBOL']." ".number_format($real_total_cost, 2);
-            echo "<b>Total System Revenue: $totalcost_cr</b><br />";
-            echo '<a href="system_bill_graph.php?xsize=640&ysize=480&size='.$size.'&max='.$highest.'&groupid=-1"><img src="system_bill_graph.php?xsize=800&ysize=200&size='.$size.'&max='.$highest.'&groupid=-1" width="800" height="200" border="0"></a>';
-            echo "<br>";
-            }
-            ?>
+?>
 
 
 
@@ -120,6 +133,6 @@ require "header.php";
 
 
 
-            <?
-            require "footer.php";
-            ?>
+<?
+require "footer.php";
+?>
