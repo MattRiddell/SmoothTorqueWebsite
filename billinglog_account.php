@@ -9,13 +9,13 @@ if (!isset($_GET[startdate])) {
             <br/>
         <form action="billinglog_account.php">
             From: <br/><br/><input name="startdate">
-            <input type=button value="select" onclick="displayDatePicker('startdate', false, 'ymd', '-');"><br/><br/>
+            <input type=button value="Choose Start Date" onclick="displayDatePicker('startdate', false, 'ymd', '-');"><br/><br/>
             To: <br/><br/><input name="enddate">
-            <input type=button value="select" onclick="displayDatePicker('enddate', false, 'ymd', '-');"><br/><br/>
+            <input type=button value="Choose End Date" onclick="displayDatePicker('enddate', false, 'ymd', '-');"><br/><br/>
             <? if (isset($_GET[accountcode])) { ?>
                 <input type="hidden" name="accountcode" value="<? echo $_GET[accountcode]; ?>">
             <? } ?>
-            <input class="btn btn-primary" type="submit" value="Select">
+            <input class="btn btn-primary" type="submit" value="Show Billing Records">
         </form>
         </p>
     </div>
