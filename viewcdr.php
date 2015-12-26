@@ -115,9 +115,9 @@ if (!isset($_GET[startdate])) {
     }
     $result = mysql_query($sql, $cdrlink);
     $i = 0;
-    $titletd = "<td bgcolor=\"#000000\"><font color=\"#CCCCFF\"><b>&nbsp;&nbsp;";
-    $titletdc = "&nbsp;&nbsp;</td>";
-    echo "<center><table border=0>";
+    $titletd = "<th>";
+    $titletdc = "</th>";
+    echo '<div class="table-responsive"><table class="table table-striped">';
     if (isset($_GET['all']) && $_GET['all'] == "1") {
         echo "<tr>".$titletd."Call Date/Time".$titletdc."".$titletd.
             /*"DContext".$titletdc."".$titletd."Caller ID".$titletdc."".$titletd.*/
@@ -355,7 +355,7 @@ if (!isset($_GET[startdate])) {
         $i++;
     }
 
-    echo "</table>";
+    echo "</table></div>";
 }
 require "footer.php";
 ?>
