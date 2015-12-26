@@ -86,28 +86,36 @@ if (!isset($_GET[startdate])) {
     } else {
         $start = 0;
     }
-    echo '<a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page=0&accountcode='.$accountcode_in.'&all='.$_GET['all'].'&count='.$count.'" class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i></a> ';
+    echo '<ul class="pagination">';
+
+    echo '<li><a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page=0&accountcode='.$accountcode_in.'&all='.$_GET['all'].'&count='.$count.'"><i class="glyphicon glyphicon-step-backward"></i>  First</a></li> ';
     if ($page > 0) {
-        echo '<a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page='.($page - 1).'&accountcode='.$accountcode_in.'&all='.$_GET['all'].'&count='.$count.'" class="btn btn-primary"><i class="glyphicon glyphicon-chevron-left"></i></a> ';
+        echo '<li>';
+    } else {
+        echo '<li class="disabled">';
     }
+    echo '<a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page='.($page - 1).'&accountcode='.$accountcode_in.'&all='.$_GET['all'].'&count='.$count.'" ><i class="glyphicon glyphicon-chevron-left"></i> Back</a></li> ';
+
+
     if ($page > 5) {
         $pagex = $page - 4;
     } else {
         $pagex = 0;
     }
-    for ($i = $pagex; $i < ($count / 20); $i++) {
-        if ($i < $page + 20) {
+    for ($i = $pagex; $i < ($count / 15); $i++) {
+        if ($i < $page + 15) {
             if ($page == $i) {
-                echo "<b>$i</b> ";
+                echo '<li class="active"><a href="#">'.$i.'</a></li> ';
             } else {
-                echo '<a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page='.$i.'&accountcode='.$accountcode_in.'&all='.$_GET['all'].'&count='.$count.'">'.$i.'</a> ';
+                echo '<li><a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page='.$i.'&accountcode='.$accountcode_in.'&all='.$_GET['all'].'&count='.$count.'">'.$i.'</a></li> ';
             }
         }
     }
 
-    echo '<a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page='.($page + 1).'&accountcode='.$accountcode_in.'&all='.$_GET['all'].'&count='.$count.'" class="btn btn-primary"><i class="glyphicon glyphicon-chevron-right"></i></a> ';
-    echo '<a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page='.round($count / 20).'&accountcode='.$accountcode_in.'&all='.$_GET['all'].'&count='.$count.'" class="btn btn-primary"><i class="glyphicon glyphicon-step-forward"></i></a> <br /><br/>';
-    //$sql = "SELECT * from ".$config_values['CDR_TABLE']." order by calldate DESC LIMIT $start,20";
+    echo '<li><a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page='.($page + 1).'&accountcode='.$accountcode_in.'&all='.$_GET['all'].'&count='.$count.'" ><i class="glyphicon glyphicon-chevron-right"></i> Next</a></li> ';
+    echo '<li><a href="viewcdr.php?startdate='.$startdate.'&enddate='.$enddate.'&page='.round($count / 15).'&accountcode='.$accountcode_in.'&all='.$_GET['all'].'&count='.$count.'" ><i class="glyphicon glyphicon-step-forward"></i> Last</a></li> ';
+    echo '</ul>&nbsp;';
+//$sql = "SELECT * from ".$config_values['CDR_TABLE']." order by calldate DESC LIMIT $start,20";
     if (isset($_GET['all']) && $_GET['all'] == "1") {
         $sql = "SELECT * from ".$config_values['CDR_TABLE']." WHERE calldate between '".$_GET['startdate']." 00:00:00' and '".$_GET['enddate']." 23:59:59' and dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' order by calldate DESC LIMIT $start,20";
     } else {
@@ -185,37 +193,37 @@ if (!isset($_GET[startdate])) {
         $userfield2[$i] = $row[userfield2];
         if ($userfield2[$i] != 1) {
             $userfield2[$i] = 0;
-            $paid[$i] = '<td bgcolor="#FFEEEE"><img src="images/cross.png" border="0" align="center">';
+            $paid[$i] = '<td><img src="images/cross.png" border="0" align="center">';
         } else {
-            $paid[$i] = '<td bgcolor="#EEFFEE"><img src="images/tick.png" border="0" align="center">';
+            $paid[$i] = '<td><img src="images/tick.png" border="0" align="center">';
         }
         $display = TRUE;
         if ($disposition[$i] == "ANSWERED") {
-            $td = "<td bgcolor=\"#CCffCC\">";
+            $td = "<td>";
         } else if ($disposition[$i] == "NO ANSWER") {
-            $td = "<td bgcolor=\"#DDDDDD\">";
+            $td = "<td>";
         } else if ($disposition[$i] == "FAILED") {
-            $td = "<td bgcolor=\"#999999\">";
+            $td = "<td>";
             $display = FALSE;
         } else if ($disposition[$i] == "BUSY") {
-            $td = "<td bgcolor=\"#99ffff\">";
+            $td = "<td>";
         } else {
             $td = "<td>";
         }
         if ($dst[$i] != "s") {
             /* Failed */
-            $td = "<td bgcolor=\"#ff9999\">";
+            $td = "<td>";
         }
         if ($dst[$i] == "timeout") {
-            $td = "<td bgcolor=\"#DDDDDD\">";
+            $td = "<td>";
             $dst[$i] = "no answer";
         }
         if ($dst[$i] == "busy") {
-            $td = "<td bgcolor=\"#FF99FF\">";
+            $td = "<td>";
             $dst[$i] = "busy";
         }
         if ($dst[$i] == "1") {
-            $td = "<td bgcolor=\"#9999ff\">";
+            $td = "<td>";
             $dst[$i] = "pressed 1";
         }
 
