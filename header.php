@@ -573,6 +573,9 @@ if ($loggedin) {
                 padding: 40px;
             }
         }
+        .table tbody>tr>td.vert-align{
+            vertical-align: middle;
+        }
     </style>
     <?
     /* If we are on one of the realtime graph pages we don't want it to be cached */

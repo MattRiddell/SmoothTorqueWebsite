@@ -26,7 +26,7 @@ if ($level != sha1("level100")) {
     ?>
 
     <div class="table-responsive">
-        <table class="table table-bordered" align="center" border="0" cellpadding="2" cellspacing="0">
+        <table class="table table-striped" align="center" border="0" cellpadding="2" cellspacing="0">
             <TR>
                 <TD CLASS="">
                     Name
@@ -37,15 +37,7 @@ if ($level != sha1("level100")) {
                 <TD CLASS="">
                     Call Details
                 </TD>
-                <TD CLASS="">
-                    City
-                </TD>
-                <TD CLASS="">
-                    Country
-                </TD>
-                <TD CLASS="">
-                    Phone
-                </TD>
+
                 <? if ($config_values['USE_BILLING'] == "YES") { ?>
                     <TD CLASS="">
                         Credit
@@ -71,73 +63,53 @@ if ($level != sha1("level100")) {
 
 
                 $count++;
-                if ($toggle) {
-                    $toggle = FALSE;
-                    $class = " class=\"tborder2\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f8f8f8'\"   ";
-                } else {
-                    $toggle = TRUE;
-                    $class = " class=\"tborderx\"  onmouseover=\"style.backgroundColor='#84DFC1';\" onmouseout=\"style.backgroundColor='#f0f0f0'\" ";
-                }
 
                 ?>
                 <TR <? echo $class; ?> >
                     <TD>
                         <?
                         if (strlen($row[company]) < 15) {
-                            echo '<A HREF="editcustomer.php?id='.$row[id].'" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i> '.$row[company].'</A>&nbsp;';
+                            echo ''.$row[company].'';
                         } else {
-                            echo '<A HREF="editcustomer.php?id='.$row[id].'" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i> '.trim(substr($row[company], 0, 15))."...</A>";
+                            echo ''.trim(substr($row[company], 0, 15))."...";
                         }
                         ?>
                     </TD>
-                    <TD>
-                        <?
-                        ?>
-                        <? echo "<A HREF=\"changepassword.php?id=".$row[id]."\" title=\"Change Password\"><img src=\"images/lock_edit.png\" border=\"0\" align=\"right\" title=\"Change Password\"></A>"; ?>
+                    <TD class="vert-align">
                         <?
                         if (strlen($row[username]) < 15) {
-                            echo $row[username];
+                            echo '<A HREF="editcustomer.php?id='.$row[id].'" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i> '.$row[username].'</a>';
                         } else {
-                            echo trim(substr($row[username], 0, 15))."...";
+                            echo '<A HREF="editcustomer.php?id='.$row[id].'" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i> '.trim(substr($row[username], 0, 15))."...</a>";
                         }
+                        echo '&nbsp;<A HREF="changepassword.php?id='.$row[id].'" title="Change Password" class="btn btn-info"><i class="glyphicon glyphicon-lock"></i> Reset Password</A>';
                         ?>
                     </TD>
                     <TD>
                         <?
                         echo '<A HREF="viewcdr.php?accountcode=stl-'.$row[username].'" title="View CDR Information" class="btn btn-primary">View CDR</A>'; ?>
                     </TD>
-                    <TD>
-                        <? echo $row[city]; ?>
-                    </TD>
-                    <TD>
-                        <? echo $row[country]; ?>
-                    </TD>
-                    <TD>
-                        <?
-                        if (strlen($row[phone]) < 15) {
-                            echo $row[phone];
-                        } else {
-                            echo substr($row[phone], 15)."...";
-                        }
-                        ?>
-                    </TD>
+
                     <? if ($config_values['USE_BILLING'] == "YES") { ?>
                         <TD>
                             <?
-                            echo "<A HREF=\"billing.php?id=".$row[id]."\" title=\"View Billing Information\"><img src=\"images/cart_edit.png\" border=\"0\" align=\"right\" title=\"View Billing Information\">";
+                            echo '<a href="billing.php?id='.$row[id].'" title="View Billing Information" class="btn btn-primary">';
                             if (isset($row[credit])) {
-                                echo $config_values['CURRENCY_SYMBOL']." ".number_format($row[credit], 2)."</A>";
+                                echo '<i class="glyphicon glyphicon-pencil"></i> ';
+                                echo $config_values['CURRENCY_SYMBOL']." ".number_format($row[credit], 2)."</a>";
                             } else {
-                                echo "Add Billing</A>";
+                                echo '<i class="glyphicon glyphicon-plus"></i> Add Billing</a>';
                             }
                             ?>
                         </TD>
                         <TD>
                             <?
-                            echo "<A HREF=\"billing.php?id=".$row[id]."\" title=\"View Billing Information\"><img src=\"images/cart_edit.png\" border=\"0\" align=\"right\" title=\"View Billing Information\">";
+                            echo '<A HREF="billing.php?id='.$row[id].'" title="View Billing Information" class="btn btn-primary">';
                             if (isset($row[credit])) {
+                                echo '<i class="glyphicon glyphicon-pencil"></i> ';
                                 echo $config_values['CURRENCY_SYMBOL']." ".number_format($row[creditlimit], 2)."</A>";
                             } else {
+                                echo '<i class="glyphicon glyphicon-plus"></i> ';
                                 echo "Add Billing</A>";
                             }
                             ?>
