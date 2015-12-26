@@ -38,7 +38,7 @@ if (isset($_GET['search'])) {
         while ($row = mysql_fetch_assoc($result)) {
             //print_pre($row);
             ?>
-            <p>We found the following information for <?=$row['phonenumber']?>:</p>
+            <p>We found the following information for <?=format_phone($row['phonenumber'])?>:</p>
             <p>Last Update: <?=date("d/m/Y H:i:s",strtotime($row['datetime']))?></p>
             <p>Status: <?=$row['status']?></p>
             <p>
@@ -57,10 +57,10 @@ if (isset($_GET['search'])) {
                                 <h4 class="modal-title" id="myModalLabel">Delete <?=$row['phonenumber']?></h4>
                             </div>
                             <div class="modal-body">
-                                Are you sure you want to delete <?=$row['phonenumber']?> from the database?
+                                Are you sure you want to delete <?=format_phone($row['phonenumber'])?> from the database?
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                 <button type="button" class="btn btn-primary" onclick="delete_number('<?=$_GET['search']?>','<?=$row['phonenumber']?>')">Yes, delete it</button>
                             </div>
                         </div>
@@ -195,7 +195,7 @@ if (isset($_GET['view'])) {
         } else {
             while ($row = mysql_fetch_assoc($result)) {
                 echo "<tr>";
-                echo '<td>'.$row['phonenumber'].'</td>';
+                echo '<td>'.format_phone($row['phonenumber']).'</td>';
                 echo '<td><p id="'.$row['phonenumber'].'">'.ucwords(str_replace("_", " ", $row['status'])).'</p></td>';
                 echo '<td>'.$row['datetime'].'</td>';
                 echo '<td><button class="btn btn-primary" onclick="reset(\''.$_GET['view'].'\',\''.$row['phonenumber'].'\');"><i class="glyphicon glyphicon-refresh" ></i></button></td>';
@@ -210,13 +210,13 @@ if (isset($_GET['view'])) {
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Delete <?=$row['phonenumber']?></h4>
+                                <h4 class="modal-title" id="myModalLabel">Delete <?=format_phone($row['phonenumber'])?></h4>
                             </div>
                             <div class="modal-body">
-                                Are you sure you want to delete <?=$row['phonenumber']?> from the database?
+                                Are you sure you want to delete <?=format_phone($row['phonenumber'])?> from the database?
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                 <button type="button" class="btn btn-primary" onclick="delete_number('<?=$_GET['view']?>','<?=$row['phonenumber']?>')">Yes, delete it</button>
                             </div>
                         </div>

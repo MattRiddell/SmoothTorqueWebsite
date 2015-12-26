@@ -13,6 +13,18 @@ require $current_directory."/functions/layout.php";
 
 require $current_directory."/functions/database.php";
 
+if (!function_exists('format_phone')) {
+    function format_phone($data) {
+
+        if (preg_match('/^\d(\d{3})(\d{3})(\d{4})$/', $data, $matches)) {
+            $result = "(".$matches[1].') '.$matches[2].'-'.$matches[3];
+            return $result;
+        } else {
+            return null;
+        }
+    }
+}
+
 if (!function_exists('sec2hms')) {
     function sec2hms($sec, $padHours = FALSE) {
 
