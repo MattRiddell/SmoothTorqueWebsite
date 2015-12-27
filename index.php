@@ -54,7 +54,7 @@ if (mysql_num_rows($result) > 0) {
                     echo '?redirect='.$_GET['redirect'];
                 } ?>" METHOD="POST" class="form">
 
-                    <img src="./<? echo $config_values['LOGO']; ?>" class="img-responsive"><br/>
+                    <img src="./<? echo $config_values['LOGO']; ?>" class="img-responsive img-rounded"><br/>
 
                     <br/>
 
