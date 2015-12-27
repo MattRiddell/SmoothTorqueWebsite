@@ -20,7 +20,7 @@ if (!function_exists('format_phone')) {
             $result = "(".$matches[1].') '.$matches[2].'-'.$matches[3];
             return $result;
         } else {
-            return null;
+            return NULL;
         }
     }
 }
@@ -205,7 +205,7 @@ if (!function_exists('get_bootstrap_menu')) {
     function get_bootstrap_menu($config_values, $self, $level, $mode = 0) {
         $response = '
 
-        <nav class="navbar navbar-default">
+        <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -276,7 +276,7 @@ if (!function_exists('get_menu_html')) {
         global $http_dir_name;
         if ($mode == 1) {
             $menu = '<CENTER>
-<nav class="navbar navbar-default ">
+<nav class="navbar navbar-inverse ">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">

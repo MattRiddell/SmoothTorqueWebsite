@@ -600,10 +600,11 @@ if ($loggedin) {
     <script src="js/respond.min.js"></script>
     <![endif]-->
 
-    <!-- Optional theme -->
-
     <!-- Latest compiled and minified JavaScript -->
     <script type="text/javascript" src="js/jquery.js"></script>
+
+    <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->
+    <script language="javascript" type="text/javascript" src="js/jquery.flot.min.js"></script>
 
     <script src="js/bootstrap.min.js"></script>
     <script src="js/validator.js"></script>

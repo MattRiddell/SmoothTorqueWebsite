@@ -80,7 +80,7 @@ if ($level == sha1("level100") && $config_values['USE_BILLING'] == "YES" && $con
 
     echo "<br /><br />";
 
-
+    //include "system_bill_graph.php";
     echo '<a href="system_bill_graph.php?xsize=800&ysize=600&size='.$size.'&max='.$highest.'&groupid=-1"><img src="system_bill_graph.php?xsize=1020&ysize=400&size='.$size.'&max='.$highest.'&groupid=-1" width="1020" height="400" style="border: 1px solid #ccc" class="img-responsive img-rounded"></a>';
     echo "<br>";
     echo '</div>';
