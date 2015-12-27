@@ -79,7 +79,7 @@ if (mysql_num_rows($result) > 0) {
                     </div>
                     <div class="form-group">
                         <label for="pass"><?= $config_values['MAIN_PAGE_PASSWORD']; ?></label>
-                        <input type="text" class="form-control" id="pass" name="pass" placeholder="<?= $config_values['MAIN_PAGE_PASSWORD']; ?>">
+                        <input type="password" class="form-control" id="pass" name="pass" placeholder="<?= $config_values['MAIN_PAGE_PASSWORD']; ?>">
                     </div>
                     <?
                     $result = mysql_query("SELECT LANG, language FROM web_config WHERE url = ".sanitize($url));
