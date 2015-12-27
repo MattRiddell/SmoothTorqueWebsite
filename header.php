@@ -710,5 +710,6 @@ if (isset($menu) && $loggedin == TRUE) {
 
 }
 ?>
+</div>
 <div class="container">
 
