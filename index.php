@@ -14,7 +14,7 @@
  */
 
 /* Read the header file.  This is done on pretty much every page of the
-/* site. Because we may have no cookie set, we should temporarily set it*/
+/* site. Because we may have no cookie set, we should temporarily set it */
 
 require "admin/db_config.php";
 $current_directory = dirname(__FILE__);
@@ -43,77 +43,72 @@ if (mysql_num_rows($result) > 0) {
     $show_front_page_text = mysql_result($result, 0, 'value');
 }
 
-echo "<FONT FACE=\"ARIAL\">";
 ?>
+<div class="container">
+    <br/><br/>
+    <div class="row">
+        <div class='col-md-3'></div>
+        <div class="col-md-6">
+            <div class="jumbotron" style="">
+                <FORM ACTION="login.php<? if (isset($_GET['redirect'])) {
+                    echo '?redirect='.$_GET['redirect'];
+                } ?>" METHOD="POST" class="form">
 
+                    <img src="./<? echo $config_values['LOGO']; ?>" class="img-responsive"><br/>
 
-<FORM ACTION="login.php<? if (isset($_GET['redirect'])) {
-    echo '?redirect='.$_GET['redirect'];
-} ?>" METHOD="POST">
-    <CENTER>
-        <? /* <table class="tborder" align="center" width="270" border="0" cellpadding="0" cellspacing="2">*/ ?>
-        <br/>
-        <table align="center" cellpadding="0" cellspacing="0">
-            <TR>
-                <TD COLSPAN=2>
-                    <CENTER><img src="./<? echo $config_values['LOGO']; ?>">
-                </TD>
-            </TR>
-        </table>
-        <br/>
-        <font color="#888888">
-            <?
-            if ($show_front_page_title == "1") {
-                echo stripslashes($config_values['TITLE']);
-                ?><br/><br/><?
-            }
-            if ($show_front_page_text == "1") {
-                echo $config_values['TEXT']; ?>        <br/><br/>
-            <? } ?>
-        </font>
-
-
-        <?
-        ?>
-
-
+                    <br/>
 
                     <?
-                    if (isset($_GET['error'])) {
-                        echo "<CENTER><B><FONT COLOR=\"RED\">".$_GET[error]."</FONT></B></CENTER>";
+                    if ($show_front_page_title == "1") {
+                        echo "<h3>".stripslashes($config_values['TITLE'])."</h3>";
+
+                    }
+                    if ($show_front_page_text == "1") {
+                        echo $config_values['TEXT'];
                     }
 
+                    if (isset($_GET['error'])) {
+                        echo "<h4><B><FONT COLOR=\"RED\">".$_GET[error]."</FONT></B></h4>";
+                    }
                     ?>
 
-                    <? echo $config_values['MAIN_PAGE_USERNAME']; ?>:<br/>
-                    <INPUT class="" TYPE="TEXT" NAME="user" ><br/>
-                    <? echo $config_values['MAIN_PAGE_PASSWORD']; ?>:<br/>
-                    <INPUT class="input130" TYPE="PASSWORD" NAME="pass"><br/><br/>
+
+                    <div class="form-group">
+                        <label for="user"><?= $config_values['MAIN_PAGE_USERNAME']; ?></label>
+                        <input type="text" class="form-control" id="user" name="user" placeholder="<?= $config_values['MAIN_PAGE_USERNAME']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="pass"><?= $config_values['MAIN_PAGE_PASSWORD']; ?></label>
+                        <input type="text" class="form-control" id="pass" name="pass" placeholder="<?= $config_values['MAIN_PAGE_PASSWORD']; ?>">
+                    </div>
                     <?
                     $result = mysql_query("SELECT LANG, language FROM web_config WHERE url = ".sanitize($url));
                     if (mysql_num_rows($result) == 0) {
                         $result = mysql_query("SELECT LANG, language FROM web_config WHERE url = 'default'");
                     }
                     if (mysql_num_rows($result) > 0) {
-                        echo 'Language:<br />';
-                        //echo "Translations Available";
-                        echo '<select name="language">';
-//    echo '<option value="en">English</option>';
+                    ?>
+                    <div class="form-group">
+                        <label for="lang">Language:</label>
+                        <?
+                        echo '<select id="lang" name="language" class="form-control">';
+                        //    echo '<option value="en">English</option>';
                         while ($row = mysql_fetch_assoc($result)) {
 
                             echo '<option value="'.$row[LANG].'">'.$row[language].'</option>';
                         }
-                        echo '</select><br /><br />';
-                    } ?>
-                    <INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="<? echo $config_values['MAIN_PAGE_LOGIN']; ?>">
+                        echo '</select></div>';
+                        } ?>
+                        <INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="<? echo $config_values['MAIN_PAGE_LOGIN']; ?>">
 
-</FORM>
+                </FORM>
 
+            </div>
 
+        </div>
+        <div class='col-md-3'></div>
+    </div>
 
-<?
-?>
-
-<?
-require "footer.php";
-?>
+    <?
+    require "footer.php";
+    ?>
