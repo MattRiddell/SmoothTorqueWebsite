@@ -49,15 +49,15 @@ if (mysql_num_rows($result) > 0) {
     <div class="row">
         <div class='col-md-3'></div>
         <div class="col-md-6">
-            <div class="jumbotron" style="">
-                <FORM ACTION="login.php<? if (isset($_GET['redirect'])) {
-                    echo '?redirect='.$_GET['redirect'];
-                } ?>" METHOD="POST" class="form">
 
-                    <img src="./<? echo $config_values['LOGO']; ?>" class="img-responsive img-rounded"><br/>
+            <FORM ACTION="login.php<? if (isset($_GET['redirect'])) {
+                echo '?redirect='.$_GET['redirect'];
+            } ?>" METHOD="POST" class="form">
 
-                    <br/>
+                <img src="./<? echo $config_values['LOGO']; ?>" class="img-responsive img-rounded"><br/>
 
+                <br/>
+                <div class="jumbotron" style="">
                     <?
                     if ($show_front_page_title == "1") {
                         echo "<h3>".stripslashes($config_values['TITLE'])."</h3>";
@@ -101,14 +101,14 @@ if (mysql_num_rows($result) > 0) {
                         } ?>
                         <INPUT class="btn btn-primary" TYPE="SUBMIT" VALUE="<? echo $config_values['MAIN_PAGE_LOGIN']; ?>">
 
-                </FORM>
-
-            </div>
+            </FORM>
 
         </div>
-        <div class='col-md-3'></div>
-    </div>
 
-    <?
-    require "footer.php";
-    ?>
+    </div>
+    <div class='col-md-3'></div>
+</div>
+
+<?
+require "footer.php";
+?>
