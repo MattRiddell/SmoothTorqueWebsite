@@ -412,7 +412,7 @@ if ($level != sha1("level100")) {
 
 
     <form action="config.php" name="config" method="post">
-    <center>
+    
 
 
 
@@ -459,8 +459,7 @@ if ($level != sha1("level100")) {
     
     <div id="tools" title="Tools" class="tab-pane" >
     <br />
-    <center>
-    <a href="check_version.php" class="btn btn-default"><img src="<?= $http_dir_name ?>images/browser.png" border="0" width="32"><br />Check for updates</a>
+    
         <a href="mailto:matt@venturevoip.com" class="btn btn-default"><img src="<?= $http_dir_name ?>images/ftp.png" border="0" width="32"><br />Submit Support Request</a>
         <a href="log.php" class="btn btn-default"><img src="<?= $http_dir_name ?>images/document.png" border="0" width="32"><br />View System Logs</a>
         <a href="billinglog.php" class="btn btn-default"><img src="<?= $http_dir_name ?>images/kcalc.png" border="0" width="32"><br />View <? echo $config_values['BILLING_TEXT']; ?></a>
@@ -472,8 +471,8 @@ if ($level != sha1("level100")) {
     
     
     <div id="system" title="System" class="tab-pane">
-    <center>
-    <table class="table">
+    
+    <table class="table table-striped">
     <thead>
     <tr>
     <th colspan="2">Settings</th>
@@ -501,7 +500,7 @@ if ($level != sha1("level100")) {
     Sox Path:
     </td>
     <td>
-    <input type="Text" name="sox" value="<? echo $config_values['SOX']; ?>">
+    <input class="form-control" type="Text" name="sox" value="<? echo $config_values['SOX']; ?>">
     </td>
     </tr>
 
@@ -510,7 +509,7 @@ if ($level != sha1("level100")) {
     Expected Percent of Press 1 Calls (0.01-100):
     </td>
     <td>
-    <input type="Text" name="expected_rate" value="<?
+    <input class="form-control" type="Text" name="expected_rate" value="<?
     if ($expected_rate > 0) {
         echo $expected_rate;
     } else {
@@ -527,8 +526,8 @@ if ($level != sha1("level100")) {
 
     <? /************************** EMAIL TAB *************************/ ?>
     <div id="email" title="Email"class="tab-pane">
-    <center>
-    <table class="table">
+
+    <table class="table table-striped">
 
     <tr><th colspan="2">Email Settings</th>
 
@@ -537,7 +536,7 @@ if ($level != sha1("level100")) {
     SMTP Host Name
     </td>
     <td>
-    <input type="Text" name="SMTP_HOST" value="<? echo $config_values['SMTP_HOST']; ?>">
+    <input class="form-control" type="Text" name="SMTP_HOST" value="<? echo $config_values['SMTP_HOST']; ?>">
     </td>
     </tr>
 
@@ -546,7 +545,7 @@ if ($level != sha1("level100")) {
     SMTP User Name
     </td>
     <td>
-    <input type="Text" name="SMTP_USER" value="<? echo $config_values['SMTP_USER']; ?>">
+    <input class="form-control" type="Text" name="SMTP_USER" value="<? echo $config_values['SMTP_USER']; ?>">
     </td>
     </tr>
 
@@ -555,7 +554,7 @@ if ($level != sha1("level100")) {
     SMTP Password
     </td>
     <td>
-    <input type="Text" name="SMTP_PASS" value="<? echo $config_values['SMTP_PASS']; ?>">
+    <input class="form-control" type="Text" name="SMTP_PASS" value="<? echo $config_values['SMTP_PASS']; ?>">
     </td>
     </tr>
 
@@ -564,7 +563,7 @@ if ($level != sha1("level100")) {
     Email from address
     </td>
     <td>
-    <input type="Text" name="SMTP_FROM" value="<? echo $config_values['SMTP_FROM']; ?>">
+    <input class="form-control" type="Text" name="SMTP_FROM" value="<? echo $config_values['SMTP_FROM']; ?>">
     </td>
     </tr>
 
@@ -575,8 +574,8 @@ if ($level != sha1("level100")) {
 
     <? /************************** Mysql TAB *************************/ ?>
     <div id="mysql" title="MySQL" class="tab-pane">
-    <center>
-    <table class="table">
+
+    <table class="table table-striped">
 
     <tr><th colspan="2">MySQL Settings</th>
 
@@ -585,7 +584,7 @@ if ($level != sha1("level100")) {
     SmoothTorque MySQL Host Name
     </td>
     <td>
-    <input type="Text" name="ST_MYSQL_HOST" value="<? echo $db_host; ?>">
+    <input class="form-control" type="Text" name="ST_MYSQL_HOST" value="<? echo $db_host; ?>">
     </td>
     </tr>
 
@@ -594,7 +593,7 @@ if ($level != sha1("level100")) {
     SmoothTorque MySQL User Name
     </td>
     <td>
-    <input type="Text" name="ST_MYSQL_USER" value="<? echo $db_user; ?>">
+    <input class="form-control" type="Text" name="ST_MYSQL_USER" value="<? echo $db_user; ?>">
     </td>
     </tr>
 
@@ -603,7 +602,7 @@ if ($level != sha1("level100")) {
     SmoothTorque MySQL Password
     </td>
     <td>
-    <input type="password" name="ST_MYSQL_PASS" value="<? echo $db_pass; ?>">
+    <input class="form-control" type="password" name="ST_MYSQL_PASS" value="<? echo $db_pass; ?>">
     </td>
     </tr>
 
@@ -612,7 +611,7 @@ if ($level != sha1("level100")) {
     Asterisk MySQL CDR Host:
     </td>
     <td>
-    <input type="Text" name="CDR_HOST" value="<? echo $config_values['CDR_HOST']; ?>">
+    <input class="form-control" type="Text" name="CDR_HOST" value="<? echo $config_values['CDR_HOST']; ?>">
     </td>
     </tr>
 
@@ -621,7 +620,7 @@ if ($level != sha1("level100")) {
     Asterisk MySQL CDR Username:
     </td>
     <td>
-    <input type="Text" name="CDR_USER" value="<? echo $config_values['CDR_USER']; ?>">
+    <input class="form-control" type="Text" name="CDR_USER" value="<? echo $config_values['CDR_USER']; ?>">
     </td>
     </tr>
 
@@ -630,7 +629,7 @@ if ($level != sha1("level100")) {
     Asterisk MySQL CDR Pass:
     </td>
     <td>
-    <input type="password" name="CDR_PASS" value="<? echo $config_values['CDR_PASS']; ?>">
+    <input class="form-control" type="password" name="CDR_PASS" value="<? echo $config_values['CDR_PASS']; ?>">
     </td>
     </tr>
 
@@ -639,7 +638,7 @@ if ($level != sha1("level100")) {
     Asterisk MySQL CDR Database:
     </td>
     <td>
-    <input type="Text" name="CDR_DB" value="<? echo $config_values['CDR_DB']; ?>">
+    <input class="form-control" type="Text" name="CDR_DB" value="<? echo $config_values['CDR_DB']; ?>">
     </td>
     </tr>
 
@@ -648,7 +647,7 @@ if ($level != sha1("level100")) {
     Asterisk MySQL CDR Table:
     </td>
     <td>
-    <input type="Text" name="CDR_TABLE" value="<? echo $config_values['CDR_TABLE']; ?>">
+    <input class="form-control" type="Text" name="CDR_TABLE" value="<? echo $config_values['CDR_TABLE']; ?>">
     </td>
     </tr>
 
@@ -657,7 +656,7 @@ if ($level != sha1("level100")) {
     SugarCRM MySQL Hostname:
     </td>
     <td>
-    <input type="Text" name="sugar_host" value="<? echo $config_values['SUGAR_HOST']; ?>">
+    <input class="form-control" type="Text" name="sugar_host" value="<? echo $config_values['SUGAR_HOST']; ?>">
     </td>
     </tr>
 
@@ -666,7 +665,7 @@ if ($level != sha1("level100")) {
     SugarCRM MySQL Username:
     </td>
     <td>
-    <input type="Text" name="sugar_user" value="<? echo $config_values['SUGAR_USER']; ?>">
+    <input class="form-control" type="Text" name="sugar_user" value="<? echo $config_values['SUGAR_USER']; ?>">
     </td>
     </tr>
 
@@ -675,7 +674,7 @@ if ($level != sha1("level100")) {
     SugarCRM MySQL Password:
     </td>
     <td>
-    <input type="Text" name="sugar_pass" value="<? echo $config_values['SUGAR_PASS']; ?>">
+    <input class="form-control" type="Text" name="sugar_pass" value="<? echo $config_values['SUGAR_PASS']; ?>">
     </td>
     </tr>
 
@@ -684,7 +683,7 @@ if ($level != sha1("level100")) {
     SugarCRM MySQL Database:
     </td>
     <td>
-    <input type="Text" name="sugar_db" value="<? echo $config_values['SUGAR_DB']; ?>">
+    <input class="form-control" type="Text" name="sugar_db" value="<? echo $config_values['SUGAR_DB']; ?>">
     </td>
     </tr>
 
@@ -695,8 +694,8 @@ if ($level != sha1("level100")) {
     <? /************************** Multi Tenant TAB *************************/ ?>
 
     <div id="multi" title="Hosting"class="tab-pane">
-    <center>
-    <table class="table">
+
+    <table class="table table-striped">
     <tr>
     <th colspan="2">Multitenant Hosting</th>
     </tr>
@@ -714,7 +713,7 @@ if ($level != sha1("level100")) {
         <tr ><th colspan="2">Add new server</th>
         </tr><tr ><td>
         <form action="config.php" method="POST">
-        New URL:</td><td> <input type="text" name="url_to_add" value=""></td></tr>
+        New URL:</td><td> <input class="form-control" type="Text" name="url_to_add" value=""></td></tr>
         <tr ><td>Copy From: </td><td><select  class="form-control" name="copy_from">
         <option value="default">Default Configs</option>
         <?
@@ -736,7 +735,7 @@ if ($level != sha1("level100")) {
         Once you have added a url, you can log in from that URL and configure the system.<br/>
         <br/>
         <form action="config.php?add_url=1" method="POST">
-            <input type="text" name="url_to_add" value="">
+            <input class="form-control" type="Text" name="url_to_add" value="">
             <input type="hidden" name="copy_from" value="default">
             <input class="btn btn-primary" type="submit" value="Add URL">
         </form>
@@ -751,8 +750,8 @@ if ($level != sha1("level100")) {
     <? /********************************** Licensing TAB ***********************/ ?>
 
         <div id="licensing" title="Licensing"class="tab-pane">
-        <center>
-        <table class="table">
+
+        <table class="table table-striped">
 
         <tr>
         <th colspan="2">Licence Details</th>
@@ -762,7 +761,7 @@ if ($level != sha1("level100")) {
         User ID:
         </td>
         <td>
-        <input type="text" name="userid" value="<? echo $userid; ?>">
+        <input class="form-control" type="Text" name="userid" value="<? echo $userid; ?>">
         </td>
         </tr>
         <tr  >
@@ -770,7 +769,7 @@ if ($level != sha1("level100")) {
         Licence Key:
         </td>
         <td>
-        <input type="text" name="licencekey" value="<? echo $licencekey; ?>">
+        <input class="form-control" type="Text" name="licencekey" value="<? echo $licencekey; ?>">
         </td>
         </tr>
         <tr  >
@@ -826,8 +825,8 @@ if ($level != sha1("level100")) {
 
     <? /************************** Look and Feel TAB *************************/ ?>
     <div id="look" title="Theme"class="tab-pane">
-    <center>
-    <table class="table">
+
+    <table class="table table-striped">
 
     <tr>
     <th colspan="2">Look and Feel</th>
@@ -840,7 +839,7 @@ if ($level != sha1("level100")) {
     </td>
     <td>
     <script language=JavaScript src="js/picker.js"></script>
-    <input type="Text" name="colour" value="<? echo $config_values['COLOUR']; ?>">
+    <input class="form-control" type="Text" name="colour" value="<? echo $config_values['COLOUR']; ?>">
     <a href="javascript:TCP.popup(document.forms['config'].elements['colour'], 1)"><img width="15" height="13" border="0" alt="Click Here to Pick up the color" src="img/sel.gif"></a>
 
     </td>
@@ -851,7 +850,7 @@ if ($level != sha1("level100")) {
     Date/Time Colour:
     </td>
     <td>
-    <input type="Text" name="DATE_COLOUR" value="<? echo $config_values['DATE_COLOUR']; ?>">
+    <input class="form-control" type="Text" name="DATE_COLOUR" value="<? echo $config_values['DATE_COLOUR']; ?>">
     <a href="javascript:TCP.popup(document.forms['config'].elements['DATE_COLOUR'], 1)"><img width="15" height="13" border="0" alt="Click Here to Pick the color" src="img/sel.gif"></a>
 
     </td>
@@ -864,7 +863,7 @@ if ($level != sha1("level100")) {
     Site Name:
     </td>
     <td>
-    <input type="Text" name="title" value="<? echo stripslashes($config_values['TITLE']); ?>">
+    <input class="form-control" type="Text" name="title" value="<? echo stripslashes($config_values['TITLE']); ?>">
     </td>
     </tr>
 
@@ -873,7 +872,7 @@ if ($level != sha1("level100")) {
     Short Brand Name:
     </td>
     <td>
-    <input type="Text" name="brand" value="<? echo stripslashes($config_values['brand']); ?>">
+    <input class="form-control" type="Text" name="brand" value="<? echo stripslashes($config_values['brand']); ?>">
     </td>
     </tr>
 
@@ -884,7 +883,7 @@ if ($level != sha1("level100")) {
     Logo Filename:
     </td>
     <td>
-    <input type="Text" name="logo" value="<? echo $config_values['LOGO']; ?>">
+    <input class="form-control" type="Text" name="logo" value="<? echo $config_values['LOGO']; ?>">
     </td>
     </tr>
 
@@ -895,7 +894,7 @@ if ($level != sha1("level100")) {
     Logo Width:
     </td>
     <td>
-    <input type="Text" name="logo_width" value="<? echo $logo_width; ?>">
+    <input class="form-control" type="Text" name="logo_width" value="<? echo $logo_width; ?>">
     </td>
     </tr>
 
@@ -906,7 +905,7 @@ if ($level != sha1("level100")) {
     Logo Height:
     </td>
     <td>
-    <input type="Text" name="logo_height" value="<? echo $logo_height; ?>">
+    <input class="form-control" type="Text" name="logo_height" value="<? echo $logo_height; ?>">
     </td>
     </tr>
 
@@ -915,7 +914,7 @@ if ($level != sha1("level100")) {
     Opening Text:
     </td>
     <td>
-    <input type="Text" name="text" value="<? echo $config_values['TEXT']; ?>">
+    <input class="form-control" type="Text" name="text" value="<? echo $config_values['TEXT']; ?>">
     </td>
     </tr>
 
@@ -974,8 +973,8 @@ if ($level != sha1("level100")) {
     </div>
     <? /************************** Menu Text TAB *************************/ ?>
     <div id="menutext" title="Menu Text"class="tab-pane">
-    <center>
-    <table class="table">
+
+    <table class="table table-striped">
 
     <? /*******************************************************************/ ?>
     <? /*                           Menu Text                             */ ?>
@@ -987,7 +986,7 @@ if ($level != sha1("level100")) {
 Language:
     </td>
     <td>
-    <input type="Text" name="LANGUAGE" value="<? echo $config_values['LANGUAGE']; ?>">
+    <input class="form-control" type="Text" name="LANGUAGE" value="<? echo $config_values['LANGUAGE']; ?>">
     </td>
     </tr>
     <tr  >
@@ -995,7 +994,7 @@ Language:
     Home Menu Text:
     </td>
     <td>
-    <input type="Text" name="MENU_HOME" value="<? echo $config_values['MENU_HOME']; ?>">
+    <input class="form-control" type="Text" name="MENU_HOME" value="<? echo $config_values['MENU_HOME']; ?>">
     </td>
     </tr>
     <tr  >
@@ -1003,7 +1002,7 @@ Language:
     Campaigns Menu Text:
     </td>
     <td>
-    <input type="Text" name="MENU_CAMPAIGNS" value="<? echo $config_values['MENU_CAMPAIGNS']; ?>">
+    <input class="form-control" type="Text" name="MENU_CAMPAIGNS" value="<? echo $config_values['MENU_CAMPAIGNS']; ?>">
     </td>
     </tr>
     <tr  >
@@ -1011,7 +1010,7 @@ Language:
     Numbers Menu Text:
     </td>
     <td>
-    <input type="Text" name="MENU_NUMBERS" value="<? echo $config_values['MENU_NUMBERS']; ?>">
+    <input class="form-control" type="Text" name="MENU_NUMBERS" value="<? echo $config_values['MENU_NUMBERS']; ?>">
     </td>
     </tr>
     <tr  >
@@ -1019,7 +1018,7 @@ Language:
     DNC Numbers Menu Text:
     </td>
     <td>
-    <input type="Text" name="MENU_DNC" value="<? echo $config_values['MENU_DNC']; ?>">
+    <input class="form-control" type="Text" name="MENU_DNC" value="<? echo $config_values['MENU_DNC']; ?>">
     </td>
     </tr>
     <tr  >
@@ -1027,7 +1026,7 @@ Language:
     Messages Menu Text:
     </td>
     <td>
-    <input type="Text" name="MENU_MESSAGES" value="<? echo $config_values['MENU_MESSAGES']; ?>">
+    <input class="form-control" type="Text" name="MENU_MESSAGES" value="<? echo $config_values['MENU_MESSAGES']; ?>">
     </td>
     </tr>
     <tr  >
@@ -1035,7 +1034,7 @@ Language:
     Schedules Menu Text:
     </td>
     <td>
-    <input type="Text" name="MENU_SCHEDULES" value="<? echo $config_values['MENU_SCHEDULES']; ?>">
+    <input class="form-control" type="Text" name="MENU_SCHEDULES" value="<? echo $config_values['MENU_SCHEDULES']; ?>">
     </td>
     </tr>
     <tr  >
@@ -1043,7 +1042,7 @@ Language:
     Customers Menu Text:
     </td>
     <td>
-    <input type="Text" name="MENU_CUSTOMERS" value="<? echo $config_values['MENU_CUSTOMERS']; ?>">
+    <input class="form-control" type="Text" name="MENU_CUSTOMERS" value="<? echo $config_values['MENU_CUSTOMERS']; ?>">
     </td>
     </tr>
     <tr  >
@@ -1051,7 +1050,7 @@ Language:
     Surveys Menu Text:
     </td>
     <td>
-    <input type="Text" name="MENU_SURVEYS" value="<? echo $config_values['MENU_SURVEYS']; ?>">
+    <input class="form-control" type="Text" name="MENU_SURVEYS" value="<? echo $config_values['MENU_SURVEYS']; ?>">
     </td>
     </tr>
     <tr  >
@@ -1059,7 +1058,7 @@ Language:
     CDR Menu Text:
     </td>
     <td>
-    <input type="Text" name="MENU_CDR" value="<? echo $config_values['MENU_CDR']; ?>">
+    <input class="form-control" type="Text" name="MENU_CDR" value="<? echo $config_values['MENU_CDR']; ?>">
     </td>
     </tr>
     <tr  >
@@ -1067,7 +1066,7 @@ Language:
     Queues Menu Text:
     </td>
     <td>
-    <input type="Text" name="MENU_QUEUES" value="<? echo $config_values['MENU_QUEUES']; ?>">
+    <input class="form-control" type="Text" name="MENU_QUEUES" value="<? echo $config_values['MENU_QUEUES']; ?>">
     </td>
     </tr>
     <tr  >
@@ -1075,7 +1074,7 @@ Language:
     Servers Menu Text:
     </td>
     <td>
-    <input type="Text" name="MENU_SERVERS" value="<? echo $config_values['MENU_SERVERS']; ?>">
+    <input class="form-control" type="Text" name="MENU_SERVERS" value="<? echo $config_values['MENU_SERVERS']; ?>">
     </td>
     </tr>
     <tr  >
@@ -1083,7 +1082,7 @@ Language:
     Trunks Menu Text:
     </td>
     <td>
-    <input type="Text" name="MENU_TRUNKS" value="<? echo $config_values['MENU_TRUNKS']; ?>">
+    <input class="form-control" type="Text" name="MENU_TRUNKS" value="<? echo $config_values['MENU_TRUNKS']; ?>">
     </td>
     </tr>
     <tr  >
@@ -1091,7 +1090,7 @@ Language:
     Timezone Menu Text:
     </td>
     <td>
-    <input type="Text" name="MENU_TIMEZONES" value="<? echo $config_values['MENU_TIMEZONES']; ?>">
+    <input class="form-control" type="Text" name="MENU_TIMEZONES" value="<? echo $config_values['MENU_TIMEZONES']; ?>">
     </td>
     </tr>
     <tr  >
@@ -1099,7 +1098,7 @@ Language:
     Admin Menu Text:
     </td>
     <td>
-    <input type="Text" name="MENU_ADMIN" value="<? echo $config_values['MENU_ADMIN']; ?>">
+    <input class="form-control" type="Text" name="MENU_ADMIN" value="<? echo $config_values['MENU_ADMIN']; ?>">
     </td>
     </tr>
     <tr  >
@@ -1107,7 +1106,7 @@ Language:
     Logout Menu Text:
     </td>
     <td>
-    <input type="Text" name="MENU_LOGOUT" value="<? echo $config_values['MENU_LOGOUT']; ?>">
+    <input class="form-control" type="Text" name="MENU_LOGOUT" value="<? echo $config_values['MENU_LOGOUT']; ?>">
     </td>
     </tr>
     <tr  >
@@ -1121,8 +1120,8 @@ Language:
 
     <? /************************** Misc Text TAB *************************/ ?>
     <div id="other" title="Misc Text"class="tab-pane">
-    <center>
-    <table class="table">
+
+    <table class="table table-striped">
 
 
     <tr><th colspan="2">Other Text</th>
@@ -1134,7 +1133,7 @@ Language:
     Main Page Text:
     </td>
     <td>
-    <input type="Text" name="MAIN_PAGE_TEXT" size="60" value="<? echo $config_values['MAIN_PAGE_TEXT']; ?>">
+    <input class="form-control" type="Text" name="MAIN_PAGE_TEXT" size="60" value="<? echo $config_values['MAIN_PAGE_TEXT']; ?>">
     </td>
     </tr>
 
@@ -1143,7 +1142,7 @@ Language:
     Add Campaign Text:
     </td>
     <td>
-    <input type="Text" name="ADD_CAMPAIGN" size="60" value="<? echo $config_values['ADD_CAMPAIGN']; ?>">
+    <input class="form-control" type="Text" name="ADD_CAMPAIGN" size="60" value="<? echo $config_values['ADD_CAMPAIGN']; ?>">
     </td>
     </tr>
 
@@ -1152,7 +1151,7 @@ Language:
     View Campaigns Text:
     </td>
     <td>
-    <input type="Text" name="VIEW_CAMPAIGN" size="60" value="<? echo $config_values['VIEW_CAMPAIGN']; ?>">
+    <input class="form-control" type="Text" name="VIEW_CAMPAIGN" size="60" value="<? echo $config_values['VIEW_CAMPAIGN']; ?>">
     </td>
     </tr>
 
@@ -1161,7 +1160,7 @@ Language:
     Main Page Username Text:
     </td>
     <td>
-    <input type="Text" name="MAIN_PAGE_USERNAME" size="60" value="<? echo $config_values['MAIN_PAGE_USERNAME']; ?>">
+    <input class="form-control" type="Text" name="MAIN_PAGE_USERNAME" size="60" value="<? echo $config_values['MAIN_PAGE_USERNAME']; ?>">
     </td>
     </tr>
 
@@ -1170,7 +1169,7 @@ Language:
     Main Page Password Text:
     </td>
     <td>
-    <input type="Text" name="MAIN_PAGE_PASSWORD" size="60" value="<? echo $config_values['MAIN_PAGE_PASSWORD']; ?>">
+    <input class="form-control" type="Text" name="MAIN_PAGE_PASSWORD" size="60" value="<? echo $config_values['MAIN_PAGE_PASSWORD']; ?>">
     </td>
     </tr>
 
@@ -1179,7 +1178,7 @@ Language:
     Main Page Login Text:
     </td>
     <td>
-    <input type="Text" name="MAIN_PAGE_LOGIN" size="60" value="<? echo $config_values['MAIN_PAGE_LOGIN']; ?>">
+    <input class="form-control" type="Text" name="MAIN_PAGE_LOGIN" size="60" value="<? echo $config_values['MAIN_PAGE_LOGIN']; ?>">
     </td>
     </tr>
 
@@ -1195,8 +1194,8 @@ Language:
 
     <? /************************** DNC TAB *************************/ ?>
     <div id="dnc" title="DNC"class="tab-pane">
-    <center>
-    <table class="table">
+
+    <table class="table table-striped">
 
     <? /*******************************************************************/ ?>
     <? /*                        DNC Numbers Section                      */ ?>
@@ -1209,7 +1208,7 @@ Language:
     Number List Management Text (Title):
     </td>
     <td>
-    <input type="Text" name="DNC_NUMBERS_TITLE" size="60" value="<? echo $config_values['DNC_NUMBERS_TITLE']; ?>">
+    <input class="form-control" type="Text" name="DNC_NUMBERS_TITLE" size="60" value="<? echo $config_values['DNC_NUMBERS_TITLE']; ?>">
     </td>
     </tr>
 
@@ -1218,7 +1217,7 @@ Language:
     View existing DNC numbers Text (Title):
     </td>
     <td>
-    <input type="Text" name="DNC_VIEW" size="60" value="<? echo $config_values['DNC_VIEW']; ?>">
+    <input class="form-control" type="Text" name="DNC_VIEW" size="60" value="<? echo $config_values['DNC_VIEW']; ?>">
     </td>
     </tr>
 
@@ -1227,7 +1226,7 @@ Language:
     Search DNC numbers Text (Title):
     </td>
     <td>
-    <input type="Text" name="DNC_SEARCH" size="60" value="<? echo $config_values['DNC_SEARCH']; ?>">
+    <input class="form-control" type="Text" name="DNC_SEARCH" size="60" value="<? echo $config_values['DNC_SEARCH']; ?>">
     </td>
     </tr>
     <tr  >
@@ -1235,7 +1234,7 @@ Language:
     Upload DNC numbers Text (Title):
     </td>
     <td>
-    <input type="Text" name="DNC_UPLOAD" size="60" value="<? echo $config_values['DNC_UPLOAD']; ?>">
+    <input class="form-control" type="Text" name="DNC_UPLOAD" size="60" value="<? echo $config_values['DNC_UPLOAD']; ?>">
     </td>
     </tr>
 
@@ -1244,7 +1243,7 @@ Language:
     Add DNC numbers Text (Title):
     </td>
     <td>
-    <input type="Text" name="DNC_ADD" size="60" value="<? echo $config_values['DNC_ADD']; ?>">
+    <input class="form-control" type="Text" name="DNC_ADD" size="60" value="<? echo $config_values['DNC_ADD']; ?>">
     </td>
     </tr>
 
@@ -1270,8 +1269,8 @@ Language:
     </div>
     <? /************************** Numbers TAB *************************/ ?>
     <div id="numbers" title="Numbers"class="tab-pane">
-    <center>
-    <table class="table">
+
+    <table class="table table-striped">
 
 
 
@@ -1406,7 +1405,7 @@ Language:
     Number of entries to show per page:
     </td>
     <td>
-    <input type="Text" name="PER_PAGE" size="60" value="<? echo $config_values['PER_PAGE']; ?>">
+    <input class="form-control" type="Text" name="PER_PAGE" size="60" value="<? echo $config_values['PER_PAGE']; ?>">
     </td>
     </tr>
 
@@ -1429,7 +1428,7 @@ Language:
     Number List Management Text (Title):
     </td>
     <td>
-    <input type="Text" name="NUMBERS_TITLE" size="60" value="<? echo $config_values['NUMBERS_TITLE']; ?>">
+    <input class="form-control" type="Text" name="NUMBERS_TITLE" size="60" value="<? echo $config_values['NUMBERS_TITLE']; ?>">
     </td>
     </tr>
 
@@ -1439,7 +1438,7 @@ Language:
     View phone numbers text:
     </td>
     <td>
-    <input type="Text" name="NUMBERS_VIEW" size="60" value="<? echo $config_values['NUMBERS_VIEW']; ?>">
+    <input class="form-control" type="Text" name="NUMBERS_VIEW" size="60" value="<? echo $config_values['NUMBERS_VIEW']; ?>">
     </td>
     </tr>
 
@@ -1448,7 +1447,7 @@ Language:
     Use System Lists Text:
     </td>
     <td>
-    <input type="Text" name="NUMBERS_SYSTEM" size="60" value="<? echo $config_values['NUMBERS_SYSTEM']; ?>">
+    <input class="form-control" type="Text" name="NUMBERS_SYSTEM" size="60" value="<? echo $config_values['NUMBERS_SYSTEM']; ?>">
     </td>
     </tr>
 
@@ -1457,7 +1456,7 @@ Language:
     Search for a phone number Text:
         </td>
         <td>
-        <input type="Text" name="NUMBERS_SEARCH" size="60" value="<? echo $config_values['NUMBERS_SEARCH']; ?>">
+        <input class="form-control" type="Text" name="NUMBERS_SEARCH" size="60" value="<? echo $config_values['NUMBERS_SEARCH']; ?>">
         </td>
         </tr>
 
@@ -1466,7 +1465,7 @@ Language:
         Export Phone Numbers Text:
         </td>
         <td>
-        <input type="Text" name="NUMBERS_EXPORT" size="60" value="<? echo $config_values['NUMBERS_EXPORT']; ?>">
+        <input class="form-control" type="Text" name="NUMBERS_EXPORT" size="60" value="<? echo $config_values['NUMBERS_EXPORT']; ?>">
         </td>
         </tr>
 
@@ -1475,7 +1474,7 @@ Language:
         Upload numbers from a text file Text:
         </td>
         <td>
-        <input type="Text" name="NUMBERS_UPLOAD" size="60" value="<? echo $config_values['NUMBERS_UPLOAD']; ?>">
+        <input class="form-control" type="Text" name="NUMBERS_UPLOAD" size="60" value="<? echo $config_values['NUMBERS_UPLOAD']; ?>">
         </td>
         </tr>
 
@@ -1484,7 +1483,7 @@ Language:
         Add number(s) manually Text:
         </td>
         <td>
-        <input type="Text" name="NUMBERS_MANUAL" size="60" value="<? echo $config_values['NUMBERS_MANUAL']; ?>">
+        <input class="form-control" type="Text" name="NUMBERS_MANUAL" size="60" value="<? echo $config_values['NUMBERS_MANUAL']; ?>">
         </td>
         </tr>
 
@@ -1493,7 +1492,7 @@ Language:
         Generate numbers automatically Text:
         </td>
         <td>
-        <input type="Text" name="NUMBERS_GENERATE" size="60" value="<? echo $config_values['NUMBERS_GENERATE']; ?>">
+        <input class="form-control" type="Text" name="NUMBERS_GENERATE" size="60" value="<? echo $config_values['NUMBERS_GENERATE']; ?>">
         </td>
         </tr>
 
@@ -1535,8 +1534,8 @@ Language:
     </div>
     <? /************************** Billing TAB *************************/ ?>
     <div id="billing" title="Billing"class="tab-pane">
-    <center>
-    <table class="table">
+
+    <table class="table table-striped">
 
 
     <tr><th colspan="2">Billing Information</th>
@@ -1546,7 +1545,7 @@ Language:
     Call Details Text (in header):
     </td>
     <td>
-    <input type="Text" name="CDR_TEXT" value="<? echo $config_values['CDR_TEXT']; ?>">
+    <input class="form-control" type="Text" name="CDR_TEXT" value="<? echo $config_values['CDR_TEXT']; ?>">
     </td>
     </tr>
 
@@ -1555,7 +1554,7 @@ Language:
     Billing Text (in header):
     </td>
     <td>
-    <input type="Text" name="BILLING_TEXT" value="<? echo $config_values['BILLING_TEXT']; ?>">
+    <input class="form-control" type="Text" name="BILLING_TEXT" value="<? echo $config_values['BILLING_TEXT']; ?>">
     </td>
     </tr>
 
@@ -1564,7 +1563,7 @@ Language:
     Currency Symbol (i.e. $):
     </td>
     <td>
-    <input type="Text" name="CURRENCY_SYMBOL" value="<? echo $config_values['CURRENCY_SYMBOL']; ?>">
+    <input class="form-control" type="Text" name="CURRENCY_SYMBOL" value="<? echo $config_values['CURRENCY_SYMBOL']; ?>">
     </td>
     </tr>
 
@@ -1573,7 +1572,7 @@ Language:
     Per Minute Wording in CDR
     </td>
     <td>
-    <input type="Text" name="PER_MINUTE" value="<? echo $config_values['PER_MINUTE']; ?>">
+    <input class="form-control" type="Text" name="PER_MINUTE" value="<? echo $config_values['PER_MINUTE']; ?>">
     </td>
     </tr>
 
@@ -1582,7 +1581,7 @@ Language:
     Price per lead wording
     </td>
     <td>
-    <input type="Text" name="PER_LEAD" value="<? echo $config_values['PER_LEAD']; ?>">
+    <input class="form-control" type="Text" name="PER_LEAD" value="<? echo $config_values['PER_LEAD']; ?>">
     </td>
     </tr>
 
@@ -1640,13 +1639,13 @@ Language:
     </div>
     <? /************************** Advanced TAB *************************/ ?>
     <div id="advanced" title="Advanced"class="tab-pane">
-    <center>
-    <table class="table">
+
+    <table class="table table-striped">
 
 
     <tr><th colspan="2">Custom contexts</th>
 
-    <tr  >
+    <tr >
     <td>
     Disable Everything Except Spare1
     </td>
@@ -1661,53 +1660,53 @@ Language:
     </td>
     </tr>
 
-    
+
     <tr  >
     <td>
     Description of spare1 context (optional)
     </td>
     <td>
-    <input type="Text" name="SPARE1" value="<? echo $config_values['SPARE1']; ?>">
+    <input class="form-control" type="Text" name="SPARE1" value="<? echo $config_values['SPARE1']; ?>">
     </td>
     </tr>
-    
+
     <tr  >
     <td>
     Description of spare2 context (optional)
     </td>
     <td>
-    <input type="Text" name="SPARE2" value="<? echo $config_values['SPARE2']; ?>">
+    <input class="form-control" type="Text" name="SPARE2" value="<? echo $config_values['SPARE2']; ?>">
     </td>
     </tr>
-    
+
     <tr  >
     <td>
     Description of spare3 context (optional)
     </td>
     <td>
-    <input type="Text" name="SPARE3" value="<? echo $config_values['SPARE3']; ?>">
+    <input class="form-control" type="Text" name="SPARE3" value="<? echo $config_values['SPARE3']; ?>">
     </td>
     </tr>
-    
+
     <tr  >
     <td>
     Description of spare4 context (optional)
     </td>
     <td>
-    <input type="Text" name="SPARE4" value="<? echo $config_values['SPARE4']; ?>">
+    <input class="form-control" type="Text" name="SPARE4" value="<? echo $config_values['SPARE4']; ?>">
     </td>
     </tr>
-    
+
     <tr  >
     <td>
     Description of spare5 context (optional)
     </td>
     <td>
-    <input type="Text" name="SPARE5" value="<? echo $config_values['SPARE5']; ?>">
+    <input class="form-control" type="Text" name="SPARE5" value="<? echo $config_values['SPARE5']; ?>">
     </td>
     </tr>
-    
-    
+
+
     <tr  >
     <td>
     Provide Configurable Drive:<br />
@@ -1724,8 +1723,8 @@ Language:
     </select>
     </td>
     </tr>
-    
-    
+
+
     <tr  >
     <td>
     Provide Configurable Target Percentage:<br />
@@ -1742,7 +1741,7 @@ Language:
     </select>
     </td>
     </tr>
-    
+
     <tr  >
     <td>
     Use CDR Count InnoDB Workaround:
@@ -1758,13 +1757,13 @@ Language:
     </select>
     </td>
     </tr>
-    
+
     <tr  >
     <td>
     Test Phone Number:
     </td>
     <td>
-    <input type="Text" name="test_number" value="<? echo $config_values['test_number']; ?>">
+    <input class="form-control" type="Text" name="test_number" value="<? echo $config_values['test_number']; ?>">
     </td>
     </tr>
     
