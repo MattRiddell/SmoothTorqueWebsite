@@ -22,6 +22,80 @@ if (isset($_GET['delete'])) {
  */
 
 require "header.php";
+
+if (isset($_GET['save_manual'])) {
+    //print_pre($_POST);
+    $numbers = explode("\n",$_POST['numbers']);
+    //print_pre($numbers);
+    foreach ($numbers as $number) {
+        $number = preg_replace("/[^0-9]/","",$number);
+        if (strlen($number) != 10) {
+            $errors[] = $number;
+        } else {
+            $sql = "REPLACE INTO number (campaignid, phonenumber, status, random_sort, datetime) VALUES (".sanitize($_GET['save_manual']).",".sanitize($number).",'new',".sanitize(rand(0, 999999999)).", NOW())";
+            //echo $sql;
+            mysql_query($sql) or die('<div class="jumbotron"><h3>Database problem</h3><p>We are sorry to inform you that there was a problem importing your numbers. Please show the following error to your sales representative.</p><p><strong>'.mysql_error()."</strong></p></div>");
+        }
+    }
+    if (isset($errors)) {
+        ?>
+        <div class="jumbotron">
+            <h3>Some Numbers Not Imported</h3>
+            <p>The following numbers were not imported because they were not ten digit numbers:</p>
+            <p>
+            <?
+            foreach ($errors as $number) {
+                echo $number."<br/>";
+            }
+            ?>
+            </p>
+            <p>
+                <a href="manage_numbers.php?add_manual=<?=$_GET['save_manual']?>" class="btn btn-primary">Import More Numbers</a>
+            </p>
+            <p>
+                <a href="new_campaign.php?view=1" class="btn btn-primary">Return to your campaign list</a>
+            </p>
+        </div>
+        <?
+    } else {
+        ?>
+            <div class="jumbotron">
+            <h3>Numbers Imported</h3>
+            <p>All the numbers you typed were imported successfully.</p>
+
+            <p>
+                <a href="manage_numbers.php?add_manual=<?=$_GET['save_manual']?>" class="btn btn-primary">Import More Numbers</a>
+            </p>
+            <p>
+                <a href="new_campaign.php?view=1" class="btn btn-primary">Return to your campaign list</a>
+            </p>
+        </div>
+        <?
+    }
+}
+
+
+if (isset($_GET['add_manual'])) {
+    ?>
+    <div class="jumbotron">
+        <h3>Add Numbers Manually</h3>
+        <p>
+            Please add one ten digit number per line (with no 1 in front)
+        </p>
+        <p>
+            <form action="manage_numbers.php?save_manual=<?=$_GET['add_manual']?>" method="post">
+                <div class="form-group">
+                    <textarea class="form-control" id="numbers" name="numbers" placeholder="I.E. 4075551234" rows="20"></textarea>
+                </div>
+                <input type="submit" class="btn btn-primary" value="Save Numbers">
+            </form>
+        </p>
+    </div>
+    <?
+}
+
+
+
 if (isset($_GET['search'])) {
     //print_pre($_POST);
     $result = mysql_query("SELECT * FROM number WHERE phonenumber = ".sanitize($_POST['number'])." AND campaignid = ".sanitize($_GET['search'])) or die(mysql_error());
@@ -109,10 +183,6 @@ if (isset($_GET['add'])) {
     exit(0);
 }
 if (isset($_GET['view'])) {
-    if ($_GET['view'])
-        ?>
-
-        <?
     $result = mysql_query("SELECT Count(*) FROM number WHERE campaignid = ".sanitize($_GET['view'])) or die(mysql_error());
     if (mysql_num_rows($result) == 0) {
         // No rows

@@ -16,7 +16,7 @@ require $current_directory."/functions/database.php";
 if (!function_exists('format_phone')) {
     function format_phone($data) {
 
-        if (preg_match('/^\d(\d{3})(\d{3})(\d{4})$/', $data, $matches)) {
+        if (preg_match('/(\d{3})(\d{3})(\d{4})$/', $data, $matches)) {
             $result = "(".$matches[1].') '.$matches[2].'-'.$matches[3];
             return $result;
         } else {
