@@ -219,7 +219,7 @@ if (isset($_GET['view'])) {
 
     if ($total_nums > 100) {
 
-
+        // TODO: Make pagination work
         ?>
 
 

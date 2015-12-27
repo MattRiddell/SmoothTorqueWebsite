@@ -20,7 +20,7 @@ $self = $_SERVER['PHP_SELF'];
  */
 require "/".$current_directory."/functions/functions.php";
 
-/* Find out what user the webserver is running as - this looks like you
+/* Find out what user the web server is running as - this looks like you
  could also get it from $HTTP_ENV_VARS[APACHE_RUN_USER] but I'm a little
  concerned about the fact it mentions apache - i.e. won't work with
  another server type - this'll have to do for the moment
@@ -558,7 +558,6 @@ if ($loggedin) {
 /* Start printing out the HTML page */
 ?>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -573,7 +572,9 @@ if ($loggedin) {
                 padding: 40px;
             }
         }
-        .table tbody>tr>td.vert-align{
+
+        /*noinspection CssUnusedSymbol*/
+        .table tbody > tr > td.vert-align {
             vertical-align: middle;
         }
     </style>
@@ -617,209 +618,97 @@ if ($loggedin) {
             $interface_type = mysql_result($result_if, 0, 0);
         }
     }
-    if (!isset($interface_type)) {
-        $interface_type = 'default';
-    }
-    if ($interface_type == "broadcast") {
+
     ?>
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <link rel="stylesheet" type="text/css" href="<?= $http_dir_name ?>css/style.css?version=3">
+    <link rel="stylesheet" href="<?= $http_dir_name ?>example.css?version=3" TYPE="text/css" MEDIA="screen">
+    <? /*<link rel="stylesheet" href="<?=$http_dir_name?>example-print.css" TYPE="text/css" MEDIA="print">*/ ?>
+    <link rel="stylesheet" type="text/css" href="<?= $http_dir_name ?>css/default.css?version=3">
     <link rel="shortcut icon" href="<?= $http_dir_name ?>favicon.ico">
-    <link rel="stylesheet" type="text/css" href="<?= $http_dir_name ?>/css/default.css">
+    <!-- Javascript includes -->
+    <script type="text/javascript" src="<?= $http_dir_name ?>ajax/picker.js"></script>
+    <script type="text/javascript" src="<?= $http_dir_name ?>header.js"></script>
 </head>
-<!-- Javascript includes -->
+
+<body bgcolor="<? echo $config_values['COLOUR']; ?>">
+<?
+if ($config_values['disable_all_types'] == "YES") {
+    echo '<div class="container">';
+} else {
+    echo '<div class="container-fluid">';
+}
+
+if (isset($menu) && $loggedin == TRUE) {
+    $sql = 'SELECT value FROM config WHERE parameter=\'logo_width\'';
+    $result = mysql_query($sql, $link) or die (mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        $logo_width = mysql_result($result, 0, 'value');
+    }
+
+    $sql = 'SELECT value FROM config WHERE parameter=\'logo_height\'';
+    $result = mysql_query($sql, $link) or die (mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        $logo_height = mysql_result($result, 0, 'value');
+    }
+
+    $sql = 'SELECT value FROM config WHERE parameter=\'use_names\'';
+    $result = mysql_query($sql, $link) or die (mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        $config_values['use_names'] = mysql_result($result, 0, 'value');
+    }
 
 
-<body bgcolor="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
-<script type="text/javascript" src="<?= $http_dir_name ?>ajax/picker.js"></script>
-<script type="text/javascript" src="<?= $http_dir_name ?>prototype.js"></script>
-<script type="text/javascript" src="<?= $http_dir_name ?>header.js"></script>
-
-<!-- Save for Web Slices (broadcast_new.psd) -->
-<center>
-    <table id="Table_01" width="1145" height="876" border="0" cellpadding="0" cellspacing="0">
-        <tr>
-            <td rowspan="19" style="width:1px;height:875px;">
-            </td>
-            <td rowspan="19" style="width:40px;height:875px;">
-            </td>
-            <td rowspan="17">
-                <img src="<?= $http_dir_name ?>/images/broadcast_03.png" width="43" height="753" alt=""></td>
-            <td colspan="5" rowspan="2">
-                <a href="main.php">
-                    <img src="<?= $http_dir_name ?>/images/Logo.png" width="287" height="104" border="0" alt="Logo"></a>
-            </td>
-            <td colspan="2" rowspan="2">
-                <img src="<?= $http_dir_name ?>/images/broadcast_05.png" width="69" height="104" alt=""></td>
-            <td>
-                <a href="main.php">
-                    <img src="<?= $http_dir_name ?>/images/Home.png" width="114" height="103" border="0" alt="Home"></a>
-            </td>
-            <td>
-                <a href="lists.php">
-                    <img src="<?= $http_dir_name ?>/images/Lists.png" width="95" height="103" border="0" alt="Lists"></a>
-            </td>
-            <td>
-                <a href="campaigns.php">
-                    <img src="<?= $http_dir_name ?>/images/Campaigns.png" width="152" height="103" border="0" alt="Campaigns"></a>
-            </td>
-            <td>
-                <a href="reports.php">
-                    <img src="<?= $http_dir_name ?>/images/Reports.png" width="117" height="103" border="0" alt="Reports"></a>
-            </td>
-            <td colspan="2">
-                <a href="<?= $http_dir_name ?>logout.php">
-                    <img src="<?= $http_dir_name ?>/images/Logout.png" width="121" height="103" border="0" alt="Logout"></a>
-            </td>
-            <td rowspan="2">
-                <img src="<?= $http_dir_name ?>/images/broadcast_11.png" width="103" height="104" alt=""></td>
-            <td rowspan="19">
-                <img src="<?= $http_dir_name ?>/images/rightbg.png" width="1" height="875" alt=""></td>
-            <td rowspan="19">
-                <img src="<?= $http_dir_name ?>/images/broadcast_13.png" width="1" height="875" alt=""></td>
-            <td>
-                <img src="<?= $http_dir_name ?>/images/spacer.gif" width="1" height="103" alt=""></td>
-        </tr>
-        <tr>
-            <td colspan="6">
-                <img src="<?= $http_dir_name ?>/images/broadcast_14.png" width="599" height="1" alt=""></td>
-            <td>
-                <img src="<?= $http_dir_name ?>/images/spacer.gif" width="1" height="1" alt=""></td>
-        </tr>
-        <tr>
-            <td colspan="14">
-                <img src="<?= $http_dir_name ?>/images/broadcast_15.png" width="1058" height="162" alt=""></td>
-            <td>
-                <img src="<?= $http_dir_name ?>/images/spacer.gif" width="1" height="162" alt=""></td>
-        </tr>
-        <tr>
-            <td rowspan="14">
-                <img src="<?= $http_dir_name ?>/images/broadcast_16.png" width="35" height="487" alt=""></td>
-            <td colspan="3" rowspan="2">
-                <img src="<?= $http_dir_name ?>/images/broadcast_17.png" width="215" height="15" alt=""></td>
-            <td rowspan="14">
-                <img src="<?= $http_dir_name ?>/images/broadcast_18.png" width="37" height="487" alt=""></td>
-            <td colspan="9">
-                <img src="<?= $http_dir_name ?>/images/broadcast_19.png" width="771" height="5" alt=""></td>
-            <td>
-                <img src="<?= $http_dir_name ?>/images/spacer.gif" width="1" height="5" alt=""></td>
-        </tr>
-        <tr>
-            <td rowspan="13">
-                <img src="<?= $http_dir_name ?>/images/broadcast_20.png" width="6" height="482" alt=""></td>
-            <td width="658" height="478" colspan="6" rowspan="12" valign="top" style="padding: 20px; background: #ffffff;">
-                <font face="arial" color="#666666" size="2">
-                    <?
-                    } else if ($interface_type == "cc") {
-                        ?>
-                        <?
-                    } else {
-                    ?>
-                    <link rel="stylesheet" type="text/css" href="<?= $http_dir_name ?>css/style.css?version=3">
-                    <link rel="stylesheet" href="<?= $http_dir_name ?>example.css?version=3" TYPE="text/css" MEDIA="screen">
-                    <? /*<link rel="stylesheet" href="<?=$http_dir_name?>example-print.css" TYPE="text/css" MEDIA="print">*/ ?>
-                    <link rel="stylesheet" type="text/css" href="<?= $http_dir_name ?>css/default.css?version=3">
-                    <link rel="shortcut icon" href="<?= $http_dir_name ?>favicon.ico">
-                    <!-- Javascript includes -->
-                    <script type="text/javascript" src="<?= $http_dir_name ?>ajax/picker.js"></script>
-                    <script type="text/javascript" src="<?= $http_dir_name ?>header.js"></script>
-                    </head>
-
-                    <body bgcolor="<? echo $config_values['COLOUR']; ?>">
-                    <?
-                    if ($config_values['disable_all_types'] == "YES") {
-                        echo '<div class="container">';
-                    } else {
-                        echo '<div class="container-fluid">';
-                    }
-                    ?>
-
-                    <?
-                    if (isset($menu) && $loggedin == TRUE){
-                    $sql = 'SELECT value FROM config WHERE parameter=\'logo_width\'';
-                    $result = mysql_query($sql, $link) or die (mysql_error());
-                    if (mysql_num_rows($result) > 0) {
-                        $logo_width = mysql_result($result, 0, 'value');
-                    }
-
-                    $sql = 'SELECT value FROM config WHERE parameter=\'logo_height\'';
-                    $result = mysql_query($sql, $link) or die (mysql_error());
-                    if (mysql_num_rows($result) > 0) {
-                        $logo_height = mysql_result($result, 0, 'value');
-                    }
-
-                    $sql = 'SELECT value FROM config WHERE parameter=\'use_names\'';
-                    $result = mysql_query($sql, $link) or die (mysql_error());
-                    if (mysql_num_rows($result) > 0) {
-                        $config_values['use_names'] = mysql_result($result, 0, 'value');
-                    }
+    ?>
+    <center><img class="img-responsive" src="./<? echo $config_values['LOGO']; ?>"<?
+        if ($logo_height > 0) {
+            echo ' height="'.$logo_height.'"';
+        }
+        if ($logo_width > 0) {
+            echo ' width="'.$logo_width.'"';
+        }
+        ?>></center>
+    <?
 
 
-                    ?>
-                    <center><img class="img-responsive" src="./<? echo $config_values['LOGO']; ?>"<?
-                        if ($logo_height > 0) {
-                            echo ' height="'.$logo_height.'"';
-                        }
-                        if ($logo_width > 0) {
-                            echo ' width="'.$logo_width.'"';
-                        }
-                        ?>></center>
-                        <?
+    echo $menu;
+    flush();
+    unset($menu);
 
-                        if ($loggedin) {
-                            $result_if = mysql_query("SELECT interface_type FROM customer where username = '$_COOKIE[user]'");
-                            if (mysql_num_rows($result_if) > 0) {
-                                $interface_type = mysql_result($result_if, 0, 0);
-                            }
-                        }
-                        if ($interface_type == "broadcast") {
-                            echo "<br /></center>";
-                        } else if ($interface_type == "cc") {
-                            echo "<br /></center>";
-                        } else if ($self == "/run_tests.php" || $self == "/test_results.php" || $help == TRUE) {
-                        } else {
-                            echo $menu;
-                            flush();
-                            unset($menu);
-                            ?>
+    if ($loggedin) {
+        if (!($config_values['USE_BILLING'] == "YES")) {
 
+        } else {
+            /* Find out how much credit and what the credit limit is for this
+             customer */
+            $sql = "SELECT credit, creditlimit from billing where accountcode = 'stl-$_COOKIE[user]'";
+            $result_credit = mysql_query($sql, $link);
+            box_start();
+            if (mysql_num_rows($result_credit) == 0) {
+                /* They have no billing account - set to defaults */
+                $credit = $config_values['CURRENCY_SYMBOL']." 0.00";
+                $creditlimit = 0;
+                $postpay = 0;
+            } else {
+                /* They have a billing account - set up the variables */
+                $credit = $config_values['CURRENCY_SYMBOL']." ".number_format(mysql_result($result_credit, 0, 'credit'), 2);
+                $creditlimit = $config_values['CURRENCY_SYMBOL']." ".number_format(mysql_result($result_credit, 0, 'creditlimit'), 2);
+                $postpay = 1;
+            }
+            if ($postpay == 1) {
+                echo 'Credit: '.$credit.' Credit Limit: $creditlimit <a href="'.$http_dir_name.'"viewcdr.php" class="btn btn-primary"><i class="glyphicon glyphicon-phone-alt"></i> '.$config_values['CDR_TEXT'].'</a> <a href="'.$http_dir_name.'billinglog_account.php" class="btn btn-primary"><i class="glyphicon glyphicon-list"></i> '.$config_values['BILLING_TEXT'].'</a></font><br /></center>';
 
-                            <?
-                            if ($loggedin) {
-                                if (!($config_values['USE_BILLING'] == "YES")) {
+            } else {
+                echo 'Credit: '.$credit.' <a href="'.$http_dir_name.'viewcdr.php" class="btn btn-success"><i class="glyphicon glyphicon-phone-alt"></i> '.$config_values['CDR_TEXT'].'</a> <a href="'.$http_dir_name.'billinglog_account.php" class="btn btn-success"><i class="glyphicon glyphicon-list"></i>  '.$config_values['BILLING_TEXT'].'</a></font><br /></center>';
+            }
+            unset($result_credit);
+            unset($postpay);
+            unset($credit);
+            unset($creditlimit);
+            box_end();
+        }
+    }
 
-                                } else {
-                                    /* Find out how much credit and what the credit limit is for this
-                                     customer */
-                                    $sql = "SELECT credit, creditlimit from billing where accountcode = 'stl-$_COOKIE[user]'";
-                                    $result_credit = mysql_query($sql, $link);
-                                    box_start();
-                                    if (mysql_num_rows($result_credit) == 0) {
-                                        /* They have no billing account - set to defaults */
-                                        $credit = $config_values['CURRENCY_SYMBOL']." 0.00";
-                                        $creditlimit = 0;
-                                        $postpay = 0;
-                                    } else {
-                                        /* They have a billing account - set up the variables */
-                                        $credit = $config_values['CURRENCY_SYMBOL']." ".number_format(mysql_result($result_credit, 0, 'credit'), 2);
-                                        $creditlimit = $config_values['CURRENCY_SYMBOL']." ".number_format(mysql_result($result_credit, 0, 'creditlimit'), 2);
-                                        $postpay = 1;
-                                    }
-                                    if ($postpay == 1) {
-                                        echo 'Credit: '.$credit.' Credit Limit: $creditlimit <a href="'.$http_dir_name.'"viewcdr.php" class="btn btn-primary"><i class="glyphicon glyphicon-phone-alt"></i> '.$config_values['CDR_TEXT'].'</a> <a href="'.$http_dir_name.'billinglog_account.php" class="btn btn-primary"><i class="glyphicon glyphicon-list"></i> '.$config_values['BILLING_TEXT'].'</a></font><br /></center>';
+}
+?>
+<div class="container">
 
-                                    } else {
-                                        echo 'Credit: '.$credit.' <a href="'.$http_dir_name.'viewcdr.php" class="btn btn-success"><i class="glyphicon glyphicon-phone-alt"></i> '.$config_values['CDR_TEXT'].'</a> <a href="'.$http_dir_name.'billinglog_account.php" class="btn btn-success"><i class="glyphicon glyphicon-list"></i>  '.$config_values['BILLING_TEXT'].'</a></font><br /></center>';
-                                    }
-                                    unset($result_credit);
-                                    unset($postpay);
-                                    unset($credit);
-                                    unset($creditlimit);
-                                    box_end();
-                                }
-                            }
-                        }
-                        }
-                        ?>
-                        </div>
-                        <div class="container">
-                            <? } ?>
