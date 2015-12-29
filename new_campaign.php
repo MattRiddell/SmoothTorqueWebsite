@@ -170,6 +170,9 @@ if (isset($_GET['edit']) || isset($_GET['add'])) {
                 <a href="recycle.php?id=<?=$row['id']?>&type=deleteall" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i>&nbsp;Delete Numbers</a>&nbsp;
             </td>
 
+            <?
+
+            ?>
             <td>
                 <a href="api.php?start=<?=$row['id']?>" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-play"></i>&nbsp;Start</a>
                 <a href="api.php?stop=<?=$row['id']?>" class="btn btn-warning  btn-sm disabled"><i class="glyphicon glyphicon-stop"></i>&nbsp;Stop</a>
