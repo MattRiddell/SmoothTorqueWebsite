@@ -171,11 +171,24 @@ if (isset($_GET['edit']) || isset($_GET['add'])) {
             </td>
 
             <?
-
+            $resultx = mysql_query("SELECT status FROM queue WHERE campaignID = ".$row['id']) or die(mysql_error());
+            $running = false;
+            if (mysql_num_rows($resultx) == 0) {
+                // No rows
+            } else {
+                while ($rowx = mysql_fetch_assoc($resultx)) {
+                    if ($rowx['status'] == '1') {
+                        $running = true;
+                    }
+                    if ($rowx['status'] == '101') {
+                        $running = true;
+                    }
+                }
+            }
             ?>
             <td>
-                <a href="api.php?start=<?=$row['id']?>" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-play"></i>&nbsp;Start</a>
-                <a href="api.php?stop=<?=$row['id']?>" class="btn btn-warning  btn-sm disabled"><i class="glyphicon glyphicon-stop"></i>&nbsp;Stop</a>
+                <a href="api.php?start=<?=$row['id']?>" class="btn btn-success btn-sm <?=$running==true?"disabled":""?>"><i class="glyphicon glyphicon-play"></i>&nbsp;Start</a>
+                <a href="api.php?stop=<?=$row['id']?>" class="btn btn-warning btn-sm <?=$running==false?"disabled":""?>"><i class="glyphicon glyphicon-stop"></i>&nbsp;Stop</a>
             </td>
             <td>
                 <a href="new_campaign.php?delete=<?=$row['id']?>" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i>&nbsp;Delete Campaign</a>&nbsp;

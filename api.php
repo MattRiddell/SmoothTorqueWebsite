@@ -36,7 +36,17 @@ if (isset($_GET['stop'])) {
 
 <?
 
-$result = mysql_query("SELECT * FROM campaign WHERE id = ".sanitize($_GET['start'])) or die(mysql_error());
+
+if (isset($_GET['start'])) {
+    $field['status'] = 1;
+    $id = $_GET['start'];
+} else {
+    $field['status'] = 2;
+    $id = $_GET['stop'];
+}
+
+
+$result = mysql_query("SELECT * FROM campaign WHERE id = ".sanitize($id)) or die(mysql_error());
 $row = mysql_fetch_assoc($result);
 
 $result = mysql_query("SELECT * FROM customer WHERE id = ".sanitize($row['groupid'])) or die(mysql_error());
@@ -53,13 +63,9 @@ if ($customer_row['trunkid'] == -1) {
 }
 
 $field['queuename'] = "autostart-".$_GET['start'];
-if (isset($_GET['start'])) {
-    $field['status'] = 1;
-} else {
-    $field['status'] = 2;
-}
 
-$field['campaignID'] = $_GET['start'];
+
+$field['campaignID'] = $id;
 $field['details'] = "No Details";
 $field['flags'] = 0;
 $field['transferclid'] = $row['trclid'];
@@ -83,7 +89,7 @@ $field['maxcps'] = $trunk_row['maxcps'];
 $field['drive_min'] = '43.0';
 $field['drive_max'] = '61.0';
 
-mysql_query("DELETE FROM queue WHERE campaignID = ".sanitize($_GET['start']));
+mysql_query("DELETE FROM queue WHERE campaignID = ".sanitize($id));
 $sql1 = "INSERT INTO queue (";
 $sql2 = ") VALUES (";
 foreach ($field as $key => $value) {
