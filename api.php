@@ -49,7 +49,7 @@ if (isset($_GET['start'])) {
 $result = mysql_query("SELECT * FROM campaign WHERE id = ".sanitize($id)) or die(mysql_error());
 $row = mysql_fetch_assoc($result);
 
-$result = mysql_query("SELECT * FROM customer WHERE id = ".sanitize($row['groupid'])) or die(mysql_error());
+$result = mysql_query("SELECT * FROM customer WHERE campaigngroupid = ".sanitize($row['groupid'])) or die(mysql_error());
 $customer_row = mysql_fetch_assoc($result);
 
 if ($customer_row['trunkid'] == -1 || $customer_row['trunkid'] == null || $customer_row['trunkid'] == "") {
