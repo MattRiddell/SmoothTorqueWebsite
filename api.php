@@ -52,7 +52,7 @@ $row = mysql_fetch_assoc($result);
 $result = mysql_query("SELECT * FROM customer WHERE id = ".sanitize($row['groupid'])) or die(mysql_error());
 $customer_row = mysql_fetch_assoc($result);
 
-if ($customer_row['trunkid'] == -1) {
+if ($customer_row['trunkid'] == -1 || $customer_row['trunkid'] == null || $customer_row['trunkid'] == "") {
     // Default Trunk
     $result = mysql_query("SELECT * FROM trunk WHERE current = '1'") or die(mysql_error());
     $trunk_row = mysql_fetch_assoc($result);
