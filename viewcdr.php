@@ -36,7 +36,7 @@ if (!isset($_GET[startdate])) {
             <? if (isset($_GET[accountcode])) { ?>
                 <input type="hidden" name="accountcode" value="<? echo $_GET[accountcode]; ?>">
             <? } ?>
-            <input class="btn btn-primary" type="submit" value="Show CDRs">
+            <input class="btn btn-primary" type="submit" value="Search">
         </form>
         </p>
     </div>
