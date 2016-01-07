@@ -6,8 +6,9 @@ if (!isset($_GET[startdate])) {
     <div class="jumbotron">
         <h3>Call Detail Records</h3>
         <p>
-            You have a couple of options for viewing your call detail records.  You can either view today's records or you can view all records over a date range.
-            </p><p>
+            You have a couple of options for viewing your call detail records. You can either view today's records or you can view all records over a date range.
+        </p>
+        <p>
             <?
             if (isset($_GET['all'])) {
                 ?>
@@ -15,13 +16,21 @@ if (!isset($_GET[startdate])) {
                 <br/>
                 <?
             } else {
+
                 ?>
-                <a href="viewcdr.php?startdate=<?= @Date("Y-m-d") ?>&enddate=<?= @Date("Y-m-d") ?>" class="btn btn-primary">View records for today</a>
+                <? if (isset($_GET['accountcode'])) { ?>
+
+                    <a href="viewcdr.php?startdate=<?= @Date("Y-m-d") ?>&enddate=<?= @Date("Y-m-d") ?>&accountcode=<?=$_GET['accountcode']?>" class="btn btn-primary">View records for today</a>
+                <? } else { ?>
+                    <a href="viewcdr.php?startdate=<?= @Date("Y-m-d") ?>&enddate=<?= @Date("Y-m-d") ?>" class="btn btn-primary">View records for today</a>
+                <?
+                } ?>
                 <br/>
                 <?
             }
             ?>
-            </p><p>
+        </p>
+        <p>
             Or select the dates you would like to view:</p>
         <form action="viewcdr.php">
             From: <input name="startdate">
@@ -33,7 +42,7 @@ if (!isset($_GET[startdate])) {
                 ?><input type="hidden" name="all" value="1"><?
             }
             ?>
-            <? if (isset($_GET[accountcode])) { ?>
+            <? if (isset($_GET['accountcode'])) { ?>
                 <input type="hidden" name="accountcode" value="<? echo $_GET[accountcode]; ?>">
             <? } ?>
             <input class="btn btn-primary" type="submit" value="Search">
@@ -56,7 +65,7 @@ if (!isset($_GET[startdate])) {
     $db_user = $config_values['CDR_USER'];
     $db_pass = $config_values['CDR_PASS'];
     if ($level == sha1("level100")) {
-        if (isset($_GET[accountcode])) {
+        if (isset($_REQUEST['accountcode'])) {
             $accountcode_in = $_GET[accountcode];
         } else {
             $accountcode_in = "stl-".$_COOKIE[user];
@@ -121,7 +130,8 @@ if (!isset($_GET[startdate])) {
     } else {
         $sql = "SELECT * from ".$config_values['CDR_TABLE']." WHERE calldate between '".$_GET['startdate']." 00:00:00' and '".$_GET['enddate']." 23:59:59' and dcontext!='default' and dcontext!='load-simulation' and dcontext!='staff' and dcontext!='ls3' and userfield!='' and accountcode='$accountcode_in' order by calldate DESC LIMIT $start,20";
     }
-    $result = mysql_query($sql, $cdrlink);
+    //echo $sql;
+    $result = mysql_query($sql, $cdrlink) or die(mysql_error());
     $i = 0;
     $titletd = "<th>";
     $titletdc = "</th>";
@@ -168,6 +178,7 @@ if (!isset($_GET[startdate])) {
         }
     }
     while ($row = mysql_fetch_assoc($result)) {
+        //print_pre($row);
         $calldate[$i] = $row[calldate];
         $dcontext[$i] = $row[dcontext];
         $dst[$i] = $row[dst];
@@ -370,11 +381,11 @@ if (!isset($_GET[startdate])) {
                 if ($config_values['disable_all_types'] == "YES") {
                     echo "$td".$phonenumber[$i]."</b></td>$td<b>".$dst[$i]."</b></td>";
                     echo $td.$currency.$costperminute[$i]."</td>".
-                        $td.$currency.$cost[$i]."</td>".$paid[$i]."</td>";
+                        $td.$currency.$cost[$i]."</td>".$td.$paid[$i]."</td>";
                 } else {
                     echo "$td".$accountcode[$i]."</td>$td".$phonenumber[$i]."</b></td>$td<b>".$dst[$i]."</b></td>";
                     echo $td.$currency.$costperminute[$i]."</td>".$td.$currency.$costpercall[$i]."</td>".
-                        $td.$currency.$costperconnect[$i]."</td>".$td.$currency.$costperpress1[$i]."</td>".$td.$currency.$cost[$i]."</td>".$paid[$i]."</td>";
+                        $td.$currency.$costperconnect[$i]."</td>".$td.$currency.$costperpress1[$i]."</td>".$td.$currency.$cost[$i]."</td>".$td.$paid[$i]."</td>";
                 }
                 echo "</tr>";
             }
