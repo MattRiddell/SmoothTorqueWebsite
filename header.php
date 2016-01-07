@@ -696,10 +696,11 @@ if (isset($menu) && $loggedin == TRUE) {
                 $postpay = 1;
             }
             if ($postpay == 1) {
-                echo 'Credit: '.$credit.' Credit Limit: $creditlimit <a href="'.$http_dir_name.'"viewcdr.php" class="btn btn-primary"><i class="glyphicon glyphicon-phone-alt"></i> '.$config_values['CDR_TEXT'].'</a> <a href="'.$http_dir_name.'billinglog_account.php" class="btn btn-primary"><i class="glyphicon glyphicon-list"></i> '.$config_values['BILLING_TEXT'].'</a></font><br /></center>';
-
+                echo 'Credit: '.$credit.' Credit Limit: $creditlimit <a href="'.$http_dir_name.'"viewcdr.php" class="btn btn-primary"><i class="glyphicon glyphicon-phone-alt"></i> '.$config_values['CDR_TEXT'].'</a> </font><br /></center>';
+//                echo 'Credit: '.$credit.' Credit Limit: $creditlimit <a href="'.$http_dir_name.'"viewcdr.php" class="btn btn-primary"><i class="glyphicon glyphicon-phone-alt"></i> '.$config_values['CDR_TEXT'].'</a> <a href="'.$http_dir_name.'billinglog_account.php" class="btn btn-primary"><i class="glyphicon glyphicon-list"></i> '.$config_values['BILLING_TEXT'].'</a></font><br /></center>';
             } else {
-                echo 'Credit: '.$credit.' <a href="'.$http_dir_name.'viewcdr.php" class="btn btn-success"><i class="glyphicon glyphicon-phone-alt"></i> '.$config_values['CDR_TEXT'].'</a> <a href="'.$http_dir_name.'billinglog_account.php" class="btn btn-success"><i class="glyphicon glyphicon-list"></i>  '.$config_values['BILLING_TEXT'].'</a></font><br /></center>';
+                echo 'Credit: '.$credit.' Credit Limit: $creditlimit <a href="'.$http_dir_name.'"viewcdr.php" class="btn btn-primary"><i class="glyphicon glyphicon-phone-alt"></i> '.$config_values['CDR_TEXT'].'</a>/font><br /></center>';
+//                echo 'Credit: '.$credit.' Credit Limit: $creditlimit <a href="'.$http_dir_name.'"viewcdr.php" class="btn btn-primary"><i class="glyphicon glyphicon-phone-alt"></i> '.$config_values['CDR_TEXT'].'</a> <a href="'.$http_dir_name.'billinglog_account.php" class="btn btn-primary"><i class="glyphicon glyphicon-list"></i> '.$config_values['BILLING_TEXT'].'</a></font><br /></center>';
             }
             unset($result_credit);
             unset($postpay);
