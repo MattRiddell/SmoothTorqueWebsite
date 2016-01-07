@@ -136,8 +136,14 @@ if (!isset($_GET[startdate])) {
             echo $titletd."State".$titletdc;
         }
 
-        echo $titletd."AccountCode".$titletdc."".$titletd."Phone Number".$titletdc."".$titletd.
-            "Result".$titletdc."</tr>";
+        if ($config_values['disable_all_types'] == "YES") {
+            echo $titletd."Phone Number".$titletdc."".$titletd.
+                "Result".$titletdc."</tr>";
+        } else {
+            echo $titletd."AccountCode".$titletdc."".$titletd."Phone Number".$titletdc."".$titletd.
+                "Result".$titletdc."</tr>";
+        }
+
     } else {
         echo "<tr>".$titletd."Call Date/Time".$titletdc."".$titletd.
             /*"DContext".$titletdc."".$titletd."Caller ID".$titletdc."".$titletd.*/
@@ -148,11 +154,18 @@ if (!isset($_GET[startdate])) {
             echo $titletd."State".$titletdc;
         }
 
-        echo $titletd."AccountCode".$titletdc."".$titletd."Phone Number".$titletdc."".$titletd.
-            "Result".$titletdc.$titletd.$config_values['PER_MINUTE'].$titletdc.$titletd.
-            "Lead".$titletdc.$titletd."Connected".$titletdc.$titletd."Press1".$titletdc.$titletd.
-            "Total".$titletdc.$titletd."Charged".$titletdc.
-            "</tr>";
+        if ($config_values['disable_all_types'] == "YES") {
+            echo $titletd."Phone Number".$titletdc."".$titletd.
+                "Result".$titletdc.$titletd.$config_values['PER_MINUTE'].$titletdc.$titletd.
+                "Total".$titletdc.$titletd."Charged".$titletdc.
+                "</tr>";
+        } else {
+            echo $titletd."AccountCode".$titletdc."".$titletd."Phone Number".$titletdc."".$titletd.
+                "Result".$titletdc.$titletd.$config_values['PER_MINUTE'].$titletdc.$titletd.
+                "Lead".$titletdc.$titletd."Connected".$titletdc.$titletd."Press1".$titletdc.$titletd.
+                "Total".$titletdc.$titletd."Charged".$titletdc.
+                "</tr>";
+        }
     }
     while ($row = mysql_fetch_assoc($result)) {
         $calldate[$i] = $row[calldate];
@@ -354,9 +367,15 @@ if (!isset($_GET[startdate])) {
                     echo $td.$state[$i]."</td>";
                 }
 
-                echo "$td".$accountcode[$i]."</td>$td".$phonenumber[$i]."</b></td>$td<b>".$dst[$i]."</b></td>";
-                echo $td.$currency.$costperminute[$i]."</td>".$td.$currency.$costpercall[$i]."</td>".
-                    $td.$currency.$costperconnect[$i]."</td>".$td.$currency.$costperpress1[$i]."</td>".$td.$currency.$cost[$i]."</td>".$paid[$i]."</td>";
+                if ($config_values['disable_all_types'] == "YES") {
+                    echo "$td".$phonenumber[$i]."</b></td>$td<b>".$dst[$i]."</b></td>";
+                    echo $td.$currency.$costperminute[$i]."</td>".
+                        $td.$currency.$cost[$i]."</td>".$paid[$i]."</td>";
+                } else {
+                    echo "$td".$accountcode[$i]."</td>$td".$phonenumber[$i]."</b></td>$td<b>".$dst[$i]."</b></td>";
+                    echo $td.$currency.$costperminute[$i]."</td>".$td.$currency.$costpercall[$i]."</td>".
+                        $td.$currency.$costperconnect[$i]."</td>".$td.$currency.$costperpress1[$i]."</td>".$td.$currency.$cost[$i]."</td>".$paid[$i]."</td>";
+                }
                 echo "</tr>";
             }
         }
