@@ -13,7 +13,7 @@ if (isset($_GET[type])){
             if ($config_values['LEAVE_PRESS1'] == "NO") {
                 $sql = 'DELETE FROM number WHERE campaignid='.$_GET[id];
             } else {
-                $sql = 'DELETE FROM number WHERE campaignid='.$_GET[id]." and status != 'pressed1' and status != 'pressedf'";
+                $sql = 'DELETE FROM number WHERE campaignid='.$_GET[id]." and status != 'pressed1' and status != 'pressedf' and status != 'pressed-nq' and status != 'pressed-ni'";
             }
         } else {
             require "header.php";
