@@ -11,7 +11,7 @@ if ($config_values['USE_TIMEZONES'] == "YES") {
 } else {
     $new = "new";
 }
-
+ini_set("auto_detect_line_endings", "1");
 $_POST = array_map(mysql_real_escape_string,$_POST);
 $_GET = array_map(mysql_real_escape_string,$_GET);
 
