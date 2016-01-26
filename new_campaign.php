@@ -4,6 +4,43 @@
  */
 
 require "header.php";
+if (isset($_GET['delete_sure'])) {
+    mysql_query("DELETE FROM campaign WHERE id = ".sanitize($_GET['delete_sure'])) or die(mysql_error());
+    redirect("new_campaign.php?view=1","Deleted",1);
+    require "footer.php";
+    exit(0);
+}
+if (isset($_GET['delete'])) {
+    ?>
+    <div class="jumbotron">
+    	<div class="container">
+    		<h3>Delete Campaign</h3>
+    		<p>Are you sure you want to delete this campaign?</p>
+    		<p>
+    		<?
+            $result = mysql_query("SELECT * FROM campaign WHERE id = ".sanitize($_GET['delete'])) or die(mysql_error());
+            if (mysql_num_rows($result) == 0) {
+                // No rows
+            } else {
+                while ($row = mysql_fetch_assoc($result)) {
+                    echo "Name: ".$row['name']."<br />";
+                    echo "Description: ".$row['description']."<br />";
+                }
+            }
+            ?>
+            </p>
+    		<p>
+    			<a class="btn btn-danger" href="new_campaign.php?delete_sure=<?=$_GET['delete']?>">Yes, Delete It</a>
+    		</p>
+    		<p>
+    			<a class="btn btn-success" href="new_campaign.php?view=1">No, Leave It</a>
+    		</p>
+    	</div>
+    </div>
+    <?
+    require "footer.php";
+    exit(0);
+}
 $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE['user'].'\'';
 $result=mysql_query($sql, $link) or die (mysql_error());;
 $campaigngroupid=mysql_result($result,0,'campaigngroupid');
@@ -172,23 +209,23 @@ if (isset($_GET['edit']) || isset($_GET['add'])) {
 
             <?
             $resultx = mysql_query("SELECT status FROM queue WHERE campaignID = ".$row['id']) or die(mysql_error());
-            $running = false;
+            $running = FALSE;
             if (mysql_num_rows($resultx) == 0) {
                 // No rows
             } else {
                 while ($rowx = mysql_fetch_assoc($resultx)) {
                     if ($rowx['status'] == '1') {
-                        $running = true;
+                        $running = TRUE;
                     }
                     if ($rowx['status'] == '101') {
-                        $running = true;
+                        $running = TRUE;
                     }
                 }
             }
             ?>
             <td>
-                <a href="api.php?start=<?=$row['id']?>" class="btn btn-success btn-sm <?=$running==true?"disabled":""?>"><i class="glyphicon glyphicon-play"></i>&nbsp;Start</a>
-                <a href="api.php?stop=<?=$row['id']?>" class="btn btn-warning btn-sm <?=$running==false?"disabled":""?>"><i class="glyphicon glyphicon-stop"></i>&nbsp;Stop</a>
+                <a href="api.php?start=<?=$row['id']?>" class="btn btn-success btn-sm <?=$running==TRUE?"disabled":""?>"><i class="glyphicon glyphicon-play"></i>&nbsp;Start</a>
+                <a href="api.php?stop=<?=$row['id']?>" class="btn btn-warning btn-sm <?=$running==FALSE?"disabled":""?>"><i class="glyphicon glyphicon-stop"></i>&nbsp;Stop</a>
             </td>
             <td>
                 <a href="new_campaign.php?delete=<?=$row['id']?>" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i>&nbsp;Delete Campaign</a>&nbsp;
