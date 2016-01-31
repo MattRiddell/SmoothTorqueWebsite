@@ -17,8 +17,14 @@ $sid = md5(uniqid(rand()));
                 <? if ($_GET[type] == "audio") { ?>
                 <div id="matt2">
                     <b>Upload Message</b><br/><br/>
+                    <?if ($config_values['disable_all_types'] == "YES") {?>
+                        To record an audio message/voice mail click on the vocaroo link below:<br />
+                        <br />
+                        <a href="http://www.vocaroo.com">www.vocaroo.com</a>
+                    <?} else {?>
                     Please select a wave file from your computer that you would like to use
                     as one of your messages and then click Upload.<br/><br/>
+                    <?}?>
                 </div>
                 <form enctype="multipart/form-data" name="postform" action="/cgi-bin/upload.cgi?sid=<?php echo $sid; ?>&target=<? echo normal_target('receivemessage.php'); ?>" method="post">
                     <? } else if ($_GET[type] == "fax") { ?>
