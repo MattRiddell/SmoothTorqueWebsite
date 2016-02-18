@@ -110,8 +110,8 @@ if (isset($_GET['campaigngroupid'])) {
     $campaigngroupid = ($_GET['campaigngroupid']);
 } else {
     $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE['user'].'\'';
-    $result=mysql_query($sql, $link) or die (mysql_error());;
-    $campaigngroupid=mysql_result($result,0,'campaigngroupid');
+    $result = mysql_query($sql, $link) or die (mysql_error());;
+    $campaigngroupid = mysql_result($result, 0, 'campaigngroupid');
 }
 if (isset($_POST['id'])) {
     $id = $_POST['id'];
@@ -131,7 +131,7 @@ $result = mysql_query($sql, $link) or die ("1: ".mysql_error()." FROM ".$sql);;
 if (mysql_num_rows($result) == 0) {
     ?>
     <br/><br/>
-    <?box_start();
+    <? box_start();
     echo "<br /><center><img src=\"images/icons/gtk-dialog-info.png\" border=\"0\" width=\"64\" height=\"64\"><br /><br />";
     ?>
 
@@ -212,7 +212,6 @@ $user = $_COOKIE['user'];
         <? } ?>
 
 
-
         <th CLASS="">
             Percentage Busy
         </th>
@@ -246,7 +245,7 @@ $user = $_COOKIE['user'];
         }
 
         ?>
-        <TR <?echo $class; ?>>
+        <TR <? echo $class; ?>>
             <td></td>
             <TD>
                 <?
@@ -283,7 +282,7 @@ $user = $_COOKIE['user'];
             //} else {
             $extra_sql = "";
             //}
-            if ($config_values['SHOW_NUMBERS_LEFT'] == 'YES') {
+            if ($config_values['SHOW_NUMBERS_LEFT'] == 'YES' && $_GET['show_numbers'] == 1) {
                 $sql = 'SELECT count(*) from number where campaignid='.$row['id'].' and (status="manual_dial" or status="new" or status="new_nodial" or status="no-credit") '.$extra_sql;
                 $result2 = mysql_query($sql, $link) or die (mysql_error());;
                 $new_numbers = mysql_result($result2, 0, 'count(*)');
@@ -320,7 +319,7 @@ $user = $_COOKIE['user'];
             <TD width="100">
                 <?
 
-                if ($config_values['SHOW_NUMBERS_LEFT'] == 'YES') {
+                if ($config_values['SHOW_NUMBERS_LEFT'] == 'YES'&& $_GET['show_numbers'] == 1) {
                     if ($isApple) {
                         echo "Remaining: $new_numbers/$total_numbers $tz";
                     }
@@ -328,20 +327,45 @@ $user = $_COOKIE['user'];
                         $perc = 0;
                     } else {
 
-                        $perc = round((( (($new_numbers / $total_numbers) * 100)) * 1) - 1,0);
+                        $perc = round((((($new_numbers / $total_numbers) * 100)) * 1) - 1, 0);
                     }
 
 
-                        ?>
+                    ?>
 
                     </div>
-                        <div class="progress">
-                            <div  data-toggle="tooltip" data-placement="left" title="(<?echo "Remaining: $new_numbers/$total_numbers $tz";?>)" class="progress-bar <? if ($perc == 0) { ?>progress-bar-danger<? } ?>" role="progressbar" aria-valuenow="<?= $perc ?>" aria-valuemin="0" aria-valuemax="100" style="min-width: 4em;width: <?= $perc ?>%;">
-                                <?= $perc ?>%
-                            </div>
+                    <div class="progress">
+                        <div data-toggle="tooltip" data-placement="left" title="(<? echo "Remaining: $new_numbers/$total_numbers $tz"; ?>)" class="progress-bar <? if ($perc == 0) { ?>progress-bar-danger<? } ?>" role="progressbar" aria-valuenow="<?= $perc ?>" aria-valuemin="0" aria-valuemax="100" style="min-width: 4em;width: <?= $perc ?>%;">
+                            <?= $perc ?>%
                         </div>
+                    </div>
                     <?
 
+                } else if ($config_values['SHOW_NUMBERS_LEFT'] == 'YES') {
+                    function url_origin($s, $use_forwarded_host = FALSE) {
+                        $ssl = (!empty($s['HTTPS']) && $s['HTTPS'] == 'on');
+                        $sp = strtolower($s['SERVER_PROTOCOL']);
+                        $protocol = substr($sp, 0, strpos($sp, '/')).(($ssl) ? 's' : '');
+                        $port = $s['SERVER_PORT'];
+                        $port = ((!$ssl && $port == '80') || ($ssl && $port == '443')) ? '' : ':'.$port;
+                        $host = ($use_forwarded_host && isset($s['HTTP_X_FORWARDED_HOST'])) ? $s['HTTP_X_FORWARDED_HOST'] : (isset($s['HTTP_HOST']) ? $s['HTTP_HOST'] : NULL);
+                        $host = isset($host) ? $host : $s['SERVER_NAME'].$port;
+                        return $protocol.'://'.$host;
+                    }
+
+                    function full_url($s, $use_forwarded_host = FALSE) {
+                        return url_origin($s, $use_forwarded_host).$s['REQUEST_URI'];
+                    }
+
+                    $absolute_url = full_url($_SERVER);
+                    if (strpos($absolute_url, "?") ===  FALSE) {
+                        $absolute_url .= "?x=1";
+                    }
+                    //echo ;
+                    //echo "x";
+                    ?>
+                    <a href="<?=$absolute_url?>&show_numbers=1" class="btn btn-primary">Show Numbers</a>
+                    <?
                 }
                 ?>
             </TD>
@@ -365,21 +389,21 @@ $user = $_COOKIE['user'];
         <td>
         <? if ($user != "demo") {
             ?>
-            <a class="btn btn-danger" title="Stop running this campaign" href="stopcampaign.php?id=<? echo $row['id'];?>"><img width="16" height="16" src="images/control_stop_blue.png" border="0"></a>
+            <a class="btn btn-danger" title="Stop running this campaign" href="stopcampaign.php?id=<? echo $row['id']; ?>"><img width="16" height="16" src="images/control_stop_blue.png" border="0"></a>
         <? } else { ?>
             <a href="#" class="btn btn-default disabled" title="Stop campaign (Not running)"><img width="16" height="16" src="images/control_stop_blue.png" border="0"></a>
-        <?
+            <?
         }
         } else {
 
         ?>
-        <?if ($user != "demo") { ?>
+        <? if ($user != "demo") { ?>
             <a class="btn btn-success" title="Start running this campaign" href="startcampaign.php?id=<? echo $row['id']; ?>&astqueuename=<? echo $row['astqueuename']; ?>&clid=<? echo $row['clid']; ?>&trclid=<? echo $row['trclid']; ?>&agents=<? echo $row['maxagents']; ?>&did=<? echo $row['did']; ?>&context=<? echo $row['context']; ?>&drive_min=<?= $row['drive_min'] ?>&drive_max=<?= $row['drive_max'] ?>">
                 <IMG width="16" height="16" SRC="images/control_play_blue.png" BORDER="0"></a><br>
         <? } else { ?>
             <a class="btn btn-default disabled" href="#" title="Start campaign (Already started)"><IMG width="16" height="16" SRC="images/control_play_blue.png" BORDER="0"></a>
             <br>
-        <?
+            <?
         } ?>
         </TD>
             <td>
@@ -389,7 +413,7 @@ $user = $_COOKIE['user'];
 
                 if (strlen($config_values['test_number']) > 0) { ?>
                     <a class="btn btn-default" href="add_test_number.php?id=<?= $row['id'] ?>&type=<?= $_GET['type'] ?>" title="Add test number to this campaign"><img width="16" height="16" src="images/cog.png" border="0"></a>
-                <?
+                    <?
                 }
 
                 if ($config_values['ALLOW_NUMBERS_MANUAL'] == "YES") {
@@ -397,27 +421,27 @@ $user = $_COOKIE['user'];
                     <a class="btn btn-default" href="manual_init.php?campaignid=<?= $row['id'] ?>">
                         <img width="16" height="16" src="images/database_lightning.png" border="0" title="Initialise campaign for manual dialing">
                     </a>
-                <?
+                    <?
                 }
 
                 if ($config_values['DELETE_ALL'] == "YES") { ?>
                     <a class="btn btn-default" href="recycle.php?type=deleteall&id=<?= $row['id'] ?>">
                         <img width="16" height="16" src="images/page_white_delete.png" border="0" title="Delete all numbers">
                     </a>
-                <?
+                    <?
                 }
                 ?>
             </td>
             <TD>
-                <?if ($backend == 0) { ?>
-                    <a class="btn btn-default" title="View the report for this campaign" href="report<?if ($use_new_pie == 1) {
+                <? if ($backend == 0) { ?>
+                    <a class="btn btn-default" title="View the report for this campaign" href="report<? if ($use_new_pie == 1) {
                         echo "2";
-                    } ?>.php?id=<?echo $row['id']; ?>" class="abcd"><img width="16" height="16" src="images/chart_pie.png" border="0"></a>
-                    <a class="btn btn-default" title="View the graph for this campaign" href="test.php?id=<?echo $row['id']; ?>" class="abcd"><img width="16" height="16" src="images/chart_curve.png" border="0"></a>&nbsp;
-                <?
+                    } ?>.php?id=<? echo $row['id']; ?>" class="abcd"><img width="16" height="16" src="images/chart_pie.png" border="0"></a>
+                    <a class="btn btn-default" title="View the graph for this campaign" href="test.php?id=<? echo $row['id']; ?>" class="abcd"><img width="16" height="16" src="images/chart_curve.png" border="0"></a>&nbsp;
+                    <?
                 } ?>
-                <a class="btn btn-default" title="Recycle Numbers" href="recycle.php?id=<?echo $row['id']; ?>&type_input=<?echo $_GET['type']; ?>" class="abcd"><img width="16" height="16" src="images/arrow_refresh.png" border="0"></a>&nbsp;
-                <a class="btn btn-default" title="List Numbers" href="viewnumbers.php?campaignid=<?echo $row['id']; ?>" class="abcd"><img width="16" height="16" src="images/table.png" border="0"></a>&nbsp;
+                <a class="btn btn-default" title="Recycle Numbers" href="recycle.php?id=<? echo $row['id']; ?>&type_input=<? echo $_GET['type']; ?>" class="abcd"><img width="16" height="16" src="images/arrow_refresh.png" border="0"></a>&nbsp;
+                <a class="btn btn-default" title="List Numbers" href="viewnumbers.php?campaignid=<? echo $row['id']; ?>" class="abcd"><img width="16" height="16" src="images/table.png" border="0"></a>&nbsp;
                 <?
                 if ($user != "demo") {
                     echo "<A class=\"btn btn-default\" title=\"Delete this campaign\" HREF=\"deletecampaign.php?id=".$row['id']."\"><IMG width=\"16\" height=\"16\" SRC=\"images/delete.png\" BORDER=\"0\"></A>";
@@ -438,14 +462,14 @@ $user = $_COOKIE['user'];
                     }
                     ?>
                 </TD>
-            <?
+                <?
             } ?>
 
             <td>
 
 
                 <div class="progress">
-                    <div class="progress-bar <?if ($perc == 0) { ?>progress-bar-danger<?
+                    <div class="progress-bar <? if ($perc == 0) { ?>progress-bar-danger<?
                     } ?>" role="progressbar" aria-valuenow="<?= $perc ?>" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;width: <?= $perc ?>%;">
                         <?= $perc ?>%
                     </div>
@@ -457,7 +481,7 @@ $user = $_COOKIE['user'];
             <td></td>
         </TR>
 
-    <?
+        <?
     }
     ?>
 
