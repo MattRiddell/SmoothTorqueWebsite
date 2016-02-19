@@ -25,6 +25,26 @@ if (!function_exists('format_phone')) {
     }
 }
 
+if (!function_exists('url_origin')) {
+    function url_origin($s, $use_forwarded_host = FALSE) {
+        $ssl = (!empty($s['HTTPS']) && $s['HTTPS'] == 'on');
+        $sp = strtolower($s['SERVER_PROTOCOL']);
+        $protocol = substr($sp, 0, strpos($sp, '/')).(($ssl) ? 's' : '');
+        $port = $s['SERVER_PORT'];
+        $port = ((!$ssl && $port == '80') || ($ssl && $port == '443')) ? '' : ':'.$port;
+        $host = ($use_forwarded_host && isset($s['HTTP_X_FORWARDED_HOST'])) ? $s['HTTP_X_FORWARDED_HOST'] : (isset($s['HTTP_HOST']) ? $s['HTTP_HOST'] : NULL);
+        $host = isset($host) ? $host : $s['SERVER_NAME'].$port;
+        return $protocol.'://'.$host;
+    }
+}
+
+if (!function_exists('full_url')) {
+    function full_url($s, $use_forwarded_host = FALSE) {
+        return url_origin($s, $use_forwarded_host).$s['REQUEST_URI'];
+    }
+}
+
+
 if (!function_exists('sec2hms')) {
     function sec2hms($sec, $padHours = FALSE) {
 
