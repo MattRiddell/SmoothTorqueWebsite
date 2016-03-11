@@ -15,8 +15,9 @@ if (mysql_num_rows($result) == 0) {
 } else {
     while ($row = mysql_fetch_assoc($result)) {
         $random_sort = rand(1,999999999);
-        $sql = "UPDATE number SET status = 'new', random_sort='$random_sort', times_called=times_called+1 WHERE phonenumber = '".$row['phonenumber']."' and campaignid = '".$campaign_id."' and status = '".$row['status']."'";
-        echo $sql."\n";
+        $sql = "UPDATE number SET status = 'new', random_sort='$random_sort', times_called=times_called+1 WHERE phonenumber = '".$row['phonenumber']."' and campaignid = '".$campaign_id."'";
+        mysql_query($sql) or die(mysql_error());
+        echo "Ran $sql\n";
     }
 }
 ?>
