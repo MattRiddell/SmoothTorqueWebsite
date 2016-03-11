@@ -14,7 +14,8 @@ if (mysql_num_rows($result) == 0) {
     echo "No rows available for recycling\n";
 } else {
     while ($row = mysql_fetch_assoc($result)) {
-        $sql = "UPDATE number SET status = 'new', random_sort=random_sort+1 WHERE phonenumber = '".$row['phonenumber']."' and campaignid = '".$campaign_id."'";
+        $random_sort = rand(1,999999999);
+        $sql = "UPDATE number SET status = 'new', random_sort='$random_sort', times_called=times_called+1 WHERE phonenumber = '".$row['phonenumber']."' and campaignid = '".$campaign_id."'";
         echo $sql."\n";
     }
 }
