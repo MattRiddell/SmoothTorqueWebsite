@@ -16,139 +16,141 @@ require "header_numbers.php";
 
 ob_implicit_flush(FALSE);
 
-$_POST = array_map(mysql_real_escape_string,$_POST);
-$_GET = array_map(mysql_real_escape_string,$_GET);
+$_POST = array_map(mysql_real_escape_string, $_POST);
+$_GET = array_map(mysql_real_escape_string, $_GET);
 
 ?>
-<?php if(!empty($data)){?>
-<?php if(isset($data['title'])){?>
-<div class="inputhead">Title</div>
-<div class="data"><?php echo $data['title']; ?></div>
-<?}?>
-	<?php if(isset($data['body'])){?>
-	<div class="inputhead">Body</div>
-	<div class="data"><?php echo $data['body']; ?></div>
-  <?}?>
-  <?}?>
-  <?if(!empty($files)){?>
-	<div class="data">
-	  <?foreach($files as $file) {
-        //print_r($file);
+<?php if (!empty($data)) { ?>
+    <?php if (isset($data['title'])) { ?>
+        <div class="inputhead">Title</div>
+        <div class="data"><?php echo $data['title']; ?></div>
+    <? } ?>
+    <?php if (isset($data['body'])) { ?>
+        <div class="inputhead">Body</div>
+        <div class="data"><?php echo $data['body']; ?></div>
+    <? } ?>
+<? } ?>
+<? if (!empty($files)) { ?>
+    <div class="data">
+        <? foreach ($files as $file) {
+            //print_r($file);
 
-	/* Because the new version of Sox (>14.0) requires different options 
-	 * we need to find out which version is being run 
-	 */
-	
-	exec($config_values['SOX']." --version",$retval);
-	$split = explode(":",$retval[0]);
-	$sox_version = substr(trim($split[1]), 5);
-	/* $sox_major is now 14, $sox_minor is 1 and $sox_point is 0 */
-	list($sox_major, $sox_minor, $sox_point) = explode(".",$sox_version);	
+            /* Because the new version of Sox (>14.0) requires different options
+             * we need to find out which version is being run
+             */
 
-	if ($sox_major <= 14) {
-		if ($sox_minor < 1) {
-			/* Use -w option */
-			$sox_options = "-w -s -c 1";
-		} else {
-			/* Use -2 option */
-			$sox_options = "-2 -s -c 1";
-		}
-	} else {
-		/* Use -2 option */
-		$sox_options = "-2 -s -c 1";
-	}
+            exec($config_values['SOX']." --version", $retval);
+            $split = explode(":", $retval[0]);
+            $sox_version = substr(trim($split[1]), 5);
+            /* $sox_major is now 14, $sox_minor is 1 and $sox_point is 0 */
+            list($sox_major, $sox_minor, $sox_point) = explode(".", $sox_version);
 
-        //TODO: This file path needs to be sanitised to make sure that
-        //the input doesn't get a command execution injection
-        $hash=sha1(date('l dS \of F Y h:i:s A'));
-        exec($config_values['SOX']." ".str_replace(" ","\ ",$file[path]).' -t raw -r 8000 '.$sox_options.' /var/tmp/uploads/x-'.$hash.'.sln');
-        exec($config_values['SOX']." ".str_replace(" ","\ ",$file[path]).' -r 8000 '.$sox_options.' /var/tmp/uploads/x-'.$hash.'.wav');
-        exec($config_values['SOX']." ".str_replace(" ","\ ",$file[path]).' -r 8000 '.$sox_options.' ./uploads/x-'.$hash.'.wav');
-        ?>
-<img src="/images/tick.png" onLoad="window.location = '/addmessage.php?filename=<?echo "x-".$hash.".sln";?>';">
-        <?
-        exit(0);
-        $filename = $file[path];
-        $row = 0;
-        $display2 = 0;
-        $handle = fopen($filename, "r");
-        echo "<br />Importing numbers, please wait<br /><br />";
-        //print_r($_POST);
-        $campaignid = $data["id"];
-        $sql2 = "LOCK TABLES number WRITE";
-        mysql_query($sql2, $link) or die (mysql_error());;
-        $sql = "INSERT IGNORE INTO number (campaignid,phonenumber,status,type) VALUES";
-        $isfirst=true;
-        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-            //echo "Inside Loop: ".$data[0]."<br />";
-            $data[0] = str_replace("(","",$data[0]);
-            $data[0] = str_replace(")","",$data[0]);
-            $data[0] = str_replace("-","",$data[0]);
-            $data[0] = str_replace(" ","",$data[0]);
-            $data[0] = str_replace("\r","",$data[0]);
-            if ($isfirst) {
-                $sql.="(".$campaignid.",'".$data[0]."','new',0)";
+            if ($sox_major <= 14) {
+                if ($sox_minor < 1) {
+                    /* Use -w option */
+                    $sox_options = "-w -s -c 1";
+                } else {
+                    /* Use -2 option */
+                    $sox_options = "-2 -s -c 1";
+                }
+            } else {
+                /* Use -2 option */
+                $sox_options = "-2 -s -c 1";
+            }
+
+            //TODO: This file path needs to be sanitised to make sure that
+            //the input doesn't get a command execution injection
+            $hash = sha1(date('l dS \of F Y h:i:s A'));
+            exec($config_values['SOX']." ".str_replace(" ", "\ ", $file[path]).' -t raw -r 8000 '.$sox_options.' /var/tmp/uploads/x-'.$hash.'.sln');
+            exec($config_values['SOX']." ".str_replace(" ", "\ ", $file[path]).' -r 8000 '.$sox_options.' /var/tmp/uploads/x-'.$hash.'.wav');
+            exec($config_values['SOX']." ".str_replace(" ", "\ ", $file[path]).' -r 8000 '.$sox_options.' ./uploads/x-'.$hash.'.wav');
+            ?>
+            <img src="/images/tick.png" onLoad="window.location = '/addmessage.php?filename=<? echo "x-".$hash.".sln"; ?>';">
+            <?
+            exit(0);
+            $filename = $file[path];
+            $row = 0;
+            $display2 = 0;
+            $handle = fopen($filename, "r");
+            echo "<br />Importing numbers, please wait<br /><br />";
+            //print_r($_POST);
+            $campaignid = $data["id"];
+            $sql2 = "LOCK TABLES number WRITE";
+            mysql_query($sql2, $link) or die (mysql_error());;
+            $sql = "INSERT IGNORE INTO number (campaignid,phonenumber,status,type) VALUES";
+            $isfirst = TRUE;
+            while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                //echo "Inside Loop: ".$data[0]."<br />";
+                $data[0] = str_replace("(", "", $data[0]);
+                $data[0] = str_replace(")", "", $data[0]);
+                $data[0] = str_replace("-", "", $data[0]);
+                $data[0] = str_replace(" ", "", $data[0]);
+                $data[0] = str_replace("\r", "", $data[0]);
+                if ($isfirst) {
+                    $sql .= "(".$campaignid.",'".$data[0]."','new',0)";
 
 //                $sql2 = "SET AUTOCOMMIT=0;";//BEGIN";
 //                mysql_query($sql2, $link) or die(mysql_error());
 //                echo mysql_error();
 
-                $isfirst=false;
+                    $isfirst = FALSE;
+                }
+                $row++;
+                $display++;
+                $display2++;
+                /*if ($display2>500){
+                    //echo "<!-- -->";
+                    //ob_flush();flush();
+
+                    $display2=0;
+                }*/
+                if ($display > 17347) { /* Just so the chances of doing nothing  */
+                    /* in the last write is low.  It doesn't */
+                    /* really matter but makes it cleaner */
+                    echo "".$row." numbers imported<br />\n";
+                    ob_flush();
+                    flush();
+                    //echo "saving $sql";
+                    mysql_query($sql, $link) or die (mysql_error());;
+                    $sql2 = "COMMIT";
+                    mysql_query($sql2, $link) or die (mysql_error());;
+                    $sql2 = "UNLOCK TABLES";
+                    mysql_query($sql2, $link) or die (mysql_error());;
+
+
+                    $display = 0;
+                    $sq2 = "LOCK TABLES number WRITE";
+                    mysql_query($sql2, $link) or die (mysql_error());;
+                    $sql = "INSERT IGNORE INTO number (campaignid,phonenumber,status,type)  VALUES";
+                    $sql .= "(".$campaignid.",'".$data[0]."','new',0)";
+                } else {
+                    $sql .= ",(".$campaignid.",'".$data[0]."','new',0)";
+                }
             }
-            $row++;
-            $display++;
-            $display2++;
-            /*if ($display2>500){
-                //echo "<!-- -->";
-                //ob_flush();flush();
+            //echo "Saving Records to the Database <br />";
+            echo "[".$row." numbers inserted]<br />\n";
+            ob_flush();
+            flush();
+            mysql_query($sql, $link) or die (mysql_error());;
+            $sql2 = "COMMIT";
+            mysql_query($sql2, $link) or die (mysql_error());;
+            $sql2 = "UNLOCK TABLES";
+            mysql_query($sql2, $link) or die (mysql_error());;
 
-                $display2=0;
-            }*/
-            if ($display > 17347) { /* Just so the chances of doing nothing  */
-                                   /* in the last write is low.  It doesn't */
-                                   /* really matter but makes it cleaner */
-                echo "".$row." numbers imported<br />\n";
-                ob_flush();flush();
-                //echo "saving $sql";
-                mysql_query($sql, $link) or die (mysql_error());;
-                $sql2="COMMIT";
-                mysql_query($sql2, $link) or die (mysql_error());;
-                $sql2="UNLOCK TABLES";
-                mysql_query($sql2, $link) or die (mysql_error());;
-
-
-				$display = 0;
-                $sq2 = "LOCK TABLES number WRITE";
-                mysql_query($sql2, $link) or die (mysql_error());;
-                $sql = "INSERT IGNORE INTO number (campaignid,phonenumber,status,type)  VALUES";
-                $sql.="(".$campaignid.",'".$data[0]."','new',0)";
-            } else {
-				$sql.=",(".$campaignid.",'".$data[0]."','new',0)";
-			}
-        }
-        //echo "Saving Records to the Database <br />";
-        echo "[".$row." numbers inserted]<br />\n";
-        ob_flush();flush();
-        mysql_query($sql, $link) or die (mysql_error());;
-                $sql2="COMMIT";
-                mysql_query($sql2, $link) or die (mysql_error());;
-                $sql2="UNLOCK TABLES";
-                mysql_query($sql2, $link) or die (mysql_error());;
-
-			/*$sql2 = "SET AUTOCOMMIT=1;";
-		mysql_query($sql2, $link) or die (mysql_error());;*/
+            /*$sql2 = "SET AUTOCOMMIT=1;";
+        mysql_query($sql2, $link) or die (mysql_error());;*/
 //$row--;
-echo "<br />";
-echo "<br />";
-fclose($handle);
-echo "<b>A total of $row numbers were inserted into the database</b><br /><br /><br />";
-/*echo "A total of $row numbers was read.  Inserting into database<br />";
-    for ($i = 1;$i<$row;$i++){
-        echo $i.":".$number[$i]."<br />";
-    }*/
-}?>
+            echo "<br />";
+            echo "<br />";
+            fclose($handle);
+            echo "<b>A total of $row numbers were inserted into the database</b><br /><br /><br />";
+            /*echo "A total of $row numbers was read.  Inserting into database<br />";
+                for ($i = 1;$i<$row;$i++){
+                    echo $i.":".$number[$i]."<br />";
+                }*/
+        } ?>
 
-	</div>
-<?}?>
+    </div>
+<? } ?>
 </body>
 </html>
