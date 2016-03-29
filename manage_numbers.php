@@ -67,7 +67,7 @@ if (isset($_GET['file_import'])) {
         //for ($i = 0;$i<=10;$i++) {
         ?>
         <script>
-        $('#imported').html("Reading the file into memory");
+            $('#imported').html("Reading the file into memory");
         </script>
         <?
         flush();
@@ -390,26 +390,39 @@ if (isset($_GET['view'])) {
     <? box_end();
 
     if ($total_nums > 100) {
-
-        // TODO: Make pagination work
+        if (!isset($_GET['page'])) {
+            $_GET['page'] = 1;
+        }
+        $actual_link = $_SERVER['PHP_SELF']."?view=".$_GET['view'];
         ?>
 
 
         <nav style="text-align: center">
             <ul class="pagination">
-                <li>
-                    <a href="#" aria-label="Previous">
+                <?
+                if ($_GET['page'] > 1) {
+
+
+                    ?>
+                    <li>
+                        <?
+                        echo '<a href="'.$actual_link."&page=".($_GET['page'] - 1).'">';
+                        ?>
                         <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
+                        </a>
+                    </li>
+                    <?
+                }
+                for ($i = $_GET['page']; $i < $_GET['page'] + 10; $i++) {
+                    echo '<li><a href="'.$actual_link."&page=".$i.'">'.$i.'</a></li>';
+                }
+                ?>
+
                 <li>
-                    <a href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
+                    <?
+                    echo '<a href="'.$actual_link."&page=".($_GET['page'] + 1).'">';
+                    ?>
+                    <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
             </ul>
@@ -430,7 +443,10 @@ if (isset($_GET['view'])) {
         </thead>
         <tbody>
         <?
-        $result = mysql_query("SELECT * FROM number WHERE campaignid = ".sanitize($_GET['view'])) or die(mysql_error());
+
+        $start = ($_GET['page'] - 1) * 100;
+
+        $result = mysql_query("SELECT * FROM number WHERE campaignid = ".sanitize($_GET['view'])." LIMIT ".sanitize($start).",100") or die(mysql_error());
         if (mysql_num_rows($result) == 0) {
             // No rows
 
