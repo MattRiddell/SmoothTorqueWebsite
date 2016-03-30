@@ -388,11 +388,11 @@ if (isset($_GET['view'])) {
         </button>
     </form>
     <? box_end();
-
+    if (!isset($_GET['page'])) {
+        $_GET['page'] = 1;
+    }
     if ($total_nums > 100) {
-        if (!isset($_GET['page'])) {
-            $_GET['page'] = 1;
-        }
+
         $actual_link = $_SERVER['PHP_SELF']."?view=".$_GET['view'];
         ?>
 
