@@ -1,6 +1,5 @@
 <?
-include "admin/db_config.php";
-mysql_select_db("SineDialer", $link);
+require "header.php";
 
 $_POST = array_map(mysql_real_escape_string,$_POST);
 $_GET = array_map(mysql_real_escape_string,$_GET);
@@ -9,6 +8,6 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
 if (isset($_GET[name])){
     $sql="DELETE FROM queue_table where name='".($_GET[name])."' limit 1";
     $result=mysql_query($sql, $link) or die (mysql_error());;
-    include("queues.php");
+    redirect("queues.php");
     exit;
 }
