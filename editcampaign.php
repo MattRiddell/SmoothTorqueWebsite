@@ -1,9 +1,5 @@
 <?
-include "admin/db_config.php";
-mysql_select_db("SineDialer", $link);
-
-/* Include the sanitize function */
-require "functions/sanitize.php";
+require "header.php";
 
 $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
 $result = mysql_query($sql, $link) or die (mysql_error());;
@@ -71,7 +67,7 @@ if (isset($_POST[name])) {
         exit(0);
     }
     $result = mysql_query($sql, $link) or die (mysql_error());;
-    include("campaigns.php");
+    redirect("campaigns.php");
     exit;
 }
 
