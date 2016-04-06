@@ -1,7 +1,5 @@
 <?
-include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(mysql_error());
-mysql_select_db("SineDialer", $link);
-
+require "header.php";
 $_POST = array_map(mysql_real_escape_string,$_POST);
 $_GET = array_map(mysql_real_escape_string,$_GET);
 
@@ -16,6 +14,6 @@ $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE
 $result=mysql_query($sql, $link);
 /*================= Log Access ======================================*/
 
-include("viewdncnumbers.php");
+redirect("viewdncnumbers.php");
 exit;
 ?>
