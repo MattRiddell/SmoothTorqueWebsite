@@ -1,6 +1,5 @@
 <?
-include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(mysql_error());
-mysql_select_db("SineDialer", $link);
+require "header.php";
 
 if (isset($_POST[name])) {
     if (isset($_POST[enabled])) {
@@ -74,11 +73,11 @@ if (isset($_POST[name])) {
     $result = mysql_query($sql, $link) or die (mysql_error());;
 
     //exit(0);
-    include("customers.php");
+    redirect("customers.php");
     exit;
 }
-require "header.php";
-Require "header_customer.php";
+
+require "header_customer.php";
 if (!isset($_GET[id])) {
     ?>
     <META HTTP-EQUIV=REFRESH CONTENT="0; URL=customers.php">
