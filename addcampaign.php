@@ -1,7 +1,9 @@
 <?
     include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(mysql_error());
     mysql_select_db("SineDialer", $link);
-    
+
+    require "header.php";
+    require "header_campaign.php";
     $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE['user'].'\'';
     $result=mysql_query($sql, $link) or die (mysql_error());;
     $campaigngroupid=mysql_result($result,0,'campaigngroupid');
@@ -16,17 +18,17 @@
                 $messageid=$_POST['faxid'];
             } else {
                 $messageid=$_POST['messageid'];
-            }        
+            }
             $messageid2=($_POST['messageid2']);
             $messageid3=($_POST['messageid3']);
-            
+
             if ($context == 9) {
                 $filename = str_replace(".","#~#",$_POST['sms_message'].".");
                 $result = mysql_query("INSERT INTO campaignmessage (filename, name) VALUES ('".$filename."', 'SMS')");
                 $messageid3 = mysql_insert_id();
             }
-            
-            
+
+
             $modein=($_POST['mode']);
             if (!isset($_POST['surveyid'])) {
                 $survey=-1;
@@ -61,14 +63,12 @@
             $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE[user]', 'Added a campaign')";
             $result=mysql_query($sql, $link);
             /*================= Log Access ======================================*/
-            include("campaigns.php");
+            redirect("campaigns.php","Saved",0);
             exit;
         } else {
             $error = "Please select a campaign";
         }
     }
-    require "header.php";
-    require "header_campaign.php";
     ?>
 
 <FORM ACTION="addcampaign.php" METHOD="POST" id="addcampaign">
