@@ -24,7 +24,7 @@
 
             if ($context == 9) {
                 $filename = str_replace(".","#~#",$_POST['sms_message'].".");
-                $result = mysql_query("INSERT INTO campaignmessage (filename, name) VALUES ('".$filename."', 'SMS')");
+                $result = mysql_query("INSERT INTO campaignmessage (filename, name) VALUES ('".sanitize($filename)."', 'SMS')");
                 $messageid3 = mysql_insert_id();
             }
 
