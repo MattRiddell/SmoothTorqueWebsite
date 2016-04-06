@@ -2,7 +2,9 @@
 include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(mysql_error());
 mysql_select_db("SineDialer", $link);
 
-if (isset($_POST[name])) {
+require "header.php";
+
+if (isset($_POST['name'])) {
     $_POST = array_map(mysql_real_escape_string, $_POST);
     $description = ($_POST[description]);
     $username = ($_POST[username]);
@@ -60,11 +62,10 @@ if (isset($_POST[name])) {
     $result = mysql_query($sql, $link);
     /*================= Log Access ======================================*/
 
-
-    include("customers.php");
+    redirect("customers.php");
+    //include("customers.php");
     exit;
 }
-require "header.php";
 require "header_customer.php";
 ?>
 
