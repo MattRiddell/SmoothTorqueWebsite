@@ -62,7 +62,7 @@ if (isset($_POST['name'])) {
     $result = mysql_query($sql, $link);
     /*================= Log Access ======================================*/
 
-    redirect("customers.php");
+    redirect("customers.php","Saved",0);
     //include("customers.php");
     exit;
 }
