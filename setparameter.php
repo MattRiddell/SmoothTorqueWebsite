@@ -8,7 +8,7 @@ $_GET = array_map(mysql_real_escape_string,$_GET);
 if (isset($_GET[value])){
     $sql="update config set value='$_GET[value]' where parameter='$_GET[parameter]'";
     $result=mysql_query($sql, $link) or die (mysql_error());;
-    include("config.php");
+    redirect("config.php");
     exit;
 }
 require "footer.php";
