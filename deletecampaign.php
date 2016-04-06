@@ -1,6 +1,5 @@
-<? 
-include "admin/db_config.php";//mysql_connect('localhost', 'root', '') OR die(mysql_error());
-mysql_select_db("SineDialer", $link);
+<?
+require "header.php";
 
 $sql = 'SELECT campaigngroupid FROM customer WHERE username=\''.$_COOKIE[user].'\'';
 $result=mysql_query($sql, $link) or die (mysql_error());;
@@ -17,10 +16,10 @@ $sql = "INSERT INTO log (timestamp, username, activity) VALUES (NOW(), '$_COOKIE
 $result=mysql_query($sql, $link);
 /*================= Log Access ======================================*/
 
-    include("campaigns.php");
+    redirect("campaigns.php");
     exit;
 }
-require "header.php";
+
 require "header_campaign.php";
 
 box_start();
