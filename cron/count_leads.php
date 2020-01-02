@@ -35,7 +35,7 @@ if (mysql_num_rows($result) > 0) {
     }
 }
 
-/* Go through all the campaigns that are scheduled to be run for this hour 
+/* Go through all the campaigns that are scheduled to be run for this hour
  * if there are more or the same as required for the current hour, stop the
  * campaign.
  */
@@ -48,7 +48,7 @@ if (mysql_num_rows($result) > 0) {
             /* If the number of calls is more than required */
             if ($billables[$row['campaign_id']] >= $row['leads_required']) {
                 // Stop the campaign - it has reached the max leads
-                $sql = "INSERT INTO queue (queuename, status, campaignID, starttime, endtime, startdate, enddate) VALUES ('lead_stop',2,".$row['campaign_id'].",'00:00','23:59','2005-01-01','2020-01-01')";
+                $sql = "INSERT INTO queue (queuename, status, campaignID, starttime, endtime, startdate, enddate) VALUES ('lead_stop',2,".$row['campaign_id'].",'00:00','23:59','2005-01-01','2090-01-01')";
                 $result = mysql_query($sql);
                 echo "Running $sql because ".$billables[$row['campaign_id']].">=".$row['leads_required']."\n";
             } else {

@@ -6,7 +6,7 @@ if (isset($_GET['change_target'])) {
     //echo $_GET['change_target'];
     $id = $_GET['id'];
     $target = $_GET['change_target'];
-    $sql="insert into queue (status, campaignID, flags, startdate, enddate, starttime, endtime) VALUES (5, '$id', '$target', '2008-01-01', '2020-01-01', '00:00:00', '23:59:59')";
+    $sql="insert into queue (status, campaignID, flags, startdate, enddate, starttime, endtime) VALUES (5, '$id', '$target', '2008-01-01', '2090-01-01', '00:00:00', '23:59:59')";
     //echo $sql;
     $result=mysql_query($sql, $link) or die (mysql_error()) or die (mysql_error());
     echo "Updated target percentage to $target";
@@ -22,8 +22,8 @@ $debug=$_GET[debug];
 
 $result = mysql_query("SELECT * FROM SineDialer.config WHERE parameter = 'm_c_stats'");
 if (!(mysql_num_rows($result) > 0)) {
-    
-    
+
+
     if (file_exists("/tmp/Sm".$id.".campaignProperties") == false) {
         if (isset($_GET[secondtime])) {
             echo "Your campaign has finished";
@@ -137,7 +137,7 @@ if (mysql_num_rows($result) > 0) {
 
 
 body {
-font:		MessageBox;	
+font:		MessageBox;
 font:		Message-Box;
 }
 
@@ -168,7 +168,7 @@ float: left;
 </div>
 
 <p>
-Target Percentage: 
+Target Percentage:
 <span id="val">Default
 </span>
 </p>
@@ -194,19 +194,19 @@ s.onchange = function () {
 };
 
 function sendData() {
-    var http = getHTTPObject(); 
+    var http = getHTTPObject();
     try {
-        http.open("GET", "test.php?id=<?=$_GET['id']?>&change_target="+s.getValue(), true); 
+        http.open("GET", "test.php?id=<?=$_GET['id']?>&change_target="+s.getValue(), true);
     } catch (err) {
         alert(err);
     }
     try {
-        http.onreadystatechange = function() { 
-            if (http.readyState == 4) { 
-                alert(http.responseText); 
-            } 
-            
-        } 
+        http.onreadystatechange = function() {
+            if (http.readyState == 4) {
+                alert(http.responseText);
+            }
+
+        }
     } catch (err) {
         alert(err);
     }

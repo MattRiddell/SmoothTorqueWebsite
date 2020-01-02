@@ -110,7 +110,7 @@ while ($accounts = mysql_fetch_assoc($result_accounts)) {
         	if ($billsec[$i] > 0) {
 				if ($billsec[$i] >= $firstperiod[$accountcode[$i]]) {
 					if ($increment[$accountcode[$i]] == 1) {
-						/* If the increment is 1 second then we can just bill based on pricepermin/60 */ 
+						/* If the increment is 1 second then we can just bill based on pricepermin/60 */
 						$costperminute[$i] = (($priceperminute[$accountcode[$i]]/60) * $billsec[$i]);
 						$total_billsec += $billsec[$i];
 					} else {
@@ -143,7 +143,7 @@ while ($accounts = mysql_fetch_assoc($result_accounts)) {
             } else {
                 mysql_select_db("SineDialer", $link);
                 $campaignid = substr($userfield[$i], $pos + 1);
-                
+
                 /* Get the current cost */
                 $sql = "SELECT cost FROM SineDialer.campaign WHERE id = ".$campaignid;
                 $result_campaign_cost = mysql_query($sql,$link);
@@ -152,7 +152,7 @@ while ($accounts = mysql_fetch_assoc($result_accounts)) {
                 } else {
     	            $campaign_cost = 0;
     	        }
-    	        
+
     	        /* Update it with the new cost - i.e. cost of call + existing info */
     	        $sql = "UPDATE SineDialer.campaign set cost = '".($campaign_cost+$cost[$i])."' WHERE id = ".$campaignid;
 				//echo $sql."\n";
@@ -207,7 +207,7 @@ while ($accounts = mysql_fetch_assoc($result_accounts)) {
                     starttime,endtime,startdate,enddate,did,clid,context,maxcalls,maxchans,maxretries
                     ,retrytime,waittime) VALUES
                     ('$campaignid','creditstop-$campaignid','2','No details','0','0',
-                    '00:00:00','23:59:00','2005-01-01','2020-01-01','123','000',
+                    '00:00:00','23:59:00','2005-01-01','2090-01-01','123','000',
                     '0','10','500','0'
                     ,'0','30') ";
                 $resultx=mysql_query($sql1, $link) or die (mysql_error());;

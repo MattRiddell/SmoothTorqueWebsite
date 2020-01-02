@@ -195,7 +195,7 @@ $("#status").text("Scrubbing against DNC");
 //echo $dncsql."<br />";
 while ($row = mysql_fetch_assoc($resultdnc)) {
     $count_dnc_rows_so_far++;
-    
+
     if ($count_dnc_rows_so_far % 100) {
         ?><script>
         $("#status").text("Scrubbing <?=$row['phonenumber']?> against DNC");
@@ -270,7 +270,7 @@ $sql2="INSERT INTO queue (campaignid,queuename,status,details,flags,transferclid
     starttime,endtime,startdate,enddate,did,clid,context,maxcalls,maxchans,maxretries
     ,retrytime,waittime,trunk,astqueuename, accountcode, trunkid, customerID, maxcps, mode, expectedRate, drive_min, drive_max) VALUES
     ('$_GET[id]','autostart-$_GET[id]','1','No details','0','$_GET[trclid]',
-    '00:00','23:59','2005-01-01','2020-01-01','$did','$_GET[clid]',
+    '00:00','23:59','2005-01-01','2090-01-01','$did','$_GET[clid]',
     '$_GET[context]','$_GET[agents]','$maxchans','0'
     ,'0','30','".$dialstring."','$_GET[astqueuename]','stl-".$new_username."','$trunkid','$campaigngroupid','$maxcps','$mode', '$expected_rate','$drive_min','$drive_max') ";
 //    echo $sql2;

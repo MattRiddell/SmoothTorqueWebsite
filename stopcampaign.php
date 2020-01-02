@@ -27,7 +27,7 @@ $sql2="INSERT INTO queue (campaignid,queuename,status,details,flags,transferclid
     starttime,endtime,startdate,enddate,did,clid,context,maxcalls,maxchans,maxretries
     ,retrytime,waittime) VALUES
     ('$_GET[id]','autostop-$_POST[id]','2','No details','0','0',
-    '00:00:00','23:59:00','2005-01-01','2020-01-01','$_POST[did]','000',
+    '00:00:00','23:59:00','2005-01-01','2090-01-01','$_POST[did]','000',
     '$_POST[context]','$_POST[agents]','500','0'
     ,'0','30') ";
 $resultx=mysql_query($sql1, $link) or die (mysql_error());;

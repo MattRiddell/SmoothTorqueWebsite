@@ -42,13 +42,13 @@ while ($row = mysql_fetch_assoc($result)) {
                 $right_day = true;
             }
             break;
-            
+
     }
     if ($right_day) {
         // Get the details of the campaign
         $result_campaign = mysql_query( "SELECT * FROM campaign WHERE id = $row[campaignid]");
         $campaign_row = mysql_fetch_assoc($result_campaign);
-        
+
         // Get the details of the user
         $sqlx = 'SELECT campaigngroupid, maxchans, maxcps, trunkid FROM customer WHERE username=\''.$row['username'].'\'';
         $resultz=mysql_query($sqlx, $link) or die (mysql_error());;
@@ -57,7 +57,7 @@ while ($row = mysql_fetch_assoc($result)) {
         $maxcps=mysql_result($resultz,0,'maxcps');
         $trunkid=mysql_result($resultz,0,'trunkid');
         $username=$row['username'];
-        
+
         // Get the trunk details
         if ($trunkid==-1){
             $sql3="select dialstring, id from trunk where current = 1";
@@ -69,7 +69,7 @@ while ($row = mysql_fetch_assoc($result)) {
             $resultx=mysql_query($sql3, $link) or die ("d:".mysql_error());;
             $dialstring=mysql_result($resultx,0,'dialstring');
         }
-        
+
         // Scrub against DNC
         $dncsql = "SELECT number.phonenumber FROM number LEFT JOIN dncnumber ON number.phonenumber=dncnumber.phonenumber WHERE dncnumber.phonenumber IS NOT NULL AND number.campaignid='$row[campaignid]'";
         $resultdnc=mysql_query($dncsql, $link) or die ("e:".mysql_error());;
@@ -77,48 +77,48 @@ while ($row = mysql_fetch_assoc($result)) {
             $removedncsql = "UPDATE number set status = 'indnc' where phonenumber='$rowx[phonenumber]'";
             $resultremovednc=mysql_query($removedncsql, $link) or die ("f:".mysql_error());;
         }
-        
+
         // Clean up the DDI number for the call center
         $did = str_replace("-","",$campaign_row['did']);
         $did = str_replace("(","",$did);
         $did = str_replace(")","",$did);
         $did = str_replace(" ","",$did);
-        
+
         // Clean up the dialstring
         $dialstring = str_replace(" ","",$dialstring);
         $dialstring = str_replace("(","",$dialstring);
         $dialstring = str_replace(")","",$dialstring);
-        
+
         // Check if it is in Queue Mode
         if (strlen($campaign_row['astqueuename'])> 0) {
             $mode = 1;
         } else {
             $mode = 0;
         }
-        
+
         // Clear out the queue table
         $sql1="delete from queue where campaignid=".$row['campaignid'];
-        
+
         // Create the actual queue entry
         $sql2="INSERT INTO queue (campaignid,queuename,status,details,flags,transferclid,
         starttime,endtime,startdate,enddate,did,clid,context,maxcalls,maxchans,maxretries
         ,retrytime,waittime,trunk,astqueuename, accountcode, trunkid, customerID, maxcps, mode) VALUES
         ('$row[campaignid]','autostart-$row[campaignid]','1','No details','0','$campaign_row[trclid]',
-        '00:00','23:59','2005-01-01','2020-01-01','$did','$campaign_row[clid]',
+        '00:00','23:59','2005-01-01','2090-01-01','$did','$campaign_row[clid]',
         '$campaign_row[context]','$campaign_row[maxagents]','$maxchans','0'
         ,'0','30','".$dialstring."','$campaign_row[astqueuename]','stl-".$username."','$trunkid','$campaigngroupid','$maxcps','$mode') ";
         $resultx=mysql_query($sql1, $link) or die ("j:".mysql_error());;
         $resultx=mysql_query($sql2, $link) or die ("k:".mysql_error());;
         echo "Started ".$row['campaignid']."\n";
     }
-    
+
 }
 
 $result = mysql_query("SELECT * FROM schedule WHERE end_hour = $hour AND end_minute = $minute");
 while ($row = mysql_fetch_assoc($result)) {
     //print_pre($row);
     //Create a queue entry to stop a running campaign
-    
+
     $right_day = false;
     switch ($row['regularity']) {
         case "every-day":
@@ -134,9 +134,9 @@ while ($row = mysql_fetch_assoc($result)) {
                 $right_day = true;
             }
             break;
-            
+
     }
-    if ($right_day) {                
+    if ($right_day) {
         $sql1="delete from queue where campaignid=".$row['campaignid'];
         $sql2="INSERT INTO queue (campaignid,queuename,status,
         starttime,endtime,startdate,enddate) VALUES
